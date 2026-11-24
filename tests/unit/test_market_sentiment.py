@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import tempfile
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 import pandas as pd
@@ -16,6 +16,47 @@ from lei_signal.market_context.sentiment import (
     load_aaii_observations,
     load_naaim_observations,
 )
+from lei_signal.market_context import sentiment as sentiment_module
+
+
+@pytest.mark.parametrize("series,source,license_status,offset,basis,expected", [
+    ("naaim", "official", "unknown", -1, None, False),
+    ("naaim", "official", "licensed", 1, None, False),
+    ("naaim", "auto:naaim.org", "licensed", -1, None, False),
+    ("naaim", "official", "licensed", -1, "estimated_from_survey_week", False),
+    ("aaii", "official", "unknown", -1, None, False),
+    ("aaii", "official", "licensed", 1, None, False),
+    ("aaii", "auto:aaii.com", "licensed", -1, None, False),
+    ("aaii", "official", "licensed", -1, "operator_supplied_unverified", False),
+    ("aaii", "official", "licensed", -1, "verified_publication", True),
+    ("aaii", "official", "licensed", -1, None, True),
+])
+def test_current_eligibility_at_load_and_decision_time(
+    tmp_path, series, source, license_status, offset, basis, expected,
+):
+    observed = datetime.now(UTC) + timedelta(days=offset)
+    common = {"survey_week": observed.date().isoformat(),
+              "available_at": observed.isoformat(), "source": source,
+              "license_status": license_status}
+    if basis is not None:
+        common["publication_time_basis"] = basis
+    if series == "naaim":
+        row = {**common, "exposure_index": 60.0, "publication_delay_days": 3}
+        loader = load_naaim_observations
+    else:
+        row = {**common, "bullish": 40.0, "neutral": 30.0, "bearish": 30.0}
+        loader = load_aaii_observations
+    path = tmp_path / f"{series}.csv"
+    pd.DataFrame([row]).to_csv(path, index=False)
+    observation = loader(path)[0]
+    assert observation.current_eligible is expected
+    current = sentiment_module.latest_available_sentiment_at(
+        (observation,), datetime.now(UTC), 14 if series == "naaim" else 10,
+    )
+    if offset > 0:
+        assert current is None
+    else:
+        assert current is not None and current.current_eligible is expected
 
 # ── NAAIM tests ───────────────────────────────────────────────────────
 

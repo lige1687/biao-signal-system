@@ -533,7 +533,7 @@ function daysAgo(n: number): string {
   return new Date(Date.now() - n * 86_400_000).toISOString().slice(0, 10);
 }
 
-export default function NewsPage() {
+export default function NewsPage({ embedded = false }: { embedded?: boolean } = {}) {
   const [focus, setFocus] = useState(true); // 聚焦模式：近1天 + importance≥6
   const [category, setCategory] = useState<string>("");
   const [source, setSource] = useState<string>("");
@@ -622,24 +622,46 @@ export default function NewsPage() {
   };
 
   return (
-    <div className="page">
-      <div className="header">
-        <h1>
-          资讯流{" "}
-          <span className="fund-count">
-            {focus ? "今天重点" : data ? `${data.total} 条` : ""}
-          </span>
-        </h1>
-        <span className="generated">每日 20:30 自动整合 · 参考层，非交易信号</span>
-        <span className="spacer" />
-        <button className="btn primary" onClick={onRefresh} disabled={running}>
-          {running ? "抓取中…" : "立即刷新"}
-        </button>
-      </div>
+    <div className={embedded ? "news-embedded" : "page"}>
+      {embedded ? (
+        <div className="pg-head" style={{ paddingTop: 4, marginBottom: 10 }}>
+          <div className="pg-head-kv">
+            <span className="pg-kv"><span className="k">当前范围</span><b>{focus ? "今天重点（重要性≥6）" : "全量"}</b></span>
+            <span className="pg-kv"><span className="k">条数</span><b>{data ? data.total : "加载中"}</b></span>
+            {symbolFilter && (
+              <span className="pg-kv"><span className="k">标的筛选</span><b>{symbolFilter}</b></span>
+            )}
+          </div>
+          <div className="pg-head-actions">
+            <button className="btn small primary" onClick={onRefresh} disabled={running}>
+              {running ? "抓取中…" : "立即刷新"}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="pg-head">
+          <div className="pg-head-title">
+            <h1>市场资讯</h1>
+            <span className="pg-head-sub">重要消息检索与排序 · 每日 20:30 自动整合</span>
+          </div>
+          <div className="pg-head-kv">
+            <span className="pg-kv"><span className="k">当前范围</span><b>{focus ? "今天重点（重要性≥6）" : "全量"}</b></span>
+            <span className="pg-kv"><span className="k">条数</span><b>{data ? data.total : "加载中"}</b></span>
+            {symbolFilter && (
+              <span className="pg-kv"><span className="k">标的筛选</span><b>{symbolFilter}</b></span>
+            )}
+          </div>
+          <div className="pg-head-actions">
+            <button className="btn primary" onClick={onRefresh} disabled={running}>
+              {running ? "抓取中…" : "立即刷新"}
+            </button>
+          </div>
+        </div>
+      )}
 
       {runError && (
         <div className="fund-errors">
-          抓取启动失败：{runError}（通常是 LLM 配额或数据源限流，稍后再试）
+          抓取启动失败：{runError}（通常是模型配额或数据源限流，稍后再试）
           <button className="btn small" style={{ marginLeft: 8 }} onClick={() => setRunError(null)}>
             知道了
           </button>

@@ -1,0 +1,78 @@
+{
+  "kind": "hourly_input_request_not_execution_contract",
+  "status": "awaiting_authorized_source",
+  "created_at": "2026-10-03T19:29:31.574088+08:00",
+  "task_id": "technical-factor-sequence",
+  "assets": [
+    "510300.SS",
+    "510050.SS",
+    "510500.SS",
+    "512100.SS",
+    "159915.SZ",
+    "588000.SS"
+  ],
+  "hourly_requested_period": {
+    "from": "2020-12-21",
+    "to": "2026-09-25",
+    "frequency": "60m",
+    "coverage": "full continuous session coverage, not only selected old candidates; pre-listing dates inapplicable; known missing kept"
+  },
+  "planned_evaluation_period": {
+    "from": "2022-01-04",
+    "to": "2026-09-25",
+    "eligibility": "depends on actual daily, completed-weekly and hourly warmup; do not backfill absent pre-listing history"
+  },
+  "schema_reuse": {
+    "git_commit": "f87de4f9aacab9f58ccefa85297ea143250d4f9d",
+    "timing": "docs/research/proposals/remote-astra-2026-09-30/T4/field-contract.json",
+    "data": "docs/research/proposals/remote-astra-2026-09-30/T8/data-contract.json",
+    "status": "draft references; not proof of approved production or source permission"
+  },
+  "required": [
+    "asset/exchange",
+    "bar_start/bar_end with UTC offset",
+    "nominal OHLC",
+    "volume and unit",
+    "session identity",
+    "source/version/retrieved_at",
+    "original file sha256",
+    "revision policy",
+    "source_available_at if retained; unknown explicitly allowed as limited historical reconstruction, not exact executable timing",
+    "licence/research-use permission and redistribution boundary"
+  ],
+  "companion_data": [
+    "compatible nominal daily OHLC",
+    "dividend/split/merge coverage and amount basis",
+    "official exchange calendar and special-session evidence",
+    "enough earlier daily records for completed weekly SMA/EMA120 warmup"
+  ],
+  "first_qualification": [
+    "source permission and provenance",
+    "original content hash and coverage per product",
+    "bar-start versus bar-end convention and lunch-break handling",
+    "duplicates/revisions/missing sessions",
+    "same price basis hourly-to-daily OHLC consistency",
+    "hourly indicator warmup and reset policy",
+    "as-of completed bars only; distinguish historical lower bound from actual feed availability"
+  ],
+  "known_source_leads_only": [
+    {
+      "source": "Tushare etf_mins",
+      "reference": "docs/experiments/raw/lei-technical-strategy-c-baseline-2026-10-03/hourly-source-ledger.json",
+      "entitlement": "unknown",
+      "coverage": "vendor documentation only; six-ETF coverage untested"
+    },
+    {
+      "source": "AKShare fund_etf_hist_min_em",
+      "reference": "same prior source ledger",
+      "coverage": "recent-data documentation only; full-period unavailable status unverified"
+    }
+  ],
+  "delivery": "existing authorised directory or connection; no credentials in documents/Git; do not upload vendor originals publicly",
+  "estimated_rows": null,
+  "estimated_bytes": null,
+  "size_note": "not measured before actual source; no fabricated transfer estimate",
+  "download_authorized_by_this_file": false,
+  "market_runs": 0,
+  "fits": 0
+}

@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-02T19:48:57.015227+08:00",
+  "action": "accidental_remote_coordination_branch_deletion_then_restoration",
+  "cause": "A new commit-tree object was not referenced by any ref; git log --all returned an empty command substitution, producing a delete refspec. This was unauthorized and unintended.",
+  "before_tip": "4ddf1c7e869bdb074632e970fc1ff44ead873e66",
+  "restored_tip": "b21c4ae07578007fd9b5d2a28852804162a985c1",
+  "history_preserved": true,
+  "other_task_files_unchanged": true,
+  "remote_exact_readback": true,
+  "source_and_data_unchanged": true,
+  "user_notified": true,
+  "prevention": "Use explicit nonempty 40-hex commit SHA and exact destination; never derive a push source from an unchecked shell substitution."
+}

@@ -1,0 +1,110 @@
+{
+  "CN_ALL_A": {
+    "history_unchanged": true,
+    "rows": 1282,
+    "observation_rows": 1282,
+    "response_bytes": 1153550,
+    "seconds": 0.53,
+    "method": "breadth.observation@1.0.0",
+    "latest": {
+      "date": "2026-10-16",
+      "horizons": {
+        "20": {
+          "lower": 18.36143,
+          "median": 46.99465,
+          "upper": 80.90616000000003,
+          "percentile": 6.587301587301588,
+          "delta_5": -16.327044043647135,
+          "sample_count": 1260,
+          "status": "ready",
+          "position": "low",
+          "event": "stay_low"
+        },
+        "50": {
+          "lower": 19.04296,
+          "median": 44.812,
+          "upper": 78.14225,
+          "percentile": 9.047619047619047,
+          "delta_5": -23.348641945325866,
+          "sample_count": 1260,
+          "status": "ready",
+          "position": "low",
+          "event": "stay_low"
+        },
+        "200": {
+          "lower": 18.07215,
+          "median": 47.1862,
+          "upper": 81.45731,
+          "percentile": 6.825396825396825,
+          "delta_5": -6.876662651987642,
+          "sample_count": 1260,
+          "status": "ready",
+          "position": "low",
+          "event": "stay_low"
+        }
+      },
+      "state": {
+        "code": "weakening",
+        "label": "弱势参与延续",
+        "tone": "caution",
+        "summary": "20/50日宽度均回落，200日均线上方股票仍不足半数。较5条记录前分别变化-16.3、-23.3个百分点。"
+      }
+    },
+    "history_sha256": "16e9252666014ad6975772d5c4cf36dae41fd985bb619f8c0873c0c749b61d87",
+    "default_response_unchanged": true
+  },
+  "SP500": {
+    "history_unchanged": true,
+    "rows": 11725,
+    "observation_rows": 1825,
+    "response_bytes": 2523890,
+    "seconds": 0.944,
+    "method": "breadth.observation@1.0.0",
+    "latest": {
+      "date": "2026-10-20",
+      "horizons": {
+        "20": {
+          "lower": 21.676370000000002,
+          "median": 56.4777,
+          "upper": 81.74992,
+          "percentile": 77.53968253968254,
+          "delta_5": 11.382100000000008,
+          "sample_count": 1260,
+          "status": "ready",
+          "position": "middle",
+          "event": "none"
+        },
+        "50": {
+          "lower": 26.56786,
+          "median": 57.4037,
+          "upper": 78.4114,
+          "percentile": 40.714285714285715,
+          "delta_5": 14.227600000000002,
+          "sample_count": 1260,
+          "status": "ready",
+          "position": "middle",
+          "event": "none"
+        },
+        "200": {
+          "lower": 37.16164,
+          "median": 62.74315,
+          "upper": 78.37171000000001,
+          "percentile": 32.53968253968254,
+          "delta_5": 4.065100000000001,
+          "sample_count": 1260,
+          "status": "ready",
+          "position": "middle",
+          "event": "none"
+        }
+      },
+      "state": {
+        "code": "expanding",
+        "label": "上涨参与延续",
+        "tone": "supportive",
+        "summary": "20/50日宽度均回升，三个周期均至少有半数股票站在均线上方。较5条记录前分别变化+11.4、+14.2个百分点。"
+      }
+    },
+    "history_sha256": "5ba02f583d09472a9910c9e853f38fe2392f1053c3b7137a7c1078b0ab01ac80",
+    "default_response_unchanged": true
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "verified_at": "2026-11-02T00:32:41.217022+08:00",
+  "status": "ui_verified_research_review_complete_cache_install_waiting_for_user_confirmation",
+  "latest_scope_coordination_commit": "be47e3d1047befde0d1509a1c2f1aaebc52ac804",
+  "source_files": {
+    "web/src/components/market-style/BreadthComparison.tsx": "1dfb20022db3a135c1dab1864b28d397a020ce2c9b78d5a47845b103f9327315",
+    "web/src/components/market-style/breadth-comparison.css": "a32727205e9efd172756678df8d99182c861e08f6319eb0636f748b68a3fb8f4",
+    "web/src/components/market-style/breadthChartDisplay.ts": "dccf6b66a5c9d1de29f221c69e14f80be20e7b19e62a3810177984493f3d0db0",
+    "web/src/components/market-style/breadthChartDisplay.test.mjs": "a0d76d05a5c2dbeb3a6aa993db7d954949ac1a0da134b72d51a78f5abccf9b2a"
+  },
+  "visual": {
+    "default": "selected horizon historical P10/P90 date-aligned bands",
+    "alternate": "supplied backend participation changes; no new classification",
+    "missing": "gray date cells, gaps listed, no interpolation",
+    "desktop": [
+      1280,
+      900
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "overflow": false,
+    "linked_zoom": "native drag verified; display switches retain range; market/index/window reset",
+    "checked": [
+      "CN and US",
+      "20/50/200 horizons",
+      "1y and 5y",
+      "three lines",
+      "background on/off",
+      "two background meanings",
+      "single-date missing shade",
+      "price axis unchanged by background"
+    ],
+    "console_errors": 0,
+    "viewport_reset": true,
+    "screenshots": [
+      "desktop-background-v3.jpg",
+      "desktop-phases-v3.jpg",
+      "mobile-background-v3.jpg"
+    ]
+  },
+  "tests": {
+    "command": "node --test src/components/market-style/breadthChartDisplay.test.mjs src/components/market-style/breadthReading.display.test.mjs",
+    "passed": 23,
+    "price_axis_red_green": "empty y encoding initially polluted price minimum; y:-1 fix passed true ECharts SSR",
+    "zoom_red_green": "four display switches initially reset zoom; updater fix passed eight added SSR cases",
+    "build": "tsc and vite passed; final 864 modules; existing chunk size warning",
+    "repo_hygiene": "passed",
+    "backend": "unchanged; previous 82-test evidence retained, not rerun"
+  },
+  "workbuddy": {
+    "review": "workbuddy-review-v3.md",
+    "audit": "workbuddy-review-v3.json",
+    "report": "docs/experiments/workbuddy-breadth-threshold-review-2026-11-02.md",
+    "source_hashes_verified": 23,
+    "independent_recompute_batches": 2,
+    "new_threshold_searches": 0,
+    "adopted": "visual separation of high/low breadth zones from participation direction",
+    "not_adopted": [
+      "whole-sample trading thresholds",
+      "future-filtered first-day arrows",
+      "buy/sell position advice"
+    ]
+  },
+  "data_repair": {
+    "installed": false,
+    "authorization": "explicit warehouse-external file confirmation pending; candidate work complete",
+    "US": {
+      "candidate_dir": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/us-tail-candidate-20261102",
+      "old_rows": 11725,
+      "new_rows": 11733,
+      "added_dates": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-26",
+        "2026-10-27",
+        "2026-10-28",
+        "2026-10-29",
+        "2026-10-30"
+      ],
+      "minimum_coverage": 0.9959514170040485,
+      "http_requests": 495,
+      "fetch_failures": 0,
+      "old_prefix_equal": true,
+      "live_sha_unchanged": true,
+      "candidate_sha256": "664eaaf0f04cb184777495cf9a9cef20d8d0a616f07b31e83e1f36089a5c1409"
+    },
+    "CN": {
+      "candidate_dir": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102",
+      "old_rows": 1282,
+      "new_rows": 1288,
+      "added_dates": [
+        "2026-08-20",
+        "2026-08-21",
+        "2026-08-24",
+        "2026-08-25",
+        "2026-08-26",
+        "2026-08-27"
+      ],
+      "existing_live_rows_preserved": true,
+      "common_backup_dates_equal": 1254,
+      "qualification_upgraded": false,
+      "live_sha_unchanged": true,
+      "candidate_sha256": "8a6c051b14988759a7240cf61c50d16f3aaf66a956fe3ecfb6798cf2719d88ff",
+      "remaining_same_axis_missing_dates_after_install": 14,
+      "audit": "cn-repair-v3.json",
+      "input_boundary": "qfq missing/stale/revision conflicts; verified short listing histories cannot manufacture MA200; BSE identity continuity and suspension/source gaps not yet qualified",
+      "source_requests": 28
+    }
+  },
+  "no_changes": [
+    "production cache",
+    "research price matrices",
+    "trading rules",
+    "ERP and homepage owner files",
+    "WorkBuddy source files"
+  ],
+  "storage": "active operational candidates within repository; no external disk or warehouse-external writes; no deletion"
+}

@@ -1,0 +1,116 @@
+--- web/src/components/market-observation-alerts/index.tsx (v9-before)
++++ web/src/components/market-observation-alerts/index.tsx (v9-after)
+@@ -12,6 +12,7 @@
+ import MiniTrend from "./MiniTrend";
+ import { BREADTH_LINES } from "../trend/zones";
+ import BreadthInstitutionalReference from "../market-style/BreadthInstitutionalReference";
++import { BREADTH_EXTERNAL_REFERENCES } from "../market-style/breadthInstitutionalReferences";
+ import "./style.css";
+ 
+ async function getJson(url: string, signal: AbortSignal): Promise<unknown> {
+@@ -39,6 +40,7 @@
+   snapshot: AlertSnapshot; href: string; pending: boolean; onRead: () => void;
+   participation?: BreadthReadingPoint | null; breadth?: BreadthReadingResponse; points: AlertPoint[];
+ }) {
++  const [reference, setReference] = useState<"dynamic50" | "stockcharts50" | "stockcharts200">("dynamic50");
+   const fresh = s.quality === "ready";
+   const reading = fresh && participation?.date === s.latest?.date ? participation : null;
+   const interpretation = breadthInterpretation(reading);
+@@ -53,8 +55,23 @@
+   const erpRows = points.slice(-260);
+   const latest = rows[rows.length - 1];
+   const boundsByDate = new Map((breadth?.observation?.history ?? []).map(p => [p.date, p.horizons["50"]]));
+-  const low = rows.map(p => boundsByDate.get(p.date)?.status === "ready" ? boundsByDate.get(p.date)!.lower : null);
+-  const high = rows.map(p => boundsByDate.get(p.date)?.status === "ready" ? boundsByDate.get(p.date)!.upper : null);
++  const fixed = BREADTH_EXTERNAL_REFERENCES.stockcharts;
++  const low = reference === "stockcharts200" ? undefined : rows.map(p => reference === "stockcharts50"
++    ? p.breadth_50 == null ? null : fixed.sma50.lower
++    : boundsByDate.get(p.date)?.status === "ready" ? boundsByDate.get(p.date)!.lower : null);
++  const high = reference === "stockcharts200" ? undefined : rows.map(p => reference === "stockcharts50"
++    ? p.breadth_50 == null ? null : fixed.sma50.upper
++    : boundsByDate.get(p.date)?.status === "ready" ? boundsByDate.get(p.date)!.upper : null);
++  const chartPeriod = reference === "stockcharts200" ? "200" : "50";
++  const lineOrder = chartPeriod === "200" ? ["200", "20", "50"] as const : ["50", "20", "200"] as const;
++  const referenceDescription = reference === "dynamic50" ? "50日动态P10/P90，高低边界随历史变化"
++    : reference === "stockcharts50" ? "StockCharts 50日固定参考，低于30%、高于70%"
++    : "StockCharts 200日参考，50%为半数股票中线，不划高低区";
++  // Display-only position follows the chosen reference; alert state remains unchanged.
++  const displayPhase = reference === "dynamic50" ? s.latest?.phase
++    : reference === "stockcharts50" && latest?.breadth_50 != null
++      ? latest.breadth_50 < fixed.sma50.lower ? "low" : latest.breadth_50 > fixed.sma50.upper ? "high" : "middle"
++      : undefined;
+   const periods = ["20", "50", "200"] as const;
+   const colors = { "20": BREADTH_LINES[0].color, "50": BREADTH_LINES[1].color, "200": BREADTH_LINES[2].color };
+   return <article className={`moa-item moa-${s.quality}`} data-tone={tone} aria-label={s.label}>
+@@ -68,13 +85,20 @@
+         lower={erpRows.map(p => p.lower)} upper={erpRows.map(p => p.upper)} label="沪深300股债利差近五年趋势与三年上下轨，绿色虚线为上轨，棕色虚线为下轨" />
+     </> : <>
+       <div className="moa-horizons">{periods.map(period => <div key={period}><span><i style={{ background: colors[period] }} />{period}日</span><strong>{latest?.[`breadth_${period}`] == null ? "—" : `${latest[`breadth_${period}`]!.toFixed(1)}%`}</strong></div>)}</div>
+-      <div className="moa-breadth-thresholds" aria-label="50日宽度历史高低观察区"><span>50日动态分位 · 非买卖线</span><span>低位 ≤ <b>{format(s.latest?.lower)}%</b></span><span>高位 ≥ <b>{format(s.latest?.upper)}%</b></span></div>
+-      <MiniTrend dates={rows.map(p => p.date)} percent lower={low} upper={high} lines={["50", "20", "200"].map(period => ({ name: `${period}日`, color: colors[period as typeof periods[number]], values: rows.map(p => p[`breadth_${period as typeof periods[number]}`] ?? null) }))}
+-        label={`${s.label}近90条记录，蓝色50日、橙色20日、紫色200日；绿区为50日历史低位，观察修复机会；棕区为50日历史高位，观察回落风险。边界为当时P10/P90，非已验证买卖线`} />
+-      <div className="moa-threshold-meaning"><span>低位回升时看机会</span><span>高位转弱时看风险</span></div>
++      <div className="moa-reference-picker" role="group" aria-label="小图参考阈值">
++        <button type="button" aria-pressed={reference === "dynamic50"} onClick={() => setReference("dynamic50")}><span>动态50日</span><strong>{format(s.latest?.lower)}% / {format(s.latest?.upper)}%</strong></button>
++        <button type="button" aria-pressed={reference === "stockcharts50"} onClick={() => setReference("stockcharts50")}><span>StockCharts 50日</span><strong>&lt;{fixed.sma50.lower}% / &gt;{fixed.sma50.upper}%</strong></button>
++        <button type="button" aria-pressed={reference === "stockcharts200"} onClick={() => setReference("stockcharts200")}><span>StockCharts 200日</span><strong>{fixed.sma200.majority}% 半数线</strong></button>
++      </div>
++      <div className="moa-reference-caption" aria-live="polite">{reference === "dynamic50" ? "50日动态分位" : `StockCharts ${chartPeriod}日固定参考`} · {chartPeriod === "200" ? "紫线为主，看长期参与" : "蓝线为主，非买卖线"}</div>
++      <MiniTrend dates={rows.map(p => p.date)} percent lower={low} upper={high} lines={lineOrder.map(period => ({ name: `${period}日`, color: colors[period], values: rows.map(p => p[`breadth_${period}`] ?? null) }))}
++        label={`${s.label.replace("50日宽度", "市场宽度")}近90条记录，蓝色50日、橙色20日、紫色200日；${referenceDescription}。${chartPeriod}日曲线加粗，非已验证买卖线`} />
++      <div className={`moa-threshold-meaning${chartPeriod === "200" ? " moa-majority-meaning" : ""}`}>{chartPeriod === "200"
++        ? <span>200日宽度高于50%：多数股票站上年线</span>
++        : <><span>低位回升时看机会</span><span>高位转弱时看风险</span></>}</div>
+     </>}
+-    <p className="moa-use">{isErp ? "上穿上轨有历史反弹线索；下穿下轨未可靠地提示顶部。" : reading && s.latest?.phase === "low" ? `已在低位观察区。${interpretation.watch}` : reading && s.latest?.phase === "high" ? `已在高位观察区。${interpretation.watch}` : interpretation.meaning}</p>
+-    {!isErp && <BreadthInstitutionalReference market={s.id.startsWith("SP500:") ? "us" : "cn"} />}
++    <p className="moa-use">{isErp ? "上穿上轨有历史反弹线索；下穿下轨未可靠地提示顶部。" : reading && displayPhase === "low" ? `已在低位观察区。${interpretation.watch}` : reading && displayPhase === "high" ? `已在高位观察区。${interpretation.watch}` : interpretation.meaning}</p>
++    {!isErp && <BreadthInstitutionalReference market={s.id.startsWith("SP500:") ? "us" : "cn"} showValues={false} />}
+     <footer><Link to={href} onClick={onRead}>看大图 <span aria-hidden="true">↗</span></Link>
+       <details className="moa-history"><summary>依据与变化{s.newEvents.length > 0 ? ` · ${s.newEvents.length}项新变化` : ""}</summary>
+         <div><p>读数日期 {s.latest?.date ?? "未知"}。{s.qualityLabel}</p>
+--- web/src/components/market-observation-alerts/style.css (v9-before)
++++ web/src/components/market-observation-alerts/style.css (v9-after)
+@@ -28,12 +28,16 @@
+ .moa-key-lines span:first-child { color: #287c70; }
+ .moa-key-lines b { font-weight: 650; }
+ .moa-mini svg { display: block; width: 100%; height: 116px; }
+-.moa-breadth-thresholds { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; padding: 3px 0 7px; font-size: 11px; color: #287c70; }
+-.moa-breadth-thresholds > span:first-child { flex-basis: 100%; color: #68788d; font-size: 10px; }
+-.moa-breadth-thresholds > span:last-child { color: #92662f; }
+-.moa-breadth-thresholds b { font-variant-numeric: tabular-nums; font-weight: 650; }
++.moa-reference-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 3px 0 6px; }
++.moa-reference-picker button { display: flex; flex-direction: column; justify-content: center; gap: 4px; min-width: 0; padding: 7px 3px; color: #68788d; font-size: 10px; line-height: 1.35; }
++.moa-reference-picker button strong { color: #465970; font-size: 11px; font-variant-numeric: tabular-nums; font-weight: 600; }
++.moa-reference-picker button:hover { border-color: #8aa9d0; background: #f2f6fc; }
++.moa-reference-picker button[aria-pressed="true"] { border-color: #3971ba; background: #eaf2fd; box-shadow: inset 0 0 0 1px #3971ba; color: #2458a2; }
++.moa-reference-picker button[aria-pressed="true"] strong { color: #214e8b; }
++.moa-reference-caption { min-height: 16px; color: #68788d; font-size: 10px; }
+ .moa-threshold-meaning { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: #287c70; margin-top: 7px; }
+ .moa-threshold-meaning > span:last-child { color: #92662f; }
++.moa-majority-meaning > span:last-child { color: #68788d; }
+ .moa-mini-dates { display: flex; justify-content: space-between; color: #8490a1; font-size: 9px; font-variant-numeric: tabular-nums; }
+ .moa-mini-empty { display: grid; place-items: center; height: 132px; color: #8490a1; }
+ .moa-use { min-height: 33px; margin: 10px 0; color: #4e5f76; font-size: 12px; line-height: 1.5; }
+--- web/src/components/market-style/BreadthInstitutionalReference.tsx (v9-before)
++++ web/src/components/market-style/BreadthInstitutionalReference.tsx (v9-after)
+@@ -3,15 +3,15 @@
+ import "./breadth-comparison.css";
+ 
+ /** Fixed external examples alongside, never substituted for, the local dynamic percentiles. */
+-export default function BreadthInstitutionalReference({ market, horizon }: {
+-  market: "cn" | "us"; horizon?: BreadthHorizon;
++export default function BreadthInstitutionalReference({ market, horizon, showValues = true }: {
++  market: "cn" | "us"; horizon?: BreadthHorizon; showValues?: boolean;
+ }) {
+   return <aside className="bc-external-reference" aria-label="外部来源宽度固定参考">
+-    <div className="bc-external-values">
++    {showValues && <div className="bc-external-values">
+       <a href={refs.stockcharts.url} target="_blank" rel="noreferrer">StockCharts 固定参考 ↗</a>
+       <span data-selected={horizon === "50"}>50日 <b>&lt;{refs.stockcharts.sma50.lower}%低 / &gt;{refs.stockcharts.sma50.upper}%高</b></span>
+       <span data-selected={horizon === "200"}>200日 <b>{refs.stockcharts.sma200.majority}%半数线</b></span>
+-    </div>
++    </div>}
+     {horizon === "20" && <p className="bc-external-note">20日宽度暂无已核实的机构固定参考值。</p>}
+     <details className="bc-external-detail">
+       <summary>{market === "cn" ? "美股经验 · 全A未验证 · 用法与来源" : "高位不等于顶部 · 用法与来源"}</summary>

@@ -1,0 +1,64 @@
+{
+  "mission": "补采日成交集中度2026年10月与11月初全池原始价量，并定向补历史月频真实缺段",
+  "task_scope": [
+    "复用已存9032行stock_basic和探针，核完整沪深A股类型及上市退出日期",
+    "逐股同口径BaoStock不复权amount/volume/tradestatus，2026-10-08—11-06；包含期间上市及退出股，实际返回不填补",
+    "复用monthly-gap-detail精确清单（就绪前不可猜）每股单窗历史补采，保留合法旧源不覆盖",
+    "取必要交易日历与最新全市场股票列表独立对照",
+    "只采原始资料，不写builder/测试/公开数据包/目录/其他源"
+  ],
+  "path_base": "/",
+  "execution_cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/monthly-gap-detail.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/probe-ledger.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/diagnosis.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/twenty-year-universe-data-20261025"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/collect_concentration.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/collection-ledger.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/collection-summary.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108"
+  ],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "逐请求账及原件路径/内容SHA/实字节/返回起止日",
+    "近期全池目录、实际覆盖与失败不重置账",
+    "历史清单逐股补采结果",
+    "来源操作累计与30分钟到期状态"
+  ],
+  "stop_conditions": [
+    "累计5600操作或50MiB响应，含所有前阶段probe及root来源核查",
+    "到UTC截止2026-11-08T13:00:46.537129+00:00",
+    "最多4独立进程连接，不在线程共享BaoStock全局socket",
+    "每个失败最多一次有理由重试，限流/两个同类全局传输失败先停诊断",
+    "付费/凭证/旧原件修改/源不支持而拟填0"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "budget": {
+    "overallOperations": 5600,
+    "overallResponseBytes": 52428800,
+    "maxNewWorkerOperations": 5480,
+    "maxNewWorkerResponseBytes": 49000000,
+    "maxProcesses": 4,
+    "deadlineUtc": "2026-11-08T13:00:46.537129+00:00",
+    "probeOperationsAlready": 25,
+    "probeBytesAlready": 1009888,
+    "rootSourceSearchesAlready": 4,
+    "reservedRootAndUncertaintyOperations": 99
+  },
+  "externalVolumeUuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+  "internalAdditionalBytes": 500000,
+  "authorization": "原用户补齐任务；首页主控2026-11-08明确有界工程额度，非收益研究预算"
+}

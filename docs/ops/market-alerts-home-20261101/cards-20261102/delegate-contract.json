@@ -1,0 +1,36 @@
+{
+  "mission": "Read-only review of existing models for everyday market observation mini/detail cards; no new efficacy experiment",
+  "task_scope": [
+    "Read catalog/source adapters and relevant existing reports; map meaning, distinct information versus breadth/ERP, frequency, dates, known limitations; recommend 4-6 defaults and selectable remainder."
+  ],
+  "read_only_paths": [
+    "web/src/components/observation-library",
+    "docs/experiments",
+    "web/public/research",
+    "web/src/components/market-observation-alerts"
+  ],
+  "write_paths": [
+    "docs/ops/market-alerts-home-20261101/cards-20261102/evidence-review.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "evidence-review.md with per-model recommendation and exact evidence references",
+    "unknowns and overlapping information; no invented thresholds/predictions"
+  ],
+  "stop_conditions": [
+    "missing permission",
+    "scope ambiguity",
+    "unsafe action"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab"
+}

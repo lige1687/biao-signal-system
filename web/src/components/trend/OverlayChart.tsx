@@ -17,6 +17,8 @@ export interface OverlaySeries {
   opacity?: number;
   /** 在原始刻度指数格里，是否作为配角（不单独占一把 Y 轴，与主角共轴）。 */
   secondary?: boolean;
+  /** 调查等离散资料可选择保留缺口；默认沿用既有连线行为。 */
+  connectNulls?: boolean;
 }
 
 /**
@@ -251,8 +253,10 @@ function buildSeries(
       xAxisIndex: x,
       yAxisIndex: y,
       data: rebase ? rebaseFrom(s.values, iBase) : s.values,
-      showSymbol: false,
-      connectNulls: true, // 债券/股票交易日历不完全重合，跳过空点连线
+      showSymbol: s.connectNulls === false,
+      showAllSymbol: s.connectNulls === false ? true : undefined,
+      symbolSize: s.connectNulls === false ? 5 : undefined,
+      connectNulls: s.connectNulls ?? true, // 其他既有叠图仍跳过交易日历空点
       lineStyle: {
         width: s.lineWidth ?? (s.dashed ? 1.2 : 1.4),
         color: s.color,
@@ -433,6 +437,15 @@ function paneLayout(cfg: OverlayConfig, height: number): PaneLayout {
       // 若同格多指数跨度差异 >5 倍（如标普500 6000 点 vs 纳斯达克 26000 点），
       // 强制分轴：共轴会把低量级线压成贴地平线。A股上证/沪深300 跨度接近则共轴。
       const shouldSeparate = pane.series.length > 1 && maxSpan / minSpan > 5;
+
+      if (!shouldSeparate) {
+        yAxes.push({ type: "value", scale: true, min: "dataMin", max: "dataMax", gridIndex: gi,
+          position: "left", name: cfg.leftName, nameTextStyle: { fontSize: 10, color: "#6b7280" },
+          axisLine: { show: true, lineStyle: { color: "#d6dde6" } }, axisTick: { show: false },
+          axisLabel: { fontSize: 10, color: "#6b7280" }, splitLine: { lineStyle: { color: "#eef1f5" } } });
+        pane.series.forEach(s => locateMap.set(s, { x: gi, y: yAxes.length - 1 }));
+        return;
+      }
 
       pane.series.forEach((s, k) => {
         const solo = pane.series.length === 1 || !shouldSeparate;

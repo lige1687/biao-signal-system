@@ -1,0 +1,43 @@
+{
+  "mission": "核验8条历史正量额但停牌标志冲突的独立来源，不擅自采纳",
+  "path_base": "/",
+  "task_scope": [
+    "仅derived-run1/audit.json中除sh600656之外8个日期",
+    "东方财富不复权日K作为独立数值见证；逐股窄日期窗取原响应，不填零",
+    "核元/手与股单位，比较amount/volume/price，交明确可复核结论"
+  ],
+  "read_only_paths": [
+    "Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-derived-20261108-run1"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/anomaly-probe.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/anomaly-probe-result.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes"
+  ],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "8行各自独立原件与SHA",
+    "数值/单位/日期对照，缺行仍缺",
+    "与之前总请求账累计"
+  ],
+  "stop_conditions": [
+    "最多16新增请求/2MiB响应",
+    "继承整体5600操作50MiB与UTC13:00:46截止",
+    "不得改builder/包、不得将零或缺行当证据"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "budget": {
+    "requestsAlreadyWithRootSearches": 5350,
+    "maxExtra": 16,
+    "deadlineUtc": "2026-11-08T13:00:46.537129+00:00"
+  }
+}

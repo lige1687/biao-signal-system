@@ -244,7 +244,7 @@ def _is_consumed(conn: sqlite3.Connection, nonce: str) -> bool:
     return bool(row and row["consumed_at"])
 
 
-def _claim_nonce(conn: sqlite3.Connection, nonce: str) -> bool:
+def _claim_nonce(conn: sqlite3.Connection, nonce: str, *, commit: bool = True) -> bool:
     cursor = conn.execute(
         """
         UPDATE feishu_webhook_nonces
@@ -253,7 +253,8 @@ def _claim_nonce(conn: sqlite3.Connection, nonce: str) -> bool:
         """,
         (datetime.now(UTC).isoformat(), nonce),
     )
-    conn.commit()
+    if commit:
+        conn.commit()
     return cursor.rowcount == 1
 
 
@@ -384,27 +385,20 @@ async def submit_action(request: Request) -> HTMLResponse:
             )
         if item.state != "open":
             raise HTTPException(status_code=409, detail=f"待办当前状态不可处理: {item.state}")
-        if not _claim_nonce(conn, signed.nonce):
+        if operation == "done":
+            conn.execute("BEGIN IMMEDIATE")
+        if not _claim_nonce(conn, signed.nonce, commit=(operation != "done")):
             return HTMLResponse(
                 _page(signed, message="该待办已经处理，无需重复提交。", show_form=False)
             )
 
         if operation == "done":
-            update_action_item(conn, item.action_id, state="done", close_kind="done")
-            plan = get_plan(conn, signed.plan_id)
-            if plan is not None and item.kind == "ENTER" and plan.state == "armed":
-                entered = set_entered(
-                    conn,
-                    signed.plan_id,
-                    entered_on=item.due_from or datetime.now(UTC).date().isoformat(),
-                )
-                handle_supersede(conn, entered)
-            elif plan is not None and item.kind == "EXIT" and plan.state == "entered":
-                set_exited(
-                    conn,
-                    signed.plan_id,
-                    exited_on=item.due_from or datetime.now(UTC).date().isoformat(),
-                )
+            from lei_signal.plans.evidence import complete_action, EvidenceConflict
+            try:
+                complete_action(conn, signed.plan_id, item.action_id,
+                    actual_action_date=None, source="feishu", commit=False)
+            except (ValueError, KeyError) as exc:
+                raise HTTPException(status_code=409, detail=str(exc)) from exc
             add_annotation(
                 conn,
                 signed.plan_id,
@@ -412,8 +406,9 @@ async def submit_action(request: Request) -> HTMLResponse:
                 ref_id=item.action_id,
                 kind="webhook_done",
                 reason_cn="通过飞书 Webhook 回执标记已执行",
-                author="user",
+                author="user", commit=False,
             )
+            conn.commit()
             result_detail = "后续监督周期将按已执行状态继续。"
         else:
             assert predicate is not None

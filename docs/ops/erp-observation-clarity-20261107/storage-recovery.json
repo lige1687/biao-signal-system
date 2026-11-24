@@ -1,0 +1,21 @@
+{
+  "operation": "archive redundant idle updater cache with readback before local copy removal",
+  "source": "/Users/yongbiaoli/Library/Caches/Trae CN/update.zip",
+  "external_backup": "/Volumes/win+mac通用/LeiSignal-新实验结果/erp-trend-matrix-20261107/erp-trend-matrix-20261107-20261107T183134-80bdc9e883ca/storage-recovery/Trae-CN-update.zip",
+  "retained_identical_pending_archive": "/Users/yongbiaoli/Library/Caches/Trae CN/pending/TRAE_CN-darwin-arm64.zip",
+  "sha256": "5a3bbe67084f31a6d9515288203a7fde3a63f4be56467ba97a8ffec5ed384991",
+  "bytes": 643626938,
+  "internal_free_before": 5086322688,
+  "restore": "Copy external_backup to source; no source data or research artifacts modified.",
+  "authorization": "docs/ops/research-output-storage.md 2026-11-05 explicit active-task cache recovery; duplicate immutable updater archive; no application termination",
+  "internal_free_after": 5085450240,
+  "second_cache_archive": {
+    "source": "/Users/yongbiaoli/Library/Caches/Trae CN/pending/TRAE_CN-darwin-arm64.zip",
+    "content_backup": "/Volumes/win+mac通用/LeiSignal-新实验结果/erp-trend-matrix-20261107/erp-trend-matrix-20261107-20261107T183134-80bdc9e883ca/storage-recovery/Trae-CN-update.zip",
+    "metadata_backup": "/Volumes/win+mac通用/LeiSignal-新实验结果/erp-trend-matrix-20261107/erp-trend-matrix-20261107-20261107T183134-80bdc9e883ca/storage-recovery/pending-update-info.json",
+    "sha256": "5a3bbe67084f31a6d9515288203a7fde3a63f4be56467ba97a8ffec5ed384991",
+    "mtime_ns": 1793881661602563813,
+    "reason": "Identical local archives may share APFS blocks; first archive removal did not restore capacity. Pending archive idle, reproducible, no open handles; current app runs from mounted app image."
+  },
+  "internal_free_after_second": 5080621056
+}

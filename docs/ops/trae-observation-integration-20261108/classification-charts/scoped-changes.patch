@@ -1,0 +1,678 @@
+--- before/web/src/components/market-observation-alerts/IndicatorBrowser.tsx
++++ web/src/components/market-observation-alerts/IndicatorBrowser.tsx
+@@ -14,6 +14,7 @@
+   previewId: string | null;
+   preview: ReactNode;
+   onClosePreview: () => void;
++  renderThumbnail?: (id: string) => ReactNode;
+ }
+ 
+ const MARKET_LABELS: Record<IndicatorEntry["market"], string> = {
+@@ -33,8 +34,24 @@
+   </button>;
+ }
+ 
++function LazyThumbnail({ id, children }: { id: string; children: ReactNode }) {
++  const container = useRef<HTMLDivElement>(null);
++  const [visible, setVisible] = useState(false);
++  useEffect(() => {
++    if (!container.current || typeof IntersectionObserver === "undefined") { setVisible(true); return; }
++    const observer = new IntersectionObserver(([entry]) => {
++      if (entry.isIntersecting) { setVisible(true); observer.disconnect(); }
++    }, { rootMargin: "240px" });
++    observer.observe(container.current);
++    return () => observer.disconnect();
++  }, []);
++  return <div ref={container} className="mib-thumbnail" data-indicator-thumbnail={id}>
++    {visible ? children : <p className="mib-thumbnail-loading">正在准备趋势小图…</p>}
++  </div>;
++}
++
+ export default function IndicatorBrowser({
+-  entries = INDICATOR_CATALOG, selectedIds, summaries, onSetPinned, onPreview, previewId, preview, onClosePreview,
++  entries = INDICATOR_CATALOG, selectedIds, summaries, onSetPinned, onPreview, previewId, preview, onClosePreview, renderThumbnail,
+ }: IndicatorBrowserProps) {
+   const [category, setCategory] = useState<CategoryId | "all">("all");
+   const [market, setMarket] = useState<IndicatorEntry["market"] | "all">("all");
+@@ -129,9 +146,10 @@
+               </div>
+               <h4 id={itemHeadingId}>{item.label}</h4>
+               <p>{item.meaning}</p>
+-              {item.readable && summary && <p className="mib-reading">
++              {item.readable && !renderThumbnail && summary && <p className="mib-reading">
+                 <strong>{summary.value}</strong>{summary.date && <time>{summary.date}</time>}
+               </p>}
++              {item.readable && renderThumbnail && <LazyThumbnail id={item.id}>{renderThumbnail(item.id)}</LazyThumbnail>}
+               {!item.readable && <p className="mib-limitation">{item.limitation}</p>}
+               <div className="mib-actions">
+                 <button type="button" className="mib-button mib-view" aria-label={`查看${item.label}`}
+@@ -145,7 +163,7 @@
+                     } else {
+                       onPreview(item.id);
+                     }
+-                  }}>查看指标</button>
++                  }}>{item.readable ? "展开图表与口径" : "查看缺项"}</button>
+                 <PinButton item={item} pinned={isPinned} onSetPinned={onSetPinned} />
+               </div>
+             </article>
+--- before/web/src/components/market-observation-alerts/indicator-browser.css
++++ web/src/components/market-observation-alerts/indicator-browser.css
+@@ -216,3 +216,18 @@
+   margin-top: auto;
+   padding-top: 8px;
+ }
++
++.mib-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
++.mib-item { align-items:stretch; padding:12px 14px; }
++.mib-item > p { min-height:2.8em; }
++.mib-thumbnail { min-width:0; min-height:200px; margin:12px 0 4px; }
++.mib-thumbnail-loading { color:#788471; padding-top:36px; text-align:center; }
++.mit-thumbnail { min-width:0; }
++.mit-thumbnail .moa-mini { margin:8px 0 4px; }
++.mit-thumbnail .moa-mini svg { width:100%; height:135px; display:block; }
++.mit-reading { display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 12px; margin:0 0 8px; }
++.mit-reading strong { font-size:23px; font-weight:650; color:#353c36; }
++.mit-reading time, .mit-state { color:#6d7763; font-size:12px; }
++.mit-thumbnail .moa-mini-empty { min-height:110px; display:grid; place-items:center; background:#f7f9f4; border-radius:5px; }
++.mit-thumbnail p { font-size:12px; line-height:1.5; }
++@media (max-width:1280px) { .mib-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+--- before/web/src/components/market-observation-alerts/index.tsx
++++ web/src/components/market-observation-alerts/index.tsx
+@@ -40,8 +40,10 @@
+ import RelativeObservationCards from "./RelativeObservationCards";
+ import type { CandidateSummary } from "./CandidateShelf";
+ import IndicatorBrowser from "./IndicatorBrowser";
++import IndicatorThumbnail from "./IndicatorThumbnail";
+ import { INDICATOR_BY_ID, MICRO_INDICATORS } from "./indicatorCatalog";
+ import MicrostructureObservations from "./MicrostructureObservations";
++import ConcentrationObservationCard from "./ConcentrationObservationCard";
+ import ObservationMetric from "../observation-library/ObservationMetric";
+ 
+ async function getJson(url: string, signal: AbortSignal): Promise<unknown> {
+@@ -358,6 +360,7 @@
+       points={inputs[index].points} onRead={() => markRead([snapshots[index]])}
+       erpSource={index === 0 && erp.data ? { name: erp.data.sourceName, url: erp.data.sourceUrl } : undefined}
+       onOpen={() => setDetailId(id as "erp-cn" | "breadth-cn" | "breadth-us")} onCollapse={onDismiss} />;
++    if (id === "turnover-concentration") return <ConcentrationObservationCard onCollapse={onDismiss} />;
+     if (id === "erp-us") return <UsErpCard collapsed={false} onCollapse={onDismiss} onSummary={summary => updateSummary(id, summary)} />;
+     if (id === "focus-momentum") return <FocusMomentumOverview collapsed={false} onCollapse={onDismiss} onSummary={summary => updateSummary(id, summary)} />;
+     const market = INDICATOR_BY_ID.get(id)?.market === "us" ? "us" : "cn";
+@@ -417,6 +420,7 @@
+         {contextOpen && <ContextPanel snapshots={snapshots} cnBreadth={cn.isError ? undefined : cn.data} usBreadth={us.isError ? undefined : us.data} asOf={nowDate} />}
+       </details>
+     </> : <IndicatorBrowser selectedIds={selectedIds} summaries={summaries} onSetPinned={changePinned}
++      renderThumbnail={id => <IndicatorThumbnail id={id} />}
+       previewId={previewId} onPreview={setPreviewId} onClosePreview={() => setPreviewId(null)}
+       preview={previewId ? <div className="moa-preview-card">{renderCard(previewId, () => setPreviewId(null))}</div> : null} />}
+     {detailId && <OverviewDetail id={detailId} onClose={() => setDetailId(null)} />}
+--- before/web/src/components/market-observation-alerts/style.css
++++ web/src/components/market-observation-alerts/style.css
+@@ -138,3 +138,9 @@
+ .moa-preview-card { max-width:860px; margin:14px auto 0; min-width:0; }
+ .moa-preview-card .cmo-card { padding:14px; border:1px solid #e1e5dc; border-radius:7px; background:#fbfcf9; }
+ .moa-preview-card .micro-reading { min-width:0; }
++.moa-concentration-controls { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:12px; }
++.moa-concentration-controls > div { display:flex; flex-wrap:wrap; gap:5px; }
++.moa-concentration-controls button[aria-pressed=true] { background:#eaf2e6; border-color:#9eb495; color:#345b30; }
++.moa-concentration > .moa-item { padding:0; border:0; }
++.moa-concentration .moa-mini svg { height:auto; }
++.moa-concentration .moa-mini path { vector-effect:non-scaling-stroke; }
+--- before/web/src/components/market-observation-alerts/indicatorCatalog.ts
++++ web/src/components/market-observation-alerts/indicatorCatalog.ts
+@@ -815,11 +815,12 @@
+ export const INDICATOR_CATALOG: readonly IndicatorEntry[] = [
+   ...OBSERVATION_CATALOG.map(({ group, id, label, market, meaning, limitation, readable }) => ({
+     id, label, market, meaning, limitation, readable,
++    ...(id === "turnover-concentration" ? { meaning: "看成交额集中在少数股票的程度：日频前5%、日频前10%、月频前5%。", keywords: "成交额集中度 每日 月度 前5% 前10% top5 top10" } : {}),
+     category: CATEGORY_OVERRIDES.get(id) ?? CATEGORY_BY_GROUP[group],
+-    keywords: SEARCH_ALIASES[id],
++    keywords: id === "turnover-concentration" ? "成交额集中度 每日 月度 前5% 前10% top5 top10" : SEARCH_ALIASES[id],
+   })),
+   ...EXTRA_INDICATORS,
+-  ...MICRO_INDICATORS,
++  ...MICRO_INDICATORS.filter(item => !["cn-daily-amount-top5", "cn-daily-amount-top10"].includes(item.id)),
+ ];
+ 
+ export const INDICATOR_BY_ID: ReadonlyMap<string, IndicatorEntry> =
+--- before/web/src/components/market-observation-alerts/indicatorCatalog.test.mjs
++++ web/src/components/market-observation-alerts/indicatorCatalog.test.mjs
+@@ -101,3 +101,13 @@
+   assert.deepEqual(filterIndicators({ market: "cn", query: "样例" }, [extra]), [extra]);
+   assert.deepEqual(filterIndicators({}, []), []);
+ });
++
++test("concentration has one browse entry with daily and monthly search aliases", () => {
++  assert.ok(INDICATOR_BY_ID.has("turnover-concentration"));
++  assert.ok(!INDICATOR_BY_ID.has("cn-daily-amount-top5"));
++  assert.ok(!INDICATOR_BY_ID.has("cn-daily-amount-top10"));
++  assert.ok(!INDICATOR_BY_ID.has("cn-monthly-amount-top5"));
++  for (const query of ["成交额集中度","每日 前5%","月度","top10"]) {
++    assert.ok(filterIndicators({ query }).some(({id}) => id === "turnover-concentration"),query);
++  }
++});
+--- before/web/src/components/market-observation-alerts/selection.ts
++++ web/src/components/market-observation-alerts/selection.ts
+@@ -17,9 +17,11 @@
+ const LEGACY_DEFAULTS: readonly (readonly string[])[] = [LEGACY_DEFAULT_IDS, LEGACY_DEFAULT_IDS.slice(0, 15),
+   LEGACY_DEFAULT_IDS.slice(0, 15).filter(id => id !== "cn-session" && id !== "cn-institution")];
+ 
++const ALIASES: Readonly<Record<string, string>> = { "cn-daily-amount-top5": "turnover-concentration", "cn-daily-amount-top10": "turnover-concentration" };
++
+ export function normalizeSelection(value: unknown): string[] {
+   if (!Array.isArray(value)) return [];
+-  return [...new Set(value.filter((id): id is string => typeof id === "string" && CANDIDATE_IDS.has(id)))];
++  return [...new Set(value.filter((id): id is string => typeof id === "string").map(id => ALIASES[id] ?? id).filter(id => CANDIDATE_IDS.has(id)))];
+ }
+ 
+ function readArray(value: string | null): unknown[] | null {
+--- before/web/src/components/market-observation-alerts/selection.test.mjs
++++ web/src/components/market-observation-alerts/selection.test.mjs
+@@ -33,3 +33,8 @@
+   assert.deepEqual(normalizeSelection(["vix","vix","unknown",42,"industry-structure-cn","cn-300etf-pcr-volume"]),["vix","industry-structure-cn","cn-300etf-pcr-volume"]);
+   assert.deepEqual(migrateSelection(null,"{bad",json(["aaii"]),null),[...CORE_IDS,"aaii"]);
+ });
++
++test("daily and monthly concentration pins migrate to one canonical card", () => {
++  assert.deepEqual(normalizeSelection(["cn-daily-amount-top5","vix","cn-daily-amount-top10","turnover-concentration"]), ["turnover-concentration","vix"]);
++  assert.deepEqual(migrateSelection('["cn-daily-amount-top5","cn-daily-amount-top10"]',null,null,null),["turnover-concentration"]);
++});
+--- /dev/null
++++ web/src/components/market-observation-alerts/ConcentrationObservationCard.tsx
+@@ -0,0 +1,29 @@
++import { useState } from "react";
++import MicrostructureObservations from "./MicrostructureObservations";
++
++type Mode = "daily5" | "daily10" | "monthly5";
++const KEY = "ws.concentrationView.v1";
++const OPTIONS = [
++  { id: "daily5", label: "日频 · 前5%" },
++  { id: "daily10", label: "日频 · 前10%" },
++  { id: "monthly5", label: "月频 · 前5%" },
++] as const;
++function initialMode(): Mode {
++  try { const saved = localStorage.getItem(KEY); return OPTIONS.some(item => item.id === saved) ? saved as Mode : "daily5"; }
++  catch { return "daily5"; }
++}
++export default function ConcentrationObservationCard({ onCollapse }: {
++  onCollapse: () => void;
++}) {
++  const [mode, setMode] = useState<Mode>(initialMode);
++  return <section className="moa-concentration moa-standalone" data-overview-card="turnover-concentration" aria-label="成交额集中度 · 周期与口径">
++    <div className="moa-concentration-controls">
++      <div role="group" aria-label="成交额集中度周期">{OPTIONS.map(item => <button key={item.id}
++        aria-pressed={mode === item.id} onClick={() => { setMode(item.id); try { localStorage.setItem(KEY, item.id); } catch { /* The current view remains usable. */ } }}>{item.label}</button>)}</div>
++      <button onClick={onCollapse}>收起</button>
++    </div>
++    <MicrostructureObservations market="cn" selectedIds={[mode === "monthly5" ? "cn-monthly-amount-top5"
++      : mode === "daily5" ? "cn-daily-amount-top5" : "cn-daily-amount-top10"]} />
++    <p className="moa-card-limit">日频按当天成交额排名；月频先累加每只股票整月成交额再排名。前5%与前10%使用相同股票池，观察集中程度的不同范围。</p>
++  </section>;
++}
+--- /dev/null
++++ web/src/components/market-observation-alerts/IndicatorThumbnail.tsx
+@@ -0,0 +1,298 @@
++import { useMemo } from "react";
++import { useQuery } from "@tanstack/react-query";
++import { fundamentalsApi } from "../../api/client";
++import { seriesPoints, volatilityHistory } from "../market-style/marketRiskMetrics";
++import { fromObservation, formatValue, type MetricPoint } from "../observation-library/metricData";
++import {
++  fromSmallcapSnapshot, parseSmallcapSnapshot, SMALLCAP_QUERY_KEY, SMALLCAP_URL,
++} from "../observation-library/candidateData";
++import { marketReferenceBands } from "../observation-library/marketReferenceBands";
++import { innerErpRails } from "../observation-library/erpComparisonDisplay";
++import { usErpBands } from "../observation-library/usErpBands";
++import { PROJECTION_METRICS, useProjectionSource } from "../observation-library/projectionSources";
++import { parseBreadth, type BreadthMarket } from "./adapters";
++import ChartLegend, { CHART_COLORS } from "./ChartLegend";
++import { INDICATOR_BY_ID, MICRO_INDICATORS } from "./indicatorCatalog";
++import {
++  breadthThumbnail, historyState, microThumbnail, microThumbnailId, thumbnailWindow,
++  type ThumbnailReading,
++} from "./indicatorThumbnailData";
++import { parseIncrementObservation, SESSION_DIFFERENCE_COLOR } from "./incrementObservationData";
++import { parseIndustryStructure } from "./industryStructureData";
++import { parseMicrostructure, type MicroPacket } from "./microstructureData";
++import MiniTrend from "./MiniTrend";
++import { parseRelativeObservationSnapshot, relativeObservationReading, RELATIVE_OBSERVATION_CARDS } from "./relativeObservationData";
++
++const fiveMinutes = 5 * 60_000;
++const microIds = new Set(MICRO_INDICATORS.map(({ id }) => id));
++const relativeIds = new Set<string>(RELATIVE_OBSERVATION_CARDS.map(({ id }) => id));
++const projectedIds = new Set(PROJECTION_METRICS.map(({ id }) => id));
++
++async function readJson(url: string, signal: AbortSignal): Promise<unknown> {
++  const response = await fetch(url, { signal, cache: "no-cache" });
++  if (!response.ok) throw new Error("观察资料暂不可读");
++  return response.json();
++}
++
++function Loading({ pending, failed }: { pending?: boolean; failed?: boolean }) {
++  return <p className="mit-state" role="status">{failed ? "资料暂不可读。" : pending ? "正在读取小图…" : "暂无可绘历史。"}</p>;
++}
++
++function Thumbnail({ data, label }: { data: ThumbnailReading; label: string }) {
++  const chart = data.chart && thumbnailWindow(data.chart);
++  const history = chart ? historyState(chart.lines) : "empty";
++  return <>
++    <p className="mit-reading"><strong>{data.value}</strong>{data.date && <> · <time dateTime={data.date.replace(" ", "T")}>{data.date}</time></>}
++      {data.note && <small> · {data.note}</small>}</p>
++    {chart && history === "chart" ? <>
++      {(chart.lines.length > 1 || chart.references?.length) ? <ChartLegend items={[
++        ...chart.lines.map((line) => ({ label: line.name, color: line.color })),
++        ...(chart.references ?? []).map((line) => ({ label: line.name, color: line.color, dashed: line.dashed !== false })),
++      ]} /> : null}
++      <MiniTrend {...chart} label={label} />
++    </> : <p className="mit-state">{
++      history === "disconnected" ? "有效读数不连续，暂无法绘制曲线。"
++        : history === "snapshot" ? "仅有一条有效读数，暂无历史曲线。" : "暂无可绘历史。"
++    }</p>}
++  </>;
++}
++
++function pointChart(points: readonly MetricPoint[], name: string, color: string = CHART_COLORS.primary) {
++  return {
++    dates: points.map((point) => point.date),
++    lines: [{ name, color, values: points.map((point) => point.value) }],
++  };
++}
++
++function BreadthThumbnail({ market, label }: { market: BreadthMarket; label: string }) {
++  const query = useQuery({
++    queryKey: ["homeObservationBreadth", market, 90],
++    queryFn: async ({ signal }) => parseBreadth(await readJson(
++      `/api/market-context/breadth-history?market_id=${market}&lookback_days=90&include_observation=true`, signal), market),
++    staleTime: fiveMinutes, retry: false,
++  });
++  if (query.isPending || query.isError) return <Loading pending={query.isPending} failed={query.isError} />;
++  return <Thumbnail data={breadthThumbnail(market, query.data)} label={`${label} · 50日宽度历史高低参考`} />;
++}
++
++function ErpThumbnail({ id, label }: { id: "erp-cn" | "erp-us"; label: string }) {
++  const source = useProjectionSource(id);
++  const rows = useMemo(() => {
++    try { return id === "erp-us" ? usErpBands(source.points) : source.bands ?? []; }
++    catch { return null; }
++  }, [id, source.points, source.bands]);
++  if (source.error || source.isPending || !rows) return <Loading pending={source.isPending} failed={!!source.error || !rows} />;
++  const latest = rows[rows.length - 1];
++  const inner = rows.map(innerErpRails);
++  return <Thumbnail label={`${label} · 近90条及1.5/2倍标准差参考轨道`} data={{
++    value: formatValue(latest?.value ?? null, "个百分点"), date: latest?.date,
++    note: id === "erp-cn" ? "周频历史" : "盈利端月频",
++    chart: {
++      ...pointChart(rows, "股债利差"),
++      references: [
++        { name: "2σ上轨", color: CHART_COLORS.low, values: rows.map((row) => row.upper) },
++        { name: "2σ下轨", color: CHART_COLORS.high, values: rows.map((row) => row.lower) },
++        { name: "1.5σ上轨", color: "#73a89f", values: inner.map((row) => row.upper) },
++        { name: "1.5σ下轨", color: "#bc9974", values: inner.map((row) => row.lower) },
++      ],
++    },
++  }} />;
++}
++
++function ProjectionThumbnail({ id, label }: { id: string; label: string }) {
++  const source = useProjectionSource(id);
++  if (source.error || source.isPending) return <Loading pending={source.isPending} failed={!!source.error} />;
++  const latest = source.points[source.points.length - 1];
++  const reference = marketReferenceBands(id, source.points);
++  return <Thumbnail label={`${label} · ${source.unit || "历史读数"}`} data={{
++    value: formatValue(latest?.value ?? null, source.unit), date: latest?.date,
++    chart: {
++      ...pointChart(source.points, label),
++      references: reference ? [
++        { name: reference.lowerLabel, color: CHART_COLORS.low, values: reference.rows.map((row) => row.lower) },
++        { name: reference.upperLabel, color: CHART_COLORS.high, values: reference.rows.map((row) => row.upper) },
++      ] : undefined,
++    },
++  }} />;
++}
++
++function MicroThumbnail({ id, label }: { id: string; label: string }) {
++  const query = useQuery({
++    queryKey: ["microstructureObservationPacketsV1"],
++    queryFn: ({ signal }) => Promise.all(["funding", "equity", "derivatives"].map(async (branch) => {
++      try {
++        const data = parseMicrostructure(await readJson(`/research/microstructure-observations-20261108/${branch}.json`, signal));
++        return { branch, data, failed: false };
++      } catch {
++        return { branch, data: null as MicroPacket | null, failed: true };
++      }
++    })),
++    staleTime: 60_000, refetchOnWindowFocus: true,
++  });
++  const card = query.data?.flatMap(({ data }) => data?.cards ?? []).find((entry) => entry.id === microThumbnailId(id));
++  if (!card) {
++    const missing = query.data?.flatMap(({ data }) => data?.unavailable ?? []).find((entry) => entry.id === microThumbnailId(id));
++    if (missing) return <p className="mit-state">{missing.reason}</p>;
++    return <Loading pending={query.isPending} failed={query.isError || query.data?.some(({ failed }) => failed)} />;
++  }
++  const data = microThumbnail(card);
++  if (id === "turnover-concentration") data.note = `日频 · 前5% · ${data.note ?? ""}`;
++  return <Thumbnail data={data} label={`${label}${id === "turnover-concentration" ? " · 日频前5%" : ""} · ${card.unit}`} />;
++}
++
++function RelativeThumbnail({ id, label }: { id: string; label: string }) {
++  const query = useQuery({
++    queryKey: ["relativeObservationSnapshotV1"],
++    queryFn: async ({ signal }) => parseRelativeObservationSnapshot(await readJson("/research/relative-market-observations-20261108/data.json", signal)),
++    staleTime: fiveMinutes, retry: false,
++  });
++  const card = query.data?.cards.find((entry) => entry.id === id);
++  if (!card) return <Loading pending={query.isPending} failed={query.isError} />;
++  const { latest, value } = relativeObservationReading(card);
++  return <Thumbnail label={`${label} · 比值`} data={{
++    value, date: latest.date, note: "历史快照",
++    chart: {
++      ...pointChart(card.points.map((point) => ({ date: point.date, value: point.ratio })), "实际比值", "#28629e"),
++      references: [{ name: card.kind === "term" ? "1倍 · 两者相同" : "60日均线", color: "#67747e",
++        values: card.points.map((point) => card.kind === "term" ? 1 : point.ma60) }],
++    },
++  }} />;
++}
++
++function VolatilityThumbnail({ market, label }: { market: "cn" | "us"; label: string }) {
++  const query = useQuery({
++    queryKey: ["fundOverlay", 20], queryFn: () => fundamentalsApi.overlayHistory(20), staleTime: fiveMinutes, retry: false,
++  });
++  const price = query.data?.series[market === "cn" ? "sse" : "sp500"];
++  const rows = useMemo(() => volatilityHistory(price?.dates ?? [], price?.values ?? []), [price]);
++  if (query.isPending || query.isError) return <Loading pending={query.isPending} failed={query.isError} />;
++  const latest = rows[rows.length - 1];
++  return <Thumbnail label={`${label} · 年化百分比`} data={{
++    value: `20日 ${formatValue(latest?.hv20 ?? null, "%")} / 60日 ${formatValue(latest?.hv60 ?? null, "%")}`, date: latest?.date,
++    chart: {
++      dates: rows.map((point) => point.date),
++      lines: [
++        { name: "20日", color: CHART_COLORS.primary, values: rows.map((point) => point.hv20) },
++        { name: "60日", color: CHART_COLORS.secondary, values: rows.map((point) => point.hv60) },
++      ],
++    },
++  }} />;
++}
++
++type RiskSupplement = { series?: Record<string, { points: MetricPoint[]; unit: string; snapshotTime?: string }> };
++function Dr007Thumbnail({ label }: { label: string }) {
++  const query = useQuery({
++    queryKey: ["crossMarketRiskSupplement", "20261102-v2"],
++    queryFn: async ({ signal }) => await readJson("/research/cross-market-risk-context-20261102/supplement-v2.json", signal) as RiskSupplement,
++    staleTime: fiveMinutes, retry: false,
++  });
++  const series = query.data?.series?.dr007;
++  const latest = series?.points[series.points.length - 1];
++  if (!series || !latest) return <Loading pending={query.isPending} failed={query.isError} />;
++  return <Thumbnail label={label} data={{
++    value: latest.value == null ? "暂无可核读数" : `${latest.value.toFixed(4)}${series.unit}`,
++    date: series.snapshotTime ?? latest.date, note: "历史快照",
++    chart: pointChart(series.points, label),
++  }} />;
++}
++
++function FinancingThumbnail() {
++  const query = useQuery({
++    queryKey: ["fundamentalsRatesHistory", 7300], queryFn: () => fundamentalsApi.ratesHistory(7300),
++    staleTime: 30 * 60_000, retry: false,
++  });
++  const points = seriesPoints(query.data?.series.margin_rzyezb);
++  const latest = points[points.length - 1];
++  if (query.isPending || query.isError) return <Loading pending={query.isPending} failed={query.isError} />;
++  return <Thumbnail label="A股融资余额占流通市值比 · 百分比" data={{
++    value: `融资余额占流通市值 ${formatValue(latest?.value ?? null, "%")}`, date: latest?.date,
++    chart: pointChart(points, "融资余额占流通市值"),
++  }} />;
++}
++
++function IncrementThumbnail({ id, label }: { id: string; label: string }) {
++  const query = useQuery({
++    queryKey: ["incrementObservationCnV1"],
++    queryFn: async ({ signal }) => parseIncrementObservation(await readJson("/research/market-increment-observations/cn.v1.json", signal)),
++    staleTime: fiveMinutes, retry: false,
++  });
++  if (query.isPending || query.isError) return <Loading pending={query.isPending} failed={query.isError} />;
++  if (id === "cn-institution") {
++    const source = query.data.institutional_disclosure;
++    return <Thumbnail label={label} data={{
++      value: `披露机构净额 ${formatValue(source.net_yuan / 1e8, "亿元")}`, date: source.asof, note: "单日披露",
++    }} />;
++  }
++  const source = query.data.session;
++  return <Thumbnail label={`${label} · 百分点`} data={{
++    value: `日内－隔夜 ${formatValue(source.latest.diff20_pp, "个百分点")}`, date: source.asof, note: "历史快照",
++    chart: {
++      dates: source.points.map((point) => point.date),
++      lines: [
++        { name: "隔夜", color: CHART_COLORS.primary, values: source.points.map((point) => point.overnight20_pp) },
++        { name: "日内", color: CHART_COLORS.secondary, values: source.points.map((point) => point.intraday20_pp) },
++        { name: "日内－隔夜", color: SESSION_DIFFERENCE_COLOR, values: source.points.map((point) => point.diff20_pp) },
++      ],
++      references: [{ name: "0 · 涨跌分界", color: CHART_COLORS.zero, values: source.points.map(() => 0) }],
++    },
++  }} />;
++}
++
++function IndustryThumbnail() {
++  const query = useQuery({
++    queryKey: ["industryStructureCnV1"],
++    queryFn: async ({ signal }) => parseIndustryStructure(await readJson("/research/industry-structure/cn.v1.json", signal)),
++    staleTime: fiveMinutes, retry: false,
++  });
++  if (query.isPending || query.isError) return <Loading pending={query.isPending} failed={query.isError} />;
++  const { latest, history } = query.data;
++  return <Thumbnail label="沪深300十行业涨跌同步程度 · 相关系数" data={{
++    value: `同步程度 ${formatValue(latest.correlation, "")} · 分化 ${formatValue(latest.dispersion5, "个百分点")}`,
++    date: latest.date, note: "历史快照 · 图示同步程度",
++    chart: pointChart(history.map((point) => ({ date: point.date, value: point.correlation })), "同步程度"),
++  }} />;
++}
++
++function SnapshotThumbnail({ id, label }: { id: "smallcap-turnover" | "vxn"; label: string }) {
++  const smallcap = useQuery({
++    queryKey: SMALLCAP_QUERY_KEY,
++    queryFn: async ({ signal }) => parseSmallcapSnapshot(await readJson(SMALLCAP_URL, signal)),
++    enabled: id === "smallcap-turnover", staleTime: Infinity, retry: false, refetchOnWindowFocus: false,
++  });
++  const vxn = useQuery({
++    queryKey: ["fundamentalsObservations", "us"],
++    queryFn: () => fundamentalsApi.observations("us"),
++    enabled: id === "vxn", staleTime: fiveMinutes, retry: false,
++  });
++  const query = id === "vxn" ? vxn : smallcap;
++  if (query.isPending || query.isError) return <Loading pending={query.isPending} failed={query.isError} />;
++  const snapshot = id === "smallcap-turnover"
++    ? smallcap.data && fromSmallcapSnapshot(smallcap.data)
++    : fromObservation(vxn.data?.items.find((row) => row.metric_id === "vxn"));
++  if (!snapshot) return <Loading />;
++  return <Thumbnail label={label} data={{
++    value: formatValue(snapshot.value, snapshot.unit), date: snapshot.date ?? undefined, note: "单次快照",
++  }} />;
++}
++
++function ThumbnailContent({ id, label }: { id: string; label: string }) {
++  if (id === "turnover-concentration" || microIds.has(id)) return <MicroThumbnail id={id} label={label} />;
++  if (id === "breadth-cn" || id === "breadth-us") return <BreadthThumbnail market={id === "breadth-cn" ? "CN_ALL_A" : "SP500"} label={label} />;
++  if (id === "erp-cn" || id === "erp-us") return <ErpThumbnail id={id} label={label} />;
++  if (relativeIds.has(id)) return <RelativeThumbnail id={id} label={label} />;
++  if (id === "hv-cn" || id === "hv-us") return <VolatilityThumbnail market={id === "hv-cn" ? "cn" : "us"} label={label} />;
++  if (id === "dr007") return <Dr007Thumbnail label={label} />;
++  if (id === "cn-financing") return <FinancingThumbnail />;
++  if (id === "cn-session" || id === "cn-institution") return <IncrementThumbnail id={id} label={label} />;
++  if (id === "industry-structure-cn") return <IndustryThumbnail />;
++  if (id === "smallcap-turnover" || id === "vxn") return <SnapshotThumbnail id={id} label={label} />;
++  if (projectedIds.has(id)) return <ProjectionThumbnail id={id} label={label} />;
++  return <Loading />;
++}
++
++export default function IndicatorThumbnail({ id }: { id: string }) {
++  const item = INDICATOR_BY_ID.get(id);
++  return <div className="mit-thumbnail">
++    {item?.readable ? <ThumbnailContent key={id} id={id} label={item.label} /> : <Loading />}
++  </div>;
++}
+--- /dev/null
++++ web/src/components/market-observation-alerts/indicatorThumbnailData.ts
+@@ -0,0 +1,79 @@
++import type { BreadthReadingResponse } from "../market-style/breadthReadingTypes";
++import { BREADTH_LINES } from "../trend/zones";
++import { breadthInput, type BreadthMarket } from "./adapters";
++import { CHART_COLORS } from "./ChartLegend";
++import { formatMicro, reading, type MicroCard } from "./microstructureData";
++
++export type ThumbnailLine = { name: string; color: string; values: (number | null)[] };
++export type ThumbnailReference = ThumbnailLine & { dashed?: boolean; endLabel?: string };
++export type ThumbnailChart = {
++  dates: string[];
++  lines: ThumbnailLine[];
++  references?: ThumbnailReference[];
++  lower?: (number | null)[];
++  upper?: (number | null)[];
++  percent?: boolean;
++};
++export type ThumbnailReading = { value: string; date?: string; note?: string; chart?: ThumbnailChart };
++
++const finite = (value: unknown): value is number => typeof value === "number" && Number.isFinite(value);
++
++export function thumbnailWindow(chart: ThumbnailChart, count = 90): ThumbnailChart {
++  const tail = <T extends ThumbnailLine>(line: T): T => ({ ...line, values: line.values.slice(-count) });
++  return {
++    dates: chart.dates.slice(-count),
++    lines: chart.lines.map(tail),
++    references: chart.references?.map(tail),
++    lower: chart.lower?.slice(-count),
++    upper: chart.upper?.slice(-count),
++    percent: chart.percent,
++  };
++}
++
++export function historyState(lines: readonly ThumbnailLine[]) {
++  if (lines.some(({ values }) => values.some((value, index) => finite(value) && finite(values[index - 1])))) return "chart";
++  if (lines.some(({ values }) => values.filter(finite).length >= 2)) return "disconnected";
++  return lines.some(({ values }) => values.some(finite)) ? "snapshot" : "empty";
++}
++
++export function microThumbnailId(id: string) {
++  return id === "turnover-concentration" ? "cn-daily-amount-top5" : id;
++}
++
++export function microThumbnail(card: MicroCard): ThumbnailReading {
++  const latest = reading(card);
++  const lastKnown = latest.value === null ? [...card.points].reverse().find((point) => point.value !== null) : undefined;
++  return {
++    value: formatMicro(latest.value, card.unit),
++    date: latest.date,
++    note: lastKnown ? `最近有效读数 ${formatMicro(lastKnown.value, card.unit)}（${lastKnown.date}）`
++      : latest.value === null ? "本期缺读数 · 历史快照" : "历史快照",
++    chart: {
++      dates: card.points.map((point) => point.date),
++      lines: [{ name: `${card.title} · ${card.unit}`, color: "#28629e", values: card.points.map((point) => point.value) }],
++      references: card.references?.map((reference) => ({
++        name: reference.label, color: "#9b7953", values: card.points.map(() => reference.value),
++      })),
++    },
++  };
++}
++
++export function breadthThumbnail(market: BreadthMarket, data: BreadthReadingResponse): ThumbnailReading {
++  const history = data.history;
++  const rails = new Map(breadthInput(market, data).points.map((point) => [point.date, point]));
++  const latest = history[history.length - 1];
++  const value = latest?.breadth_50;
++  return {
++    date: latest?.date,
++    value: finite(value) ? `50日 ${value.toFixed(1)}%` : "待补",
++    note: "50日宽度 · 高低线为历史参照",
++    chart: {
++      dates: history.map((point) => point.date),
++      lines: [{ name: "50日宽度", color: BREADTH_LINES[1]?.color ?? CHART_COLORS.primary,
++        values: history.map((point) => finite(point.breadth_50) ? point.breadth_50 : null) }],
++      lower: history.map((point) => rails.get(point.date)?.lower ?? null),
++      upper: history.map((point) => rails.get(point.date)?.upper ?? null),
++      percent: true,
++    },
++  };
++}
+--- /dev/null
++++ web/src/components/market-observation-alerts/indicatorThumbnailData.test.mjs
+@@ -0,0 +1,82 @@
++import test from "node:test";
++import assert from "node:assert/strict";
++import { build } from "esbuild";
++import { readFile } from "node:fs/promises";
++
++async function load(file) {
++  const result = await build({ entryPoints: [new URL(file, import.meta.url).pathname],
++    bundle: true, platform: "node", format: "esm", write: false });
++  return import(`data:text/javascript;base64,${Buffer.from(result.outputFiles[0].text).toString("base64")}`);
++}
++const { thumbnailWindow, historyState, microThumbnailId, microThumbnail, breadthThumbnail } = await load("./indicatorThumbnailData.ts");
++const { parseMicrostructure } = await load("./microstructureData.ts");
++const { MICRO_INDICATORS } = await load("./indicatorCatalog.ts");
++
++test("thumbnail history keeps the current missing reading and the gaps in each series", () => {
++  const dates = ["2026-11-02", "2026-11-03", "2026-11-04", "2026-11-05"];
++  const values = [2, 3, 4, null];
++  const window = thumbnailWindow({ dates, lines: [{ name: "走势", color: "#123456", values }],
++    references: [{ name: "参照", color: "#987654", values: [1, 1, null, 1] }] }, 3);
++  assert.deepEqual(window.dates, dates.slice(-3));
++  assert.deepEqual(window.lines[0].values, [3, 4, null]);
++  assert.deepEqual(window.references[0].values, [1, null, 1]);
++  assert.equal(historyState(window.lines), "chart");
++});
++
++test("a snapshot or a run of isolated readings never becomes a fake trend", () => {
++  const line = values => [{ name: "走势", color: "#123456", values }];
++  assert.equal(historyState(line([null, null])), "empty");
++  assert.equal(historyState(line([null, 4, null])), "snapshot");
++  assert.equal(historyState(line([2, null, 4])), "disconnected");
++  assert.equal(historyState(line([2, 3, null, 4])), "chart");
++});
++
++test("concentration thumbnail uses the actual daily top-five series and its original readout", async () => {
++  const source = new URL("../../../public/research/microstructure-observations-20261108/equity.json", import.meta.url);
++  const packet = parseMicrostructure(JSON.parse(await readFile(source, "utf8")));
++  const id = microThumbnailId("turnover-concentration");
++  assert.equal(id, "cn-daily-amount-top5");
++  const card = packet.cards.find(entry => entry.id === id);
++  assert.ok(card);
++  const thumb = microThumbnail(card);
++  const latest = card.points.at(-1);
++  assert.equal(thumb.date, latest.date);
++  assert.equal(thumb.value, latest.value === null ? "待补" : `${latest.value.toFixed(2)}%`);
++  assert.deepEqual(thumb.chart.lines[0].values, card.points.map(p => p.value));
++  for (const [mode, frequency] of [["cn-daily-amount-top5", "daily"], ["cn-daily-amount-top10", "daily"], ["cn-monthly-amount-top5", "monthly"]]) {
++    assert.equal(packet.cards.find(entry => entry.id === mode)?.frequency, frequency, mode);
++  }
++});
++
++test("breadth uses matched, validated dynamic reference rails and keeps missing values", () => {
++  const history = [
++    { date: "2026-11-02", breadth_50: 40 },
++    { date: "2026-11-03", breadth_50: 45 },
++    { date: "2026-11-04", breadth_50: null },
++  ];
++  const observations = history.map(({ date }, index) => ({ date, horizons: {
++    50: { status: "ready", sample_count: index === 0 ? 200 : 252, lower: 20, upper: 80 },
++  } }));
++  const result = breadthThumbnail("CN_ALL_A", { history, observation: { history: observations } });
++  assert.equal(result.date, "2026-11-04");
++  assert.equal(result.value, "待补");
++  assert.deepEqual(result.chart.lines[0].values, [40, 45, null]);
++  assert.deepEqual(result.chart.lower, [null, 20, null]);
++  assert.deepEqual(result.chart.upper, [null, 80, null]);
++});
++
++test("every readable microstructure entry has a real source packet with an aligned thumbnail", async () => {
++  const packets = await Promise.all(["funding", "equity", "derivatives"].map(async (branch) => {
++    const source = new URL(`../../../public/research/microstructure-observations-20261108/${branch}.json`, import.meta.url);
++    return parseMicrostructure(JSON.parse(await readFile(source, "utf8")));
++  }));
++  const byId = new Map(packets.flatMap((packet) => packet.cards).map((card) => [card.id, card]));
++  for (const entry of MICRO_INDICATORS.filter(({ readable }) => readable)) {
++    const card = byId.get(entry.id);
++    assert.ok(card, entry.id);
++    assert.equal(card.market, entry.market, entry.id);
++    const { chart, date } = microThumbnail(card);
++    assert.equal(chart.dates.at(-1), date, entry.id);
++    assert.equal(chart.lines[0].values.length, chart.dates.length, entry.id);
++  }
++});

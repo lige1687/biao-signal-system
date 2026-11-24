@@ -1,0 +1,44 @@
+{
+  "protocol_id": "factor-product-historical-observation-20261013",
+  "version": "1.0.0",
+  "kind": "calculation_only",
+  "data_mode": "historical_reconstruction",
+  "timezone": "Asia/Shanghai",
+  "observation_date": "2026-06-30",
+  "scope": "Two fixed product/date historical observations for read-only Agent explanation; no new effect test, model fitting, market download, or trading use.",
+  "cases": [
+    {
+      "reference": "research.price_volume.range_mean20@1.0.0",
+      "entity_id": "588000.SS",
+      "input_path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/workflow-input.json",
+      "input_sha256": "aaf497e345404bacd0bc3db3899928de4ba5767fc10b332af5351dd13340c00d",
+      "qualification_path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/qualification.json",
+      "qualification_sha256": "113d8a9f4169a5750450c4270545989a31ba88c098d45bbb47d0c6b186c63f7d",
+      "code_path": "src/lei_signal/research/price_volume_path_information.py",
+      "code_sha256": "5986f81ae066f409e4295fa6f86fa584cc0a74e418cfcb833ee37cf11544db66",
+      "formula": "mean((H[j]-L[j])/C[j-1]) for 20 complete economic-price quoted pairs through 2026-06-30",
+      "unit": "ratio",
+      "required_warmup": 253
+    },
+    {
+      "reference": "mixed.momentum.raw@1.0.0",
+      "entity_id": "159915.SZ",
+      "input_path": "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv",
+      "input_sha256": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be",
+      "manifest_path": "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/input-manifest.json",
+      "manifest_sha256": "b5392a07e03f1deb27997ca8cf9d94c904433c0d1bff54e2c2f1c6b5ed52f293",
+      "run_record_path": "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/run-record.json",
+      "run_record_sha256": "0769c245b5d22366e6d7f56ca88834ae24f91d40fb558f85de5dde980e8876eb",
+      "code_path": "src/lei_signal/research/definitions.py",
+      "code_sha256": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+      "formula": "I(t-21)/I(t-252)-1 on the product's valid economic-price quotes; recent 21 quotes excluded",
+      "unit": "fraction",
+      "required_warmup": 253
+    }
+  ],
+  "historical_availability": "unknown",
+  "current_observation": "not_qualified",
+  "production_authorization": "not_authorized",
+  "new_fits": 0,
+  "new_downloads": 0
+}

@@ -1,0 +1,43 @@
+{
+  "mission": "Build six-category indicator browser and catalog with previews and homepage selection controls",
+  "task_scope": [
+    "Only new standalone category UI, metadata mapping and focused mapping tests; root owns homepage, selection migration, data renderer."
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "web/AGENTS.md",
+    "web/src/components/observation-library/catalog.ts",
+    "web/src/components/market-observation-alerts/CandidateShelf.tsx",
+    "web/src/components/market-observation-alerts/style.css",
+    "web/src/components/market-observation-alerts/relativeObservationData.ts",
+    "web/src/components/market-observation-alerts/IndustryStructure.tsx"
+  ],
+  "write_paths": [
+    "web/src/components/market-observation-alerts/IndicatorBrowser.tsx",
+    "web/src/components/market-observation-alerts/indicator-browser.css",
+    "web/src/components/market-observation-alerts/indicatorCatalog.ts",
+    "web/src/components/market-observation-alerts/indicatorCatalog.test.mjs"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "4 scoped files",
+    "metadata/API contract",
+    "typecheck and focused tests",
+    "known limitations"
+  ],
+  "stop_conditions": [
+    "missing permission",
+    "scope ambiguity",
+    "unsafe action"
+  ],
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

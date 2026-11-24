@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SPY月度趋势参与、持有与固定半仓的历史费用情景比较">
+<title>SPY 趋势参与与持有对比</title>
+<style>
+:root{color-scheme:light;--ink:#162b3a;--muted:#627584;--line:#dce5e9;--paper:#f4f7f8;--white:#fff;--blue:#2168b2;--orange:#dc7b35;--green:#319278;--red:#a23d42}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:34px 22px 52px}h1{font-size:clamp(26px,4vw,38px);line-height:1.18;margin:4px 0 10px;letter-spacing:-.025em}h2{font-size:18px;margin:0 0 16px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.13em;color:var(--blue);font-weight:700}.intro{max-width:790px;color:#455b69;margin:0 0 22px}.verdict{background:#eaf1f8;border-left:4px solid var(--blue);padding:16px 18px;border-radius:8px;margin:22px 0 18px}.verdict strong{display:block;margin-bottom:4px}.verdict p{margin:0;color:#334b5a}.controls,.panel,.note{background:var(--white);border:1px solid var(--line);border-radius:12px}.controls{display:flex;flex-wrap:wrap;gap:14px 20px;padding:14px 16px;margin-bottom:16px;align-items:end}.control{display:grid;gap:5px;min-width:150px}.control label{font-size:12px;color:var(--muted);font-weight:650}.control select{font:inherit;color:var(--ink);background:white;border:1px solid #c8d4da;border-radius:7px;padding:8px 10px}.panel{padding:19px;margin-bottom:16px}.chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}.chart-head span{font-size:12px;color:var(--muted)}.chart-wrap{width:100%;overflow:hidden}.chart{display:block;width:100%;height:auto;min-height:260px}.chart text{font-family:inherit;fill:#607482;font-size:11px}.grid{stroke:#e6ecef;stroke-width:1}.axis{stroke:#aab9c1;stroke-width:1}.series{fill:none;stroke-width:2.7;stroke-linejoin:round;stroke-linecap:round}.legend{display:flex;flex-wrap:wrap;gap:9px 20px;margin:4px 0 0;color:#405663;font-size:13px}.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}.stats{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.stats th,.stats td{border-bottom:1px solid #e7edef;padding:10px 8px;text-align:right;white-space:nowrap}.stats th:first-child,.stats td:first-child{text-align:left}.stats th{font-size:12px;color:var(--muted);font-weight:650}.strategy-name{display:flex;align-items:center;gap:8px}.dot{width:9px;height:9px;border-radius:50%;display:inline-block}.table-scroll{overflow-x:auto}.metric-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}.metric{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fbfcfc}.metric .label{font-size:12px;color:var(--muted)}.metric .value{font-size:23px;font-weight:730;font-variant-numeric:tabular-nums;margin-top:2px}.metric .sub{font-size:12px;color:#637785}.note{padding:16px 18px;margin:14px 0;color:#455b69}.note h2{margin:0 0 7px}.note p{margin:6px 0}.note strong{color:var(--ink)}.caveat{border-color:#e8d6c4;background:#fffaf4}.status{color:var(--muted);font-size:12px;margin-top:9px}.error{color:var(--red)}footer{font-size:12px;color:#71818c;margin-top:18px}
+@media(max-width:680px){main{padding:24px 13px 38px}.panel{padding:14px}.controls{gap:10px}.control{flex:1 1 130px}.metric-cards{grid-template-columns:1fr}.metric{padding:11px}.metric .value{font-size:21px}.chart{min-height:220px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">历史情景复核 · 费用假设已计入</div>
+  <h1>SPY 趋势参与与持有对比</h1>
+  <p class="intro">同一只美国大盘 ETF 的三种持仓方式，在一致的费用假设下比较。图表从每个时期的期初账户金额出发；默认显示 2015—2024 年趋势参与相对持续持有的累计收益差。</p>
+  <section class="verdict" id="verdict"><strong>2015—2024：趋势参与年化 6.28%，低于持续持有的 13.00%；固定半仓为 6.65%。</strong><p>趋势参与最大日收盘跌幅为 26.08%，固定半仓为 17.71%。这组结果不支持把该规则称为已验证的自动避险方法。</p></section>
+  <section class="controls" aria-label="图表筛选">
+    <div class="control"><label for="period">比较时期</label><select id="period"><option value="primary" selected>2015—2024（120个月）</option><option value="early">1994—2014（252个月）</option><option value="recent">2025—2026年8月（20个月）</option><option value="all">1994—2026年8月（392个月）</option></select></div>
+    <div class="control"><label for="fee">单边费用假设</label><select id="fee"><option value="0">0%</option><option value="10" selected>0.10%</option><option value="25">0.25%</option></select></div>
+    <div class="control"><label for="mode">图表口径</label><select id="mode"><option value="excess" selected>相对持有收益差（百分点）</option><option value="nav">账户净值（期初100）</option><option value="relative">相对财富变化（%）</option></select></div>
+  </section>
+  <section class="metric-cards" id="cards" aria-live="polite"></section>
+  <section class="panel">
+    <div class="chart-head"><h2>期初归一后的月末账户曲线</h2><span id="chart-caption">收益差按各账户累计收益减去同期持有累计收益，逐月相减，不将差额连乘。</span></div>
+    <div class="chart-wrap"><svg class="chart" id="chart" viewBox="0 0 1000 390" role="img" aria-label="三种SPY持仓方式的月末曲线"></svg></div>
+    <div class="legend" id="legend"></div>
+    <div class="status" id="chart-status">月末点连线；风险表中的最大跌幅另按每日收盘净值计算。各分期只作展示归一，持仓连续、不重新开仓。</div>
+  </section>
+  <section class="panel">
+    <h2>该时期统计</h2>
+    <div class="table-scroll"><table class="stats"><thead><tr><th>持仓方式</th><th>年化收益</th><th>累计收益</th><th>最大跌幅<br>每日收盘</th><th>买卖次数</th><th>平均持仓比例</th></tr></thead><tbody id="stats"></tbody></table></div>
+  </section>
+  <section class="note">
+    <h2>比较的三种方式</h2>
+    <p><strong>趋势参与：</strong>每个自然月末，用截至当月已完成的十个月 SPY 月末调整后收盘价，判断当月收盘是否高于这十个月平均值；若高于，下月首个报价开盘持有，否则转为现金。</p>
+    <p><strong>持续持有：</strong>期初首个开盘买入后一直持有 SPY。<strong>每月半仓：</strong>每月首个开盘按扣费后的账户净值调到约一半持有 SPY。</p>
+    <p>形成信号发生在当月最后报价收盘之后；交易假设在下月第一个报价开盘进行。它们是历史价格回放中的时间规则，供应商历史数据何时实际可得并未留存。</p>
+  </section>
+  <section class="note caveat">
+    <h2>结果边界</h2>
+    <p>这里只有一只 SPY ETF，不能代表美股个股选股结果。历史时期都已被看过，不是独立验证；尤其 2025—2026 年 8 月只有 20 个月。</p>
+    <p>每次买入或卖出均按成交金额扣除单边 0%、0.10% 或 0.25% 的假设费用；个人实际费率、最低收费、税费和滑点未知。现金按零利息处理。价格已作分红调整近似，不再额外加分红现金；最后按收盘估值，不强制卖出。</p>
+    <p>表中最大跌幅按每日收盘账户净值计算；图表只含月末净值，不能从图上读出日内或每日风险。持续持有在1994年建仓；分段表的0次买卖表示该段没有新增交易，初次费用已计入连续账户。</p>
+  </section>
+  <div class="status" id="load-status">正在读取随页面保存的汇总数据…</div>
+  <footer>来源：冻结的 SPY 情景汇总。费用属于假设；个人真实费用后的净收益仍未评价。</footer>
+</main>
+<script>
+(() => {
+  const COLORS = {sma10:'#2168b2', hold:'#dc7b35', fixed50:'#319278'};
+  const LABELS = {sma10:'趋势参与', hold:'持续持有 SPY', fixed50:'每月半仓'};
+  const PERIOD_LABELS = {all:'1994—2026年8月',early:'1994—2014',primary:'2015—2024',recent:'2025—2026年8月'};
+  const PERIOD_COUNTS = {all:392,early:252,primary:120,recent:20};
+  const fmtPct = (x, digits=2) => `${(x*100).toFixed(digits)}%`;
+  const fmtPP = x => `${x.toFixed(2)} 个百分点`;
+  const fmtUSD = x => '$' + new Intl.NumberFormat('zh-CN',{maximumFractionDigits:0}).format(x);
+  const feeKey = x => `fee${Number(x)}bps`;
+  const accountKey = (strategy, fee) => `${strategy}__${feeKey(fee)}`;
+  const periodSelect = document.querySelector('#period');
+  const feeSelect = document.querySelector('#fee');
+  const modeSelect = document.querySelector('#mode');
+  const svg = document.querySelector('#chart');
+  let DATA = null;
+  const bySummary = (p,s,f) => DATA.periods.find(x=>x.period===p && x.strategy===s && x.fee_bps_per_side===Number(f));
+  const byCurve = (s,f) => DATA.month_end_nav_curves.find(x=>x.account_id===accountKey(s,f));
+  const selectedPoints = (strategy, period, fee) => {
+    const from = bySummary(period,strategy,fee);
+    const baseline = bySummary(period,'hold',fee);
+    const curve = byCurve(strategy,fee).points;
+    const anchorMonth = from.first_month;
+    const prior = new Date(`${anchorMonth}-01T00:00:00Z`);
+    prior.setUTCDate(prior.getUTCDate()-1);
+    const startDate = prior.toISOString().slice(0,10);
+    const points = [[startDate, from.start_nav]];
+    for (const [month,nav] of curve) {
+      if (month < from.first_month || month > from.last_month) continue;
+      points.push([month,nav]);
+    }
+    const holdStart = baseline.start_nav;
+    const holdCurve = byCurve('hold',fee).points;
+    const holdMap = new Map(holdCurve.filter(([m])=>m>=from.first_month && m<=from.last_month));
+    return points.map(([date,nav],i)=>{
+      if (i===0) {
+        if (modeSelect.value==='nav') return {date,value:100};
+        return {date,value:0};
+      }
+      const month=date.slice(0,7);
+      const holdNav=holdMap.get(month);
+      const wealth=nav/from.start_nav;
+      const holdWealth=holdNav/holdStart;
+      if (modeSelect.value==='excess') return {date,value:(wealth-holdWealth)*100};
+      if (modeSelect.value==='relative') return {date,value:(wealth/holdWealth-1)*100};
+      return {date,value:wealth*100};
+    });
+  };
+  function drawChart(period,fee){
+    const W=1000,H=390,L=78,R=24,T=18,B=42, plotW=W-L-R,plotH=H-T-B;
+    const strategies=['sma10','hold','fixed50'];
+    const series=strategies.map(s=>({key:s,name:LABELS[s],color:COLORS[s],pts:selectedPoints(s,period,fee)}));
+    const all=series.flatMap(x=>x.pts.map(p=>p.value));
+    let min=Math.min(...all),max=Math.max(...all);
+    if(modeSelect.value==='excess'||modeSelect.value==='relative'){min=Math.min(min,0);max=Math.max(max,0)}
+    if(min===max){min-=1;max+=1} const pad=(max-min)*.08;min-=pad;max+=pad;
+    const n=series[0].pts.length;
+    const x=i=>L+(n<2?0:i/(n-1))*plotW;
+    const y=v=>T+(max-v)/(max-min)*plotH;
+    const dateAt=i=>series[0].pts[i].date;
+    const ticks=5;let out='';
+    for(let k=0;k<=ticks;k++){const val=max-k*(max-min)/ticks, yy=y(val);out+=`<line class="grid" x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}"/><text x="${L-10}" y="${yy+4}" text-anchor="end">${modeSelect.value==='nav'?val.toFixed(1):val.toFixed(1)+(modeSelect.value==='excess'?' pp':'%')}</text>`}
+    if(min<=0&&max>=0)out+=`<line class="axis" x1="${L}" y1="${y(0)}" x2="${W-R}" y2="${y(0)}"/>`;
+    out+=`<line class="axis" x1="${L}" y1="${T}" x2="${L}" y2="${H-B}"/><line class="axis" x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}"/>`;
+    const xticks=5;for(let k=0;k<=xticks;k++){const i=Math.round(k*(n-1)/xticks),xx=x(i),label=dateAt(i).slice(0,7);out+=`<line class="grid" x1="${xx}" y1="${T}" x2="${xx}" y2="${H-B}"/><text x="${xx}" y="${H-13}" text-anchor="middle">${label}</text>`}
+    for(const s of series){const d=s.pts.map((p,i)=>`${i?'L':'M'}${x(i).toFixed(2)},${y(p.value).toFixed(2)}`).join(' ');out+=`<path class="series" stroke="${s.color}" d="${d}"/>`}
+    svg.innerHTML=out;
+    document.querySelector('#legend').innerHTML=series.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join('');
+    const labels={excess:'收益差（百分点）',nav:'账户净值（期初100）',relative:'相对财富变化（%）'};
+    document.querySelector('#chart-caption').textContent=modeSelect.value==='excess'?'收益差按各账户累计收益减去同期持有累计收益，逐月相减，不将差额连乘。':`${labels[modeSelect.value]}；按所选时期的期初账户净值作比较锚点。`;
+  }
+  function update(){
+    const p=periodSelect.value,f=Number(feeSelect.value);
+    const rows=['sma10','hold','fixed50'].map(s=>bySummary(p,s,f));
+    const trend=rows[0],hold=rows[1],half=rows[2];
+    document.querySelector('#cards').innerHTML=[trend,hold,half].map(r=>`<div class="metric"><div class="label">${LABELS[r.strategy]} · 年化收益</div><div class="value">${fmtPct(r.cagr_exact_month_count)}</div><div class="sub">累计收益 ${fmtPct(r.total_return)} · ${r.months}个月</div></div>`).join('');
+    document.querySelector('#stats').innerHTML=rows.map(r=>`<tr><td><span class="strategy-name"><i class="dot" style="background:${COLORS[r.strategy]}"></i>${LABELS[r.strategy]}</span></td><td>${fmtPct(r.cagr_exact_month_count)}</td><td>${fmtPct(r.total_return)}</td><td>${fmtPct(r.max_drawdown_daily_close_in_slice)}</td><td>${r.trade_count}</td><td>${fmtPct(r.average_exposure)}</td></tr>`).join('');
+    if(p==='primary'&&f===10){document.querySelector('#verdict').innerHTML=`<strong>2015—2024：趋势参与年化 ${fmtPct(trend.cagr_exact_month_count)}，低于持续持有的 ${fmtPct(hold.cagr_exact_month_count)}；固定半仓为 ${fmtPct(half.cagr_exact_month_count)}。</strong><p>趋势参与最大日收盘跌幅为 ${fmtPct(trend.max_drawdown_daily_close_in_slice)}，固定半仓为 ${fmtPct(half.max_drawdown_daily_close_in_slice)}。这组结果不支持把该规则称为已验证的自动避险方法。</p>`}
+    else document.querySelector('#verdict').innerHTML=`<strong>${PERIOD_LABELS[p]}：趋势参与相对持续持有的累计收益差为 ${fmtPP(trend.cumulative_return_difference_vs_hold_percentage_points)}；固定半仓为 ${fmtPP(half.cumulative_return_difference_vs_hold_percentage_points)}。</strong><p>这是已看过的历史价格回放；具体收益、回撤和适用性随时期及费用假设变化。</p>`;
+    drawChart(p,f);
+  }
+  [periodSelect,feeSelect,modeSelect].forEach(el=>el.addEventListener('change',update));
+  fetch('./data.json').then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json()}).then(x=>{DATA=x;update();document.querySelector('#load-status').textContent=`已载入截至2026年8月的冻结汇总；月末曲线 ${DATA.month_end_nav_curves.length} 条。历史数据实际到达时刻未知。`;}).catch(e=>{document.querySelector('#load-status').className='status error';document.querySelector('#load-status').textContent=`无法读取汇总数据：${e.message}`;});
+})();
+</script>
+</body>
+</html>

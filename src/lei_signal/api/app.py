@@ -26,18 +26,23 @@ from lei_signal.api.routes import (
     copilot,
     dailybrief,
     dashboard,
+    decisions,
     experiments,
     factors,
     feishu_webhook,
     fundamentals,
+    fwd_ledger,
     learning,
     news,
     opportunities,
+    opportunity_reviews,
     plans,
     portfolio,
+    portfolio_workspace,
     sectors,
     sentiment,
     signals,
+    smart_prompts,
     strategy_documents,
     symbols,
     timing_backtest,
@@ -125,7 +130,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
             r"|10\.\d{1,3}\.\d{1,3}\.\d{1,3}"
             r"|172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3})(:\d+)?$"
         ),
-        allow_methods=["GET", "POST", "PATCH", "DELETE"],
+        allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
         allow_headers=["*"],
     )
     app.state.analysis_service = analysis_service or AnalysisService(max_workers=8)
@@ -146,9 +151,13 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(watch_subscriptions.router)
     app.include_router(plans.router)
     app.include_router(portfolio.router)
+    app.include_router(decisions.router)
+    app.include_router(opportunity_reviews.router)
+    app.include_router(portfolio_workspace.router)
     app.include_router(signals.router)
     app.include_router(agent.router)
     app.include_router(copilot.router)
+    app.include_router(fwd_ledger.router)
     app.include_router(feishu_webhook.router)
     app.include_router(fundamentals.router)
     app.include_router(sectors.router)
@@ -162,6 +171,10 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(learning.router)
     app.include_router(strategy_documents.router)
     app.include_router(upgrades.router)
+    app.include_router(smart_prompts.router)
+
+    from lei_signal.api.research_surfaces import install_research_surfaces
+    install_research_surfaces(app)
 
     _warm_a_share_breadth()
     # 看盘缓存后台预热：按用户时效性要求定时强刷（盘中 12 分钟 / 收盘补一次 /
@@ -174,7 +187,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
 
     @app.get("/api/health")
     def health() -> dict[str, str]:
-        return {"status": "ok"}
+        return {"status": "ok", "research_surfaces": "integrated", "ui_revision": "2026-10-31"}
 
     if _WEB_DIST.is_dir():
         app.mount("/assets", StaticFiles(directory=_WEB_DIST / "assets"), name="assets")

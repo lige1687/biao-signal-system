@@ -79,6 +79,7 @@ def _row_to_dto(row: sqlite3.Row) -> FundTradeDTO:
         price_status=row["price_status"],
         price_status_cn=_STATUS_CN.get(row["price_status"], row["price_status"]),
         plan_id=row["plan_id"],
+        plan_version_id=row["plan_version_id"],
         source=row["source"],
         note=row["note"] or "",
         created_at=row["created_at"],
@@ -148,10 +149,11 @@ def create_trade(
             """INSERT INTO fund_trades
                (trade_id, fund_code, fund_name, side, amount, trade_date,
                 priced_nav, price_status, plan_id, source, note,
-                created_at, updated_at, request_id, request_payload)
-               VALUES (?,?,?,?,?,?,NULL,'pending',?,?,?,?,?,?,?)""",
+                created_at, updated_at, request_id, request_payload, plan_version_id)
+               VALUES (?,?,?,?,?,?,NULL,'pending',?,?,?,?,?,?,?,
+                 (SELECT version_id FROM trade_plan_versions WHERE plan_id=? ORDER BY rowid DESC LIMIT 1))""",
             (trade_id, fund_code, fund_name, side, amount, trade_date,
-             plan_id, source, note, created, created, request_id, canonical),
+             plan_id, source, note, created, created, request_id, canonical, plan_id),
         )
     except sqlite3.IntegrityError:
         # 并发下另一连接先落了同一 request_id（WAL 写锁放行后撞唯一索引）；

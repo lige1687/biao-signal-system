@@ -1,0 +1,454 @@
+--- before/web/src/components/market-observation-alerts/index.tsx
++++ after/web/src/components/market-observation-alerts/index.tsx
+@@ -39,6 +39,7 @@
+ import { recentDelta, historicalPosition } from "../market-style/indicatorReading";
+ import { IndustryStructureSection } from "./IndustryStructure";
+ import IncrementObservationCards from "./IncrementObservationCards";
++import RelativeObservationCards from "./RelativeObservationCards";
+ import CandidateShelf, { type CandidateSummary } from "./CandidateShelf";
+ 
+ async function getJson(url: string, signal: AbortSignal): Promise<unknown> {
+@@ -305,12 +306,15 @@
+   const sources = [erp, cn, us];
+   const participation = [null, cn.data?.observation?.latest, us.data?.observation?.latest];
+   const handledIds = new Set(["erp-cn", "breadth-cn", "breadth-us", "focus-momentum", "erp-us", "hv-cn", "hv-us",
+-    "cn-financing", "dr007", "aaii", "vix", "hy-oas", "nfci", "finra-margin", "earnings-revisions", "cn-session", "cn-institution"]);
++    "cn-financing", "dr007", "aaii", "vix", "hy-oas", "nfci", "finra-margin", "earnings-revisions", "cn-session", "cn-institution",
++    "cn-style-relative", "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative"]);
+   const selectedOther = selectedIds.filter((id) => !handledIds.has(id));
+   const catalog = [
+     ...EXTRA_IDS.filter((id) => !["earnings-cn", "earnings-us"].includes(id)).map((id) => ({ id,
+       label: ({ "breadth-cn": "全A · 市场宽度", "breadth-us": "标普500 · 市场宽度", "hv-cn": "上证 · 20/60日波动率", "hv-us": "标普500 · 20/60日波动率", dr007: "A股 · DR007资金价格",
+-        "cn-session": "沪深300 · 隔夜与日内表现", "cn-institution": "龙虎榜 · 已披露机构席位" } as Record<string, string>)[id] })),
++        "cn-session": "沪深300 · 隔夜与日内表现", "cn-institution": "龙虎榜 · 已披露机构席位",
++        "cn-style-relative": "大小盘 · 中证1000 / 沪深300", "vix-term-structure": "VIX · 期限结构",
++        "us-semiconductor-relative": "半导体 / 纳指100", "us-equal-weight-relative": "标普500 · 等权 / 市值加权" } as Record<string, string>)[id] })),
+     ...OBSERVATION_CATALOG.map((item) => ({ id: item.id, label: item.label })),
+   ];
+   const summaries: Record<string, CandidateSummary> = { ...liveSummaries };
+@@ -381,6 +385,8 @@
+             collapsedIds={collapsedIds} onCollapse={collapseCard} onSummary={updateSummary} />
+           {market === "cn" && <IncrementObservationCards selectedIds={selectedIds} collapsedIds={collapsedIds}
+             onCollapse={collapseCard} onSummary={updateSummary} />}
++          <RelativeObservationCards market={market} selectedIds={selectedIds} collapsedIds={collapsedIds}
++            onCollapse={collapseCard} onSummary={updateSummary} />
+           {selectedOther.filter((id) => OBSERVATION_BY_ID.get(id)?.market === market || OBSERVATION_BY_ID.get(id)?.market === "global" && market === "cn")
+             .map((id) => <ExtraCandidateCard key={id} id={id} collapsed={collapsedIds.includes(id)} onCollapse={() => collapseCard(id)} onSummary={(summary) => updateSummary(id, summary)} />)}
+         </div>
+--- before/web/src/components/market-observation-alerts/selection.ts
++++ after/web/src/components/market-observation-alerts/selection.ts
+@@ -5,8 +5,10 @@
+ export const LEGACY_PINS_KEY = "ws.marketPins.v1";
+ export const OVERVIEW_CHANGE_EVENT = "lei:market-overview-cards-changed";
+ export const CORE_IDS = ["erp-cn", "breadth-cn", "focus-momentum", "hv-cn", "cn-financing", "turnover-concentration", "dr007",
+-  "cn-session", "cn-institution", "breadth-us", "erp-us", "hv-us", "vix", "hy-oas", "nfci"] as const;
+-export const EXTRA_IDS = ["breadth-cn", "breadth-us", "hv-cn", "hv-us", "dr007", "cn-session", "cn-institution"] as const;
++  "cn-session", "cn-institution", "breadth-us", "erp-us", "hv-us", "vix", "hy-oas", "nfci",
++  "cn-style-relative", "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative"] as const;
++export const EXTRA_IDS = ["breadth-cn", "breadth-us", "hv-cn", "hv-us", "dr007", "cn-session", "cn-institution",
++  "cn-style-relative", "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative"] as const;
+ export const CANDIDATE_IDS = new Set([...OBSERVATION_CATALOG.map((item) => item.id), ...EXTRA_IDS]);
+ 
+ export function normalizeSelection(value: unknown): string[] {
+--- before/web/src/components/market-observation-alerts/selection.test.mjs
++++ after/web/src/components/market-observation-alerts/selection.test.mjs
+@@ -32,3 +32,12 @@
+   assert.deepEqual(parseSelection('["cn-session","cn-institution"]', null), ["cn-session", "cn-institution"]);
+   assert.deepEqual(parseCollapsed('["cn-institution","cn-institution"]'), ["cn-institution"]);
+ });
++
++test("relative and term cards default on, while existing selections and collapsed choices stay intact", () => {
++  const additions = ["cn-style-relative", "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative"];
++  for (const id of additions) assert.ok(parseSelection(null, null).includes(id));
++  assert.deepEqual(parseSelection('["erp-cn","vix"]', null), ["erp-cn", "vix"]);
++  assert.deepEqual(parseSelection('[]', null), []);
++  assert.deepEqual(parseCollapsed(JSON.stringify([...additions, additions[0]])), additions);
++  assert.deepEqual(parseSelection(JSON.stringify(additions), null), additions);
++});
+--- before/web/src/components/market-observation-alerts/CandidateShelf.tsx
++++ after/web/src/components/market-observation-alerts/CandidateShelf.tsx
+@@ -6,7 +6,8 @@
+ type Entry = { id: string; label: string };
+ type Market = "cn" | "us";
+ const marketFor = (id: string): Market => {
+-  if (id === "breadth-us" || id === "hv-us" || id === "erp-us" || ["vix", "hy-oas", "nfci", "finra-margin", "aaii"].includes(id)) return "us";
++  if (id === "breadth-us" || id === "hv-us" || id === "erp-us" || ["vix", "hy-oas", "nfci", "finra-margin", "aaii",
++    "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative"].includes(id)) return "us";
+   return OBSERVATION_BY_ID.get(id)?.market === "us" ? "us" : "cn";
+ };
+ 
+--- before/web/src/components/market-observation-alerts/RelativeObservationCards.tsx
++++ after/web/src/components/market-observation-alerts/RelativeObservationCards.tsx
+@@ -0,0 +1,158 @@
++import { useEffect, useMemo, useRef, useState } from "react";
++import { createPortal } from "react-dom";
++import { useQuery } from "@tanstack/react-query";
++import MarketTrendChart from "../market-style/MarketTrendChart";
++import type { CandidateSummary } from "./CandidateShelf";
++import ChartLegend from "./ChartLegend";
++import MiniTrend from "./MiniTrend";
++import {
++  parseRelativeObservationSnapshot, relativeObservationReading, RELATIVE_OBSERVATION_CARDS,
++  type RelativeObservationCard, type RelativeObservationPoint,
++} from "./relativeObservationData";
++import "./increment-observation.css";
++import "./relative-observation.css";
++
++const SOURCE = "/research/relative-market-observations-20261108/data.json";
++const PERIODS = [120, 252, "all"] as const;
++const SNAPSHOT_NOTE = "未自动按日更新";
++
++function chartSeries(points: RelativeObservationPoint[], term: boolean) {
++  return [
++    { name: "实际比值", color: "#28629e", values: points.map((point) => point.ratio) },
++    { name: term ? "1倍 · 两者相同" : "60日均线", color: "#67747e", dashed: true,
++      values: points.map((point) => term ? 1 : point.ma60) },
++  ];
++}
++
++function interpretation(card: RelativeObservationCard) {
++  return card.kind === "term"
++    ? "1倍表示两者相同。比值越高，短期隐含波动率相对3个月越高。"
++    : "比值上升表示前者相对更强，下降表示前者相对更弱。";
++}
++
++function RelativeObservationDetail({ card, onClose, trigger }: {
++  card: RelativeObservationCard; onClose: () => void; trigger: HTMLButtonElement | null;
++}) {
++  const dialog = useRef<HTMLDialogElement>(null);
++  const [ready, setReady] = useState(false);
++  const [period, setPeriod] = useState<typeof PERIODS[number]>(120);
++  const term = card.kind === "term";
++  const { latest, prior, headline, comparison, value } = relativeObservationReading(card);
++  const points = useMemo(() => period === "all" ? card.points : card.points.slice(-period), [card.points, period]);
++  const series = useMemo(() => chartSeries(points, term), [points, term]);
++  const dates = useMemo(() => points.map(({ date }) => date), [points]);
++
++  useEffect(() => {
++    const node = dialog.current;
++    if (!node) return;
++    node.showModal();
++    setReady(true);
++    return () => {
++      node.close();
++      if (trigger?.isConnected) trigger.focus({ preventScroll: true });
++    };
++  }, [trigger]);
++
++  return createPortal(<dialog ref={dialog} className="io-dialog ro-dialog" aria-label={card.title}
++    onCancel={(event) => { event.preventDefault(); onClose(); }}
++    onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}>
++    <div className="io-dialog-surface">
++      <header><h2>{card.title}</h2><button type="button" onClick={onClose}>关闭 ×</button></header>
++      <p className="io-detail-lead">截至 {latest.date} · {value}{term && ` · ${headline}`}</p>
++      <p className="io-range">较 {prior.date}（20个共同交易日前），比值{comparison}。</p>
++      {term && <p className="io-range">VIX {latest.numerator.toFixed(2)}% · VIX3M {latest.denominator.toFixed(2)}%</p>}
++      <div className="io-period" role="group" aria-label="图表时间范围">
++        {PERIODS.map((range) => <button key={range} type="button" aria-pressed={period === range}
++          onClick={() => setPeriod(range)}>{range === "all" ? "全部" : `近${range}日`}</button>)}
++      </div>
++      <p className="io-range">{dates[0]} 至 {dates[dates.length - 1]} · 拖动滑块或滚轮缩放</p>
++      {ready && <MarketTrendChart dates={dates} series={series} unit="倍" height={360} precision={term ? 3 : 4} />}
++      <p className="io-explain">{interpretation(card)}{!term && "虚线是最近60个共同交易日的平均比值。"}</p>
++      <p className="io-explain">比值为 {card.numerator.label} ÷ {card.denominator.label}，取两者都有读数的日期。{card.price_note}</p>
++      <p className="io-source">历史快照 · {SNAPSHOT_NOTE}。{card.sources.map(({ name, url }) =>
++        <a key={`${name}-${url}`} href={url} target="_blank" rel="noreferrer">{name}</a>)}</p>
++    </div>
++  </dialog>, document.body);
++}
++
++function ObservationCard({ card, onCollapse }: { card: RelativeObservationCard; onCollapse: () => void }) {
++  const [open, setOpen] = useState(false);
++  const trigger = useRef<HTMLButtonElement>(null);
++  const term = card.kind === "term";
++  const { latest, prior, headline, comparison, value } = relativeObservationReading(card);
++  const points = card.points.slice(-120);
++  const [line, reference] = chartSeries(points, term);
++
++  return <article className="moa-item io-card ro-card" data-overview-card={card.id} data-tone="neutral" aria-label={card.title}>
++    <div className="moa-item-head"><h3>{card.title}</h3></div>
++    <p className="ro-asof">截至 {latest.date} · 历史快照</p>
++    <p className="ro-current"><strong>{value}</strong><span>{headline}</span></p>
++    <p className="io-comparison">
++      {term ? <>较 {prior.date}（20个共同交易日前），比值{comparison}。</> : <>与 {prior.date} 比较</>}
++    </p>
++    {term && <p className="ro-levels"><span>VIX <b>{latest.numerator.toFixed(2)}%</b></span>
++      <span>VIX3M <b>{latest.denominator.toFixed(2)}%</b></span></p>}
++    <ChartLegend items={[
++      { label: line.name, color: line.color },
++      { label: reference.name, color: reference.color, dashed: true },
++    ]} />
++    <MiniTrend dates={points.map(({ date }) => date)} lines={[line]} references={[reference]}
++      label={`${card.title}近120个共同交易日的比值，单位为倍。实线为实际比值，虚线为${reference.name}。`} />
++    <p className="io-scope-note">{interpretation(card)}</p>
++    <p className="ro-asof">{SNAPSHOT_NOTE}</p>
++    <footer>
++      <button ref={trigger} type="button" aria-haspopup="dialog" onClick={() => setOpen(true)}>看历史与口径</button>
++      <button type="button" onClick={onCollapse}>收起</button>
++    </footer>
++    {open && <RelativeObservationDetail card={card} onClose={() => setOpen(false)} trigger={trigger.current} />}
++  </article>;
++}
++
++export default function RelativeObservationCards({ market, selectedIds, collapsedIds, onCollapse, onSummary }: {
++  market: "cn" | "us"; selectedIds: readonly string[]; collapsedIds: readonly string[];
++  onCollapse: (id: string) => void; onSummary: (id: string, summary: CandidateSummary) => void;
++}) {
++  const selected = useMemo(() => RELATIVE_OBSERVATION_CARDS.filter((card) => card.market === market && selectedIds.includes(card.id)),
++    [market, selectedIds]);
++  const visible = selected.filter(({ id }) => !collapsedIds.includes(id));
++  const query = useQuery({
++    queryKey: ["relativeObservationSnapshotV1"], enabled: selected.length > 0,
++    queryFn: async ({ signal }) => {
++      const response = await fetch(SOURCE, { signal, cache: "no-cache" });
++      if (!response.ok) throw new Error("Observation snapshot unavailable");
++      return parseRelativeObservationSnapshot(await response.json());
++    },
++    staleTime: 5 * 60_000, retry: false,
++  });
++  const { data, isError, isFetching } = query;
++
++  useEffect(() => {
++    selected.forEach(({ id }) => {
++      const card = data?.cards.find((entry) => entry.id === id);
++      if (card) {
++        const { latest, value, headline } = relativeObservationReading(card);
++        onSummary(id, { value, date: latest.date, meaning: `${headline} · 历史快照 · ${SNAPSHOT_NOTE}` });
++      } else {
++        const failed = isError && !isFetching;
++        onSummary(id, { value: failed ? "读取失败" : "读取中",
++          meaning: failed ? "历史快照暂不可用，可恢复卡片后重试" : "历史快照读取中" });
++      }
++    });
++  }, [selected, data, isError, isFetching, onSummary]);
++
++  return <>{visible.map(({ id, title }) => {
++    const card = data?.cards.find((entry) => entry.id === id);
++    if (card) return <ObservationCard key={id} card={card} onCollapse={() => onCollapse(id)} />;
++    const failed = isError && !isFetching;
++    return <article className="moa-item io-card ro-card" data-overview-card={id} key={id} aria-label={title}>
++      <div className="moa-item-head"><h3>{title}</h3></div>
++      <p className="io-scope-note" role={failed ? "alert" : "status"}>
++        {failed ? "历史快照暂不可用。" : "历史快照读取中…"}
++      </p>
++      <footer>
++        {failed && <button type="button" onClick={() => void query.refetch()}>重试</button>}
++        <button type="button" onClick={() => onCollapse(id)}>收起</button>
++      </footer>
++    </article>;
++  })}</>;
++}
+--- before/web/src/components/market-observation-alerts/relativeObservationData.ts
++++ after/web/src/components/market-observation-alerts/relativeObservationData.ts
+@@ -0,0 +1,147 @@
++export const RELATIVE_OBSERVATION_CARDS = [
++  { id: "cn-style-relative", market: "cn", kind: "relative", title: "大小盘 · 中证1000 / 沪深300" },
++  { id: "us-semiconductor-relative", market: "us", kind: "relative", title: "半导体 / 纳指100" },
++  { id: "us-equal-weight-relative", market: "us", kind: "relative", title: "标普500 · 等权 / 市值加权" },
++  { id: "vix-term-structure", market: "us", kind: "term", title: "VIX · 期限结构" },
++] as const;
++
++type CardDefinition = typeof RELATIVE_OBSERVATION_CARDS[number];
++const INSTRUMENT_PAIRS: Record<CardDefinition["id"], readonly [string, string]> = {
++  "cn-style-relative": ["512100", "510300"],
++  "us-semiconductor-relative": ["SMH", "QQQ"],
++  "us-equal-weight-relative": ["RSP", "SPY"],
++  "vix-term-structure": ["VIX", "VIX3M"],
++};
++type Instrument = { symbol: string; label: string };
++type Source = { name: string; url: string };
++
++export type RelativeObservationPoint = {
++  date: string;
++  ratio: number;
++  ma60: number | null;
++  numerator: number;
++  denominator: number;
++};
++
++export type RelativeObservationCard = CardDefinition & {
++  numerator: Instrument;
++  denominator: Instrument;
++  sources: Source[];
++  price_note: string;
++  points: RelativeObservationPoint[];
++};
++
++export type RelativeObservationSnapshot = {
++  schema_version: 1;
++  imported_at: string;
++  refresh_mode: "snapshot";
++  cards: RelativeObservationCard[];
++};
++
++const isoDate = (value: unknown): value is string =>
++  typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)
++  && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
++const isoTimestamp = (value: unknown): value is string =>
++  typeof value === "string" && isoDate(value.slice(0, 10))
++  && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(value)
++  && Number.isFinite(Date.parse(value));
++const positive = (value: unknown): value is number =>
++  typeof value === "number" && Number.isFinite(value) && value > 0;
++const nonempty = (value: unknown): value is string => typeof value === "string" && value.trim().length > 0;
++const near = (value: number, expected: number) =>
++  positive(expected) && Math.abs(value / expected - 1) <= 1e-8;
++
++function record(value: unknown): Record<string, unknown> {
++  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Invalid observation object");
++  return value as Record<string, unknown>;
++}
++
++function parseInstrument(value: unknown): Instrument {
++  const { symbol, label } = record(value);
++  if (!nonempty(symbol) || !nonempty(label)) throw new Error("Invalid observation instrument");
++  return { symbol, label };
++}
++
++function parseSource(value: unknown): Source {
++  const { name, url } = record(value);
++  if (!nonempty(name) || !nonempty(url)) throw new Error("Invalid observation source");
++  const parsed = new URL(url);
++  if (!["https:", "http:"].includes(parsed.protocol) || parsed.username || parsed.password) {
++    throw new Error("Invalid observation source URL");
++  }
++  return { name, url: parsed.href };
++}
++
++function parsePoints(values: unknown): RelativeObservationPoint[] {
++  if (!Array.isArray(values) || values.length < 120) throw new Error("Insufficient observation history");
++  const points: RelativeObservationPoint[] = [];
++  let previous = "";
++  for (const value of values) {
++    const { date, ratio, ma60, numerator, denominator } = record(value);
++    if (!isoDate(date) || date < "2024-01-01" || date <= previous
++      || !positive(ratio) || !positive(numerator) || !positive(denominator)
++      || !near(ratio, numerator / denominator)) {
++      throw new Error("Invalid observation point");
++    }
++    if (points.length < 59) {
++      if (ma60 !== null) throw new Error("Invalid observation moving average");
++    } else {
++      const mean = points.slice(-59).reduce((sum, point) => sum + point.ratio / 60, ratio / 60);
++      if (!positive(ma60) || !near(ma60, mean)) throw new Error("Invalid observation moving average");
++    }
++    previous = date;
++    points.push({ date, ratio, ma60, numerator, denominator });
++  }
++  return points;
++}
++
++/** All four histories are required for a version 1 snapshot. */
++export function parseRelativeObservationSnapshot(value: unknown): RelativeObservationSnapshot {
++  const snapshot = record(value);
++  if (snapshot.schema_version !== 1 || snapshot.refresh_mode !== "snapshot"
++    || !isoTimestamp(snapshot.imported_at) || !Array.isArray(snapshot.cards)
++    || snapshot.cards.length !== RELATIVE_OBSERVATION_CARDS.length) {
++    throw new Error("Invalid observation snapshot");
++  }
++  const importedAt = snapshot.imported_at;
++  const seen = new Set<CardDefinition["id"]>();
++  const cards = snapshot.cards.map((value): RelativeObservationCard => {
++    const card = record(value);
++    const definition = RELATIVE_OBSERVATION_CARDS.find(({ id }) => id === card.id);
++    if (!definition || seen.has(definition.id) || card.market !== definition.market
++      || card.kind !== definition.kind || card.title !== definition.title
++      || !Array.isArray(card.sources) || !card.sources.length || !nonempty(card.price_note)) {
++      throw new Error("Invalid observation card");
++    }
++    seen.add(definition.id);
++    const numerator = parseInstrument(card.numerator);
++    const denominator = parseInstrument(card.denominator);
++    const [expectedNumerator, expectedDenominator] = INSTRUMENT_PAIRS[definition.id];
++    if (numerator.symbol !== expectedNumerator || denominator.symbol !== expectedDenominator) {
++      throw new Error("Incorrect observation instrument pair");
++    }
++    const points = parsePoints(card.points);
++    if (points[points.length - 1].date > importedAt.slice(0, 10)) {
++      throw new Error("Observation date exceeds snapshot date");
++    }
++    return {
++      ...definition, numerator, denominator, sources: card.sources.map(parseSource),
++      price_note: card.price_note, points,
++    };
++  });
++  return { schema_version: 1, refresh_mode: "snapshot", imported_at: importedAt, cards };
++}
++
++export function relativeObservationReading(card: RelativeObservationCard) {
++  const latest = card.points[card.points.length - 1];
++  const prior = card.points[card.points.length - 21];
++  const change = (latest.ratio / prior.ratio - 1) * 100;
++  const displayedChange = Math.abs(change).toFixed(2);
++  const comparison = displayedChange === "0.00" ? "基本持平" : `${change > 0 ? "上升" : "下降"} ${displayedChange}%`;
++  let headline = `近20个共同交易日比值${comparison}`;
++  if (card.kind === "term") {
++    headline = latest.ratio > 1 ? "短期隐含波动率高于3个月"
++      : latest.ratio < 1 ? "短期隐含波动率低于3个月" : "短期与3个月隐含波动率相同";
++  }
++  return { latest, prior, comparison, headline, value: `${latest.ratio.toFixed(card.kind === "term" ? 3 : 4)}倍` };
++}
+--- before/web/src/components/market-observation-alerts/relative-observation.css
++++ after/web/src/components/market-observation-alerts/relative-observation.css
+@@ -0,0 +1,20 @@
++.ro-card .ro-current {
++  display: flex;
++  align-items: baseline;
++  flex-wrap: wrap;
++  gap: 3px 9px;
++  margin: 6px 0 2px;
++  color: #293a31;
++  font-size: 14px;
++  font-weight: 600;
++}
++.ro-current strong {
++  color: #28629e;
++  font-size: 26px;
++  line-height: 1.15;
++  font-variant-numeric: tabular-nums;
++}
++.ro-card .ro-asof { margin: 5px 0; color: #536158; font-size: 13px; }
++.ro-levels { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 5px 0; color: #536158; font-size: 13px; }
++.ro-levels b { color: #293a31; font-variant-numeric: tabular-nums; }
++.ro-dialog .io-source a { display: inline-block; margin-right: 10px; }
+--- before/web/src/components/market-style/MarketTrendChart.tsx
++++ after/web/src/components/market-style/MarketTrendChart.tsx
+@@ -5,11 +5,12 @@
+   name: string;
+   values: (number | null)[];
+   color: string;
++  dashed?: boolean;
+ }
+ 
+ /** Market observation curves use vector text so monitor/zoom changes do not blur axes. */
+-export default function MarketTrendChart({ dates, series, unit, height = 260 }: {
+-  dates: string[]; series: LineSeries[]; unit: string; height?: number;
++export default function MarketTrendChart({ dates, series, unit, height = 260, precision = 2 }: {
++  dates: string[]; series: LineSeries[]; unit: string; height?: number; precision?: number;
+ }) {
+   const ref = useRef<HTMLDivElement>(null);
+   const chartRef = useRef<echarts.ECharts | null>(null);
+@@ -32,7 +33,7 @@
+       textStyle: { fontFamily: 'system-ui, -apple-system, "PingFang SC", sans-serif' },
+       tooltip: {
+         trigger: "axis", confine: true, textStyle: { fontSize: 13 },
+-        valueFormatter: (value) => value == null ? "—" : `${Number(value).toFixed(2)}${unit}`,
++        valueFormatter: (value) => value == null ? "—" : `${Number(value).toFixed(precision)}${unit}`,
+       },
+       legend: multi ? {
+         type: "plain", top: 0, left: 0, right: 0,
+@@ -57,11 +58,12 @@
+       ] : [],
+       series: series.map((item) => ({
+         name: item.name, type: "line", data: item.values, showSymbol: dates.length <= 8,
+-        symbolSize: 5, lineStyle: { width: 2, color: item.color }, itemStyle: { color: item.color },
++        symbolSize: 5, lineStyle: { width: 2, color: item.color, type: item.dashed ? "dashed" : "solid" },
++        itemStyle: { color: item.color },
+       })),
+     };
+     chartRef.current?.setOption(option, true);
+-  }, [dates, series, unit]);
++  }, [dates, series, unit, precision]);
+ 
+   return <div ref={ref} className="ms-trend-chart" role="img"
+     aria-label={`${series.map((item) => item.name).join("、")}历史曲线；横轴日期，纵轴${unit || "指数值"}`}

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { api, dailyBriefApi, sectorsApi } from "../api/client";
+import { dailyBriefApi } from "../api/client";
 import InfoTip from "../components/InfoTip";
-import { fmt, fmtPrice } from "../utils/format";
+import { fmt } from "../utils/format";
 import type { DailyBriefResponse } from "../types";
 
 type DailyBriefResponseBrief = DailyBriefResponse["brief"];
@@ -13,7 +13,7 @@ type DailyBriefResponseBrief = DailyBriefResponse["brief"];
 /* ------------------------------------------------------------------ */
 const TIPS = {
   breadth: "宽度 = 全市场站上这条均线的股票占比。比如 43% 的股票站上 20 日线，宽度就是 43%：比例越高，上涨的参与面越广，行情越扎实。",
-  pctile: "近一年位置（分位）= 当前数值在过去一年里排第几。第 97% 位表示过去一年 97% 的时间都比现在低。≥90% 或 ≤10% 视为「异常区间」，值得留意。",
+  pctile: "近一年位置（分位）= 记录时的数值在此前一年里排第几。第 97% 位表示此前一年 97% 的时间都比记录值低。≥90% 或 ≤10% 视为「异常区间」，值得留意。",
   b20: "过去 20 个交易日的平均价，约一个月成本线。站上的股票多 = 短期行情偏强。",
   b50: "过去 50 个交易日的平均价，约一个季度成本线，看中期参与度。",
   b200: "过去 200 个交易日的平均价，约一年成本线（俗称「年线」）。站上的比例低，说明多数股票处于长期弱势。",
@@ -28,10 +28,7 @@ const TIPS = {
   pe: "市盈率 TTM = 按最近四个季度利润计算的估值，负数代表亏损。",
   stage: "板块趋势阶段：筑底=跌完横盘中 / 上升=趋势向上 / 派发=高位转弱 / 下降=趋势向下。",
   color: "BIAO 趋势颜色：绿 = 价格在 20 日线上方且高于 20 天前（向上）；灰 = 均线方向分歧（震荡）；黑 = 价格在 20 日线下方且低于 20 天前（向下）。",
-  verdict: "机会档位来自「机会扫描」：可操作 = 满足条件可研究入场；等待 = 方向对但条件未齐；受阻 = 有明确阻力；当前无机会 = 条件不成立。",
-  updown: "板块内当日上涨家数 / 下跌家数，反映板块内部共识：一边倒说明涨得齐、跌得也齐。",
-  dist60: "现价相对 60 日线的位置：+2% = 高出 60 日线 2 个百分点，负数 = 还在 60 日线下方。",
-  quote: "来自行情快照：收盘版为当日收盘涨跌幅，盘中版为最新价实时涨跌。",
+  verdict: "机会档位来自「机会扫描」：可操作 = 满足条件可研究入场；等待 = 方向对但条件未齐；受阻 = 有明确阻力；无机会 = 记录时条件不成立。",
 };
 
 const SLOT_CN: Record<string, string> = {
@@ -101,18 +98,6 @@ function fmtDayChange(v: number | null | undefined): { text: string; cls: string
   return { text: `${v > 0 ? "+" : ""}${v.toFixed(1)}`, cls: v > 0 ? "up" : "down" };
 }
 
-/** 涨跌幅单元格：正红负绿，null/不可用 → 灰 — */
-function PctCell({ v, title }: { v: number | null | undefined; title?: string }) {
-  if (v == null || Number.isNaN(v)) return <span className="flat">—</span>;
-  const cls = v > 0 ? "up" : v < 0 ? "down" : "flat";
-  return (
-    <span className={cls} title={title}>
-      {v > 0 ? "+" : ""}
-      {v.toFixed(2)}%
-    </span>
-  );
-}
-
 /* ------------------------------------------------------------------ */
 
 export default function DailyBriefPage() {
@@ -149,35 +134,36 @@ export default function DailyBriefPage() {
 
   const activeSlot = slot && data.slots_available.includes(slot) ? slot : data.slot;
 
+  const slotButtons = data.slots_available.map((s) => (
+    <button
+      key={s}
+      className={`btn ${s === activeSlot ? "primary" : ""}`}
+      onClick={() => setSlot(s)}
+    >
+      {s === "1445" ? "14:45 预判" : "16:45 收盘"}
+    </button>
+  ));
+
   return (
     <div className="page">
-      <div className="header">
-        <h1>收盘简报</h1>
-        <span className="generated">
-          {data.date} · {SLOT_CN[activeSlot] ?? activeSlot} · 生成于 {data.brief.generated_at}
-        </span>
-        <span className="spacer" />
-        {data.slots_available.map((s) => (
-          <button
-            key={s}
-            className={`btn ${s === activeSlot ? "primary" : ""}`}
-            onClick={() => setSlot(s)}
-          >
-            {s === "1445" ? "14:45 预判" : "16:45 收盘"}
-          </button>
-        ))}
-      </div>
-
       {activeSlot !== data.slot ? (
-        <SlotView date={data.date} slot={activeSlot} />
+        <SlotView date={data.date} slot={activeSlot} buttons={slotButtons} />
       ) : (
-        <BriefBody brief={data.brief} />
+        <BriefBody
+          brief={data.brief}
+          headMeta={
+            <>
+              {data.date} · {SLOT_CN[activeSlot] ?? activeSlot} · 生成于 {data.brief.generated_at}
+            </>
+          }
+          actions={slotButtons}
+        />
       )}
     </div>
   );
 }
 
-function SlotView({ date, slot }: { date: string; slot: string }) {
+function SlotView({ date, slot, buttons }: { date: string; slot: string; buttons: ReactNode }) {
   const { data, error } = useQuery({
     queryKey: ["dailyBrief", date, slot],
     queryFn: () => dailyBriefApi.byDate(date, slot),
@@ -187,7 +173,17 @@ function SlotView({ date, slot }: { date: string; slot: string }) {
     return <div className="fund-errors">该槽位加载失败：{(error as Error).message}</div>;
   }
   if (!data) return <div className="muted">加载中…</div>;
-  return <BriefBody brief={data.brief} />;
+  return (
+    <BriefBody
+      brief={data.brief}
+      headMeta={
+        <>
+          {date} · {SLOT_CN[slot] ?? slot} · 生成于 {data.brief.generated_at}
+        </>
+      }
+      actions={buttons}
+    />
+  );
 }
 
 /* ------------------------------------------------------------------ */
@@ -211,7 +207,7 @@ function SummaryBlock({ brief }: { brief: DailyBriefResponseBrief }) {
   return (
     <section className="brief-summary">
       <div className="brief-summary-head">
-        <span className="brief-summary-title">今日要点</span>
+        <span className="brief-summary-title">本次简报要点</span>
         <InfoTip tip="所有数字由本机规则引擎计算，这段文字只是把下面三节的数据串成人话；数据本身与文字无关（判定权在 Python 规则层）。">
           {byLlm ? "AI 组织文字" : "模板生成文字"}
         </InfoTip>
@@ -365,18 +361,10 @@ function EnvSection({ env }: { env: DailyBriefResponseBrief["env"] }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  ② 自选重点变化（联表行情卡片：现价 + 当日涨跌）                       */
+/*  ② 自选重点变化（仅展示简报保存字段）                       */
 /* ------------------------------------------------------------------ */
 
 function WatchSection({ wl }: { wl: DailyBriefResponseBrief["watchlist"] }) {
-  // 与看盘页共享同一 queryKey：进过看盘页这里秒开，反之并行取
-  const { data: cardsData } = useQuery({
-    queryKey: ["cards", "watchlist"],
-    queryFn: () => api.dashboard("watchlist"),
-    staleTime: 60_000,
-  });
-  const quoteBy = new Map((cardsData?.cards ?? []).map((c) => [c.symbol, c]));
-
   const items = wl.items;
   const changedCount = items.filter((it) => it.n_changes > 0 || it.is_new).length;
   return (
@@ -384,9 +372,9 @@ function WatchSection({ wl }: { wl: DailyBriefResponseBrief["watchlist"] }) {
       <div className="brief-sec-head">
         <h2 className="fund-section-title">② 自选重点变化</h2>
         <span className="fund-hint">
-          共 {items.length} 只 · {changedCount} 只今日有变化
+          共 {items.length} 只 · {changedCount} 只本次有变化
           {wl.sector_watch_count > 0 && ` · 另有 ${wl.sector_watch_count} 项板块自选`}
-          ：与上一份简报逐项对比，没写的就是和昨天一样
+          ：与前一份简报逐项对比，未列变化的字段与前一份记录相同
         </span>
       </div>
       {items.length === 0 ? (
@@ -397,25 +385,18 @@ function WatchSection({ wl }: { wl: DailyBriefResponseBrief["watchlist"] }) {
             <thead>
               <tr>
                 <th>标的</th>
-                <th className="num">
-                  <InfoTip tip={TIPS.quote}>现价</InfoTip>
-                </th>
-                <th className="num">
-                  <InfoTip tip={TIPS.quote}>当日</InfoTip>
-                </th>
                 <th>
                   <InfoTip tip={TIPS.color}>趋势</InfoTip>
                   {" / "}
                   <InfoTip tip={TIPS.verdict}>档位</InfoTip>
                 </th>
                 <th>状态速览（六维）</th>
-                <th>今日变化（与上一份简报对比）</th>
+                <th>本次变化（与前一份简报对比）</th>
               </tr>
             </thead>
             <tbody>
               {items.map((it) => {
                 const changed = it.n_changes > 0 || it.is_new;
-                const q = quoteBy.get(it.symbol);
                 const colorCn =
                   it.state?.color_cn ?? (it.state?.color ? COLOR_CN[it.state.color] : null);
                 return (
@@ -435,10 +416,6 @@ function WatchSection({ wl }: { wl: DailyBriefResponseBrief["watchlist"] }) {
                         <span className="symbol"> {it.symbol}</span>
                       </Link>
                     </td>
-                    <td className="num">{q?.price != null ? fmtPrice(q.price) : "—"}</td>
-                    <td className="num">
-                      <PctCell v={q?.change_pct} title={TIPS.quote} />
-                    </td>
                     <td className="brief-status">
                       {colorCn && (
                         <span
@@ -449,7 +426,7 @@ function WatchSection({ wl }: { wl: DailyBriefResponseBrief["watchlist"] }) {
                         </span>
                       )}
                       {it.state?.stage_cn && (
-                        <span className="brief-stage-cn" title="规则引擎判定的当前阶段">
+                        <span className="brief-stage-cn" title="规则引擎在记录时判定的阶段">
                           {it.state.stage_cn}
                         </span>
                       )}
@@ -493,39 +470,27 @@ function WatchSection({ wl }: { wl: DailyBriefResponseBrief["watchlist"] }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  ③ 板块观察池（联表 /sectors/trend：当日涨跌 + 涨跌家数 + 距60日线）  */
+/*  ③ 板块观察池（仅展示简报保存字段）  */
 /* ------------------------------------------------------------------ */
 
 function PoolSection({ pool }: { pool: DailyBriefResponseBrief["pool"] }) {
-  // 与行业板块页共享同一 queryKey
-  const { data: trendData } = useQuery({
-    queryKey: ["sectorsTrend"],
-    queryFn: () => sectorsApi.trend(false, "all"),
-    staleTime: 5 * 60_000,
-  });
-  const rowBy = new Map((trendData?.boards ?? []).map((b) => [b.code, b]));
-
   return (
     <section className="brief-pool-sec brief-sec">
       <div className="brief-sec-head">
         <h2 className="fund-section-title">③ 板块观察池</h2>
         <span className="fund-hint">
-          近几日持续登上观察清单的行业板块：
+          记录时连续数日登上观察清单的行业板块：
           <InfoTip tip={TIPS.streak}>连续天数</InfoTip> 越长热度越持续，入榜理由见「为什么在榜」
         </span>
       </div>
       {pool.items.length === 0 ? (
-        <div className="muted">当前无持续上榜板块</div>
+        <div className="muted">记录时无持续上榜板块</div>
       ) : (
         <div className="fund-table-wrap">
           <table className="event-table fund-table brief-pool-table">
             <thead>
               <tr>
                 <th>板块</th>
-                <th className="num">当日涨跌</th>
-                <th className="num">
-                  <InfoTip tip={TIPS.updown}>涨/跌家数</InfoTip>
-                </th>
                 <th>
                   <InfoTip tip={TIPS.stage}>阶段</InfoTip>
                 </th>
@@ -540,9 +505,6 @@ function PoolSection({ pool }: { pool: DailyBriefResponseBrief["pool"] }) {
                   <InfoTip tip={TIPS.rsDelta}>20日变化</InfoTip>
                 </th>
                 <th className="num">
-                  <InfoTip tip={TIPS.dist60}>距60日线</InfoTip>
-                </th>
-                <th className="num">
                   <InfoTip tip={TIPS.flow}>主力资金20日</InfoTip>
                 </th>
                 <th className="num">
@@ -553,19 +515,12 @@ function PoolSection({ pool }: { pool: DailyBriefResponseBrief["pool"] }) {
             </thead>
             <tbody>
               {pool.items.map((it) => {
-                const row = rowBy.get(it.code);
                 return (
                   <tr key={it.code}>
                     <td>
-                      {it.name ?? it.code} <span className="symbol">{it.code}</span>
-                    </td>
-                    <td className="num">
-                      <PctCell v={row?.pct_change} />
-                    </td>
-                    <td className="num brief-updn">
-                      {row?.up_count != null || row?.down_count != null
-                        ? `${row?.up_count ?? "-"} / ${row?.down_count ?? "-"}`
-                        : "—"}
+                      <Link to="/sectors" title="查看板块最新资料">
+                        {it.name ?? it.code} <span className="symbol">{it.code}</span>
+                      </Link>
                     </td>
                     <td>
                       {it.stage ? (
@@ -589,11 +544,6 @@ function PoolSection({ pool }: { pool: DailyBriefResponseBrief["pool"] }) {
                       {it.rs_pctile_delta_20 != null
                         ? `${it.rs_pctile_delta_20 > 0 ? "+" : ""}${it.rs_pctile_delta_20.toFixed(0)}`
                         : "-"}
-                    </td>
-                    <td className={`num ${(row?.dist_to_sma60_pct ?? 0) >= 0 ? "up" : "down"}`}>
-                      {row?.dist_to_sma60_pct != null
-                        ? `${row.dist_to_sma60_pct > 0 ? "+" : ""}${row.dist_to_sma60_pct.toFixed(1)}%`
-                        : "—"}
                     </td>
                     <td
                       className={`num ${it.flow_20d_main_yi != null && it.flow_20d_main_yi > 0 ? "up" : "down"}`}
@@ -626,7 +576,7 @@ function PoolSection({ pool }: { pool: DailyBriefResponseBrief["pool"] }) {
 /* ------------------------------------------------------------------ */
 
 /* ------------------------------------------------------------------ */
-/*  今日机会速览条：系统最关心的一问——有没有值得动手的标的               */
+/*  本次机会速览条：系统最关心的一问——有没有值得动手的标的               */
 /* ------------------------------------------------------------------ */
 
 function OpportunityStrip({
@@ -644,10 +594,10 @@ function OpportunityStrip({
   return (
     <div className={`brief-opp-strip${act.length > 0 ? " has-action" : ""}`}>
       <span className="brief-opp-label">
-        <InfoTip tip={TIPS.verdict}>今日机会</InfoTip>
+        <InfoTip tip={TIPS.verdict}>本次机会</InfoTip>
       </span>
       {act.length + wait.length === 0 ? (
-        <span className="muted">无可操作 / 等待中的自选（今日全部为低档位）</span>
+        <span className="muted">无可操作 / 等待中的自选（记录时全部为低档位）</span>
       ) : (
         <>
           {act.map((it) => (
@@ -682,23 +632,53 @@ function OpportunityStrip({
 
 /* ------------------------------------------------------------------ */
 
-function BriefBody({ brief }: { brief: DailyBriefResponseBrief }) {
+function BriefBody({
+  brief,
+  headMeta,
+  actions,
+}: {
+  brief: DailyBriefResponseBrief;
+  headMeta: ReactNode;
+  actions?: ReactNode;
+}) {
+  const [showRaw, setShowRaw] = useState(false);
   return (
     <>
-      <OpportunityStrip wl={brief.watchlist} pool={brief.pool} env={brief.env} />
-      <SummaryBlock brief={brief} />
+      {/* S13 信号组层级：组头=市场总结+日期状态；组体=机会速览+核心摘要；
+          动作组=槽位切换/原始文字版，独立于摘要区 */}
+      <div className="pg-firstlook-group daily-firstlook-group">
+        <div className="pg-grp-head">
+          <h1>收盘简报</h1>
+          <span className="pg-grp-meta">{headMeta}</span>
+        </div>
+        <div className="pg-grp-body">
+          <OpportunityStrip wl={brief.watchlist} pool={brief.pool} env={brief.env} />
+          <SummaryBlock brief={brief} />
+        </div>
+        <div className="pg-grp-actions">
+          <button className="btn" onClick={() => setShowRaw((v) => !v)}>
+            {showRaw ? "收起原始文字版" : "查看原始文字版"}
+          </button>
+          {actions}
+        </div>
+      </div>
+
       <EnvSection env={brief.env} />
+      <p className="fund-hint">
+        以下仅显示本次简报保存的字段。简报未保存当时行情（价格、涨跌、涨跌家数、距60日线），可从标的或板块入口查看最新资料。
+      </p>
       <WatchSection wl={brief.watchlist} />
       <PoolSection pool={brief.pool} />
 
-      <details className="brief-raw">
-        <summary>原始文字版（用于复制 / 与飞书推送对照）</summary>
-        <pre className="brief-text">{brief.summary.text}</pre>
-      </details>
+      {showRaw && (
+        <details className="brief-raw" open>
+          <summary>原始文字版（用于复制 / 与飞书推送对照）</summary>
+          <pre className="brief-text">{brief.summary.text}</pre>
+        </details>
+      )}
 
       <div className="legend" style={{ marginTop: 10 }}>
-        本页为个人研究参考（research_proxy），不构成买卖建议。所有「主力资金」按单笔成交金额规模推算，是研究代理口径而非真实机构数据；
-        盘中版（14:45）生成时未收盘，结论以收盘版（16:45）为准。
+        盘中版（14:45）生成时未收盘，以收盘版（16:45）为准；主力资金按单笔成交额估算，作参考。
       </div>
     </>
   );

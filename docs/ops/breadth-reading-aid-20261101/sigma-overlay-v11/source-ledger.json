@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-03",
+  "scope": "source review only; no new financial experiment or market data acquisition",
+  "newWebCallBudget": 4,
+  "newWebCallsUsed": 4,
+  "countsIncludeFailures": true,
+  "requests": [
+    {
+      "call": 1,
+      "operation": "batched search: John Bollinger original rules, StockCharts price bands, StockCharts breadth",
+      "outcome": "found Bollinger original rules and StockCharts method pages"
+    },
+    {
+      "call": 2,
+      "operation": "opened Bollinger original rules and StockCharts Bollinger Bands method page",
+      "outcome": "both opened; directly verified 20/2, 10/1.9, 50/2.1 and touch-is-not-signal caveat"
+    },
+    {
+      "call": 3,
+      "operation": "batched search: StockCharts official percent-above-MA 30/70 and 200-day 50; institutional ERP 1.5",
+      "outcome": "official StockCharts method body retrieved in search result; exact 30/70 and 200-day 50 context verified"
+    },
+    {
+      "call": 4,
+      "operation": "batched exact search: Chinese institutional ERP/stock-bond spread 1.5 standard deviations",
+      "outcome": "no same-object same-window CSI300 ERP primary 1.5 rule verified; a SPDBI Hong Kong sentiment original-PDF search snippet surfaced but PDF not opened, so not adopted as verified evidence"
+    }
+  ],
+  "reusedLocalEvidence": [
+    "docs/experiments/erp-band-sensitivity-2026-11-02.md",
+    "docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-bands-replication-20261101/literature/institutional-methods.md",
+    "docs/ops/focus-live-and-erp-thresholds-20261102/erp-comparison/increment-results.json"
+  ],
+  "verifiedPrimaryUrls": [
+    "https://www.bollingerbands.com/bollinger-band-rules",
+    "https://chartschool.stockcharts.com/table-of-contents/technical-indicators-and-overlays/technical-overlays/bollinger-bands",
+    "https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average"
+  ],
+  "priorPrimaryUrlsReusedFromLocalReview": [
+    "https://pdf.dfcfw.com/pdf/H3_AP202501271642603267_1.pdf?1738011030000.pdf=",
+    "https://www.foundersc.com/u/cms/www/ZX/20231020/1071df6d0c464aba9a8d83c9cc43a073.pdf"
+  ],
+  "unverifiedSearchLead": "https://www.spdbi.com/getfile/index/action/images/name/%E6%B5%A6%E9%93%B6%E5%9B%BD%E9%99%85%E9%87%8F%E5%8C%96%E7%AD%96%E7%95%A5%EF%BC%9A%E6%B8%AF%E8%82%A1%E5%B8%82%E5%9C%BA%E6%83%85%E7%BB%AA%E6%8C%87%E6%95%B0%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E7%94%A8%EF%BC%88%E4%B8%8B%EF%BC%89_%E6%B5%A6%E9%93%B6%E5%9B%BD%E9%99%85%E7%A0%94%E7%A9%B6.pdf",
+  "evidenceBoundary": "No same-object same-window CSI300 ERP primary rule for 1.5 sigma verified. Price Bollinger and bounded breadth thresholds do not validate ERP threshold efficacy."
+}

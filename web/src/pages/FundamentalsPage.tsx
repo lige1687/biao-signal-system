@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Fragment, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Fragment, useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import SentimentPage from "./SentimentPage";
+import NewsPage from "./NewsPage";
+import HomeEnvironmentStrip from "../components/HomeEnvironmentStrip";
+import "./reference-reading.css";
 import { api, fundamentalsApi } from "../api/client";
 import OverlayChart, { type OverlayMode, type OverlaySeries } from "../components/trend/OverlayChart";
 import Sparkline from "../components/trend/Sparkline";
@@ -8,6 +12,16 @@ import MetricCard from "../components/trend/MetricCard";
 import TrendChart from "../components/trend/TrendChart";
 import TrendDrawer, { type DrawerState } from "../components/trend/TrendDrawer";
 import SentimentProjectionCard from "../components/SentimentProjectionCard";
+import MarketObservationCards from "../components/MarketObservationCards";
+import MarketStylePanel from "../components/market-style/MarketStylePanel";
+import { ObservationLibrary } from "../components/observation-library";
+import ObservationMetric from "../components/observation-library/ObservationMetric";
+import ObservationDetailDialog from "../components/observation-library/ObservationDetailDialog";
+import { OBSERVATION_BY_ID } from "../components/observation-library/catalog";
+import { fromValuation } from "../components/observation-library/metricData";
+import { marketReferenceBands } from "../components/observation-library/marketReferenceBands";
+import ErpReferenceCard from "../components/observation-library/ErpReferenceCard";
+import { useProjectionSource, type ProjectionSource } from "../components/observation-library/projectionSources";
 import { buildDrawer } from "../components/trend/drawer";
 import { alignTo, unionDates } from "../components/trend/align";
 import { fmt, pctClass } from "../utils/format";
@@ -24,10 +38,8 @@ import {
   BREADTH_HIGHLIGHT_RULES,
   BREADTH_LINES,
   BREADTH_ZONES,
-  CAPE_US_ZONES,
   ERP_CN_ZONES,
   ERP_US_ZONES,
-  PE_CN_ZONES,
   RATE_LOOKBACK_OPTIONS,
   MARKLINES,
   OVERLAY_MARKLINES,
@@ -51,30 +63,10 @@ import type {
   SentimentIngest,
 } from "../types";
 
-/** 小图分界线（单条，落在数据区间内才有意义）。 */
-const SPARK_MARK: Record<string, number> = {
-  us_10y: 4.5,
-  cn_10y: 2.0,
-  cn_us_spread_10y: 0,
-  vix: 20,
-  margin_rzyezb: 3.0,
-  pmi: 50,
-  cpi: 0,
-  ppi: 0,
-  erp_us: 1.9,
-  erp_cn: 5.1,
-  // 估值分位对照：小图分界线取各自标定窗口中位（CAPE 1950 起 / 沪深300 PE 2010 起）。
-  cape_us: 20.2,
-  pe_cn: 11.9,
-  // 美国宏观（FRED）
-  wei: 0,
-  hy_oas: 4.5,
-  payems_yoy: 0,
-  ppiaco_yoy: 0,
-  cpiaucsl_yoy: 2,
-  cshpi_yoy: 0,
-  dgorder_yoy: 0,
-};
+/** Small-chart reference lines share the same evidence-qualified definitions as the drawer. */
+const SPARK_MARK: Record<string, number | null> = Object.fromEntries(
+  Object.entries(MARKLINES).map(([key, lines]) => [key, lines[0]?.y ?? null]),
+);
 
 type MacroItem = {
   key: string;
@@ -166,7 +158,7 @@ function breadthOverlay(
   return { series, v20, v50, v200, valid, last50, degenerate, coverage: `宽度覆盖 ${window}（${valid} 个交易日）` };
 }
 
-/** 叠图卡片头部的当前宽度 chip：实时显示 50 日宽度所处压力/机会区。 */
+/** 叠图卡片头部的当前宽度 chip：显示50日均线上方的股票比例。 */
 function BreadthChip({ value, missing }: { value: number | null; missing?: boolean }) {
   if (missing) {
     return <span className="macro-chip muted-chip breadth-chip--missing">宽度：数据缺失</span>;
@@ -181,7 +173,23 @@ function BreadthChip({ value, missing }: { value: number | null; missing?: boole
 }
 
 
+/** Match observations on their actual dates; absent weeks or days remain null. */
+function alignErp(dates: string[], source: ProjectionSource): (number | null)[] {
+  if (source.isPending || source.error) return dates.map(() => null);
+  const values = new Map(source.points.map(point => [point.date, point.value]));
+  return dates.map(date => values.get(date) ?? null);
+}
+
+function erpStatus(source: ProjectionSource): string {
+  if (source.isPending) return "股债利差读取中";
+  if (source.error) return "股债利差来源读取失败";
+  const last = source.points[source.points.length - 1];
+  return last?.value == null ? "股债利差读数缺失" : `${source.sourceName} · 截至 ${last.date} · ${source.frequency === "weekly" ? "周频" : "日线含月频盈利输入"} · 百分点`;
+}
+
 function OverlaySection() {
+  const cnErp = useProjectionSource("erp-cn");
+  const usErp = useProjectionSource("erp-us");
   const { data, isLoading, error } = useQuery({
     queryKey: ["fundOverlay", 20],
     queryFn: () => fundamentalsApi.overlayHistory(20),
@@ -189,15 +197,15 @@ function OverlaySection() {
     retry: 1,
   });
   const [range, setRange] = useState<OverlayRange>("2y");
-  // 原始刻度看绝对水位（利率压力位/机会位有意义），归一化看涨跌比（同一把尺子）。
+  // 原始刻度看绝对水位，归一化看涨跌比（同一把尺子）。
   const [mode, setMode] = useState<OverlayMode>("raw");
   // 三张 600px 大图纵向堆叠太长，内部再分页签一次只看一张。
   const [panel, setPanel] = useState<"cn" | "us" | "margin" | "vix">("cn");
   // 6 条宽度规则的激活集：可同时多选，触发区间叠加到宽度格（0–100%）。
-  // 默认预选反转信号+牛熊底色（stage 顶/底触发较频，留用户按需开）；持久化到 localStorage 防刷新丢失。
-  // 空数组/损坏值回退默认（避免浏览器残留 [] 把默认预选吃掉）；__ALL_OFF__ 哨兵 = 用户主动全关。
-  const RULES_STORAGE_KEY = "biao-overlay-active-rules";
-  const RULES_DEFAULT = ["reversal_top", "reversal_bottom", "bull_base", "bear_base"] as const;
+  // 同期数值条件仅按需选择，默认关闭；不是预测阈值。
+  // 使用新版本偏好键，避免旧预测分区自动显示。
+  const RULES_STORAGE_KEY = "biao-overlay-numeric-conditions-v2";
+  const RULES_DEFAULT: readonly string[] = [];
   const RULES_ALL_OFF = "__ALL_OFF__";
   const [activeRules, setActiveRules] = useState<ReadonlySet<string>>(() => {
     try {
@@ -223,7 +231,7 @@ function OverlaySection() {
     });
   };
   // 宽度阈值口径（A股 / 美股各自独立、持久化防刷新丢失）：
-  //   标准 80/20 = 行业共识，反转信号更易触发；严苛 85/15 = 与后端 classifier.py 一致，更难触发。
+  //   80/20 与 85/15 是原有数值查询选项，不是本轮验证的交易阈值。
   // 高亮是否显示的开关就是顶部的 6 条规则 chip（选中=显示、不选=不显示），无需额外总开关。
   const CN_THRESHOLD_KEY = "biao-overlay-cn-threshold";
   const US_THRESHOLD_KEY = "biao-overlay-us-threshold";
@@ -249,7 +257,7 @@ function OverlaySection() {
   const s = data?.series ?? {};
 
   // 市场宽度历史（真全A 来自收盘后预计算缓存；标普500 来自东财K线）。
-  // 与指数同周期对齐后叠加到叠图第三轴，并在宽度轴标压力/机会位。
+  // 与指数同周期对齐后叠加到叠图第三轴，并在宽度轴标定义参照。
   const { data: cnBreadth } = useQuery({
     queryKey: ["overlayBreadth", "CN_ALL_A", 1260],
     queryFn: () => api.marketContextBreadthHistory("CN_ALL_A", 1260),
@@ -264,12 +272,12 @@ function OverlaySection() {
   });
 
   const cnDates = useMemo(
-    () => unionDates(...[s.sse, s.hs300, s.kc50, s.kc100, s.cybz].filter(Boolean)),
-    [s.sse, s.hs300, s.kc50, s.kc100, s.cybz],
+    () => unionDates(...[s.sse, s.hs300, s.kc50, s.kc100, s.cybz].filter(Boolean), { dates: cnErp.points.map(point => point.date) }),
+    [s.sse, s.hs300, s.kc50, s.kc100, s.cybz, cnErp.points],
   );
   const usDates = useMemo(
-    () => unionDates(...[s.sp500, s.nasdaq].filter(Boolean)),
-    [s.sp500, s.nasdaq],
+    () => unionDates(...[s.sp500, s.nasdaq].filter(Boolean), { dates: usErp.points.map(point => point.date) }),
+    [s.sp500, s.nasdaq, usErp.points],
   );
 
   /** 可视窗口占全序列百分比（echarts dataZoom start 换算）。 */
@@ -299,10 +307,10 @@ function OverlaySection() {
       { name: "创业板指", values: alignTo(cnDates, s.cybz), color: "#16a34a", axis: "left", secondary: true, dashed: true, lineWidth: 1, opacity: 0.5 },
       { name: "中国10Y", values: alignTo(cnDates, s.cn_10y), color: "#e36b1c", axis: "right" },
       // A股股债收益差（Fed Model 口径）：与 10Y 共用右轴，颜色区分；虚线表示这是辅助指标
-      { name: "A股股债差", values: alignTo(cnDates, s.erp_cn), color: "#0891b2", axis: "right", dashed: true, lineWidth: 1.4, opacity: 0.95 },
+      { name: "A股股债差", values: alignErp(cnDates, cnErp), connectNulls: false, color: "#0891b2", axis: "right", dashed: true, lineWidth: 1.4, opacity: 0.95 },
       ...(cnDegenerate ? [] : cnB.series),
     ],
-    [cnDates, s.sse, s.hs300, s.kc50, s.kc100, s.cybz, s.cn_10y, s.erp_cn, cnDegenerate, cnB.series],
+    [cnDates, s.sse, s.hs300, s.kc50, s.kc100, s.cybz, s.cn_10y, cnErp, cnDegenerate, cnB.series],
   );
   const usSeries = useMemo<OverlaySeries[]>(
     () => [
@@ -310,10 +318,10 @@ function OverlaySection() {
       { name: "纳斯达克", values: alignTo(usDates, s.nasdaq), color: "#7c3aed", axis: "left", secondary: true, dashed: true, lineWidth: 1, opacity: 0.5 },
       { name: "美国10Y", values: alignTo(usDates, s.us_10y), color: "#e36b1c", axis: "right" },
       // 美股股债收益差：同上，与 10Y 共用右轴
-      { name: "美股股债差", values: alignTo(usDates, s.erp_us), color: "#0891b2", axis: "right", dashed: true, lineWidth: 1.4, opacity: 0.95 },
+      { name: "美股股债差", values: alignErp(usDates, usErp), connectNulls: false, color: "#0891b2", axis: "right", dashed: true, lineWidth: 1.4, opacity: 0.95 },
       ...(usDegenerate ? [] : usB.series),
     ],
-    [usDates, s.sp500, s.nasdaq, s.us_10y, s.erp_us, usDegenerate, usB.series],
+    [usDates, s.sp500, s.nasdaq, s.us_10y, usErp, usDegenerate, usB.series],
   );
   // 美股 × VIX 映射：VIX 来自 rates-history（与页面级查询同 key，共享缓存不重拉）。
   const { data: ratesHistLocal } = useQuery({
@@ -398,7 +406,7 @@ function OverlaySection() {
         <button
           className={`ma-toggle${mode === "raw" ? " on" : ""}`}
           onClick={() => setMode("raw")}
-          title="指数走左轴、利率走右轴，可读绝对水位与压力位/机会位"
+          title="指数走左轴、利率走右轴，分别读取原值"
         >
           原始刻度
         </button>
@@ -474,7 +482,7 @@ function OverlaySection() {
             type="button"
             className={`ma-toggle${cnThreshold === "standard" ? " on" : ""}`}
             onClick={() => setCnThresholdPersist("standard")}
-            title="80/20：行业共识，反转信号更易触发"
+            title="按80%和20%选择同期数值，不表示未来顶底"
           >
             80/20
           </button>
@@ -482,7 +490,7 @@ function OverlaySection() {
             type="button"
             className={`ma-toggle${cnThreshold === "strict" ? " on" : ""}`}
             onClick={() => setCnThresholdPersist("strict")}
-            title="85/15：与后端 classifier.py 一致，更难触发"
+            title="按85%和15%选择同期数值，不表示未来顶底"
           >
             85/15
           </button>
@@ -494,10 +502,9 @@ function OverlaySection() {
           mode={mode}
           breadthMarkLines={cnDegenerate ? undefined : MARKLINES.breadth}
           breadthHighlightBands={cnBands}
-          // 右轴分界线 = 10Y 阈值 + 股债收益差阈值（共 6 条），便于一眼对照
+          // 仅保留有定义依据的参考线。
           rightMarkLines={[...OVERLAY_MARKLINES.cn_10y, ...OVERLAY_MARKLINES.erp_cn]}
-          // 色带用股债收益差的机会/风险区：<2.8 相对债券贵（红）/ >6.4 相对便宜（绿）。
-          // 10Y 与股债差共用右轴，两套 zone 会重叠混淆，故只保留后者（用户明确要的高亮）。
+          // 不用经验分位推断机会或风险。
           rightZones={ERP_CN_ZONES}
           height={600}
         />
@@ -505,10 +512,8 @@ function OverlaySection() {
           左轴：上证（实线主角）；沪深300 / 科创50 / 科创100 / 创业板指为虚线配角
           （科创50 自 2019-12 基日、科创100 自 2023-08、创业板指自 2010-06 起），
           点图例可开关。五指数点位口径不同，直接比涨跌请切上方「涨跌比(=100)」。
-          右轴实线：中国 10Y；虚线：A股股债收益差。色带：
-          <strong>绿=相对债券便宜，红=相对债券贵</strong>。
-          分界线：1.8% / 2.2% / 2.5%（10Y 阈值）+ 股债差 2.8 / 5.1 / 6.4。
-          宽度：实线 = B50，虚线 = B20/B200；超买/超卖阈值
+          右轴实线：中国10Y；虚线：沪深300盈利收益率减国债收益率，零线表示两者相等。{erpStatus(cnErp)}。
+          宽度：实线 = B50，虚线 = B20/B200；可选数值条件
           <strong>{cnThreshold === "standard" ? "80/20" : "85/15"}</strong>（本卡可切）。{cnB.coverage}。
         </div>
       </div>
@@ -526,7 +531,7 @@ function OverlaySection() {
             type="button"
             className={`ma-toggle${usThreshold === "standard" ? " on" : ""}`}
             onClick={() => setUsThresholdPersist("standard")}
-            title="80/20：行业共识，反转信号更易触发"
+            title="按80%和20%选择同期数值，不表示未来顶底"
           >
             80/20
           </button>
@@ -534,7 +539,7 @@ function OverlaySection() {
             type="button"
             className={`ma-toggle${usThreshold === "strict" ? " on" : ""}`}
             onClick={() => setUsThresholdPersist("strict")}
-            title="85/15：与后端 classifier.py 一致，反转顶极少触发"
+            title="按85%和15%选择同期数值，不表示未来顶底"
           >
             85/15
           </button>
@@ -558,11 +563,9 @@ function OverlaySection() {
           height={600}
         />
         <div className="fund-hint-row">
-          右轴实线：美国 10Y；虚线：美股股债收益差。色带：
-          <strong>绿=相对债券便宜，红=相对债券贵（含负值：债券占优）</strong>。
-          分界线：3.5% / 4.5% / 5.0%（10Y 阈值）+ 股债差 0 / 1.9 / 2.8。
-          标普500 仅近 10 年数据，纳斯达克为全史。宽度阈值：美股当前用
-          <strong>{usThreshold === "standard" ? "标准 80/20" : "严苛 85/15"}</strong>
+          右轴实线：美国10Y；虚线：标普500盈利收益率减国债收益率，零线表示两者相等。{erpStatus(usErp)}。
+          标普500仅近10年数据，纳斯达克为来源可用历史。美股宽度数值条件
+          <strong>{usThreshold === "standard" ? "80/20" : "85/15"}</strong>
           （本卡可切）。{usB.coverage}{usDegenerate && "（宽度未叠加）"}。
         </div>
       </div>
@@ -582,7 +585,7 @@ function OverlaySection() {
           rightZones={ZONES.margin_rzyezb}
         />
         <div className="fund-hint-row">
-          两融数据自 2010-03 开闸；利率格背景色带为杠杆水位分档，占比 &gt; 3.5% 进入 2015 式警戒区（历史顶 2015-07-03 达 4.70%）。
+          两融数据始于2010-03；占比表示融资余额相对流通市值的大小，未建立固定机会或风险线。
         </div>
       </div>
       )}
@@ -599,14 +602,11 @@ function OverlaySection() {
             (new Date(vixDates[vixDates.length - 1]).getTime() - new Date(vixDates[0]).getTime()) / 86400000 || 1
           ) * 100))}
           mode={mode}
-          rightMarkLines={[
-            { y: 20, label: "20 正常/升温界", color: "#6b7280" },
-            { y: 30, label: "30 恐慌区（尖峰事后看多为阶段底）", color: "#e33d47" },
-          ]}
+          rightMarkLines={MARKLINES.vix}
         />
         <div className="fund-hint-row">
           左轴标普500（近 10 年）；右轴 VIX。月度相关性：同期 <strong>-0.78</strong>（构造性镜像——VIX 本身由标普期权定价反推，见「相关性速查」卡），
-          指数领先 VIX 变化 +0.28。用法：VIX&gt;30 尖峰用于<strong>确认</strong>底部区域，不是领先抄底信号。
+          指数领先 VIX 变化 +0.28（旧研究窗口）。VIX只描述期权市场对未来约30天波动幅度的预期；不设未经验证的固定顶底线。
         </div>
       </div>
       )}
@@ -620,6 +620,22 @@ function RatesSection({ data, hist }: {
   data: RatesResponse;
   hist?: RatesHistoryResponse;
 }) {
+  const valuationHistory = useQuery({ queryKey: ["fundamentalsValuationHistory"],
+    queryFn: () => fundamentalsApi.valuationHistory(), staleTime: 5 * 60_000, retry: false });
+  const [openValuation, setOpenValuation] = useState<"hs300-pe" | "sp500-cape" | null>(null);
+  const valuationItem = openValuation ? OBSERVATION_BY_ID.get(openValuation) : undefined;
+  const valuationCard = (id: "hs300-pe" | "sp500-cape") => {
+    const reading = fromValuation(data, id, valuationHistory.data?.series[id === "hs300-pe" ? "pe_cn" : "cape_us"]);
+    const bands = marketReferenceBands(id, reading?.points ?? []);
+    const rank = bands?.kind === "valuation" ? bands.latest?.percentile : null;
+    const date = reading?.date ? `${reading.dateLabel} ${reading.date} · ` : "";
+    return <MetricCard label={OBSERVATION_BY_ID.get(id)?.label ?? id}
+      value={reading?.value == null ? "暂不可用" : `${reading.value.toFixed(2)} 倍`}
+      sub={date + (rank == null ? valuationHistory.isPending ? "读取历史参照…" : "近10年分位暂不可用" : `近10年 P${rank.toFixed(1)}`)}
+      zoneLabel={bands?.kind === "valuation" ? bands.position ?? undefined : undefined}
+      sparkValues={reading?.points.slice(-24).flatMap(point => point.value == null ? [] : [point.value])}
+      onOpen={() => setOpenValuation(id)} />;
+  };
   const t = data.treasury;
   const s = hist?.series ?? {};
   // 卡片小图固定看最近 2 年（≈504 个交易日），与趋势抽屉的缩放窗口互不影响。
@@ -680,7 +696,7 @@ function RatesSection({ data, hist }: {
       <MetricCard
         label="中美 10Y 利差"
         value={fmt(spread, 2, "%")}
-        sub="为负 = 美债收益更高，资本外流压力侧"
+        sub="中国10Y减美国10Y；负值仅表示美债名义收益率更高"
         zoneLabel={findZone(spread, ZONES.cn_us_spread_10y).label}
         zoneTone={findZone(spread, ZONES.cn_us_spread_10y).tone}
         sparkValues={spark("cn_us_spread_10y")}
@@ -694,10 +710,10 @@ function RatesSection({ data, hist }: {
           data.vix == null
             ? "yfinance 限流，稍后刷新重试"
             : data.vix.value > 30
-              ? "恐慌区：持股风险高，但常伴逆向机会"
+              ? "预期波动较高；不表示价格方向"
               : data.vix.value < 15
-                ? "低波动区：风险资产环境友好，需防自满"
-                : "15–30 正常/升温区间"
+                ? "预期波动较低；不表示价格方向"
+                : "处于原页面15–30参考范围"
         }
         zoneLabel={data.vix == null ? undefined : findZone(data.vix.value, ZONES.vix).label}
         zoneTone={data.vix == null ? undefined : findZone(data.vix.value, ZONES.vix).tone}
@@ -736,100 +752,15 @@ function RatesSection({ data, hist }: {
             : `${data.margin.rzyezb_pct.toFixed(2)}%（两融余额 ${data.margin.rzrqye_yi == null ? "-" : `${(data.margin.rzrqye_yi / 10000).toFixed(2)}万亿`}）`,
         )}
       />
-      <MetricCard
-        label="美股股债收益差（E/P − 10Y）"
-        value={
-          data.erp?.us == null
-            ? "暂不可用"
-            : `${data.erp.us.erp >= 0 ? "+" : ""}${data.erp.us.erp.toFixed(2)}%`
-        }
-        sub={
-          data.erp?.us == null
-            ? "盈利收益率源暂不可用，稍后刷新重试"
-            : `盈利收益率 ${data.erp.us.earnings_yield.toFixed(2)}% − 10Y ${data.erp.us.risk_free.toFixed(2)}%　Fed Model 口径，ERP 粗略代理`
-        }
-        zoneLabel={data.erp?.us == null ? undefined : findZone(data.erp.us.erp, ERP_US_ZONES).label}
-        zoneTone={data.erp?.us == null ? undefined : findZone(data.erp.us.erp, ERP_US_ZONES).tone}
-        sparkValues={spark("erp_us")}
-        markY={SPARK_MARK.erp_us}
-        onOpen={open("erp_us", "美股股债收益差（E/P − 10Y）", data.erp?.us?.erp ?? null)}
-      />
-      <MetricCard
-        label="美股 CAPE 估值分位"
-        value={data.valuation?.us_cape == null ? "暂不可用" : `${data.valuation.us_cape.value.toFixed(1)} 倍`}
-        sub={
-          data.valuation?.us_cape == null
-            ? "Shiller PE 源暂不可用，稍后刷新重试"
-            : `${data.valuation.us_cape.calib_from} 年来分位 P${data.valuation.us_cape.percentile.toFixed(0)}　全史(${data.valuation.us_cape.full_from}起) P${data.valuation.us_cape.percentile_full.toFixed(0)}　不含利率项`
-        }
-        zoneLabel={
-          data.valuation?.us_cape == null
-            ? undefined
-            : findZone(data.valuation.us_cape.value, CAPE_US_ZONES).label
-        }
-        zoneTone={
-          data.valuation?.us_cape == null
-            ? undefined
-            : findZone(data.valuation.us_cape.value, CAPE_US_ZONES).tone
-        }
-        sparkValues={spark("cape_us")}
-        markY={SPARK_MARK.cape_us}
-        onOpen={open(
-          "cape_us",
-          "美股 CAPE（Shiller PE）",
-          data.valuation?.us_cape?.value ?? null,
-          data.valuation?.us_cape == null
-            ? undefined
-            : `${data.valuation.us_cape.value.toFixed(1)} 倍（${data.valuation.us_cape.calib_from} 年来 P${data.valuation.us_cape.percentile.toFixed(0)}）`,
-        )}
-      />
-      <MetricCard
-        label="A股股债收益差（E/P − 10Y）"
-        value={
-          data.erp?.cn == null
-            ? "暂不可用"
-            : `${data.erp.cn.erp >= 0 ? "+" : ""}${data.erp.cn.erp.toFixed(2)}%`
-        }
-        sub={
-          data.erp?.cn == null
-            ? "估值源暂不可用，稍后刷新重试"
-            : `盈利收益率 ${data.erp.cn.earnings_yield.toFixed(2)}% − 10Y ${data.erp.cn.risk_free.toFixed(2)}%（PE ${data.erp.cn.pe_ttm?.toFixed(1) ?? "-"}）　Fed Model 口径`
-        }
-        zoneLabel={data.erp?.cn == null ? undefined : findZone(data.erp.cn.erp, ERP_CN_ZONES).label}
-        zoneTone={data.erp?.cn == null ? undefined : findZone(data.erp.cn.erp, ERP_CN_ZONES).tone}
-        sparkValues={spark("erp_cn")}
-        markY={SPARK_MARK.erp_cn}
-        onOpen={open("erp_cn", "A股股债收益差（E/P − 10Y）", data.erp?.cn?.erp ?? null)}
-      />
-      <MetricCard
-        label="沪深300 PE_TTM 估值分位"
-        value={data.valuation?.cn_pe == null ? "暂不可用" : `${data.valuation.cn_pe.value.toFixed(1)} 倍`}
-        sub={
-          data.valuation?.cn_pe == null
-            ? "估值源暂不可用，稍后刷新重试"
-            : `${data.valuation.cn_pe.calib_from} 年来分位 P${data.valuation.cn_pe.percentile.toFixed(0)}　全史(${data.valuation.cn_pe.full_from}起) P${data.valuation.cn_pe.percentile_full.toFixed(0)}　不含利率项`
-        }
-        zoneLabel={
-          data.valuation?.cn_pe == null
-            ? undefined
-            : findZone(data.valuation.cn_pe.value, PE_CN_ZONES).label
-        }
-        zoneTone={
-          data.valuation?.cn_pe == null
-            ? undefined
-            : findZone(data.valuation.cn_pe.value, PE_CN_ZONES).tone
-        }
-        sparkValues={spark("pe_cn")}
-        markY={SPARK_MARK.pe_cn}
-        onOpen={open(
-          "pe_cn",
-          "沪深300 PE_TTM",
-          data.valuation?.cn_pe?.value ?? null,
-          data.valuation?.cn_pe == null
-            ? undefined
-            : `${data.valuation.cn_pe.value.toFixed(1)} 倍（${data.valuation.cn_pe.calib_from} 年来 P${data.valuation.cn_pe.percentile.toFixed(0)}）`,
-        )}
-      />
+      <ErpReferenceCard market="us" />
+      {valuationCard("sp500-cape")}
+      <ErpReferenceCard market="cn" />
+      {valuationCard("hs300-pe")}
+      <div className="macro-card metric-card">
+        <div className="macro-head"><span className="macro-name">纳斯达克100 PE_TTM</span></div>
+        <ObservationMetric id="nasdaq100-pe" />
+      </div>
+      {valuationItem && <ObservationDetailDialog item={valuationItem} onClose={() => setOpenValuation(null)} />}
       <HyOasCard />
       {drawer && (
         <TrendDrawer
@@ -857,7 +788,7 @@ function HyOasCard() {
       <MetricCard
         label="信用利差（高收益债 OAS）"
         value={hy?.value == null ? "暂不可用" : `${hy.value.toFixed(2)}%`}
-        sub={hy ? `日更 · ${hy.date ?? "-"} · ${hy.note_cn}` : "FRED 拉取中，稍后刷新重试"}
+        sub={hy ? `日更 · ${hy.date ?? "-"} · 高收益债相对国债的额外收益率；未建立固定顶底线` : "FRED 拉取中，稍后刷新重试"}
         zoneLabel={hyZone?.label}
         zoneTone={hyZone?.tone}
         sparkValues={hySer?.values}
@@ -924,7 +855,7 @@ function BreadthSparkCard({
       // 用户可滚轮/双指捏合缩小看完整 32 年。
       defaultWindowDays: 756,
       footnote:
-        "宽度 = 站上 N 日均线的个股占比。50 日 >80% 大概率阶段顶部，<20% 短期底部；配合 200 日同低/同高可能见反转。" +
+        "宽度 = 站上 N 个交易日均线的个股占比。50日读数描述上涨参与范围；20/80 是观察参考范围，不能单凭它判断短期顶底。" +
         SOURCE_NOTES.breadth,
     });
   };
@@ -1006,8 +937,8 @@ function MarketSection({ onOpen }: { onOpen: (d: DrawerState) => void }) {
   if (error || !data) return <div className="fund-errors">市场宽度加载失败</div>;
   return (
     <div className="breadth-trends">
-      {data.panels.map((p) => (
-        <BreadthSparkCard key={p.market_id} panel={p} onOpen={onOpen} />
+      {data.panels.map((p, idx) => (
+        <BreadthSparkCard key={`${p.market_id}-${idx}`} panel={p} onOpen={onOpen} />
       ))}
       <SentimentCard sentiment={data.sentiment} onOpen={onOpen} />
     </div>
@@ -1015,20 +946,6 @@ function MarketSection({ onOpen }: { onOpen: (d: DrawerState) => void }) {
 }
 
 // ── 投资者情绪（NAAIM/AAII，来自 LEI_SENTIMENT_ROOT，与 Streamlit 同源）────
-function sentimentTone(label: string): string {
-  // 情绪分档→语义色：极端乐观=过度自满=风险；乐观=偏谨慎；悲观/极端悲观=机会；中性/未知=灰
-  switch (label) {
-    case "extreme_high":
-      return "danger";
-    case "high":
-      return "caution";
-    case "low":
-    case "extreme_low":
-      return "opportunity";
-    default:
-      return "neutral";
-  }
-}
 
 function SentimentRow({
   kind,
@@ -1043,7 +960,7 @@ function SentimentRow({
   sparkValues?: number[];
   onOpen?: () => void;
 }) {
-  const tone = sentimentTone(s.label);
+  const tone = "neutral";
   const delayed =
     s.license_status != null && s.license_status.toLowerCase().includes("public_delayed");
   const clickable = !!onOpen && (sparkValues?.length ?? 0) >= 2;
@@ -1055,13 +972,13 @@ function SentimentRow({
     >
       <div className="sentiment-row-head">
         <span className="sentiment-name">{title}</span>
-        <span className={`macro-chip ${tone}`}>{s.label_cn}</span>
+        <span className={`macro-chip ${tone}`}>调查读数</span>
       </div>
       {sparkValues && sparkValues.length >= 2 ? (
         <Sparkline
           values={sparkValues}
           height={40}
-          markY={kind === "naaim" ? 50 : 0}
+          markY={kind === "naaim" ? null : 0}
           color={kind === "naaim" ? "#2563eb" : "#7c3aed"}
         />
       ) : null}
@@ -1162,7 +1079,7 @@ function SentimentUpdateForm({ onDone }: { onDone: () => void }) {
 
   const naaimOk = exposure.trim() !== "";
   const aaiiOk = bullish.trim() !== "" && neutral.trim() !== "" && bearish.trim() !== "";
-  const canSubmit = series === "naaim" ? naaimOk : aaiiOk;
+  const canSubmit = (series === "naaim" ? naaimOk : aaiiOk) && availableAt.trim() !== "";
 
   return (
     <div className="sentiment-update-form">
@@ -1177,7 +1094,7 @@ function SentimentUpdateForm({ onDone }: { onDone: () => void }) {
       <div className="sentiment-form-row">
         <label className="sentiment-form-label" htmlFor="sw">调查周</label>
         <input id="sw" type="date" value={surveyWeek} onChange={(e) => setSurveyWeek(e.target.value)} />
-        <span className="sentiment-form-hint">默认本周一；发布时间取 {releaseHint(surveyWeek, series)}</span>
+        <span className="sentiment-form-hint">默认本周一；常见周四安排仅供查证：{releaseHint(surveyWeek, series)}</span>
       </div>
 
       {series === "naaim" ? (
@@ -1198,8 +1115,8 @@ function SentimentUpdateForm({ onDone }: { onDone: () => void }) {
       )}
 
       <div className="sentiment-form-row">
-        <label className="sentiment-form-label" htmlFor="av">发布时间(可选)</label>
-        <input id="av" type="text" value={availableAt} placeholder="留空=默认周四发布时间" onChange={(e) => setAvailableAt(e.target.value)} />
+        <label className="sentiment-form-label" htmlFor="av">已核实发布时间</label>
+        <input id="av" type="text" required value={availableAt} placeholder="按来源填写，不以调查周推算" onChange={(e) => setAvailableAt(e.target.value)} />
       </div>
 
       {error && <div className="sentiment-form-error">写入失败：{error}</div>}
@@ -1242,7 +1159,7 @@ function SentimentCard({
           <span className="macro-name">投资者情绪</span>
         </div>
         <div className="macro-note">
-          未设置 <code>LEI_SENTIMENT_ROOT</code>。设置后放入 naaim.csv / aaii.csv，或点「更新情绪」手动录入，本卡即展示最新读数与分档。
+          未设置 <code>LEI_SENTIMENT_ROOT</code>。设置后放入 naaim.csv / aaii.csv，或点「更新情绪」手动录入，本卡展示带日期的历史调查读数。
         </div>
         <details className="sentiment-setup">
           <summary>如何启用（一次性）</summary>
@@ -1263,25 +1180,21 @@ function SentimentCard({
     const cur = series === "naaim" ? sentiment.naaim : sentiment.aaii;
     if (series === "naaim") {
       onOpen({
-        title: "NAAIM 机构情绪（暴露指数）",
-        subtitle: `当前 ${fmt(cur?.exposure_index, 1)} · ${cur?.label_cn ?? "-"}${
+        title: "NAAIM 主动投资管理人自报股票敞口（原值历史）",
+        subtitle: `已记录 ${fmt(cur?.exposure_index, 1)} · ${cur?.label_cn ?? "-"}${
           cur?.percentile != null ? ` · 百分位 P${cur.percentile.toFixed(0)}` : ""
         }（共 ${obs.length} 期，周频）`,
         dates,
         series: [{ name: "暴露指数", values: obs.map((o) => o.exposure_index ?? null), color: "#2563eb" }],
         unit: "",
-        yRange: [0, 100],
-        markLines: [
-          { y: 20, label: "20 极端悲观（逆向机会区）", color: "#0b9b64" },
-          { y: 80, label: "80 极端乐观（自满风险区）", color: "#e33d47" },
-        ],
+        yRange: [-200, 200],
         footnote:
-          "NAAIM = 机构经理人平均多头暴露（0–100）。逆向解读：极端乐观常伴阶段顶，极端悲观常伴阶段底；百分位基于全部历史周排序。",
+          "NAAIM 是基金经理自报股票敞口，个别答复可为负值或超过100。横轴是调查周，不代表当周已公布；历史位置来自现有记录，不是顶底线。",
       });
     } else {
       onOpen({
-        title: "AAII 散户情绪（多空调查）",
-        subtitle: `当前 多 ${fmt(cur?.bullish, 0)}% / 空 ${fmt(cur?.bearish, 0)}%（共 ${obs.length} 期，周频）`,
+        title: "AAII 会员未来六个月方向调查",
+        subtitle: `已记录 多 ${fmt(cur?.bullish, 0)}% / 空 ${fmt(cur?.bearish, 0)}%（共 ${obs.length} 期，周频）`,
         dates,
         series: [
           { name: "看多 %", values: obs.map((o) => o.bullish ?? null), color: "#e33d47" },
@@ -1290,7 +1203,7 @@ function SentimentCard({
         unit: "%",
         yRange: [0, 70],
         footnote:
-          "AAII = 散户多空调查（看多/看空占受访者 %）。散户情绪逆向用：看多极端常近顶，看空极端常近底；与 NAAIM 机构口径对照看分歧。",
+          "AAII 是美国个人投资者协会会员对未来六个月股市方向的问卷；横轴是调查周，不代表当周已公布。看多和看空比例不能直接当作短期顶底线。",
       });
     }
   };
@@ -1308,7 +1221,7 @@ function SentimentCard({
           <SentimentRow
             kind="naaim"
             s={sentiment.naaim}
-            title="NAAIM 机构"
+            title="NAAIM 自报股票敞口"
             sparkValues={(naaimHist?.observations ?? []).map((o) => o.exposure_index).filter((v): v is number => v != null)}
             onOpen={() => openHistory("naaim")}
           />
@@ -1319,7 +1232,7 @@ function SentimentCard({
           <SentimentRow
             kind="aaii"
             s={sentiment.aaii}
-            title="AAII 散户"
+            title="AAII 会员方向调查"
             sparkValues={(aaiiHist?.observations ?? []).map((o) => o.bull_bear).filter((v): v is number => v != null)}
             onOpen={() => openHistory("aaii")}
           />
@@ -1389,7 +1302,7 @@ function UsMacroSection({ onOpen }: { onOpen: (d: DrawerState) => void }) {
               key={it.key}
               label={it.name_cn}
               value={it.value == null || !fmtVal ? "-" : fmtVal(it.value)}
-              sub={`${it.freq}更 · ${it.date ?? "-"} · ${it.note_cn}`}
+              sub={`${it.freq}更 · ${it.date ?? "-"} · ${it.key === "hy_oas" ? "高收益债相对国债的额外收益率；未建立固定顶底线" : it.note_cn}`}
               zoneLabel={it.value == null ? undefined : zone.label}
               zoneTone={it.value == null ? undefined : zone.tone}
               sparkValues={ser?.values}
@@ -1438,118 +1351,12 @@ const ETF_LINE_COLORS: Record<string, string> = {
   XLRE: "#64748b", // 地产
 };
 
-// ── 仓位带建议（A股 ERP，战略层）：只有两端调带，中间不动 ────────────────
+// Prior ERP allocation advice was not adopted; preserve the audit entry without action guidance.
 function PositionBandCard() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["fundamentalsPositionBand"],
-    queryFn: () => fundamentalsApi.positionBand(),
-    staleTime: 60 * 60_000, // ERP 是慢变量，1 小时内视为新鲜
-  });
-  if (isLoading) return <div className="card-skeleton" style={{ height: 200 }} />;
-  if (!data?.ok) {
-    return (
-      <div className="macro-card todo-card">
-        <div className="macro-head"><span className="macro-name">仓位带建议（A股 ERP）</span></div>
-        <div className="macro-note">ERP 历史暂不可用，稍后刷新重试。</div>
-      </div>
-    );
-  }
-  const ev12 = data.evidence.filter((e) => e.fwd_months === 12);
-  const toneCls =
-    data.zone === 3 ? "up" : data.zone === 0 ? "down" : "";
-  return (
-    <div className="macro-card band-card">
-      <div className="macro-head">
-        <span className="macro-name">仓位带建议（A股 ERP · 战略层）</span>
-        <span className={`macro-chip ${data.zone_tone}`}>{data.zone_cn}</span>
-      </div>
-      <div className="band-main">
-        <div className="band-erp">
-          <div className="band-erp-val">ERP {data.erp.toFixed(2)}</div>
-          <div className="macro-note">
-            盈利收益率 − 中债10Y · 截至 {data.as_of}
-            {data.percentile_5y != null && ` · 5年分位 P${data.percentile_5y.toFixed(0)}`}
-          </div>
-        </div>
-        <div className={`band-action ${toneCls}`}>{data.action_cn}</div>
-      </div>
-
-      <table className="event-table fund-table band-table">
-        <thead>
-          <tr>
-            <th>ERP 区间</th>
-            <th className="num">样本</th>
-            <th className="num">前瞻12月中位</th>
-            <th className="num">胜率</th>
-            <th className="num">年化(均值)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {ev12.map((e) => (
-            <tr key={e.zone} className={data.zone_cn.includes(e.zone) ? "band-cur" : ""}>
-              <td>{e.zone}</td>
-              <td className="num sx-dim-num">{e.n}</td>
-              <td className={`num ${e.median_pct >= 0 ? "up" : "down"}`}>{e.median_pct > 0 ? "+" : ""}{e.median_pct}%</td>
-              <td className="num">{e.win_rate_pct}%</td>
-              <td className={`num ${e.annualized_pct >= 0 ? "up" : "down"}`}>{e.annualized_pct > 0 ? "+" : ""}{e.annualized_pct}%</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <div className="band-rules">
-        {data.rules_cn.map((r, i) => (
-          <div key={i} className="band-rule">· {r}</div>
-        ))}
-      </div>
-
-      {data.backtest && (
-        <>
-          <h5 className="band-bt-title">规则回测（{data.backtest.from} ~ {data.backtest.to}，{data.backtest.months} 个月，换带 {data.backtest.band_turns} 次）</h5>
-          <TrendChart
-            dates={data.backtest.curve_dates}
-            series={[
-              { name: "带位±15pp", values: data.backtest.curves["band15"], color: "#2563eb" },
-              { name: "只加不减", values: data.backtest.curves["asym"], color: "#7c3aed" },
-              { name: "恒定60%", values: data.backtest.curves["const60"], color: "#98a2b3" },
-              { name: "全仓", values: data.backtest.curves["full"], color: "#e0913a" },
-            ]}
-            unit="x"
-            height={240}
-          />
-          <table className="event-table fund-table band-table">
-            <thead>
-              <tr>
-                <th>策略</th>
-                <th className="num">CAGR</th>
-                <th className="num">年化波动</th>
-                <th className="num">最大回撤</th>
-                <th className="num">Sharpe(rf=2%)</th>
-                <th className="num">终值</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.backtest.strategies.map((st) => (
-                <tr key={st.key}>
-                  <td>{st.name}</td>
-                  <td className={`num ${st.cagr_pct >= 0 ? "up" : "down"}`}>{st.cagr_pct > 0 ? "+" : ""}{st.cagr_pct}%</td>
-                  <td className="num sx-dim-num">{st.vol_pct}%</td>
-                  <td className="num down">{st.maxdd_pct}%</td>
-                  <td className="num">{st.sharpe.toFixed(2)}</td>
-                  <td className="num sx-dim-num">{st.final_x}x</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="macro-note">{data.backtest.note_cn}</div>
-        </>
-      )}
-      <div className="macro-note">
-        样本 {data.sample.from} ~ {data.sample.to}（{data.sample.days} 期，月频）。{data.caveats_cn[0]}。
-        证据实时重算，口径可复核。美股 ERP 不接仓位（近十年负 ERP 并不预示下跌），仅叠加图色带观察。
-      </div>
-    </div>
-  );
+  return <div className="macro-card"><h3>ERP历史研究</h3>
+    <p className="macro-note">旧仓位带建议未获采用，现不展示为操作建议。盈利收益率与国债收益率的差只作估值背景。</p>
+    <a href="/library?report=docs%2Fexperiments%2Ffundamentals-independent-review-2026-10-02.md">查看既有审阅</a>
+  </div>;
 }
 
 // ── 指标 × 股指 相关性速查：三向相关 + 判型 + 机理解说 ─────────────────────
@@ -1724,7 +1531,7 @@ function EtfStrengthSection() {
   );
 }
 
-// ── 情绪 × 标普500 同窗对照：逆向指标，情绪极端处常对应指数拐点 ─────────────
+// ── 情绪 × 标普500 同窗对照：只在有明确发布时间时落点 ─────────────
 function SentimentSp500Card() {
   // 与 OverlaySection / SentimentCard 共享同一 queryKey，不产生重复请求
   const { data: ov } = useQuery({
@@ -1744,32 +1551,22 @@ function SentimentSp500Card() {
     staleTime: 5 * 60_000,
   });
 
-  const sp = ov?.series?.sp500;
-  const dates = sp?.dates ?? [];
   const naaimObs = naaimHist?.observations ?? [];
   const aaiiObs = aaiiHist?.observations ?? [];
-
-  // 周频情绪 → 日轴：每个调查周（周一）对齐到当天或之后第一个交易日；
-  // 其余日期为 null，靠 OverlayChart 的 connectNulls 连成周频折线（与宽度叠加同法）。
-  const weeklyToDaily = <T,>(obs: T[], weekOf: (o: T) => string, pick: (o: T) => number | null | undefined) => {
-    const byWeek = new Map<string, number>();
-    for (const o of obs) {
-      const v = pick(o);
-      if (v != null) byWeek.set(weekOf(o), v);
+  const dates = ov?.series?.sp500?.dates ?? [];
+  // 只在记录的可用日之后落点；旧档 available_at 的首发真实性未逐条核实。
+  const pointsAtAvailableDay = <T extends { available_at?: string | null }>(obs: T[], pick: (o: T) => number | null | undefined) => {
+    const result: (number | null)[] = dates.map(() => null);
+    for (const row of obs) {
+      const value = pick(row);
+      if (value == null || !row.available_at) continue;
+      const date = row.available_at.slice(0, 10);
+      const index = dates.findIndex((day) => day >= date);
+      if (index >= 0) result[index] = value;
     }
-    const hit = new Map<string, number>();
-    let di = 0;
-    for (const w of [...byWeek.keys()].sort()) {
-      while (di < dates.length && dates[di] < w) di++;
-      if (di < dates.length) {
-        const d = dates[di] >= w ? dates[di] : null;
-        if (d != null && !hit.has(d)) hit.set(d, byWeek.get(w)!);
-      }
-    }
-    return dates.map((d) => hit.get(d) ?? null);
+    return result;
   };
-
-  if (!sp || dates.length < 2) {
+  if (!ov?.series?.sp500 || ov.series.sp500.dates.length < 2) {
     return (
       <div className="macro-card todo-card">
         <div className="macro-head"><span className="macro-name">情绪 × 标普500</span></div>
@@ -1781,65 +1578,33 @@ function SentimentSp500Card() {
     return (
       <div className="macro-card todo-card">
         <div className="macro-head"><span className="macro-name">情绪 × 标普500</span></div>
-        <div className="macro-note">暂无情绪读数：每周四 launchd 自动抓取 NAAIM/AAII，攒满后此处叠加显示。</div>
+        <div className="macro-note">暂无调查历史读数。</div>
       </div>
     );
   }
-
   const series: OverlaySeries[] = [
-    { name: "标普500", values: alignTo(dates, sp), color: "#2563eb", axis: "left" },
-    ...(naaimObs.length
-      ? [{
-          name: "NAAIM 暴露",
-          values: weeklyToDaily(naaimObs, (o) => o.survey_week, (o) => o.exposure_index ?? null),
-          color: "#7c3aed", axis: "right" as const, lineWidth: 1.6,
-        }]
-      : []),
-    ...(aaiiObs.length
-      ? [
-          {
-            name: "AAII 看多",
-            values: weeklyToDaily(aaiiObs, (o) => o.survey_week, (o) => o.bullish ?? null),
-            color: "#e33d47", axis: "right" as const, lineWidth: 1.2, opacity: 0.85,
-          },
-          {
-            name: "AAII 看空",
-            values: weeklyToDaily(aaiiObs, (o) => o.survey_week, (o) => o.bearish ?? null),
-            color: "#0b9b64", axis: "right" as const, lineWidth: 1.2, opacity: 0.85,
-          },
-        ]
-      : []),
+    { name: "标普500", values: alignTo(dates, ov.series.sp500), color: "#2563eb", axis: "left" },
+    { name: "NAAIM 股票敞口", values: pointsAtAvailableDay(naaimObs, (o) => o.exposure_index), color: "#7c3aed", axis: "right", connectNulls: false },
+    { name: "AAII 看多", values: pointsAtAvailableDay(aaiiObs, (o) => o.bullish), color: "#e33d47", axis: "right", connectNulls: false },
+    { name: "AAII 看空", values: pointsAtAvailableDay(aaiiObs, (o) => o.bearish), color: "#0b9b64", axis: "right", connectNulls: false },
   ];
 
   return (
     <div className="macro-card overlay-card">
       <h4>
-        <span>情绪 × 标普500</span>
-        <span className="macro-period">周频 · 逆向对照</span>
+        <span>调查历史 × 标普500</span>
+        <span className="macro-period">事后资料对照</span>
       </h4>
-      <OverlayChart
-        dates={dates}
-        series={series}
-        leftName="标普500"
-        rightName="情绪（0–100）"
-        height={380}
-        startPercent={15}
-        rightMarkLines={[
-          { y: 20, label: "20 极端悲观·逆向机会", color: "#16a34a" },
-          { y: 80, label: "80 极端乐观·自满风险", color: "#e33d47" },
-        ]}
-      />
+      <OverlayChart dates={dates} series={series} leftName="标普500" rightName="调查原值（不同单位）" height={380} startPercent={15} />
       <div className="fund-hint-row">
-        左轴标普500（日线）；右轴情绪（0–100，周频，周四发布）：紫=NAAIM 机构暴露，
-        <span className="up">红=AAII 看多</span> / <span className="down">绿=AAII 看空</span>。
-        逆向读法：情绪触及 20/80 分界线的极端区，常对应指数阶段拐点（历史由 NAAIM 官方 chart /
-        AAII Wayback 快照回填，每周四自动追加最新一期）。
+        已保存 NAAIM {naaimObs.length} 期、AAII {aaiiObs.length} 期。调查用离散点表示，缺口不连线；没有可用日的记录不画。
+        旧历史的首次发布时间未逐条核实，这只是事后资料对照，不能称当时已知或据此判定短期顶底。价格对象是标普500，不是纳斯达克。
       </div>
     </div>
   );
 }
 
-// ── 情绪 × 标普500：同一区块两种视图（对照看拐点叙事 / 投影看关系强度）──────
+// ── 调查历史 × 标普500：两种事后资料对照视图 ──────
 function SentimentViews() {
   const [view, setView] = useState<"overlay" | "projection">("overlay");
   return (
@@ -1850,7 +1615,7 @@ function SentimentViews() {
           type="button"
           className={`ma-toggle${view === "overlay" ? " on" : ""}`}
           onClick={() => setView("overlay")}
-          title="标普与情绪同窗叠加，看极端区与指数拐点的叙事对照"
+          title="调查记录可用日与标普500的事后对照；历史首次公开时间未逐条核实"
         >
           同窗对照
         </button>
@@ -1858,7 +1623,7 @@ function SentimentViews() {
           type="button"
           className={`ma-toggle${view === "projection" ? " on" : ""}`}
           onClick={() => setView("projection")}
-          title="X=情绪、Y=发布后 N 周标普涨跌的散点，看关系强度与极端区后续分布"
+          title="调查记录可用日后数周的标普500涨跌，仅供事后对照；历史首次公开时间未逐条核实"
         >
           投影散点
         </button>
@@ -1871,23 +1636,54 @@ function SentimentViews() {
 // ── 铜金比 / 油金比（thememo 消费类，抽象化全球经济）─────────────────────
 
 function CommodityCard({ data }: { data: CommodityRatios | null | undefined }) {
+  const meta = data?.meta;
+  const known = (value: string | undefined) => value && value !== "unknown" ? value : "未提供或未核实";
+  const number = (value: number | undefined, digits: number) =>
+    value != null && Number.isFinite(value) ? value.toFixed(digits) : "暂不可用";
   return (
     <div className="macro-card">
       <div className="macro-head">
         <span className="macro-name">铜金比 / 油金比</span>
-        <span className="macro-period">全球需求 × 避险</span>
+        <span className="macro-period">日度期货报价比值 · 背景参考</span>
       </div>
       {data == null ? (
         <div className="macro-value">暂不可用</div>
       ) : (
         <div className="commodity-grid">
-          <div><span className="b-label">铜金比</span><span className="b-val">{data.copper_gold.toFixed(4)}</span></div>
-          <div><span className="b-label">油金比</span><span className="b-val">{data.crude_gold.toFixed(4)}</span></div>
+          <div><span className="b-label">铜金比（铜价 ÷ 金价）</span><span className="b-val">{number(data.copper_gold, 6)}</span></div>
+          <div><span className="b-label">油金比（油价 ÷ 金价）</span><span className="b-val">{number(data.crude_gold, 6)}</span></div>
         </div>
       )}
       <div className="macro-note">
-        铜金比升=工业需求回暖；油金比升=通胀预期升。配合国债/PMI 可抽象化把握全球经济。
+        共同报价日：{known(meta?.quote_date)}；报价单位：{known(meta?.quote_units)}。
+        铜价、油价或作为分母的金价变动都会影响比值。无通用买卖阈值；仅作经济背景参考，不参与技术判定。
       </div>
+      <details className="macro-note">
+        <summary>资料口径与限制</summary>
+        {data != null && (
+          <>
+            <div>读取时间（UTC）：{known(meta?.retrieved_at_utc)}。读取时间不等于行情日期或首次发布时间。</div>
+            <div>
+              原始报价：铜 {number(data.copper, 6)}（{known(meta?.tickers?.copper)}）；
+              黄金 {number(data.gold, 6)}（{known(meta?.tickers?.gold)}）；
+              原油 {number(data.crude, 6)}（{known(meta?.tickers?.crude)}）。
+              {meta?.quote_date ? "三项报价取同一共同日期。" : "旧缓存未提供日期信息，无法确认三项报价是否同日。"}
+            </div>
+            <div>各源最新报价日：铜 {known(meta?.latest_dates?.["HG=F"])}；黄金 {known(meta?.latest_dates?.["GC=F"])}；原油 {known(meta?.latest_dates?.["CL=F"])}。</div>
+          </>
+        )}
+        <div>
+          来源：{known(meta?.provider)}
+          {meta?.provider && <>{" · "}<a href="https://finance.yahoo.com/" target="_blank" rel="noreferrer">Yahoo Finance 来源入口</a></>}；
+          首次发布时间：{known(meta?.publication_time)}；合约换月身份：{known(meta?.roll_contract_identity)}；
+          数据使用许可：{known(meta?.data_usage_license)}。软件包许可不代表行情数据使用许可。
+        </div>
+        <div>
+          铜价不动、金价下降，铜金比也会上升。单个数值不能判断趋势，也不能直接断言需求回暖或通胀上升；
+          报价单位和合约换月身份未核实时，跨来源、跨时段比较需谨慎。
+          可配合国债、PMI（采购经理调查指数）理解经济背景。
+        </div>
+      </details>
     </div>
   );
 }
@@ -1899,11 +1695,13 @@ function MacroSection({
   hist,
   commodities,
   onOpen,
+  onJumpUsMacro,
 }: {
   macro: MacroItem[];
   hist?: MacroHistoryResponse;
   commodities: CommodityRatios | null | undefined;
   onOpen: (d: DrawerState) => void;
+  onJumpUsMacro?: () => void;
 }) {
   const s = hist?.series ?? {};
   return (
@@ -1945,12 +1743,14 @@ function MacroSection({
         );
       })}
       <CommodityCard data={commodities} />
-      <div className="macro-card todo-card">
-        <div className="macro-head"><span className="macro-name">更多消费指标</span></div>
-        <div className="macro-note">
-          就业（初请/续请失业金、非农）、WEI 周经济指数 - 第二批接入（需 FRED key）。
+      {onJumpUsMacro && (
+        <div className="macro-card clickable" onClick={onJumpUsMacro}>
+          <div className="macro-head"><span className="macro-name">美国就业、房产与周经济指标</span></div>
+          <div className="macro-note">
+            初请/续请失业金、非农、新屋开工与 WEI 周经济指数已接入「美国宏观」分区，点此直接查看 →
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -1961,25 +1761,51 @@ function MacroSection({
 /** 分区页签：原来 5 段纵向堆叠近万素深，「翻个东西要滚到最底」；改为点选直达。
  *  id 沿用锚点名并同步到 URL hash，刷新/深链保持当前分区。 */
 const FUND_SECTIONS: { id: string; label: string; tip: string }[] = [
-  { id: "fund-sec-market", label: "市场", tip: "宽度 + 情绪（最有用）" },
-  { id: "fund-sec-rates", label: "利率", tip: "价格的标尺 / 资本的成本" },
-  { id: "fund-sec-overlay", label: "长周期叠加", tip: "利率 / 两融 × 股指（20 年级，可滑动缩放）" },
-  { id: "fund-sec-macro", label: "消费", tip: "就业 / 物价 / 景气" },
-  { id: "fund-sec-usmacro", label: "美国宏观", tip: "就业 / 房产 / 汽车 / WEI / 物价 / 订单（FRED）" },
+  { id: "fund-sec-market", label: "市场水位", tip: "中美估值、市场宽度与风险条件" },
+  { id: "fund-sec-sentiment", label: "情绪与热度", tip: "场内基金热度、杠杆资金、恐慌与调查" },
+  { id: "fund-sec-rates", label: "利率", tip: "中美利率成本与曲线位置" },
+  { id: "fund-sec-overlay", label: "长周期叠加", tip: "利率与两融叠加股指的 20 年对照" },
+  { id: "fund-sec-macro", label: "中美宏观", tip: "就业、物价、消费景气与大宗商品" },
+  { id: "fund-sec-news", label: "市场资讯", tip: "每日重要消息与自选雷达" },
 ];
+
+function resolveFundSection(hash: string): string {
+  const clean = hash.replace("#", "");
+  if (clean === "fund-sec-usmacro") return "fund-sec-macro";
+  return FUND_SECTIONS.some((s) => s.id === clean) ? clean : FUND_SECTIONS[0].id;
+}
 
 export default function FundamentalsPage() {
   const queryClient = useQueryClient();
+  const location = useLocation();
+  const [market, setMarket] = useState<"cn" | "us">("cn");
+  const [macroRegion, setMacroRegion] = useState<"cn" | "us">(() =>
+    window.location.hash === "#fund-sec-usmacro" ? "us" : "cn",
+  );
+  const { data: observations, error: observationsError, isLoading: observationsLoading } = useQuery({
+    queryKey: ["fundamentalsObservations", market],
+    queryFn: () => fundamentalsApi.observations(market),
+    staleTime: 5 * 60_000,
+  });
   const [drawer, setDrawer] = useState<DrawerState>(null);
   // 利率趋势数据一次拉满 20 年：抽屉里的 3/5/10/20 年 chips 是纯本地缩放窗口，不再重拉。
   const ratesLookback = RATE_LOOKBACK_OPTIONS[RATE_LOOKBACK_OPTIONS.length - 1].days;
   // 当前页签：初始读 URL hash（深链/刷新保持），切换时写回 hash 并回到页首。
-  const [activeSection, setActiveSection] = useState(() => {
-    const h = window.location.hash.replace("#", "");
-    return FUND_SECTIONS.some((s) => s.id === h) ? h : FUND_SECTIONS[0].id;
-  });
+  const [activeSection, setActiveSection] = useState(() => resolveFundSection(window.location.hash));
+  useEffect(() => {
+    if (!location.hash) return;
+    if (location.hash === "#fund-sec-usmacro") setMacroRegion("us");
+    setActiveSection(resolveFundSection(location.hash));
+  }, [location.hash]);
 
   const jumpTo = (id: string) => {
+    if (id === "fund-sec-usmacro") {
+      setMacroRegion("us");
+      setActiveSection("fund-sec-macro");
+      history.replaceState(null, "", "#fund-sec-macro");
+      window.scrollTo({ top: 0 });
+      return;
+    }
     setActiveSection(id);
     history.replaceState(null, "", `#${id}`);
     window.scrollTo({ top: 0 });
@@ -1995,12 +1821,12 @@ export default function FundamentalsPage() {
     queryFn: () => fundamentalsApi.rates(),
     staleTime: 5 * 60_000,
   });
-  const { data: ratesHist } = useQuery({
+  const { data: ratesHist, error: ratesHistError } = useQuery({
     queryKey: ["fundamentalsRatesHistory", ratesLookback],
     queryFn: () => fundamentalsApi.ratesHistory(ratesLookback),
     staleTime: 30 * 60_000,
   });
-  const { data: macroHist } = useQuery({
+  const { data: macroHist, error: macroHistError } = useQuery({
     queryKey: ["fundamentalsMacroHistory", 60],
     queryFn: () => fundamentalsApi.macroHistory(60),
     staleTime: 30 * 60_000,
@@ -2031,51 +1857,70 @@ export default function FundamentalsPage() {
       queryClient.setQueryData(["fundamentalsUsMacro"], um);
       queryClient.invalidateQueries({ queryKey: ["marketContextGlobalStrip"] });
       queryClient.invalidateQueries({ queryKey: ["fundamentalsRatesHistory"] });
+      queryClient.invalidateQueries({ queryKey: ["fundamentalsValuationHistory"] });
       queryClient.invalidateQueries({ queryKey: ["fundamentalsMacroHistory"] });
+      queryClient.invalidateQueries({ queryKey: ["fundamentalsObservations"] });
     },
   });
 
   const allErrors = [
     ...(ov?.errors ?? []),
+    ...(ovError ? [`概览：${ovError instanceof Error ? ovError.message : String(ovError)}`] : []),
+    ...(ratesError ? [`利率：${ratesError instanceof Error ? ratesError.message : String(ratesError)}`] : []),
     ...(rates?.errors ?? []),
+    ...(ratesHistError ? [`利率历史：${ratesHistError instanceof Error ? ratesHistError.message : String(ratesHistError)}`] : []),
     ...(ratesHist?.errors ?? []),
+    ...(macroHistError ? [`经济历史：${macroHistError instanceof Error ? macroHistError.message : String(macroHistError)}`] : []),
     ...(macroHist?.errors ?? []),
     ...(commoditiesError
       ? [`大宗商品：${commoditiesError instanceof Error ? commoditiesError.message : String(commoditiesError)}`]
       : []),
   ];
 
+  const showMacroRefresh =
+    activeSection === "fund-sec-rates" ||
+    activeSection === "fund-sec-overlay" ||
+    activeSection === "fund-sec-macro";
+
   return (
-    <div className="page">
-      <div className="header">
-        <h1>基本面参考</h1>
-        {ov && (
-          <span className="generated">
-            更新于 {new Date(ov.generated_at).toLocaleString("zh-CN", { hour12: false })}
+    <div className={`page fund-reading-page ${activeSection === "fund-sec-market" ? "ms-page" : ""}`}>
+      <div className="pg-head">
+        <div className="pg-head-title">
+          <h1>宏观与情绪</h1>
+          <span className="pg-head-sub">大环境水位、场内情绪热度、利率与中美宏观一站查阅</span>
+        </div>
+        {showMacroRefresh && <div className="pg-head-kv">
+          <span className="pg-kv">
+            <span className="k">更新时间</span>
+            <b>{ov ? new Date(ov.generated_at).toLocaleString("zh-CN", { hour12: false }) : "加载中"}</b>
           </span>
-        )}
-        <span className="spacer" />
-        <button
-          className="btn primary"
-          disabled={refreshMutation.isPending}
-          onClick={() => refreshMutation.mutate()}
-        >
-          {refreshMutation.isPending ? "刷新中…" : "刷新"}
-        </button>
+          <span className="pg-kv">
+            <span className="k">数据状态</span>
+            <b>{ov ? (allErrors.length > 0 ? "部分受限" : "正常") : "读取中"}</b>
+          </span>
+        </div>}
+        {showMacroRefresh && <div className="pg-head-actions">
+          <button
+            className="btn primary"
+            disabled={refreshMutation.isPending}
+            onClick={() => refreshMutation.mutate()}
+          >
+            {refreshMutation.isPending ? "刷新中…" : "刷新"}
+          </button>
+        </div>}
       </div>
 
-      {ov && <div className="legend">{ov.disclaimer_cn}</div>}
-      {allErrors.length > 0 && (
+      {showMacroRefresh && allErrors.length > 0 && (
         <div className="fund-errors">
           部分数据源暂不可用（其余内容不受影响）：
-          {allErrors.map((e, i) => <div key={i}>· {e}</div>)}
+          {Array.from(new Set(allErrors.map((e) => e.split(/[:：]/)[0]))).map((source, i) => <div key={i}>· {/[\u4e00-\u9fff]/.test(source) ? source : "部分来源"}资料读取失败</div>)}
         </div>
       )}
-      {(ovError || ratesError) && (
+      {showMacroRefresh && (ovError || ratesError) && (
         <div className="fund-errors">加载失败：{((ovError || ratesError) as Error).message}</div>
       )}
 
-      {/* 分区页签：sticky 吸顶，点选直达（各卡点开仍有大图抽屉） */}
+      {/* 分区页签：整合大环境水位、情绪热度、利率、长周期叠图、中美宏观与市场资讯 */}
       <nav className="fund-nav" aria-label="分区导航">
         {FUND_SECTIONS.map((s) => (
           <button
@@ -2090,16 +1935,30 @@ export default function FundamentalsPage() {
         ))}
       </nav>
 
-      {/* ── ① 市场 ── */}
+      {/* ── ① 市场水位（直出中美 4×2 全景矩阵，与首页单行晴雨表形成分工） ── */}
       {activeSection === "fund-sec-market" && (
         <>
-          <MarketSection onOpen={setDrawer} />
-          <EtfStrengthSection />
-          <SentimentViews />
+          <HomeEnvironmentStrip mode="full" />
+          <MarketStylePanel market={market} onMarketChange={setMarket} observations={observations} ratesHistory={ratesHist} ratesHistoryFailed={!!ratesHistError} />
+          <ObservationLibrary market={market} />
+          {observationsError && <p className="fund-errors">{market === "cn" ? "A股" : "美股"}观察资料读取失败；风格事实表仍可查看。</p>}
+          <details className="observation-legacy">
+            <summary>更多补充参考：背景指标、宽度明细与产品强弱</summary>
+            {observationsLoading && <p className="muted">观察资料加载中…</p>}
+            <MarketObservationCards response={observations} title={`${market === "cn" ? "A股" : "美股"}背景观察`} limit={4}
+              metricIds={market === "us" ? ["vix", "vxn", "real_yield_10y", "hy_oas"] : undefined} />
+            {market === "us" && <MarketObservationCards response={observations} title="个人看法与管理人股票敞口调查" metricIds={["aaii", "naaim"]} />}
+            <MarketSection onOpen={setDrawer} />
+            <EtfStrengthSection />
+            <SentimentViews />
+          </details>
         </>
       )}
 
-      {/* ── ② 利率 ── */}
+      {/* ── ② 情绪与热度（原「市场参与与情绪」整合） ── */}
+      {activeSection === "fund-sec-sentiment" && <SentimentPage embedded />}
+
+      {/* ── ③ 利率 ── */}
       {activeSection === "fund-sec-rates" &&
         (rates ? (
           <>
@@ -2111,38 +1970,55 @@ export default function FundamentalsPage() {
           <div className="card-skeleton" style={{ height: 180 }} />
         ))}
 
-      {/* ── ②⁺ 长周期叠加 ── */}
+      {/* ── ④ 长周期叠加 ── */}
       {activeSection === "fund-sec-overlay" && <OverlaySection />}
 
-      {/* ── 消费 ── */}
-      {activeSection === "fund-sec-macro" &&
-        (ovLoading ? (
-          <div className="macro-grid">{Array.from({ length: 3 }).map((_, i) => <div key={i} className="card-skeleton" />)}</div>
-        ) : ov && ov.macro.length > 0 ? (
-          <MacroSection
-            macro={ov.macro}
-            hist={macroHist}
-            commodities={commoditiesData?.commodities}
-            onOpen={setDrawer}
-          />
-        ) : (
-          <div className="macro-card todo-card">
-            <div className="macro-head"><span className="macro-name">消费指标</span></div>
-            <div className="macro-note">暂无消费指标数据（数据源可能限流）。点右上角「刷新」重试。</div>
-          </div>
-        ))}
-
-      {/* ── ③⁺ 美国宏观 ── */}
-      {activeSection === "fund-sec-usmacro" && (
+      {/* ── ⑤ 中美宏观（经济与物价 + 美国宏观合并切换） ── */}
+      {activeSection === "fund-sec-macro" && (
         <>
-          <div className="fund-section-title fund-tab-title">
-            美国宏观 <span className="fund-count">消费驱动型经济体检（FRED，无需 API key）</span>
+          <div className="observation-market-switch" role="group" aria-label="宏观地区切换" style={{ marginBottom: 14 }}>
+            <button
+              type="button"
+              className={macroRegion === "cn" ? "on" : ""}
+              aria-pressed={macroRegion === "cn"}
+              onClick={() => setMacroRegion("cn")}
+            >
+              国内经济与大宗
+            </button>
+            <button
+              type="button"
+              className={macroRegion === "us" ? "on" : ""}
+              aria-pressed={macroRegion === "us"}
+              onClick={() => setMacroRegion("us")}
+            >
+              美国宏观体检
+            </button>
           </div>
-          <UsMacroSection onOpen={setDrawer} />
+          {macroRegion === "cn" ? (
+            ovLoading ? (
+              <div className="macro-grid">{Array.from({ length: 3 }).map((_, i) => <div key={i} className="card-skeleton" />)}</div>
+            ) : ov && ov.macro.length > 0 ? (
+              <MacroSection
+                macro={ov.macro}
+                hist={macroHist}
+                commodities={commoditiesData?.commodities}
+                onOpen={setDrawer}
+                onJumpUsMacro={() => setMacroRegion("us")}
+              />
+            ) : (
+              <div className="macro-card todo-card">
+                <div className="macro-head"><span className="macro-name">国内经济指标</span></div>
+                <div className="macro-note">暂无最新数据（数据源可能限流）。点右上角「刷新」重试。</div>
+              </div>
+            )
+          ) : (
+            <UsMacroSection onOpen={setDrawer} />
+          )}
         </>
       )}
 
-      {/* ── ④ 行业（已下线：A 股行业全景在 /sectors 页有更完整的趋势工作台）── */}
+      {/* ── ⑥ 市场资讯（原「资讯流」整合） ── */}
+      {activeSection === "fund-sec-news" && <NewsPage embedded />}
 
       {drawer && <TrendDrawer {...drawer} onClose={() => setDrawer(null)} />}
     </div>

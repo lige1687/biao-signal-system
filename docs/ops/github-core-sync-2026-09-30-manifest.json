@@ -1,0 +1,2831 @@
+{
+  "schema_version": "github-core-sync/1",
+  "snapshot_date": "2026-09-30",
+  "branch": "codex/core-sync-20260930",
+  "repository": "lige1687/biao-signal-system",
+  "repository_visibility": "public",
+  "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+  "purpose": "Repository-only review of historical moving-average target definitions; source snapshot, not a production release",
+  "file_scope": "New or modified files included in this snapshot, excluding this self-referential manifest; existing repository files are inherited from base_commit",
+  "files": [
+    {
+      "path": "configs/factor-access.v1.json",
+      "bytes": 5772,
+      "sha256": "0ac46ed9043b41bc2aa17fbb6b6e388cfe41f0b0bd2284ca68b712dad58c7cc8"
+    },
+    {
+      "path": "configs/market-observations.v1.json",
+      "bytes": 799,
+      "sha256": "ed5e7a262ffa4867493c918acb1ab204522903d632b477c61d8c6cc279a6769b"
+    },
+    {
+      "path": "configs/mindset_seed.json",
+      "bytes": 6936,
+      "sha256": "4bff4b76c120b2ac429e479752606390402b578d1bb248a533def927151b03e4"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/2026-09-30-github-astra-task.md",
+      "bytes": 5942,
+      "sha256": "960861a40bdfa15ff26125acc274c7fd105bb03cbb24b1ac16e1e0519942c4fc"
+    },
+    {
+      "path": "docs/experiments/a01-guide-technical-findings-2026-09-29.md",
+      "bytes": 18240,
+      "sha256": "cc59606675f71af06c5918053532572e14a07fe56e089e610b986049ce0d7af1"
+    },
+    {
+      "path": "docs/experiments/a01-index-position-effects-2026-09-29.md",
+      "bytes": 25126,
+      "sha256": "7bb61f459913665a8f23967edcfb74d6d12f7768cd56612b722e62eeac1b2719"
+    },
+    {
+      "path": "docs/experiments/a02-sma-maintenance-findings-2026-09-29.md",
+      "bytes": 18289,
+      "sha256": "66711a4b48c2d9a3e7218e9409c2d64d31e8958356db2a74246acaa9140a0f4b"
+    },
+    {
+      "path": "docs/experiments/a03-index-pullback-order-2026-09-30.md",
+      "bytes": 10019,
+      "sha256": "99cda802302cd4b1ce26b965bd5452d4bcb6653a1c97016bf21a6825b8d54c20"
+    },
+    {
+      "path": "docs/experiments/agent-card-render-2026-09-19.md",
+      "bytes": 7541,
+      "sha256": "50b14cf1d16e3dffb0db9e3144f93610d17d18f5251ec4589808eac4fb960f03"
+    },
+    {
+      "path": "docs/experiments/agent-card-render-adoption-2026-09-19.md",
+      "bytes": 2152,
+      "sha256": "07268b16d3fe0e7bbaebf3e31ce04945b6a159ea56c6c77d58426608a44fa4be"
+    },
+    {
+      "path": "docs/experiments/agent-entry-fix-adoption-2026-09-19.md",
+      "bytes": 2668,
+      "sha256": "ceeb837d05e79a68979e29bd0a4400d361c596cbc31d8ba81c4cce8ca976b4e1"
+    },
+    {
+      "path": "docs/experiments/agent-factor-access-generic-2026-09-22.md",
+      "bytes": 10060,
+      "sha256": "9d77d3423fc67b2517c4bef4dfe22d7cba4d23656e291f389233ee2bff061422"
+    },
+    {
+      "path": "docs/experiments/agent-factor-readonly-2026-09-22.md",
+      "bytes": 11532,
+      "sha256": "bef10e5e05be518102db42fb155c46a9065a6ac28348ac72ddc9d3789760061d"
+    },
+    {
+      "path": "docs/experiments/agent-fwd-ledger-survey-2026-09-19.md",
+      "bytes": 8990,
+      "sha256": "942253091cd26c10d278d8089627a23d2783aa7daa5dc92281364d0eaa42cb5a"
+    },
+    {
+      "path": "docs/experiments/agent-fwd-wire-2026-09-19.md",
+      "bytes": 9809,
+      "sha256": "6eb03a0519a74303685a220d9e01c1bcb731e5155c616ba4cd022b7b9b97b5b2"
+    },
+    {
+      "path": "docs/experiments/agent-intent-routing-2026-09-19.md",
+      "bytes": 7415,
+      "sha256": "2c6b5ff98f07fa57f6728c2d069937e38e35544330e7febc8773011b742c3c47"
+    },
+    {
+      "path": "docs/experiments/agent-intent-routing-adoption-2026-09-19.md",
+      "bytes": 2701,
+      "sha256": "5fe2c849699738258b11941054bf92573f315150e45daeb7f629f877f8d4146f"
+    },
+    {
+      "path": "docs/experiments/agent-intent-routing-audit-2026-09-19.md",
+      "bytes": 17485,
+      "sha256": "753fe4869e44cad6e073815960f8977a9313dc47f8b1e5b8de53577ebae70713"
+    },
+    {
+      "path": "docs/experiments/agent-mindset-adoption-2026-09-19.md",
+      "bytes": 1996,
+      "sha256": "d6c9ba6a73dfd7adb516b47c5c3a3576789505b3fa572ea04c57be382801373b"
+    },
+    {
+      "path": "docs/experiments/agent-mindset-seed-2026-09-19.md",
+      "bytes": 4731,
+      "sha256": "1ed5dcd8c5a80d3d17b304081b13e4c64940e113fd13df12db95ca43fbd408a3"
+    },
+    {
+      "path": "docs/experiments/agent-name-binding-adoption-2026-09-18.md",
+      "bytes": 2817,
+      "sha256": "6caff83455886b1af117a41ca245ead80a825e7756eadf1ed6ae1c42a88308a0"
+    },
+    {
+      "path": "docs/experiments/agent-news-glm-s2-controller-review-2026-09-18.md",
+      "bytes": 11023,
+      "sha256": "6e562c549069d39a328be5e268e20d6010f1cedf8451c0bc524255df97ea1ad9"
+    },
+    {
+      "path": "docs/experiments/agent-news-glm-s2-repair-review-2026-09-18.md",
+      "bytes": 9462,
+      "sha256": "61f8476e9b945bf0b8cd085f5a48a7c9617cca4f46cd6789a29f1eb5f27975d2"
+    },
+    {
+      "path": "docs/experiments/agent-ops-dca-2026-09-20.md",
+      "bytes": 7730,
+      "sha256": "e7bf819e624598fc3fd2d1e87e2aab0bbcd97f933f66483c58f559298b18756b"
+    },
+    {
+      "path": "docs/experiments/agent-ops-dca-adoption-2026-09-20.md",
+      "bytes": 1457,
+      "sha256": "dec29681d527d85a26e65666474338cfb9a4932d84889fe4fd576cec45de78a6"
+    },
+    {
+      "path": "docs/experiments/agent-realmodel-eval-2026-09-20.md",
+      "bytes": 6474,
+      "sha256": "01509bf012c589425392862cb19aaea0abc8ca41650714cdbe94416923a6701b"
+    },
+    {
+      "path": "docs/experiments/agent-scenario-acceptance-2026-09-19.md",
+      "bytes": 12219,
+      "sha256": "3f266323b7d94d69049f47042705f7351d3275c654903a049ff7f80a6b07eab3"
+    },
+    {
+      "path": "docs/experiments/agent-streaming-retest-2026-09-20.md",
+      "bytes": 7267,
+      "sha256": "2d35d5c5eb92d75aa4bf0fd6dc90cbc0e4cb865524552224e50df4c7db39a5c5"
+    },
+    {
+      "path": "docs/experiments/agent-symbol-binding-review-2026-09-17.md",
+      "bytes": 3783,
+      "sha256": "1afba1e7558868c6dba922055f50216bb87f55c509c665413e9c52d2c190cd94"
+    },
+    {
+      "path": "docs/experiments/agent-symbol-fix-2026-09-18.md",
+      "bytes": 3621,
+      "sha256": "23209f2e60df7f6136d145e965c9764ca7a873ae9477f5c3ddfcb594d885d433"
+    },
+    {
+      "path": "docs/experiments/agent-whitelist-fix-r3-2026-09-20.md",
+      "bytes": 4961,
+      "sha256": "1ec6073cfa6b944a08d35784b63511a7466bde1a9cb581d40d4e2a301a603c06"
+    },
+    {
+      "path": "docs/experiments/ai-work-increment-scan-2026-09-30.md",
+      "bytes": 12345,
+      "sha256": "155d9cc22bdc43e3f5152efbefa88455caafcc18fd4acbdde2e65bf8aa08fab2"
+    },
+    {
+      "path": "docs/experiments/breadth-preflight-controller-review-2026-09-18.md",
+      "bytes": 4857,
+      "sha256": "c4dd09d610493e557eae042ee34cac7aed6a1c9798fde394b39ec800e47d36a4"
+    },
+    {
+      "path": "docs/experiments/breadth-risk-information-findings-2026-09-28.md",
+      "bytes": 8867,
+      "sha256": "027dfa2f11b625e4852b844cb303e4d8b168fab896c8493ae656f91991ca05a4"
+    },
+    {
+      "path": "docs/experiments/candidate-preflight-validation-2026-09-28.md",
+      "bytes": 4541,
+      "sha256": "515a8f366cd47b543255e84294adcecdbfaf3009c84152cf93512b117f5ed83b"
+    },
+    {
+      "path": "docs/experiments/checkcc-claude-risk-review-2026-09-30.md",
+      "bytes": 6506,
+      "sha256": "4b12d32e98d6826e770d5ba8a2cc6feadaef899d824337a042ba519a0be67389"
+    },
+    {
+      "path": "docs/experiments/classic-benchmarks-2026-09-28.md",
+      "bytes": 14275,
+      "sha256": "4242aed6a8152245e5966be8931fdeaf182c4f30878d68329adc3370890b508f"
+    },
+    {
+      "path": "docs/experiments/classic-benchmarks-dual20-2026-09-28.md",
+      "bytes": 6748,
+      "sha256": "c14bfabe36334690a8688f26f8a577b26859822192b568462b651fc6ceb87e20"
+    },
+    {
+      "path": "docs/experiments/classic-benchmarks-dual20-final-2026-09-28.md",
+      "bytes": 13619,
+      "sha256": "abce919f533ed8fdafec0df79af2e06ae9cc18317925ad7164fd151e5b1a0a8a"
+    },
+    {
+      "path": "docs/experiments/classic-benchmarks-dual20-r3-2026-09-28.md",
+      "bytes": 6748,
+      "sha256": "beb3077ec1247158d57c3b7ecad99587b52b5d8efb4ee449221a1ce6b80e05d4"
+    },
+    {
+      "path": "docs/experiments/classic-benchmarks-review-2026-09-28.md",
+      "bytes": 5095,
+      "sha256": "2b844572d3d7e11ae7205b3a6383897b2b6226bc44038740950f5bec4c885aa3"
+    },
+    {
+      "path": "docs/experiments/classic-research-learning-2026-09-29.md",
+      "bytes": 4852,
+      "sha256": "6ba48a03093b316a183cb2a164a1f3437ebcb1c48216098613f084605b1960aa"
+    },
+    {
+      "path": "docs/experiments/core-a-distance-increment-2026-09-29.md",
+      "bytes": 15088,
+      "sha256": "00d908f1b790d49833650a751ad89858a342815ba281ee1145b7e210806db3db"
+    },
+    {
+      "path": "docs/experiments/core-a-distance-study-2026-09-28.md",
+      "bytes": 16894,
+      "sha256": "dc4b7e2882803fcb34384ccb3e471329083f619b1b2bc0be864067041ec38cb1"
+    },
+    {
+      "path": "docs/experiments/core-strategy-factor-plan-2026-09-28.md",
+      "bytes": 7323,
+      "sha256": "31755b25671832032fa10d19ac50ccec7e3d909a083fb2057031312bf96d8df0"
+    },
+    {
+      "path": "docs/experiments/dual-ma-information-findings-2026-09-28.md",
+      "bytes": 86798,
+      "sha256": "bde23a72d96c53e937333908989d0abfa336807b82ca9aad1464a3a1a4eb6e61"
+    },
+    {
+      "path": "docs/experiments/dual-ma-information-review-2026-09-28.md",
+      "bytes": 4836,
+      "sha256": "4ab588a64b23ef151b1d950528372204a1e0036a436869bdfd538c8f978c96a0"
+    },
+    {
+      "path": "docs/experiments/dual60-holding-difference-review-2026-09-28.md",
+      "bytes": 11466,
+      "sha256": "21f9a4b178c3c40de51039f5821ecdc128060c0f7f57e918dd805152f734abb8"
+    },
+    {
+      "path": "docs/experiments/ema120-deep-value-2026-09-29.md",
+      "bytes": 26834,
+      "sha256": "f48f5784c917f5e2723b8aadd5504fc87bfd2930066b17065e771720c91f46da"
+    },
+    {
+      "path": "docs/experiments/ema120-deep-value-review-2026-09-29.md",
+      "bytes": 8046,
+      "sha256": "948e6c1a440c83d48307696121f8becf8d86b5287ec80225faa7f59d82976fd9"
+    },
+    {
+      "path": "docs/experiments/ema120-market-cycle-2026-09-29.md",
+      "bytes": 16887,
+      "sha256": "b1da543beb0d14c46fa40ba4fd78735808cb9782956aa6bf44866cf94c15738c"
+    },
+    {
+      "path": "docs/experiments/ema120-market-cycle-review-2026-09-29.md",
+      "bytes": 5032,
+      "sha256": "c8b4cfeaf5a18b4b291a1c1ea7500416232212aa619cb705e92504f57bb0be85"
+    },
+    {
+      "path": "docs/experiments/ema120-reversion-findings-2026-09-28.md",
+      "bytes": 10005,
+      "sha256": "f122e1d3d918eafd89add95a6ebdfc8549212ae39fa0888f898f450922682c47"
+    },
+    {
+      "path": "docs/experiments/ema120-scope-expansion-2026-09-28.md",
+      "bytes": 10389,
+      "sha256": "a6ec76ee8b73169b377d606ff79b6d242bdf42245587077dfa35c640055aa1c6"
+    },
+    {
+      "path": "docs/experiments/ema120-sector-expansion-plan-2026-09-28.md",
+      "bytes": 1900,
+      "sha256": "c37d80ec371d0e4b596d2d7063794452f4686f16ef17aaa98ba2b3dd573d91a0"
+    },
+    {
+      "path": "docs/experiments/ema120-sector-increment-2026-09-28.md",
+      "bytes": 14797,
+      "sha256": "93f28f01718eec27cf7cc5a8a75546e638fa526c739dfbb93cbfef71d0f5e2bc"
+    },
+    {
+      "path": "docs/experiments/ema120-sector-increment-review-2026-09-28.md",
+      "bytes": 3851,
+      "sha256": "93e13057724e2b70ff695c24865351d9c8b142fb0ddeb958be49cef2648144fc"
+    },
+    {
+      "path": "docs/experiments/ema120-sector-input-review-2026-09-28.md",
+      "bytes": 3311,
+      "sha256": "b9c035d18f5f5ac934863d7c883204df692bcd25fba92fd20a940c506401fccb"
+    },
+    {
+      "path": "docs/experiments/ema120-sector-risk-2026-09-28.md",
+      "bytes": 14428,
+      "sha256": "b882001c64f2105d41a0101e690171817def1121154e225b1fc4d45e93586a91"
+    },
+    {
+      "path": "docs/experiments/ema120-sector-risk-review-2026-09-28.md",
+      "bytes": 4117,
+      "sha256": "bf84db020afe1f59a0899f854f57927fedf2296407fb449578ebb061f46c9531"
+    },
+    {
+      "path": "docs/experiments/ema120-standard-validation-2026-09-28.md",
+      "bytes": 10923,
+      "sha256": "eb3ab17d0a12571d3a9a2462615d77467362a23d9b1913f4028f3bed5240de08"
+    },
+    {
+      "path": "docs/experiments/factor-a-exit-findings-2026-09-27.md",
+      "bytes": 12446,
+      "sha256": "6c5d6edbcf036b50ef33f1735b3749f7b604f9d128db79bc1c9f379e34275c75"
+    },
+    {
+      "path": "docs/experiments/factor-a-exit-review-2026-09-27.md",
+      "bytes": 9781,
+      "sha256": "1acaa463750b6f907ef669b7f462cd3aaa59e8208781109f9d7d5c031d5b8882"
+    },
+    {
+      "path": "docs/experiments/factor-b10-v2-controller-review-2026-09-21.md",
+      "bytes": 7208,
+      "sha256": "bfc218dfe1e94193898b6767c158d90c1094f246e49988e2441d0a3dcec4a470"
+    },
+    {
+      "path": "docs/experiments/factor-b11-four-candidate-closure-2026-09-21.md",
+      "bytes": 6927,
+      "sha256": "ce52a4ce1e69b37ab526858bf7ef81d57de9162135d44b537bc06747ec6c8b3b"
+    },
+    {
+      "path": "docs/experiments/factor-b12-b200-distance200-controller-review-2026-09-21.md",
+      "bytes": 5420,
+      "sha256": "aa83ff99036c807f30b463d2c184df8ee57981560fc1e1166c0682805753f580"
+    },
+    {
+      "path": "docs/experiments/factor-b13-trend-backbone-controller-review-2026-09-21.md",
+      "bytes": 5840,
+      "sha256": "c635e50cdbc49562a7ac3a2b1e83ad7027b59c9a60dfc67e1574d06fb1b25921"
+    },
+    {
+      "path": "docs/experiments/factor-b14-rv-rank-recovered200-controller-review-2026-09-21.md",
+      "bytes": 7046,
+      "sha256": "4b7e42868e788ec895cd6947169521f4227c8e2f81b03a62c5e51d6d5b1dd3bb"
+    },
+    {
+      "path": "docs/experiments/factor-b4-source-evidence-recovery-batch1-2026-09-20.md",
+      "bytes": 4402,
+      "sha256": "9cc40e755307b8700c979d460bedfc15d4f4613003a4fb851f6901a30e1706d0"
+    },
+    {
+      "path": "docs/experiments/factor-b4-source-evidence-recovery-batch2-2026-09-20.md",
+      "bytes": 2821,
+      "sha256": "e63dc516fa8373aacb8352bf0d6b5a8b13d0512cfc83fd5beadee0b83a5f23fa"
+    },
+    {
+      "path": "docs/experiments/factor-b8-registered-bridge-and-bias-2026-09-21.md",
+      "bytes": 3602,
+      "sha256": "85047d3a6236f8d6751e6640637e9d58aacb8423e708805649c0f23268494797"
+    },
+    {
+      "path": "docs/experiments/factor-b9-missing-policy-controller-review-2026-09-21.md",
+      "bytes": 7910,
+      "sha256": "e1b46612b43dc960aef3a8facbbb998dd1dc3d570fc59fbce61e2eb9e42b6df0"
+    },
+    {
+      "path": "docs/experiments/factor-breadth-dual-ma-findings-2026-09-24.md",
+      "bytes": 4850,
+      "sha256": "22f0cfc5a43ecffb0c780fa615859e46c4584e931283020ef77b80eee60ec862"
+    },
+    {
+      "path": "docs/experiments/factor-breadth-road-risk-findings-2026-09-24.md",
+      "bytes": 8221,
+      "sha256": "90782c1c2cf1292dd98016d122f082d8ebbe81b01d22878712f67c20e7d19845"
+    },
+    {
+      "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+      "bytes": 10367,
+      "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+    },
+    {
+      "path": "docs/experiments/factor-core-breadth-readiness-review-2026-09-23.md",
+      "bytes": 3137,
+      "sha256": "9d1033aa78d0e4aa3a062dde23a5ed87a1b400ba2ea39f15bd39b7ebe064bec0"
+    },
+    {
+      "path": "docs/experiments/factor-core-real-release-review-2026-09-24.md",
+      "bytes": 3308,
+      "sha256": "0fe1469b2840f2748496480d4d6dc5689c64034ea042dc4b896c2c2981523d58"
+    },
+    {
+      "path": "docs/experiments/factor-core-start-2026-09-22.md",
+      "bytes": 9836,
+      "sha256": "fdd35663274dc92fc5dc1ee332df7619630c197159d2a7e22bfc47247d0bfc7f"
+    },
+    {
+      "path": "docs/experiments/factor-direction-audit-2026-09-30.md",
+      "bytes": 14926,
+      "sha256": "61fe17cb52ae9b760d8f2d0bced97d910f51b127a1d2e66eb0210dc086f912a9"
+    },
+    {
+      "path": "docs/experiments/factor-direction-method-review-2026-09-22.md",
+      "bytes": 15371,
+      "sha256": "f55a87d9735b8eb90d98dcd05bd7edc803616d206a7ce4da09affea959cfed41"
+    },
+    {
+      "path": "docs/experiments/factor-etf-input-review-2026-09-23.md",
+      "bytes": 20131,
+      "sha256": "0d15b4311d3ee066640a12a6bac4f0dff912ff1d636b16e9e0ab3221548e272e"
+    },
+    {
+      "path": "docs/experiments/factor-etf-momentum-numerical-review-2026-09-23.md",
+      "bytes": 5015,
+      "sha256": "8be58fc13710fe8ec1914cb30003c3c8e91692d2fab329ce6232cc43b6286ef3"
+    },
+    {
+      "path": "docs/experiments/factor-high52-preflight-2026-09-22.md",
+      "bytes": 6805,
+      "sha256": "43c1d9e08d8b696806438d7e60972efa80723ae4d8d1f6316574ac4acdc8c2d7"
+    },
+    {
+      "path": "docs/experiments/factor-increment-information-2026-09-28.md",
+      "bytes": 21444,
+      "sha256": "1fc2374ed0e7b0d80f1e6d751cbd3997fbc0a159ea93b9e1c2d88bf17a416465"
+    },
+    {
+      "path": "docs/experiments/factor-increment-information-review-2026-09-28.md",
+      "bytes": 6083,
+      "sha256": "e3355a35c9c8585c39c094ec7f04293ff91682516ab8de480d235e550a54ad65"
+    },
+    {
+      "path": "docs/experiments/factor-information-expansion-2026-09-28.md",
+      "bytes": 14391,
+      "sha256": "bc5c15a4ff2fce42af69148588642ba7964797a9bc4528d93205d463aa0bab07"
+    },
+    {
+      "path": "docs/experiments/factor-lib-selfevolution-2026-09-19.md",
+      "bytes": 4756,
+      "sha256": "f16e1a0e3660abdcb5c43599ab697f98f238c3f2c07409072f7c4ed47f8014c2"
+    },
+    {
+      "path": "docs/experiments/factor-ma-baseline-reset-review-2026-09-24.md",
+      "bytes": 22005,
+      "sha256": "e55d9e8b5b0a3e7ab710a3c77b6570bcc6501322ff0d0a1556f7f8633be98562"
+    },
+    {
+      "path": "docs/experiments/factor-ma-money-findings-2026-09-27.md",
+      "bytes": 13924,
+      "sha256": "9714bae6964216fa928ac83607f75697e11725089d5f0ce3e82d494c332e285d"
+    },
+    {
+      "path": "docs/experiments/factor-mainline-five-actions-2026-09-22.md",
+      "bytes": 8665,
+      "sha256": "6ef40d37516d13e710e1e72ca6116141a09dad5464aed674305bafa783d3d7de"
+    },
+    {
+      "path": "docs/experiments/factor-module-a-money-findings-2026-09-27.md",
+      "bytes": 18237,
+      "sha256": "0659e0a16232f590a6c30d1a1fed8f57285984f1be5c02e84d8e13dc91c27eab"
+    },
+    {
+      "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+      "bytes": 7180,
+      "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+    },
+    {
+      "path": "docs/experiments/factor-p2-restricted-pilot-2026-09-19.md",
+      "bytes": 5422,
+      "sha256": "f35ebbd589b4f6cbc3a889f80a90826bf1c72bca539d145dd16529dd76f44c95"
+    },
+    {
+      "path": "docs/experiments/factor-range-expansion-findings-2026-09-27.md",
+      "bytes": 11549,
+      "sha256": "f98d9c5441d6ef583c065c3ad9d95bd3b7ce6c4df5a2e8a01b0210aab40de986"
+    },
+    {
+      "path": "docs/experiments/factor-range-expansion-review-2026-09-27.md",
+      "bytes": 11138,
+      "sha256": "dba55e387927db126e080570868cc06e0d0f03a98076b3a9e290b89c4997d9cb"
+    },
+    {
+      "path": "docs/experiments/factor-research-next-s1-controller-review-2026-09-22.md",
+      "bytes": 11518,
+      "sha256": "cd37a7d6d0894f7ad1437784c8041f11e68d84f9f13c9713bd0f0078a68921d8"
+    },
+    {
+      "path": "docs/experiments/factor-research-ui-2026-09-23.md",
+      "bytes": 11758,
+      "sha256": "d26d2e8115cdaaff16d1fe5303e0bdb3be5ee66010fe04e92c5536abc525b294"
+    },
+    {
+      "path": "docs/experiments/factor-reuse-refresh-2026-09-22.md",
+      "bytes": 7841,
+      "sha256": "2df4b7be38bcb315fbd575b119b7d3d2ac727f70139de261ee0ca85eef7cebc7"
+    },
+    {
+      "path": "docs/experiments/factor-system-increment-review-2026-09-27.md",
+      "bytes": 8250,
+      "sha256": "17220d36f93707cbb57e9a5ff334a8c2e9c91f320ac20bc659092bcae8a59a55"
+    },
+    {
+      "path": "docs/experiments/factor-upstream-alignment-2026-09-18.md",
+      "bytes": 13843,
+      "sha256": "2ddb3e20ccd655c2ad67561b366bca3a768609cd1546e6e4d2673ea59cb52b03"
+    },
+    {
+      "path": "docs/experiments/factor-verification-completion-b6-2026-09-20.md",
+      "bytes": 2230,
+      "sha256": "e35fd84f7e8fb30a4ebcd9e7e39480dca8032aa775351662686138b5a2d5e382"
+    },
+    {
+      "path": "docs/experiments/factor-verification-completion-b7-2026-09-20.md",
+      "bytes": 3502,
+      "sha256": "2973fa1f9e9efd6a4042fec74b6561e8e2d4955601f06d11dc1347e1a3ef2466"
+    },
+    {
+      "path": "docs/experiments/factor-verification-readiness-2026-09-20.md",
+      "bytes": 3118,
+      "sha256": "1cc685b1e3c6c6cb5f57d25b52ebe1261308050288c3ec6c3842c836851d3a41"
+    },
+    {
+      "path": "docs/experiments/first-touch-information-findings-2026-09-28.md",
+      "bytes": 8291,
+      "sha256": "76f929ec2423722b1ce6032b383186956dfadf01541365f77f585b93e2393d71"
+    },
+    {
+      "path": "docs/experiments/gpt-factor-readout-review-2026-09-28.md",
+      "bytes": 5687,
+      "sha256": "d2e01358447a1992ce4e8c215ff5f5301df2a1091a02e092bb94f3a9d6c78274"
+    },
+    {
+      "path": "docs/experiments/jev-model-routing-pilot-2026-09-22.md",
+      "bytes": 5129,
+      "sha256": "8658d72b9ac306b5805c02273b19efd6400798e4131a65b91b6e719ea56663db"
+    },
+    {
+      "path": "docs/experiments/jev-news-pilot-2026-09-21.md",
+      "bytes": 7114,
+      "sha256": "171fa09760086d36d72b79d4c85e7905edfe9b27a9fe6856e305d616cf2ac9e7"
+    },
+    {
+      "path": "docs/experiments/jev-real-news-pilot-2026-09-22.md",
+      "bytes": 5128,
+      "sha256": "40fb58957e8c73ffeff0cfcef56081d34cbac5ae82715e474be77cdd17987a56"
+    },
+    {
+      "path": "docs/experiments/jev-scenario-decision-2026-09-20.md",
+      "bytes": 8928,
+      "sha256": "c779d73cae3ca31b093f5f475f059213b7bc8da9bef89523199562289fd82b2e"
+    },
+    {
+      "path": "docs/experiments/jev-system-news-30-pilot-2026-09-22.md",
+      "bytes": 5829,
+      "sha256": "1b8c059c76e7460fc5080175a05922cd73425f5e3213a84dbad89c01c1977f34"
+    },
+    {
+      "path": "docs/experiments/lei-22-30-findings-2026-09-28.md",
+      "bytes": 12914,
+      "sha256": "8217587d54e025d4dc704d26aaa52b8a44fc88dffa9184ef29cf192e26dca0f8"
+    },
+    {
+      "path": "docs/experiments/lei-black-horizons-findings-2026-09-28.md",
+      "bytes": 12360,
+      "sha256": "5538e997afd8ea05b0d1f54123a3d8b524f031b4a31322162486d3194e1fdb1e"
+    },
+    {
+      "path": "docs/experiments/lei-green-black-findings-2026-09-28.md",
+      "bytes": 12255,
+      "sha256": "94dceb3b52a149ff7a09d083260e34c7e9f5942b59176ad9553f22231bbc213a"
+    },
+    {
+      "path": "docs/experiments/lei-regime-increment-findings-2026-09-29.md",
+      "bytes": 16044,
+      "sha256": "3299f5bf592e8c018836af7dfb583b65719c9307064620704fcc2eb64928aaf3"
+    },
+    {
+      "path": "docs/experiments/lei-risk-support-findings-2026-09-28.md",
+      "bytes": 7318,
+      "sha256": "09233b1f5275973a1f1dbbcc1011b6c45cd84caebf5b946000edbc8cae2bf247"
+    },
+    {
+      "path": "docs/experiments/lei-single-horizons-findings-2026-09-28.md",
+      "bytes": 13614,
+      "sha256": "4eaf7d11e54f1c5051bba8585f16a93c9048d74c4848b094268c8d3a7fadb741"
+    },
+    {
+      "path": "docs/experiments/lei-single-increment-findings-2026-09-28.md",
+      "bytes": 10737,
+      "sha256": "835b9d2f943c48bad7ef49ff23a6fb293735f23e6e39c45f04a5b26cc611f07f"
+    },
+    {
+      "path": "docs/experiments/lei-temporal-findings-2026-09-28.md",
+      "bytes": 8698,
+      "sha256": "23b6a2c7618e201264d1b8f09dfe9d47161b133bb388faca8e5e46f3c01603f8"
+    },
+    {
+      "path": "docs/experiments/ma-cluster-information-2026-09-30.md",
+      "bytes": 14774,
+      "sha256": "0c987d8f3c0e61b612c8897275033a55a410758e917d5bba3fab9aab1572d53e"
+    },
+    {
+      "path": "docs/experiments/ma-cluster-information-mae-artifact-2026-09-30.md",
+      "bytes": 25228,
+      "sha256": "c03f7acae0da9db8840902a51233df02938cb283251663055da12f0ff14803c1"
+    },
+    {
+      "path": "docs/experiments/ma-cluster-information-return-artifact-2026-09-30.md",
+      "bytes": 25027,
+      "sha256": "8e193bca59fa0c652fb6ea7735a16050ef65509c87f3dfeb3f9eae01c5f0b6c1"
+    },
+    {
+      "path": "docs/experiments/ma-context-information-next-2026-09-28.md",
+      "bytes": 7874,
+      "sha256": "5b9e705ee098f8d8a6ddc41a9eec62fd14b8b1b216b87def02409502d1d5d312"
+    },
+    {
+      "path": "docs/experiments/market-observation-candidates-2026-09-30.md",
+      "bytes": 7518,
+      "sha256": "39d5e3ddfdcb12f5b6dc4b27129839e5809a95df8641978a2d0bb3049e0c6b1d"
+    },
+    {
+      "path": "docs/experiments/market-observation-content-2026-09-30.md",
+      "bytes": 9207,
+      "sha256": "eebb6f62703a05b2506d6cc2bbc5c251f2fe274d8358eda3b4adc63fc6355cbc"
+    },
+    {
+      "path": "docs/experiments/market-observation-implementation-2026-09-30.md",
+      "bytes": 5880,
+      "sha256": "4d445d51cc9c78588c51a73144068e37e83da8d87f8990d41aaa4576dc4f0895"
+    },
+    {
+      "path": "docs/experiments/other-factor-information-review-2026-09-28.md",
+      "bytes": 4833,
+      "sha256": "7858a921bd39c3de3666545942e158274f280581de444021a1e0495edf87b4e9"
+    },
+    {
+      "path": "docs/experiments/quantaalpha-assessment-2026-09-28.md",
+      "bytes": 10683,
+      "sha256": "a27cd103c8490a0cea17b515236e0a212c4bbe9548d40a47fa6baf8d4479ccb3"
+    },
+    {
+      "path": "docs/experiments/quantaalpha-medium-validation-2026-09-28.md",
+      "bytes": 12854,
+      "sha256": "056233663898c7963f86595d964d219b8744c9f030d9fe975051138905feb219"
+    },
+    {
+      "path": "docs/experiments/rd-agent-adoption-review-2026-09-24.md",
+      "bytes": 13361,
+      "sha256": "4d5fc225495dba80465458eee337f88315184d5806ccd63cc1b3683e39041fa7"
+    },
+    {
+      "path": "docs/experiments/rdagent-model-feedback-review-2026-09-27.md",
+      "bytes": 5727,
+      "sha256": "2fa517971fc3bddfdd8cd1b0cc050a5c04b0b7c96cb11d6074e729a226f3470f"
+    },
+    {
+      "path": "docs/experiments/rdagent-pilot-controller-review-2026-09-27.md",
+      "bytes": 7780,
+      "sha256": "eefe70ca54c748ddb65e65ce3c4348a6ce68db9a98b7e2fdacc66bc6a1f48a03"
+    },
+    {
+      "path": "docs/experiments/research-closure-factor-depth-2026-09-29.md",
+      "bytes": 5995,
+      "sha256": "50bb5424020bd68854205796120cf03c210fd9c8c77b83869ec552556fca1e34"
+    },
+    {
+      "path": "docs/experiments/research-closure-install-2026-09-28.md",
+      "bytes": 20486,
+      "sha256": "b8c0d2fa77dc8b551f63cdbb307da211b69a96e202dd174f6c74184be1de36bc"
+    },
+    {
+      "path": "docs/experiments/research-design-correction-2026-09-30.md",
+      "bytes": 4563,
+      "sha256": "615e5e6d1e6c89c9991323456a524e7bb66bdb5c50ae6f0c7c32f3eb5688f1f5"
+    },
+    {
+      "path": "docs/experiments/research-information-gain-review-2026-09-28.md",
+      "bytes": 9790,
+      "sha256": "b8252bdcb5aa9b1155dd3c14c01037e19bb1c4203e7240f6e8c140de53264e51"
+    },
+    {
+      "path": "docs/experiments/research-tools-correction-2026-09-29.md",
+      "bytes": 17292,
+      "sha256": "e240478143237d498fb56376c779238bd75dfe9d9f7706840d1497a734d4ab24"
+    },
+    {
+      "path": "docs/experiments/research-workflow-continuous-demo-2026-09-29.md",
+      "bytes": 7098,
+      "sha256": "101c75cb226c20a027a699296293f0b6a362ef390583b447719789152e62d63b"
+    },
+    {
+      "path": "docs/experiments/research-workflow-continuous-final-demo-2026-09-29.md",
+      "bytes": 7098,
+      "sha256": "101c75cb226c20a027a699296293f0b6a362ef390583b447719789152e62d63b"
+    },
+    {
+      "path": "docs/experiments/research-workflow-engineering-2026-09-29.md",
+      "bytes": 16133,
+      "sha256": "d8e0e65125ffb4be217b43a0bcd0e052a7071d2c5b4125bf08fe63a3912f97b1"
+    },
+    {
+      "path": "docs/experiments/research-workflow-engineering-final-2026-09-29.md",
+      "bytes": 17530,
+      "sha256": "b86ebf0825bbcc3f4a3fcc271938758cd01d022e7a40855b46120e0d4c3ab1f4"
+    },
+    {
+      "path": "docs/experiments/research-workflow-event-risk-demo-2026-09-29.md",
+      "bytes": 9356,
+      "sha256": "e62d7d67910e2d3e49213b72eaffd07b3567c265981210895f9703f855efb6ff"
+    },
+    {
+      "path": "docs/experiments/research-workflow-event-risk-final-demo-2026-09-29.md",
+      "bytes": 9356,
+      "sha256": "e62d7d67910e2d3e49213b72eaffd07b3567c265981210895f9703f855efb6ff"
+    },
+    {
+      "path": "docs/experiments/sentiment-aaii-extremes-increment-2026-09-29.md",
+      "bytes": 14585,
+      "sha256": "9e5f7222ff381e598da7712b32f3e670fa54c5985be86ce8b5bbb770d2628e07"
+    },
+    {
+      "path": "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md",
+      "bytes": 22038,
+      "sha256": "023b9c2032929131841db7ce8a7ae9789ed8545ecf9d8f14bd235b54d5e89e4e"
+    },
+    {
+      "path": "docs/experiments/sentiment-direction-application-2026-09-30.md",
+      "bytes": 12245,
+      "sha256": "42a87db22b3a461a653c89deaab6b70fb0de87750ce0634fb1dfa5cfa84615f4"
+    },
+    {
+      "path": "docs/experiments/sentiment-factor-feasibility-2026-09-29.md",
+      "bytes": 17081,
+      "sha256": "9d66f4fa755553ad46f143d4ff1c2bb680e8c0783990ef89a3d897bd917a4932"
+    },
+    {
+      "path": "docs/experiments/sentiment-library-readiness-2026-09-29.md",
+      "bytes": 13415,
+      "sha256": "0878c2d55b02e01eba0339170b46e777bc45c68504f3169dd484241b044e97dd"
+    },
+    {
+      "path": "docs/experiments/sentiment-naaim-public-window-2026-09-30.md",
+      "bytes": 11850,
+      "sha256": "b5e409987cb1326d9148d1782dee58208aa4dcc08e39918c29fa1db41e05db29"
+    },
+    {
+      "path": "docs/experiments/sentiment-open-source-input-2026-09-30.md",
+      "bytes": 16367,
+      "sha256": "4b87b2da03f77e6683122f6b9ea4f7758c7dcbfb731769b7ce2b17e01b186aa3"
+    },
+    {
+      "path": "docs/experiments/sentiment-pages-audit-2026-09-30.md",
+      "bytes": 20934,
+      "sha256": "6c291f4c950c3e36b09071335f260b06a4264560837178dbc60abf5055687fc4"
+    },
+    {
+      "path": "docs/experiments/sentiment-putcall-increment-2026-09-29.md",
+      "bytes": 22487,
+      "sha256": "48a17b563645cc4a816ff6b39bd961bcc805e04dca99a818ac19016fe66130ec"
+    },
+    {
+      "path": "docs/experiments/sentiment-s01-historical-input-2026-09-30.md",
+      "bytes": 8503,
+      "sha256": "765b96e63c8ff667a5e7b351cc8d91656a6b540249c8b662c7f3a8c8e259ae33"
+    },
+    {
+      "path": "docs/experiments/sentiment-s01-local-cache-2026-09-30.md",
+      "bytes": 8171,
+      "sha256": "ec4f19e3528bf907705d9b23959526b28b155c984adf0110f8e09db695e7631c"
+    },
+    {
+      "path": "docs/experiments/space-prior-target-2026-09-30.md",
+      "bytes": 14041,
+      "sha256": "429c9305acc21caba0079d389515c4884ad591afd62cfe6929b125de7c42c34d"
+    },
+    {
+      "path": "docs/experiments/sqlite-backup-restore-drill-2026-09-19.md",
+      "bytes": 5125,
+      "sha256": "831f26a7f80aa8c15d4aac95fe7dde9d2e99af86c978910857febdd3dab694b5"
+    },
+    {
+      "path": "docs/experiments/technical-direction-pro-review-2026-09-30.md",
+      "bytes": 4815,
+      "sha256": "4b2821a68aaaec1c7ea173eaddf1ac26ffa87d30ec5160ab2b9404904da87dab"
+    },
+    {
+      "path": "docs/experiments/universe-research-scope-correction-2026-09-29.md",
+      "bytes": 20427,
+      "sha256": "f0cccce5a03b5fb653076f38cbf16f3e2f80530de73f9e3d68f946ac7975f016"
+    },
+    {
+      "path": "docs/literature-learning/classic-benchmark-method-card-2026-09-28.md",
+      "bytes": 3565,
+      "sha256": "15ff0b8335eb580756b14bedf4cc5af6d180f04c983f383c4858ba673a845d6a"
+    },
+    {
+      "path": "docs/literature-learning/classic-research-process-2026-09-29.md",
+      "bytes": 20425,
+      "sha256": "44831b4a77ea5831c98109b4d990a7993b9fa04ba03332f818d6bd0ab565a54f"
+    },
+    {
+      "path": "docs/ops/bar-completeness-contract.md",
+      "bytes": 4093,
+      "sha256": "357e08db27678c1a22efb24e7a9c3e5b866d245a8de6540cc9eb5011c93868e4"
+    },
+    {
+      "path": "docs/ops/bar-completeness-wiring-design-2026-09-20.md",
+      "bytes": 35042,
+      "sha256": "e52056f90c9fea7389afbc748cc57e8d7015313601fc0790f7045b94696bd46a"
+    },
+    {
+      "path": "docs/ops/job-ledger-diagnosis-2026-09-19.md",
+      "bytes": 22825,
+      "sha256": "6d69bf8230972416c0050061d0fdfbdc2b1d39eda6a12c6f2de1f471b2cd6587"
+    },
+    {
+      "path": "docs/research/classic-benchmarks-usage.md",
+      "bytes": 3251,
+      "sha256": "f7c94c0f77963365a59ccc6c472e69d0ca063ea387339dcdc1c332c82c169ce7"
+    },
+    {
+      "path": "docs/research/current-standards.json",
+      "bytes": 1209,
+      "sha256": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57"
+    },
+    {
+      "path": "docs/research/factor-admission/README.md",
+      "bytes": 9543,
+      "sha256": "4454923e3f614330a3a21252c7a0259ab250d78cfa87b9a92cf3973afc54ed1a"
+    },
+    {
+      "path": "docs/research/factor-admission/admission-form.template.json",
+      "bytes": 4396,
+      "sha256": "a2b9b0e97ba6b3979f7549d7a2899f86a7fd32c5ec6211f6400b691d902d7423"
+    },
+    {
+      "path": "docs/research/factor-admission/examples/2026-09-19-b1-admissions.md",
+      "bytes": 19989,
+      "sha256": "bdb868d43d3065a7595d0d3b13f93dcee5e2cc58229946436096744b42ecb9ff"
+    },
+    {
+      "path": "docs/research/factor-admission/examples/2026-09-19-b1-rejections.md",
+      "bytes": 2671,
+      "sha256": "3915c366075b00526489b88a42c04cf3a7291cb67db7746f48a242bf868e33ed"
+    },
+    {
+      "path": "docs/research/factor-admission/examples/2026-09-19-rejections.md",
+      "bytes": 3532,
+      "sha256": "27b22b475baab6f533bc6eebe62f6774f7ad44102fd8e12727ff7e380438921b"
+    },
+    {
+      "path": "docs/research/factor-admission/examples/2026-09-19-volume-anomaly-decay.md",
+      "bytes": 5849,
+      "sha256": "72e618a413de5ff33a06bc90d4f3e666659087358b14c00669142781332bfde4"
+    },
+    {
+      "path": "docs/research/factor-agent-access.md",
+      "bytes": 8174,
+      "sha256": "b2a615742c7429839e6eb6c303003ee59d9d3ec921c389c2f1ada3f0a3dc4657"
+    },
+    {
+      "path": "docs/research/factor-increment-evidence-standard.md",
+      "bytes": 7451,
+      "sha256": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871"
+    },
+    {
+      "path": "docs/research/lei-factor-research-mission.md",
+      "bytes": 8625,
+      "sha256": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/README.md",
+      "bytes": 8055,
+      "sha256": "b0e96351945bd9712a18fb1a36206e6ca0fed2980b7df58771099baff24bebcf"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/TEMPLATE-method-change-case.json",
+      "bytes": 1857,
+      "sha256": "7c1e6a598c7f77cc6b574269fd930e529d764ba2861bff6d44731a7c72c0318e"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-09-breadth-price50-reject.json",
+      "bytes": 2428,
+      "sha256": "441d2748676bb30ba949bc4f50fc75dcc0c15093896393fffb3d9a4cbb5cf4df"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-10-rdf-coverage-illusion.json",
+      "bytes": 2351,
+      "sha256": "14ba253de299859478d05935aac755654aa78387464d1dedfc95421bafa6479b"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-10-rdf-root-entry.json",
+      "bytes": 2297,
+      "sha256": "b4286e4bff13e4e1180befdd1d70f57a4b3012ce20205ee369a429afb2b4f296"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-10-roadmap-v01-revision.json",
+      "bytes": 2380,
+      "sha256": "a59841e573e70a1eb5f50d6dccc8a0ed16ed319d4373f61ce5cfb151b7920c3c"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-13-momentum-bad-actions.json",
+      "bytes": 2158,
+      "sha256": "92342612f0c1be54c97f36232f25b5036d67ca65e76191d2abdf2f3a63f550f4"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-13-momentum-protocol-binding.json",
+      "bytes": 2663,
+      "sha256": "4aec1921e5fa5cbd323dbd794b1e0bd2d9c00832fe1b45b45f16e17a270d16da"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-13-rdf-halt-consumption.json",
+      "bytes": 2621,
+      "sha256": "8eb924d728e50ac444ecc0a5998367421b73edf7550e90a4d69b7f04a58b4d30"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-13-rdf-listing-evidence.json",
+      "bytes": 2310,
+      "sha256": "69de546c01f34ad287c6e50a93febde04b1ed3b693b28b8e28c5cfb805580934"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-17-factor-method-reuse-pause.json",
+      "bytes": 2643,
+      "sha256": "00ce4fd6e22f9710f6f929eb7468214e1c973ef0ce6482ac24fa0a573833063f"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-19-s2s3-module-rename.json",
+      "bytes": 2323,
+      "sha256": "cb4264d114ee7e9f39d86320f29b709abdb7a60040d1b4a5471be30d5792737c"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/cases/rmc-2026-09-19-s3-target-block.json",
+      "bytes": 2577,
+      "sha256": "51c15e22c869448003b37634fd52171d0928e805598604380c8f3734926379dc"
+    },
+    {
+      "path": "docs/research/methods/research-method-cases/schema.json",
+      "bytes": 6981,
+      "sha256": "e5939820ba1a4118958a71ea410014346ede429545b66edeaa94b58c6b3be94a"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/records/2026-09-17T093041.338026_0000-2402a944.json",
+      "bytes": 6695,
+      "sha256": "8b9899ab1460c19de8a75a852c5698ad2fe66d7fba98493d9febe030c70443ee"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/records/2026-09-18T093154.244563_0000-4b390e73.json",
+      "bytes": 6695,
+      "sha256": "c40d857b468bd6d7d5327e06af512e5bbe9ae6af9b0ddd304acef95f98142920"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/records/2026-09-21T093046.224220_0000-dd59d079.json",
+      "bytes": 6695,
+      "sha256": "6815fc36f35e03bcf0195c1e1dbd78b79355db487dc56026eca8711903e09c2e"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/records/2026-09-22T093053.953544_0000-4fdc801d.json",
+      "bytes": 6695,
+      "sha256": "9211ca8ecf6df4ee5f2995ad6b6c0ddbb74a5ad51fc79fb60296da963bb07845"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/records/2026-09-23T093234.874891_0000-addd4e5b.json",
+      "bytes": 6695,
+      "sha256": "d783dbe64d3105c55b6e8e9b5dcd9e8ec9705585d23476ab179f5010b549b684"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/records/2026-09-24T093205.767253_0000-1b2fa431.json",
+      "bytes": 6695,
+      "sha256": "ca822ae712aa47d721fc997df074a14ea6511cfa059b088b1684b3cf0040a9db"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/records/2026-09-25T093117.935787_0000-a822bad4.json",
+      "bytes": 6695,
+      "sha256": "2ef8aa3ac51676d88cc0f48257bb1bdb9c63ac2b104adf08c56306726c27ce80"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/records/2026-09-28T093128.831018_0000-4ace9e4c.json",
+      "bytes": 6695,
+      "sha256": "850a26c13cb62e48ed3362ca576456222c5444ef3b41a33a0f4e77aef7fa4646"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/records/2026-09-29T093203.519380_0000-b80e16a6.json",
+      "bytes": 6695,
+      "sha256": "1b26dae18640d5d78b216c9698b6a65f4cd5bcb4a3e96bbcc4af488df9dffd1c"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/reviews/2026-09-17T093041.338026_0000-2402a944-review.json",
+      "bytes": 1948,
+      "sha256": "3b869660eb7642661f3fc285fe7161527fc3497f6ec4aaff870e7d014a6cbca5"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/reviews/2026-09-18T093154.244563_0000-4b390e73-review.json",
+      "bytes": 1741,
+      "sha256": "d79feb31d3bed239f58681c4169b4a1c0c2bc8b78740739f33a4b4b739d94c4b"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/reviews/2026-09-21T093046.224220_0000-dd59d079-review.json",
+      "bytes": 1896,
+      "sha256": "98e569e19381a48cbaca366118da90941b46efd3f3673c9965359b590bdca006"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/reviews/2026-09-22T093053.953544_0000-4fdc801d-review.json",
+      "bytes": 1585,
+      "sha256": "03aa17fec61c8099a3a4890b00b0555dd7690b6958b80cfb879f1594dc41a468"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/reviews/2026-09-23T093234.874891_0000-addd4e5b-review.json",
+      "bytes": 1496,
+      "sha256": "6e2713e151b6fe21abdad032e0de8d42c270d31aebe9d4817c70cf42a2e29c9f"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/reviews/2026-09-24T093205.767253_0000-1b2fa431-review.json",
+      "bytes": 1490,
+      "sha256": "9688dcf434d6a67df179ffa5390cab4c629c16402a9f507807315381ff030e79"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/reviews/2026-09-25T093117.935787_0000-a822bad4-review.json",
+      "bytes": 1480,
+      "sha256": "17e3a7af88629485d570aaa404fdb0f5e503ea2903070578573413f552cc1304"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/reviews/2026-09-28T093128.831018_0000-4ace9e4c-review.json",
+      "bytes": 1541,
+      "sha256": "3e89555fef15edd111d658db821795a29cd16332b96c715dab580b8e04b6eb18"
+    },
+    {
+      "path": "docs/research/observations/breadth-v1/reviews/2026-09-29T093203.519380_0000-b80e16a6-review.json",
+      "bytes": 1543,
+      "sha256": "0a9b01a4b070386ff4eab03b0ac396875b6c5866e906a3088e1f033264b13203"
+    },
+    {
+      "path": "docs/research/proposals/a01-universe-expansion-2026-09-29/attempt-matrix.json",
+      "bytes": 29236,
+      "sha256": "f5609445f021d9d3b635eb21ffccccfdcbae01e8849cb21c3a458fb6c1f43110"
+    },
+    {
+      "path": "docs/research/proposals/a01-universe-expansion-2026-09-29/contract.md",
+      "bytes": 17833,
+      "sha256": "ebddd8623a4237e652f4b3ad8693f72877a3d2827327efca50c5c87cdd7d55b1"
+    },
+    {
+      "path": "docs/research/proposals/a01-universe-expansion-2026-09-29/data-acquisition-plan.md",
+      "bytes": 7265,
+      "sha256": "9b6dfab5f338cff944751ee62daaf96d477cd7db65c2bf169f2004964d1023c2"
+    },
+    {
+      "path": "docs/research/proposals/a01-universe-expansion-2026-09-29/definition-binding.json",
+      "bytes": 674,
+      "sha256": "0dbf1bdc59cde98362d525303b79ba757e8ee97e861160d9cb97999bbf41f594"
+    },
+    {
+      "path": "docs/research/proposals/a01-universe-expansion-2026-09-29/manifest.json",
+      "bytes": 2558,
+      "sha256": "44514f5f16aac63c2e3683ef89324c3633f7493ae4613bf2f5db911a205908fb"
+    },
+    {
+      "path": "docs/research/proposals/a01-universe-expansion-2026-09-29/qualification-review-state-v1.1.json",
+      "bytes": 3504,
+      "sha256": "5ab83c88843df49d24aea93069b4ca374256e638b4910a0caf1d7db3fa0cc605"
+    },
+    {
+      "path": "docs/research/proposals/a01-universe-expansion-2026-09-29/qualification-state.json",
+      "bytes": 1237,
+      "sha256": "29fb184fdf9a86629da71378da487e07bf703c8dd616f4712a09690d37d0b7e8"
+    },
+    {
+      "path": "docs/research/proposals/a01-universe-expansion-2026-09-29/review-amendment-v1.1.md",
+      "bytes": 3195,
+      "sha256": "5901dc69c8ca45498d4774388164b86a7192a1e0c5b803272c253b8867fdb4f7"
+    },
+    {
+      "path": "docs/research/proposals/a01-universe-expansion-2026-09-29/review-binding-v1.1.json",
+      "bytes": 2054,
+      "sha256": "8de91ba156c7caa9499f045a2f242c46e5ca762825605b24079b7135b4816192"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/README.md",
+      "bytes": 2848,
+      "sha256": "970e4d78548a358582a8f671656441f0d4318237bbbeecb2c0b3e10bd8b2275f"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/checks.log",
+      "bytes": 4328,
+      "sha256": "aff94ec29cd7d649540707bb607b972b58aea6f6a97c4d2653b544f07542d3f5"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/archive-pre-repair-2026-09-18/README.md",
+      "bytes": 787,
+      "sha256": "9322fdb1bf308e33b64fe670905a1d13ff9d004cffcfe3fa865d41bde00585ef"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/archive-pre-repair-2026-09-18/review.md",
+      "bytes": 14983,
+      "sha256": "e9a8ed529fc7cecaa784fe39a8f2f1b1c1c5aedd6220094871f210b41620cd1c"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/archive-pre-repair-2026-09-18/test_independent_checks.py",
+      "bytes": 21776,
+      "sha256": "ed8c7e0176d3984573b72c7a958418dc7241f9c4b29a217b5fb515a42dde9dfa"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/run-01-pytest.log",
+      "bytes": 99,
+      "sha256": "9b05698d19b4a03d5b7f7abf86fe2e03c89fccfed736df1a11567706c4bb0df8"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/run-02-repair-pytest.log",
+      "bytes": 9573,
+      "sha256": "50be1df0515a2f778079378a91aa45cf64bc3038af627be63b0a82899c9d7d8f"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/run-03-repair-pytest.log",
+      "bytes": 99,
+      "sha256": "7ff4f40e6147f4a18543eef8e22e5e5d1d661b7abbd83c54b37b3376ecb24daf"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_independent_checks.py",
+      "bytes": 21776,
+      "sha256": "ed8c7e0176d3984573b72c7a958418dc7241f9c4b29a217b5fb515a42dde9dfa"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_protocol_identity_checks.py",
+      "bytes": 7682,
+      "sha256": "4d28c957e929878437e3eb21cc7e1096c2018e24b2d6a3b742ceb4a02cbe96ca"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py",
+      "bytes": 11230,
+      "sha256": "e6307caf12af06b3cac757a5be4f4a16b1210038ebf19bfc8fbd93f7c4928a70"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/handoff.md",
+      "bytes": 5121,
+      "sha256": "92c9f67b48ce92f2aaa2d3eca54bd6dfa4ac2aca8865ffb6558bc16af8b3661a"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/review.md",
+      "bytes": 19002,
+      "sha256": "0b37b636e0be50d98a7c3fb2a8e7daae44d540861f6e800ce6e8aea9ada667a9"
+    },
+    {
+      "path": "docs/research/proposals/breadth-preflight-ark-2026-09-17/source-manifest.json",
+      "bytes": 7731,
+      "sha256": "14a80d0ffc9160e7eb0535aa0284ea0fea2f09a717e1871be5a1d710ea8a7ed1"
+    },
+    {
+      "path": "docs/research/proposals/data-staleness-fix-2026-09-20/a-final.json",
+      "bytes": 1975,
+      "sha256": "c0f4e4020a9eafec249719fb95b743b1c8b6377160e514d2aa7832a85d167dde"
+    },
+    {
+      "path": "docs/research/proposals/data-staleness-fix-2026-09-20/a-review.json",
+      "bytes": 1438,
+      "sha256": "1ae2353bcff2322a88070837e64d642850f031477a291a1a1d130969ffbde40d"
+    },
+    {
+      "path": "docs/research/proposals/data-staleness-fix-2026-09-20/brief.md",
+      "bytes": 3299,
+      "sha256": "ce0c8e51bb66ab9ec3432627dc9e80d9e959f39f6095e80a5cf89aec45bd71d9"
+    },
+    {
+      "path": "docs/research/proposals/data-staleness-fix-2026-09-20/contract.json",
+      "bytes": 2886,
+      "sha256": "571eebe9eb5690f0bcb0d0288784f4826b3b42065c984d72904b0c34e6253305"
+    },
+    {
+      "path": "docs/research/proposals/data-staleness-fix-2026-09-20/routing-reason.md",
+      "bytes": 384,
+      "sha256": "2e94e204a09a639e86d9a0600546c55fd63ea34acbfb9bd6205e7e8808b725cc"
+    },
+    {
+      "path": "docs/research/proposals/etf-data-audit-2026-09-19/README.md",
+      "bytes": 1727,
+      "sha256": "8b0bc4dabc0c8e39d48280c720197d18d9b63977bece46b7ca93c43db569c75a"
+    },
+    {
+      "path": "docs/research/proposals/etf-data-audit-2026-09-19/audit-final.json",
+      "bytes": 1583,
+      "sha256": "bcd339f7c4570dc2de1f49f5799710faa48354234cf31eaf966643f91cd5b4a2"
+    },
+    {
+      "path": "docs/research/proposals/etf-data-audit-2026-09-19/audit-review.json",
+      "bytes": 1071,
+      "sha256": "223900d61f20b526bceaba60e9f40ac003d67f51f128fdb375c632581311cd07"
+    },
+    {
+      "path": "docs/research/proposals/etf-data-audit-2026-09-19/brief.md",
+      "bytes": 3961,
+      "sha256": "5fc0ba7fc3642a7789b74d1ef374b5d2166f33da676e5865f3cc598195c13b44"
+    },
+    {
+      "path": "docs/research/proposals/etf-data-audit-2026-09-19/contract.json",
+      "bytes": 3051,
+      "sha256": "5ac509719510e11c93256527bc68d15b3b8e7608947548698dde9043409bb5b8"
+    },
+    {
+      "path": "docs/research/proposals/etf-data-audit-2026-09-19/round4-ab-arrangement.txt",
+      "bytes": 4886,
+      "sha256": "2a232bdf3659b5fa630cbd1a812d0624bd683e7c71939815bcaabbbc14f08c01"
+    },
+    {
+      "path": "docs/research/proposals/etf-data-audit-2026-09-19/routing-reason.md",
+      "bytes": 421,
+      "sha256": "6b60a4576619e2ade143a7918dce088f7bb105eb7a19dedc820fd13924adff46"
+    },
+    {
+      "path": "docs/research/proposals/etf-source-verify-2026-09-20/b-final.json",
+      "bytes": 1755,
+      "sha256": "0218014785467c9f04174886fc84bc57d206e4615b0f5541a1cc063a1618ffa4"
+    },
+    {
+      "path": "docs/research/proposals/etf-source-verify-2026-09-20/b-review-2.json",
+      "bytes": 1196,
+      "sha256": "fbdb33f4fe5288b750a7f8157e6c94b098105a4c6bb818e73e8a6743fd2e00f0"
+    },
+    {
+      "path": "docs/research/proposals/etf-source-verify-2026-09-20/brief.md",
+      "bytes": 3198,
+      "sha256": "f25fae64420ea20892cfd4418d7865628848bc3cd38ac8b0a225fe22b2a6c7df"
+    },
+    {
+      "path": "docs/research/proposals/etf-source-verify-2026-09-20/contract.json",
+      "bytes": 2582,
+      "sha256": "902dd18bcfd894d60730d127fa0fbab5dab603f195a5dbb9a82c1471c2c4215f"
+    },
+    {
+      "path": "docs/research/proposals/etf-source-verify-2026-09-20/routing-reason.md",
+      "bytes": 419,
+      "sha256": "ff357b0b23028a8d10b59034331068277389bb071670d75e980644ecb3c4a8b8"
+    },
+    {
+      "path": "docs/research/proposals/factor-breadth-road-context-2026-09-24/method-note.md",
+      "bytes": 2260,
+      "sha256": "dd7f4dbe3202d4f75ccdb3aa98ba7fa247b8615cbd351cee0c7394034b329945"
+    },
+    {
+      "path": "docs/research/proposals/factor-breadth-road-context-2026-09-24/protocol-draft.json",
+      "bytes": 20230,
+      "sha256": "7ac108394571a1abadf5f939cc3cc91b49a510b82fccd19d1d92908bbf5f65ed"
+    },
+    {
+      "path": "docs/research/proposals/factor-candidate-exploration-2026-09-22/candidate-definitions.md",
+      "bytes": 10124,
+      "sha256": "c6ddc7b99032ac168c3199c765f45f856c152b2a680de3deb34f92d8a893a54d"
+    },
+    {
+      "path": "docs/research/proposals/factor-candidate-exploration-2026-09-22/high52-comparison-preflight.md",
+      "bytes": 9854,
+      "sha256": "5d3784768c49fb7a2dd01a59fe0e2f6b69c5f652a7d1ade834761a48cdbfb9f9"
+    },
+    {
+      "path": "docs/research/proposals/factor-candidate-exploration-2026-09-22/sources-and-methods.md",
+      "bytes": 5087,
+      "sha256": "6ce67b3db46fdf2933006d37c3dac71b3ef34811b6b043eb7dbfc1941d304eb1"
+    },
+    {
+      "path": "docs/research/proposals/factor-lib-selfevolution-2026-09-19/factor-library-build-contract.md",
+      "bytes": 7181,
+      "sha256": "164f999c2d31ec777600252b28ef23f7dfa2647916a1567d0b0aede80d971d58"
+    },
+    {
+      "path": "docs/research/proposals/factor-lib-selfevolution-2026-09-19/gpt-exchange-log.md",
+      "bytes": 2525,
+      "sha256": "7026501c3ab3e29786877f1a314c0401fc9cb877db4bf4db6b57fda48d6a214a"
+    },
+    {
+      "path": "docs/research/proposals/factor-lib-selfevolution-2026-09-19/self-evolution-restricted-contract.md",
+      "bytes": 3765,
+      "sha256": "0f2711c195ea0a7b832a5c9117a003b2bf5abfa08ee2bd70b27abb8b568f0c54"
+    },
+    {
+      "path": "docs/research/proposals/factor-ma-baselines-2026-09-24/inputs/readiness.json",
+      "bytes": 5704,
+      "sha256": "c662d8d70a95cc06593676e22e5fb971d0027b192a1ce07b08a8ac74aa63b02d"
+    },
+    {
+      "path": "docs/research/proposals/factor-ma-baselines-2026-09-24/inputs/reuse-map.md",
+      "bytes": 7762,
+      "sha256": "38b0b61e36a1585ee434f29ac14e97320ab6c8882ae37456c850cb564aca4ad8"
+    },
+    {
+      "path": "docs/research/proposals/factor-ma-baselines-2026-09-24/inputs/source-manifest.json",
+      "bytes": 7386,
+      "sha256": "a8b4eb1952b316c6229a6f125f6d5621c19d725d9c2c3ad0c11d4a5ac78f7d98"
+    },
+    {
+      "path": "docs/research/proposals/factor-ma-baselines-2026-09-24/inventory/attempts.json",
+      "bytes": 11230,
+      "sha256": "369934ce4097c6dc3d63de0b7c3df015f7c99fa43001845298e42eef9eb22762"
+    },
+    {
+      "path": "docs/research/proposals/factor-ma-baselines-2026-09-24/inventory/results-schema.json",
+      "bytes": 8632,
+      "sha256": "811dcecd528116e5275505c44ad5ef16a3cd4dbac8560cad8e760feb3328993c"
+    },
+    {
+      "path": "docs/research/proposals/factor-ma-baselines-2026-09-24/inventory/summary.md",
+      "bytes": 5763,
+      "sha256": "d743c2886262f6e19b59ea1626d7f8dfbe14033610aaf93df424eb60f9932ea4"
+    },
+    {
+      "path": "docs/research/proposals/factor-ma-baselines-2026-09-24/method/baseline-card.md",
+      "bytes": 8423,
+      "sha256": "4895c7f9dcf4663786b6d503d3f159e92ef7efa28279a032415c2789440b9e06"
+    },
+    {
+      "path": "docs/research/proposals/factor-ma-baselines-2026-09-24/method/decision-rules.json",
+      "bytes": 7870,
+      "sha256": "0795d2d7eed013fd87d66736e70ca45a7233e5c028f925b4bcd74eb818083237"
+    },
+    {
+      "path": "docs/research/proposals/factor-ma-baselines-2026-09-24/method/protocol.json",
+      "bytes": 30987,
+      "sha256": "a0503f18c8224020615eff5a51967cc72c0b2770d591229d79575971538ee383"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/history-v3/README.md",
+      "bytes": 4397,
+      "sha256": "ec3dfa8a795e5a7494464b783cd3bd6939e7037d98fceeeb83b3206d77b13f41"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/history-v3/capability-reuse.csv",
+      "bytes": 9589,
+      "sha256": "7c9bfeb5abbffc59c6e061346760bc1915306ffc6f6444221f1f40e50e2324bc"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/history-v3/factor-definition-crosswalk.md",
+      "bytes": 6292,
+      "sha256": "e52d9302360166872bedce5aa665f346e24d7e1212bd6e345be92119628be4a5"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/history-v3/method-cards.md",
+      "bytes": 8287,
+      "sha256": "6ae731bdfa645ea4263a15efc669e7f2db1bad7f01dea880ed7f22577a6be2fc"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/history-v3/next-pilot-proposal.md",
+      "bytes": 8648,
+      "sha256": "295490905af82e8bbff9837e46f9a4cc39ee34c7ffddc56a953a594e33332f73"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/history-v3/revision-response.md",
+      "bytes": 11325,
+      "sha256": "31e0fe6092d318e5e7fa54842f7818559df1e6ed6487e92e11834159037ad7b1"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/history-v3/sources-and-checks.json",
+      "bytes": 8145,
+      "sha256": "e0dcb3a27a6ce46e2c49149e769f4945c910615022e6e203c21663d2a2005424"
+    },
+    {
+      "path": "docs/research/proposals/factor-next-phase-4dir-2026-09-19/README.md",
+      "bytes": 1824,
+      "sha256": "aa040bbd32640c682f2e8ac10cf243366bf5990b46f84c8679b0f48e32ffd463"
+    },
+    {
+      "path": "docs/research/proposals/factor-next-phase-4dir-2026-09-19/a3-historical-availability-contract.md",
+      "bytes": 5514,
+      "sha256": "60934f8c1073c2056079453e222457bdfa14b4e2fc26a1407cc55dd6d417c88c"
+    },
+    {
+      "path": "docs/research/proposals/factor-next-phase-4dir-2026-09-19/b4-price-basis-recovery-contract.md",
+      "bytes": 7268,
+      "sha256": "8b089df2842ba8b735a9b5218c888b347162e21a48105d00319c8359e40912b7"
+    },
+    {
+      "path": "docs/research/proposals/factor-next-phase-4dir-2026-09-19/factor-coverage-contract.md",
+      "bytes": 1118,
+      "sha256": "f9f650cf5cef6cb0298c7503881ea0053af70c3212e783b3b579b693cad941e8"
+    },
+    {
+      "path": "docs/research/proposals/factor-next-phase-4dir-2026-09-19/p1-decision-package.md",
+      "bytes": 16330,
+      "sha256": "49e12448402ad610c0ae6826cc5fb70810495090e883b453ac0b40e3255bfae4"
+    },
+    {
+      "path": "docs/research/proposals/factor-next-phase-4dir-2026-09-19/p1-direction-decision-package-contract.md",
+      "bytes": 1054,
+      "sha256": "bbbdb5ec6c0942e5099340b05764f66c402538c944a03795aaccd841eb69e0f8"
+    },
+    {
+      "path": "docs/research/proposals/factor-next-phase-4dir-2026-09-19/qualification-path-contract.md",
+      "bytes": 2160,
+      "sha256": "edc7317a7bbac75be1d55aab1767d70f0106190edfc176fb1efc56ebdc60b39c"
+    },
+    {
+      "path": "docs/research/proposals/factor-next-phase-4dir-2026-09-19/self-evolution-m2-contract.md",
+      "bytes": 1315,
+      "sha256": "92ba1d4819eb42c96ad8d892dbb486eef7fd66fec676a1d6a3fbc94dfef5e85a"
+    },
+    {
+      "path": "docs/research/proposals/factor-upstream-alignment-2026-09-18/alignment-map.md",
+      "bytes": 30782,
+      "sha256": "f78daebd4277f180fc30f5638ef84deda6021f91cfbc0f76646426f879ac73a7"
+    },
+    {
+      "path": "docs/research/proposals/factor-upstream-alignment-2026-09-18/next-stage-execution-contract.md",
+      "bytes": 17747,
+      "sha256": "5a94c0b20ef3aac2a7055e86e247429080408959f55f6045092b45d094fd4d54"
+    },
+    {
+      "path": "docs/research/proposals/factor-upstream-alignment-2026-09-18/p1-direction-decision.md",
+      "bytes": 4084,
+      "sha256": "5abb11dd941ad1c5fe3e642c394358ee8a758404a62441b5c6bd898db355e368"
+    },
+    {
+      "path": "docs/research/proposals/factor-upstream-alignment-2026-09-18/sources/LeiSignal-direction-2026-09-18-v1.1.md",
+      "bytes": 40994,
+      "sha256": "b3c24fda9ce5093b0118ff5f72e770d97a6275cb61189d83994f8413df217ddc"
+    },
+    {
+      "path": "docs/research/proposals/factor-upstream-alignment-2026-09-18/sources/LeiSignal-factor-roadmap-and-direction-metrics-v1.1-2026-09-18.md",
+      "bytes": 58770,
+      "sha256": "039761bccc60c2f25c89a4d99dcc9afaaee7a4c51392d8a150793766763c0dd8"
+    },
+    {
+      "path": "docs/research/proposals/factor-upstream-alignment-2026-09-18/sources/manifest.json",
+      "bytes": 1321,
+      "sha256": "6c96fe7df91a21c1c1602076a5a99135429fce24d3a784f007fdd297b2b19633"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/FROZEN-PLAN.md",
+      "bytes": 6082,
+      "sha256": "98e69550ac6e70e4a70fb6147e2bbe96d10de76a4739c1daa8c1c4c6542b02fe"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/README.md",
+      "bytes": 7896,
+      "sha256": "ede81011230ec77cae0acaa931275882cda48f7c3169c2785479306eba71f68a"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/round1_reply.txt",
+      "bytes": 7591,
+      "sha256": "39e20f8026401ff19af6400aadf08fad4723239458711177a997d84b2319b201"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/round2.txt",
+      "bytes": 3322,
+      "sha256": "0858955c2355379b2d57f190f4dc760659d794ca66a57b138975766a22f8ee25"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/round2_reply.txt",
+      "bytes": 4517,
+      "sha256": "2ba604a1441948db60ec0cecf1062732f714dc2ea7dbd6907e1f93ae75389dd3"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/round2b.txt",
+      "bytes": 2382,
+      "sha256": "46dc70ceb3f4d54f7982398beb3db7c60cf8542a4388dd89980d2bac4aa8d21a"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/round3-future-directions.txt",
+      "bytes": 4927,
+      "sha256": "bbad498a1b06a36a6d5e29056a8855eda61b2fcaec2f4dc3d0094f3609ea6933"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-ack-request.txt",
+      "bytes": 2283,
+      "sha256": "f85a3ccf48a8440d62c9a212d8e0ec2b25bb8d0884fc7820cbafa382a8f27eae"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-brief.md",
+      "bytes": 3616,
+      "sha256": "062be84f05853d21f0f80b303b4e3a679c0b8770bf198676703399f5222a512d"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-contract.json",
+      "bytes": 3417,
+      "sha256": "781636ea7566516781bcd45a53eacf13dff2342a2e756e036c89057943f9ed04"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-controller-review-1.json",
+      "bytes": 1917,
+      "sha256": "f2e90220b29d5701e7665c12dda278089d044dc9e99ea2883c19a026862d234d"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-final-report.json",
+      "bytes": 2308,
+      "sha256": "c45c0ba0224145e28acb56c4b19acece0e872c613227df2e3e5571f9f3e8f40b"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-gpt-ack.txt",
+      "bytes": 18,
+      "sha256": "227bc396dcb93bd3e42305a36ac69a768e6f79da3b75e36c71dafd61646a0035"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-gpt-final-review.txt",
+      "bytes": 4701,
+      "sha256": "e353b70c03aac604977811d5c55ed4e26b815face184818f476a920572ff1dd4"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-repair-feedback.md",
+      "bytes": 1280,
+      "sha256": "96b16e1a51841c4968b69aa7ef1b2d8309629b6b140ebc1d9458dd22ac7e54d1"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-review-2.json",
+      "bytes": 1185,
+      "sha256": "406eb3ab29c55acfea178992093d3638e1fc5ebefc7a8509fdaa96d7dde230c0"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-routing-reason.md",
+      "bytes": 967,
+      "sha256": "ebaab512906a9e6cb4e7a9f272f052b4a8e413bf98a35649ef9b9f5008d7c48d"
+    },
+    {
+      "path": "docs/research/proposals/pretrade-watchlist-2026-09-19/stage1-source-mapping.md",
+      "bytes": 3042,
+      "sha256": "95486caf8728e417169995f7933df03c7737a5f7a2e16181aba6d77d858fc196"
+    },
+    {
+      "path": "docs/research/qualification-path/action-time-chain-framework.md",
+      "bytes": 5590,
+      "sha256": "1b7e07df2b3ab07ca03aa57b4f0845ad2397a7412020a491973db465d2d07cea"
+    },
+    {
+      "path": "docs/research/qualification-path/available-at-evidence.schema.json",
+      "bytes": 6712,
+      "sha256": "b04c01146bb4a7362207b6b09cc2f9a3b3ec02d4e4c4e6c1cf9d11c04828a0cf"
+    },
+    {
+      "path": "docs/research/qualification-path/evidence-model.md",
+      "bytes": 5540,
+      "sha256": "a2cf8c6d48038c1b2dbc17fb060fbbc773263f7f4dafe4174189b2115e7753e3"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/01-preregistration.md",
+      "bytes": 5451,
+      "sha256": "a08cbabb58acc6c9250c802b6ec2a31179da58df65febc7a9a23e4d48b3b82fd"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/02-access-log.md",
+      "bytes": 7214,
+      "sha256": "552fab2761014319bf8e152be5081f35281b4ddb4a40233a87a3d4d5a7ee0215"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/03-evidence-matrix.md",
+      "bytes": 3365,
+      "sha256": "821c24343ac551347f80c440cf0b0fbc52c5a373c18b2555602ef407cf0a8059"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/04-report.md",
+      "bytes": 6596,
+      "sha256": "ca4a1d56983b8e078a28887e7f04ea760b590ab4f0c97a4dcd21c7e09ab54cbd"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/SELF_CHECK.md",
+      "bytes": 1491,
+      "sha256": "4c917b0958996233f6db29c9c6cdebfaab8e678c0ad29367ee7181a96e585487"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/audit/a3_audit.py",
+      "bytes": 6314,
+      "sha256": "03f8cbeb7aec924350dbbfa4beec1e92fee5966e8162bbeafbdfc9e311fd9335"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/audit/run-output.txt",
+      "bytes": 653,
+      "sha256": "f0f306459b1808e23253e6523bf798bc3d17c545d2925d8030f7c551e39db746"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/cost-record.md",
+      "bytes": 787,
+      "sha256": "55523f161a5de462ba6cf2f37152ab4da2a38064e98b6dac3f701e836344ed75"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/evidence/channel1-fundpage.md",
+      "bytes": 1124,
+      "sha256": "81e933223b5dff1b65aa8a4f2d145c2c33eee4c194720410f578870acbcdab41"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/evidence/channel1-page-probes.md",
+      "bytes": 844,
+      "sha256": "dc4ba4bd47bb6cd1fe7e663b86998e6fbbc308e0d07acd008de09bdb6a8410f1"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/evidence/channel1-page417.md",
+      "bytes": 1613,
+      "sha256": "9af2c65c22b20d2ca5f97ed0f9fd8e720ad0830d962b586593e8eb444e30dfa0"
+    },
+    {
+      "path": "docs/research/qualification-path/historical-availability-feasibility-2026-09-20/evidence/channel1-sitemap.md",
+      "bytes": 831,
+      "sha256": "18d210e6079ce6a5bd9ca8fa951bc2b63caf9fa50b3e1b7693ea2a83310b732b"
+    },
+    {
+      "path": "docs/research/qualification-path/normalized-actions-inventory-2026-09-19.json",
+      "bytes": 21635,
+      "sha256": "0e12677673672b7ff9b5cd5a018dfa31e4c282dc8585c10750049925e5422d54"
+    },
+    {
+      "path": "docs/research/qualification-path/time-field-semantics.md",
+      "bytes": 4265,
+      "sha256": "83901f6ee8f2bde44aa751dd05387b4d65ed5a436f8b09add66ef85ebe64b153"
+    },
+    {
+      "path": "docs/research/research-question-method-standard.md",
+      "bytes": 19221,
+      "sha256": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16"
+    },
+    {
+      "path": "docs/research/research-workflow-usage.md",
+      "bytes": 7788,
+      "sha256": "3d4479fc93d1f8882f988c03129a7683b1ba2b6ba4da69707664c1ddf667364c"
+    },
+    {
+      "path": "docs/research/sentiment-factor-library/README.md",
+      "bytes": 12301,
+      "sha256": "4fe18c249da8ac122ac6ffe49eee55cd669e3337b97988e01a4b5f5a5234f656"
+    },
+    {
+      "path": "docs/research/sentiment-factor-library/factor-report.md",
+      "bytes": 3042,
+      "sha256": "9e7e0dd5d836fedbc2503eaaabbfc11ccf1d99b3f3700a4dce4642637f9b0f92"
+    },
+    {
+      "path": "docs/research/sentiment-factor-library/registry.json",
+      "bytes": 20626,
+      "sha256": "e8edad87996b6d001edd672823512162f34b57dcb0a35aa4f245697764caa897"
+    },
+    {
+      "path": "docs/research/sentiment-factor-library/research-cards.md",
+      "bytes": 25103,
+      "sha256": "bd44d70d867c6d664c8aba7313b45c781fade7c53d357d4229fc9ead5fbd52f1"
+    },
+    {
+      "path": "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+      "bytes": 65786,
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+      "bytes": 36427,
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    },
+    {
+      "path": "docs/research/strategy-source-snapshots/2026-09-30/README.md",
+      "bytes": 740,
+      "sha256": "01d11675a4979fd73e5c38ab01090542abd212d90d766328f78dc06ea8faee02"
+    },
+    {
+      "path": "docs/research/strategy-source-snapshots/2026-09-30/manifest.json",
+      "bytes": 968,
+      "sha256": "d3a4ba5aa1ed1bda0b97fd01ce106b038ca6817f0978c7b78ed27ce7db579497"
+    },
+    {
+      "path": "scripts/archive/sqlite_backup_restore_drill.py",
+      "bytes": 7664,
+      "sha256": "73c7c349e1638a71b188288370765ff1f51103d6c85266cb86a3aeeeb8aa85ba"
+    },
+    {
+      "path": "src/lei_signal/api/ask_timing.py",
+      "bytes": 2261,
+      "sha256": "e837622f8b910f9f8517c8a0ff4f83a10583a052517cc9d091e0cca8b173de2d"
+    },
+    {
+      "path": "src/lei_signal/api/fwd_ledger.py",
+      "bytes": 6729,
+      "sha256": "24e624c4249887a3ebeb2c6017be15e6dc92b6bffad4e0e4ea2befcb94906298"
+    },
+    {
+      "path": "src/lei_signal/api/routes/fwd_ledger.py",
+      "bytes": 1699,
+      "sha256": "da8ed187acc918799b397252bd2dd3b10ef3d2ec871a16217519747b47cb5d91"
+    },
+    {
+      "path": "src/lei_signal/copilot/context_scope.py",
+      "bytes": 2302,
+      "sha256": "d42997aca6e6b31f4f1eb67cf419c3a16388e74e4502427934f1e0ebdc3bcd2a"
+    },
+    {
+      "path": "src/lei_signal/copilot/factor_readonly.py",
+      "bytes": 29237,
+      "sha256": "6bfb1fef57957f781598a55d2f12144efe4f78f58d2e4bf92524c6fd978fa22e"
+    },
+    {
+      "path": "src/lei_signal/copilot/mindset.py",
+      "bytes": 4228,
+      "sha256": "4b6d5e2e29d86588e77ace46a824007110bb78ce5f6995fba3927f58d9b56e6a"
+    },
+    {
+      "path": "src/lei_signal/data/bar_completeness.py",
+      "bytes": 7081,
+      "sha256": "04810a2c69b282ea294e6fafa7d53e8898fbe5b19bdd12e0c8092f574ededefc"
+    },
+    {
+      "path": "src/lei_signal/fundamentals/observation_meta.py",
+      "bytes": 3479,
+      "sha256": "ae9b56f448acd66aa761bfeecfe5c7d66df39a497e64967b591f35148d591340"
+    },
+    {
+      "path": "src/lei_signal/fundamentals/observations.py",
+      "bytes": 13532,
+      "sha256": "89e3be737fb35c2477062c6eb715874198870d3758b2de48e59fc04b7211e084"
+    },
+    {
+      "path": "src/lei_signal/jobledger/__init__.py",
+      "bytes": 605,
+      "sha256": "8bbf81d7469505b4ef6f8778b820aac34078c633ea4d2318c50b5217387cabc2"
+    },
+    {
+      "path": "src/lei_signal/jobledger/ledger.py",
+      "bytes": 5394,
+      "sha256": "75467876cf6dc19d58fe8332dbb887a8af37771bb3baf62a25ae4c8b5e146a3e"
+    },
+    {
+      "path": "src/lei_signal/jobledger/wrap.py",
+      "bytes": 9906,
+      "sha256": "3f14d55f3f8b6c41b3902d245464e6448cb7abdfe855465b3341535631bc5c83"
+    },
+    {
+      "path": "src/lei_signal/research/a01_index_features.py",
+      "bytes": 14506,
+      "sha256": "387dbd556124b13a7acc5676006bb6c58436f159553c52d208d6d69c653f6177"
+    },
+    {
+      "path": "src/lei_signal/research/a03_pullback_order.py",
+      "bytes": 12047,
+      "sha256": "251805ee0af6079d8f952c2149d7e6cd2b6dc69f2ddf672247e7d2fd25943585"
+    },
+    {
+      "path": "src/lei_signal/research/candidate_preflight.py",
+      "bytes": 10132,
+      "sha256": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df"
+    },
+    {
+      "path": "src/lei_signal/research/factor_access.py",
+      "bytes": 31855,
+      "sha256": "2cd6e1def41010dca5e6401fcc637c014ab441e873eb74f589cf6222ec20f31b"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/b3a_factors.py",
+      "bytes": 11739,
+      "sha256": "418e8a335c973707bdc2de6e421fa9e764c1712eb96f6dc72e63a5d969981877"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/b3a_registered.py",
+      "bytes": 5149,
+      "sha256": "ff624a6e6f70d14cc410110db097d637de39dfb07d51053b1c61869246d31b5c"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/b3a_registered_v2.py",
+      "bytes": 4172,
+      "sha256": "bc0b25d9968bf8484085ec019e62b0352afe8380feb281f9bbebeb026bfd049c"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/b3b_ma_cluster_width.py",
+      "bytes": 2110,
+      "sha256": "5729017a16dd43824dc8a5a38446be71f61cb9bbda2dfc2aee4494a4b004d5ab"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/b3b_swing_rr_distance.py",
+      "bytes": 3433,
+      "sha256": "2f48f51a4461e07864dec4d437a064d469283adde09be5261822b7167ec5f899"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/benchmark_pilot.py",
+      "bytes": 23646,
+      "sha256": "20709406a69e4657035a9a263bd736616abe104525c6f256cdad2302f7e06c66"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/benchmarks.py",
+      "bytes": 10177,
+      "sha256": "6a958bc94a605e52540fcda8b28b5781528ec1b61255ee747db17ad7b9313618"
+    },
+    {
+      "path": "src/lei_signal/research/ma_cluster_information.py",
+      "bytes": 6086,
+      "sha256": "b3d14ed03b569e13bc199624deea5f3a0b00c89ed2be6f23839f546938921594"
+    },
+    {
+      "path": "src/lei_signal/research/provider_index_input.py",
+      "bytes": 10336,
+      "sha256": "5230882c5c45e48da4db590cb8950db9d37dd7c75d2498cc8ff828bf7cdc9006"
+    },
+    {
+      "path": "src/lei_signal/research/question_contract.py",
+      "bytes": 32525,
+      "sha256": "37e644880e3f609043e58f5e2e9bb8f3ade2475e721df27add4a636397ebdca8"
+    },
+    {
+      "path": "src/lei_signal/research/space_prior_target.py",
+      "bytes": 10607,
+      "sha256": "daebb885b6cc8a6d978c7b4075995c52bc6239c4fbd11fb07e3c1104c6fb20ef"
+    },
+    {
+      "path": "src/lei_signal/research/volume_information.py",
+      "bytes": 15244,
+      "sha256": "e794f2fe131ff1e9e0fe49560dfbe463ce0d2244af0663b7769b02779d2d2570"
+    },
+    {
+      "path": "src/lei_signal/research/workflow.py",
+      "bytes": 68509,
+      "sha256": "0cd95412c8a86212e0137f625c26bfa38929c22b8c6dac644ace7351711d1e4a"
+    },
+    {
+      "path": "src/lei_signal/research/workflow_descriptions.py",
+      "bytes": 6086,
+      "sha256": "4d2ae1f63729efb897c7804008b7b47fbe17f78fcb654336574fd32c08d6fe11"
+    },
+    {
+      "path": "src/lei_signal/research/workflow_evaluation.py",
+      "bytes": 28133,
+      "sha256": "f02f2447e3b5724f1f2f90e4942cdc26c0a3a9a32e5beef7b6b28843f70474c4"
+    },
+    {
+      "path": "src/lei_signal/research/workflow_inputs.py",
+      "bytes": 16915,
+      "sha256": "8eb1e24559702fd7183e76b270b9dc66ef40eac131a326c5e8df6da8d9a1ba4e"
+    },
+    {
+      "path": "src/lei_signal/storage/write_tx.py",
+      "bytes": 15857,
+      "sha256": "55ae4fa4069e65ce3c001db9ec106d47904bc8d180b35008b56fb4c10253ffae"
+    },
+    {
+      "path": "tests/fixtures/agent_semantics/atr_intents.json",
+      "bytes": 1190,
+      "sha256": "57aa6e417202edfc5659bf709549f674dfea1f90f2af0aaa217d38c2466d968f"
+    },
+    {
+      "path": "tests/fixtures/backup_drill/seed_events.json",
+      "bytes": 1907,
+      "sha256": "3559463251ce625f41a15ff634c069f768dea31d72d8f2bb86133cbd3c356a0e"
+    },
+    {
+      "path": "tests/fixtures/research_closure/controls-complete.md",
+      "bytes": 1422,
+      "sha256": "5972cecc70d0ac4f653ebd09f0ec63dee088c08c1808ed90513874472d44ebe2"
+    },
+    {
+      "path": "tests/fixtures/research_closure/observations.csv",
+      "bytes": 150,
+      "sha256": "3c377a06cc000e968cc4a863f5bee079427142af94e94f9dd0e9e35448bb0b29"
+    },
+    {
+      "path": "tests/fixtures/research_closure/prior-report.md",
+      "bytes": 748,
+      "sha256": "23fdd54561a878a9688c0fa0f33162d69484c20e9a42cf7ccf8bd4241e1c2c21"
+    },
+    {
+      "path": "tests/golden/scan_entry_samples.py",
+      "bytes": 8330,
+      "sha256": "f9b70fdc24cc76508c737b510b1ad04da1003c7ee16916da6d387fe0f6eec77f"
+    },
+    {
+      "path": "tests/golden/test_golden_completeness.py",
+      "bytes": 1852,
+      "sha256": "715693a632e5502f073c5b558635320cccfff72bf65a42ba7fb17694574620c3"
+    },
+    {
+      "path": "tests/golden/test_golden_entry_engines.py",
+      "bytes": 19033,
+      "sha256": "a31fa7155e731eb3c9ec7bd86453eea8400d4f24c13e1efe6b325bf7f0da05ce"
+    },
+    {
+      "path": "tests/integration/test_agent_factor_readonly.py",
+      "bytes": 9573,
+      "sha256": "91a39f991840e370e6a8a9ca66209e26342cb1cd10487498f98b8418fd6e94b6"
+    },
+    {
+      "path": "tests/integration/test_dual_entry_scan_guard.py",
+      "bytes": 11948,
+      "sha256": "5f5cc7627976ec77a228c306bf5cf9d644bbd78251b99260e2c4310af565c0c5"
+    },
+    {
+      "path": "tests/integration/test_factor_access_generic.py",
+      "bytes": 10447,
+      "sha256": "c6d5441f731d7ac84f54b1239ea64ffa8b5383a9f2ca0167aa164216c4e86343"
+    },
+    {
+      "path": "tests/integration/test_research_workflow_entry.py",
+      "bytes": 25440,
+      "sha256": "81674de8b0d6615a086a843561cbb5e96771696bac83240527521668cbfa5a6f"
+    },
+    {
+      "path": "tests/integration/test_signal_scan_unavailable_path.py",
+      "bytes": 4261,
+      "sha256": "b4d9c8e1dfaba1915febac119dca3259aa3b099504c9d427007f82f60dd7fbb0"
+    },
+    {
+      "path": "tests/unit/test_a01_index_features.py",
+      "bytes": 11796,
+      "sha256": "28c504880c24fe10b7f122274a85b99501bce9c2fb94e54a12af35180f04d36b"
+    },
+    {
+      "path": "tests/unit/test_a03_pullback_order.py",
+      "bytes": 10103,
+      "sha256": "ef47e700c185e864aae02efcbd3c39132829230035b70a0897ee02d970762014"
+    },
+    {
+      "path": "tests/unit/test_agent_ask_stability.py",
+      "bytes": 20307,
+      "sha256": "5735ca48ed61295b9be841fdc01154b84ab9f49ed453a2e36b00b7168d9de9af"
+    },
+    {
+      "path": "tests/unit/test_agent_context_contract.py",
+      "bytes": 3497,
+      "sha256": "7358efbb7f6d0a0b175c85d8ba00e4300e82b7a52fa594570d7cde672d7059f3"
+    },
+    {
+      "path": "tests/unit/test_agent_continuity_20260916.py",
+      "bytes": 28336,
+      "sha256": "46143e96e2f5edb079964854adef562ae39ebc5159f210a90d5526f0fa0675b0"
+    },
+    {
+      "path": "tests/unit/test_agent_continuity_routes_20260916.py",
+      "bytes": 16601,
+      "sha256": "7d891d308b6a1eae44d540113ac434703ccc4a059e55e59dd06586dc86b29e26"
+    },
+    {
+      "path": "tests/unit/test_agent_history_code_grounding.py",
+      "bytes": 9147,
+      "sha256": "40e826c92bbf0babc1297f905425252a10503e71807fab8d8b02fb35e6757512"
+    },
+    {
+      "path": "tests/unit/test_b3b_ma_cluster_width.py",
+      "bytes": 2307,
+      "sha256": "f50e58fcc09574e60bdff02e612994c92c75681216c6058a2a78c62271032791"
+    },
+    {
+      "path": "tests/unit/test_b3b_swing_rr_distance.py",
+      "bytes": 3912,
+      "sha256": "ea24ba3542ca6dcf1efb78c6cb8fcfe636e3c437fc1c505377ae003bf8a45e72"
+    },
+    {
+      "path": "tests/unit/test_bar_completeness.py",
+      "bytes": 7516,
+      "sha256": "2399c84df3f1964e51be99f8747c5934d9b533bbd13e3e2d75b4412c0d02ae5f"
+    },
+    {
+      "path": "tests/unit/test_candidate_preflight.py",
+      "bytes": 6588,
+      "sha256": "358c672aba7bd5e342536edb22cb45e1bbb3e172afff26881c720804442b36b3"
+    },
+    {
+      "path": "tests/unit/test_classic_benchmarks.py",
+      "bytes": 10571,
+      "sha256": "736c0081cb6fb90bd578f55b37e149f7a75558b90525d6e63e467f1923649f74"
+    },
+    {
+      "path": "tests/unit/test_copilot_factor_readonly.py",
+      "bytes": 16411,
+      "sha256": "1935e0a26db968f1b761e6bb74e6284e9daaa0eacffd8c77a6c634bb15790e90"
+    },
+    {
+      "path": "tests/unit/test_copilot_mindset.py",
+      "bytes": 4569,
+      "sha256": "07b6a79509de8ae374180dfd36e90b7b1bf8116407aae385d0fd047624e63922"
+    },
+    {
+      "path": "tests/unit/test_factor_access.py",
+      "bytes": 18725,
+      "sha256": "e3cc4e76fa84a19e224bbd1d06f8c97d9ba76568e28ca505ab359efc60fce2f0"
+    },
+    {
+      "path": "tests/unit/test_factor_lab_b3a_factors.py",
+      "bytes": 6728,
+      "sha256": "f0729d350c73f0456fbc76579f044d9009948d99ca2d3746d958e30bee01af07"
+    },
+    {
+      "path": "tests/unit/test_factor_lab_b3a_registered.py",
+      "bytes": 6678,
+      "sha256": "e5b9558df6ed420d1ccbf2b38ff6f8b948f800742063c7c227266dd10c06a0ee"
+    },
+    {
+      "path": "tests/unit/test_factor_lab_b3a_registered_v2.py",
+      "bytes": 6449,
+      "sha256": "1f68e40c40b1c9dfcc1240d854e872c545f3dd3eadec4157ac3be348aad285be"
+    },
+    {
+      "path": "tests/unit/test_factor_lab_rv_rank_recovered200.py",
+      "bytes": 5621,
+      "sha256": "853b01f8f716b6bab8f04bcf65b0e16b3ffd01e151b09911d8c175410022e32f"
+    },
+    {
+      "path": "tests/unit/test_factor_lab_trend_backbone.py",
+      "bytes": 7987,
+      "sha256": "62b61c84814ab5655aba7e442a2a210652c4a7aaaf887a8ac23e4db4d47eadd6"
+    },
+    {
+      "path": "tests/unit/test_factor_momentum_rank_reuse.py",
+      "bytes": 6445,
+      "sha256": "612a7ec0e275a7871cd5cc21915f3af10a597dc5b916e4073505440b73707b7f"
+    },
+    {
+      "path": "tests/unit/test_factor_p2_pilot_s2.py",
+      "bytes": 17192,
+      "sha256": "de50b454bc9957e23b3521538f97a95554e97f6f9e2ac86a09cfdb9a4417ee49"
+    },
+    {
+      "path": "tests/unit/test_factor_p2_pilot_s3.py",
+      "bytes": 20281,
+      "sha256": "b8beb886b0e8aeab9ca8a65bb6c4ae6251463668f56e9006f315550b117a10ea"
+    },
+    {
+      "path": "tests/unit/test_factor_rv_known_limitations.py",
+      "bytes": 2657,
+      "sha256": "e44d494c73327e50d3f2b04a5ccc697cdf6382b5687c478f24011988c2c03718"
+    },
+    {
+      "path": "tests/unit/test_fetch_sentiment_weekly.py",
+      "bytes": 460,
+      "sha256": "e009818fec201d0c0546a10d55e20b2719270e45c1f67b7cb95468029dcf772b"
+    },
+    {
+      "path": "tests/unit/test_fwd_ledger_api.py",
+      "bytes": 6935,
+      "sha256": "fd44b375dab81c49b477ba93002a99648ef4de71041c78762c54447eec23fa4a"
+    },
+    {
+      "path": "tests/unit/test_jobledger_exit_contract.py",
+      "bytes": 7416,
+      "sha256": "0cbeeeb15ba1654dafb7409937d024fcde999b9ef64c4cc9a0f7b1a901b870ed"
+    },
+    {
+      "path": "tests/unit/test_jobledger_ledger.py",
+      "bytes": 5032,
+      "sha256": "97a6d4b87554218193a4610f48191c945683ae24770da978497d46186474d92e"
+    },
+    {
+      "path": "tests/unit/test_jobledger_nondisruption.py",
+      "bytes": 10579,
+      "sha256": "be30f9cffff916e207ec0c862132c708052c9793a2d22c53316f320bb8b37000"
+    },
+    {
+      "path": "tests/unit/test_jobledger_second_failure_closure.py",
+      "bytes": 6239,
+      "sha256": "b0819b19f84e7016e1b8a7dec6856149102f3ae39a8d402d3038814f0d536ff3"
+    },
+    {
+      "path": "tests/unit/test_jobledger_wrap.py",
+      "bytes": 5088,
+      "sha256": "976a82f026e9b0512fb0b135d9587fc9129da6e17ec48f424c0ca2e153cb364c"
+    },
+    {
+      "path": "tests/unit/test_ledger_boundary_20260919.py",
+      "bytes": 11575,
+      "sha256": "290d9db9fcecc084a664a47886d88092313ebd414e5e2b27c08133702348590a"
+    },
+    {
+      "path": "tests/unit/test_ma_cluster_information.py",
+      "bytes": 3801,
+      "sha256": "1c70ed7a1d118c7910dd48e387cd7ff976b57975a3e09fbdfeff1d0e7c4fa759"
+    },
+    {
+      "path": "tests/unit/test_market_mood_perf.py",
+      "bytes": 6721,
+      "sha256": "eda2a3dadb6aeb5693fd435231266a5202567da586d0105c5ce6bd911f32c8cd"
+    },
+    {
+      "path": "tests/unit/test_market_observations.py",
+      "bytes": 4516,
+      "sha256": "78db40f31d818949388c49b586e005b8f8a1ed668a71b1c4c51576ff12e7dabd"
+    },
+    {
+      "path": "tests/unit/test_observation_meta.py",
+      "bytes": 1612,
+      "sha256": "1642c973b166214108b5e7e555bc16e20c33f6ddb37fa99786984e3583c89cc3"
+    },
+    {
+      "path": "tests/unit/test_provider_index_input.py",
+      "bytes": 6986,
+      "sha256": "e9ceaa52f5cc3e6d3caf8cd4b0f5c8366151b568c5ff9f806a1dcd92f2685df0"
+    },
+    {
+      "path": "tests/unit/test_question_contract.py",
+      "bytes": 8364,
+      "sha256": "2ed6fde6804344d9e4861a5291a65cacf2a1938bdb7047c5a3dbb653caa36c8f"
+    },
+    {
+      "path": "tests/unit/test_space_prior_target.py",
+      "bytes": 5479,
+      "sha256": "893b2a07195e248d701dad1725d48366da408aa368d49e10d88f15d059296440"
+    },
+    {
+      "path": "tests/unit/test_sqlite_backup_restore_drill.py",
+      "bytes": 1657,
+      "sha256": "f0f8eac96af102099d531055efbf2b77348ffb0538421679306818da1ef4bf83"
+    },
+    {
+      "path": "tests/unit/test_volume_information.py",
+      "bytes": 6213,
+      "sha256": "d2dc5955f40647a0f4e5cb44db2a9a6810f6e03cfa0d5f12a00e76e6b9e6619d"
+    },
+    {
+      "path": "tests/unit/test_workflow_design_review.py",
+      "bytes": 9194,
+      "sha256": "2e5a051d4025d783bb2b55aedec3ddf722561227ede13c9e62e2f4153ead324a"
+    },
+    {
+      "path": "tests/unit/test_workflow_evaluation.py",
+      "bytes": 18874,
+      "sha256": "b2da8c4ffbe06beacd4f3cef42bacd150cc33a98ef54aeb41d3c3444fa48de04"
+    },
+    {
+      "path": "tests/unit/test_workflow_inputs.py",
+      "bytes": 10104,
+      "sha256": "3395bf6c0cba95c1ced27b933d7ac7bb93904432c7d7f82600c3a0f5f845a254"
+    },
+    {
+      "path": "tests/unit/test_workflow_price_descriptions.py",
+      "bytes": 2915,
+      "sha256": "49849c642eca8f1ace9d954636195a98fe974d12a6abb0df58d864c0669bf37b"
+    },
+    {
+      "path": "tests/unit/test_write_tx_tracking.py",
+      "bytes": 13289,
+      "sha256": "6feb766d724f0a9fb6d682c242c592181412d8a8c202648a236bb59d5fca7171"
+    },
+    {
+      "path": "web/VISUAL.md",
+      "bytes": 17866,
+      "sha256": "77d348f18ff61ec1b6ef2dde66aaacf5fa83419abe7f9ed768fc61f3c601cb4e"
+    },
+    {
+      "path": "web/run-copilot-cards-regression.mjs",
+      "bytes": 14269,
+      "sha256": "6287b3c7732a61182ca698338b895ddd8045764d47530285d008d07d5a21b4c2"
+    },
+    {
+      "path": "web/run-fwd-ledger-regression.mjs",
+      "bytes": 2995,
+      "sha256": "655633e08adfc0ddb1a669d8ea35a28a94abe8a5621e4a805f10b845229e5f7d"
+    },
+    {
+      "path": "web/run-resolve-route-regression.mjs",
+      "bytes": 3540,
+      "sha256": "52561e2bb242bcd73f43fec4b7e90482a1f6b8a06de3c699aa9fb5d1ad15f97a"
+    },
+    {
+      "path": "web/scripts/build_factor_research.py",
+      "bytes": 28391,
+      "sha256": "1409f516442e5039cf7263b5380fcdfde16505c2fe0a21eb91753b2a299b5ff9"
+    },
+    {
+      "path": "web/scripts/market-observation-regression.mjs",
+      "bytes": 2853,
+      "sha256": "8fb7c56bb2272e79a937de65a6dc455fe2394e2e7e619989d24d1822231e482c"
+    },
+    {
+      "path": "web/scripts/sector-observation-regression.mjs",
+      "bytes": 3233,
+      "sha256": "30ba92d2319725f46d0b120df7a6b4a426bc4a51c6237ebf11d52abe9cbb175d"
+    },
+    {
+      "path": "web/scripts/test_factor_research_catalog.py",
+      "bytes": 8174,
+      "sha256": "ce184acc6e41e3520d148016fc04a4926eed4d45e7f2739e231126e7368cd42a"
+    },
+    {
+      "path": "web/src/components/MarketObservationCards.tsx",
+      "bytes": 3311,
+      "sha256": "74032aaeec0244ea97af00db155630d8b00461860bb0ad83e7509191184b64ef"
+    },
+    {
+      "path": "web/src/components/ObservationSourceNote.tsx",
+      "bytes": 1777,
+      "sha256": "d2aa40ef141f9436745b10bb8225a5dbc00de8a75cdbd0b77e874b5343bae07e"
+    },
+    {
+      "path": "web/src/components/market-observations.css",
+      "bytes": 2591,
+      "sha256": "8f1f5d4ba297dc74a47f522a1e4a456700c8cdf3b0976b8d6911e253fb03b804"
+    },
+    {
+      "path": "web/src/components/portfolio/PortfolioTechnicalDetail.tsx",
+      "bytes": 5375,
+      "sha256": "34550578893fdf2fc99bec3c0acda0723ca262210a2a4d557e164c96349e0073"
+    },
+    {
+      "path": "web/src/pages/FwdLedgerPage.tsx",
+      "bytes": 5387,
+      "sha256": "5b25b05a9898c8baf648bc0b2beba1a1ad7e5a39ddd0d17228490a5b523b2272"
+    },
+    {
+      "path": "web/src/pages/factor-research/FactorResearchOverview.tsx",
+      "bytes": 3574,
+      "sha256": "b72faa375612779946b2985ff4adcb5f896e4375bcfb4ca758c5c94d8669067b"
+    },
+    {
+      "path": "web/src/pages/factor-research/FactorResearchPage.tsx",
+      "bytes": 48054,
+      "sha256": "9da7c343639b17f7c3a00a5a1a2cbc9abf35687a845bd2eea568b5220a4ffae9"
+    },
+    {
+      "path": "web/src/pages/factor-research/assessment-framework.json",
+      "bytes": 18159,
+      "sha256": "4a5626724edcfad52dea2614e73eda18151d0c6e1acf28c72dd9aaf861eeb1a7"
+    },
+    {
+      "path": "web/src/pages/factor-research/catalog.generated.json",
+      "bytes": 115649,
+      "sha256": "ff24409ab5c533e8204319ca3ec0309af07099504a418edac04eb20fa6a86406"
+    },
+    {
+      "path": "web/src/pages/factor-research/display-bindings.json",
+      "bytes": 6765,
+      "sha256": "bbe981d696cdbe530ceae9ba4867445fe9f40addf5d357ac30aae4ee123be4a2"
+    },
+    {
+      "path": "web/src/pages/factor-research/factor-overview.css",
+      "bytes": 2235,
+      "sha256": "f7052fe4eefd6099279c48c6cbfd980c0459baf5587babbbfa499eca7d77b534"
+    },
+    {
+      "path": "web/src/pages/factor-research/factor-research.css",
+      "bytes": 55279,
+      "sha256": "bdb21f4fe10ca79029d0285c2cf899646f04fa3f9864ddc82c4c4f13537f62d6"
+    },
+    {
+      "path": "web/src/pages/factor-research/metrics-guidance.json",
+      "bytes": 8274,
+      "sha256": "10be3deb71ea879ab6f772dea53760b21bfb51f1da6da7ca23631cbddfe32de9"
+    },
+    {
+      "path": "web/src/pages/factor-research/model.test.mjs",
+      "bytes": 20593,
+      "sha256": "48d266b206f909356b6abf35317353cabd97e497d80c72e62deacdd1a3ffe4b1"
+    },
+    {
+      "path": "web/src/pages/factor-research/model.ts",
+      "bytes": 31116,
+      "sha256": "c73cdcae99b6adf07419b840050f8d1852918edfb53f830845b5a345cd3b4fd2"
+    },
+    {
+      "path": "web/src/pages/factor-research/overview.test.mjs",
+      "bytes": 1590,
+      "sha256": "9c13cbdf16bcf157619bc8f67483ab2c94dcce8a19749c65265f192260d6339f"
+    },
+    {
+      "path": "web/src/pages/factor-research/overviewModel.ts",
+      "bytes": 930,
+      "sha256": "7f9fae86cba38ba92198000da684f8a3e2a83b101349d536ad8a680d6e953ed7"
+    },
+    {
+      "path": "web/src/pages/factor-research/reading-guidance.json",
+      "bytes": 35930,
+      "sha256": "7f19f644e2b3ba8875ec39c249f405b6bc82799572284ebf262d05fe76738452"
+    },
+    {
+      "path": "web/src/pages/fwdLedgerLogic.ts",
+      "bytes": 2332,
+      "sha256": "2205816a368078e3db91e19f0548a523afb02ffbd3439c3ff2f751a71343de2e"
+    },
+    {
+      "path": "web/src/pages/page-reading.css",
+      "bytes": 846,
+      "sha256": "66d397c32425f246ff4b75b8be69c410788570bd62062131d746ab580b7a120c"
+    },
+    {
+      "path": "web/src/pages/portfolio.css",
+      "bytes": 8408,
+      "sha256": "9cbada600c2a64463b08adc0817bc66c73d6ad4ab7299f450c5e62ece57aec83"
+    },
+    {
+      "path": "web/src/pages/reference-reading.css",
+      "bytes": 798,
+      "sha256": "6bfdacbf7f97375bcbcc1de19dd561cfc5e757be09d0e5e88cc0e9086600a24f"
+    },
+    {
+      "path": "web/src/pages/sector-observation.css",
+      "bytes": 866,
+      "sha256": "9349b7da4b28b113ebf7fa961a2418e605f839e28753a7cc89f75f948ad72331"
+    },
+    {
+      "path": "web/src/pages/sectorObservationLogic.ts",
+      "bytes": 2163,
+      "sha256": "798d4ee1c4beec41c29ec8cc2c053d852158bac58ffc1a8207a7dd5447a0cc0a"
+    },
+    {
+      "path": "web/src/pages/sentiment.css",
+      "bytes": 1628,
+      "sha256": "c07a53689b9659c38417bef86cab920fe013ffb10fcb4c68aaf9bbff42c8a5ad"
+    },
+    {
+      "path": ".agents/skills/lei-gpt-zcode-orchestrator/SKILL.md",
+      "bytes": 14445,
+      "sha256": "6925ece4dc1d77800ec92f89333ec3499a678f693980f74c1d83e131ebb6ba82"
+    },
+    {
+      "path": ".agents/skills/lei-task-router/SKILL.md",
+      "bytes": 3970,
+      "sha256": "66204e48ee2d995bf0689fe27e92792866d489d7019af60b8f824493c42eb7f4"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 17000,
+      "sha256": "7ad9a396a7b3308db6a83dc425dfd0d87ea861992817881e85d82c470f6cb33c"
+    },
+    {
+      "path": "docs/experiments/INDEX.md",
+      "bytes": 103369,
+      "sha256": "e67dcb0e996cef3d2232244a8167216ca8d98822800427479ef3291ecd9e3834"
+    },
+    {
+      "path": "docs/experiments/factor-method-reuse-controller-review-2026-09-17.md",
+      "bytes": 17044,
+      "sha256": "7ce73c30ff6a55a99b41f0e426a110bbfce8de395be9709092a860380c060921"
+    },
+    {
+      "path": "docs/experiments/registry.json",
+      "bytes": 159476,
+      "sha256": "3e76fc222c89fd8f0dddf6bc56b80e5ab9cdfa84cb50467d469881e270e8ec2e"
+    },
+    {
+      "path": "docs/literature-learning/READING.md",
+      "bytes": 25330,
+      "sha256": "7934d1b520e96030e4443b869e3d5d11e2fea2093d59c6f73fd765e2ae15ab8c"
+    },
+    {
+      "path": "docs/literature-learning/README.md",
+      "bytes": 7507,
+      "sha256": "2d6163fb4cbb7ba291ea22233fb683b6986f72fc12b2b08da444746c023abcc0"
+    },
+    {
+      "path": "docs/literature-learning/learning-seed.json",
+      "bytes": 90661,
+      "sha256": "317f14bbcb7e6ae24042c801614bf4443b924e9747e2d032a8b8f75a21a3b169"
+    },
+    {
+      "path": "docs/ops/运维手册.md",
+      "bytes": 21088,
+      "sha256": "950668179ca90e98448ade43daf5bc4ac9bd2430d3fd36628bc27a5ddf66fe9b"
+    },
+    {
+      "path": "docs/research/ai-execution-contract.md",
+      "bytes": 6129,
+      "sha256": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22"
+    },
+    {
+      "path": "docs/research/definition-standard.md",
+      "bytes": 16412,
+      "sha256": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd"
+    },
+    {
+      "path": "docs/research/definitions.v1.json",
+      "bytes": 457435,
+      "sha256": "5a826d07035c377db3b793b9bd9aee0287430dab206e551001af1aedd5c0f357"
+    },
+    {
+      "path": "docs/research/experiment-backtest-principles.md",
+      "bytes": 23327,
+      "sha256": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c"
+    },
+    {
+      "path": "docs/research/experiment-report-template.md",
+      "bytes": 15786,
+      "sha256": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170"
+    },
+    {
+      "path": "docs/research/factor-lab-usage.md",
+      "bytes": 14682,
+      "sha256": "17acfb8fe2c7f46689fdd1815f84f81a5926aeb8f578820269a492a9763c0014"
+    },
+    {
+      "path": "docs/research/factor-research-roadmap-2026-09-10.md",
+      "bytes": 26373,
+      "sha256": "e69a770fe8eeb9e9913796b7421bc252a95fcab80bdc8c923b00045066458f09"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/README.md",
+      "bytes": 4973,
+      "sha256": "f2cda597af445692769585e081ff3f753d970f7db3154691ab9aaaa6dfe18932"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/next-pilot-proposal.md",
+      "bytes": 9901,
+      "sha256": "f47aaf24e248892cc2498ddae4fb8e478a871f5366b846358dc79f48278423e6"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/revision-response.md",
+      "bytes": 14524,
+      "sha256": "ae6c6610553433e34d4052202b2d9c15fc3bf69440b36509dc03dd293b2585c8"
+    },
+    {
+      "path": "docs/research/proposals/factor-method-reuse-2026-09-17/sources-and-checks.json",
+      "bytes": 7351,
+      "sha256": "81693a9e675369aaf8026227466f654b78c0b6c318a9e2f2e3b09af5a6908be8"
+    },
+    {
+      "path": "scripts/check_repo_hygiene.py",
+      "bytes": 8303,
+      "sha256": "be1aa933ae825e5bef0c51ae669d2ec2339dc3cff7055fff31e8e5348e44ab84"
+    },
+    {
+      "path": "scripts/fetch_sentiment_weekly.py",
+      "bytes": 6172,
+      "sha256": "0677f7ec5676eef902781308ab8474b2c9e632fc81d9e3b111bcfe37495567f1"
+    },
+    {
+      "path": "scripts/precompute_sector_trend.py",
+      "bytes": 6441,
+      "sha256": "889e81e0e1cd3a586395f5085daa9b7c592fb70adba825814265306cbe5675c3"
+    },
+    {
+      "path": "scripts/round5_repro/ingest_sentiment.py",
+      "bytes": 18935,
+      "sha256": "8db13730149dfd572201ecf50e99ced4e16e88e7ba919e275000a0db6bf35f32"
+    },
+    {
+      "path": "scripts/run_factor_lab.py",
+      "bytes": 2507,
+      "sha256": "075d02d39fd38d8f21dc7cc2aa8a15b3260ca69169df6302a3ee6c8ffb042247"
+    },
+    {
+      "path": "src/lei_signal/api/app.py",
+      "bytes": 7621,
+      "sha256": "6e748df9487ac96fa675b44f6f323b8b25b97f96461d0ccad6369b1a8769c1fe"
+    },
+    {
+      "path": "src/lei_signal/api/routes/agent.py",
+      "bytes": 180073,
+      "sha256": "834666087bdc07339b1c3871fc5e61e9a6ad77d52dff1c1abf4fafed9cdf6c73"
+    },
+    {
+      "path": "src/lei_signal/api/routes/copilot.py",
+      "bytes": 45916,
+      "sha256": "e3fc41dd01d742d89a10fd5504810bf8d95b91e0a7c8032f7326947e10b61fb3"
+    },
+    {
+      "path": "src/lei_signal/api/routes/fundamentals.py",
+      "bytes": 3683,
+      "sha256": "98347f483a2404f936eee6c41f5d416d804dbfacf54de6dce4d4744ef21315b5"
+    },
+    {
+      "path": "src/lei_signal/api/routes/sentiment.py",
+      "bytes": 4428,
+      "sha256": "11d236e24e86d8dcf0a052ca15ad59f733b81626af8bc650720b6e8b551da394"
+    },
+    {
+      "path": "src/lei_signal/api/schemas.py",
+      "bytes": 49153,
+      "sha256": "1de9fa8461139e0b28f00183022dd186eb400d83329cb43a9331c5a9589738bc"
+    },
+    {
+      "path": "src/lei_signal/copilot/chat_identity.py",
+      "bytes": 20224,
+      "sha256": "38a7eee8482fa2408aee0ac935457f5c3dcdafe9c910ddb2ea3a3d68735fd2a9"
+    },
+    {
+      "path": "src/lei_signal/copilot/intent.py",
+      "bytes": 7311,
+      "sha256": "533efafd725c5a5426b3c000da36eb119416a0821a2df159cd79b2207a88d6d6"
+    },
+    {
+      "path": "src/lei_signal/copilot/ops.py",
+      "bytes": 13114,
+      "sha256": "21e77f2443c02e0113dac4232e2a9ab6b20be53399e719f9f123dce50e7059ec"
+    },
+    {
+      "path": "src/lei_signal/copilot/resolve.py",
+      "bytes": 28883,
+      "sha256": "2754d3b3e0c8704cfb3fb29bb30c3cd57a13f69f7e0e3e2bcddc12eebcc212c2"
+    },
+    {
+      "path": "src/lei_signal/copilot/subjects.py",
+      "bytes": 5873,
+      "sha256": "99734490fdf85c484b9ce12f21126a5a185858d4504a520039366cc2385676a7"
+    },
+    {
+      "path": "src/lei_signal/fundamentals/service.py",
+      "bytes": 20304,
+      "sha256": "f0a596e6c3f4f116da54c424060ac947c9e0a729eeb27608d77789b597e6fe23"
+    },
+    {
+      "path": "src/lei_signal/fundamentals/sources.py",
+      "bytes": 62513,
+      "sha256": "771e182adbe583413d75c826ffa6b54bd985923f02ab45ee079bd3425375e99c"
+    },
+    {
+      "path": "src/lei_signal/market_context/market_mood.py",
+      "bytes": 35571,
+      "sha256": "2bb7a62507bb5862b2d37ad4018a15f40046b293ba067f2c394011526a254728"
+    },
+    {
+      "path": "src/lei_signal/market_context/sentiment.py",
+      "bytes": 15595,
+      "sha256": "725de4c731b3f8a5af12ea7cf1f14ff2aa1d49db47d86684f102694ceeb70515"
+    },
+    {
+      "path": "src/lei_signal/market_context/types.py",
+      "bytes": 9681,
+      "sha256": "37341bd8fceafcd040df06bef7a305d840e13b92a203899044fa3d318a07278c"
+    },
+    {
+      "path": "src/lei_signal/plans/llm.py",
+      "bytes": 56167,
+      "sha256": "72c66c98a43edf93bba94185263ddb8012b2a7af13f62581d9ffbfe68bd6e8d0"
+    },
+    {
+      "path": "src/lei_signal/research/definitions.py",
+      "bytes": 26232,
+      "sha256": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/adapters.py",
+      "bytes": 16656,
+      "sha256": "386ec73574c0a47b17df2f7b2af3991bbe57bd0478ddcbcb239d47b3d017d1c9"
+    },
+    {
+      "path": "src/lei_signal/research/input_preflight.py",
+      "bytes": 18885,
+      "sha256": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04"
+    },
+    {
+      "path": "src/lei_signal/storage/sqlite_store.py",
+      "bytes": 82628,
+      "sha256": "1805f00c0e28e5c328ebeab42252477edaed1a4a5b11e94146a735702b6c419e"
+    },
+    {
+      "path": "tests/integration/test_agent_chat_e2e.py",
+      "bytes": 13452,
+      "sha256": "062f1f78292cd21f0107e4c586ebb6634db54c4a9d8f9fc5018dfa0720dbf113"
+    },
+    {
+      "path": "tests/unit/test_agent_name_resolve.py",
+      "bytes": 7179,
+      "sha256": "fda6b0fffe4d84a6f3a0278f1aed6687776c436fee0b49b4402eeb1efb67f697"
+    },
+    {
+      "path": "tests/unit/test_copilot_dispatch.py",
+      "bytes": 6479,
+      "sha256": "b7e50ee77f5d1db8049d4864047b80663d81aeb6cef4f033773e9bfb5366c9ab"
+    },
+    {
+      "path": "tests/unit/test_copilot_intent.py",
+      "bytes": 5188,
+      "sha256": "341ba1dae8a9fa87a3931349d80b82501042a40e03ccb6f05f91479166395c5b"
+    },
+    {
+      "path": "tests/unit/test_copilot_ops.py",
+      "bytes": 6965,
+      "sha256": "0652bca20f4de15d15a42b3bb3c2a8d4aacd3dfbbe6d977b79ac0c36e353d893"
+    },
+    {
+      "path": "tests/unit/test_fundamentals.py",
+      "bytes": 29096,
+      "sha256": "5b05ab958fc6d8f3f0d88cf17108096389219dac0c52935230e88dbf58cda45f"
+    },
+    {
+      "path": "tests/unit/test_ingest_sentiment.py",
+      "bytes": 5980,
+      "sha256": "88e4920f827131143fa5d31a830531093eba64c15246731dda119d04ae782bd4"
+    },
+    {
+      "path": "tests/unit/test_market_sentiment.py",
+      "bytes": 8044,
+      "sha256": "3a8cd900a18f917d0b0074a80423e31adae899c5ddd3bdee0ac2fcd3ccd78abb"
+    },
+    {
+      "path": "tests/unit/test_research_definitions.py",
+      "bytes": 18101,
+      "sha256": "b34d8bf00e1aab41503a92767c7937b2aa07b22427bff335b7df4c58d5e3ad90"
+    },
+    {
+      "path": "web/package-lock.json",
+      "bytes": 63340,
+      "sha256": "5ace1dc073a5b2c5e104dff8b36c42e7d92fdbd2630ae8040dbddb6362ddf813"
+    },
+    {
+      "path": "web/package.json",
+      "bytes": 2559,
+      "sha256": "f45cca0c2a3fa4c5dd335ab6fbeab18333a6323c8c7ed738b0d9f14b6b2445a0"
+    },
+    {
+      "path": "web/run-agent-ux-regression.mjs",
+      "bytes": 9139,
+      "sha256": "83390d0e72f91620eddac05c6064ba98424a0759eab26e4b8d09328e9d798bc4"
+    },
+    {
+      "path": "web/src/App.tsx",
+      "bytes": 5996,
+      "sha256": "ba790a68c1dd571e780a0ca4d83b0ef117b367a9e43886f2f692c41f49f2ce4c"
+    },
+    {
+      "path": "web/src/api/client.ts",
+      "bytes": 29921,
+      "sha256": "49fdde85e916ee31599457d06a7440843ccfb3d397920364bc20d05b88fcbf6a"
+    },
+    {
+      "path": "web/src/components/AgentConsole.tsx",
+      "bytes": 31442,
+      "sha256": "314c903a3d8a211947e648c2a02cdb87218553c03ca8128d9b564bac72593783"
+    },
+    {
+      "path": "web/src/components/BreadthTrendChart.tsx",
+      "bytes": 7496,
+      "sha256": "d33cf54fb1dee50f26572beca81c4937dd873df5ea6800ad3a7d5823aae214bd"
+    },
+    {
+      "path": "web/src/components/FlagshipSection.tsx",
+      "bytes": 4085,
+      "sha256": "2cd4fcaf862230db8039f082285f43c5bf1fddc46e03728e26faf21ef3412f64"
+    },
+    {
+      "path": "web/src/components/SentimentProjectionCard.tsx",
+      "bytes": 13512,
+      "sha256": "5535e582f03debd4cae6df1dcdae2d37163925c26d6cb09e6d61f1829d6b9d93"
+    },
+    {
+      "path": "web/src/components/SentimentSectorBlock.tsx",
+      "bytes": 29741,
+      "sha256": "afaa95460f89e66913e34d12158176f70bdd4bab42587614d4b9fa6d817b931d"
+    },
+    {
+      "path": "web/src/components/TopNav.tsx",
+      "bytes": 4921,
+      "sha256": "7bc551a534ce83ab9e91164faeba6faab24ddb5fc6979d79e4207d9ac6626af5"
+    },
+    {
+      "path": "web/src/components/WatchlistSidebar.tsx",
+      "bytes": 16782,
+      "sha256": "d0d4d7410e5fc1bdcabd9ca14b2c7629ed69a08f587afd998d848f377b6356df"
+    },
+    {
+      "path": "web/src/components/copilot/CopilotCards.tsx",
+      "bytes": 29868,
+      "sha256": "ee6ed4e8175a07fb55c5ed5543a6a91ce29831e3180d218713651550212d14fd"
+    },
+    {
+      "path": "web/src/components/trend/OverlayChart.tsx",
+      "bytes": 22299,
+      "sha256": "10ddd37b761594af13c7d47f0fdbe4abd4090b5f8d49852a74dc721d1727ff24"
+    },
+    {
+      "path": "web/src/pages/AgentWorkspacePage.tsx",
+      "bytes": 47246,
+      "sha256": "34e78ad09c1833ce504be7f208fb38c361c2a97e29b3a8641d7f7588537acd79"
+    },
+    {
+      "path": "web/src/pages/BacktestPage.tsx",
+      "bytes": 23098,
+      "sha256": "5790096a5b29e7a34084d56c22a0c069a213dc35cb151dd350736d700fb5c75e"
+    },
+    {
+      "path": "web/src/pages/DailyBriefPage.tsx",
+      "bytes": 30188,
+      "sha256": "3b369803d5ca0185dd9ce1cd2e10889c78df921e9f10fe589c7df438ff941099"
+    },
+    {
+      "path": "web/src/pages/DetailPage.tsx",
+      "bytes": 23053,
+      "sha256": "ad4d3e5c816e57f7d0892f50657f519dcfb0bda96abe76b4ff1e1b4841f6c922"
+    },
+    {
+      "path": "web/src/pages/FactorPanelPage.tsx",
+      "bytes": 16415,
+      "sha256": "f3c202cc8326fc2663bb96bb8560e74e4e5ac3a67c6559bde23001053cabdb9c"
+    },
+    {
+      "path": "web/src/pages/FundamentalsPage.tsx",
+      "bytes": 91736,
+      "sha256": "40f426a80ccc31753dffd36247b8144de47401071a4e69c1aaff76f621079dfd"
+    },
+    {
+      "path": "web/src/pages/LearningLibraryPage.tsx",
+      "bytes": 21048,
+      "sha256": "3002faa23dfbce38e67f57f98ce255212006e9ddcaea094ddf2c26a8f17b7541"
+    },
+    {
+      "path": "web/src/pages/MindsetPage.tsx",
+      "bytes": 14357,
+      "sha256": "b3daa5eed44d368ccb290b8d2983626e7f6d0e8e7c426564ac5036b55e14b42b"
+    },
+    {
+      "path": "web/src/pages/NewsPage.tsx",
+      "bytes": 29333,
+      "sha256": "147646eb64e11093adbbeba097128193c5403475bfc1594b7f6195cf5af127ca"
+    },
+    {
+      "path": "web/src/pages/OpsPage.tsx",
+      "bytes": 9558,
+      "sha256": "5f725f8c6ed76f59e7ceeee085e08476083acbbbf488b620b4be73cb7a188837"
+    },
+    {
+      "path": "web/src/pages/PortfolioPage.tsx",
+      "bytes": 11993,
+      "sha256": "23f48374e52390627958ab8b94671eda25eeaf60c34c77d5e6964098fbf2cd0d"
+    },
+    {
+      "path": "web/src/pages/ReportsLibraryPage.tsx",
+      "bytes": 8577,
+      "sha256": "988083ceda5bc53c8b0575d200eaa11d48d075a46b15c60ac5da6d8dc9229b9b"
+    },
+    {
+      "path": "web/src/pages/ResearchPage.tsx",
+      "bytes": 10788,
+      "sha256": "0b1f956d8fac3d1da5d932694b7473ffcd9f4d49d08092710cf1f6642acc3d03"
+    },
+    {
+      "path": "web/src/pages/SectorsPage.tsx",
+      "bytes": 50080,
+      "sha256": "86a51923c4bda40b783124131ed3c3202f96bc03e891aafffce4f892fba60c1e"
+    },
+    {
+      "path": "web/src/pages/SentimentPage.tsx",
+      "bytes": 23593,
+      "sha256": "5f7a65e89e2bda7ccdecd152fe82c657dc9f355d52a385d50201e21da2e8137f"
+    },
+    {
+      "path": "web/src/pages/StrategySystemPage.tsx",
+      "bytes": 13381,
+      "sha256": "184389cc55e96f70deb5911b2cf482d561bc6a582fe7f361c0952ea904bc1056"
+    },
+    {
+      "path": "web/src/pages/SupervisorPage.tsx",
+      "bytes": 12788,
+      "sha256": "1120e781efb529045ede8d23b7e2eae6981b64da2bc38a329cc71e7ecad203af"
+    },
+    {
+      "path": "web/src/pages/UpgradesPage.tsx",
+      "bytes": 23989,
+      "sha256": "b5c05c3706287bc9d23280e7df524567ddcc605b82c5a62920805a2dfa48b6c5"
+    },
+    {
+      "path": "web/src/pages/WorkspacePage.tsx",
+      "bytes": 34349,
+      "sha256": "de1fd233b01be47a0096b063fcaf29b49e21af0741dc10740b467d54beabc346"
+    },
+    {
+      "path": "web/src/pages/strategy-system.css",
+      "bytes": 7891,
+      "sha256": "98f9e07b95aded6503c597cc5780eb1c06c02c76dce5d11f5af21991141ad79a"
+    },
+    {
+      "path": "web/src/pages/upgrades.css",
+      "bytes": 14572,
+      "sha256": "4c677a05c6e0f1464982e2be5dafd6517124070d76236014e575ccb4f5cd36f8"
+    },
+    {
+      "path": "web/src/styles.css",
+      "bytes": 239695,
+      "sha256": "bea4c524b65a687f1d033993985c99a417ea9857a59c9bcc626be90278be41d1"
+    },
+    {
+      "path": "web/src/types.ts",
+      "bytes": 81796,
+      "sha256": "2e555bde7a1a54407994fae399f9404288f34da3eca64e4c9bdbc932e3c37ae0"
+    },
+    {
+      "path": "web/src/utils/agentUx.ts",
+      "bytes": 10110,
+      "sha256": "81fb3378457ba1f1dcb857d9b4e3d6a9930db07bdf34882b3b7685122ce8fce6"
+    },
+    {
+      "path": "web/src/utils/resolveRoute.ts",
+      "bytes": 2840,
+      "sha256": "b0e3c5b5017aa267c5669f700a9e76d98540efaf1c79d4b4b1d30937dde3946d"
+    },
+    {
+      "path": "web/src/workspace-design.css",
+      "bytes": 16442,
+      "sha256": "d3d076e2df05305f891bf12374080dbb127377e4177bf328fa1eecf78fd27e8d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6934,
+      "sha256": "6d2699db8e79092cb65f869f290317789b1f8e2e8371ec91346ef2d22a9b76c3"
+    },
+    {
+      "path": "docs/ops/github-core-sync-2026-09-30.md",
+      "bytes": 3297,
+      "sha256": "c673fd187b25ebff95fd629c53a8484ae9a4233f91f1d592b41fb14364620510"
+    }
+  ],
+  "withheld_current_documents": [
+    "docs/experiments/jev-system-fit-2026-09-20.md",
+    "docs/experiments/sentiment-direction-pro-review-2026-09-29.md",
+    "docs/experiments/sentiment-standard-pro-review-2026-09-29.md",
+    "docs/research/proposals/factor-lib-selfevolution-2026-09-19/okr-acceptance-patch.json",
+    "docs/research/proposals/factor-lib-selfevolution-2026-09-19/okr-closeout-patch.json",
+    "docs/research/proposals/factor-lib-selfevolution-2026-09-19/okr-registration.json",
+    "docs/research/proposals/factor-next-phase-4dir-2026-09-19/b4-price-basis-recovery-erratum-2026-09-20.md",
+    "docs/research/proposals/factor-next-phase-4dir-2026-09-19/gpt-exchange-log.md",
+    "docs/research/proposals/factor-next-phase-4dir-2026-09-19/okr-registration.json",
+    "docs/research/proposals/factor-upstream-alignment-2026-09-18/records/2026-09-18-after-get.json",
+    "docs/research/proposals/factor-upstream-alignment-2026-09-18/records/2026-09-18-before-get.json",
+    "docs/research/proposals/factor-upstream-alignment-2026-09-18/records/2026-09-18-patch-direction-okr-cd1a0bd5532c.json",
+    "docs/research/proposals/factor-upstream-alignment-2026-09-18/records/2026-09-18-patch-direction-response.json",
+    "docs/research/proposals/factor-upstream-alignment-2026-09-18/records/2026-09-18-post-new-goal.json",
+    "docs/research/proposals/factor-upstream-alignment-2026-09-18/records/2026-09-19-gpt-final-review-exchange.md",
+    "docs/research/proposals/factor-upstream-alignment-2026-09-18/records/2026-09-19-gpt-review-okr-patches.json",
+    "docs/research/proposals/factor-upstream-alignment-2026-09-18/records/2026-09-19-pilot-closeout-okr-patch.json",
+    "docs/research/sentiment-factor-library/experiment-ledger.json"
+  ],
+  "excluded_new_categories": [
+    "raw experiment datasets and downloads",
+    "chat/handoff archives except this task brief",
+    "local account/runtime databases and secrets",
+    "temporary agent working directories"
+  ],
+  "verification": {
+    "python_related_suite": {
+      "passed": 276,
+      "subtests_passed": 24,
+      "files": "14 research/input test modules plus tests/no_lookahead/*.py",
+      "first_attempt": "217 passed; 59 setup errors because the in-repository basetemp parent directory was absent; rerun after creating parent, no business-code change"
+    },
+    "repository_only_smoke": {
+      "passed": 47,
+      "files": [
+        "tests/unit/test_a01_index_features.py",
+        "tests/unit/test_a03_pullback_order.py",
+        "tests/unit/test_ma_cluster_information.py",
+        "tests/unit/test_space_prior_target.py"
+      ],
+      "exported_files": 401,
+      "raw_data_present": false,
+      "desktop_documents_present": false,
+      "source_fingerprints_match": true
+    },
+    "web_build": "passed; existing bundle-size warning retained",
+    "repo_hygiene": "passed",
+    "outgoing_sensitive_pattern_scan": {
+      "files_scanned": 585,
+      "findings": 0,
+      "limitation": "Pattern checks for known key formats, private keys and private conversation/authorization links; not a claim of exhaustive security audit"
+    },
+    "changed_python_syntax": "passed",
+    "astra_task_required_paths": "all present in indexed snapshot",
+    "whole_system_regression": "not run"
+  },
+  "task_dispatch": "recommended only; no task on the other computer has been started",
+  "upgrade_ledger": "existing factor-research goals read-only checked; external database unchanged"
+}

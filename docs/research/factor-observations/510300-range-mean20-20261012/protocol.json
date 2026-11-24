@@ -1,0 +1,29 @@
+{
+  "protocol_id": "etf-factor-observation-agent-20261012",
+  "version": "1.0.0",
+  "kind": "calculation_only",
+  "data_mode": "historical_reconstruction",
+  "reference": "research.price_volume.range_mean20@1.0.0",
+  "entity": "510300.SS",
+  "observation_date": "2026-06-30",
+  "question": "沪深300ETF（510300.SS）在2026-06-30的20日平均日内波动，对判断有什么帮助？请结合这条历史读数和已有研究结论说明。",
+  "scope": "one fixed retrospective observation and consumer before/after comparison; no new predictive fitting or strategy change",
+  "input_path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/workflow-input.json",
+  "input_sha256": "aaf497e345404bacd0bc3db3899928de4ba5767fc10b332af5351dd13340c00d",
+  "calculation": "formal day_values and candidate_values; independently compare arithmetic mean of 20 daily ranges; require 253 complete calendar-aligned quoted/action_known observations",
+  "historical_availability": "unknown",
+  "current_observation": "not_qualified",
+  "production_authorization": "not_authorized",
+  "new_fits": 0,
+  "new_downloads": 0,
+  "success": [
+    "exact product/date/value/source readable in saved Web Agent reply",
+    "same question before/after compared",
+    "wrong product/date/current/missing/source drift rejected without compute",
+    "refresh recovery"
+  ],
+  "strategy_sha256": [
+    "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  ]
+}

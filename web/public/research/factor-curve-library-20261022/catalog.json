@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-22T01:05:13.448251+08:00",
+  "datasets": [
+    {
+      "id": "fixed2014_300_legacy",
+      "name": "固定300股 · 原四因子",
+      "market": "A股",
+      "universeDescription": "2014年底历史名单固定抽取300只来源股票，沪116/深184；不是沪深300指数成分。每月资格变化，不能代表完整历史市场。",
+      "sourceReportPath": "docs/experiments/factor-group-curves-2026-10-21.md",
+      "dataUrl": "/research/factor-curve-library-20261022/legacy-summary.json",
+      "summarySha256": "99f74440908714d9e14b12ecedb387819b77759023205f4a76c58a0c8c8b14f1",
+      "historySeen": true,
+      "evidenceLabel": "历史报价模拟",
+      "accountDescription": "每月形成五组，下月首交易日开盘模拟一次调仓；每日记账，月末显示；各组初始10万，不能当可兑现净值。",
+      "limitations": [
+        "缺价沿最后报价，虚线表示不确定估值；未知退出权利未解决。",
+        "成交限制使用全日日线，不能当成开盘即可执行的历史订单。",
+        "2015—2025全部已经研究过，不是独立新验证。"
+      ],
+      "factors": [
+        {
+          "id": "momentum",
+          "label": "中期动量（跳过近月）",
+          "family": "momentum",
+          "formula": "12个月前至1个月前的涨幅",
+          "group5Meaning": "中期涨幅最高",
+          "primaryUse": "候选排序"
+        },
+        {
+          "id": "cool",
+          "label": "近期偏冷／短期反转",
+          "family": "reversal",
+          "formula": "最近1个月涨幅取负值",
+          "group5Meaning": "近月涨得较少或跌得较多",
+          "primaryUse": "候选排序与追涨代价"
+        },
+        {
+          "id": "lowvol",
+          "label": "60日低波动",
+          "family": "risk",
+          "formula": "60日日对数收益标准差取负值",
+          "group5Meaning": "近期波动较小",
+          "primaryUse": "持有风险及放弃上涨的代价"
+        },
+        {
+          "id": "high52",
+          "label": "52周高点接近度",
+          "family": "price_position",
+          "formula": "当前收盘÷过去252交易日最高收盘",
+          "group5Meaning": "最接近一年最高收盘",
+          "primaryUse": "候选排序"
+        }
+      ],
+      "stockPools": [
+        {
+          "id": "all_qualified",
+          "label": "全部合格候选"
+        },
+        {
+          "id": "green_only",
+          "label": "双均线绿色候选"
+        }
+      ],
+      "regime": {
+        "status": "available",
+        "id": "csi300_price_sma10_prior_month",
+        "label": "沪深300价格指数 · 10月均线状态",
+        "definition": "每个持有月使用上月末沪深300指数收盘：高于截至当日的10个月末均价为偏强，否则偏弱。",
+        "dataUrl": "/research/factor-curve-library-20261022/legacy-regimes.json",
+        "sha256": "07f98c9f420c71cc619913038599ebf13ff6b35f1fb04b01337937bc1bbff525",
+        "limitations": [
+          "按历史报价计算，原始取得记录及当时供应商版本未完全核实。",
+          "市场趋势偏强/偏弱是本地透明定义，不等于唯一牛熊划分。"
+        ]
+      },
+      "diagnostics": {
+        "status": "available",
+        "dataUrl": "/research/factor-curve-library-20261022/legacy-diagnostics.json",
+        "sha256": "c485b242d8dd440552c4e3d85cece84be34299584a7847b4d41c2a003a5d43b3"
+      },
+      "assessment": {
+        "status": "available",
+        "dataUrl": "/research/momentum-three-universe-20261022/legacy-assessment.json",
+        "sha256": "1e6e15a8dcfd09b5aaf52bd09928cda3b365fd59ddcdb7eb3a2afe10b5c19df3"
+      }
+    },
+    {
+      "id": "fixed2014_300_extension",
+      "name": "固定300股 · 四类因子对照",
+      "market": "A股",
+      "universeDescription": "同一2014年底固定300只来源股票；按10项信息共同资格逐月比较，2016—2025；不是沪深300历史成分。绿色候选不足30只的11个月，所有方法目标现金。",
+      "sourceReportPath": "docs/experiments/factor-curve-library-2026-10-22.md",
+      "dataUrl": "/research/factor-curve-library-20261022/new-summary.json",
+      "summarySha256": "433ff87ea9b68a5605f3d8213246cb158f19a756d5763bf7916ab494f901bc6e",
+      "historySeen": true,
+      "evidenceLabel": "历史报价模拟",
+      "accountDescription": "每月形成五组，下月首交易日开盘模拟一次调仓；每日记账，月末显示；各组初始10万，不能当可兑现净值。",
+      "limitations": [
+        "缺价沿最后报价，虚线表示不确定估值；未知退出权利未解决。",
+        "成交限制使用全日日线，不能当成开盘即可执行的历史订单。",
+        "2015—2025全部已经研究过，不是独立新验证。",
+        "残差回归因子当时公布时间与修订未知，不称可执行的事前预测。",
+        "本批共同资格和日期不同于原四因子；只与本批共同基准比较，不拼接旧账户。",
+        "双均线距离是研究扩展，不是原版首次回撤或完整LEI策略。"
+      ],
+      "factors": [
+        {
+          "id": "momentum20",
+          "label": "20日动量",
+          "family": "momentum",
+          "formula": "收盘÷20个交易日前收盘－1",
+          "group5Meaning": "过去20日涨幅最高",
+          "primaryUse": "候选排序"
+        },
+        {
+          "id": "momentum60",
+          "label": "60日动量",
+          "family": "momentum",
+          "formula": "收盘÷60个交易日前收盘－1",
+          "group5Meaning": "过去60日涨幅最高",
+          "primaryUse": "候选排序"
+        },
+        {
+          "id": "momentum120",
+          "label": "120日动量",
+          "family": "momentum",
+          "formula": "收盘÷120个交易日前收盘－1",
+          "group5Meaning": "过去120日涨幅最高",
+          "primaryUse": "候选排序"
+        },
+        {
+          "id": "ma_distance",
+          "label": "双均线距离（研究扩展）",
+          "family": "trend",
+          "formula": "到20/60/120日各SMA和EMA的最近相对距离；缺价后重新预热",
+          "group5Meaning": "离六条均线都较远；不是优先推荐组",
+          "primaryUse": "描述价格位置；未指定近或远更好，不代表完整回调买点"
+        },
+        {
+          "id": "ppo",
+          "label": "PPO12/26趋势强度",
+          "family": "trend",
+          "formula": "100×(12日EMA－26日EMA)÷26日EMA",
+          "group5Meaning": "PPO数值最高；不等于买入点",
+          "primaryUse": "强度排序相对动量的帮助"
+        },
+        {
+          "id": "residual",
+          "label": "残差动量（中国三因子）",
+          "family": "momentum",
+          "formula": "复用36个月市场/规模/价值回归；剔除共同变化，保留截距；此前11个月且跳过最近月的分数",
+          "group5Meaning": "扣除三类共同涨跌后相对走强",
+          "primaryUse": "相对波动缩放动量的选股帮助；没有扣除行业影响"
+        },
+        {
+          "id": "downside",
+          "label": "60日下行波动",
+          "family": "risk",
+          "formula": "60日日对数涨跌中负值平方平均的平方根，再取负值排序",
+          "group5Meaning": "下跌波动较小",
+          "primaryUse": "持有风险与少赚上涨的代价；先比总波动"
+        },
+        {
+          "id": "lowvol",
+          "label": "60日低波动（对照）",
+          "family": "risk",
+          "formula": "60日日对数收益标准差取负值",
+          "group5Meaning": "总波动较小",
+          "primaryUse": "简单风险对照"
+        },
+        {
+          "id": "momentum",
+          "label": "中期动量（对照）",
+          "family": "momentum",
+          "formula": "12个月前至1个月前的涨幅",
+          "group5Meaning": "中期涨幅最高",
+          "primaryUse": "简单选股对照"
+        },
+        {
+          "id": "scaled_momentum",
+          "label": "波动缩放动量（对照）",
+          "family": "momentum",
+          "formula": "此前11个月超额收益之和÷其样本标准差，跳过最近月",
+          "group5Meaning": "缩放后的中期动量最高",
+          "primaryUse": "残差动量的简单对照"
+        }
+      ],
+      "stockPools": [
+        {
+          "id": "all_qualified",
+          "label": "全部合格候选"
+        },
+        {
+          "id": "green_only",
+          "label": "双均线绿色候选"
+        }
+      ],
+      "regime": {
+        "status": "available",
+        "id": "csi300_price_sma10_prior_month",
+        "label": "沪深300价格指数 · 10月均线状态",
+        "definition": "每个持有月使用上月末沪深300指数收盘：高于截至当日的10个月末均价为偏强，否则偏弱。",
+        "dataUrl": "/research/factor-curve-library-20261022/new-regimes.json",
+        "sha256": "12505cbfb27b4d5d71b1d16bb0765bb1eeeda38c3cc04cf333710cfbd27e8260",
+        "limitations": [
+          "按历史报价计算，原始取得记录及当时供应商版本未完全核实。",
+          "市场趋势偏强/偏弱是本地透明定义，不等于唯一牛熊划分。"
+        ]
+      },
+      "diagnostics": {
+        "status": "available",
+        "dataUrl": "/research/factor-curve-library-20261022/new-diagnostics.json",
+        "sha256": "074d51278633b78f77237342269c6d1b49814188a6f57322fd01aa102d597303"
+      },
+      "assessment": {
+        "status": "available",
+        "dataUrl": "/research/momentum-three-universe-20261022/new-assessment-rankic-20261023.json",
+        "sha256": "0069959946ce5c681c12fc8f0e10bee9516fbed3ba16cde86b8fc2fd0db4c5f0"
+      }
+    }
+  ],
+  "unavailableUniverses": [
+    {
+      "id": "csi300",
+      "label": "沪深300历史成分",
+      "reason": "132个月末来源已取；官方事件复核发现2015年12月、2021年6月及12月、2022年12月换股未正确反映。新报告已列具体差异，原件保留外盘；完整历史名单与复权资格尚未核齐，本池新收益未生成。",
+      "statusLabel": "历史名单已发现错配"
+    },
+    {
+      "id": "csi500",
+      "label": "中证500历史成分",
+      "reason": "132个月末来源已取；2021年9月499只已定位缺中国能建601868，2021年6月及12月、2022年12月另有换股错配。官方附件有名称缺代码的两处已核身份；完整历史池仍未合格，不开放新收益。",
+      "statusLabel": "历史名单已发现错配"
+    },
+    {
+      "id": "sp500",
+      "label": "标普500历史成分",
+      "reason": "Yahoo与旧Tiingo/WIKI复用，新增新浪来源；原缺口仍748个证券日无候选，新增候选另有255个零量或价格结构异常日。代码身份与退出收益未核齐，候选覆盖不等于完整可回测。",
+      "statusLabel": "新增新浪历史，异常已单列"
+    },
+    {
+      "id": "ndx100",
+      "label": "纳斯达克100历史成分",
+      "reason": "原缺口仍3,349个证券日无候选，新增新浪候选有2个零量日；TCOM加入日期、Endo等代码身份仍待核。纳指价格/总回报参考已存，不开放未核完整池收益。",
+      "statusLabel": "多源候选已补，身份待核"
+    }
+  ],
+  "pendingFactors": []
+}

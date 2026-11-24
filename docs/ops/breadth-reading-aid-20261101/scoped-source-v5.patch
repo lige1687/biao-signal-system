@@ -1,0 +1,328 @@
+--- web/src/pages/FundamentalsPage.tsx (before v5)
++++ web/src/pages/FundamentalsPage.tsx (after v5)
+@@ -11,6 +11,7 @@
+ import SentimentProjectionCard from "../components/SentimentProjectionCard";
+ import MarketObservationCards from "../components/MarketObservationCards";
+ import MarketStylePanel from "../components/market-style/MarketStylePanel";
++import MarketObservationAlerts from "../components/market-observation-alerts";
+ import { ObservationLibrary } from "../components/observation-library";
+ import { buildDrawer } from "../components/trend/drawer";
+ import { alignTo, unionDates } from "../components/trend/align";
+@@ -1954,8 +1955,9 @@
+       {/* ── ① 市场 ── */}
+       {activeSection === "fund-sec-market" && (
+         <>
++          <MarketObservationAlerts placement="market" />
++          <MarketStylePanel market={market} onMarketChange={setMarket} observations={observations} ratesHistory={ratesHist} ratesHistoryFailed={!!ratesHistError} />
+           <ObservationLibrary market={market} />
+-          <MarketStylePanel market={market} onMarketChange={setMarket} observations={observations} ratesHistory={ratesHist} ratesHistoryFailed={!!ratesHistError} />
+           {observationsError && <p className="fund-errors">{market === "cn" ? "A股" : "美股"}观察资料读取失败；风格事实表仍可查看。</p>}
+           <details className="observation-legacy"><summary>更多市场资料：资金、调查与产品历史</summary>
+           {observationsLoading && <p className="muted">观察资料加载中…</p>}
+--- web/src/components/market-observation-alerts/index.tsx (before v5)
++++ web/src/components/market-observation-alerts/index.tsx (after v5)
+@@ -1,4 +1,4 @@
+-import { useEffect, useMemo, useState } from "react";
++import { useEffect, useId, useMemo, useState } from "react";
+ import { useQuery } from "@tanstack/react-query";
+ import { Link } from "react-router-dom";
+ import { ERP_REFERENCE_QUERY_KEY, ERP_REFERENCE_URL, parseErpReference } from "../observation-library/erpReferenceData";
+@@ -6,6 +6,7 @@
+ import { breadthInput, chartLink, erpInput, parseBreadth, type BreadthMarket } from "./adapters";
+ import { buildAlertSnapshot, eventLabel, parseSeen, type AlertSnapshot } from "./model";
+ import { acknowledge, SEEN_EVENT, SEEN_KEY } from "./storage";
++import type { BreadthReadingPoint } from "../market-style/breadthReadingTypes";
+ import "./style.css";
+ 
+ async function getJson(url: string, signal: AbortSignal): Promise<unknown> {
+@@ -34,19 +35,23 @@
+   return "离开低位看修复，离开高位看回落；高低位本身不是买卖点。";
+ }
+ 
+-function AlertRow({ snapshot: s, href, pending, onRead }: {
+-  snapshot: AlertSnapshot; href: string; pending: boolean; onRead: () => void;
++function AlertRow({ snapshot: s, href, pending, onRead, participation }: {
++  snapshot: AlertSnapshot; href: string; pending: boolean; onRead: () => void; participation?: BreadthReadingPoint | null;
+ }) {
+   const fresh = s.quality === "ready";
+   const lastNew = s.newEvents[s.newEvents.length - 1];
++  const reading = fresh && participation?.date === s.latest?.date ? participation : null;
++  const change = reading?.horizons["50"].delta_5;
+   const quality = pending && !s.latest ? "读取中" : s.quality === "historical" ? "历史快照 · 未自动更新"
+     : s.quality === "stale" ? "待更新" : s.quality === "error" ? "读取失败" : s.quality === "missing" ? "资料不足" : "资料可用";
+-  return <article className={`moa-item moa-${s.quality}`} aria-label={s.label}>
++  return <article className={`moa-item moa-${s.quality} moa-kind-${s.kind} moa-zone-${s.latest?.phase ?? "unknown"}`} aria-label={s.label}>
+     <div className="moa-item-head"><h3>{s.label}</h3><span className="moa-quality" title={s.qualityLabel}>{quality}</span></div>
+     <div className="moa-reading"><strong>{format(s.latest?.value)}<small>{s.kind === "erp" ? "百分点" : "%"}</small></strong>
+       <span>{fresh ? "" : "末次："}{s.positionLabel}</span></div>
+     <div className="moa-bounds"><span>{s.kind === "erp" ? "下轨" : "低位线 P10"} <b>{format(s.latest?.lower)}</b></span>
+       <span>{s.kind === "erp" ? "上轨" : "高位线 P90"} <b>{format(s.latest?.upper)}</b></span></div>
++    {reading && <p className="moa-participation"><b title={reading.state.summary}>{reading.state.label}</b><span>20/50日合看</span>
++      {change != null && Number.isFinite(change) && <small>50日宽度较5条记录前 {change > 0 ? "+" : ""}{change.toFixed(2)} 个百分点</small>}</p>}
+     <p className="moa-meaning">{meaning(s)}</p>
+     {lastNew ? <div className="moa-new"><span>新变化 · {eventLabel(s.kind, lastNew.event)} <time>{lastNew.date}</time>
+       {s.newEvents.length > 1 ? ` 等${s.newEvents.length}次` : ""}</span><button onClick={onRead}>知道了</button></div>
+@@ -57,14 +62,16 @@
+         : s.quality === "stale" ? "旧读数仅供回看，当前变化未知" : "等待完整读数与轨道"}</p>}
+     <footer><time>数据 {s.latest?.date ?? "—"}{s.kind === "erp" ? " · 周频" : ""}</time>
+       <Link to={href} onClick={onRead}>看走势图 <span aria-hidden="true">↗</span></Link></footer>
+-    {s.lastEvent && <details className="moa-history"><summary>最近一次历史变化 · {s.lastEvent.date}</summary>
++    {s.lastEvent && <p className="moa-last-change">最近历史变化 <b>{eventLabel(s.kind, s.lastEvent.event)}</b><time>{s.lastEvent.date}</time></p>}
++    {s.lastEvent && <details className="moa-history"><summary>触发时读数与边界</summary>
+       <p>{eventLabel(s.kind, s.lastEvent.event)} · 读数 {format(s.lastEvent.value)}；当时下界 {format(s.lastEvent.lower)}、上界 {format(s.lastEvent.upper)}。
+         {s.kind === "breadth" ? "仅检索返回的近90条记录。" : "历史事件，不代表今天触发。"}</p>
+     </details>}
+   </article>;
+ }
+ 
+-export default function MarketObservationAlerts() {
++export default function MarketObservationAlerts({ placement = "home" }: { placement?: "home" | "market" }) {
++  const titleId = useId();
+   const [stored, setStored] = useState(readSeen);
+   const [nowDate, setNowDate] = useState(today);
+   const cn = useBreadth("CN_ALL_A");
+@@ -81,6 +88,7 @@
+   const fetching = erp.isFetching || cn.isFetching || us.isFetching;
+   const sources = [erp, cn, us];
+   const hrefs = [chartLink("erp"), chartLink("CN_ALL_A"), chartLink("SP500")];
++  const participation = [null, cn.data?.observation?.latest, us.data?.observation?.latest];
+ 
+   useEffect(() => {
+     const sync = (event?: StorageEvent) => {
+@@ -102,16 +110,17 @@
+       window.dispatchEvent(new Event(SEEN_EVENT));
+     } catch { setStored(previous => ({ ...previous, failed: true })); }
+   };
+-  return <section className="market-observation-alerts" aria-labelledby="moa-title">
+-    <header className="moa-header"><div><h2 id="moa-title">市场提醒</h2>
++  return <section className={`market-observation-alerts moa-placement-${placement}`} aria-labelledby={titleId}>
++    <header className="moa-header"><div><h2 id={titleId}>重点观察 · 宽度与股债</h2>
+       <span aria-live="polite">{newCount ? `${newCount}条新变化` : readyCount === 0 ? "当前提醒待资料更新"
+         : readyCount < monitored.length ? `${readyCount}/${monitored.length}项宽度资料可用 · 其余待更新` : "宽度暂无新穿越 · 股债仅历史观察"}</span></div>
+       <div className="moa-actions">{newCount > 0 && <button onClick={() => markRead(snapshots)}>全部已读</button>}
+         <button disabled={fetching} onClick={() => { void Promise.all([erp.refetch(), cn.refetch(), us.refetch()]); }}>{fetching ? "读取中…" : "刷新读数"}</button></div>
+     </header>
++    <p className="moa-intro">先看参与面、估值位置和越轨变化，再对照价格判断机会与风险。每项保留自己的数据日期。</p>
+     {stored.failed && <p className="moa-storage-error" role="status">浏览器未能保存已读状态，刷新后可能再次显示提醒。</p>}
+     <div className="moa-grid">{snapshots.map((s, i) => <AlertRow key={s.id} snapshot={s} href={hrefs[i]}
+-      pending={sources[i].isPending} onRead={() => markRead([s])} />)}</div>
++      pending={sources[i].isPending} participation={participation[i]} onRead={() => markRead([s])} />)}</div>
+     <details className="moa-rules"><summary>提醒口径与依据</summary><div>
+       <p>穿出上下界、重新回到界内时提示；持续在界外不重复报新变化。这里常驻显示读数，已读仅清除新变化标记。</p>
+       <p>股债轨道：<a href={ERP_BAND_METHOD.url} target="_blank" rel="noreferrer">国信证券三年均值±2σ方法</a>的独立参照版，现有周频资料仅供历史回看。
+--- web/src/components/market-observation-alerts/style.css (before v5)
++++ web/src/components/market-observation-alerts/style.css (after v5)
+@@ -1,26 +1,32 @@
+ .market-observation-alerts { flex: 0 0 auto; margin: 8px 18px 4px; padding: 12px 16px 8px; border: 1px solid #dce4ee; border-radius: 10px; background: #fff; color: #172b45; font-size: 12px; }
++.market-observation-alerts.moa-placement-market { margin: 0 0 18px; padding: 16px; }
++.moa-intro { margin: -2px 0 12px; color: #607088; font-size: 12px; line-height: 1.6; }
+ /* Keep the permanent section reachable when a small viewport or expanded detail exceeds the workbench height. */
+ .workspace:has(> .market-observation-alerts) { overflow-y: auto; }
+ .workspace:has(> .market-observation-alerts) > .ws-body { min-height: 250px; }
+ .moa-header, .moa-header > div, .moa-item-head, .moa-reading, .moa-bounds, .moa-item footer, .moa-new { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+ .moa-header { margin-bottom: 10px; }
+-.moa-header h2 { margin: 0; font-size: 14px; font-weight: 650; }
++.moa-header h2 { margin: 0; font-size: 16px; font-weight: 650; }
+ .moa-header > div > span { color: #7c6339; font-size: 11px; }
+ .market-observation-alerts button { min-height: 28px; padding: 3px 9px; border: 1px solid #dce4ee; border-radius: 5px; background: #fff; color: #2458c6; cursor: pointer; font-size: 11px; }
+ .market-observation-alerts button:disabled { color: #758395; cursor: default; }
+ .market-observation-alerts :is(button, a, summary):focus-visible { outline: 2px solid #2458c6; outline-offset: 3px; }
+ .moa-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+-.moa-item { min-width: 0; padding-right: 16px; border-right: 1px solid #e5ebf3; }
+-.moa-item:last-child { border-right: 0; padding-right: 0; }
+-.moa-item h3 { font-size: 12px; font-weight: 600; margin: 0; }
++.moa-item { min-width: 0; padding: 12px; border: 1px solid #e5ebf3; border-top: 3px solid #8296ac; border-radius: 7px; background: #f8fafc; }
++.moa-item.moa-zone-low, .moa-item.moa-kind-erp.moa-zone-high { border-top-color: #459384; background: #f1f8f6; }
++.moa-item.moa-zone-high, .moa-item.moa-kind-erp.moa-zone-low { border-top-color: #c59148; background: #fcf7ee; }
++.moa-item h3 { font-size: 13px; font-weight: 650; margin: 0; }
+ .moa-quality { font-size: 10px; color: #8b631d; background: #faf5e9; padding: 2px 5px; border-radius: 3px; white-space: nowrap; }
+ .moa-ready .moa-quality { color: #526c63; background: #f1f6f3; }
+ .moa-reading { margin: 6px 0 5px; align-items: baseline; flex-wrap: wrap; gap: 4px 8px; }
+-.moa-reading strong { font-size: 22px; line-height: 1.2; letter-spacing: -.5px; font-variant-numeric: tabular-nums; font-weight: 650; }
++.moa-reading strong { font-size: 28px; line-height: 1.2; letter-spacing: -.5px; font-variant-numeric: tabular-nums; font-weight: 650; }
+ .moa-reading small { font-size: 11px; font-weight: 400; margin-left: 3px; letter-spacing: 0; color: #607088; }
+-.moa-reading > span { color: #607088; font-size: 11px; }
++.moa-reading > span { color: #344862; font-size: 12px; font-weight: 600; }
+ .moa-bounds { justify-content: flex-start; gap: 20px; font-size: 11px; color: #607088; font-variant-numeric: tabular-nums; }
+ .moa-bounds b { color: #344862; font-weight: 600; margin-left: 4px; }
++.moa-participation { display: flex; flex-wrap: wrap; gap: 3px 6px; margin: 8px 0 4px; color: #607088; font-size: 11px; line-height: 1.5; }
++.moa-participation b { color: #344862; font-size: 12px; font-weight: 600; }
++.moa-participation small { flex-basis: 100%; font: inherit; font-variant-numeric: tabular-nums; }
+ .moa-meaning { margin: 6px 0 4px; color: #607088; line-height: 1.5; font-size: 11px; }
+ .moa-event { color: #8b631d; font-size: 11px; margin: 4px 0; }
+ .moa-ready .moa-event { color: #607088; }
+@@ -31,6 +37,9 @@
+ .market-observation-alerts a:hover { text-decoration: underline; }
+ .market-observation-alerts summary { cursor: pointer; color: #607088; font-size: 10px; }
+ .moa-history { margin-top: 5px; }
++.moa-last-change { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 6px; margin: 9px 0 4px; padding-top: 7px; border-top: 1px solid #dce4ee; color: #607088; font-size: 11px; line-height: 1.5; }
++.moa-last-change b { font-weight: 600; color: #344862; }
++.moa-last-change time { font-variant-numeric: tabular-nums; }
+ .moa-history p { margin: 5px 0 0; font-size: 11px; line-height: 1.6; color: #607088; }
+ .moa-rules { border-top: 1px solid #edf1f6; margin-top: 9px; padding-top: 6px; }
+ .moa-rules > div { max-width: 1000px; }
+@@ -43,9 +52,8 @@
+   .moa-header { align-items: flex-start; gap: 4px; }
+   .moa-header > div:first-child { flex-direction: column; align-items: flex-start; gap: 3px; }
+   .moa-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+-  .moa-item { padding: 0 0 9px; border-right: 0; border-bottom: 1px solid #e5ebf3; }
+-  .moa-item:last-child { padding-bottom: 0; border-bottom: 0; }
++  .moa-item { padding: 10px 12px; }
+   .moa-item-head { flex-direction: row; align-items: center; }
+-  .moa-reading strong { font-size: 20px; }
++  .moa-reading strong { font-size: 26px; }
+   .moa-meaning { margin-top: 5px; }
+ }
+--- web/src/components/observation-library/projectionView.tsx (before v5)
++++ web/src/components/observation-library/projectionView.tsx (after v5)
+@@ -137,12 +137,22 @@
+   const navigate = useNavigate();
+   const [choice, setChoice] = useState("breadth");
+   const card = useRef<HTMLElement>(null);
++  const previousMarket = useRef(market);
+   const selected = PROJECTION_METRICS.find((item) => item.id === choice);
+   const id = !selected || selected.market === market ? choice : "breadth";
+-  const selectUrl = (next: string) => {
++  const selectUrl = (next: string, nextMarket: Market) => {
+     const params = new URLSearchParams(location.search);
+-    if (next === "breadth") params.delete("observation"); else params.set("observation", next);
++    params.set("observation", next);
++    params.set("market", nextMarket);
+     navigate({ search: params.toString(), hash: "#fund-sec-market" }, { replace: true });
++  };
++  const selectObservation = (next: string) => {
++    const entry = PROJECTION_METRICS.find((item) => item.id === next);
++    const nextMarket = entry?.market ?? market;
++    setChoice(next);
++    if (nextMarket !== market) onMarketChange(nextMarket);
++    selectUrl(next, nextMarket);
++    requestAnimationFrame(() => card.current?.scrollIntoView({ block: "start" }));
+   };
+   useEffect(() => {
+     const params = new URLSearchParams(location.search);
+@@ -161,7 +171,15 @@
+     return () => cancelAnimationFrame(frame);
+   }, [location.search, onMarketChange]);
+   useEffect(() => {
+-    if (selected && selected.market !== market) { setChoice("breadth"); selectUrl("breadth"); }
++    if (previousMarket.current === market) return;
++    previousMarket.current = market;
++    if (selected && selected.market !== market) {
++      setChoice("breadth");
++      selectUrl("breadth", market);
++    } else if (choice === "breadth") {
++      const params = new URLSearchParams(location.search);
++      if ((!params.has("observation") || params.get("observation") === "breadth") && params.get("market") !== market) selectUrl("breadth", market);
++    }
+   }, [market]);
+   useEffect(() => {
+     // Existing Agent snapshot knows breadth only; do not bind it to an unrelated selected model.
+@@ -169,12 +187,7 @@
+   }, [id, onContextChange]);
+   return <section className="observation-projection" ref={card} aria-label="价格与指标对照">
+     <header className="op-header"><div><h2>价格与指标对照</h2><p>{id === "erp-cn" ? "上方看股债利差与三年轨道，下方看股指价格；日期、光标与缩放联动。" : "上方看价格，下方看指标；日期、光标与缩放联动。"}</p></div>
+-      <label>观察指标<select aria-label="选择对照指标" value={id} onChange={(e) => {
+-        const next = e.target.value; setChoice(next);
+-        const entry = PROJECTION_METRICS.find((item) => item.id === next);
+-        if (entry) onMarketChange(entry.market);
+-        selectUrl(next);
+-      }}><option value="breadth">市场宽度 · {market === "cn" ? "全A" : "标普500"}</option>
++      <label>观察指标<select aria-label="选择对照指标" value={id} onChange={(e) => selectObservation(e.target.value)}><option value="breadth">市场宽度 · {market === "cn" ? "全A" : "标普500"}</option>
+         {OBSERVATION_SECTIONS.map((section) => {
+           const items = PROJECTION_METRICS.filter((item) => {
+             const entry = OBSERVATION_BY_ID.get(item.id);
+@@ -186,6 +199,15 @@
+         })}
+       </select></label>
+     </header>
++    <div className="op-quick" role="group" aria-label={`${market === "cn" ? "A股" : "美股"}常用对照`}>
++      <span>快速查看</span>
++      <button type="button" aria-pressed={id === "breadth"} onClick={() => selectObservation("breadth")}>市场宽度 · {market === "cn" ? "全A" : "标普500"}</button>
++      <button type="button" aria-pressed={id === (market === "cn" ? "erp-cn" : "erp-us")} onClick={() => selectObservation(market === "cn" ? "erp-cn" : "erp-us")}>{market === "cn" ? "沪深300股债利差 · 上下轨" : "标普500股债利差 · 原值"}</button>
++      {market === "us" && <>
++        <button type="button" aria-pressed={id === "vix"} onClick={() => selectObservation("vix")}>VIX</button>
++        <button type="button" aria-pressed={id === "hy-oas"} onClick={() => selectObservation("hy-oas")}>高收益债利差</button>
++      </>}
++    </div>
+     {id === "breadth" ? <BreadthComparison market={market} onMarketChange={onMarketChange} onContextChange={onContextChange} />
+       : id === "erp-cn" ? <ErpCrossChart /> : <MetricProjection id={id} market={market} />}
+   </section>;
+--- web/src/components/observation-library/projection.css (before v5)
++++ web/src/components/observation-library/projection.css (after v5)
+@@ -3,6 +3,11 @@
+ .op-header h2 { margin: 0; font-size: 15px; font-weight: 650; }
+ .op-header p, .op-footnote, .op-source, .op-reading > span { color: var(--text-secondary); font-size: 11px; line-height: 1.65; }
+ .op-header p { margin: 5px 0 0; }
++.op-quick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 14px 0 2px; }
++.op-quick > span { margin-right: 2px; font-size: 11px; color: var(--text-secondary); }
++.op-quick button { padding: 6px 10px; border: 1px solid var(--border-subtle); border-radius: 6px; background: var(--bg-panel); color: var(--text-secondary); font: inherit; font-size: 12px; line-height: 1.4; cursor: pointer; }
++.op-quick button[aria-pressed=true] { border-color: var(--accent); background: var(--bg-card-hover); color: var(--text-primary); font-weight: 600; }
++.op-quick button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ .op-header label, .op-controls label { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-secondary); }
+ .observation-projection select { max-width: 100%; min-width: 0; padding: 6px 8px; border: 1px solid var(--border-subtle); border-radius: 5px; background: var(--bg-panel); color: var(--text-primary); font: inherit; }
+ .op-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin: 14px 0 10px; }
+@@ -24,5 +29,5 @@
+ .op-open-link { display: inline-block; margin: 10px 0; font-size: 12px; color: var(--accent); }
+ .observation-projection .breadth-comparison { background: transparent; border: 0; border-radius: 0; padding: 12px 0 0; }
+ .observation-projection .bc-heading h2, .observation-projection .bc-heading p { display: none; }
+-@media (max-width: 600px) { .observation-projection { padding: 14px 10px; } .op-header label { width: 100%; } .op-header select { flex: 1; } .op-chart { height: 420px; } }
++@media (max-width: 600px) { .observation-projection { padding: 14px 10px; } .op-header label { width: 100%; } .op-header select { flex: 1; } .op-quick > span { width: 100%; } .op-chart { height: 420px; } }
+ @media (max-width: 600px) { .observation-projection { scroll-margin-top: 155px; } }
+--- web/src/components/observation-library/catalog.ts (before v5)
++++ web/src/components/observation-library/catalog.ts (after v5)
+@@ -55,8 +55,8 @@
+   entry("cash-earnings", "C19", "现金与利润匹配", "global", "earnings", 23, "看利润是否有经营现金支持。", "需分行业及成长投资情景，旧公开组合效果不能代替本地同池。"),
+   entry("earnings-concentration", "C20", "指数盈利贡献集中度", "global", "earnings", 24, "看利润主要由少数公司或行业贡献吗。", "历史权重和可比盈利缺失，总利润接近零时比例会失真。"),
+   entry("hs300-pe", "C21", "沪深300 PE_TTM", "cn", "valuation", 30, "看沪深300估值在自身历史中的位置。", "只对应沪深300；历史分位和亏损公司处理需按来源读。", true),
+-  entry("erp-cn", "C21", "沪深300股债利差", "cn", "valuation", 30, "比较沪深300盈利收益率与中国10年国债利率。", "三年均值±2σ，上轨相对便宜、下轨相对偏贵；有据参照版，尚非原视频逐点复刻。", true),
+-  entry("erp-us", "C21", "标普500股债利差", "us", "valuation", 31, "比较标普500盈利收益率与美国10年国债利率。", "复用基本面股债收益差；盈利端历史为月频，不代表纳指100或每日新增盈利信息。", true),
++  entry("erp-cn", "C21", "沪深300股债利差 · 三年上下轨", "cn", "valuation", 30, "比较沪深300盈利收益率与中国10年国债利率。", "三年均值±2σ，上轨相对便宜、下轨相对偏贵；有据参照版，尚非原视频逐点复刻或已验证买卖信号。", true),
++  entry("erp-us", "C21", "标普500股债利差 · 原值", "us", "valuation", 31, "比较标普500盈利收益率与美国10年国债利率。", "复用基本面股债收益差；盈利端历史为月频，无合格上下轨，不代表纳指100、每日新增盈利信息或已验证买卖信号。", true),
+   entry("sp500-cape", "C21", "美国 Shiller CAPE", "us", "valuation", 31, "看美国长期平滑盈利估值的位置。", "对应Shiller美国市场估值口径，不等于纳指或某只ETF。", true),
+   entry("chinext-pe", "C21", "创业板指估值", "cn", "valuation", 32, "看创业板指自身估值和历史位置。", "该指数独立估值原件、分位窗口及亏损处理尚未接通。"),
+   entry("star50-pe", "C21", "科创50估值", "cn", "valuation", 33, "看科创50自身估值和历史位置。", "科创50不是科创板全体；独立估值序列尚未接通。"),
+@@ -77,6 +77,7 @@
+ // Reading priority is shared by the library, home and price comparison menu.
+ // It describes a reading workflow, not predictive strength or live-data availability.
+ export const OBSERVATION_SECTIONS = [
++  { id: "focus", label: "重点对照", note: "先看股债估值背景；A股三年轨道与美股原值的资料边界不同" },
+   { id: "daily", label: "常用观察", note: "先看波动、信用和融资热度" },
+   { id: "weekly", label: "每周补充", note: "再看投资者意见与管理人仓位" },
+   { id: "background", label: "慢周期背景", note: "估值、月度情绪与经济环境" },
+@@ -87,6 +88,7 @@
+ 
+ export function observationSection(item: ObservationEntry): ObservationSection {
+   if (!item.readable) return "pending";
++  if (["erp-cn", "erp-us"].includes(item.id)) return "focus";
+   if (["downside-price-impact", "salience-str", "smallcap-turnover", "focus-momentum", "nfci"].includes(item.id)) return "historical";
+   if (["vix", "hy-oas", "ofr-fsi", "vxn", "cn-financing"].includes(item.id)) return "daily";
+   if (["aaii", "naaim"].includes(item.id)) return "weekly";
+@@ -94,8 +96,8 @@
+ }
+ 
+ const READING_ORDER = [
+-  "vix", "hy-oas", "cn-financing", "ofr-fsi", "vxn", "aaii", "naaim",
+-  "turnover-concentration", "erp-cn", "erp-us", "hs300-pe", "sp500-cape", "baker-wurgler", "finra-margin", "pmi-cn", "wei",
++  "erp-cn", "erp-us", "vix", "hy-oas", "cn-financing", "ofr-fsi", "vxn", "aaii", "naaim",
++  "turnover-concentration", "hs300-pe", "sp500-cape", "baker-wurgler", "finra-margin", "pmi-cn", "wei",
+   "downside-price-impact", "salience-str", "smallcap-turnover", "focus-momentum", "nfci", "csi300-etf-float-ratio", "etf-shares",
+   "earnings-revisions", "earnings-breadth", "equal-weight-spread", "industry-diffusion",
+   "chinext-pe", "star50-pe", "nasdaq100-pe", "profitability-breadth", "earnings-concentration",
+--- web/src/components/market-style/BreadthComparison.tsx (before v5)
++++ web/src/components/market-style/BreadthComparison.tsx (after v5)
+@@ -302,6 +302,7 @@
+     </div>
+     <p className="bc-scope">{market === "cn" ? `全A股票宽度 × ${PRICE_NAMES[priceKey]}价格` : `标普500股票样本宽度 × ${PRICE_NAMES[priceKey]}价格`}</p>
+     <p className={`bc-dates${breadthBehindPrice ? " bc-stale" : ""}`}>价格截至 {lastPriceDate ?? "未提供"} · 宽度截至 {lastBreadthDate ?? "未提供"}{breadthBehindPrice ? "（宽度后续缺失；图上留白）" : ""}</p>
++    {market === "cn" && <p className="bc-caption">数据修复：2026-08-19—10-30已按同一来源重建；历史分位仅作观察参考。<a href="/library?report=docs%2Fexperiments%2Fbreadth-erp-ma200-increment-review-2026-11-02.md">口径与核验 →</a></p>}
+     {breadth.isPending || overlay.isPending ? <p className="bc-state" role="status">正在读取历史曲线…</p> : null}
+     {breadth.isError || overlay.isError ? <p className="bc-state bc-error" role="alert">{breadth.isError ? "宽度历史读取失败。" : "指数价格历史读取失败。"}暂不能显示同期对照。</p> : null}
+     {!breadth.isPending && !overlay.isPending && !breadth.isError && !overlay.isError && (!view.dates.length || !view.breadth.some((line) => line.some(exists))) &&
+@@ -333,6 +334,6 @@
+       <span>数值标记（默认关闭）：</span>{BREADTH_HIGHLIGHT_RULES.map((rule) => <button key={rule.key} type="button" aria-pressed={active.has(rule.key)} onClick={() => toggle(rule.key)} title={rule.full}><span className="bc-rule-dot" style={{ background: rule.color }} aria-hidden="true" />{numericRuleLabel(rule.key, market)}</button>)}
+     </div><p className="bc-caption">条件色带同时标在价格与宽度上；它们只是数值筛选，未验证为顶底或收益信号。20日宽度不参与这六项旧筛选。</p></details>
+     <p className="bc-caption"><a href="/fundamentals?section=overlay#fund-sec-overlay">原长周期叠加：指数 × 利率／两融／VIX →</a></p>
+-    <details className="bc-source"><summary>轨道口径、状态依据与来源</summary><p>历史轨道采用截至所示日期最近1260个有效读数（含当日）的10%、50%、90%分位，至少252个有效值才显示；它描述历史分布，不是预测区间。历史百分位采用不高于当日值的样本比例；变化比较5条记录前，不承诺等于5个交易日。缺值留白，不填补。</p><p>“上涨参与延续”表示20/50日宽度均回升且三周期均≥50%；“低位修复／高位回落”表示此前5条记录中20/50日宽度曾同处固定低位／高位，目前均反向变化。其余状态描述参与回升、收缩或分歧。状态依据固定经验值（A股20/80、美股15/85），越轨事件依据历史分位，两者含义不同。当前没有100日宽度数据。</p><p>宽度是股票中有多少比例站在各自均线上方。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源，也不为本图的分位参数背书。</p><p>价格与宽度沿用现有接口，严格同日对齐。全A宽度不是沪深300成分股专属宽度，美股沿用标普500股票样本，尚非逐日还原的官方成分股，也非纳指专属宽度。当前接口未给出逐日完整覆盖率；这些限制会影响历史对照。新轨道和状态仅帮助读图，尚无顶底识别或收益增量验证。</p></details>
++    <details className="bc-source"><summary>轨道口径、状态依据与来源</summary><p>历史轨道采用截至所示日期最近1260个有效读数（含当日）的10%、50%、90%分位，至少252个有效值才显示；它描述历史分布，不是预测区间。历史百分位采用不高于当日值的样本比例；变化比较5条记录前，不承诺等于5个交易日。缺值留白，不填补。</p><p>“上涨参与延续”表示20/50日宽度均回升且三周期均≥50%；“低位修复／高位回落”表示此前5条记录中20/50日宽度曾同处固定低位／高位，目前均反向变化。其余状态描述参与回升、收缩或分歧。状态依据固定经验值（A股20/80、美股15/85），越轨事件依据历史分位，两者含义不同。当前没有100日宽度数据。</p><p>宽度是股票中有多少比例站在各自均线上方。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源，也不为本图的分位参数背书。</p>{market === "cn" && <p>2026-11-02修复记录：08-19至10-30按当日取得的5,577只股票名单回看，以WeStock前复权日线统一重建；各周期分别排除当日非交易股票及上市后有效记录不足的新股。它不是逐日历史成员还原。更早的旧记录保留原值；本次补齐不代表长期分位阈值已通过效果验证。</p>}<p>价格与宽度沿用现有接口，严格同日对齐。全A宽度不是沪深300成分股专属宽度，美股沿用标普500股票样本，尚非逐日还原的官方成分股，也非纳指专属宽度。当前接口未给出逐日完整覆盖率；这些限制会影响历史对照。新轨道和状态仅帮助读图，尚无顶底识别或收益增量验证。</p></details>
+   </section>;
+ }

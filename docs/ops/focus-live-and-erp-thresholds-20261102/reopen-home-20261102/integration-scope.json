@@ -1,0 +1,24 @@
+{
+  "reason": "New same-supplier600rawresponse ledger has arrived; narrow integration authorized by user data-gap request",
+  "priorContinuationRuns": 4,
+  "previousFailedLogins": 2,
+  "thisStageNewLogins": 1,
+  "rawQueries": 600,
+  "financialExperiments": 0,
+  "newContinuationRunLimit": 1,
+  "repairLimit": 2,
+  "invariants": [
+    "base observation immutable",
+    "193 continuation rows unchanged",
+    "23 frozen overlap rows match",
+    "original stock_windows + amount rank + equal mean unchanged",
+    "adjustment break excludes windows; no synthesized factors"
+  ],
+  "writes": [
+    "src/lei_signal/research/focus_recent.py",
+    "tests/unit/test_focus_recent.py",
+    "web/public/research/focus-momentum/continuation.v1.json"
+  ],
+  "dataResult": "data/data-result.json",
+  "dataResultSha256": "1d0b03ac832539f893d821b56e4d01b0965185d80c968b3edaf65b5b09b28fb7"
+}

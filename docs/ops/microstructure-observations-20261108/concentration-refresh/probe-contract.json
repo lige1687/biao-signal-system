@@ -1,0 +1,66 @@
+{
+  "mission": "有界探测集中度缺股和11月初逐股成交额公开来源可得性，保留原件与请求账",
+  "task_scope": [
+    "复用v17补10月的资格核查",
+    "用少量公开API请求核缺股和11/2—6的历史amount可得性",
+    "交付取全近期沪深A股所需总请求/体积/时长估计",
+    "可探一个历史缺股sh600696在2023年空白的可得性；不抓完整历史或完整全市场"
+  ],
+  "path_base": "/",
+  "execution_cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/market_context/microstructure_equity.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/diagnosis.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/twenty-year-universe-data-20261025"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/probe.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/probe-result.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/probe-ledger.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108"
+  ],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "逐请求URL/参数/状态/字节/SHA/原件路径",
+    "请求不同日期得到的真实末日与缺股行情况",
+    "至少一个新旧重叠日amount和单位核对",
+    "给根任务明确新数据全量工程预算"
+  ],
+  "stop_conditions": [
+    "28次来源请求或28MiB响应或5分钟网络窗口",
+    "两个同类外部失败或限流后不原样重试",
+    "需付费/凭证扩权/修改旧源/超范围"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "budget": {
+    "totalProbeWithRoot": {
+      "requests": 30,
+      "bytes": 31457280,
+      "seconds": 300
+    },
+    "worker": {
+      "requests": 28,
+      "bytes": 29360128,
+      "seconds": 300
+    },
+    "root": {
+      "sourceSearchRequests": 2,
+      "bytes": 2097152
+    }
+  },
+  "externalVolumeUuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+  "internalWriteBudgetBytes": 10485760,
+  "notes": "Network cap includes failures and retries; login/logout with network count. Dry-run read-only external root needs exact narrower diagnostic input references; old archives remain read-only by scope. Current entire task backup already8.5MB; new probe code/records <100KB.",
+  "external_read_only_root": "Volumes/win+mac通用/LeiSignal-新实验结果"
+}

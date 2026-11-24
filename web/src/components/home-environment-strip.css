@@ -1,0 +1,593 @@
+/* 首页第1步：大环境水位（8张卡片完全统一格式，4×2 对齐矩阵：左2列A股 / 右2列美股） */
+.hes-wrap {
+  margin: 6px 18px 4px;
+  padding: 10px 14px 8px;
+  background: var(--bg-panel, #fff);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.hes-wrap.is-collapsed {
+  padding: 5px 12px;
+}
+.hes-wrap.hes-full-mode {
+  margin: 0 0 14px;
+}
+.hes-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  min-height: 28px;
+}
+.hes-bar-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  flex-shrink: 0;
+}
+.hes-bar-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 5px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 11.5px;
+  line-height: 1.3;
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  transition: background 0.12s, border-color 0.12s;
+}
+.hes-bar-pill:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+.hes-bar-pill.supportive {
+  background: #eefaf6;
+  border-color: rgba(15, 118, 110, 0.3);
+  color: #0f685e;
+}
+.hes-bar-pill.caution {
+  background: #fffbeb;
+  border-color: rgba(217, 119, 6, 0.42);
+  color: #92400e;
+}
+.hes-bar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #64748b;
+  flex-shrink: 0;
+}
+.hes-bar-pill.supportive .hes-bar-dot { background: #0f766e; }
+.hes-bar-pill.caution .hes-bar-dot { background: #d97706; }
+.hes-bar-mkt { font-weight: 600; }
+.hes-bar-pill b { font-weight: 650; }
+.hes-bar-kv {
+  font-size: 11px;
+  opacity: 0.8;
+  padding-left: 6px;
+  border-left: 1px solid rgba(100, 116, 139, 0.25);
+}
+.hes-bar-actions {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.hes-help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: help;
+}
+
+.hes-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.hes-head-left {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hes-step-tag {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--accent);
+  background: #edf3ff;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+}
+
+.hes-head-left h2 {
+  margin: 0;
+  font-size: var(--fs-title);
+  font-weight: 650;
+  color: var(--text-primary);
+}
+
+.hes-guide {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+.hes-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hes-link {
+  font-size: var(--fs-xs);
+  color: var(--accent);
+  text-decoration: none;
+  padding: 2px 5px;
+}
+.hes-link:hover {
+  text-decoration: underline;
+}
+
+/* 中美四维交叉判读卡片（左对A股2列，右对美股2列；突出结论与关键指标依据，严格避开BIAO绿） */
+.hes-combo-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.hes-combo-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  padding: 7px 11px;
+  border-radius: var(--radius-md);
+  background: #fbfcfe;
+  border: 1px solid #e2e8f0;
+  border-left: 3.5px solid #64748b;
+  color: var(--text-primary);
+}
+.hes-combo-banner.supportive {
+  border-left-color: #0f766e;
+}
+.hes-combo-banner.caution {
+  border-left-color: #d97706;
+}
+
+.hes-combo-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 5px;
+}
+
+.hes-combo-market {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e293b;
+  white-space: nowrap;
+}
+
+.hes-combo-verdict {
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  padding: 1px 7px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+.hes-combo-banner.supportive .hes-combo-verdict {
+  background: #e6f4f1;
+  color: #0f685e;
+  border-color: rgba(15, 118, 110, 0.28);
+}
+.hes-combo-banner.caution .hes-combo-verdict {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: rgba(217, 119, 6, 0.35);
+}
+
+.hes-combo-chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px 5px;
+  margin-left: auto;
+}
+
+.hes-combo-jump {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #1d5f8a;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.hes-combo-jump:hover {
+  background: #f0f6fc;
+  border-color: #93b4d1;
+}
+
+.hes-evi-chip {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 10.5px;
+  line-height: 1.3;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.hes-evi-chip i {
+  font-style: normal;
+  color: #64748b;
+  margin-right: 3px;
+}
+.hes-evi-chip b {
+  font-weight: 600;
+  color: #334155;
+}
+.hes-evi-chip.warn b {
+  color: #9a4d0c;
+}
+.hes-evi-chip.good b {
+  color: #0f685e;
+}
+
+.hes-combo-bottom {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.hes-combo-arrow {
+  font-size: 10.5px;
+  font-weight: 650;
+  color: #475569;
+  background: #eef2f6;
+  padding: 0 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.hes-combo-lead {
+  color: #64748b;
+}
+
+.hes-combo-hl {
+  font-weight: 700;
+  color: #0f172a;
+  padding: 0 3px;
+  border-radius: 2px;
+  background: linear-gradient(transparent 56%, rgba(148, 163, 184, 0.25) 56%);
+}
+.hes-combo-banner.caution .hes-combo-hl {
+  background: linear-gradient(transparent 56%, rgba(251, 191, 36, 0.34) 56%);
+}
+.hes-combo-banner.supportive .hes-combo-hl {
+  background: linear-gradient(transparent 56%, rgba(45, 212, 191, 0.28) 56%);
+}
+
+.hes-combo-tail {
+  color: #64748b;
+  font-size: 11.5px;
+}
+
+/* 8张卡统一网格：桌面4列×2行，窄屏2列×4行，上下行每一列严格同宽同结构 */
+.hes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hes-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 8px 11px 7px;
+  background: #fafbfd;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.hes-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.hes-card-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hes-card-top-right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+/* 状态标签严格避开 BIAO 绿/黑，仅使用冷静蓝/暖琥珀/中性灰 */
+.hes-stance {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.35;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: #eef2f7;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.hes-stance.supportive {
+  background: #e8f0fb;
+  color: #1f4f99;
+}
+.hes-stance.caution {
+  background: #fdf2e6;
+  color: #9a5212;
+}
+
+.hes-zoom-btn {
+  padding: 1px 6px;
+  min-height: 22px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.hes-zoom-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* 单值主读数行（6张单主线卡共用） */
+.hes-value-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 4px 0 2px;
+  min-height: 23px;
+}
+
+.hes-val {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.hes-val small {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-left: 3px;
+}
+
+.hes-meta-inline {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.hes-meta-inline b {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.hes-meta-inline time,
+.hes-date-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 市场宽度三周期读数行（与单值主读数行同高对齐） */
+.hes-breadth-vals {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 4px 0 2px;
+  min-height: 23px;
+}
+
+.hes-breadth-triplet {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.hes-b-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2.5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.hes-b-chip i {
+  display: inline-block;
+  width: 6px;
+  height: 2.5px;
+  border-radius: 1px;
+  vertical-align: middle;
+  transform: translateY(-2px);
+}
+.hes-b-chip em {
+  font-style: normal;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.hes-b-chip strong {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+.hes-b-chip b {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 单行参考轨道摘要（8张卡同高对齐） */
+.hes-rail-line {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  min-height: 16px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.hes-rail-line i {
+  font-style: normal;
+  font-size: 10px;
+  margin-right: 2px;
+  color: var(--text-muted);
+}
+.hes-rail-line b {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.hes-rail-line b.rail-low {
+  color: #986737;
+}
+.hes-rail-line b.rail-high {
+  color: #2f756b;
+}
+.hes-ref-muted {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+.hes-dot {
+  color: var(--text-muted);
+}
+
+/* 图表区：8张卡全部使用 320:92 原生比例满宽铺开，上下排图框完全同尺寸 */
+.hes-card .moa-mini {
+  margin-top: auto;
+}
+.hes-card .moa-mini svg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 320 / 92;
+  display: block;
+  background: #fff;
+  border: 1px solid #edf1f6;
+  border-radius: 5px;
+}
+.hes-card .moa-mini-dates {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  font-size: 10px;
+  line-height: 1.2;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.hes-card .moa-mini-empty {
+  width: 100%;
+  aspect-ratio: 320 / 92;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  background: #f3f6fa;
+  border-radius: var(--radius-sm);
+}
+
+/* 底部一句话结论（8张卡同高对齐） */
+.hes-takeaway {
+  margin: 4px 0 0;
+  padding-top: 4px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hes-takeaway b {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.hes-note-row {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.hes-more-drawer {
+  margin: 4px 18px 6px;
+}
+
+@media (max-width: 920px) {
+  .hes-combo-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .hes-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

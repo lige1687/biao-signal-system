@@ -1,0 +1,786 @@
+{
+  "schema_version": "stock-price-scale-and-membership-qualification/1.0.0",
+  "checked_at_utc": "2026-10-06T18:04:01.825464+00:00",
+  "scope": "439-code historical CSI300 candidate source qualification only; no effect tests",
+  "purpose_layer": "Technical price/quantity observation input and historical cross-sectional membership qualification; no strategy rule change",
+  "primary_wide_close": {
+    "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_full.parquet",
+    "bytes": 49432584,
+    "sourcehash": "5ad045c518d0bb4394d8c8cb946d207ad9b5b1454e5a776b1a3766c62b475b04",
+    "hash_algorithm": "sha256",
+    "filesystem_mtime_utc_not_retrieval_time": "2026-08-27T16:08:04.820148+00:00",
+    "observed_footer": {
+      "created_by": "parquet-cpp-arrow version 24.0.0",
+      "rows": 8714,
+      "row_groups": 1,
+      "pandas_creator": {
+        "library": "pyarrow",
+        "version": "24.0.0"
+      },
+      "pandas_version": "2.3.3",
+      "index_columns": [
+        "date"
+      ],
+      "metadata_keys": [
+        "ARROW:schema",
+        "pandas"
+      ]
+    }
+  },
+  "primary_candidate_membership": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+    "bytes": 136179,
+    "sourcehash": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30",
+    "hash_algorithm": "sha256",
+    "filesystem_mtime_utc_not_retrieval_time": "2026-09-09T10:13:21.464509+00:00"
+  },
+  "code_list": {
+    "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes_cached.json",
+    "bytes": 55430,
+    "sourcehash": "cf6ea5486a358be0cba7e74d2de3ee10a782237b2faea8862864ba6b29e8a237",
+    "hash_algorithm": "sha256",
+    "filesystem_mtime_utc_not_retrieval_time": "2026-08-16T15:57:54.970203+00:00",
+    "code_count": 5543,
+    "historical_membership": false
+  },
+  "reused_coverage_after_exact_sourcehash_match": {
+    "formal_first": "2022-01-04",
+    "formal_last": "2026-06-30",
+    "candidate_dates": 1085,
+    "candidate_code_count": 439,
+    "candidate_rows": 325500,
+    "positive_close_candidate_member_keys": 323556,
+    "missing_keys_original": 1944,
+    "columns_present": 436,
+    "columns_absent": [
+      "600705",
+      "600837",
+      "601989"
+    ],
+    "wide_rows": 8714,
+    "wide_columns": 5211,
+    "wide_first": "1990-12-19",
+    "wide_last": "2026-08-27",
+    "complete_week_ends": 228,
+    "month_ends": 54,
+    "unique_period_ends": 252
+  },
+  "current1944_source_partition": {
+    "normal_raw_observation": 1601,
+    "provider_status0_placeholder": 305,
+    "never_queried": 34,
+    "queried_no_return": 4
+  },
+  "B04_cloud_independent_review_status": "pending parent review; exact local capture/classification reused, not represented as cloud-approved",
+  "normal1601_by_code": [
+    {
+      "symbol": "600705",
+      "old_gap": 9,
+      "normal": 9,
+      "placeholder": 0,
+      "never_queried": 0,
+      "queried_no_return": 0
+    },
+    {
+      "symbol": "600837",
+      "old_gap": 767,
+      "normal": 728,
+      "placeholder": 36,
+      "never_queried": 0,
+      "queried_no_return": 3
+    },
+    {
+      "symbol": "601989",
+      "old_gap": 892,
+      "normal": 864,
+      "placeholder": 27,
+      "never_queried": 0,
+      "queried_no_return": 1
+    }
+  ],
+  "normal1601_original_classification_source": {
+    "archive": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/b03-remaining-gaps-2026-10-06/inputs/LeiSignal-B01-B02-audit-remaining-keys-2026-10-05.zip",
+      "bytes": 21329,
+      "sourcehash": "3ed11716738a46f4b544a2551048fb178b2e7bf885a012162021592a756fa9e7",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-10-06T13:58:14.050739+00:00"
+    },
+    "member": "all-34-gap-classification.csv",
+    "member_sha256": "a7073c31d01ea5bc17520c025c9cbe3577ab7b20272dfc48a84ff107eb0dae02"
+  },
+  "producer_chain": {
+    "production_script": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/backfill_breadth_full.py",
+      "bytes": 11825,
+      "sourcehash": "3f4805526e4e7792c5c197b833d9839ab6d569ec8497cc52d02bb007ca7546e3",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-03T15:26:48.737240+00:00"
+    },
+    "documented_generation_command_not_proven_actual_run": "python scripts/backfill_breadth_full.py --market cn [--workers8]",
+    "observed_call": "ak.stock_zh_a_daily(symbol=(sh if code starts6 else sz)+six_digit_code,adjust=qfq)",
+    "start_end_arguments": "Not supplied by production caller; current installed default19900101..21000118, historical installed version not captured",
+    "primary_vendor": "Sina, through AKShare; not Eastmoney, BaoStock or Tencent for the documented original wide-table path",
+    "original_raw_vendor_response_saved": false,
+    "original_qfq_factor_response_saved": false,
+    "per_security_retrieved_at_saved": false,
+    "actual_adjustment_anchor_date": null,
+    "actual_generation_command_log": null,
+    "resume_policy": "Read old per-code non-null series and skip every existing code entirely; only fetch new/missing codes; existing column tails are not refreshed by this script",
+    "git_aug23_commit": "407573b4",
+    "git_aug23_producer_script_sha256": "500d65ff2c1beae20f8c815012fc81f97638b4f74e1edd52ff56a1e625bb24fe",
+    "current_producer_functions_text_equal_to_aug23": {
+      "_fetch_cn_close": true,
+      "_fetch_all": true,
+      "run_cn": false,
+      "_save_pivot": true
+    },
+    "run_cn_only_difference_observed": "Output breadth JSON filename changed; cached/current code selection algorithm unchanged",
+    "installed_current_akshare_version": "1.18.49",
+    "installed_current_sina_source": {
+      "path": "/opt/homebrew/lib/python3.11/site-packages/akshare/stock/stock_zh_a_sina.py",
+      "bytes": 18375,
+      "sourcehash": "7b28b6dd61fc3fbdae0cc69f745289ca3869484d39f4c3072359d18655ac49e8",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-03-29T16:05:08.531209+00:00"
+    },
+    "installed_current_sina_constants": {
+      "path": "/opt/homebrew/lib/python3.11/site-packages/akshare/stock/cons.py",
+      "bytes": 43453,
+      "sourcehash": "3899402e16d448b2bde482737ec1fe5824826ef0c110742b1237c3b211294447",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-03-29T16:05:08.525064+00:00"
+    },
+    "current_sina_qfq_formula_source": "Merge factor table, forward-fill, divide each nominal OHLC by qfq_factor, round to2decimals, drop missing/duplicate observations; code inspected only, not executed",
+    "current_sina_request_templates": {
+      "nominal": "https://finance.sina.com.cn/realstock/company/{symbol}/hisdata_klc2/klc_kl.js",
+      "qfq_factor": "https://finance.sina.com.cn/realstock/company/{symbol}/qfq.js"
+    },
+    "current_code_cannot_certify_original_installed_version": "Current package/Parquet writer metadata are observed facts, not saved original download environment",
+    "separate_possible_writer": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/refresh_timing_matrix.py",
+      "bytes": 1815,
+      "sourcehash": "65aa64341c28e9de9b314f88fd099b8a86f6a520c16a1d993229a873232c5a0b",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-01T02:52:19.713663+00:00"
+    },
+    "separate_possible_writer_policy": "Append only dates after wide max from Tencent long cache; no provenance/anchor/branch validation. Exists as code, not evidence it ran on this frozen wide table",
+    "current_wide_tail_does_not_show_refresh_to_long_tail": "Wide ends2026-08-27; earlier qualified long table ends2026-09-30. No assertion of actual Tencent/Sina mixing without a run receipt"
+  },
+  "core_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/backfill_breadth_full.py",
+      "bytes": 11825,
+      "sourcehash": "3f4805526e4e7792c5c197b833d9839ab6d569ec8497cc52d02bb007ca7546e3",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-03T15:26:48.737240+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/refresh_timing_matrix.py",
+      "bytes": 1815,
+      "sourcehash": "65aa64341c28e9de9b314f88fd099b8a86f6a520c16a1d993229a873232c5a0b",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-01T02:52:19.713663+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/market_context/a_share_breadth.py",
+      "bytes": 27847,
+      "sourcehash": "1c224f23bdbfd468da4c81af6a4e1eaa856b93c336d200203d80c8ef13fb0f2b",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-06T16:34:10.373826+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/precompute_a_share_ma.py",
+      "bytes": 6298,
+      "sourcehash": "f201e8cd3c7ee89d9750156c17e3cb0414b6b3e90e5aee3e1185118088382a63",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-08-16T13:26:17.767128+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepare_data.py",
+      "bytes": 17731,
+      "sourcehash": "16e0f937a68c09a70eb672ee76c766a26793aced5a77ba34f0433753a5e12f7b",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-09T10:15:44.431657+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_probe_audit.json",
+      "bytes": 3351,
+      "sourcehash": "163424317ba3b0b27dd13e37b5c178999c87d8e81b9bc5c3d1f388ae3c854f22",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-09T10:13:21.466250+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/a01-universe-expansion-2026-09-29/contract.md",
+      "bytes": 17833,
+      "sourcehash": "ebddd8623a4237e652f4b3ad8693f72877a3d2827327efca50c5c87cdd7d55b1",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-29T08:41:19.628061+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/a01-universe-expansion-2026-09-29/review-amendment-v1.1.md",
+      "bytes": 3195,
+      "sourcehash": "5901dc69c8ca45498d4774388164b86a7192a1e0c5b803272c253b8867fdb4f7",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-29T09:23:30.617516+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/current-standards.json",
+      "bytes": 1209,
+      "sourcehash": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-10-05T13:40:57.778245+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+      "bytes": 720930,
+      "sourcehash": "0af4884298f7cb4ecdf123ff1c5a610aaa6d079625fd1dd3e9716da75c792c15",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-10-05T04:25:01.714187+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/weekly-ppo-information-2026-10-05.md",
+      "bytes": 3416,
+      "sourcehash": "13e2776503f64e74944b7debb3660496af643e65b5526b4b553ea5b7e196623c",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-10-05T13:03:43.865651+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/input_preflight.py",
+      "bytes": 18885,
+      "sourcehash": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-29T09:44:05.984710+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/data_quality.py",
+      "bytes": 70867,
+      "sourcehash": "4496b0a0ea9e358ae22c5b6064801e4a9622bb5514ddce88393b6765d46b8c3d",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-10-01T12:54:44.242743+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/workflow_inputs.py",
+      "bytes": 24286,
+      "sourcehash": "fee3af1aa80645426a0d59b762ad33f62ecb81e32ccc2288c83caa7e554b2e2e",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-10-04T06:54:38.998887+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-data-availability/SKILL.md",
+      "bytes": 3206,
+      "sourcehash": "f0218e2f8971770ff4e993f5d925998e9490f66a6e31f8195b7fbd0c11944b45",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-10-01T18:00:53.348900+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/strategy-documents.v1.json",
+      "bytes": 806,
+      "sourcehash": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-29T07:17:16.551503+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-week-month-qualification-2026-10-05/qualification.json",
+      "bytes": 329639,
+      "sourcehash": "33dd041fa39a98b07756e65539fb6e69e66e6038462e74705a58ddc635130be7",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-10-05T13:34:57.728803+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b04-targeted-gap-batch-2026-10-06/run01-review-01/acceptance.json",
+      "bytes": 49608,
+      "sourcehash": "d01154fe45c4079f2305d9350c5b6a44b0a4bfbdbf4c0a0de84fd78591572860",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-10-06T17:40:02.855828+00:00"
+    }
+  ],
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "bytes": 65786,
+      "sourcehash": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-29T06:55:10.727216+00:00"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "bytes": 36427,
+      "sourcehash": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-09-29T06:55:10.726066+00:00"
+    }
+  ],
+  "candidate_change_objects_not_complete_chain": [
+    {
+      "candidate_difference_detected_date": "2022-01-17",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "000301",
+        "002064",
+        "002459",
+        "002466",
+        "002568",
+        "002709",
+        "002791",
+        "300316",
+        "300750",
+        "300759",
+        "300760",
+        "300782",
+        "300866",
+        "300888",
+        "300896",
+        "300999",
+        "600905",
+        "601728",
+        "601865",
+        "601868",
+        "601898",
+        "601966",
+        "603260",
+        "603486",
+        "605499",
+        "688561",
+        "688599",
+        "688981"
+      ],
+      "removed_codes_from_candidate": [
+        "000656",
+        "000728",
+        "000860",
+        "002153",
+        "002384",
+        "002456",
+        "002463",
+        "002508",
+        "002558",
+        "002673",
+        "002739",
+        "002773",
+        "002939",
+        "002945",
+        "300136",
+        "600118",
+        "600233",
+        "600299",
+        "600340",
+        "600482",
+        "600521",
+        "600522",
+        "600703",
+        "600705",
+        "601077",
+        "601555",
+        "601727",
+        "601872"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2022-06-13",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "000408",
+        "000792",
+        "000877",
+        "001289",
+        "002074",
+        "002648",
+        "002920",
+        "300207",
+        "300223",
+        "300454",
+        "300496",
+        "300661",
+        "300751",
+        "300763",
+        "300919",
+        "300957",
+        "300979",
+        "600089",
+        "600188",
+        "600219",
+        "600460",
+        "600941",
+        "601117",
+        "601825",
+        "603185",
+        "603290",
+        "688005",
+        "688065"
+      ],
+      "removed_codes_from_candidate": [
+        "000783",
+        "002024",
+        "002044",
+        "002157",
+        "002624",
+        "300144",
+        "300558",
+        "300676",
+        "300677",
+        "300888",
+        "600079",
+        "600109",
+        "600143",
+        "600848",
+        "600872",
+        "601108",
+        "601162",
+        "601231",
+        "601607",
+        "601696",
+        "601933",
+        "601990",
+        "603233",
+        "603338",
+        "603517",
+        "603658",
+        "603939",
+        "688009"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2023-03-20",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "000723",
+        "000733",
+        "002180",
+        "002756",
+        "300769",
+        "600039",
+        "600233",
+        "600674",
+        "600803",
+        "600884",
+        "601615",
+        "601689",
+        "605117",
+        "688187",
+        "688303"
+      ],
+      "removed_codes_from_candidate": [
+        "000066",
+        "000703",
+        "002568",
+        "002607",
+        "002791",
+        "300003",
+        "300866",
+        "600161",
+        "600352",
+        "600489",
+        "600655",
+        "601825",
+        "601916",
+        "603087",
+        "603160"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2023-06-12",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "000617",
+        "000983",
+        "600732",
+        "600754",
+        "600875",
+        "601607",
+        "601699",
+        "601872",
+        "688223"
+      ],
+      "removed_codes_from_candidate": [
+        "002008",
+        "002032",
+        "002600",
+        "002602",
+        "300529",
+        "300595",
+        "601966",
+        "603882",
+        "688169"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2023-12-11",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "000999",
+        "002603",
+        "300308",
+        "301269",
+        "600023",
+        "600372",
+        "600489",
+        "600515",
+        "600938",
+        "601059",
+        "601916",
+        "688041",
+        "688256",
+        "688271"
+      ],
+      "removed_codes_from_candidate": [
+        "000723",
+        "002064",
+        "002120",
+        "002414",
+        "002756",
+        "300207",
+        "300601",
+        "300769",
+        "600383",
+        "600763",
+        "600884",
+        "601216",
+        "603185",
+        "688005"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2024-06-17",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "000807",
+        "001965",
+        "300418",
+        "300442",
+        "300832",
+        "600026",
+        "600027",
+        "600161",
+        "600415",
+        "603296",
+        "688009",
+        "688082"
+      ],
+      "removed_codes_from_candidate": [
+        "000069",
+        "000877",
+        "002202",
+        "300763",
+        "600606",
+        "600754",
+        "601155",
+        "601615",
+        "603290",
+        "603486",
+        "688065",
+        "688561"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2024-12-16",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "000630",
+        "000975",
+        "002028",
+        "002422",
+        "002463",
+        "300394",
+        "300502",
+        "600066",
+        "600160",
+        "600377",
+        "600482",
+        "601127",
+        "601136",
+        "688169",
+        "688472",
+        "688506"
+      ],
+      "removed_codes_from_candidate": [
+        "000733",
+        "002410",
+        "002603",
+        "002821",
+        "002841",
+        "300142",
+        "300223",
+        "300454",
+        "300496",
+        "300751",
+        "300919",
+        "300957",
+        "600132",
+        "600732",
+        "603899",
+        "688363"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2025-03-10",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "601058"
+      ],
+      "removed_codes_from_candidate": [
+        "600837"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2025-06-16",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "001391",
+        "002600",
+        "301236",
+        "302132",
+        "601077",
+        "601825",
+        "688047"
+      ],
+      "removed_codes_from_candidate": [
+        "002007",
+        "002271",
+        "002555",
+        "002812",
+        "300450",
+        "600745",
+        "603659"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2025-09-08",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "601298"
+      ],
+      "removed_codes_from_candidate": [
+        "601989"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2025-12-15",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "002384",
+        "002625",
+        "300251",
+        "300476",
+        "300803",
+        "300866",
+        "600522",
+        "600930",
+        "601018",
+        "601456",
+        "603893"
+      ],
+      "removed_codes_from_candidate": [
+        "000800",
+        "001289",
+        "002129",
+        "002180",
+        "600332",
+        "601699",
+        "601799",
+        "601865",
+        "603806",
+        "603833",
+        "688599"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    },
+    {
+      "candidate_difference_detected_date": "2026-06-15",
+      "official_effective_date": null,
+      "official_announced_at": null,
+      "added_codes_from_candidate": [
+        "000657",
+        "000988",
+        "001280",
+        "002202",
+        "002353",
+        "002532",
+        "002558",
+        "002602",
+        "002837",
+        "300450",
+        "301165",
+        "301308",
+        "600118",
+        "600221",
+        "600549",
+        "601727",
+        "688072",
+        "688183",
+        "688521"
+      ],
+      "removed_codes_from_candidate": [
+        "000661",
+        "000786",
+        "000876",
+        "000983",
+        "002252",
+        "002459",
+        "002601",
+        "300347",
+        "300759",
+        "300782",
+        "300979",
+        "600161",
+        "600377",
+        "601236",
+        "601298",
+        "601808",
+        "603195",
+        "688169",
+        "688187"
+      ],
+      "qualified_official_original": null,
+      "status": "candidate_difference_only_not_certified_effective_date"
+    }
+  ],
+  "explicit_code_rename_assumption_in_old_preparer": {
+    "file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepare_data.py",
+    "source_lines": "CODE_RENAMES at53; dated_member at68",
+    "new_code": "302132",
+    "old_code": "300114",
+    "assumed_effective_date": "2025-02-17",
+    "qualified_official_identity_original": null
+  },
+  "strict_historic_availability_claim": "NOT_VERIFIED; vendor arrival/original vintage missing",
+  "retrospective_claim": "Permissible only after the requested field/identity/membership/price-scale qualifications; historic arrival unknown alone does not veto all retrospective uses",
+  "no_price_scale_alignment_or_repair_computed": true,
+  "provider_calls": 0,
+  "web_source_fetches": 0,
+  "features_labels_models_returns_computed": 0,
+  "primary_data_changes": 0,
+  "registry_changes": 0
+}

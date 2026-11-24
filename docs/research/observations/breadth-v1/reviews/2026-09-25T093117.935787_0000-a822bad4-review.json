@@ -1,0 +1,28 @@
+{
+  "observed_at": "2026-09-25T09:31:17.935787+00:00",
+  "reviewed_at": "2026-09-25T09:31:33Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-09-25T093117.935787_0000-a822bad4.json",
+  "changed_sources": ["source-01", "source-02"],
+  "facts": {
+    "a_share_rows": 4065939,
+    "a_share_latest_date": "2026-09-24",
+    "current_code_date": "2026-09-25",
+    "current_code_count": 5569,
+    "current_code_prefix_counts": {"sh": 2320, "sz": 2902, "bj": 347},
+    "daily_snapshot_date": "2026-09-24",
+    "daily_snapshot_total": 3249,
+    "daily_snapshot_eligible": 5212
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "当前名单已恢复上海市场，但宽度快照仍是昨日故障版本：总数3249、eligible 5212，分子分母不一致。",
+    "historical_membership": "当前名单恢复只能说明短期获取故障缓解，仍不建立历史成员、生效时间及真实取得时间链。",
+    "etf_nominal_prices_and_actions": "ETF及公司行动监测来源未变化，原资格缺口仍在。",
+    "availability": "逐股行情最新到9月24日，未把9月25日名单日期当作当天完整行情。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "名单来源部分恢复，但快照仍不可用；继续阻止信号生成，等待完整同日输入刷新。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

@@ -1,0 +1,45 @@
+{
+  "updated_at": "2026-11-02T17:04:14.265418+08:00",
+  "status": "completed_local_desktop_only",
+  "prior": "acceptance-v6.json; prior mobile verification was unwanted scope, no further mobile work",
+  "scope_files": [
+    "web/src/components/market-observation-alerts/index.tsx",
+    "web/src/components/market-observation-alerts/MiniTrend.tsx",
+    "web/src/components/market-observation-alerts/style.css",
+    "web/AGENTS.md"
+  ],
+  "new_financial_experiments": 0,
+  "new_source_requests": 0,
+  "new_data_writes": 0,
+  "desktop_width": 1280,
+  "readback_thresholds": {
+    "CN_ALL_A": {
+      "date": "2026-10-30",
+      "B50": 11.37,
+      "lower": 18.63,
+      "upper": 78.14
+    },
+    "SP500": {
+      "date": "2026-10-30",
+      "B50": 61.99,
+      "lower": 26.57,
+      "upper": 78.41
+    }
+  },
+  "checks": {
+    "raw_observation_same_dates": "pass",
+    "missing_area_split": "pass",
+    "single_value_fallback": "pass",
+    "ERP_color_direction": "pass",
+    "visible_non_trading_boundary": "pass",
+    "console_errors": [],
+    "project_preference_readback": "pass",
+    "registry_other_entries_unchanged": true
+  },
+  "screenshot": "overview-v7.jpg",
+  "logs": [
+    "build-v7.log",
+    "mini-validation-v7.log"
+  ],
+  "report_sha256": "f47938d4573e39a5020894761899eaf5abc11113a1fe886d31a212aac64737e2"
+}

@@ -1,0 +1,164 @@
+<style>
+#portfolio-review-explore { color-scheme: light dark; }
+#portfolio-review-explore .pr-app { --pr-bg: light-dark(#f5f7fa,#171d26); --pr-paper: light-dark(#ffffff,#202936); --pr-ink: light-dark(#203149,#e5edf6); --pr-muted: light-dark(#64738a,#a8b7ca); --pr-border: light-dark(#dce3eb,#3c4859); --pr-blue: light-dark(#315c88,#a2c9f0); --pr-selected: light-dark(#edf4fb,#2a4056); --pr-warn: light-dark(#9a4b29,#efb496); --pr-soft-warn: light-dark(#fcf3eb,#3b2d26); font-family: -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; font-size:14px; line-height:1.55; color:var(--pr-ink); background:var(--pr-bg); min-height:820px; padding:0 18px 18px; }
+#portfolio-review-explore .pr-app * {box-sizing:border-box;}
+#portfolio-review-explore .pr-shell {display:flex;align-items:center;gap:22px;padding:14px 0;border-bottom:1px solid var(--pr-border);flex-wrap:wrap;}
+#portfolio-review-explore .pr-brand {font-size:21px;font-weight:750;letter-spacing:-.5px;}
+#portfolio-review-explore .pr-shell span {font-size:12px;color:var(--pr-muted);}
+#portfolio-review-explore .pr-shell .pr-current {color:var(--pr-blue);font-weight:650;}
+#portfolio-review-explore .pr-demo {font-size:11px;color:var(--pr-muted);margin:10px 0;}
+#portfolio-review-explore .pr-pagehead {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:14px 0;}
+#portfolio-review-explore h2 {font-size:22px;font-weight:650;margin:0;line-height:1.3;color:var(--pr-ink);}
+#portfolio-review-explore h3 {font-size:16px;font-weight:650;margin:0 0 8px;line-height:1.4;color:var(--pr-ink);}
+#portfolio-review-explore h4 {font-size:13px;font-weight:650;margin:16px 0 6px;color:var(--pr-ink);}
+#portfolio-review-explore p {margin:6px 0;}
+#portfolio-review-explore button {font:inherit;cursor:pointer;border:1px solid var(--pr-border);border-radius:4px;background:var(--pr-paper);color:var(--pr-blue);padding:7px 11px;line-height:1.4;}
+#portfolio-review-explore button:hover {background:var(--pr-selected);}
+#portfolio-review-explore button:focus-visible,#portfolio-review-explore textarea:focus-visible {outline:2px solid var(--pr-blue);outline-offset:3px;}
+#portfolio-review-explore button[aria-pressed="true"] {background:var(--pr-selected);border-color:var(--pr-blue);}
+#portfolio-review-explore button.pr-main {background:var(--pr-blue);color:var(--pr-paper);border-color:var(--pr-blue);}
+#portfolio-review-explore .pr-small {font-size:12px;color:var(--pr-muted);}
+#portfolio-review-explore .pr-summary {display:flex;align-items:center;justify-content:space-between;gap:14px;border-block:1px solid var(--pr-border);padding:12px 0;margin-bottom:16px;flex-wrap:wrap;}
+#portfolio-review-explore .pr-summary strong {font-size:15px;font-weight:650;}
+#portfolio-review-explore .pr-summary span {font-size:12px;color:var(--pr-muted);display:block;}
+#portfolio-review-explore .pr-tabs {display:flex;gap:16px;align-items:center;border-bottom:1px solid var(--pr-border);margin-bottom:14px;flex-wrap:wrap;}
+#portfolio-review-explore .pr-tabs button {border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:8px 0;color:var(--pr-muted);}
+#portfolio-review-explore .pr-tabs button[aria-pressed="true"] {color:var(--pr-blue);border-bottom-color:var(--pr-blue);}
+#portfolio-review-explore .pr-work {display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start;}
+#portfolio-review-explore .pr-work > * {min-width:0;}
+#portfolio-review-explore .pr-work.pr-trades {grid-template-columns:minmax(0,1fr);}
+#portfolio-review-explore .pr-listcaption {display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px;}
+#portfolio-review-explore .pr-listcaption strong {font-size:13px;font-weight:600;}
+#portfolio-review-explore .pr-row {border-bottom:1px solid var(--pr-border);padding:13px 10px;background:var(--pr-paper);}
+#portfolio-review-explore .pr-row.is-current {background:var(--pr-selected);box-shadow:inset 3px 0 var(--pr-blue);}
+#portfolio-review-explore .pr-rowhead {display:flex;justify-content:space-between;gap:12px;align-items:center;}
+#portfolio-review-explore .pr-rowhead button {padding:0;border:0;background:transparent;color:var(--pr-ink);text-align:left;font-weight:650;}
+#portfolio-review-explore .pr-row p {font-size:13px;}
+#portfolio-review-explore .pr-status {font-size:11px;white-space:nowrap;color:var(--pr-muted);}
+#portfolio-review-explore .pr-row[data-kind="exit"] .pr-status {color:var(--pr-warn);}
+#portfolio-review-explore .pr-rowfoot {display:flex;gap:10px;justify-content:space-between;align-items:center;color:var(--pr-muted);font-size:11px;}
+#portfolio-review-explore .pr-rowfoot button {padding:2px 0;border:0;background:transparent;font-size:12px;}
+#portfolio-review-explore .pr-detail {background:var(--pr-paper);border:1px solid var(--pr-border);padding:17px;min-height:540px;}
+#portfolio-review-explore .pr-detailhead {display:flex;align-items:start;justify-content:space-between;gap:12px;}
+#portfolio-review-explore .pr-detailhead h3 {margin-bottom:3px;}
+#portfolio-review-explore .pr-detailhead button {padding:4px 7px;font-size:11px;}
+#portfolio-review-explore .pr-decision {padding:12px 0 14px;border-bottom:1px solid var(--pr-border);margin:6px 0 12px;}
+#portfolio-review-explore .pr-decision strong {font-size:16px;display:block;}
+#portfolio-review-explore .pr-decision p {font-size:12px;color:var(--pr-muted);}
+#portfolio-review-explore .pr-evidence {display:grid;grid-template-columns:88px minmax(0,1fr);gap:7px 10px;margin:10px 0;font-size:12px;}
+#portfolio-review-explore .pr-evidence dt {color:var(--pr-muted);}
+#portfolio-review-explore .pr-evidence dd {margin:0;}
+#portfolio-review-explore .pr-source {border-top:1px solid var(--pr-border);padding-top:10px;margin-top:14px;font-size:11px;color:var(--pr-muted);}
+#portfolio-review-explore .pr-actions {display:flex;gap:7px;flex-wrap:wrap;margin-top:16px;}
+#portfolio-review-explore .pr-actions button {font-size:12px;}
+#portfolio-review-explore .pr-agent-context {background:var(--pr-selected);padding:9px 11px;margin:10px 0;font-size:12px;}
+#portfolio-review-explore .pr-agent-chips {display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;}
+#portfolio-review-explore .pr-agent-chips button {font-size:12px;padding:5px 7px;}
+#portfolio-review-explore textarea {width:100%;min-height:74px;resize:vertical;border:1px solid var(--pr-border);border-radius:4px;background:var(--pr-paper);color:var(--pr-ink);font:inherit;font-size:13px;padding:9px;}
+#portfolio-review-explore .pr-agent-answer {font-size:13px;border-top:1px solid var(--pr-border);padding-top:10px;margin-top:12px;}
+#portfolio-review-explore .pr-agent-answer[hidden],#portfolio-review-explore [hidden] {display:none!important;}
+#portfolio-review-explore .pr-table {width:100%;border-collapse:collapse;background:var(--pr-paper);font-size:12px;}
+#portfolio-review-explore .pr-table th {text-align:left;color:var(--pr-muted);font-weight:500;padding:9px 8px;border-bottom:1px solid var(--pr-border);}
+#portfolio-review-explore .pr-table td {padding:12px 8px;border-bottom:1px solid var(--pr-border);vertical-align:top;}
+#portfolio-review-explore .pr-table tr.is-current {background:var(--pr-selected);}
+#portfolio-review-explore .pr-table button {padding:0;border:0;background:transparent;font-size:12px;text-align:left;font-weight:650;color:var(--pr-ink);}
+#portfolio-review-explore .pr-table small {display:block;color:var(--pr-muted);font-size:11px;margin-top:3px;}
+#portfolio-review-explore .pr-table .pr-table-next {color:var(--pr-blue);font-weight:400;}
+#portfolio-review-explore .pr-footer {border-top:1px solid var(--pr-border);margin-top:18px;padding-top:10px;color:var(--pr-muted);font-size:11px;}
+#portfolio-review-explore .pr-chart {width:100%;height:180px;display:block;background:var(--pr-paper);}
+#portfolio-review-explore .pr-chart text {fill:var(--pr-muted);font:11px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;}
+#portfolio-review-explore .pr-chart .price {stroke:var(--pr-blue);}
+#portfolio-review-explore .pr-chart .ref {stroke:var(--pr-warn);}
+#portfolio-review-explore .pr-chart .grid {stroke:var(--pr-border);}
+#portfolio-review-explore .pr-check {padding:8px 10px;background:var(--pr-selected);font-size:12px;margin-top:10px;}
+#portfolio-review-explore .pr-blank {padding:20px 0;font-size:13px;color:var(--pr-muted);}
+#portfolio-review-explore .pr-app.pr-roomy .pr-row {padding-block:20px;}
+@media(max-width:740px){#portfolio-review-explore .pr-work {grid-template-columns:minmax(0,1fr);} #portfolio-review-explore .pr-app {padding:0 12px 12px;min-height:1260px;} #portfolio-review-explore .pr-detail {min-height:0;} #portfolio-review-explore .pr-shell {gap:14px;} #portfolio-review-explore .pr-shell span:nth-last-child(-n+2){display:none;} #portfolio-review-explore .pr-table .pr-market {display:none;}}
+@media(pointer:coarse){#portfolio-review-explore button{min-height:44px;}#portfolio-review-explore textarea{font-size:16px;}}
+</style>
+<div id="portfolio-review-explore">
+  <div class="viz-carousel" aria-label="持仓日常交互方案" data-previous-label="上一方案" data-next-label="下一方案">
+    <section data-variant="今日复核优先" aria-label="今日复核优先">
+      <div class="pr-app" data-layout="agenda" aria-label="今日复核优先界面"></div>
+    </section>
+    <section data-variant="持仓对照优先" aria-label="持仓对照优先" hidden>
+      <div class="pr-app" data-layout="ledger" aria-label="持仓对照优先界面"></div>
+    </section>
+  </div>
+</div>
+<script>
+(() => {
+ const root=document.getElementById('portfolio-review-explore');
+ const samples=[
+  {id:'a',name:'宽基 ETF A',type:'示例持仓',kind:'exit',state:'原计划条件已满足',next:'核对原计划的退出条件',date:'最近完成行情',brief:'收盘同时低于20日指数均线与20日抵扣价。',change:'上次未满足 → 本次两项均满足',plan:'已记录：两项同时满足时退出',reason:'示例收盘为100.20，低于20日指数均线100.80，也低于20日抵扣价101.10；这与原计划约定的退出条件一致。',missing:'这条依据来自已完成行情，不使用盘中价格替代收盘确认。',ask:'为什么这次需要按原计划核对退出？',answer:'这条事项来自你原计划中已约定的退出条件：收盘同时低于20日指数均线和20日抵扣价。示例中两项均满足。先确认当前这笔持仓确实采用该计划，再按计划处理；持有收益率不改变这条依据。'},
+  {id:'b',name:'行业 ETF B',type:'示例持仓',kind:'wait',state:'尚待收盘确认',next:'等待收盘后再核对',date:'盘中形成中',brief:'盘中触及观察条件，尚未形成收盘结论。',change:'上次未触及 → 盘中触及，尚未确认',plan:'已记录：以收盘结果核对',reason:'示例为盘中形成中的行情。当前变化可以提醒你回来看，但还不能当作已完成的条件触发。',missing:'仍缺该交易日收盘结果。',ask:'现在还缺哪项条件？',answer:'还缺收盘确认。你原计划采用收盘结果；盘中触及只形成观察事项。等本产品本次交易日结束、行情完整后，系统再按原条件核对。'},
+  {id:'c',name:'海外基金 C',type:'示例持仓',kind:'data',state:'行情待更新',next:'查看数据日期',date:'应有数据尚未到齐',brief:'这次没有完整行情，不能确认是否出现新变化。',change:'本次复核未完成',plan:'已记录，等待有效行情核对',reason:'示例中，基金自身净值晚于本次应完成的数据时点仍未到齐。对应指数走势只能说明背景，不能替代基金自身的判断。',missing:'先补齐基金自身行情及其日期。',ask:'缺少的数据会影响哪些判断？',answer:'缺少的是这只基金自身本次应有的净值。阶段、条件是否触发都不能更新。这里显示“未完成核对”，不会因为没有新信号就写成“继续持有”。'},
+  {id:'d',name:'主动基金 D',type:'示例持仓',kind:'data',state:'原计划待补充',next:'记录原持有依据',date:'最近完成净值',brief:'自身资料可读，原入场依据与退出约定尚未记录。',change:'尚不能判断原持有理由是否成立',plan:'未记录；不能由 Agent 自动补写',reason:'示例中能看到基金自身资料，但缺少你当初为什么持有、什么情况退出。系统可以解释现状，不能倒推出一份你从未确认过的原计划。',missing:'需要记录真实的原持有依据；事后补录应标明补录日期。',ask:'我需要补充哪些原计划信息？',answer:'请记录原持有理由、采用哪套方法、原先约定的退出条件及适用周期。记不清的部分保持缺失；现在新定的计划要标明新版本，不能写成历史原计划。'},
+  {id:'e',name:'宽基 ETF E',type:'示例持仓',kind:'quiet',state:'本轮无新触发',next:'查看持有依据',date:'最近完成行情',brief:'原计划已核对，本轮未出现新的处理事项。',change:'与上次核对相比无新触发',plan:'已记录，最近一轮已核对',reason:'示例中原计划和有效行情均可读取，最近一轮未出现新的条件触发。仍保留原失效条件，不因这次没有事项就删除后续观察。',missing:'下次数据更新后，继续核对同一份原计划。',ask:'这只目前应该继续观察什么？',answer:'继续看原计划里的条件和失效位是否发生变化。这个“无新触发”表示本轮已完成核对并且没有新事项；它与“缺行情、还没核对”是两个不同状态。'}
+ ];
+ const saved=window.openai?.widgetState?.privateContent;
+ const validId=id=>samples.some(x=>x.id===id)?id:'a';
+ const controllers=[];
+ function remember(){if(!window.openai?.setWidgetState)return;window.openai.setWidgetState({modelContent:{proposal:'持仓每日复核，选事项后查原因并带上下文问Agent',demoOnly:true},privateContent:{views:controllers.map(c=>({layout:c.layout,selected:c.state.selected,view:c.state.view,tab:c.state.tab,scope:c.state.scope,reviewed:c.state.reviewed}))}}).catch(()=>{});}
+ const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ root.querySelectorAll('.pr-app').forEach(app=>{
+  const layout=app.dataset.layout;
+  const prior=saved?.views?.find(x=>x.layout===layout);
+  const state={selected:validId(prior?.selected),view:['today','all','trades'].includes(prior?.view)?prior.view:'today',tab:['reason','plan','agent','chart'].includes(prior?.tab)?prior.tab:'reason',scope:prior?.scope==='portfolio'?'portfolio':'holding',reviewed:prior?.reviewed||{},draft:'',answer:false};
+  const design={roomy:false};
+  app.innerHTML=`<nav class="pr-shell" aria-label="系统导航示意"><b class="pr-brand">BIAO</b><span>看盘</span><span class="pr-current">我的持仓</span><span>今日操作</span><span>监督待办</span><span>工作台</span></nav>
+   <div class="pr-demo">交互示意 · 以下5个标的、条件和回答均为虚构示例，不是你的今日交易结论</div>
+   <header class="pr-pagehead"><div><h2>我的持仓</h2><div class="pr-small">从今天的变化，回到这笔持仓的原计划</div></div><button type="button" data-action="portfolio-agent">问 Agent：今日持仓</button></header>
+   <div class="pr-summary"><div><strong>1 条原计划条件已满足，优先核对</strong><span>另有 1 条待收盘确认 · 2 只资料待补 · 1 只无新触发</span></div><span>每条事项独立标明行情日期</span></div>
+   <div class="pr-tabs" aria-label="持仓视图"><button type="button" data-view="today">今日复核</button><button type="button" data-view="all">全部持仓</button><button type="button" data-view="trades">成交记录</button></div>
+   <div class="pr-work"><section class="pr-list" aria-label="持仓事项清单"></section><section class="pr-detail" aria-label="所选持仓与原因" aria-live="polite"></section></div>
+   <div class="pr-footer">组合分布与季报资料保留在下方。查看事项、记录处理决定与登记实际成交分别留痕。</div>`;
+  const list=app.querySelector('.pr-list');
+  const detail=app.querySelector('.pr-detail');
+  function select(id,tab='reason'){state.selected=validId(id);state.tab=tab;state.scope='holding';state.draft='';state.answer=false;render();remember();if(window.matchMedia('(max-width:740px)').matches)detail.scrollIntoView({block:'start',behavior:'auto'});}
+  function renderList(){
+   app.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===state.view)));
+   if(state.view==='trades'){list.innerHTML='<h3>成交记录</h3><div class="pr-blank">这里沿用手动成交台账。实际完成买卖后，再记录金额、日期和对应持仓。</div><p class="pr-small">此演示没有成交记录，也不会登记任何交易。</p>';return;}
+   const shown=state.view==='today'?samples.filter(x=>x.kind!=='quiet'):samples;
+   list.innerHTML=`<div class="pr-listcaption"><strong>${state.view==='today'?'与持仓有关的事项':'全部持仓对照'}</strong><span class="pr-small">${shown.length} 条示例</span></div>`;
+   if(layout==='ledger'){
+    list.innerHTML+=`<table class="pr-table"><thead><tr><th>持仓</th><th>本次核对</th><th>下一步</th></tr></thead><tbody>${shown.map(x=>`<tr class="${state.selected===x.id?'is-current':''}"><td><button type="button" data-select="${x.id}">${x.name}</button><small>${x.type}</small></td><td>${x.state}<small>${x.date}</small></td><td><button type="button" class="pr-table-next" data-select="${x.id}">${x.next}</button>${state.reviewed[x.id]?'<small>已查看 · 条件保留</small>':''}</td></tr>`).join('')}</tbody></table>`;
+   }else{
+    list.innerHTML+=shown.map(x=>`<article class="pr-row ${state.selected===x.id?'is-current':''}" data-kind="${x.kind}"><div class="pr-rowhead"><button type="button" data-select="${x.id}">${x.name}</button><span class="pr-status">${x.state}</span></div><p>${x.next}</p><div class="pr-rowfoot"><span>${state.reviewed[x.id]?'已查看 · 条件保留':x.date}</span><button type="button" data-select="${x.id}">查看原因</button></div></article>`).join('');
+    if(state.view==='today')list.innerHTML+='<p class="pr-small" style="margin-top:12px">本轮无新触发的持仓，在“全部持仓”中查看。</p>';
+   }
+  }
+  function renderDetail(){
+   const x=samples.find(y=>y.id===state.selected);
+   const chosen=state.tab;
+   if(chosen==='agent'&&state.scope==='portfolio'){
+    detail.innerHTML=`<div class="pr-detailhead"><div><h3>Agent · 全部持仓</h3><div class="pr-small">本次范围固定为5只示例持仓</div></div><button type="button" data-action="holding-scope">回到单只</button></div><div class="pr-agent-context">已核对：1条计划条件满足、1条待收盘、1条无新触发。<br>未完成：1只行情待更新、1只原计划未记录。</div><div class="pr-agent-chips"><button type="button" data-portfolio-q="请按优先顺序解释今天与我的持仓有关的事项，并列出还不能判断的部分。">今天先处理什么</button><button type="button" data-portfolio-q="哪些持仓缺少资料，这分别妨碍了哪些判断？">哪些还不能判断</button></div><label class="pr-small" for="pr-draft-${layout}">可编辑问题 · 演示草稿</label><textarea id="pr-draft-${layout}" aria-label="给Agent的问题">${escape(state.draft)}</textarea><div class="pr-actions"><button type="button" class="pr-main" data-action="preview-answer">预览回复效果</button></div><div class="pr-agent-answer" ${state.answer?'':'hidden'}><span class="pr-small">示例回复 · 未调用真实 Agent</span><p>先核对宽基 ETF A：原计划的退出条件已满足。行业 ETF B 还在等待收盘确认。海外基金 C 缺本次行情，主动基金 D 缺原计划，两只都还不能完成判断。宽基 ETF E 本轮无新触发。</p><button type="button" data-select="a">查看宽基 ETF A 的依据</button></div>`;return;
+   }
+   let content='';
+   if(chosen==='reason')content=`<h4>发生了什么变化</h4><p>${x.change}</p><h4>为什么有这条事项</h4><p>${x.reason}</p><dl class="pr-evidence"><dt>原计划</dt><dd>${x.plan}</dd><dt>本次依据</dt><dd>${x.date}（示例）</dd><dt>下一步核对</dt><dd>${x.missing}</dd></dl><div class="pr-actions"><button type="button" data-tab="chart">在图上核对</button><button type="button" data-tab="plan">查看原计划</button><button type="button" class="pr-main" data-tab="agent">追问 Agent</button></div><div class="pr-source">依据入口：原计划记录 · 本产品行情 · 系统条件。实际接入后，每项均可回到对应记录。</div>`;
+   if(chosen==='plan')content=`<h4>这笔持仓采用的计划</h4><p>${x.plan}</p><dl class="pr-evidence"><dt>计划对象</dt><dd>${x.name}，本笔持仓</dd><dt>观察周期</dt><dd>${x.id==='d'?'未记录':'日线（示例）'}</dd><dt>原退出约定</dt><dd>${x.id==='a'?'收盘同时低于20日指数均线与20日抵扣价。':x.id==='d'?'未记录，不能事后自动补写。':'以原计划中记录的条件为准。'}</dd><dt>本次核对</dt><dd>${x.state}</dd></dl><p class="pr-small">新定的计划与原计划分开留存；修改依据不能改写历史。</p><div class="pr-actions"><button type="button" data-tab="reason">返回本次依据</button><button type="button" class="pr-main" data-tab="agent">和 Agent 讨论计划</button></div>`;
+   if(chosen==='chart')content=x.id!=='a'?`<h4>本产品行情</h4><p>${x.id==='c'?'本次应有的自身行情尚未到齐。':x.id==='b'?'当前为盘中形成中的行情。':'此示例只展示交互路径。'}</p><p class="pr-small">实际接入后显示同一产品的图形，并定位这条事项引用的日期。指数或板块另标为背景参考。</p><div class="pr-actions"><button type="button" data-tab="reason">返回原因</button></div>`:`<h4>退出条件对应的位置</h4><svg class="pr-chart" viewBox="0 0 340 180" role="img" aria-label="虚构示例：最新收盘100.20，低于20日指数均线100.80及20日抵扣价101.10"><g class="grid"><path d="M40 20V142H320M40 50H320M40 96H320" fill="none"/></g><text x="2" y="28">示例价</text><text x="3" y="56">102</text><text x="3" y="103">101</text><text x="3" y="147">100</text><path class="price" d="M43 37L98 55L153 45L208 79L265 132.8" fill="none" stroke-width="2.5"/><path class="ref" d="M43 91L98 97L153 101L208 104L265 105.2" fill="none" stroke-width="1.5"/><path class="ref" d="M43 84L265 91.4" fill="none" stroke-width="1.5" stroke-dasharray="4 3"/><text x="47" y="164">前4次</text><text x="218" y="164">最近完成行情</text></svg><dl class="pr-evidence"><dt>示例收盘</dt><dd>100.20</dd><dt>20日指数均线</dt><dd>100.80 · 收盘已低于</dd><dt>20日抵扣价</dt><dd>101.10 · 收盘已低于</dd></dl><p class="pr-small">蓝线：示例收盘；棕色实线：指数均线；棕色虚线：抵扣价。</p><button type="button" data-tab="reason">返回原因</button>`;
+   if(chosen==='agent')content=`<div class="pr-agent-context">本次讨论：${x.name} / ${x.state}<br>同时带入本笔持仓、原计划及本次依据。</div><div class="pr-agent-chips"><button type="button" data-question="why">为什么出现这条事项</button><button type="button" data-question="missing">还缺什么证据</button><button type="button" data-question="next">下一次看什么</button></div><label class="pr-small" for="pr-draft-${layout}">可编辑问题 · 演示草稿</label><textarea id="pr-draft-${layout}" aria-label="给Agent的问题">${escape(state.draft||x.ask)}</textarea><div class="pr-actions"><button type="button" class="pr-main" data-action="preview-answer">预览回复效果</button></div><div class="pr-agent-answer" ${state.answer?'':'hidden'}><span class="pr-small">示例回复 · 未调用真实 Agent</span><p>${x.answer}</p><button type="button" data-tab="reason">回看系统依据</button></div>`;
+   detail.innerHTML=`<div class="pr-detailhead"><div><h3>${x.name}</h3><div class="pr-small">${x.date} · 示例资料</div></div><button type="button" data-action="reviewed">${state.reviewed[x.id]?'已查看':'标记已查看'}</button></div><div class="pr-decision"><strong>${x.next}</strong><p>${x.brief}</p></div><div class="pr-tabs" aria-label="所选基金详情"><button type="button" data-tab="reason" aria-pressed="${chosen==='reason'||chosen==='chart'}">原因与依据</button><button type="button" data-tab="plan" aria-pressed="${chosen==='plan'}">原计划</button><button type="button" data-tab="agent" aria-pressed="${chosen==='agent'}">问 Agent</button></div>${content}${state.reviewed[x.id]?'<div class="pr-check">已查看只记录阅读状态；事项仍保留，未登记成交。</div>':''}`;
+  }
+  function render(){app.classList.toggle('pr-roomy',design.roomy);detail.hidden=state.view==='trades';app.querySelector('.pr-work').classList.toggle('pr-trades',state.view==='trades');renderList();renderDetail();}
+  app.addEventListener('input',e=>{if(e.target.matches('textarea'))state.draft=e.target.value;});
+  app.addEventListener('click',e=>{
+   const button=e.target.closest('button');if(!button)return;
+   if(button.dataset.select){select(button.dataset.select);return;}
+   if(button.dataset.view){state.view=button.dataset.view;render();remember();return;}
+   if(button.dataset.tab){state.tab=button.dataset.tab;state.scope='holding';renderDetail();remember();return;}
+   if(button.dataset.portfolioQ){state.draft=button.dataset.portfolioQ;state.answer=false;renderDetail();return;}
+   const x=samples.find(y=>y.id===state.selected);
+   if(button.dataset.question){state.draft=button.dataset.question==='why'?x.ask:button.dataset.question==='missing'?`针对${x.name}，还有哪些资料或条件没有核对？`:`针对${x.name}，下次数据更新后应重点核对什么？`;state.answer=false;renderDetail();return;}
+   if(button.dataset.action==='preview-answer'){state.answer=true;renderDetail();return;}
+   if(button.dataset.action==='reviewed'){state.reviewed[x.id]=!state.reviewed[x.id];render();remember();return;}
+   if(button.dataset.action==='holding-scope'){state.tab='reason';state.scope='holding';state.draft='';state.answer=false;renderDetail();return;}
+   if(button.dataset.action==='portfolio-agent'){state.tab='agent';state.scope='portfolio';state.draft='请先说明这份持仓有哪些已核对的事项、哪些因资料缺失还不能判断，再逐只给出依据。';state.answer=false;renderDetail();detail.querySelector('textarea').focus();}
+  });
+  render();controllers.push({layout,state,render});
+  if(globalThis.Tweak){const tweak=new Tweak({container:app,onChange:render});tweak.addToggle(design,'roomy',{label:'宽松行距'});}
+ });
+ window.addEventListener('openai:set_globals',event=>{const incoming=event.detail?.globals?.widgetState?.privateContent?.views;if(!Array.isArray(incoming))return;controllers.forEach(c=>{const v=incoming.find(x=>x.layout===c.layout);if(!v)return;c.state.selected=validId(v.selected);c.state.view=['today','all','trades'].includes(v.view)?v.view:'today';c.state.tab=['reason','plan','agent','chart'].includes(v.tab)?v.tab:'reason';c.state.scope=v.scope==='portfolio'?'portfolio':'holding';c.state.reviewed=v.reviewed||{};c.render();});});
+})();
+</script>

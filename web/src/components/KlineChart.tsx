@@ -95,6 +95,39 @@ export type ColorMode = "red_green" | "biao_state";
 /** 筹码峰计算口径。 */
 export type ChipMode = "full" | "decay";
 
+/** 快捷可视时间区间（仅控制默认缩放窗口，用户可随时滚轮/拖动自由缩放）。 */
+export type RangePreset = "3M" | "6M" | "1Y" | "ALL";
+
+export const RANGE_PRESET_META: { key: RangePreset; label: string; title: string }[] = [
+  { key: "3M", label: "3月", title: "近 3 个月视图，适合细看近期 K 线形态与影线" },
+  { key: "6M", label: "6月", title: "近 6 个月视图（默认），兼顾中期趋势与单根清晰度" },
+  { key: "1Y", label: "1年", title: "近 1 年视图，观察完整波段与筹码堆积" },
+  { key: "ALL", label: "全部", title: "展示后端下发的全部历史 K 线" },
+];
+
+/** 按周期与快捷区间解析右对齐的起止索引。 */
+export function resolveRangeWindow(n: number, tf: Timeframe, preset: RangePreset): ZoomRange {
+  if (n <= 1) return { startValue: 0, endValue: 0 };
+  if (preset === "ALL") return { startValue: 0, endValue: n - 1 };
+  const barsByTf: Record<Timeframe, Record<Exclude<RangePreset, "ALL">, number>> = {
+    D: { "3M": 63, "6M": 126, "1Y": 252 },
+    W: { "3M": 14, "6M": 26, "1Y": 52 },
+    M: { "3M": 12, "6M": 24, "1Y": 36 },
+  };
+  const want = barsByTf[tf][preset];
+  return { startValue: Math.max(0, n - want), endValue: n - 1 };
+}
+
+const STATE_SHORT_CN: Record<string, string> = {
+  green: "绿·多头",
+  gray: "灰·中性",
+  black: "黑·规避",
+};
+
+/** 超过该可视根数时对 MACD 交叉标记降密，避免数十个三角/圆圈糊住曲线。 */
+const MACD_COMPACT_WINDOW_BARS = 160;
+const MACD_COMPACT_RECENT_COUNT = 6;
+
 /**
  * MACD 事件标记样式。红=强度增强方向（A股涨红），绿=强度减弱方向。
  * 金叉/死叉用实心三角（DIF×DEA 交叉）；上/下穿0轴用空心圆（两线排列翻转，
@@ -224,20 +257,39 @@ interface Props {
   highlight?: HighlightSpec | null;
   /** 父组件要导出当前图为 PNG 时传入：函数体里执行下载。 */
   onDownload?: (download: () => void) => void;
+  /** 工具栏触发的快捷视野切换（seq 递增确保重复点击同区间也能复位到最新端）。 */
+  rangeRequest?: { preset: RangePreset; seq: number } | null;
+  /** 当前默认视野档（切换标的时沿用），默认近 6 个月。 */
+  defaultRangePreset?: RangePreset;
+  /** 用户手动滚轮/拖动缩放时通知父组件取消快捷按钮高亮。 */
+  onRangeCustom?: () => void;
 }
 
-export default function KlineChart({ payload, display, onPick, onDownload, highlight }: Props) {
+export default function KlineChart({
+  payload,
+  display,
+  onPick,
+  onDownload,
+  highlight,
+  rangeRequest,
+  defaultRangePreset = "6M",
+  onRangeCustom,
+}: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const chartRef = useRef<echarts.ECharts | null>(null);
-  // onPick 存进 ref，不进 setOption 的依赖，避免父组件 re-render 导致整图重建。
+  // onPick / onRangeCustom 存进 ref，不进 setOption 的依赖，避免父组件 re-render 导致整图重建。
   const onPickRef = useRef(onPick);
   onPickRef.current = onPick;
+  const onRangeCustomRef = useRef(onRangeCustom);
+  onRangeCustomRef.current = onRangeCustom;
   // 最近一次 setOption 的完整 option：ResizeObserver 里 resize 后重发自愈用
   //（echarts resize 会丢弃尚未完成的分帧渲染，大数据量下主体 K 线不再补画）。
   const lastOptionRef = useRef<ReturnType<typeof buildKlineOption> | null>(null);
   // 容器尺寸缓存与防抖句柄：尺寸没变不动作，变了等布局稳定再 resize+重发
   const lastSizeRef = useRef({ w: 0, h: 0 });
   const resizeTimerRef = useRef(0);
+  // 忽略程序内部触发的 dataZoom 事件（避免刚点快捷区间就被误判为手动自定义缩放）
+  const suppressCustomZoomRef = useRef(false);
 
   const tf = display.timeframe;
   const isDaily = tf === "D";
@@ -248,22 +300,56 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
   // 生效开关：周/月线自动隐藏日线专属内容（见 effectiveDisplay）
   const eff = useMemo(() => effectiveDisplay(display), [display]);
   // 12-1 动量序列（Carhart 1997 口径）—— 永远从日线 close 算，聚合视图不重算。
-  // 周/月线不显示 12-1：聚合后点数不足 252 根，12-1 无意义。空数组由 buildKlineOption
-  // 内部判断后跳过角标。
+  // 周/月线不显示 12-1：聚合后点数不足 252 根，12-1 无意义。
   const mom121Series = useMemo(
     () => (isDaily ? computeMom121(payload.ohlc) : []),
     [payload, isDaily],
   );
+  const mom121Summary = useMemo(() => {
+    if (!mom121Series.length) return null;
+    const latest = mom121Series[mom121Series.length - 1];
+    if (latest == null) return null;
+    return {
+      value: latest,
+      pct: computeMom121PercentileCurrent(mom121Series),
+    };
+  }, [mom121Series]);
+
+  // 20 期均量线（纯展示参考，用于成交量副图基准线及顶部动态量比读数）
+  const volMa20 = useMemo(() => computeRollingMean(view.volumes, 20), [view.volumes]);
+
+  // 筹码分布（CYQ）：主图自定义绘制与底部获利比例/均价统计共用一次计算
+  const chipData = useMemo(() => {
+    if (!eff.chipDist) return null;
+    const halfLifeDays =
+      eff.chipMode === "decay"
+        ? CHIP_DECAY_HALF_LIFE_DAYS / CHIP_BARS_PER_PERIOD[eff.timeframe]
+        : undefined;
+    const lastClose = view.lastClose ?? view.ohlc[view.ohlc.length - 1]?.[1] ?? 0;
+    return computeChipDistribution(view.ohlc, view.volumes, 80, halfLifeDays, lastClose);
+  }, [eff.chipDist, eff.chipMode, eff.timeframe, view.ohlc, view.volumes, view.lastClose]);
+
   // 买点联动高亮依赖日线结构标记，聚合视图下一并停用
   const effHighlight = isDaily ? highlight ?? null : null;
 
   // 结构标记降密档：可视窗口 > MARK_DENSE_WINDOW_BARS 根时进入。
-  // onDataZoom 里跨阈值才 setState（拖动全程只有两次翻转），effect 依赖
-  // dense 触发 setOption 重新过滤——远端非存活标记截断，存活结构始终全画。
+  // MACD 事件降密档：可视窗口 > MACD_COMPACT_WINDOW_BARS 根时仅保留最近 6 个事件。
   const [dense, setDense] = useState(false);
   const denseRef = useRef(false);
+  const [macdCompact, setMacdCompact] = useState(false);
+  const macdCompactRef = useRef(false);
 
-  // init 只跑一次：创建实例 + 绑定不变的 click/resize 监听。
+  // 顶部动态读数栏当前索引（null = 展示最新一根）
+  const [hoverIdx, setHoverIdx] = useState<number | null>(null);
+  const hoverIdxRef = useRef<number | null>(null);
+
+  // 切换标的或周期时，悬停索引回落到最新一根
+  useEffect(() => {
+    hoverIdxRef.current = null;
+    setHoverIdx(null);
+  }, [payload.symbol, tf]);
+
+  // init 只跑一次：创建实例 + 绑定不变的 click/resize/axisPointer 监听。
   useEffect(() => {
     if (!ref.current) return;
     const chart = echarts.init(ref.current, undefined, { renderer: "canvas" });
@@ -285,6 +371,25 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
     chart.on("mouseout", () => {
       if (ref.current) ref.current.style.cursor = "crosshair";
     });
+
+    // 十字光标联动顶部动态读数栏（只在实际换根时 setState，不触发 ECharts 重绘）
+    const onAxisPointer = (ev: { axesInfo?: Array<{ axisDim?: string; value?: number }> }) => {
+      const xInfo = ev?.axesInfo?.find((a) => a.axisDim === "x" && typeof a.value === "number");
+      if (!xInfo || typeof xInfo.value !== "number") return;
+      const next = Math.round(xInfo.value);
+      if (next !== hoverIdxRef.current) {
+        hoverIdxRef.current = next;
+        setHoverIdx(next);
+      }
+    };
+    const onGlobalOut = () => {
+      if (hoverIdxRef.current !== null) {
+        hoverIdxRef.current = null;
+        setHoverIdx(null);
+      }
+    };
+    chart.on("updateAxisPointer", onAxisPointer as (params: unknown) => void);
+    chart.on("globalout", onGlobalOut);
 
     // dataZoom 吸附：拖拽/滚轮缩放时把窗口起止索引取整回写，使边缘始终对齐
     // 到「整根 K 线」，不出现半根蜡烛、也不在极细缩放时漂离数据顶点。若当前
@@ -316,18 +421,29 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
         c0 && c0.startValue != null && c0.endValue != null &&
         Number.isInteger(c0.startValue) && Number.isInteger(c0.endValue);
       if (!alreadyInt) {
+        suppressCustomZoomRef.current = true;
         chart.setOption({
           dataZoom: [
             { startValue: s, endValue: e },
             { startValue: s, endValue: e },
           ],
         });
+        suppressCustomZoomRef.current = false;
+      }
+      if (!suppressCustomZoomRef.current) {
+        onRangeCustomRef.current?.();
       }
       // 降密档位检测：窗口跨度跨过阈值才翻转一次 state，触发 setOption 重过滤。
-      const nowDense = e - s > MARK_DENSE_WINDOW_BARS;
+      const span = e - s;
+      const nowDense = span > MARK_DENSE_WINDOW_BARS;
       if (nowDense !== denseRef.current) {
         denseRef.current = nowDense;
         setDense(nowDense);
+      }
+      const nowMacdCompact = span > MACD_COMPACT_WINDOW_BARS;
+      if (nowMacdCompact !== macdCompactRef.current) {
+        macdCompactRef.current = nowMacdCompact;
+        setMacdCompact(nowMacdCompact);
       }
     };
     chart.on("dataZoom", onDataZoom as (params: unknown) => void);
@@ -388,6 +504,8 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
       chart.off("click", onClick as (params: unknown) => void);
       chart.off("mouseover", onOver as (params: unknown) => void);
       chart.off("mouseout");
+      chart.off("updateAxisPointer", onAxisPointer as (params: unknown) => void);
+      chart.off("globalout", onGlobalOut);
       chart.off("dataZoom", onDataZoom as (params: unknown) => void);
       chart.dispose();
       chartRef.current = null;
@@ -416,40 +534,82 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
     });
   }, [onDownload, payload.symbol, tf, isDaily]);
 
+  // 响应工具栏快捷时间区间切换（3月 / 6月 / 1年 / 全部）
+  const lastRangeSeqRef = useRef<number>(0);
+  useEffect(() => {
+    if (!rangeRequest || rangeRequest.seq === lastRangeSeqRef.current) return;
+    lastRangeSeqRef.current = rangeRequest.seq;
+    const chart = chartRef.current;
+    const n = view.dates.length;
+    if (!chart || n === 0) return;
+    const nextWin = resolveRangeWindow(n, tf, rangeRequest.preset);
+    suppressCustomZoomRef.current = true;
+    chart.setOption({
+      dataZoom: [
+        { startValue: nextWin.startValue, endValue: nextWin.endValue },
+        { startValue: nextWin.startValue, endValue: nextWin.endValue },
+      ],
+    });
+    suppressCustomZoomRef.current = false;
+    const span = nextWin.endValue - nextWin.startValue;
+    const nowDense = span > MARK_DENSE_WINDOW_BARS;
+    if (nowDense !== denseRef.current) {
+      denseRef.current = nowDense;
+      setDense(nowDense);
+    }
+    const nowMacdCompact = span > MACD_COMPACT_WINDOW_BARS;
+    if (nowMacdCompact !== macdCompactRef.current) {
+      macdCompactRef.current = nowMacdCompact;
+      setMacdCompact(nowMacdCompact);
+    }
+  }, [rangeRequest, tf, view.dates.length]);
+
   // setOption 独立 effect：data/开关变化时只更新 option，不销毁实例，
-  // 保留 dataZoom 缩放位置，不闪烁。用 notMerge 防止旧标记/均线残留。
-  // 但 notMerge 会整体替换 option、把 dataZoom 重置回默认，因此先读出当前
-  // 窗口（整数索引）原样续接，既保留缩放位置、又保证吸附在整根 K 线。
-  // 首次渲染时 chart 还没有 option，取 null 用默认区间。
-  //
-  // 周期切换时点数会变（日 500 根 ≈ 周 100 根），旧窗口是「日线索引」，
-  // 直接沿用会被 clamp 成末尾几根。按新旧序列长度等比缩放索引 ——
-  // 两个序列覆盖同一段日期，比例映射等价于「保持大致相同的可见日期区间」。
-  const lastRenderRef = useRef<{ tf: Timeframe; n: number } | null>(null);
+  // 保留同标的下用户当前缩放位置，不闪烁。切换标的时按当前默认视野右对齐到最新日。
+  const lastRenderRef = useRef<{ symbol: string; tf: Timeframe; n: number } | null>(null);
   useEffect(() => {
     const chart = chartRef.current;
     if (!chart) return;
-    // 首次渲染时 chart 还没有 option，getOption() 返回 undefined，取 null 用默认区间。
-    const curDz = (chart.getOption()?.dataZoom as Array<{ startValue?: number; endValue?: number }> | undefined) ?? [];
-    const z0 = curDz[0];
-    let zoom =
-      z0 && z0.startValue != null && z0.endValue != null
-        ? { startValue: Math.round(z0.startValue), endValue: Math.round(z0.endValue) }
-        : null;
     const prev = lastRenderRef.current;
     const n = view.dates.length;
-    if (zoom && prev && prev.tf !== tf && prev.n > 1 && n > 1) {
-      const k = (n - 1) / (prev.n - 1);
-      zoom = {
-        startValue: Math.round(zoom.startValue * k),
-        endValue: Math.round(zoom.endValue * k),
-      };
+    const symbolChanged = !prev || prev.symbol !== payload.symbol;
+    let zoom: ZoomRange | null = null;
+    if (!symbolChanged) {
+      const curDz = (chart.getOption()?.dataZoom as Array<{ startValue?: number; endValue?: number }> | undefined) ?? [];
+      const z0 = curDz[0];
+      zoom =
+        z0 && z0.startValue != null && z0.endValue != null
+          ? { startValue: Math.round(z0.startValue), endValue: Math.round(z0.endValue) }
+          : null;
+      if (zoom && prev && prev.tf !== tf && prev.n > 1 && n > 1) {
+        const k = (n - 1) / (prev.n - 1);
+        zoom = {
+          startValue: Math.round(zoom.startValue * k),
+          endValue: Math.round(zoom.endValue * k),
+        };
+      }
     }
-    lastRenderRef.current = { tf, n };
-    const option = buildKlineOption(view, eff, effHighlight, zoom, mom121Series, dense);
+    const effectiveZoom = zoom ?? resolveRangeWindow(n, tf, defaultRangePreset);
+    const span = effectiveZoom.endValue - effectiveZoom.startValue;
+    const initDense = span > MARK_DENSE_WINDOW_BARS;
+    const initMacdCompact = span > MACD_COMPACT_WINDOW_BARS;
+    denseRef.current = initDense;
+    macdCompactRef.current = initMacdCompact;
+
+    lastRenderRef.current = { symbol: payload.symbol, tf, n };
+    const option = buildKlineOption(
+      view,
+      eff,
+      effHighlight,
+      effectiveZoom,
+      initDense,
+      initMacdCompact,
+      chipData,
+      volMa20,
+    );
     lastOptionRef.current = option;
     chart.setOption(option, { notMerge: true });
-  }, [view, eff, effHighlight, tf, mom121Series, dense]);
+  }, [view, eff, effHighlight, tf, dense, macdCompact, payload.symbol, defaultRangePreset, chipData, volMa20]);
 
   // 键盘平移：←/→ 一根，Shift+←/→ 半屏。与 ↑/↓ 切标的（WorkspacePage）互补，
   // 凑齐键盘看盘。只改 dataZoom 窗口（整根索引，天然满足吸附），不重建 series。
@@ -486,60 +646,146 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
     return () => window.removeEventListener("keydown", onKey);
   }, [view.dates.length]);
 
+  // ---- 顶部动态读数栏计算（默认最新一根，光标滑过实时联动）----
+  const activeIdx =
+    view.dates.length > 0
+      ? Math.max(0, Math.min(view.dates.length - 1, hoverIdx ?? view.dates.length - 1))
+      : -1;
+  const activeBar = activeIdx >= 0 ? view.ohlc[activeIdx] : null;
+  const activeDate = activeIdx >= 0 ? view.dates[activeIdx] : null;
+  const prevClose = activeIdx > 0 ? view.ohlc[activeIdx - 1]?.[1] ?? null : null;
+  const activeChgPct =
+    activeBar && prevClose && prevClose > 0 ? ((activeBar[1] / prevClose) - 1) * 100 : null;
+  const activeChgColor =
+    activeChgPct == null
+      ? undefined
+      : activeChgPct > 0
+        ? view.priceUp
+        : activeChgPct < 0
+          ? view.priceDown
+          : undefined;
+  const activeVol = activeIdx >= 0 ? view.volumes[activeIdx] : null;
+  const activeVolMa = activeIdx >= 0 ? volMa20[activeIdx] : null;
+  const activeVolRatio =
+    activeVol != null && activeVolMa != null && activeVolMa > 0 ? activeVol / activeVolMa : null;
+  const activeState = isDaily && activeIdx >= 0 ? view.states[activeIdx] ?? "unknown" : null;
+  const activeStateColor = activeState ? (view.stateColors ?? {})[activeState] : undefined;
+  const activeStateLabel = activeState ? STATE_SHORT_CN[activeState] : null;
+  const activeMas = MA_META.filter((m) => eff.ma[m.key]);
+  const showSymbolCode =
+    payload.displayName &&
+    payload.symbol &&
+    !payload.displayName.toUpperCase().includes(payload.symbol.toUpperCase());
+
   return (
     <>
+      {activeBar && (
+        <div className="kline-hud" aria-label="当前光标行情与均线读数">
+          <div className="kline-hud-main">
+            <span className="kline-hud-id">
+              <strong>{payload.displayName || payload.symbol}</strong>
+              {showSymbolCode && <small className="kline-hud-code">{payload.symbol}</small>}
+            </span>
+            {activeDate && <span className="kline-hud-date">{activeDate}</span>}
+            {activeStateLabel && activeStateColor && (
+              <span className="kline-hud-state" title="当日 BIAO 道路状态">
+                <i style={{ background: activeStateColor }} />
+                {activeStateLabel}
+              </span>
+            )}
+            <span className="kline-hud-ohlc">
+              <span>开 <b>{activeBar[0].toFixed(2)}</b></span>
+              <span>高 <b>{activeBar[3].toFixed(2)}</b></span>
+              <span>低 <b>{activeBar[2].toFixed(2)}</b></span>
+              <span>收 <b style={activeChgColor ? { color: activeChgColor } : undefined}>{activeBar[1].toFixed(2)}</b></span>
+              {activeChgPct != null && (
+                <b className="kline-hud-chg" style={activeChgColor ? { color: activeChgColor } : undefined}>
+                  {activeChgPct > 0 ? "+" : ""}{activeChgPct.toFixed(2)}%
+                </b>
+              )}
+              {activeVol != null && (
+                <span className="kline-hud-vol">
+                  量 <b>{fmtBig(activeVol)}</b>
+                  {activeVolRatio != null && <small>({activeVolRatio.toFixed(1)}×)</small>}
+                </span>
+              )}
+            </span>
+          </div>
+          <div className="kline-hud-meta">
+            {activeMas.map((m) => {
+              const v = activeIdx >= 0 ? view[m.key][activeIdx] : null;
+              return (
+                <span key={m.key} className="kline-hud-ma" style={{ color: m.color }}>
+                  <i className={`kline-hud-line${m.dashed ? " dashed" : ""}`} style={{ borderColor: m.color }} />
+                  {m.label} <b>{v != null ? v.toFixed(2) : "—"}</b>
+                </span>
+              );
+            })}
+            {mom121Summary && (
+              <span
+                className="kline-hud-mom"
+                title="中期动量：近一年剔除最近一个月的累计涨跌幅，及其在自身历史里的百分位位置（纯时间尺度参考，不直接做买卖判定）"
+              >
+                中期动量{" "}
+                <b style={{ color: mom121Summary.value >= 0 ? view.priceUp : view.priceDown }}>
+                  {mom121Summary.value >= 0 ? "+" : ""}
+                  {(mom121Summary.value * 100).toFixed(1)}%
+                </b>
+                {mom121Summary.pct != null && (
+                  <small>（历史 {mom121Summary.pct.toFixed(0)}% 分位）</small>
+                )}
+              </span>
+            )}
+          </div>
+        </div>
+      )}
       <div className="kline" ref={ref} />
       {!isDaily && (
         <div className="chip-legend tf-note">
           <span className="chip-leg-item">
-            {timeframeLabel(tf)}线为日线聚合视图，BIAO 信号与结构标记仅日线模式可用
-            （开/收取区间首末日、高/低取区间极值、量为区间求和；均线在聚合数据上重算，
-            MACD 副图与关键性波动不显示）
+            {timeframeLabel(tf)}线为日线聚合视图，仅展示价格与均线，BIAO 状态与日线结构标记自动隐藏
           </span>
         </div>
       )}
       {isDaily && dense && (eff.bottomMarks || eff.topMarks) && (
         <div className="chip-legend tf-note">
           <span className="chip-leg-item">
-            可视窗口超过 {MARK_DENSE_WINDOW_BARS} 根：已截断远端失效标记（保留最近
-            数量见开关口径），存活结构确认始终完整显示；缩窄窗口可恢复全量
+            当前区间较长：远端已失效标记已自动精简，存活结构完整保留；放大区间可查看全量
           </span>
         </div>
       )}
-      {eff.chipDist && (
-        <div className="chip-legend">
-          <span className="chip-leg-item">
-            <i className="chip-leg-swatch" style={{ background: "#e36b1c" }} />
-            获利盘　价位 ≤ 当前价
-          </span>
-          <span className="chip-leg-item">
-            <i className="chip-leg-swatch" style={{ background: "#6366f1" }} />
-            套牢盘　价位高于当前价
-          </span>
-          {eff.chipMode === "decay" && (
-            <span className="chip-leg-item chip-leg-decay">
-              衰减半衰期 {CHIP_DECAY_HALF_LIFE_DAYS} 日
-            </span>
+      {(eff.chipDist || eff.macd) && (
+        <div className="kline-sub-legend">
+          {eff.chipDist && (
+            <div className="ksl-group">
+              <span className="chip-leg-item">
+                <i className="chip-leg-swatch" style={{ background: "#e36b1c" }} />
+                获利盘{chipData?.profitRatioPct != null ? ` ${chipData.profitRatioPct.toFixed(0)}%` : ""}
+              </span>
+              <span className="chip-leg-item">
+                <i className="chip-leg-swatch" style={{ background: "#6366f1" }} />
+                套牢盘
+              </span>
+              {chipData?.avgCost != null && (
+                <span className="chip-leg-item ksl-stat" title="按当前口径累计筹码加权估算的平均持仓成本">
+                  筹码均价 <b>{chipData.avgCost.toFixed(2)}</b>
+                </span>
+              )}
+              {eff.chipMode === "decay" && (
+                <span className="chip-leg-item ksl-tag">衰减半衰期 {CHIP_DECAY_HALF_LIFE_DAYS}日</span>
+              )}
+            </div>
           )}
-        </div>
-      )}
-      {eff.macd && (
-        <div className="chip-legend macd-legend">
-          <span className="chip-leg-item" style={{ color: MACD_EVENT_META.golden_cross.color }}>
-            ▲ 金叉（DIF 上穿 DEA）
-          </span>
-          <span className="chip-leg-item" style={{ color: MACD_EVENT_META.death_cross.color }}>
-            ▼ 死叉（DIF 下穿 DEA）
-          </span>
-          <span className="chip-leg-item" style={{ color: MACD_EVENT_META.zero_cross_up.color }}>
-            ○ 上穿0轴（排列转多）
-          </span>
-          <span className="chip-leg-item" style={{ color: MACD_EVENT_META.zero_cross_down.color }}>
-            ○ 下穿0轴（排列转空）
-          </span>
-          <span className="chip-leg-item macd-leg-note">
-            研究代理 · 强度非转折 · 金叉/死叉不是买卖点
-          </span>
+          {eff.macd && (
+            <div className="ksl-group" title="MACD 表达均线扩散/密集的强弱程度（研究代理），不单独作买卖点">
+              <span className="ksl-label">MACD 强度</span>
+              <span className="chip-leg-item" style={{ color: MACD_EVENT_META.golden_cross.color }}>▲金叉</span>
+              <span className="chip-leg-item" style={{ color: MACD_EVENT_META.death_cross.color }}>▼死叉</span>
+              <span className="chip-leg-item" style={{ color: MACD_EVENT_META.zero_cross_up.color }}>○穿0上</span>
+              <span className="chip-leg-item" style={{ color: MACD_EVENT_META.zero_cross_down.color }}>○穿0下</span>
+              <span className="ksl-note">研究代理 · 仅看强弱</span>
+            </div>
+          )}
         </div>
       )}
     </>
@@ -567,13 +813,24 @@ function buildKlineOption(
   display: ChartDisplay,
   highlight?: HighlightSpec | null,
   zoom?: ZoomRange | null,
-  mom121Series?: (number | null)[],
   dense = false,
+  macdCompact = false,
+  chipData?: ChipDistributionResult | null,
+  volMa20?: (number | null)[],
 ) {
     const d = payload;
     const up = d.priceUp;
     const down = d.priceDown;
     const showMacd = display.macd;
+    const isDaily = display.timeframe === "D";
+    const lastClose = d.lastClose ?? d.ohlc[d.ohlc.length - 1]?.[1] ?? null;
+    const prevClose = d.ohlc.length >= 2 ? d.ohlc[d.ohlc.length - 2]?.[1] ?? null : null;
+    const lastCloseColor =
+      lastClose != null && prevClose != null
+        ? lastClose >= prevClose
+          ? up
+          : down
+        : "#2458c6";
     // 筹码 value 轴排在所有 category 轴之后：开 MACD 时占 index 3，否则 2。
     const chipXAxisIndex = showMacd ? 3 : 2;
     // 本站已改为亮色主题，与 Streamlit 研究页一致，因此直接使用后端
@@ -583,6 +840,13 @@ function buildKlineOption(
 
     const markLineData: object[] = [];
     const markPointData: object[] = [];
+
+    // 格式化相对最新价的空间百分比（如「+17.7%」「-1.0%」）
+    const fmtDistPct = (price: number): string => {
+      if (!lastClose || lastClose <= 0) return "";
+      const pct = ((price / lastClose) - 1) * 100;
+      return ` (${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%)`;
+    };
 
     // ---- 买点分析联动高亮预处理 ----
     // hl 非空时：priceLines 画亮线（买点关键价/止损/目标），
@@ -595,8 +859,28 @@ function buildKlineOption(
     const dim = !!(hl && hl.dimOthers && hasHl);
     const DIM_OPACITY = 0.3;
 
+    // ---- 最新价参考水平虚线 + 右轴高亮价格标签 ----
+    if (lastClose != null && Number.isFinite(lastClose)) {
+      markLineData.push({
+        yAxis: lastClose,
+        lineStyle: { color: lastCloseColor, type: "dashed", width: 0.9, opacity: 0.48 },
+        label: {
+          show: true,
+          position: "end",
+          distance: 4,
+          formatter: lastClose.toFixed(2),
+          color: "#ffffff",
+          backgroundColor: lastCloseColor,
+          padding: [2, 5],
+          borderRadius: 2,
+          fontSize: 10,
+          fontWeight: 600,
+        },
+      });
+    }
+
     // ---- 水平参考线（B1 / C 点 / 顶部颈线）----
-    // ECharts 的 markLine 不派发 click，因此每条线在最右端放一个可点圆点把手。
+    // 价格轴已右置，可点圆点贴在最新日内缘，标签向左展开并带距现价百分比，避免与右轴重叠。
     const lastDate = d.dates.length ? d.dates[d.dates.length - 1] : null;
 
     const pushLine = (
@@ -608,30 +892,27 @@ function buildKlineOption(
       markLineData.push({
         yAxis: line.yAxis,
         lineStyle: { color: line.color, type: dash, width: line.width ?? 1.4 },
-        // markLine 自带 label 默认在图中央偏右（vertical:mid, horizontal:center），
-        // 当 K 线图宽时与最右端的把手重叠，**关闭**。把手本身带 label 显示
-        // 名字 + 价位，信息一致。
         label: { show: false },
       });
       if (lastDate) {
         markPointData.push({
           coord: [lastDate, line.yAxis],
           symbol: "circle",
-          symbolSize: 11,
-          symbolOffset: [16, 0],
+          symbolSize: 10,
+          symbolOffset: [0, 0],
           itemStyle: { color: line.color, borderColor: "#ffffff", borderWidth: 1.5 },
-          // 把手右侧加文字标签：名称 + 价位，与原 markLine 同样信息量
-          // 但贴在右端不与线重叠。
           label: {
             show: true,
-            position: "right",
-            distance: 14,
+            position: "left",
+            distance: 8,
             color: line.color,
             fontSize: 10,
             fontWeight: 600,
-            formatter: `${labelPrefix} ${line.yAxis.toFixed(2)}`,
-            backgroundColor: "rgba(255,255,255,0.95)",
-            padding: [1, 3],
+            formatter: `${labelPrefix} ${line.yAxis.toFixed(2)}${fmtDistPct(line.yAxis)}`,
+            backgroundColor: "rgba(255,255,255,0.92)",
+            borderColor: line.color,
+            borderWidth: 0.6,
+            padding: [1, 4],
             borderRadius: 2,
           },
           pick: {
@@ -643,7 +924,7 @@ function buildKlineOption(
             distancePct: line.distance_pct ?? null,
           },
           tooltip: {
-            formatter: `${line.label_cn ?? labelPrefix} ${line.yAxis}<br/>点击查看解释`,
+            formatter: `${line.label_cn ?? labelPrefix} ${line.yAxis}${fmtDistPct(line.yAxis)}<br/>点击查看解释`,
           },
         });
       }
@@ -768,19 +1049,21 @@ function buildKlineOption(
           markPointData.push({
             coord: [lastDate, line.yAxis],
             symbol: "circle",
-            symbolSize: 13,
-            symbolOffset: [16, 0],
+            symbolSize: 12,
+            symbolOffset: [0, 0],
             itemStyle: { color: line.color, borderColor: "#ffffff", borderWidth: 2 },
             label: {
               show: true,
-              position: "right",
-              distance: 14,
+              position: "left",
+              distance: 8,
               color: line.color,
               fontSize: 10,
               fontWeight: 700,
-              formatter: `${labelPrefix} ${line.yAxis.toFixed(2)}`,
+              formatter: `${labelPrefix} ${line.yAxis.toFixed(2)}${fmtDistPct(line.yAxis)}`,
               backgroundColor: "rgba(255,255,255,0.95)",
-              padding: [1, 3],
+              borderColor: line.color,
+              borderWidth: 0.8,
+              padding: [1, 4],
               borderRadius: 2,
             },
             pick: {
@@ -791,7 +1074,7 @@ function buildKlineOption(
               annoId: hlAnnoId ?? undefined,
             },
             tooltip: {
-              formatter: `${line.label_cn ?? labelPrefix} ${line.yAxis}<br/>点击查看解释`,
+              formatter: `${line.label_cn ?? labelPrefix} ${line.yAxis}${fmtDistPct(line.yAxis)}<br/>点击查看解释`,
             },
           });
         }
@@ -828,20 +1111,20 @@ function buildKlineOption(
             borderRadius: 3,
             fontSize: 11,
             fontWeight: 700,
-            formatter: `${pl.label} ${pl.price}`,
+            formatter: `${pl.label} ${pl.price}${fmtDistPct(pl.price)}`,
           },
         });
         if (lastDate) {
           markPointData.push({
             coord: [lastDate, pl.price],
             symbol: "circle",
-            symbolSize: isEntry ? 14 : 12,
-            symbolOffset: [16, 0],
+            symbolSize: isEntry ? 13 : 11,
+            symbolOffset: [0, 0],
             itemStyle: { color: pl.color, borderColor: "#ffffff", borderWidth: 2 },
             label: {
               show: true,
-              position: "right",
-              distance: 14,
+              position: "left",
+              distance: 8,
               color: pl.color,
               fontSize: 11,
               fontWeight: 700,
@@ -852,7 +1135,7 @@ function buildKlineOption(
             },
             pick: { kind: "highlight_price", level: pl.price, annoId: pl.annoId },
             tooltip: {
-              formatter: `${pl.label.replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]!))} ${pl.price}<br/>系统参考价位`,
+              formatter: `${pl.label.replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]!))} ${pl.price}${fmtDistPct(pl.price)}<br/>系统参考价位`,
             },
           });
         }
@@ -898,140 +1181,223 @@ function buildKlineOption(
       showSymbol: false,
       smooth: true,
       lineStyle: {
-        width: 1.2,
+        width: m.key === "ema20" ? 1.6 : 1.25,
         color: m.color,
-        // 同色的 SMA 走虚线，和实线 EMA 区分开
-        type: m.dashed ? ("dashed" as const) : ("solid" as const),
-        ...(dim ? { opacity: DIM_OPACITY } : {}),
+        // 同色的 SMA 走清晰短虚线，与实线 EMA 拉开视觉层次
+        type: m.dashed ? ([4, 3] as [number, number]) : ("solid" as const),
+        opacity: dim ? DIM_OPACITY : m.dashed ? 0.78 : 0.95,
       },
       itemStyle: { color: m.color },
       z: 3,
     }));
 
-    // ---- 筹码峰（CYQ）：成交量按价格纵向分布 ----
-    // custom series 共享主图价格轴（yAxisIndex:0），价格自动对齐；绑一个隐藏
-    // value x 轴、不进 dataZoom，缩放时间轴时筹码柱不被过滤，只随价格轴范围
-    // 裁剪--用户缩到哪段，就看那段价格区间的筹码堆积。
-    let chipSeries: object | null = null;
-    let chipXAxis: object | null = null;
-    if (display.chipDist) {
-      // 衰减模式：按距最新交易日的天数对成交量做指数衰减（半衰期 250 日）。
-      // 全历史模式不传 halfLifeDays，computeChipDistribution 退化为纯累计。
-      // computeChipDistribution 的衰减按「根数」计距，因此周/月聚合视图要把
-      // 半衰期从「日」折算成「根」（1 周≈5 交易日、1 月≈21 交易日），
-      // 否则周线下 250 根 = 250 周，衰减会形同失效。
-      const halfLifeDays =
-        display.chipMode === "decay"
-          ? CHIP_DECAY_HALF_LIFE_DAYS / CHIP_BARS_PER_PERIOD[display.timeframe]
-          : undefined;
-      const chip = computeChipDistribution(d.ohlc, d.volumes, 80, halfLifeDays);
-      if (chip) {
-        const lastClose = d.lastClose ?? d.ohlc[d.ohlc.length - 1]?.[1] ?? 0;
-        const { step, maxAmount, buckets } = chip;
-        const barW = 0.3; // 筹码峰最大宽度占主图比例
-        // 局部峰：比左右邻居量大的桶，取量最大的前 3 个作为密集区高亮标注。
-        const peakIdx: number[] = [];
-        for (let i = 1; i < buckets.length - 1; i++) {
-          if (
-            buckets[i].amount > buckets[i - 1].amount &&
-            buckets[i].amount > buckets[i + 1].amount
-          ) {
-            peakIdx.push(i);
+    // ---- 双 20 均线趋势云带（EMA20 与 SMA20 同时开启时铺淡色带）----
+    // 一眼分清快线（EMA20）在慢线（SMA20）上方还是下方、粘合还是发散。
+    const maRibbonSeries: object | null =
+      display.ma.ema20 && display.ma.sma20
+        ? {
+            name: "双20云带",
+            type: "custom",
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            clip: true,
+            silent: true,
+            z: 1,
+            tooltip: { show: false },
+            data: d.ema20.map((v, i) => [i, v ?? d.ohlc[i]?.[1] ?? null]),
+            renderItem: (params: ChipRenderParams, api: ChipRenderApi) => {
+              const i = params.dataIndex;
+              if (i <= 0) return;
+              const e0 = d.ema20[i - 1];
+              const s0 = d.sma20[i - 1];
+              const e1 = d.ema20[i];
+              const s1 = d.sma20[i];
+              if (e0 == null || s0 == null || e1 == null || s1 == null) return;
+              const pE0 = api.coord([i - 1, e0]);
+              const pS0 = api.coord([i - 1, s0]);
+              const pE1 = api.coord([i, e1]);
+              const pS1 = api.coord([i, s1]);
+              const bullish = e1 >= s1;
+              return {
+                type: "polygon",
+                shape: { points: [pE0, pE1, pS1, pS0] },
+                style: {
+                  fill: bullish
+                    ? dim
+                      ? "rgba(37,99,235,0.03)"
+                      : "rgba(37,99,235,0.09)"
+                    : dim
+                      ? "rgba(100,116,139,0.03)"
+                      : "rgba(100,116,139,0.11)",
+                },
+                silent: true,
+              };
+            },
           }
-        }
-        peakIdx.sort((a, b) => buckets[b].amount - buckets[a].amount);
-        const peakSet = new Set(peakIdx.slice(0, 3));
-        chipSeries = {
-          name: "筹码峰",
+        : null;
+
+    // ---- 底部 BIAO 道路状态细色带（日线专属）----
+    // 无论选用「红涨绿跌」还是「BIAO 绿灰黑」，底部 4px 细带始终呈现连续趋势段落，
+    // 解决红涨绿跌看不到道路状态、绿灰黑看不到阴阳实体的二选一割裂。
+    const stateStripSeries: object | null = isDaily
+      ? {
+          name: "道路状态带",
           type: "custom",
-          xAxisIndex: chipXAxisIndex,
+          xAxisIndex: 0,
           yAxisIndex: 0,
           clip: true,
+          silent: true,
           z: 2,
+          tooltip: { show: false },
+          // y 借用当日收盘价（天然在 K 线区间内），绝不拉偏价格轴刻度
+          data: d.ohlc.map((bar, i) => [i, bar[1]]),
           renderItem: (params: ChipRenderParams, api: ChipRenderApi) => {
-            // price/amount 从闭包取，不进 data 维度--否则全历史价格会污染主图
-            // yAxis 的自动 scale，把 K 线压扁。yAxis[0] 仍只算 K 线+均线。
-            const { price, amount } = buckets[params.dataIndex] ?? { price: 0, amount: 0 };
-            if (!amount) return;
+            const i = params.dataIndex;
+            const st = d.states[i];
+            const fill = st ? stateColors[st] : undefined;
+            if (!fill) return;
             const cs = params.coordSys;
-            const yMid = api.coord([0, price])[1];
-            const yTop = api.coord([0, price + step / 2])[1];
-            const yBot = api.coord([0, price - step / 2])[1];
-            const barH = Math.max(1, Math.abs(yTop - yBot) * 0.92);
-            const w = maxAmount > 0 ? (amount / maxAmount) * (cs.width * barW) : 0;
-            if (w < 0.5) return;
-            const profitable = price <= lastClose;
-            const color = profitable ? "#e36b1c" : "#6366f1";
-
-            // 峰值密集区：实色柱 + 贯穿实线 + 价格标签，明显高亮（不用虚线，虚线在 K 线上糊）
-            if (peakSet.has(params.dataIndex)) {
-              return {
-                type: "group",
-                children: [
-                  {
-                    type: "rect",
-                    shape: { x: cs.x, y: yMid - barH / 2, width: w, height: barH },
-                    style: { fill: color, opacity: 0.9 },
-                    silent: true,
-                  },
-                  {
-                    type: "line",
-                    shape: { x1: cs.x, y1: yMid, x2: cs.x + cs.width, y2: yMid },
-                    style: { stroke: color, lineWidth: 1.3, opacity: 0.7 },
-                    silent: true,
-                  },
-                  {
-                    type: "text",
-                    style: {
-                      text: price.toFixed(2),
-                      x: cs.x + cs.width - 3,
-                      y: yMid,
-                      fill: color,
-                      font: "600 10px sans-serif",
-                      align: "right",
-                      verticalAlign: "middle",
-                    },
-                    silent: true,
-                  },
-                ],
-              };
-            }
-
-            // 普通柱：从左边缘向右，横向渐变（左实右淡）与 K 线柔和过渡
+            const cx = api.coord([i, d.ohlc[i][1]])[0];
+            const stepW = Math.max(1, api.size([1, 0])[0]);
             return {
               type: "rect",
-              shape: { x: cs.x, y: yMid - barH / 2, width: w, height: barH },
-              style: {
-                fill: {
-                  type: "linear",
-                  x: 0, y: 0, x2: 1, y2: 0,
-                  colorStops: [
-                    { offset: 0, color },
-                    {
-                      offset: 1,
-                      color: profitable ? "rgba(245,158,11,0.06)" : "rgba(99,102,241,0.06)",
-                    },
-                  ],
-                },
-                opacity: 0.55,
+              shape: {
+                x: cx - stepW / 2,
+                y: cs.y + cs.height - 4.5,
+                width: Math.max(1, stepW + 0.5),
+                height: 4,
               },
+              style: { fill, opacity: dim ? 0.25 : 0.85 },
               silent: true,
             };
           },
-          data: buckets.map(() => ({ value: [0] })),
-          tooltip: { show: false },
-        };
-        chipXAxis = {
-          type: "value",
-          gridIndex: 0,
-          min: 0,
-          max: 1,
-          show: false,
-          axisLine: { show: false },
-          axisLabel: { show: false },
-          splitLine: { show: false },
-        };
+        }
+      : null;
+
+    // ---- 筹码峰（CYQ）：成交量按价格纵向分布，贴右侧价格轴展示 ----
+    // custom series 共享主图价格轴（yAxisIndex:0），价格自动对齐；绑一个隐藏
+    // value x 轴、不进 dataZoom，缩放时间轴时筹码柱不被过滤，只随价格轴范围裁剪。
+    let chipSeries: object | null = null;
+    let chipXAxis: object | null = null;
+    if (display.chipDist && chipData) {
+      const refClose = lastClose ?? d.ohlc[d.ohlc.length - 1]?.[1] ?? 0;
+      const { step, maxAmount, buckets } = chipData;
+      const barW = 0.22; // 筹码峰最大宽度收敛至 22%，贴右轴不压主图
+      // 局部峰：按量降序挑选最多 3 个，同时保证峰间至少间隔 4.5% 桶距避免标签打架
+      const peakCand: number[] = [];
+      for (let i = 1; i < buckets.length - 1; i++) {
+        if (
+          buckets[i].amount > buckets[i - 1].amount &&
+          buckets[i].amount > buckets[i + 1].amount
+        ) {
+          peakCand.push(i);
+        }
       }
+      peakCand.sort((a, b) => buckets[b].amount - buckets[a].amount);
+      const minBucketGap = Math.max(3, Math.round(buckets.length * 0.045));
+      const pickedPeaks: number[] = [];
+      for (const idx of peakCand) {
+        if (pickedPeaks.length >= 3) break;
+        if (pickedPeaks.every((p) => Math.abs(p - idx) >= minBucketGap)) {
+          pickedPeaks.push(idx);
+        }
+      }
+      const peakSet = new Set(pickedPeaks);
+      chipSeries = {
+        name: "筹码峰",
+        type: "custom",
+        xAxisIndex: chipXAxisIndex,
+        yAxisIndex: 0,
+        clip: true,
+        z: 2,
+        renderItem: (params: ChipRenderParams, api: ChipRenderApi) => {
+          const { price, amount } = buckets[params.dataIndex] ?? { price: 0, amount: 0 };
+          if (!amount) return;
+          const cs = params.coordSys;
+          const yMid = api.coord([0, price])[1];
+          const yTop = api.coord([0, price + step / 2])[1];
+          const yBot = api.coord([0, price - step / 2])[1];
+          const barH = Math.max(1, Math.abs(yTop - yBot) * 0.9);
+          const w = maxAmount > 0 ? (amount / maxAmount) * (cs.width * barW) : 0;
+          if (w < 0.5) return;
+          const profitable = price <= refClose;
+          const color = profitable ? "#e36b1c" : "#6366f1";
+          const xRight = cs.x + cs.width - w;
+
+          // 峰值密集区：右置实色柱 + 克制虚线 + 智能避让语义标签（远离现价贴右侧筹码峰空白区，贴近现价放左侧避开最新 K 线）
+          if (peakSet.has(params.dataIndex)) {
+            const peakTag = `${profitable ? "获利峰" : "套牢峰"} ${price.toFixed(2)}${fmtDistPct(price)}`;
+            const yLabel = Math.max(cs.y + 10, Math.min(cs.y + cs.height - 16, yMid - 8));
+            const farFromCurrent = refClose > 0 && Math.abs(price - refClose) / refClose > 0.06;
+            return {
+              type: "group",
+              children: [
+                {
+                  type: "rect",
+                  shape: { x: xRight, y: yMid - barH / 2, width: w, height: barH },
+                  style: { fill: color, opacity: 0.82 },
+                  silent: true,
+                },
+                {
+                  type: "line",
+                  shape: { x1: cs.x, y1: yMid, x2: cs.x + cs.width, y2: yMid },
+                  style: { stroke: color, lineWidth: 1, lineDash: [3, 3], opacity: 0.45 },
+                  silent: true,
+                },
+                {
+                  type: "text",
+                  style: {
+                    text: peakTag,
+                    x: farFromCurrent ? cs.x + cs.width - 4 : cs.x + 6,
+                    y: yLabel,
+                    fill: color,
+                    backgroundColor: "rgba(255,255,255,0.9)",
+                    padding: [1, 4],
+                    borderRadius: 2,
+                    font: "600 9.5px sans-serif",
+                    align: farFromCurrent ? "right" : "left",
+                    verticalAlign: "middle",
+                  },
+                  silent: true,
+                },
+              ],
+            };
+          }
+
+          // 普通柱：从右侧价格轴向左淡出，与最新 K 线无缝对照
+          return {
+            type: "rect",
+            shape: { x: xRight, y: yMid - barH / 2, width: w, height: barH },
+            style: {
+              fill: {
+                type: "linear",
+                x: 1, y: 0, x2: 0, y2: 0,
+                colorStops: [
+                  { offset: 0, color },
+                  {
+                    offset: 1,
+                    color: profitable ? "rgba(227,107,28,0.05)" : "rgba(99,102,241,0.05)",
+                  },
+                ],
+              },
+              opacity: 0.42,
+            },
+            silent: true,
+          };
+        },
+        data: buckets.map(() => ({ value: [0] })),
+        tooltip: { show: false },
+      };
+      chipXAxis = {
+        type: "value",
+        gridIndex: 0,
+        min: 0,
+        max: 1,
+        show: false,
+        axisLine: { show: false },
+        axisLabel: { show: false },
+        splitLine: { show: false },
+      };
     }
 
     // ---- K 线消息日标记（参考层，非交易信号）----
@@ -1080,28 +1446,77 @@ function buildKlineOption(
       .filter((p): p is NonNullable<typeof p> => p !== null);
     markPointData.push(...newsMarkPoints);
 
+    // ---- 当前可视区间最高 / 最低价自动极值标注 ----
+    markPointData.push(
+      {
+        name: "区间最高",
+        type: "max",
+        valueDim: "highest",
+        symbol: "circle",
+        symbolSize: 4,
+        itemStyle: { color: "#475569" },
+        label: {
+          show: true,
+          position: "top",
+          distance: 4,
+          color: "#475569",
+          fontSize: 10,
+          fontWeight: 600,
+          backgroundColor: "rgba(255,255,255,0.85)",
+          padding: [1, 3],
+          borderRadius: 2,
+          formatter: (p: { value?: number }) => (typeof p.value === "number" ? `高 ${p.value.toFixed(2)}` : ""),
+        },
+      },
+      {
+        name: "区间最低",
+        type: "min",
+        valueDim: "lowest",
+        symbol: "circle",
+        symbolSize: 4,
+        itemStyle: { color: "#475569" },
+        label: {
+          show: true,
+          position: "bottom",
+          distance: 4,
+          color: "#475569",
+          fontSize: 10,
+          fontWeight: 600,
+          backgroundColor: "rgba(255,255,255,0.85)",
+          padding: [1, 3],
+          borderRadius: 2,
+          formatter: (p: { value?: number }) => (typeof p.value === "number" ? `低 ${p.value.toFixed(2)}` : ""),
+        },
+      },
+    );
+
     // ---- MACD 副图（研究代理强度指标）----
     // DIF/DEA 线 + 红绿柱 + 0 轴参考线。作强度/乖离解读，非转折（见 macd_strength）。
     // 事件标记（▲金叉 ▼死叉 ○穿0轴）来自后端 macd_strength 判定（macdEvents），
     // 前端不自算交叉——判定权在 Python 规则层（AGENTS.md 约束）。
     const macdOpacity = dim ? DIM_OPACITY : 1;
-    const macdMarkPoints = (d.macdEvents ?? []).map((ev) => {
+    const rawMacdEvents = d.macdEvents ?? [];
+    const shownMacdEvents =
+      macdCompact && rawMacdEvents.length > MACD_COMPACT_RECENT_COUNT
+        ? rawMacdEvents.slice(-MACD_COMPACT_RECENT_COUNT)
+        : rawMacdEvents;
+    const macdMarkPoints = shownMacdEvents.map((ev) => {
       const meta = MACD_EVENT_META[ev.type] ?? MACD_EVENT_META.golden_cross;
       return {
         coord: [ev.date, ev.dif] as [string, number],
         symbol: meta.symbol,
-        symbolSize: 10,
+        symbolSize: 7,
         symbolRotate: meta.rotate,
         itemStyle: meta.hollow
-          ? { color: "#ffffff", borderColor: meta.color, borderWidth: 2, opacity: macdOpacity }
-          : { color: meta.color, borderColor: "#ffffff", borderWidth: 1, opacity: macdOpacity },
+          ? { color: "#ffffff", borderColor: meta.color, borderWidth: 1.6, opacity: macdOpacity }
+          : { color: meta.color, borderColor: "#ffffff", borderWidth: 0.8, opacity: macdOpacity },
         label: { show: false },
         pick: { kind: "macd_event" as const, date: ev.date, macdStatusCn: ev.statusCn },
         tooltip: {
           formatter:
             `MACD ${ev.statusCn} · ${ev.date}<br/>` +
             `强度${ev.dimension}（研究代理）<br/>` +
-            `不是买卖点 · 点击查看讲解`,
+            `仅看强弱 · 点击查看讲解`,
         },
       };
     });
@@ -1110,11 +1525,12 @@ function buildKlineOption(
           {
             name: "MACD柱",
             type: "bar",
+            itemStyle: { color: up },
             data: d.macdHist.map((v) => ({
               value: v,
               itemStyle: {
                 color: v != null && v >= 0 ? up : down,
-                opacity: macdOpacity,
+                opacity: macdOpacity * 0.78,
               },
             })),
             xAxisIndex: 2,
@@ -1122,7 +1538,7 @@ function buildKlineOption(
             markLine: {
               silent: true,
               symbol: "none",
-              lineStyle: { color: "#c0c6d0", type: "dashed", width: 0.8 },
+              lineStyle: { color: "#cbd5e1", type: "dashed", width: 0.8 },
               label: { show: false },
               data: [{ yAxis: 0 }],
             },
@@ -1170,134 +1586,84 @@ function buildKlineOption(
       ? [
           {
             scale: true,
+            position: "right" as const,
+            splitNumber: 3,
             gridIndex: 2,
             axisLine: { show: false },
-            axisLabel: { color: "#7b8494", fontSize: 10 },
+            axisLabel: { color: "#64748b", fontSize: 10, margin: 8 },
             splitLine: { show: false },
           },
         ]
       : [];
+
+    // 取消顶部混排 Legend 后，主图上沿收紧至 10px，三段留出清晰间隔防止刻度碰撞
     const grids = showMacd
       ? [
-          { left: 56, right: 34, top: 32, height: "46%" },
-          { left: 56, right: 34, top: "56%", height: "14%" },
-          { left: 56, right: 34, top: "72%", height: "14%" },
+          { left: 12, right: 64, top: 10, height: "53%" },
+          { left: 12, right: 64, top: "67%", height: "11%" },
+          { left: 12, right: 64, top: "80.5%", height: "12.5%" },
         ]
       : [
-          { left: 56, right: 34, top: 32, height: "62%" },
-          { left: 56, right: 34, top: "72%", height: "18%" },
+          { left: 12, right: 64, top: 10, height: "68%" },
+          { left: 12, right: 64, top: "81.5%", height: "11.5%" },
         ];
     const zoomAxes = showMacd ? [0, 1, 2] : [0, 1];
 
-    // dataZoom 改用「数据索引」(startValue/endValue) 而非百分比，并由外部 dataZoom
-    // 事件把索引取整回写，使拖拽/缩放时窗口永远对齐到「整根 K 线」——不会被切成
-    // 半根、也不会在缩放到很细时漂离数据顶点。zoom 由 setOption effect 传入续接
-    // 用户当前位置；首次/无续接时用默认展示右侧约 60%。
     const n = d.dates.length;
-    const defStart = n > 1 ? Math.round(0.4 * (n - 1)) : 0;
-    const defEnd = n > 0 ? n - 1 : 0;
+    const defWin = resolveRangeWindow(n, display.timeframe, "6M");
     const clampIdx = (v: number) => Math.max(0, Math.min(n - 1, Math.round(v)));
-    let zs = clampIdx(zoom?.startValue ?? defStart);
-    let ze = clampIdx(zoom?.endValue ?? defEnd);
+    let zs = clampIdx(zoom?.startValue ?? defWin.startValue);
+    let ze = clampIdx(zoom?.endValue ?? defWin.endValue);
     if (zs > ze) [zs, ze] = [ze, zs];
-
-    // ---- 12-1 动量角标（Carhart 1997 口径）----
-    // 仅日线 + 数据足够（>252 根）时显示；周/月线或首 252 根数据时隐藏。
-    // 不进 legend / tooltip / 判定层；纯右上角文字，作为时间尺度外部锚点。
-    const lastMom121 =
-      mom121Series && mom121Series.length > 0
-        ? mom121Series[mom121Series.length - 1]
-        : null;
-    const mom121Pct = computeMom121PercentileCurrent(mom121Series ?? []);
-    const mom121Label: object[] =
-      lastMom121 != null
-        ? [
-            {
-              type: "text",
-              right: 10,
-              top: 4,
-              z: 100,
-              silent: true,
-              style: {
-                text: `12-1 动量  ${lastMom121 >= 0 ? "+" : ""}${(lastMom121 * 100).toFixed(2)}%`,
-                fill: lastMom121 >= 0 ? "#e33d47" : "#0b9b64",
-                fontSize: 12,
-                fontWeight: 600,
-                backgroundColor: "rgba(255,255,255,0.92)",
-                padding: [3, 8],
-                borderRadius: 3,
-              },
-            },
-            ...(mom121Pct != null
-              ? [
-                  {
-                    type: "text",
-                    right: 10,
-                    top: 28,
-                    z: 100,
-                    silent: true,
-                    style: {
-                      text: `历史百分位  ${mom121Pct.toFixed(0)}%`,
-                      fill: "#5b6473",
-                      fontSize: 10,
-                      fontWeight: 500,
-                    },
-                  },
-                ]
-              : []),
-            {
-              type: "text",
-              right: 10,
-              top: 46,
-              z: 100,
-              silent: true,
-              style: {
-                text: "Carhart 1997 · close[i−21]/close[i−252]−1",
-                fill: "#9ca3af",
-                fontSize: 9,
-              },
-            },
-          ]
-        : [];
 
     return {
         backgroundColor: "#ffffff",
         animation: false,
-        legend: {
-          data: [...maSeries.map((s) => s.name), ...(showMacd ? ["DIF", "DEA", "MACD柱"] : [])],
-          textStyle: { color: "#5b6473", fontSize: 11 },
-          top: 4,
-        },
-        // MACD 子图内直接标注两根线（固定位置，dataZoom 不影响）。
-        // 左轴占 56px，故 left 用像素紧贴轴右侧；top 用百分比对齐 MACD 子图区（grid2: 72%–86%）。
-        // 12-1 角标另由 mom121Label 提供，叠在 DIF/DEA 之后。
+        // 顶部全局 Legend 移入组件内 .kline-hud 实时读数栏，画布顶部零浪费
+        legend: { show: false },
+        // 子图内部左上角轻量标签（与各自子图对齐，绝不压图/绝不与顶部重复）
         graphic: [
+          {
+            type: "text",
+            left: 16,
+            top: showMacd ? "67.2%" : "81.7%",
+            z: 100,
+            silent: true,
+            style: { text: "量能  — 20日均量", fill: "#64748b", fontSize: 10, fontWeight: 500 },
+          },
           ...(showMacd
             ? [
                 {
                   type: "text",
-                  left: "60px",
-                  top: "73.5%",
+                  left: 16,
+                  top: "80.7%",
                   z: 100,
                   silent: true,
-                  style: { text: "● DIF", fill: "#e36b1c", fontSize: 11, fontWeight: 600 },
+                  style: { text: "MACD", fill: "#64748b", fontSize: 10, fontWeight: 600 },
                 },
                 {
                   type: "text",
-                  left: "118px",
-                  top: "73.5%",
+                  left: 56,
+                  top: "80.7%",
                   z: 100,
                   silent: true,
-                  style: { text: "● DEA", fill: "#8b5cf6", fontSize: 11, fontWeight: 600 },
+                  style: { text: "● DIF", fill: "#e36b1c", fontSize: 10, fontWeight: 600 },
+                },
+                {
+                  type: "text",
+                  left: 96,
+                  top: "80.7%",
+                  z: 100,
+                  silent: true,
+                  style: { text: "● DEA", fill: "#8b5cf6", fontSize: 10, fontWeight: 600 },
                 },
               ]
             : []),
-          ...mom121Label,
         ],
         tooltip: {
           trigger: "axis",
           axisPointer: { type: "cross" },
-          backgroundColor: "#ffffff",
+          backgroundColor: "rgba(255,255,255,0.96)",
           borderColor: "#dfe5ee",
           textStyle: { color: "#1f2937", fontSize: 12 },
           // 自定义 formatter：标清开/收/高/低，量能用万/亿收敛
@@ -1313,31 +1679,40 @@ function buildKlineOption(
             const lines = [date];
             for (const p of arr) {
               const v = p.value;
-              if (p.seriesName === "K线" && Array.isArray(v)) {
-                // ECharts candlestick: [open, close, low, high]
-                const [o, c, l, h] = v as [number, number, number, number];
-                // 涨跌幅相对前一根收盘价(昨收)，与行情软件惯例及顶栏口径一致
+              if (p.seriesName === "K线") {
+                // 直接从原始 d.ohlc 按日期取值（ECharts 传入的 candlestick params.value 首项是类目下标，不可直接解构）
                 const i = d.dates.indexOf(date);
-                const prevClose = i > 0 ? d.ohlc[i - 1][1] : null;
-                let chgLabel: string;
-                if (prevClose == null) {
-                  chgLabel = "--";
-                } else {
-                  const pct = (c / prevClose - 1) * 100;
-                  chgLabel = (pct < 0 ? "" : "+") + pct.toFixed(2) + "%";
+                const bar = i >= 0 ? d.ohlc[i] : null;
+                if (bar) {
+                  const [o, c, l, h] = bar;
+                  const prevC = i > 0 ? d.ohlc[i - 1][1] : null;
+                  let chgLabel: string;
+                  if (prevC == null) {
+                    chgLabel = "--";
+                  } else {
+                    const pct = (c / prevC - 1) * 100;
+                    chgLabel = (pct < 0 ? "" : "+") + pct.toFixed(2) + "%";
+                  }
+                  lines.push(
+                    `开 ${o.toFixed(2)}　高 ${h.toFixed(2)}　低 ${l.toFixed(2)}　收 ${c.toFixed(2)}　${chgLabel}`,
+                  );
                 }
-                lines.push(
-                  `开 ${o.toFixed(2)}　收 ${c.toFixed(2)}　高 ${h.toFixed(2)}　低 ${l.toFixed(2)}　${chgLabel}`,
-                );
               } else if (p.seriesName === "量能") {
                 const vol = typeof v === "object" && v !== null && "value" in v ? (v as { value: number }).value : (v as number);
                 lines.push(`量能 ${fmtBig(vol)}`);
+              } else if (p.seriesName === "20日均量") {
+                if (typeof v === "number" && v > 0) lines.push(`20日均量 ${fmtBig(v)}`);
               } else if (p.seriesName === "DIF" || p.seriesName === "DEA") {
                 if (typeof v === "number" && v) lines.push(`${p.seriesName} ${v.toFixed(4)}`);
               } else if (p.seriesName === "MACD柱") {
                 const hv = typeof v === "object" && v !== null && "value" in v ? (v as { value: number }).value : (v as number);
                 if (hv != null) lines.push(`MACD柱 ${hv.toFixed(4)}`);
-              } else if (typeof v === "number" && v) {
+              } else if (
+                p.seriesName !== "双20云带" &&
+                p.seriesName !== "道路状态带" &&
+                typeof v === "number" &&
+                v
+              ) {
                 lines.push(`${p.seriesName} ${v.toFixed(2)}`);
               }
             }
@@ -1352,7 +1727,7 @@ function buildKlineOption(
             data: d.dates,
             gridIndex: 0,
             axisLine: { lineStyle: { color: "#dfe5ee" } },
-            axisLabel: { color: "#7b8494", fontSize: 10 },
+            axisLabel: { color: "#64748b", fontSize: 10, margin: 6 },
             splitLine: { show: false },
           },
           {
@@ -1369,20 +1744,30 @@ function buildKlineOption(
         yAxis: [
           {
             scale: true,
+            boundaryGap: ["10%", "7%"],
+            position: "right" as const,
             ...(hl?.ensureVisible ? {
               min: (extent: {min:number;max:number}) => priceAxisBounds(extent.min,extent.max,hl.priceLines.map(p=>p.price))?.min ?? extent.min,
               max: (extent: {min:number;max:number}) => priceAxisBounds(extent.min,extent.max,hl.priceLines.map(p=>p.price))?.max ?? extent.max,
             } : {}),
             gridIndex: 0,
             axisLine: { show: false },
-            axisLabel: { color: "#7b8494", fontSize: 10 },
-            splitLine: { lineStyle: { color: "#f0f3f8" } },
+            axisLabel: { color: "#64748b", fontSize: 10, margin: 8 },
+            splitLine: { lineStyle: { color: "#f1f5f9" } },
           },
           {
             scale: true,
+            position: "right" as const,
             gridIndex: 1,
+            splitNumber: 2,
             axisLine: { show: false },
-            axisLabel: { color: "#7b8494", fontSize: 10 },
+            axisLabel: {
+              showMinLabel: false,
+              color: "#64748b",
+              fontSize: 10,
+              margin: 8,
+              formatter: (v: number) => fmtBig(v),
+            },
             splitLine: { show: false },
           },
           ...macdYAxis,
@@ -1392,16 +1777,20 @@ function buildKlineOption(
           {
             type: "slider",
             xAxisIndex: zoomAxes,
-            bottom: 6,
-            height: 18,
+            left: 12,
+            right: 64,
+            bottom: 4,
+            height: 16,
             startValue: zs,
             endValue: ze,
             borderColor: "#dfe5ee",
             backgroundColor: "#ffffff",
-            textStyle: { color: "#7b8494", fontSize: 10 },
+            textStyle: { color: "#64748b", fontSize: 10 },
           },
         ],
         series: [
+          ...(maRibbonSeries ? [maRibbonSeries] : []),
+          ...(stateStripSeries ? [stateStripSeries] : []),
           {
             name: "K线",
             type: "candlestick",
@@ -1425,6 +1814,22 @@ function buildKlineOption(
             xAxisIndex: 1,
             yAxisIndex: 1,
           },
+          ...(volMa20
+            ? [
+                {
+                  name: "20日均量",
+                  type: "line" as const,
+                  data: volMa20,
+                  xAxisIndex: 1,
+                  yAxisIndex: 1,
+                  showSymbol: false,
+                  smooth: true,
+                  silent: true,
+                  lineStyle: { width: 1.1, color: "#94a3b8", opacity: dim ? DIM_OPACITY : 0.9 },
+                  z: 3,
+                },
+              ]
+            : []),
           ...macdSeries,
           ...(chipSeries ? [chipSeries] : []),
         ],
@@ -1441,6 +1846,28 @@ interface ChipRenderParams {
 interface ChipRenderApi {
   value: (idx: number) => number;
   coord: (pt: number[]) => number[];
+  size: (val: number[]) => number[];
+}
+
+interface ChipDistributionResult {
+  buckets: { price: number; amount: number }[];
+  maxAmount: number;
+  step: number;
+  profitRatioPct: number | null;
+  avgCost: number | null;
+}
+
+/** 简单滚动均值（用于成交量 20 日均量参考线）。 */
+function computeRollingMean(values: number[], period: number): (number | null)[] {
+  const out = new Array<number | null>(values.length).fill(null);
+  if (period <= 0 || values.length === 0) return out;
+  let sum = 0;
+  for (let i = 0; i < values.length; i++) {
+    sum += values[i] ?? 0;
+    if (i >= period) sum -= values[i - period] ?? 0;
+    if (i >= period - 1) out[i] = sum / period;
+  }
+  return out;
 }
 
 // 衰减模式半衰期（交易日）。经验值：约 1 个交易年的成交权重衰减到一半，
@@ -1452,23 +1879,15 @@ const CHIP_BARS_PER_PERIOD: Record<Timeframe, number> = { D: 1, W: 5, M: 21 };
 
 /**
  * 筹码分布（CYQ）：把每个交易日的成交量按当日 [low, high] 价格区间均匀
- * 分配到等宽价格桶里累计。
- *
- * 口径（halfLifeDays）：
- *   - 省略（全历史）：纯累计、不衰减——用户要的是「量的纵向展示」，
- *     看哪个价位历史成交堆积多。
- *   - 指定半衰期（衰减模式）：成交量按距最新交易日的天数做指数衰减
- *     weight = 0.5^(距今天数 / 半衰期) 后再入桶。历史久远的成交权重趋近 0，
- *     峰值更偏向近期价位，对「当前密集区代表性弱」的痛点更友好。
- *
- * 桶价 ≤ 最新收盘价视为获利盘，否则套牢盘。
+ * 分配到等宽价格桶里累计，同时汇总获利盘比例与加权筹码均价。
  */
 function computeChipDistribution(
   ohlc: [number, number, number, number][],
   volumes: number[],
   bucketCount = 80,
   halfLifeDays?: number,
-): { buckets: { price: number; amount: number }[]; maxAmount: number; step: number } | null {
+  refClose?: number,
+): ChipDistributionResult | null {
   if (ohlc.length === 0) return null;
   let lo = Infinity;
   let hi = -Infinity;
@@ -1505,9 +1924,27 @@ function computeChipDistribution(
     for (let b = b0; b <= b1; b++) amounts[b] += per;
   }
   let maxAmount = 0;
-  for (const a of amounts) if (a > maxAmount) maxAmount = a;
-  const buckets = amounts.map((a, b) => ({ price: lo + (b + 0.5) * step, amount: a }));
-  return { buckets, maxAmount, step };
+  let totalAmount = 0;
+  let profitAmount = 0;
+  let weightedPriceSum = 0;
+  const closePrice = refClose ?? ohlc[last]?.[1] ?? 0;
+  const buckets = amounts.map((a, b) => {
+    const price = lo + (b + 0.5) * step;
+    if (a > maxAmount) maxAmount = a;
+    if (a > 0) {
+      totalAmount += a;
+      weightedPriceSum += price * a;
+      if (price <= closePrice) profitAmount += a;
+    }
+    return { price, amount: a };
+  });
+  return {
+    buckets,
+    maxAmount,
+    step,
+    profitRatioPct: totalAmount > 0 ? (profitAmount / totalAmount) * 100 : null,
+    avgCost: totalAmount > 0 ? weightedPriceSum / totalAmount : null,
+  };
 }
 
 // ---- 12-1 动量（Carhart 1997 口径）----

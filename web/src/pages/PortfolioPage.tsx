@@ -1,289 +1,88 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import * as echarts from "echarts";
+import { Link, useSearchParams } from "react-router-dom";
 import { api, portfolioApi } from "../api/client";
-import { ReviewFetcher, TradesLedgerView } from "../components/copilot/CopilotCards";
-import InfoTip from "../components/InfoTip";
 import { agentConsoleStore } from "../App";
+import { ReviewFetcher, TradeConfirmCard, TradesLedgerView } from "../components/copilot/CopilotCards";
+import PortfolioTechnicalDetail from "../components/portfolio/PortfolioTechnicalDetail";
+import PortfolioTrackBenchmarkPanel from "../components/portfolio/PortfolioTrackBenchmarkPanel";
+import SmartSymbolPromptCard from "../components/smart-prompts/SmartSymbolPromptCard";
 import { fmtChange } from "../utils/format";
-import { classifySymbol, mapHoldingsToSymbols, type HoldingSymbolMap, type SymbolSource } from "../utils/portfolioSymbols";
-import type { PortfolioAdvice, PortfolioGroup, PortfolioHolding } from "../types";
+import { classifySymbol, mapHoldingsToSymbols, type SymbolSource } from "../utils/portfolioSymbols";
+import { TRACK_BENCHMARKS } from "../utils/portfolioTrackBenchmarks";
+import type { PortfolioGroup, PortfolioHolding, TradePreview } from "../types";
+import "./portfolio.css";
+import { patchPortfolioParams } from "./portfolioUrl";
+
+type Row = { holding: PortfolioHolding; group: PortfolioGroup };
+type SortKey = "amount" | "return" | "return_asc";
+const money = (v: number) => `¥${v.toLocaleString("zh-CN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+const pct = (v: number) => `${v.toFixed(1)}%`;
+const marketName: Record<string, string> = { cn: "A股", hk: "港股", us: "美股", other: "其他" };
+
+function QuickTradeBox({ holding, asOf }: { holding: PortfolioHolding; asOf: string }) {
+  const [side, setSide] = useState<"buy" | "sell" | "">("");
+  const [preview, setPreview] = useState<TradePreview | null>(null);
+  if (!holding.code || !/^[0-9]{6}$/.test(holding.code)) return null;
+  return (
+    <details className="pl-quick-trade">
+      <summary>登记这只基金的实际成交</summary>
+      {!preview ? (
+        <div className="pl-quick-trade-row">
+          <select
+            aria-label="成交方向"
+            value={side}
+            onChange={(e) => setSide(e.target.value as typeof side)}
+          >
+            <option value="">选择方向</option>
+            <option value="buy">买入</option>
+            <option value="sell">卖出</option>
+          </select>
+          <button
+            type="button"
+            className="btn small"
+            disabled={!side}
+            onClick={() =>
+              side &&
+              setPreview({
+                fund_code: holding.code,
+                fund_name: holding.name,
+                side,
+                side_cn: side === "buy" ? "买入" : "卖出",
+                amount: null,
+                trade_date: asOf,
+                missing: ["成交金额"],
+                note_cn: "手动登记实际成交",
+              })
+            }
+          >
+            填写成交卡
+          </button>
+        </div>
+      ) : (
+        <TradeConfirmCard preview={preview} />
+      )}
+    </details>
+  );
+}
 
 /**
- * 我的持仓（持仓体检页 v1，2026-09-04）。
- *
- * 数据来自 GET /api/portfolio（截图录入的持仓快照，存 SQLite）。
- * 页面回答三个问题：钱在哪儿（环形图）→ 每块怎么看（分组结论卡，
- * 后端写入的已验证结论大白话翻译）→ 整个组合要注意什么（组合级提示）。
- * 展示层不计算任何信号；组金额/占比/加权收益均由后端算好。
+ * 我的持仓（重构版：赛道主导的「持仓全景」+「成交台账」双页签）。
+ * 合并原割裂的「今日持仓 / 全部持仓」双列表，去掉场外基金满屏「资料缺口/未完成」焦虑，
+ * 按仓位从重到轻先看赛道外部顺逆风，点赛道即联动筛选下方基金明细。
  */
-
-const TIPS = {
-  weighted: "把组内每只基金的持有收益率按当前市值加权平均，用于组间粗略对比；不是精确业绩归因，精确数字看每只基金自己的收益率。",
-  qdii: "QDII = 投海外市场的基金（要外汇额度，申赎比普通基金慢几天）。你买的纳指、标普、全球科技基金都属于这类。",
-  dingtou: "定投 = 系统里登记了该基金在自动定期买入（App 截图标注）。定投中的基金操作纪律 = 按计划继续投，不因涨跌停投。",
-  verdict: "「系统怎么看」= 把系统用历史数据反复检验过的结论，翻译成大白话。它只做参考与纪律提示，不构成买卖指令；未验证区域会明确标注。",
-  top10: "季报穿透 = 基金公司每季度公布前十大持仓，按市场分类后统计。「占净值比例」指这些股票市值占基金总净值的比重——前十大通常只覆盖四到六成仓位，所以这是部分口径的真实暴露，不是全部。",
-  adviceStrength: "证据强度：已认证 = 多轮历史回测+对照检验过线的结论；候选 = 边界结论已验证、但用到你的组合上是新应用；观察 = 数据标注（如季报），不做交易依据；管理建议 = 纯打理常识，无回测依据。",
-};
-
-/** 环形图配色：8 组固定色，与分组卡片左侧色条一一对应。 */
-const GROUP_COLORS = [
-  "#2563eb", // us_index  海外指数（主题蓝）
-  "#7c3aed", // us_tech_active 全球科技
-  "#38bdf8", // us_growth_em
-  "#e33d47", // cn_info（红=A股主赛道）
-  "#b45309", // cn_metal
-  "#65a30d", // cn_green
-  "#8c96a8", // hk_tech（灰=未验证区域）
-  "#0d9488", // stable
-];
-
-function colorForGroup(index: number): string {
-  return GROUP_COLORS[index % GROUP_COLORS.length];
-}
-
-/** 配置环形图（按组金额占比）。 */
-function AllocationRing({ groups }: { groups: PortfolioGroup[] }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!ref.current || groups.length === 0) return;
-    const chart = echarts.init(ref.current);
-    chart.setOption({
-      tooltip: {
-        trigger: "item",
-        formatter: (p: { name: string; value: number; percent: number }) =>
-          `${p.name}<br/>¥${p.value.toLocaleString("zh-CN", { minimumFractionDigits: 2 })}（${p.percent}%）`,
-      },
-      series: [
-        {
-          type: "pie",
-          radius: ["48%", "72%"],
-          center: ["50%", "50%"],
-          avoidLabelOverlap: true,
-          itemStyle: { borderColor: "#fff", borderWidth: 2 },
-          label: {
-            formatter: "{b}\n{d}%",
-            fontSize: 11,
-            color: "#5b6473",
-            lineHeight: 15,
-          },
-          labelLine: { length: 8, length2: 6 },
-          data: groups.map((g, i) => ({
-            name: g.name.replace(/^[^·]*·/, ""),
-            value: g.amount,
-            itemStyle: { color: colorForGroup(i) },
-          })),
-        },
-      ],
-    });
-    const onResize = () => chart.resize();
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-      chart.dispose();
-    };
-  }, [groups]);
-
-  return <div ref={ref} style={{ width: "100%", height: 300 }} />;
-}
-
-function ReturnCell({ v }: { v: number | null }) {
-  const { text, cls } = fmtChange(v);
-  return <span className={cls}>{text}</span>;
-}
-
-/** 市场代码 -> 短名（与后端 MARKET_CN 一致的展示层映射） */
-const MARKET_SHORT: Record<string, string> = { cn: "A股", hk: "港股", us: "美股", other: "其他" };
-
-/** 一只基金的真实暴露 chips（前十大口径）。 */
-function ExposureChips({ h }: { h: PortfolioHolding }) {
-  if (h.top10_total_pct == null) return <span className="flat">—</span>;
-  const parts = Object.entries(h.top10_by_market_pct)
-    .filter(([, v]) => v >= 1)
-    .map(([m, v]) => `${MARKET_SHORT[m] ?? m}${Math.round(v)}%`);
-  return (
-    <span className="portfolio-expo" title={`季报 ${h.report_quarter}；前十大合计占净值 ${h.top10_total_pct}%`}>
-      {parts.join(" · ")}
-    </span>
-  );
-}
-
-/** 组级真实分布行：名义分组 vs 穿透后。 */
-function GroupRealShare({ share }: { share: Record<string, number> | null }) {
-  if (!share) return null;
-  const parts = Object.entries(share).map(([m, v]) => `${MARKET_SHORT[m] ?? m}${v.toFixed(0)}%`);
-  return (
-    <div className="portfolio-real-share">
-      <InfoTip tip={TIPS.top10}>真实分布</InfoTip>：{parts.join(" · ")}
-    </div>
-  );
-}
-
-/** 建议强度徽章配色。 */
-const STRENGTH_CLS: Record<string, string> = {
-  certified: "pos",
-  candidate: "imp",
-  observation: "mid",
-  management: "muted-chip",
-};
-
-function AdviceCard({ a }: { a: PortfolioAdvice }) {
-  return (
-    <div className={`card portfolio-advice-card ${a.strength}`}>
-      <div className="portfolio-advice-head">
-        <span className={`chip ${STRENGTH_CLS[a.strength] ?? ""}`} title={TIPS.adviceStrength}>
-          {a.strength_cn}
-        </span>
-        <span className="portfolio-advice-title">{a.title_cn}</span>
-      </div>
-      <p className="portfolio-advice-detail">{a.detail_cn}</p>
-      {a.evidence.length > 0 && (
-        <div className="portfolio-advice-evidence">
-          {a.evidence.map((e, i) => (
-            <span key={i} className="portfolio-advice-ev" title={e.ref}>
-              ✓ {e.label}
-            </span>
-          ))}
-        </div>
-      )}
-      {(a.trigger_cn || a.execution_cn) && (
-        <div className="portfolio-advice-actions">
-          {a.trigger_cn && a.trigger_cn !== "—" && (
-            <div><span className="portfolio-advice-k">时机</span>{a.trigger_cn}</div>
-          )}
-          {a.execution_cn && a.execution_cn !== "—" && (
-            <div><span className="portfolio-advice-k">执行</span>{a.execution_cn}</div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-/** 「问助手」草稿：带基金名称、可用代码与快照来源，放入输入框由用户编辑后发送，不自动发送。 */
-function askDraftFor(h: PortfolioHolding, map: HoldingSymbolMap | undefined, asOf: string): string {
-  const codePart = h.code ? `基金代码 ${h.code}` : "基金代码未记录";
-  const symbolPart = map ? `；系统里对应的行情标的是「${map.displayName}」${map.symbol}` : "";
-  return `我在「我的持仓」里持有「${h.name}」（${codePart}${symbolPart}；持仓为 ${asOf} 的截图快照，金额与收益是当时的、不是实时）。请按系统数据讲讲：它现在是什么阶段、道路状态如何，有哪些触发条件和失效位要注意？`;
-}
-
-/** 单个持仓的「看图 / 问助手」入口；无法可靠映射时明确提示，不给假入口。 */
-function HoldingActions({ h, map, asOf }: { h: PortfolioHolding; map: HoldingSymbolMap | undefined; asOf: string }) {
-  const ask = (
-    <button
-      type="button"
-      className="btn small portfolio-action"
-      title="把问题草稿放进助手输入框，可编辑后再发送；不会自动发送"
-      onClick={() => agentConsoleStore.openConsole(null, askDraftFor(h, map, asOf))}
-    >
-      问助手
-    </button>
-  );
-  if (!map) {
-    return (
-      <span className="portfolio-unmapped" title="该基金（场外代码或未收录）没有可靠对应的行情标的——场外基金代码不能直接当作行情代码，为避免跳到错误标的，这里不提供看图。">
-        无对应行情标的 {ask}
-      </span>
-    );
-  }
-  return (
-    <span className="portfolio-actions">
-      <Link className="btn small portfolio-action" to={`/?symbol=${encodeURIComponent(map.symbol)}`}
-        title={`打开看盘页：${map.displayName} ${map.symbol}（代码+市场+产品类型一致，名称互相包含核对）`}>
-        看图
-      </Link>
-      {ask}
-    </span>
-  );
-}
-
-function GroupCard({ group, index, symbolMap, asOf }: { group: PortfolioGroup; index: number; symbolMap: Map<string, HoldingSymbolMap>; asOf: string }) {
-  return (
-    <div className="card portfolio-group-card" style={{ borderLeft: `4px solid ${colorForGroup(index)}` }}>
-      <div className="portfolio-group-head">
-        <div>
-          <span className="portfolio-group-name">{group.name}</span>
-          <span className="chip">{group.market_cn}</span>
-        </div>
-        <div className="portfolio-group-nums">
-          <span className="portfolio-amount">¥{group.amount.toLocaleString("zh-CN", { minimumFractionDigits: 2 })}</span>
-          <span className="portfolio-pct">{group.pct.toFixed(1)}%</span>
-          <span className="portfolio-ret">
-            组收益 <InfoTip tip={TIPS.weighted}><ReturnCell v={group.avg_return_pct} /></InfoTip>
-          </span>
-        </div>
-      </div>
-
-      <div className="portfolio-verdict">
-        <div className="portfolio-verdict-title">
-          系统怎么看
-          <InfoTip tip={TIPS.verdict}>
-            <span className="portfolio-verdict-badge">?</span>
-          </InfoTip>
-        </div>
-        <p>{group.verdict_cn}</p>
-        {group.verdict_basis && group.verdict_basis !== "—" && (
-          <div className="portfolio-verdict-basis">依据：{group.verdict_basis}</div>
-        )}
-        <GroupRealShare share={group.real_market_share} />
-      </div>
-
-      <table className="portfolio-table">
-        <thead>
-          <tr>
-            <th>基金</th>
-            <th>代码</th>
-            <th className="num">金额（元）</th>
-            <th className="num">持有收益率</th>
-            <th>
-              <InfoTip tip={TIPS.top10}>真实暴露</InfoTip>
-            </th>
-            <th>标签</th>
-            <th>行情 / 助手</th>
-          </tr>
-        </thead>
-        <tbody>
-          {group.holdings.map((h) => {
-            const ret = fmtChange(h.return_pct);
-            return (
-              <tr key={h.holding_id}>
-                <td className="portfolio-holding-name">
-                  {h.name}
-                  {h.note && <div className="portfolio-holding-note">{h.note}</div>}
-                </td>
-                <td className="flat">{h.code ?? "待补"}</td>
-                <td className="num">{h.market_value.toLocaleString("zh-CN", { minimumFractionDigits: 2 })}</td>
-                <td className={`num ${ret.cls}`}>{ret.text}</td>
-                <td><ExposureChips h={h} /></td>
-                <td>
-                  {h.tags.map((t) => (
-                    <span key={t} className="tag" title={t === "QDII" ? TIPS.qdii : t === "定投" ? TIPS.dingtou : undefined}>
-                      {t}
-                    </span>
-                  ))}
-                </td>
-                <td><HoldingActions h={h} map={symbolMap.get(h.holding_id)} asOf={asOf} /></td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
 export default function PortfolioPage() {
+  const [params, setParams] = useSearchParams();
+  const tab: "overview" | "trades" = params.get("tab") === "trades" ? "trades" : "overview";
+  const update = (values: Record<string, string | null>, replace = true) =>
+    setParams(patchPortfolioParams(params, values), { replace });
+  const setTab = (next: typeof tab) => update({ tab: next === "overview" ? null : next }, false);
+
   const { data, error, isLoading } = useQuery({
     queryKey: ["portfolio"],
     queryFn: portfolioApi.get,
     staleTime: 5 * 60_000,
   });
-
-  // 映射来源只用已有数据：用户自选票（与看盘页同一份缓存）+ 美股 ETF 目录。
-  // 不逐只 probe 行情接口（场外代码可能撞上不相关的场内证券，见 portfolioSymbols）。
   const { data: dashboard } = useQuery({
     queryKey: ["cards"],
     queryFn: () => api.dashboard(),
@@ -295,11 +94,32 @@ export default function PortfolioPage() {
     staleTime: Infinity,
   });
 
+  const search = params.get("q") ?? "";
+  const groupFilter = params.get("group") ?? "all";
+  const rawSort = params.get("sort");
+  const sort: SortKey =
+    rawSort === "return" || rawSort === "return_asc" ? rawSort : "amount";
+  const selectedId = params.get("holding");
+  const detailRef = useRef<HTMLElement>(null);
+
+  const selectHolding = (holdingId: string) => {
+    update({ holding: holdingId }, false);
+    const detail = detailRef.current;
+    if (!detail) return;
+    const navigationHeight = document.querySelector(".top-nav")?.getBoundingClientRect().height ?? 60;
+    detail.style.scrollMarginTop = `${navigationHeight + 12}px`;
+    detail.scrollIntoView({
+      block: window.matchMedia("(max-width: 1100px)").matches ? "start" : "nearest",
+      behavior: "auto",
+    });
+  };
+
+  const rows = useMemo<Row[]>(
+    () => data?.groups.flatMap((group) => group.holdings.map((holding) => ({ holding, group }))) ?? [],
+    [data],
+  );
+
   const symbolMap = useMemo(() => {
-    if (!data) return new Map<string, HoldingSymbolMap>();
-    // 来源身份：自选中只有标识符自证为境内场内基金（段+后缀一致）的才给
-    // cn_exchange_fund；字母代码/指数/板块一律 insufficient（普通自选不自动
-    // 视为美股 ETF）。us_etfs 是明确的美股 ETF 目录，给 us_etf_catalog。
     const sources: SymbolSource[] = [
       ...(dashboard?.cards ?? [])
         .filter((c) => !c.error)
@@ -314,120 +134,399 @@ export default function PortfolioPage() {
         identity: "us_etf_catalog" as const,
       })),
     ];
-    return mapHoldingsToSymbols(
-      data.groups.flatMap((g) => g.holdings),
-      sources,
-    );
-  }, [data, dashboard, catalog]);
+    return mapHoldingsToSymbols(rows.map((r) => r.holding), sources);
+  }, [rows, dashboard, catalog]);
 
-  const totalText = useMemo(
-    () => (data ? `¥${data.total_value.toLocaleString("zh-CN", { minimumFractionDigits: 2 })}` : "--"),
-    [data],
+  const visible = useMemo(
+    () =>
+      rows
+        .filter(
+          ({ holding, group }) =>
+            (groupFilter === "all" || group.group_key === groupFilter) &&
+            (!search.trim() ||
+              `${holding.name} ${holding.code ?? ""} ${group.name}`
+                .toLocaleLowerCase()
+                .includes(search.trim().toLocaleLowerCase())),
+        )
+        .sort((a, b) => {
+          if (sort === "return") {
+            return (
+              (b.holding.return_pct ?? -Infinity) - (a.holding.return_pct ?? -Infinity) ||
+              a.holding.name.localeCompare(b.holding.name, "zh-CN")
+            );
+          }
+          if (sort === "return_asc") {
+            return (
+              (a.holding.return_pct ?? Infinity) - (b.holding.return_pct ?? Infinity) ||
+              a.holding.name.localeCompare(b.holding.name, "zh-CN")
+            );
+          }
+          return (
+            (b.holding.market_value ?? -Infinity) - (a.holding.market_value ?? -Infinity) ||
+            a.holding.name.localeCompare(b.holding.name, "zh-CN")
+          );
+        }),
+    [rows, groupFilter, search, sort],
   );
 
-  /** 海外/A股/港股 三大市场占比（组占比按市场加总，"其他"不入列）。 */
-  const marketSplit = useMemo(() => {
-    if (!data) return "--";
-    const byMarket = data.groups.reduce<Record<string, number>>((acc, g) => {
-      acc[g.market] = (acc[g.market] ?? 0) + g.pct;
-      return acc;
-    }, {});
-    return `${(byMarket.us ?? 0).toFixed(0)}% : ${(byMarket.cn ?? 0).toFixed(0)}% : ${(byMarket.hk ?? 0).toFixed(0)}%`;
-  }, [data]);
+  const selected = visible.find((r) => r.holding.holding_id === selectedId) ?? visible[0];
 
-  if (isLoading) return <div className="page"><p className="flat">加载持仓中…</p></div>;
+  if (isLoading) return <div className="page pl-page">加载持仓中…</div>;
   if (error || !data) {
     return (
-      <div className="page">
-        <div className="card error">
-          <p>持仓数据加载失败：{(error as Error | null)?.message ?? "未知错误"}</p>
-          <p className="flat">首次使用请先运行：python3 scripts/seed_portfolio.py</p>
-        </div>
+      <div className="page pl-page" role="alert">
+        持仓数据加载失败：{(error as Error | null)?.message ?? "未知错误"}
       </div>
     );
   }
 
+  const max = Math.max(0, ...rows.map((r) => r.holding.market_value));
+  const sortedGroups = [...data.groups].sort((a, b) => b.amount - a.amount);
+  const activeGroupObj = data.groups.find((g) => g.group_key === groupFilter) ?? null;
+  const selectedMapped = selected ? symbolMap.get(selected.holding.holding_id) : undefined;
+  const selectedTrackRefSym = selected
+    ? TRACK_BENCHMARKS[selected.group.group_key]?.referenceSymbols?.[0] ?? null
+    : null;
+
   return (
-    <div className="page">
-      <div className="page-head">
-        <h1>我的持仓</h1>
-        <span className="ph-meta">
-          {data.holdings_count} 只 · 数据截至 {data.as_of} · {data.data_source_cn}
-        </span>
+    <div className="page pl-page">
+      <header className="pl-header">
+        <div>
+          <h1>我的持仓</h1>
+          <p>
+            持仓记录 {data.as_of} · {data.holdings_count} 只基金（不含现金）
+          </p>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <Link to="/onepage" className="btn small">
+            一页看全 →
+          </Link>
+          <Link to="/?view=compare&scope=portfolio" className="btn small">
+            横向比强弱 →
+          </Link>
+        </div>
+      </header>
+
+      <div className="pl-overview" aria-label="持仓概览">
+        <div>
+          <span>所录基金金额</span>
+          <strong>{rows.length ? money(data.total_value) : "—"}</strong>
+        </div>
+        <div>
+          <span>基金只数</span>
+          <strong>{data.holdings_count}</strong>
+        </div>
+        <div>
+          <span>最大单只占比</span>
+          <strong>{rows.length && data.total_value > 0 ? pct((max / data.total_value) * 100) : "—"}</strong>
+        </div>
+        <div>
+          <span>前三大方向权重</span>
+          <strong style={{ fontSize: 13.5, fontWeight: 600, whiteSpace: "normal", lineHeight: 1.35 }}>
+            {sortedGroups
+              .slice(0, 3)
+              .map((g) => `${g.name} ${pct(g.pct)}`)
+              .join(" · ") || "—"}
+          </strong>
+        </div>
       </div>
 
-      {/* 历史快照声明：放首屏醒目位置，明确金额/收益是截图当时口径，不伪装成实时持仓 */}
-      <div className="portfolio-asof-banner" role="note">
-        本页为 <strong>{data.as_of}</strong> 的持仓快照（{data.data_source_cn}），金额与收益是当时的记录，<strong>不是实时持仓</strong>；「看图」打开的是行情标的的最新图表，两者日期不同属正常。
+      <div className="pl-tabs" role="tablist" aria-label="持仓页面">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "overview"}
+          onClick={() => setTab("overview")}
+        >
+          持仓全景（{data.holdings_count}）
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "trades"}
+          onClick={() => setTab("trades")}
+        >
+          成交台账
+        </button>
       </div>
 
-      {/* 组合总览条 */}
-      <div className="card portfolio-summary">
-        <div className="portfolio-summary-item">
-          <div className="portfolio-summary-label">持仓总市值</div>
-          <div className="portfolio-summary-value">{totalText}</div>
-        </div>
-        <div className="portfolio-summary-item">
-          <div className="portfolio-summary-label">基金只数 / 分组</div>
-          <div className="portfolio-summary-value">
-            {data.holdings_count} / {data.groups.length}
-          </div>
-        </div>
-        <div className="portfolio-summary-item">
-          <div className="portfolio-summary-label">海外 : A股 : 港股</div>
-          <div className="portfolio-summary-value">{marketSplit}</div>
-        </div>
-      </div>
+      {tab === "overview" ? (
+        <>
+          <PortfolioTrackBenchmarkPanel
+            groups={data.groups}
+            activeGroupKey={groupFilter}
+            onSelectGroup={(gk) =>
+              update({ group: gk === "all" ? null : gk, holding: null }, false)
+            }
+          />
 
-      {/* 组合级提示 */}
-      {data.observations.length > 0 && (
-        <div className="card portfolio-observations">
-          <div className="portfolio-observations-title">整个组合要注意什么（大白话）</div>
-          <ul>
-            {data.observations.map((o, i) => (
-              <li key={i}>{o}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* 调仓建议：R1~R7 规则引擎输出（判定在后端，页面只展示） */}
-      {data.advices.length > 0 && (
-        <div className="portfolio-advice-section">
-          <div className="section-title">
-            <h2>调仓建议</h2>
-            <span className="count">
-              按优先级排序 · {data.advices.length} 条 · 建议级非指令，采纳与否你拍板
+          <div className="pl-toolbar">
+            <label>
+              赛道
+              <select
+                value={groupFilter}
+                onChange={(e) =>
+                  update({ group: e.target.value === "all" ? null : e.target.value, holding: null })
+                }
+              >
+                <option value="all">全部赛道</option>
+                {sortedGroups.map((g) => (
+                  <option key={g.group_key} value={g.group_key}>
+                    {g.name}（{g.holdings.length}）
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              搜索
+              <input
+                type="search"
+                placeholder="基金名称或代码"
+                value={search}
+                onChange={(e) => update({ q: e.target.value, holding: null })}
+              />
+            </label>
+            <label>
+              排序
+              <select
+                value={sort}
+                onChange={(e) => update({ sort: e.target.value === "amount" ? null : e.target.value })}
+              >
+                <option value="amount">仓位金额从高到低</option>
+                <option value="return">收益率从高到低</option>
+                <option value="return_asc">收益率从低到高（先看亏损）</option>
+              </select>
+            </label>
+            {activeGroupObj && (
+              <button
+                type="button"
+                className="btn small"
+                onClick={() => update({ group: null, holding: null })}
+              >
+                赛道：{activeGroupObj.name} ✕
+              </button>
+            )}
+            <span>
+              显示 {visible.length} / {rows.length} 只
             </span>
           </div>
-          <div className="portfolio-advice-grid">
-            {data.advices.map((a) => (
-              <AdviceCard key={a.advice_id} a={a} />
-            ))}
-          </div>
-        </div>
-      )}
 
-      {/* 左：配置环形图（吸顶）；右：分组卡片流 */}
-      <div className="portfolio-layout">
-        <div className="portfolio-chart-col">
-          <div className="card">
-            <div className="section-title" style={{ marginTop: 0 }}>
-              <h2>钱在哪儿</h2>
-            </div>
-            <AllocationRing groups={data.groups} />
+          <div className="pl-workspace">
+            <section className="pl-list" aria-label="基金清单">
+              <div className="pl-list-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>基金 / 赛道</th>
+                      <th className="pl-num">金额</th>
+                      <th className="pl-num">占比</th>
+                      <th className="pl-num">持有收益</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {visible.map(({ holding, group }) => {
+                      const ret = fmtChange(holding.return_pct);
+                      const mapped = symbolMap.get(holding.holding_id);
+                      const weightPct =
+                        data.total_value > 0 ? (holding.market_value / data.total_value) * 100 : 0;
+                      return (
+                        <tr
+                          key={holding.holding_id}
+                          className={
+                            selected?.holding.holding_id === holding.holding_id ? "pl-selected" : ""
+                          }
+                        >
+                          <td>
+                            <button
+                              type="button"
+                              className="pl-row-select"
+                              aria-pressed={selected?.holding.holding_id === holding.holding_id}
+                              onClick={() => selectHolding(holding.holding_id)}
+                            >
+                              <strong>
+                                {holding.name}
+                                {mapped && <span className="pl-live-dot">有图</span>}
+                              </strong>
+                              <span>
+                                {holding.code ?? "无代码"} · {group.name}
+                              </span>
+                            </button>
+                          </td>
+                          <td className="pl-num">{money(holding.market_value)}</td>
+                          <td className="pl-num">
+                            <div>{pct(weightPct)}</div>
+                            <div className="pl-mini-bar" aria-hidden="true">
+                              <i style={{ width: `${Math.min(100, weightPct * 4).toFixed(0)}%` }} />
+                            </div>
+                          </td>
+                          <td className={`pl-num ${ret.cls}`}>{ret.text}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              {visible.length === 0 && (
+                <p className="pl-empty">
+                  {rows.length ? "没有符合条件的基金，调整赛道或搜索词后再看。" : "暂无基金持仓记录。"}
+                </p>
+              )}
+            </section>
+
+            <aside ref={detailRef} className="pl-detail" aria-label="单只基金档案" aria-live="polite">
+              {selected ? (
+                <>
+                  <div className="pl-detail-head">
+                    <span>{selected.group.name}</span>
+                    <h2>{selected.holding.name}</h2>
+                    <p>{selected.holding.code ?? "代码未记录"}</p>
+                  </div>
+                  <dl className="pl-facts">
+                    <div>
+                      <dt>持仓金额</dt>
+                      <dd>{money(selected.holding.market_value)}</dd>
+                    </div>
+                    <div>
+                      <dt>仓位占比</dt>
+                      <dd>
+                        {data.total_value > 0
+                          ? pct((selected.holding.market_value / data.total_value) * 100)
+                          : "—"}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>持有收益率</dt>
+                      <dd className={fmtChange(selected.holding.return_pct).cls}>
+                        {fmtChange(selected.holding.return_pct).text}
+                      </dd>
+                    </div>
+                  </dl>
+
+                  <div className="pl-actions" style={{ marginTop: 0, marginBottom: 12 }}>
+                    {selectedMapped ? (
+                      <Link to={`/?symbol=${encodeURIComponent(selectedMapped.symbol)}`}>
+                        看行情 K 线 →
+                      </Link>
+                    ) : selectedTrackRefSym ? (
+                      <Link to={`/?symbol=${encodeURIComponent(selectedTrackRefSym)}`}>
+                        看同赛道参考 K 线 →
+                      </Link>
+                    ) : null}
+                    <button
+                      type="button"
+                      onClick={() =>
+                        agentConsoleStore.openConsole(
+                          selectedMapped?.symbol ?? selectedTrackRefSym ?? null,
+                          `帮我核对「${selected.holding.name}${selected.holding.code ? `(${selected.holding.code})` : ""}」目前仓位占比 ${
+                            data.total_value > 0
+                              ? pct((selected.holding.market_value / data.total_value) * 100)
+                              : "—"
+                          }、收益率 ${fmtChange(selected.holding.return_pct).text}，接下来怎么处理？`,
+                        )
+                      }
+                    >
+                      问 AI 这笔持仓
+                    </button>
+                  </div>
+
+                  {selected.holding.code && <SmartSymbolPromptCard symbol={selected.holding.code} />}
+
+                  <section className="pl-quarter">
+                    <h3>季报前十大持仓</h3>
+                    {selected.holding.top10_total_pct == null ? (
+                      <p className="muted">暂无已披露季报前十大资料。</p>
+                    ) : (
+                      <>
+                        <p>
+                          季报 {selected.holding.report_quarter ?? "—"} · 前十大合计占净值{" "}
+                          <b>{pct(selected.holding.top10_total_pct)}</b>
+                        </p>
+                        <p>
+                          {Object.entries(selected.holding.top10_by_market_pct)
+                            .filter(([, v]) => v > 0)
+                            .map(([m, v]) => `${marketName[m] ?? m} ${pct(v)}`)
+                            .join(" · ") || "地域拆分未提供"}
+                        </p>
+                      </>
+                    )}
+                  </section>
+
+                  {selectedMapped && (
+                    <PortfolioTechnicalDetail holding={selected.holding} map={selectedMapped} />
+                  )}
+
+                  <QuickTradeBox
+                    key={selected.holding.holding_id}
+                    holding={selected.holding}
+                    asOf={data.as_of}
+                  />
+
+                  {selected.holding.note && (
+                    <details className="pl-item-note">
+                      <summary>原持仓备注</summary>
+                      <p>{selected.holding.note}</p>
+                    </details>
+                  )}
+                </>
+              ) : (
+                <p className="pl-empty">选择一只基金查看档案。</p>
+              )}
+            </aside>
           </div>
-        </div>
-        <div className="portfolio-groups-col">
-          {data.groups.map((g, i) => (
-            <GroupCard key={g.group_key} group={g} index={i} symbolMap={symbolMap} asOf={data.as_of} />
-          ))}
-        </div>
-      </div>
-      <div className="cp-row" style={{ justifyContent: "flex-end" }}>
-        <ReviewFetcher weekly />
-      </div>
-      <TradesLedgerView />
+
+          <details className="pl-history">
+            <summary>
+              历史组合备注与计划入口 <span>旧研究文字记录 · 计划待办管理</span>
+            </summary>
+            <div style={{ margin: "10px 0 6px" }}>
+              <Link to="/plans" className="btn small">
+                打开计划待办管理 →
+              </Link>
+            </div>
+            <section>
+              <h3>原始录入来源</h3>
+              <p>{data.data_source_cn}</p>
+            </section>
+            {data.observations.length > 0 && (
+              <section>
+                <h3>组合提示</h3>
+                <ul>
+                  {data.observations.map((o, i) => (
+                    <li key={i}>{o}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            {data.advices.length > 0 && (
+              <section>
+                <h3>原调仓建议</h3>
+                {data.advices.map((a) => (
+                  <article key={a.advice_id}>
+                    <h4>
+                      {a.title_cn} <small>{a.strength_cn}</small>
+                    </h4>
+                    <p>{a.detail_cn}</p>
+                  </article>
+                ))}
+              </section>
+            )}
+            {data.groups.map((g) => (
+              <section key={g.group_key}>
+                <h3>{g.name} · 原分组说明</h3>
+                <p>{g.verdict_cn}</p>
+              </section>
+            ))}
+          </details>
+        </>
+      ) : (
+        <section className="pl-trades" role="tabpanel">
+          <p>手动成交台账（独立维护，不自动改动上方持仓金额）。</p>
+          <div className="pl-trade-review">
+            <ReviewFetcher weekly />
+          </div>
+          <TradesLedgerView />
+        </section>
+      )}
     </div>
   );
 }

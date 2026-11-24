@@ -1,0 +1,70 @@
+{
+  "question": "Which ideas from WorkBuddy and which separate or combined breadth, ERP and MA200 observations add useful information about trend participation or subsequent price paths?",
+  "decision_use": "Low-frequency index/ETF observation and research prioritization; no trades or new production rules",
+  "mode": "bounded review plus necessary fixed-claim numerical audit",
+  "scope": [
+    "Reuse existing CN ERP conditional-increment study and ETF breadth/price rule studies",
+    "Read actual WorkBuddy US sentiment conversation and saved source version",
+    "Independently recalculate the five already-reported B200<=10 cluster dates against correctly identified SP500 prices, including next-close endpoint sensitivity",
+    "Continue CN missing-data qualification separately as operations"
+  ],
+  "existing_evidence": [
+    "docs/experiments/equity-bond-bands-effect-2026-11-01.md",
+    "docs/experiments/breadth-price50-decision-2026-09-09.md",
+    "docs/experiments/etf-breadth-source-and-confirmation-backtest-2026-09-09.md",
+    "docs/experiments/us-erp-overlay-ARCHIVE-2026-09-02.md",
+    "docs/experiments/workbuddy-breadth-threshold-review-2026-11-02.md"
+  ],
+  "target_and_baseline": "Original reported 250-session SP500 price change; recalculate exact reported five events and all-date baseline over same range, no new threshold search; existing conditional studies retain their original baselines",
+  "definition": "B200<=10 original WorkBuddy claim; fixed event dates already in frozen validation.json. Same-close original endpoint and next-trading-close+250 sensitivity. Full price calendar; no compressed breadth-date axis for corrected endpoints. Lowest future close relative to starting close is adverse path, not peak-to-trough account drawdown. Index price only, no dividend/cost/account claim.",
+  "success_and_falsification": "Can reuse descriptive layout if object/time semantics truthful; arithmetic matches does not validate source universe/PIT or predictive independence. Corrected negative/unstable results retained. Correlation alone cannot decide conditional increment.",
+  "allowed_actions": "Read user-named WorkBuddy files and repository evidence; local reports and scripts; user-approved two cache installation completed, followed by explicitly approved CN 47-day correction with full backup. User-authorized observation entrypoint priority and task-scoped outside-repository edits completed. No WorkBuddy source writes, messages, trades or new predictive thresholds.",
+  "budget_and_stop": {
+    "new_core_batches_max": 1,
+    "followup_batches_max": 3,
+    "new_external_source_requests_max": 6,
+    "external_source_requests_used": 5,
+    "new_experiment_runs_used": 2,
+    "prior_workbuddy_cn_review_batches": 2,
+    "family_selection_history": "Known WorkBuddy US variants include three breadth windows, seven thresholds, several outcome horizons, mixed price sources and changed grouping. Not independent unseen validation; total prior exploration unknown."
+  },
+  "output_location": "docs/ops/breadth-reading-aid-20261101",
+  "canonical_strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "registered_at": "2026-11-02T12:47:05.089771+08:00",
+  "execution_status": "research_review_complete_data_operations_separate",
+  "evidence_stage": "bounded historical review completed; joint independent increment not established",
+  "attempts": [
+    {
+      "id": "US-FIXED-AUDIT-1",
+      "status": "failed",
+      "reason": "Original validation.sig_k is 4 while actual sig_idx/sig_r each contain 5; original script reuses global k for quintile loop. No results emitted."
+    },
+    {
+      "id": "US-FIXED-AUDIT-2",
+      "status": "completed",
+      "reason": "Keep inconsistent reported count as finding; validate exact event-list lengths instead; same inputs/endpoints, no threshold change.",
+      "artifact": "workbuddy-us-fixed-audit-v4.json"
+    }
+  ],
+  "data_operations_status": "approved_47_day_reconstruction_installed_and_independently_verified",
+  "live_history_proposal": {
+    "path": "cn-history-change-plan-v4.json",
+    "additions": 14,
+    "corrections": 33,
+    "unchanged_other_records": 1255,
+    "status": "installed_after_explicit_user_approval",
+    "previous_approved_install": "installation-v3.json",
+    "installation_receipt": "installation-v4.json"
+  },
+  "ui_operations_status": "existing_observation_cards_and_chart_navigation_promoted",
+  "updated_at": "2026-11-02T14:55:00.420038+08:00"
+}

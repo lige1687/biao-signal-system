@@ -1,0 +1,28 @@
+{
+  "id": "rmc-2026-09-13-momentum-bad-actions",
+  "title": "行动检查已发现错误记录，新消费者仍拿原记录参与经济指数重建",
+  "date": "2026-09-13",
+  "kind": "observation_case",
+  "status": "observed",
+  "failure_mode": {
+    "category": "input",
+    "reason": "已标记错误的行动记录作为输入被原样消费进经济指数重建，坏输入未被拒收导致污染。"
+  },
+  "problem": "数据质量模块会检查公司行动记录并发现错误，但动量 CLI 只抽取用途判定、把原始行动（raw_actions）原样交给重建函数；新适配层又只做 float 转换，不拒绝负分红等非法值——即'允许查看坏记录'被放大成'允许用坏记录算钱'。",
+  "why_changed": "经济指数重建一旦吃进坏记录，全部动量值与后续研究结论被污染，且错误不易察觉。",
+  "old_method": "检查与消费分离：检查模块发现问题只影响质量判定，消费者仍消费原始记录。",
+  "new_method": "（复核要求，P1）'验证后才能消费'：已发现错误的记录不得进入重建；消费路径复用验证结果或明确拒绝。",
+  "scope": "run_momentum_research_prototype / momentum_prototype.adapt_company_events 等研究入口；不涉及策略规则。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/experiments/momentum-prototype-controller-review-2026-09-13.md"
+  ],
+  "before_after": {
+    "old_result": "带错误的行动记录可一路通过历史模式（只要 description 允许）进入经济指数重建；负分红等非法值不被适配层拒绝。",
+    "new_result": "问题以集中返修单 A 项（P1）记录并进入收口；§13 复核确认 S1–S3 工程收尾通过（420 项回归通过、独立复算 772 键零差异）。本条不宣称该入口之外的全部消费路径已迁移。",
+    "difference_explanation": "差异来自职责重划：'查看坏记录'与'用坏记录重建'是两种权限，前者不能自动授予后者。方法教训与资格墙原则一致：发现不合格就挡，不静默继续。"
+  },
+  "object_states": [],
+  "notes": ""
+}

@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+const result=await build({entryPoints:['src/components/market-observation-alerts/microstructureData.ts'],bundle:true,write:false,platform:'node',format:'esm'});
+const {parseMicrostructure,reading,selectedMicro}=await import(`data:text/javascript;base64,${Buffer.from(result.outputFiles[0].text).toString('base64')}`);
+const card={id:'test',title:'测试',market:'cn',unit:'%',frequency:'daily',scope:'沪深股票',meaning:'交易参与',sourceName:'交易所',sourceUrl:'https://www.sse.com.cn/',refreshedAt:'2026-11-08T10:00:00Z',refreshMode:'snapshot',points:[{date:'2026-11-05',value:10},{date:'2026-11-06',value:null}],limitations:[],percentileWindow:250};
+const packet=()=>({schemaVersion:1,generatedAt:'2026-11-08T10:00:00Z',cards:[structuredClone(card)],unavailable:[]});
+test('latest missing value stays unknown rather than rolling back',()=>{const c=parseMicrostructure(packet(),'2026-11-08').cards[0];assert.equal(reading(c).value,null);assert.equal(reading(c).date,'2026-11-06');});
+test('reject duplicate/reversed/future dates and nonfinite values',()=>{for(const change of [c=>c.points[1].date='2026-11-05',c=>c.points[1].date='2026-11-09',c=>c.points[0].value=Infinity]){let p=packet();change(p.cards[0]);assert.throws(()=>parseMicrostructure(p,'2026-11-08'));}});
+test('percentiles require matching dates and valid 0..100 values',()=>{let p=packet();p.cards[0].percentiles=[{date:'2026-11-04',value:50}];assert.throws(()=>parseMicrostructure(p,'2026-11-08'));p.cards[0].percentiles=[{date:'2026-11-05',value:101},{date:'2026-11-06',value:null}];assert.throws(()=>parseMicrostructure(p,'2026-11-08'));});
+test('reject duplicate ids, unsupported units and unsafe source links',()=>{for(const change of [p=>p.cards.push(p.cards[0]),p=>p.cards[0].unit='元',p=>p.cards[0].sourceUrl='javascript:alert(1)']){let p=packet();change(p);assert.throws(()=>parseMicrostructure(p,'2026-11-08'));}});
+test('comparison preserves unit and exact preceding date',()=>{let p=packet();p.cards[0].points[1].value=11;const r=reading(parseMicrostructure(p,'2026-11-08').cards[0]);assert.equal(r.change,1);assert.equal(r.previousDate,'2026-11-05');});
+test('selection filters both market and exact ids including an explicitly empty selection',()=>{const items=[{id:'cn-a',market:'cn'},{id:'cn-b',market:'cn'},{id:'us-a',market:'us'}];assert.deepEqual(selectedMicro(items,'cn',['cn-b','us-a']),[items[1]]);assert.deepEqual(selectedMicro(items,'cn',[]),[]);assert.deepEqual(selectedMicro(items,'us'),[items[2]]);});

@@ -177,11 +177,61 @@ def test_overseas_skipped_when_full_due() -> None:
     assert "overseas" not in due
 
 
-def test_overseas_symbol_selection_filters_a_share_and_indices() -> None:
-    """保温清单只留非 A 股自选：剔除 A 股 ETF 与默认大盘指数组。"""
+def test_overseas_symbol_selection_filters_a_share_indices_and_cn_sectors() -> None:
+    """保温清单只留真正海外自选：剔除 A 股 ETF、默认大盘指数组及国内板块指数。"""
 
     def symbols_fn() -> list[str]:
         return ["000001.SS", "^GSPC", "SOXX", "159652.SZ", "TH881272.SECTOR"]
 
     selected = _overseas_watchlist_symbols(symbols_fn)
-    assert selected == ["SOXX", "TH881272.SECTOR"]
+    assert selected == ["SOXX"]
+
+
+def test_run_loop_records_fundamentals_timestamp() -> None:
+    """基本面预热完成后必须写入 state.fundamentals，防止每 60s 无限重刷。"""
+    import threading
+    from lei_signal.api.preheat import _run_loop
+
+    stop = threading.Event()
+    calls: list[str] = []
+
+    class _FakeAnalysis:
+        def get_many(self, symbols, *, refresh=False, background=False):  # noqa: ANN001
+            calls.append(f"analysis:{len(symbols)}")
+            return {}
+
+    class _FakeFundamentals:
+        def overview(self) -> None:
+            calls.append("overview")
+
+        def rates(self) -> None:
+            calls.append("rates")
+
+        def commodities(self) -> None:
+            calls.append("commodities")
+
+        def etf_strength(self) -> None:
+            calls.append("etf_strength")
+            stop.set()
+
+    state = PreheatState()
+    _run_loop(
+        stop,
+        analysis_service=_FakeAnalysis(),
+        fundamentals_service=_FakeFundamentals(),
+        symbols_fn=lambda: ["000001.SS"],
+        calendar=CALENDAR,
+        state=state,
+    )
+    assert state.full is not None
+    assert state.fundamentals is not None
+
+
+def test_resolve_sector_with_suffix_keeps_shanghai_session() -> None:
+    """存储态带 .SECTOR 后缀的代码仍识别为国内板块（Asia/Shanghai 时区与沪深时段）。"""
+    from lei_signal.data.symbols import Market, is_cn_session_symbol, resolve_symbol
+
+    info = resolve_symbol("TH881278.SECTOR")
+    assert info.market is Market.SECTOR
+    assert info.timezone == "Asia/Shanghai"
+    assert is_cn_session_symbol(info)

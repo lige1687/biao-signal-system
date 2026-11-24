@@ -1,0 +1,180 @@
+{
+  "schema": "B04-runner-adaptation-readonly-check/1",
+  "reviewed_base_runner": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/package/extracted-v1/run_b03_gap_batch.py",
+    "bytes": 132054,
+    "sha256": "c9ee0652a026f59ce7b688617752aa8e84add16354ea0317fef20b19aee16cc1"
+  },
+  "original_B03_runner_bytes_unchanged": true,
+  "original_B03_build_queries_refuses_B04": true,
+  "actual_refusal": "Exact 120-key deterministic selection mismatch",
+  "AST_only_pure_function_executed": true,
+  "ordinary_runner_entrypoint_executed": false,
+  "provider_calls": 0,
+  "original_B03_release_contract_rejects_B04_by_exact_hash": true,
+  "old_B03_proofs_reference_different_contract_attempt_root": true,
+  "old_de5_attempt_identity_not_a_B04_grant": true,
+  "old_runner_B04_ready": false,
+  "planned_runner_is_implemented_or_tested": false,
+  "must_change": [
+    {
+      "target": "Embedded contract/baseline/execution identity constants (lines10..43)",
+      "before": "B03 contract a273..., old selected120/remaining233/reconciliation inputs, amendment de5 hardcodes B03-run02 and only known run01",
+      "required_after": "Embed exact reviewed B04 contract 016b0b016907a5991fe740f1865614bff48a6dad05dd2b06af617e3b33d068be; selected79/remaining113/deferred34 and audited source hashes; new B04 execution-binding with BOTH B03 consumed attempts. Keep de5 solely protocol provenance, not a B04 release.",
+      "review_scope": "Configuration and authority binding; changing only CLI params is forbidden."
+    },
+    {
+      "target": "build_queries",
+      "before": "Selected count exactly120, B03-specific text",
+      "required_after": "Expected selected count79 from frozen B04 contract, unique79/date/code/deterministic ordering, ten calls and all original cap values stay mandatory."
+    },
+    {
+      "target": "validate_baseline_inputs",
+      "before": "CSV six fields;120selected/233remaining/31partitions/113deferred; only12 B01/B02 files",
+      "required_after": "Explicit reviewed four-field audited schema; selected79 subset remaining113, 21 partitions top10, deferred34; exact23 B01/B02+run02 data files. All reported hashes must be read back; do not spoof old input names or source status."
+    },
+    {
+      "target": "validate_current_dedup",
+      "before": "Proof keys selected_120/remaining_233; only1 prior B03 attempt and known run01 5 files",
+      "required_after": "New B04 contract/runner/execution-binding/attempt/root identity, actual selected79 still unqueried, both B03 attempts with5 history files each plus23 data baseline files/20 consumed daily windows, unknown additional attempt rejected. New proof required; original32ae/a79f hashes and old de5 grant cannot authorize B04."
+    },
+    {
+      "target": "Top-level CLI/authority gate lines146..200",
+      "before": "--release-amendment-sha256 matches consumed de5 B03-run02 identity",
+      "required_after": "Require release-contract-sha256 exact B04 hash and fresh B04 execution-binding hash; de5 protocol-policy evidence not accepted as execution authority. Gate all writes/socket setup on new current proof and nonexistent B04 root. Missing/wrong/old grants all fail before writes or network."
+    },
+    {
+      "target": "write_portable_receipt/final message",
+      "before": "Assertions selected120/deferred113 and consumed_run01 only; B03 schema/output texts",
+      "required_after": "Exactly79 keys/34 deferred, B04 identity/output messages, retained both consumed B03 attempts and accurate cumulative sessions. Any first error must preserve partial/unattempted categories and consumed counts; no normal-row promise."
+    },
+    {
+      "target": "Module-level manifest/state/provenance/success messages and test fixture identities",
+      "before": "Any B03-specific identity, baseline payload filenames, old proof hashes or consumed_run01-only provenance in globals and snapshots",
+      "required_after": "Audit the complete AST literal inventory plus embedded payloads; B03 can appear only in explicitly labelled immutable predecessor provenance. B04 runtime grants, selection counts, CSV names and output messages must bind B04; old manifests/proofs are evidence only."
+    }
+  ],
+  "frozen_base_function_source_fingerprints": {
+    "build_queries": {
+      "line_start": 45,
+      "line_end": 67,
+      "sha256_of_exact_function_source": "ec46658110f9f2a476547f01c2abf3415126fb22b985885328f7435c3240d325"
+    },
+    "validate_baseline_inputs": {
+      "line_start": 69,
+      "line_end": 99,
+      "sha256_of_exact_function_source": "52496d6ad54ee6e04a80873e2fb64644fc4721150e2fb92d0802981717b3581b"
+    },
+    "validate_current_dedup": {
+      "line_start": 101,
+      "line_end": 135,
+      "sha256_of_exact_function_source": "9ef65ab43754c92b900f43e6cdbbfcd3ffc7822c7f5e471f906329e4036d302d"
+    },
+    "write_portable_receipt": {
+      "line_start": 648,
+      "line_end": 671,
+      "sha256_of_exact_function_source": "06b550b21199c9f5436edc651a5369f033a528a2c28e79319d7dde7743f507e3"
+    },
+    "validate_output_root": {
+      "line_start": 137,
+      "line_end": 144,
+      "sha256_of_exact_function_source": "1fae2e234fae01861314c3200dca1b6ea516ab3c2525bd88f1f22614c431cc12"
+    },
+    "execute_declared_queries": {
+      "line_start": 673,
+      "line_end": 682,
+      "sha256_of_exact_function_source": "493e003320f88a4542b59fca1b77edc9142e3219f776540a9518db83916ad818"
+    },
+    "bounded_official_decompress": {
+      "line_start": 503,
+      "line_end": 513,
+      "sha256_of_exact_function_source": "fff64c67cdc7b841889a8c7f9b3f1295e8000fb68173ca88c9d2518b5034a3a5"
+    },
+    "validate_response_envelope": {
+      "line_start": 515,
+      "line_end": 540,
+      "sha256_of_exact_function_source": "7e09930fb68005a0f5bbdacd28934a803485070005775cb3606632854b523ac8"
+    },
+    "audited_send_msg": {
+      "line_start": 542,
+      "line_end": 572,
+      "sha256_of_exact_function_source": "086b6973ca3d543fedc302d07f2e4162788d6b27fe31d2ad2c0dd7dd754f1404"
+    },
+    "storage_check": {
+      "line_start": 209,
+      "line_end": 213,
+      "sha256_of_exact_function_source": "3bda748a9e80283c523bf246dc75b02cecbdd14be8e693a22b02c6876f30d3b5"
+    },
+    "append_ledger": {
+      "line_start": 231,
+      "line_end": 248,
+      "sha256_of_exact_function_source": "7d06baf72c0bbc4cbdd3db83e57f4434d6d0f82ee85d97dbb45faf5385b47881"
+    },
+    "verify_request": {
+      "line_start": 298,
+      "line_end": 314,
+      "sha256_of_exact_function_source": "7e1ba04cbd59bb27262d4a119e7575223a94189ee7f8cb958ca249ae6a764110"
+    },
+    "validate_daily_record": {
+      "line_start": 317,
+      "line_end": 333,
+      "sha256_of_exact_function_source": "e681e4fd80f85eb3d256a54c6281deeaf1425c19b70bb5e376a0061afe2fa593"
+    },
+    "selected_key_accounting": {
+      "line_start": 335,
+      "line_end": 341,
+      "sha256_of_exact_function_source": "68cc0a8d5480941b3898f5f6a7206da9673c2f2b8716ae9098fbfc13606dc331"
+    },
+    "qualify_result": {
+      "line_start": 343,
+      "line_end": 411,
+      "sha256_of_exact_function_source": "8683062c4b39c91f98d6863dc326abd06b7e6be88b3a26810421dfd5ac891155"
+    },
+    "persist_wire_chunk": {
+      "line_start": 413,
+      "line_end": 425,
+      "sha256_of_exact_function_source": "8fb5b6e10fa72b856d3f7697c5c6b4853cd17d22d4b897e03af40afbb6abd905"
+    },
+    "run_call": {
+      "line_start": 585,
+      "line_end": 647,
+      "sha256_of_exact_function_source": "15c5959cc962ae24dbf059f89fff45fad477ba2bbb39dfec328627a725ead488"
+    },
+    "stop_after_call": {
+      "line_start": 283,
+      "line_end": 296,
+      "sha256_of_exact_function_source": "b3f23c63b69026a58b14319287bfc310dc311086f8ed7b32c67fcc19aee55105"
+    }
+  },
+  "must_remain_unchanged_functions": [
+    "validate_output_root",
+    "execute_declared_queries",
+    "bounded_official_decompress",
+    "validate_response_envelope",
+    "audited_send_msg",
+    "storage_check",
+    "append_ledger",
+    "verify_request",
+    "validate_daily_record",
+    "selected_key_accounting",
+    "qualify_result",
+    "persist_wire_chunk",
+    "run_call",
+    "stop_after_call"
+  ],
+  "future_mandatory_cases": [
+    "selected120 old CSV rejected",
+    "remaining233/31 partition old inputs rejected",
+    "missing B03-run02 history rejected",
+    "altered run01/run02 evidence rejected",
+    "unreviewed additional attempt rejected",
+    "old B03 a273 contract or32ae/a79f proof rejected",
+    "old de5 execution grant rejected even if protocol reused",
+    "wrong attempt ID/root or existing output rejected",
+    "missing/incorrect fresh B04 execution binding rejected",
+    "79selected+34deferred category accounting on success/error/empty/status0",
+    "all prior budgets/pace/deadline/storage/no-retry guards unchanged",
+    "real87/88 login and621 mixed response replay; historical rows not new B04 evidence",
+    "unknown server/trailer forms fail; numeric daily checksum unknown preserved"
+  ]
+}

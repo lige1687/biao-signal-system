@@ -1,0 +1,31 @@
+{
+  "id": "rmc-2026-09-19-s3-target-block",
+  "title": "S3 受限运行：预测类统计被资格墙阻塞，阻塞报告本身为合格交付",
+  "date": "2026-09-19",
+  "kind": "observation_case",
+  "status": "observed",
+  "failure_mode": {
+    "category": "time",
+    "reason": "阻塞根因是 21/21 条记录缺 available_at（当时何时可知），历史可知性/时点信息缺失，属时间问题。"
+  },
+  "problem": "用冻结真实历史输入为 14 只 ETF 重建 82 个月动量排名时，凡是依赖未来收益的统计（排名相关性、高低组收益差）都被自家资格规则挡住：21/21 条公司行动记录都不知道'当时何时可知'（缺 available_at），历史可知性不成立。",
+  "why_changed": "值得记录：资格墙按设计工作，'为什么被挡'的报告被 GPT 终审判定为合格交付而非失败——这是'错误拦得住'的正面证据，也是防止制造'研究外观'的方法先例。",
+  "old_method": "无对应先前方法事件；本条是资格规则（qualified-research 前置四条件）在真实受限运行中的首次完整实战记录。",
+  "new_method": "维持现状：target 用途未获资格前不产出 Rank IC、分组收益、参考差额；阻塞按五要素（已允许用途/未允许用途/阻塞原因/缺失字段/不满足条件）写成报告交差。",
+  "scope": "factor-p2 受限试点（BLOCK_AWARE_DIAGNOSTIC_ONLY 模式）；不构成预测验证或因子有效性结论。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/experiments/factor-p2-restricted-pilot-2026-09-19.md",
+    "docs/experiments/raw/factor-p2-pilot-s3-2026-09-19/target-use-block-report.md"
+  ],
+  "before_after": {
+    "old_result": "无：此前资格墙行为未经冻结真实输入的完整实战检验。",
+    "new_result": "排名重建 82 个月完成（69 月有排名、13 月热身不足如实保留），样本账 1,148 行守恒，独立复算 772 个动量值与 09-13 历史核算零差异；target 类统计零产出，758 行可用样本逐行记录阻塞原因。",
+    "difference_explanation": "试点的成功定义是证据链走得通、错误拦得住、数字可复算——不是动量因子有效（本次根本没有也不许验证）。要点：阻塞是正确行为，不得为出数字补算 available_at 或改称'诊断统计'绕过。"
+  },
+  "object_states": [
+    "mixed.momentum.rank@1.0.0: exists"
+  ],
+  "notes": "解锁前置：公司行动 available_at 证明与历史可获得性链（候选 A，未授权）。"
+}

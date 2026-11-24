@@ -1,0 +1,139 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""把 data.json 注入 template.html，并内嵌 ECharts，产出单文件离线可看的页面。"""
+import json, io, os
+
+D = json.load(open("data.json", encoding="utf-8"))
+tpl = io.open("template.html", encoding="utf-8").read()
+
+tpl = tpl.replace("__DATA__", json.dumps(D, ensure_ascii=False, separators=(",", ":")))
+
+# 交叉矩阵相关系数与填充格数
+for k in ("20", "50", "200"):
+    tpl = tpl.replace("__R%s__" % k, "%+.2f" % D["collin"][k])
+    nf = sum(1 for c in D["cross"][k] if c[4] > 0)
+    tpl = tpl.replace("__NF%s__" % k, str(nf))
+
+
+# ---------- 交叉矩阵表格（纯 HTML，避免图表对齐问题） ----------
+CSTOP = [(62,158,120),(143,196,168),(241,238,228),(226,166,140),(176,58,46)]
+ZN = ["下轨之下","均线下方","均线上方","上轨之上"]
+BN = ["≤30%","30–70%","≥70%"]
+
+def ccolor(v):
+    t = max(0.0, min(1.0, (v + 2) / 9.0))
+    x = t * (len(CSTOP) - 1); i = min(len(CSTOP) - 2, int(x)); f = x - i
+    a, b = CSTOP[i], CSTOP[i + 1]
+    return "#%02X%02X%02X" % tuple(int(round(a[k] + (b[k] - a[k]) * f)) for k in range(3))
+
+def cink(v):
+    t = max(0.0, min(1.0, (v + 2) / 9.0))
+    return "#FFFFFF" if (t < 0.28 or t > 0.78) else "#2C2C2A"
+
+def xtab(key):
+    g = {(c[0], c[1]): c for c in D["cross"][key]}
+    o = ['<table class="xtab"><thead><tr><th class="yl"></th>']
+    for b in BN: o.append("<th>%s</th>" % b)
+    o.append("</tr></thead><tbody>")
+    for z in (3, 2, 1, 0):
+        o.append('<tr><th class="yl">%s</th>' % ZN[z])
+        for bd in range(3):
+            c = g[(bd, z)]
+            if c[2] is None or c[4] < 8:
+                o.append('<td class="na">样本<br>不足</td>')
+            else:
+                o.append('<td style="background:%s;color:%s"><span class="r">%+.1f%%</span><span class="w">%d%%</span></td>'
+                         % (ccolor(c[2]), cink(c[2]), c[2], round(c[3])))
+        o.append("</tr>")
+    o.append("</tbody></table>")
+    return "".join(o)
+
+for k in ("20", "50", "200"):
+    tpl = tpl.replace("__XTAB%s__" % k, xtab(k))
+
+
+# ---------- 三档共振阶梯表 ----------
+def ladder_html():
+    o, grp = [], None
+    for x in D["cur"]["ladder"]:
+        if x["grp"] != grp:
+            grp = x["grp"]
+            t = "低位共振：越彻底越强" if grp == "低" else "高位共振：越彻底越差"
+            o.append('<tr class="grp"><td colspan="5">%s</td></tr>' % t)
+        hl = ' class="hl"' if "三档全" in x["label"] else ""
+        o.append('<tr%s><td>%s</td><td class="n">%d</td><td class="n">%+.2f%%</td>'
+                 '<td class="n">%.1f%%</td><td class="n">%+.1f%%</td></tr>'
+                 % (hl, x["label"], x["n"], x["r60"], x["win60"], x["worst"]))
+    return "".join(o)
+
+tpl = tpl.replace("__LADDER__", ladder_html())
+tpl = tpl.replace("__NLOW__", str(len(D["cur"]["low_runs"])))
+tpl = tpl.replace("__NHIGH__", str(len(D["cur"]["high_runs"])))
+
+
+# ---------- 三周期买入表 ----------
+def buytab_html():
+    cur = D["last"]["brd"]; wait = D["buy"]["wait"]; o = []
+    for r in D["buy"]["rows"]:
+        bw = str(r["bw"]); c = cur.get(bw)
+        gap = (c - 10) if c is not None else 0
+        o.append('<tr><td><b>%s</b></td><td>%s 日宽度</td><td>≤10%%</td><td class="n">%d 日</td>'
+                 '<td class="n">%d 段</td><td class="n">%+.2f%%</td><td class="n">%.1f%%</td>'
+                 '<td class="n">%+.1f%%</td>'
+                 '<td class="n">%s<span class="sm">还差 %.0fpp · 一年内等到 %d%%</span></td></tr>'
+                 % (r["period"], r["bw"], r["hold"], r["segs"], r["r"], r["win"], r["worst"],
+                    ("%.1f%%" % c) if c is not None else "—", gap, wait.get(bw) or 0))
+    return "".join(o)
+
+def y08_html():
+    o = []
+    for d, bw, r in D["buy"]["y08"]:
+        hit = ' class="hit"' if bw <= 10 else ""
+        o.append('<tr%s><td>%s</td><td class="n">%.1f%%</td><td class="n">%+.1f%%</td></tr>'
+                 % (hit, d[:7], bw, r))
+    return "".join(o)
+
+def hist_html():
+    o = []
+    for d, bw, r in D["buy"]["hist"]:
+        o.append('<tr><td>%s</td><td class="n">%.1f%%</td><td class="n">%+.1f%%</td></tr>'
+                 % (d, bw, r))
+    return "".join(o)
+
+tpl = tpl.replace("__BUYTAB__", buytab_html())
+tpl = tpl.replace("__Y08__", y08_html())
+tpl = tpl.replace("__HIST__", hist_html())
+tpl = tpl.replace("__N2__", "{:,}".format(D["buy"]["n"]))
+
+
+def sens_html():
+    o = []
+    for r in D["buy"]["sens"]:
+        hl = ' class="hl"' if r["thr"] == 10 else ""
+        o.append('<tr%s><td>≤%d%%</td><td class="n">%d</td><td class="n">%+.1f%%</td>'
+                 '<td class="n">%d%%</td><td class="n">%+.1f%%</td><td class="n">%+.1f%%</td>'
+                 '<td class="n">%+.1f%%</td><td class="n">%s</td><td class="n">%s</td></tr>'
+                 % (hl, r["thr"], r["k"], r["mean"], r["win"], r["worst"],
+                    r["mdd_med"], r["mdd_worst"],
+                    ("%d%%" % r["w60"]) if r["w60"] else "—",
+                    ("%d%%" % r["w120"]) if r["w120"] else "—"))
+    return "".join(o)
+
+tpl = tpl.replace("__SENS__", sens_html())
+
+# 内嵌 ECharts（优先本地文件，确保断网可看）
+EC = "echarts.min.js"
+if os.path.exists(EC) and os.path.getsize(EC) > 800_000:
+    src = io.open(EC, encoding="utf-8").read()
+    if src.rstrip().endswith("}));"):
+        tag = '<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>'
+        tpl = tpl.replace(tag, "<script>" + src + "</script>")
+        print(f"已内嵌 ECharts（{len(src)//1024} KB，末尾完整）")
+    else:
+        print("⚠️ echarts.min.js 不完整，保持 CDN 引用")
+else:
+    print("⚠️ 未找到完整的 echarts.min.js，保持 CDN 引用")
+
+io.open("us-sentiment-price-bands.html", "w", encoding="utf-8").write(tpl)
+print(f"已生成 us-sentiment-price-bands.html  {len(tpl.encode('utf-8'))//1024} KB")
+print(f"数据 {D['dates'][0]} → {D['dates'][-1]}，{len(D['dates'])} 个交易日")

@@ -1,0 +1,29 @@
+{
+  "observed_at": "2026-09-28T09:31:28.831018+00:00",
+  "reviewed_at": "2026-09-28T09:31:41Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-09-28T093128.831018_0000-4ace9e4c.json",
+  "changed_sources": ["source-01", "source-02", "source-03"],
+  "facts": {
+    "a_share_rows": 4068437,
+    "a_share_latest_date": "2026-09-28",
+    "same_day_member_count": 5209,
+    "current_code_date": "2026-09-28",
+    "current_code_count": 5569,
+    "current_code_prefix_counts": {"sh": 2320, "sz": 2902, "bj": 347},
+    "daily_snapshot_date": "2026-09-28",
+    "daily_snapshot_total": 5569,
+    "daily_snapshot_eligible": 5212
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "短期名单故障已恢复，但日常快照的eligible仍是MA20口径，不是冻结研究所需的共同200日分母和90%覆盖证明。",
+    "historical_membership": "当前名单恢复不补足历史成员、生效时间和真实取得时间链。",
+    "etf_nominal_prices_and_actions": "ETF名义价格、公司行动和交易限制链的原资格缺口仍在。",
+    "availability": "本次实际读取时间已保存；恢复前故障日期不补造成合格观察。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "上海市场名单及当日快照已恢复，结束短期故障状态；冻结研究的结构性输入缺口仍在，因此继续阻止信号生成。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

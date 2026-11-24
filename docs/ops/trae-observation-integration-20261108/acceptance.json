@@ -1,0 +1,49 @@
+{
+  "accepted_at": "2026-11-08T17:44:54.204679+08:00",
+  "source_checks": {
+    "web/src/components/market-observation-alerts/index.tsx": "6799c889a31965228b3f532beed762b8e418f12c06658f55130f02320388c21d",
+    "web/src/components/market-observation-alerts/selection.ts": "ad0de08e05bd263508697a67657dc90006c991916e0d882a078fed4b9b0654f3",
+    "web/src/components/market-observation-alerts/selection.test.mjs": "960b8fbd21c038274d05be210deaa94b5539d1311fc7f6b026400ba8a7a8ba47",
+    "web/src/components/market-observation-alerts/CandidateShelf.tsx": "be0fb82ae4fb49069383f7149a267311910e4a65c90c1f0730a9dd387a452309",
+    "web/src/components/market-observation-alerts/RelativeObservationCards.tsx": "2318d41277c4d92047894a318eeaa776f18271b3481facd67539ba1bef2c1f91",
+    "web/src/components/market-observation-alerts/relativeObservationData.ts": "eb6ae552214da6acb9380567c76a0cc6b5e7a8816d9996c109c409817c28c9d5",
+    "web/src/components/market-observation-alerts/relative-observation.css": "183eaf00fd6565d54db6dfd24a5101e02cb40ea3ccc17ea814813f7155c9ffc5",
+    "web/src/components/market-style/MarketTrendChart.tsx": "9bfea384347644ce295403ca1afff8c8ed9b30c18e40d9576598ed3210e28d10"
+  },
+  "http": {
+    "status": 200,
+    "source_sha256": "1da2f06102a43eb8721ea376cefa724960b0786561f6f94b2daf1b80b85e9c64"
+  },
+  "validation": {
+    "tsc_no_emit": "passed",
+    "vite_build_write_false": "passed",
+    "frontend_tests": 17,
+    "hygiene": "passed",
+    "independent_data_points": 2836
+  },
+  "desktop": {
+    "url": "http://localhost:5173/#market-overview",
+    "viewport": [
+      1710,
+      947
+    ],
+    "four_cards_visible": true,
+    "four_details_opened": true,
+    "periods_120_252_all": true,
+    "cn_collapse_reload_restore": true,
+    "us_collapse_restore": true,
+    "escape_focus_restored": true,
+    "document_and_card_horizontal_overflow": false,
+    "final_browser_errors": []
+  },
+  "limitations": [
+    "Static snapshot through 2026-11-06, visibly labelled, no automatic update added.",
+    "Existing saved selections stay unchanged; absent cards available in 添加其他观察卡.",
+    "No source commit, no remote deploy, no replacement of localhost8000 static dist."
+  ],
+  "resolved_failures": [
+    "Initial Sina CN_MarketDataService endpoint invalid; used existing project CN_MarketData endpoint. Failed response retained.",
+    "Intermediate Vite unresolved new component before worker wrote it; temporarily removed import, reconnected after completed implementation.",
+    "Independent parser date guard needed local importedAt binding for TypeScript closure narrowing; corrected and full tsc/build/tests passed."
+  ]
+}

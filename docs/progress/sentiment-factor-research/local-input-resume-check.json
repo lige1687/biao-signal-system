@@ -1,0 +1,63 @@
+{
+  "checked_at_utc": "2026-10-03T05:33:02.101777+00:00",
+  "question": "当前本地宽度输入是否已更新，足以重开原E来源资格？",
+  "checks": [
+    {
+      "source_location": "~/.lei_signal_lab/cache/sp500_ma_breadth_history.json",
+      "bytes": 1092639,
+      "sha256": "0311f63b151d3315fa9bded4125740852d3adff2a58f3cd56260e0a80241f7ce",
+      "previous_handoff_sha256": "0311f63b151d3315fa9bded4125740852d3adff2a58f3cd56260e0a80241f7ce",
+      "changed": false
+    },
+    {
+      "source_location": "~/.lei_signal_lab/cache/sp500_klines.parquet",
+      "bytes": 26058681,
+      "sha256": "8ef96624e7ea58cb568dbd5637cfdb848a532f0335e1d2cae9a23caced0b4f51",
+      "previous_handoff_sha256": "8ef96624e7ea58cb568dbd5637cfdb848a532f0335e1d2cae9a23caced0b4f51",
+      "changed": false
+    },
+    {
+      "source_location": "~/.lei_signal_lab/cache/us_qfq_matrix.parquet",
+      "bytes": 26039960,
+      "sha256": "6eda4723c180dc2eb8c816411293c607f6df359df274fb3c981023b89317afba",
+      "previous_handoff_sha256": "6eda4723c180dc2eb8c816411293c607f6df359df274fb3c981023b89317afba",
+      "changed": false
+    },
+    {
+      "source_location": "~/.lei_signal_lab/cache/timing/breadth_sp500.parquet",
+      "bytes": 311721,
+      "sha256": "9bdffa27413866d524c1f9a3cb418dd6e70fb80a393ecf845e296f5b0ac3aafb",
+      "previous_handoff_sha256": "9bdffa27413866d524c1f9a3cb418dd6e70fb80a393ecf845e296f5b0ac3aafb",
+      "changed": false
+    },
+    {
+      "source_location": "~/.lei_signal_lab/cache/sentiment_research_2026-09/breadth_raw.json",
+      "bytes": 823657,
+      "sha256": "79ec5835601c05088ad3357a979bad8789cb211b123b4c372651665730e6ab0a",
+      "previous_handoff_sha256": "79ec5835601c05088ad3357a979bad8789cb211b123b4c372651665730e6ab0a",
+      "changed": false
+    },
+    {
+      "source_location": "~/.lei_signal_lab/cache/sentiment_research_2026-09/breadth_sp500_200dma.csv",
+      "bytes": 112809,
+      "sha256": "ac9ab39b7086b42e01617ee4a08e21e25300d9e981668058b7a23628ad915bca",
+      "previous_handoff_sha256": "ac9ab39b7086b42e01617ee4a08e21e25300d9e981668058b7a23628ad915bca",
+      "changed": false
+    },
+    {
+      "source_location": "~/.lei_signal_lab/sp500_backfill_root/fixtures/market_context/universes/SP500.parquet",
+      "bytes": 7819,
+      "sha256": "2d20038b23c4ac65b133487326f64259750fac0cebd0c1b7af6d430b78237af1",
+      "previous_handoff_sha256": "2d20038b23c4ac65b133487326f64259750fac0cebd0c1b7af6d430b78237af1",
+      "changed": false
+    }
+  ],
+  "all_seven_unchanged": true,
+  "finding": "全部7份旧本地缓存与交接指纹一致，未发现已补齐真实历史成员或价格版本的新输入。不重做旧算术核验或市场实验。",
+  "fits": 0,
+  "external_source_requests": 0,
+  "pro_calls": 0,
+  "budget_change": "none; prior source/fitting limits retained",
+  "remaining": "原E20/50历史成员/调整版本/可知时间资料缺口继续；Investing正常导出无确认文件；不能用当前成员回填替代",
+  "execution": "completed for this fingerprint check, original-E research blocked by data"
+}

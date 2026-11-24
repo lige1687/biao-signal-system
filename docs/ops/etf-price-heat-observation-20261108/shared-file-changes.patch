@@ -1,0 +1,69 @@
+--- web/src/components/market-observation-alerts/index.tsx (before)
++++ web/src/components/market-observation-alerts/index.tsx
+@@ -45,6 +45,7 @@
+ import MicrostructureObservations from "./MicrostructureObservations";
+ import ConcentrationObservationCard from "./ConcentrationObservationCard";
+ import ObservationMetric from "../observation-library/ObservationMetric";
++import EtfPriceHeatObservation from "./EtfPriceHeatObservation";
+ 
+ async function getJson(url: string, signal: AbortSignal): Promise<unknown> {
+   const response = await fetch(url, { signal });
+@@ -354,6 +355,7 @@
+     } catch { setStored(previous => ({ ...previous, failed: true })); }
+   };
+   const renderCard = (id: string, onDismiss: () => void) => {
++    if (id === "etf-price-heat") return <EtfPriceHeatObservation onCollapse={onDismiss} />;
+     const index = ["erp-cn", "breadth-cn", "breadth-us"].indexOf(id);
+     if (index >= 0) return <AlertRow snapshot={snapshots[index]} pending={sources[index].isPending}
+       participation={participation[index]} breadth={index === 1 ? cn.data : index === 2 ? us.data : undefined}
+--- web/src/components/market-observation-alerts/IndicatorThumbnail.tsx (before)
++++ web/src/components/market-observation-alerts/IndicatorThumbnail.tsx
+@@ -21,6 +21,7 @@
+ import { parseIndustryStructure } from "./industryStructureData";
+ import { parseMicrostructure, type MicroPacket } from "./microstructureData";
+ import MiniTrend from "./MiniTrend";
++import { EtfPriceHeatThumbnail } from "./EtfPriceHeatObservation";
+ import { parseRelativeObservationSnapshot, relativeObservationReading, RELATIVE_OBSERVATION_CARDS } from "./relativeObservationData";
+ 
+ const fiveMinutes = 5 * 60_000;
+@@ -276,6 +277,7 @@
+ }
+ 
+ function ThumbnailContent({ id, label }: { id: string; label: string }) {
++  if (id === "etf-price-heat") return <EtfPriceHeatThumbnail />;
+   if (id === "turnover-concentration" || microIds.has(id)) return <MicroThumbnail id={id} label={label} />;
+   if (id === "breadth-cn" || id === "breadth-us") return <BreadthThumbnail market={id === "breadth-cn" ? "CN_ALL_A" : "SP500"} label={label} />;
+   if (id === "erp-cn" || id === "erp-us") return <ErpThumbnail id={id} label={label} />;
+--- web/src/components/market-observation-alerts/indicatorCatalog.ts (before)
++++ web/src/components/market-observation-alerts/indicatorCatalog.ts
+@@ -42,6 +42,12 @@
+ };
+ 
+ const EXTRA_INDICATORS: readonly IndicatorEntry[] = [
++  {
++    id: "etf-price-heat", label: "ETF · 量价热度与分歧", market: "cn", category: "style", readable: true,
++    meaning: "对照半导体、通信、创业板与沪深300ETF的成交活跃、价格走势和热度回落。",
++    limitation: "历史快照；价热分歧用于观察，预测效果仍待独立验证。",
++    keywords: "行业 情绪 成交量 换手率 背离 半导体 通信 创业板 沪深300 512480 515880 159915 510300",
++  },
+   {
+     id: "breadth-cn", label: "全A · 市场宽度", market: "cn", category: "participation", readable: true,
+     meaning: "看全A有多少股票收在各自均线之上。",
+--- web/src/pages/SentimentPage.tsx (before)
++++ web/src/pages/SentimentPage.tsx
+@@ -3,6 +3,7 @@
+ import { useState } from "react";
+ import MarketObservationCards from "../components/MarketObservationCards";
+ import EtfSentimentComparison from "../components/etf-sentiment/EtfSentimentComparison";
++import EtfPriceHeatObservation from "../components/market-observation-alerts/EtfPriceHeatObservation";
+ import { etfsForSector } from "../data/sectorEtfMap";
+ import SentimentSectorBlock, { UsSectorBlock } from "../components/SentimentSectorBlock";
+ import "./reference-reading.css";
+@@ -89,6 +90,7 @@
+       <button type="button" className={market === "us" ? "on" : ""} onClick={() => setMarket("us")} aria-pressed={market === "us"}>美股</button>
+     </div>
+     {market === "cn" && <div id="etf-price-sentiment" style={{ marginBottom: 24, scrollMarginTop: 24 }}><EtfSentimentComparison /></div>}
++    {market === "cn" && <section id="etf-price-heat" style={{ marginBottom: 24, scrollMarginTop: 24 }}><EtfPriceHeatObservation page /></section>}
+     {observationsLoading && <p className="muted">观察资料加载中…</p>}
+     {observationsError && <p className="fund-errors">观察资料暂不可用：{(observationsError as Error).message}</p>}
+     {(observations || (!observationsLoading && !observationsError)) &&

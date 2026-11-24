@@ -1,0 +1,32 @@
+# ERP与市场观测板清晰度修复 — active 2026-11-07T18:00:25.635013+08:00
+
+- task-id erp-observation-clarity-20261107；owner 01a1b55e-b30e-7a72-98bc-103222ea9ee5/root；status active；scope_released=false。
+- 用户授权「可以看看有问题的话改一下」，接续本会话对当前桌面 ERP 与观测板的审查。当前用户入口为 5173。用途为基本面/市场环境叙事展示。
+- checked_coordination_sha 3f544e1dc0a33f000980b9807fe37620cbeeda54；已读 COORDINATION、breadth-reading-aid-20261101、focus-stock-universe-20261024、cross-market-risk-context-20261102、research-dispatch-controller 最新记录。相关阶段已释放，本轮另登记准确显示范围，不接管研究或原资料刷新。
+- 基线共享工作分支 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 加既有本地脏区。先按实际字节备份，自身 QA 在 docs/ops/erp-observation-clarity-20261107。两份策略原件 SHA 与确认值一致。
+- root 唯一写者 web/src/components/market-observation-alerts/index.tsx, web/src/components/market-observation-alerts/style.css, web/src/components/market-observation-alerts/UsErpCard.tsx, web/src/components/market-observation-alerts/us-erp-card.css, web/src/components/market-observation-alerts/CombinationReading.tsx, web/src/components/market-observation-alerts/combination-reading.css, web/src/components/market-observation-alerts/conditionalReading.ts, web/src/components/observation-library/ObservationMetric.tsx, web/src/components/observation-library/erpReferenceData.ts, web/src/components/observation-library/erpBands.ts, web/src/components/observation-library/usErpBands.ts, web/src/components/observation-library/erpCrossChart.css, web/src/components/observation-library/ErpCrossChart.tsx。执行代理仅 web/src/pages/FundamentalsPage.tsx, web/src/components/observation-library/ErpReferenceCard.tsx，尚待合同预检与真实派发。自身 QA 与本任务协调记录同 root 维护。
+- 完成目标为各 ERP 可见入口共用观测来源/日期/单位，组合解读前置且短读可用，重复解释收紧，重要样本与来源限制可查。数据原件、研究、后台、阈值、交易只读。8000静态资源差异已核，若更新仅安装经验证的本地前端构建并保留旧构建备份。
+- 验收对应源接线读回、TypeScript/Vite构建、相关既有回归、真实桌面卡片/大图/日期/缺测/展开与收起、跨入口数值一致。当前还未修改源码，验收未运行。
+
+## 用户追加的研究范围（2026-11-07）
+
+用户明确要求Gemini建议全部制作并测试验证。新增独立研究 docs/experiments/raw/erp-trend-matrix-2026-11-07/**、报告 docs/experiments/erp-trend-matrix-2026-11-07.md；root维护protocol/state/报告与独立验收，唯一Sol执行者只写compute子目录。原型/状态展示限上述已登记前端文件。报告完成时精确新增registry.json/INDEX.md一项（写前再核并发）。仅研究模拟，不改生产策略、两份权威源、参数账本、真实交易或原ERP阈值。已有ERP已看历史与失败尝试保留；新决策为完整仓位路径比较，固定合同后运行。
+
+追加精确前端范围：root唯一写者 web/src/components/trend/OverlayChart.tsx, web/src/components/observation-library/erpTrendObservation.ts, web/src/components/observation-library/erpTrendObservation.test.mjs。用于同一ERP研究观察数字的纯函数与有意义的边界测试，并修复周频散点被大图lttb采样丢掉的可视问题；不改阈值或交易。各原文件已做实际字节备份。
+
+## 第3次运行的存储修正
+
+新增 root 唯一输出范围：/Volumes/win+mac通用/LeiSignal-新实验结果/erp-trend-matrix-20261107/erp-trend-matrix-20261107-20261107T183134-80bdc9e883ca/**。已用项目 plan_output 核验外置盘 UUID、设备与剩余容量，代码/小型登记仍在现有 raw 范围。前两次结果已在本地形成，这属于输出路线未及时落实的偏差，保留原路径与字节；不迁移或删除旧结果。第3次及图表/日志写新外置目录，冻结输入继续只读。
+
+对前条图表诊断作更正：代码中没有 lttb 采样，实际问题是稀疏周频数据在自动符号显示下被隐藏；修复为不跨缺口的稀疏序列显式显示观测点，并修复共同坐标轴重复叠放。
+
+## 本地界面完成；历史研究等待存储决定
+
+- status ui_completed_research_paused；owner保持本任务root。前端显示范围完成并释放，raw/research报告接续归本任务；registry/INDEX仅本任务一项，后续写前重核并发。
+- 5173首页/基本面/大图同源同日；组合前置去重；周频点完整显示；3年窗口明确；新增两种趋势判断和5×3矩阵/连续映射预览。桌面交互、来源失败、1250附近至1920宽度、数值与日期已验收；新helper 6测试、tsc和Vite构建通过。报告深链实际可读，明确最终效益未验收。8000静态dist未替换；生产策略与真实交易未改。
+- 真实实验2次保留，第3次代码/合成检查就绪但未启动。系统盘余量跌至约4.7GiB，低于5GiB要求。已核外盘身份，闲置重复安装缓存按既有存储授权逐内容备份可恢复；本地快照使实际空间未恢复。用户一次性例外选择待答，不能默认为允许。恢复点为raw/erp-trend-matrix-2026-11-07/RESUME.md和state.json。
+- UI/source与报告都仍在共享本地脏区，未做源代码提交、推送或部署。协调记录独立正常提交推送读回。
+
+## 存储条件恢复，原授权内接续
+
+系统实测空闲11,867,205,632字节以上，已满足5GiB及本机小记录预算；外盘设备与容量重核通过。无需存储例外，未把用户未回复当批准。第3次校正批次由root实际执行，state/execution-attempt3记录精确时间、容量和代码指纹。原结果路径不动，输出仍按原storage-plan唯一外盘result目录。status research_running；UI保持已验收。

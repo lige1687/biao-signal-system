@@ -1,0 +1,11 @@
+--- before/projectionView.tsx
++++ after/projectionView.tsx
+@@ -21,7 +21,7 @@
+ const EMPTY_PRICE = { dates: [] as string[], values: [] as (number | null)[] };
+ const fmt = (v: number | null, digits = 2) => v === null ? "缺值" : v.toLocaleString("zh-CN", { maximumFractionDigits: digits, minimumFractionDigits: digits });
+ 
+-function MetricProjection({ id, market }: { id: string; market: Market }) {
++export function MetricProjection({ id, market }: { id: string; market: Market }) {
+   const definition = PROJECTION_METRICS.find((item) => item.id === id)!;
+   const [priceChoice, setPriceChoice] = useState<PriceKey>(market === "cn" ? "hs300" : "sp500");
+   const priceKey = (market === "cn" ? ["sse", "hs300"] : ["sp500", "nasdaq"]).includes(priceChoice)

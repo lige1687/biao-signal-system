@@ -1,0 +1,47 @@
+{
+  "mission": "Complete two requested observation references and qualified data candidate without unproven trading lines",
+  "task_scope": [
+    "Read prior turnover-concentration v2 study and existing PE UI; establish creator/data definitions. Verify the two provided primary institutional documents, with at most3remaining source retrievals per indicator (6remainingcombined; root alreadyused6). Implement precise references in the existing two indicator readings and price projection; maintain clearly identified professional source and local quantiles, no predictive endorsement. Prepare missing October concentration candidate by reusing v15 full-universe raw300bars and old v2 lifecycle/source index; preserve old fullhistory and qualification, cannot replace unknown rows with zero or silently narrow universe. If impossible, identify and perform smallest necessary targeted qualification under max12public dataqueries, preserve failures and exact missing rows; do not run new prediction experiments."
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "web/AGENTS.md",
+    "docs/experiments/douyin-observation-models-overlap-2026-10-31.md",
+    "docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/implementation-v2/concentration",
+    "docs/ops/breadth-reading-aid-20261101/live-refresh-v15/storage-plan.json",
+    "web/src/components/observation-library/projectionSources.ts",
+    "web/public/research/turnover-concentration/observation.v1.json"
+  ],
+  "write_paths": [
+    "src/lei_signal/fundamentals/valuation_context.py",
+    "tests/unit/test_valuation_context.py",
+    "web/src/components/observation-library/ObservationMetric.tsx",
+    "web/src/components/observation-library/concentrationData.ts",
+    "web/src/components/observation-library/metricData.ts",
+    "web/src/components/observation-library/projectionReference.ts",
+    "web/src/components/observation-library/projectionView.tsx",
+    "web/src/components/observation-library/marketReferenceBands.ts",
+    "web/src/components/observation-library/marketReferenceBands.test.mjs",
+    "docs/ops/breadth-reading-aid-20261101/institutional-context-v17"
+  ],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Sourcereview with exact method/frequency/current-versus-historical policy applicability and requestledger; useful readable references in two existing indicators/graphs, TS and focusedtests",
+    "Qualified new monthly concentration candidate (or exact coredata gap and completed targeted attempts) on externallybound path; never install live cache withoutrootacceptance"
+  ],
+  "stop_conditions": [
+    "No other files/root APIs/runtimecachewrites or childagents. Preserve v15 chart changes; only reference/data indicators scopedchanges. No mobile/no notifications/no source or binary installs.",
+    "No fake fixed buy/sell thresholds; do not apply daily concentration45% to monthly metric without exact alignment; PE95/25 source policyclosedperiodverify notcurrentuniversal.",
+    "Any source/definition mismatch record gap; allrawPDF/data only new supplied externaldirectory with dev/UUIDcheck. Smallreport/code<=3MiB internal."
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

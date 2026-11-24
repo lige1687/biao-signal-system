@@ -1,0 +1,160 @@
+--- price-projection.tsx.before
++++ price-projection.tsx
+@@ -5,6 +5,7 @@
+ import type { FocusMomentumObservation } from "./data";
+ import { adjacentEventIndices, normalizeWindow, panWindow, visibleDateRange, windowAroundDate, zoomWindow, type ChartWindow } from "./chart-navigation";
+ import { buildFocusPriceView, type FocusPriceView, type ProjectionRange } from "./price-projection-data";
++import { crossingMarkerSeries, filterCrossings, type CrossingFilter } from "./crossing-markers";
+ import "./price-projection.css";
+ 
+ type PriceKey = "hs300" | "sse";
+@@ -24,12 +25,14 @@
+   const windowRef = useRef<ChartWindow>({ start: 0, end: 100 });
+   const [window, setWindow] = useState(windowRef.current);
+   const [selectedDate, setSelectedDate] = useState(view.zeroCrossings[view.zeroCrossings.length - 1]?.date ?? "");
++  const [eventFilter, setEventFilter] = useState<CrossingFilter>("all");
+   const visible = useMemo(() => visibleDateRange(view.dates, window), [view.dates, window]);
+-  const visibleEvents = view.zeroCrossings.filter(item => visible.start && visible.end && item.date >= visible.start && item.date <= visible.end);
++  const filteredEvents = useMemo(() => filterCrossings(view.zeroCrossings, eventFilter), [view.zeroCrossings, eventFilter]);
++  const allVisibleEvents = view.zeroCrossings.filter(item => visible.start && visible.end && item.date >= visible.start && item.date <= visible.end);
++  const visibleEvents = filterCrossings(allVisibleEvents, eventFilter);
+   const selected = visibleEvents.find(item => item.date === selectedDate) ?? visibleEvents[visibleEvents.length - 1];
+-  const adjacent = adjacentEventIndices(view.zeroCrossings.map(item => item.date), selected?.date, visible.start, visible.end);
++  const adjacent = adjacentEventIndices(filteredEvents.map(item => item.date), selected?.date, visible.start, visible.end);
+   const eventColor = selected?.direction === "up" ? COLORS.up : COLORS.down;
+-  const shortView = visible.count <= 90;
+ 
+   useEffect(() => {
+     if (!node.current) return;
+@@ -47,7 +50,7 @@
+     instance.on("datazoom", onZoom);
+     const onClick = (params: unknown) => {
+       const point = params as { seriesId?: string; name?: string; data?: { date?: string } };
+-      if (point.seriesId === "crossings" && point.data?.date) setSelectedDate(point.data.date);
++      if (["price-crossings", "focus-crossings"].includes(point.seriesId ?? "") && point.data?.date) setSelectedDate(point.data.date);
+     };
+     instance.on("click", onClick);
+     return () => { instance.off("datazoom", onZoom); instance.off("click", onClick); resize.disconnect(); instance.dispose(); chart.current = null; };
+@@ -109,8 +112,7 @@
+         { id: "focus", name: "焦点动量", type: "line", xAxisIndex: 1, yAxisIndex: 1, data: view.focusPercent, showSymbol: false, connectNulls: false, lineStyle: { width: 2, color: COLORS.focus }, itemStyle: { color: COLORS.focus },
+           markLine: { silent: true, symbol: "none", data: [{ yAxis: 0, label: { show: true, formatter: "0% · 涨跌分界", position: "insideEndTop", color: COLORS.text }, lineStyle: { color: COLORS.zero, type: "dashed", width: 1 } }, ...selectedLine] },
+           markPoint: selectedPoint(selected?.focusPercent ?? 0, `${selected?.date ?? ""}\n动量 ${selected?.focusPercent.toFixed(2) ?? ""}%`) },
+-        { id: "crossings", name: "动量转正或转负", type: "scatter", xAxisIndex: 1, yAxisIndex: 1, z: 5,
+-          data: markNegative && shortView ? visibleEvents.filter(item => item.date !== selected?.date).map(item => ({ date: item.date, value: [item.date, item.focusPercent], symbol: "triangle", symbolRotate: item.direction === "down" ? 180 : 0, symbolSize: 8, itemStyle: { color: item.direction === "up" ? COLORS.up : COLORS.down } })) : [] },
++        ...crossingMarkerSeries(markNegative ? visibleEvents : [], visible.count),
+         { id: "negative-focus", name: "__negative_focus", type: "line", xAxisIndex: 1, yAxisIndex: 1, data: markNegative ? view.focusPercent.map(value => value === null ? null : Math.min(0, value)) : [], silent: true, showSymbol: false, connectNulls: false, tooltip: { show: false }, lineStyle: { opacity: 0 }, areaStyle: { color: "#c69b72", opacity: 0.13, origin: 0 }, emphasis: { disabled: true }, z: 0 },
+       ],
+     };
+@@ -120,11 +122,11 @@
+       previousChartData.current = { view, priceName, markNegative };
+     } else {
+       // Keep the active dataZoom gesture intact while the selected date follows the viewport.
+-      chart.current.setOption({ series: option.series.filter(series => ["price", "focus", "crossings"].includes(series.id)).map(series => series.id === "crossings" ? series : {
++      chart.current.setOption({ series: option.series.filter(series => ["price", "focus", "price-crossings", "focus-crossings"].includes(series.id)).map(series => series.id.endsWith("-crossings") ? series : {
+         id: series.id, markLine: "markLine" in series ? series.markLine : undefined, markPoint: "markPoint" in series ? series.markPoint : undefined,
+       }) });
+     }
+-  }, [view, priceName, markNegative, selected, shortView, visible.start, visible.end]);
++  }, [view, priceName, markNegative, selected, eventFilter, visible.count, visible.start, visible.end]);
+ 
+   const navigate = (next: ChartWindow) => {
+     const bounded = normalizeWindow(next); windowRef.current = bounded;
+@@ -132,16 +134,24 @@
+   };
+   const selectEvent = (date: string) => { setSelectedDate(date); navigate(windowAroundDate(view.dates, date, windowRef.current)); };
+   return <>
++    {markNegative && <div className="fmp-event-filter">
++      <div className="fmp-controls" role="group" aria-label="穿零标记方向">
++        <span>图中标记</span>
++        {([['all', '全部'], ['up', '仅转正'], ['down', '仅转负']] as const).map(([value, label]) =>
++          <button key={value} type="button" aria-pressed={eventFilter === value} onClick={() => setEventFilter(value)}>{label}</button>)}
++      </div>
++      <span aria-live="polite">当前区间 {allVisibleEvents.filter(item => item.direction === 'up').length} 次转正 · {allVisibleEvents.filter(item => item.direction === 'down').length} 次转负{eventFilter !== 'all' ? ` · 显示${visibleEvents.length}处` : ' · 全部标出'}</span>
++    </div>}
+     {markNegative && <div className="fmp-event-reader" aria-label="选择动量转正或转负日期">
+       <div className="fmp-event-picker">
+         <label htmlFor="fmp-event-date">定位穿零日期</label>
+         <div className="fmp-event-picker-controls">
+-          <button type="button" aria-label="上一次穿零" disabled={adjacent.previous < 0} onClick={() => selectEvent(view.zeroCrossings[adjacent.previous].date)}>‹</button>
++          <button type="button" aria-label="上一次穿零" disabled={adjacent.previous < 0} onClick={() => selectEvent(filteredEvents[adjacent.previous].date)}>‹</button>
+           <select id="fmp-event-date" value={selected?.date ?? ""} onChange={event => selectEvent(event.target.value)}>
+             {!selected && <option value="">当前区间无穿零</option>}
+-            {view.zeroCrossings.map(item => <option key={item.date} value={item.date}>{item.date} · {item.direction === "up" ? "由负转正 ↑" : "由正转负 ↓"}</option>)}
++            {filteredEvents.map(item => <option key={item.date} value={item.date}>{item.date} · {item.direction === "up" ? "由负转正 ↑" : "由正转负 ↓"}</option>)}
+           </select>
+-          <button type="button" aria-label="下一次穿零" disabled={adjacent.next < 0} onClick={() => selectEvent(view.zeroCrossings[adjacent.next].date)}>›</button>
++          <button type="button" aria-label="下一次穿零" disabled={adjacent.next < 0} onClick={() => selectEvent(filteredEvents[adjacent.next].date)}>›</button>
+         </div>
+       </div>
+       {selected && <><div className="fmp-event-values" aria-live="polite"><strong style={{ color: eventColor }}>{selected.direction === "up" ? "↑ 由负转正" : "↓ 由正转负"}</strong><span>{priceName} <b>{selected.price.toFixed(2)}</b> 点</span><span>动量 <b>{selected.focusPercent.toFixed(2)}%</b></span></div><button type="button" className="fmp-nearby" onClick={() => navigate(windowAroundDate(view.dates, selected.date, windowRef.current, true))}>看这一天附近 ↗</button></>}
+@@ -156,7 +166,7 @@
+       </div>
+       <span>{visible.start ?? "—"} — {visible.end ?? "—"}</span>
+     </div>
+-    <div ref={node} className="fmp-chart" role="img" aria-label={`${priceName}价格与焦点动量。石墨色价格线，灰紫色动量线；虚线和圆环对齐选中日期的上下两点。${selected && markNegative ? `已定位${selected.date}，动量${selected.direction === "up" ? "转正" : "转负"}，指数${selected.price.toFixed(2)}点，动量${selected.focusPercent.toFixed(2)}%。` : ""}可用按钮、滚轮或底部手柄缩放。`} />
++    <div ref={node} className="fmp-chart" role="img" aria-label={`${priceName}价格与焦点动量。石墨色价格线，灰紫色动量线；${markNegative ? `上下两图各显示${visibleEvents.length}个穿零标记，绿色向上三角为转正，橙色向下三角为转负。` : "穿零标记已隐藏。"}圆环只定位选中日期。${selected && markNegative ? `已定位${selected.date}，动量${selected.direction === "up" ? "转正" : "转负"}，指数${selected.price.toFixed(2)}点，动量${selected.focusPercent.toFixed(2)}%。` : ""}可用按钮、滚轮或底部手柄缩放。`} />
+   </>;
+ }
+ 
+@@ -188,8 +198,8 @@
+     {market === "us" ? <p className="fmp-state" role="status">美股焦点动量尚无独立历史序列，暂不能显示同期曲线。</p> : <>
+       <p className="fmp-scope">动量：固定300股中的活跃股 · 价格对照：{PRICE_NAMES[priceKey]}</p>
+       <p className="fmp-dates">资料截至 {view.commonEnd ?? "无同日资料"}{view.priceSourceLast !== view.modelLast && view.priceSourceLast && view.modelLast ? `（价格至${view.priceSourceLast}，动量至${view.modelLast}）` : ""}</p>
+-      <div className="fmp-legend" aria-label="图例"><span><i className="fmp-line price" />{PRICE_NAMES[priceKey]}价格</span><span><i className="fmp-line focus" />焦点动量</span><span><i className="fmp-line zero" />0% 涨跌分界</span><span><i className="fmp-event up">▲</i>负转正</span><span><i className="fmp-event down">▼</i>正转负</span></div>
+-      <p className="fmp-tip">选一个日期，两图的圆环与竖虚线对应同一天；滚轮可缩放，拖动可平移。</p>
++      <div className="fmp-legend" aria-label="图例"><span><i className="fmp-line price" />{PRICE_NAMES[priceKey]}价格</span><span><i className="fmp-line focus" />焦点动量</span><span><i className="fmp-line zero" />0% 涨跌分界</span>{markNegative && <><span><i className="fmp-event up">▲</i>负转正</span><span><i className="fmp-event down">▼</i>正转负</span><span><i className="fmp-selected-ring" />选中日期</span></>}</div>
++      <p className="fmp-tip">点任一三角，两图定位同一天。转正看活跃股修复，转负看表现降温；标记表示已发生的变化。</p>
+       {overlay.isPending && <p className="fmp-state" role="status">正在读取指数历史价格…</p>}
+       {overlay.isError && <div className="fmp-state fmp-error" role="alert">指数价格读取失败，暂不能显示同期曲线。<button type="button" onClick={() => void overlay.refetch()}>重试</button></div>}
+       {!overlay.isPending && !overlay.isError && !view.commonEnd && <p className="fmp-state">价格与模型没有同日有效资料，无法绘图。</p>}
+--- price-projection.css.before
++++ price-projection.css
+@@ -20,6 +20,10 @@
+ .fmp-event { font-style: normal; font-size: 12px; line-height: 1; }
+ .fmp-event.up { color: #287e71; }
+ .fmp-event.down { color: #ad6735; }
++.fmp-selected-ring { width: 9px; height: 9px; border: 2px solid #696f66; border-radius: 50%; background: white; }
++.fmp-event-filter { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-top: 12px; font-size: var(--fs-xs); }
++.fmp-event-filter > span { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
++.fmp-event-filter .fmp-controls > span { margin-right: 4px; }
+ .fmp-tip { margin-top: 0; }
+ .fmp-navigation { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 5px 14px; margin-top: 10px; }
+ .fmp-navigation > span { color: var(--text-secondary); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
+--- overview.tsx.before
++++ overview.tsx
+@@ -43,8 +43,8 @@
+       { label: "焦点动量", color: CHART_COLORS.secondary },
+       { label: "涨跌分界", value: "0%", color: CHART_COLORS.zero, dashed: true },
+       ...(bands.latest.low !== null && bands.latest.high !== null ? [
+-        { label: "历史偏低", value: `${bands.latest.low.toFixed(2)}%`, color: CHART_COLORS.low, dashed: true },
+-        { label: "历史偏高", value: `${bands.latest.high.toFixed(2)}%`, color: CHART_COLORS.high, dashed: true },
++        { label: "历史15%分位", value: `${bands.latest.low.toFixed(2)}%`, color: CHART_COLORS.low, dashed: true },
++        { label: "历史85%分位", value: `${bands.latest.high.toFixed(2)}%`, color: CHART_COLORS.high, dashed: true },
+       ] : []),
+     ]} />
+     <MiniTrend dates={rows.map(p => p.date)} lines={[
+@@ -64,7 +64,7 @@
+     <p className="moa-card-change">{change ? <>较{change.previous.date} <b>{change.difference >= 0 ? "+" : ""}{change.difference.toFixed(2)}个百分点</b></> : "前期读数待补齐，当前先看已有水平。"}</p>
+     {position !== null && <p className="moa-card-meta">高于历史 {position.toFixed(1)}% 的时期</p>}
+     <p className="moa-card-meta">截至 {data?.asOf ?? "—"}{point ? ` · 固定300股样本中选出${point.focusCount}只活跃股` : ""}</p>
+-    <p className="moa-card-limit">每日活跃股会变化；这里反映各日活跃股的表现。</p>
++    <p className="moa-card-limit">高低线比较此前756日的位置；15%／85%是观察分位，买卖效果未确立。</p>
+     <footer><button type="button" onClick={open} aria-haspopup="dialog">看大图 · 价格与穿零点 ↗</button><Link to="/factors?wb=observation">研究依据</Link></footer>
+     {expanded && <FocusMomentumDetailDialog onClose={() => setExpanded(false)} />}
+   </article>;
+@@ -79,10 +79,11 @@
+   if (query.isPending) return <p role="status">焦点动量读取中…</p>;
+   if (query.isError || !query.data) return <p role="alert">焦点动量资料暂不可用。<button type="button" onClick={() => void query.refetch()}>重试</button></p>;
+   return <><p className="fmp-note">0%表示当天选出的活跃股过去20日平均持平。上方是平均上涨，下方是平均下跌；用来观察活跃股表现，再结合宽度看强弱是否扩散到更广市场。</p><FocusMomentumPriceProjection data={query.data} />
+-    <details className="fmp-source"><summary>机构如何看动量，哪些参考能用于这张图</summary>
+-      <p><a href="https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/roc" target="_blank" rel="noreferrer">富达：价格变化率</a>用零线区分过去涨跌，高低位置与持续时间一起读。这里取活跃股20日涨跌的平均值，零线具有相同的正负含义。</p>
+-      <p><a href="https://www.msci.com/indexes/documents/methodology/2_MSCI_Momentum_Indexes_Methodology_20250725.pdf" target="_blank" rel="noreferrer">MSCI 动量方法</a>比较6个月和12个月表现，并考虑波动大小；<a href="https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-momentum-indices.pdf" target="_blank" rel="noreferrer">标普中国A股短期动量方法</a>采用6个月。它们用于挑选相对强势股票。这张图观察活跃股20日平均表现，偏高、偏低线按自身历史计算。</p>
+-      <p>小卡的偏高、偏低线只比较自身历史位置。<Link to="/library?report=docs%2Fexperiments%2Ffocus-stock-momentum-evaluation-2026-10-25.md">已有历史检验</Link>中，焦点动量低于零后，沪深300随后20日上涨比例为49.0%，低于全部观察周的54.5%。这项固定300股样本指标当前用于描述活跃股过去20日的强弱；回升时可对照宽度，观察活跃股与整体参与面是否同向变化。</p>
++    <details className="fmp-source"><summary>阈值依据与历史效果</summary>
++      <p><strong>0%：过去涨跌分界。</strong><a href="https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/roc" target="_blank" rel="noreferrer">富达的ROC说明</a>用零线区分正负涨跌，并提醒超卖可以持续。这里的负值说明活跃股近期平均下跌，不能直接推导接下来见底。</p>
++      <p><strong>极端位置：结合自身历史和趋势。</strong><a href="https://scs.fidelity.com/webcontent/ap010098-etf-content/16.11/help/research/learn_er_glossary_3.shtml" target="_blank" rel="noreferrer">富达旧版ROC指引</a>举过约5%时间落入极端区的做法，区分震荡与趋势环境；未规定适用于本模型的数值或回看窗口。小卡仍用此前756个观察日的15%／85%分位描述相对高低，这是本地显示规则，未经买卖效果验证。</p>
++      <p><strong>上穿零：有趋势研究背景，效果要单独看。</strong><a href="https://www.aqr.com/Insights/Research/Journal-Article/Time-Series-Momentum" target="_blank" rel="noreferrer">Moskowitz等人的时间序列动量研究</a>考察58种期货和远期的12个月超额收益方向，不能直接套到这张20日活跃股均值图。</p>
++      <p><strong>本图对应的固定300股检验：</strong>2015—2025年114次上穿后，沪深300全收益指数后20日平均+0.49%，上涨50.0%；全部共同日期为+0.59%、53.6%。相似背景内差值−0.06个百分点，95%区间[−0.84, +0.78]，预测增量尚不确定。收益从下一交易日收盘算起，窗口可重叠；图中指数价格不含分红。<a href="/library?report=docs%2Fexperiments%2Ffocus-momentum-threshold-review-2026-11-05.md">查看出处、检验与反例 →</a></p>
+     </details>
+   </>;
+ }

@@ -1,0 +1,21 @@
+/* 报告库专用：导航、阅读密度和归档/结论两种状态。 */
+.lib-page .lib-layout--list-only { grid-template-columns: minmax(0, 1fr); }
+.lib-page .lib-layout--list-only .lib-list { max-width: 1040px; }
+.lib-page .lib-row { display: block; color: var(--text); text-decoration: none; }
+.lib-page .lib-row:focus-visible { outline: 2px solid var(--accent, #4da3ff); outline-offset: 2px; }
+.lib-page .lib-row-date, .lib-page .lib-row-oneliner,
+.lib-page .lib-completion, .lib-page .lib-verdict-label { font-size: 13px; line-height: 1.55; }
+.lib-page .lib-row-oneliner { color: var(--text-secondary); }
+.lib-page .lib-row-meta { flex-wrap: wrap; }
+.lib-page .lib-completion { color: var(--text-secondary); margin-left: 4px; }
+.lib-page .lib-verdict-label { color: var(--text-secondary); margin-left: 6px; }
+.lib-page .lib-maintenance-note { margin: 4px 0 12px; line-height: 1.5; }
+.lib-page .lib-maintenance-note p { margin: 6px 0; }
+.lib-page .lib-reader .lib-reader-bar { flex-wrap: wrap; }
+.lib-page .lib-reader .lib-markdown { font-size: 14px; line-height: 1.7; }
+.lib-page .lib-reader .lib-markdown table { font-size: 13px; }
+.lib-page .lib-reader .lib-markdown th,
+.lib-page .lib-reader .lib-markdown td { padding: 6px 9px; }
+@media (max-width: 900px) {
+  .lib-page .lib-layout--list-only .lib-list { max-width: none; }
+}

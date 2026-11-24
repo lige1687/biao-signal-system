@@ -1,0 +1,159 @@
+{
+  "decision": "admitted_retrospective_limited",
+  "status": "input_ready_for_descriptive_comparison_only",
+  "no_outcome_values_used_for_admission": true,
+  "period": [
+    "2015-01-01",
+    "2025-12-31"
+  ],
+  "supplier_scope": 5561,
+  "quarantined": 176,
+  "quarantine_lifecycle": {
+    "out_before_period": 81,
+    "intersects_period": 32,
+    "ipo_after_period": 63
+  },
+  "covered_period_sessions": 2674,
+  "year_coverage": {
+    "2014": {
+      "days": 245,
+      "valid_days": 225,
+      "qualified_min": 1992,
+      "qualified_median": 2048,
+      "qualified_max": 2122
+    },
+    "2015": {
+      "days": 244,
+      "valid_days": 244,
+      "qualified_min": 1123,
+      "qualified_median": 2035.0,
+      "qualified_max": 2222
+    },
+    "2016": {
+      "days": 244,
+      "valid_days": 244,
+      "qualified_min": 2204,
+      "qualified_median": 2336.5,
+      "qualified_max": 2541
+    },
+    "2017": {
+      "days": 244,
+      "valid_days": 244,
+      "qualified_min": 2540,
+      "qualified_median": 2770.5,
+      "qualified_max": 3014
+    },
+    "2018": {
+      "days": 243,
+      "valid_days": 243,
+      "qualified_min": 2921,
+      "qualified_median": 3109,
+      "qualified_max": 3372
+    },
+    "2019": {
+      "days": 244,
+      "valid_days": 244,
+      "qualified_min": 3340,
+      "qualified_median": 3402.0,
+      "qualified_max": 3516
+    },
+    "2020": {
+      "days": 243,
+      "valid_days": 243,
+      "qualified_min": 3516,
+      "qualified_median": 3587,
+      "qualified_max": 3819
+    },
+    "2021": {
+      "days": 243,
+      "valid_days": 243,
+      "qualified_min": 3820,
+      "qualified_median": 4074,
+      "qualified_max": 4325
+    },
+    "2022": {
+      "days": 242,
+      "valid_days": 242,
+      "qualified_min": 4326,
+      "qualified_median": 4485.0,
+      "qualified_max": 4692
+    },
+    "2023": {
+      "days": 242,
+      "valid_days": 242,
+      "qualified_min": 4691,
+      "qualified_median": 4790.0,
+      "qualified_max": 4926
+    },
+    "2024": {
+      "days": 242,
+      "valid_days": 242,
+      "qualified_min": 4889,
+      "qualified_median": 4926.5,
+      "qualified_max": 4961
+    },
+    "2025": {
+      "days": 243,
+      "valid_days": 243,
+      "qualified_min": 4866,
+      "qualified_median": 4928,
+      "qualified_max": 4948
+    }
+  },
+  "structural_check": "passed",
+  "selected_codes_independently_reread": 427,
+  "direct_endpoint_price_adjustment_checks": [
+    {
+      "date": "2015-01-05",
+      "members": 101,
+      "direct_mean": 0.22806279426847764,
+      "builder_mean": 0.2280627942684777,
+      "absolute_difference": 5.551115123125783e-17,
+      "amount_order_verified": true
+    },
+    {
+      "date": "2020-01-02",
+      "members": 176,
+      "direct_mean": 0.17033803600589595,
+      "builder_mean": 0.17033803600589584,
+      "absolute_difference": 1.1102230246251565e-16,
+      "amount_order_verified": true
+    },
+    {
+      "date": "2025-12-31",
+      "members": 247,
+      "direct_mean": 0.2258608322296357,
+      "builder_mean": 0.22586083222963574,
+      "absolute_difference": 2.7755575615628914e-17,
+      "amount_order_verified": true
+    }
+  ],
+  "unit_checks": "8 passed; label alignment, missing sessions, factor ambiguity and ranking/amount windows",
+  "limitations": [
+    "vendor roster not certified full historical PIT coverage",
+    "source arrival/revision times unknown",
+    "exit cash/recovery unknown",
+    "20day focus returns price-adjusted but index target total return, interpretation stated",
+    "same history used in other studies and model critique",
+    "conditional baseline categorical and may leave continuous confounding",
+    "not an account simulation; fees/slippage/holding rules not modelled",
+    "176 codes quarantined because raw observations or factor events unavailable; missing factor is not assumed1; all code reasons retained.",
+    "Source universe is provider retrospective roster with code exclusions; not official fully reconstructed PIT membership.",
+    "Selected historical constituents audited at three dates; whole-universe rank not independently recalculated.",
+    "Categorical controls may leave continuous confounding; resampling sparse cells can change supported events."
+  ],
+  "bound_inputs": {
+    "daily": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/focus-dynamic-zero-20261104/focus-dynamic-zero-20261104-20261104T222850-704467f5048a/result/daily.json",
+      "sha256": "8a267ea29293c5f522bbc0e0aa7a2804ffb22dcc1a670e8d0a4889525f52375a"
+    },
+    "audit": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/focus-dynamic-zero-20261104/focus-dynamic-zero-20261104-20261104T222850-704467f5048a/result/audit.json",
+      "sha256": "f2e87331be4d45929c2a7562f1f9276cacee3f5155e8ba22510b200e02d1bb63"
+    },
+    "spot_checks": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/focus-live-and-erp-thresholds-20261102/dynamic-zero-20261104/input-spot-audit.json",
+      "sha256": "07da80ee2a6ab1166066dac3aa7f1109af51e51e951f597873e0049189ea5c12"
+    }
+  }
+}

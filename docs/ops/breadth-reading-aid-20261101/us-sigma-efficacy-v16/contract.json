@@ -1,0 +1,43 @@
+{
+  "mission": "Evaluate existing US ERP sigma observations against price trend baseline, single frozen local historical batch",
+  "task_scope": [
+    "Before running core analysis, read standards and prepare method/definition/input checks, freeze protocol and script; send root concise plan and wait for explicit go. Existing production usErpBands semantics only; main63 and auxiliary21/126session outcomes using next session close as start. Sigma1.5/2 upper/lower crossings separately, raw and63session nonoverlap cooldown; allqualifieddate baseline and conditional baseline price>MA200 crossed with prior63return sign known at signaldate; equal event weight. Report means medians correct-direction rates and min future close from entry, matched differences and dependence-aware uncertainty (calendar blocks126sessions) plus fixed era splits2016-2019/2020-2022/2023on; counterexamples. Avoid fitting/search. Inputs frozenv13 snapshots; indexprice excludes dividends/costs, monthlyEY release/revision unknown, retrospectiveseen. Bound1corebatch+1necessarycorrection only; local computation only."
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "docs/research/current-standards.json",
+    "docs/research/definitions.v1.json",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/factor-increment-evidence-standard.md",
+    "docs/research/experiment-backtest-principles.md",
+    "docs/research/experiment-report-template.md",
+    "web/src/components/observation-library/usErpBands.ts",
+    "docs/ops/breadth-reading-aid-20261101/us-sigma-yields-v13/rates-snapshot.json",
+    "docs/ops/breadth-reading-aid-20261101/us-sigma-yields-v13/overlay-snapshot.json"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/us_erp_sigma_observation.py",
+    "tests/unit/test_us_erp_sigma_observation.py",
+    "docs/ops/breadth-reading-aid-20261101/us-sigma-efficacy-v16"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Frozen protocol before numerical results; input/source/codeSHA and definitions and actualattemptledger; saved events/performance/increment/stability/counterexamples; concise readable report and limitations",
+    "Output data only new external directory suppliedroot; under project smallreportcode5MiB cap. Root independentlyreconcilescounts andlabels."
+  ],
+  "stop_conditions": [
+    "No runtimeUI/livecache/strategy changes or childagents; no newsourcecalls or broadparametersearch",
+    "Waitrootexplicitgo before core; fixedinputs and scopeambiguityreport without guessing"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "mission": "Review existing evidence for which breadth/ERP bands warrant prominent opportunity or risk wording",
+  "task_scope": [
+    "Read only existing reports and source metadata",
+    "No experiments or network calls"
+  ],
+  "read_only_paths": [
+    "docs/experiments",
+    "docs/ops/breadth-reading-aid-20261101/reading-priority-contract-v6.json",
+    "docs/ops/breadth-reading-aid-20261101/increment-review-contract-v4.json",
+    "web/src/components/observation-library",
+    "src/lei_signal/market_context/breadth_observation.py"
+  ],
+  "write_paths": [
+    "docs/ops/breadth-reading-aid-20261101/evidence-review-v6.md"
+  ],
+  "expected_outputs": [
+    "Concise retained/deemphasized model matrix with exact evidence and limitations"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "Missing scope authority",
+    "Need new financial experiment or protected input"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "preflight_repair": "v6 rejected broad read path overlapping own single output; exact input files now bound, no work dispatched under failed contract"
+}

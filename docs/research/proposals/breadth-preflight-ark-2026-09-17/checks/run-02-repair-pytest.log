@@ -1,0 +1,144 @@
+...............FFFFF                                                     [100%]
+=================================== FAILURES ===================================
+______________________ test_verifier_catches_deleted_row _______________________
+
+tmp_path = PosixPath('/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_deleted_0')
+verify_mod = <module 'verify_result_repair' from '/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/breadth-b200-first-description-2026-09-17/verify_result.py'>
+
+    def test_verifier_catches_deleted_row(tmp_path, verify_mod):
+>       clean = _build_synthetic_run(tmp_path / "clean")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py:127: in _build_synthetic_run
+    inputs.mkdir()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_deleted_0/clean/inputs')
+mode = 511, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_deleted_0/clean/inputs'
+
+/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py:1116: FileNotFoundError
+_______________________ test_verifier_catches_extra_row ________________________
+
+tmp_path = PosixPath('/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_extra_ro0')
+verify_mod = <module 'verify_result_repair' from '/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/breadth-b200-first-description-2026-09-17/verify_result.py'>
+
+    def test_verifier_catches_extra_row(tmp_path, verify_mod):
+>       clean = _build_synthetic_run(tmp_path / "clean")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py:198: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py:127: in _build_synthetic_run
+    inputs.mkdir()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_extra_ro0/clean/inputs')
+mode = 511, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_extra_ro0/clean/inputs'
+
+/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py:1116: FileNotFoundError
+_______________________ test_verifier_catches_nan_value ________________________
+
+tmp_path = PosixPath('/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_nan_valu0')
+verify_mod = <module 'verify_result_repair' from '/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/breadth-b200-first-description-2026-09-17/verify_result.py'>
+
+    def test_verifier_catches_nan_value(tmp_path, verify_mod):
+>       clean = _build_synthetic_run(tmp_path / "clean")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py:213: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py:127: in _build_synthetic_run
+    inputs.mkdir()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_nan_valu0/clean/inputs')
+mode = 511, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_nan_valu0/clean/inputs'
+
+/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py:1116: FileNotFoundError
+_______________________ test_verifier_catches_unit_error _______________________
+
+tmp_path = PosixPath('/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_unit_err0')
+verify_mod = <module 'verify_result_repair' from '/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/breadth-b200-first-description-2026-09-17/verify_result.py'>
+
+    def test_verifier_catches_unit_error(tmp_path, verify_mod):
+>       clean = _build_synthetic_run(tmp_path / "clean")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py:227: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py:127: in _build_synthetic_run
+    inputs.mkdir()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_unit_err0/clean/inputs')
+mode = 511, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_unit_err0/clean/inputs'
+
+/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py:1116: FileNotFoundError
+______________________ test_verifier_catches_wrong_target ______________________
+
+tmp_path = PosixPath('/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_wrong_ta0')
+verify_mod = <module 'verify_result_repair' from '/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/breadth-b200-first-description-2026-09-17/verify_result.py'>
+
+    def test_verifier_catches_wrong_target(tmp_path, verify_mod):
+>       clean = _build_synthetic_run(tmp_path / "clean")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py:242: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py:127: in _build_synthetic_run
+    inputs.mkdir()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_wrong_ta0/clean/inputs')
+mode = 511, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-53/test_verifier_catches_wrong_ta0/clean/inputs'
+
+/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py:1116: FileNotFoundError
+=========================== short test summary info ============================
+FAILED docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py::test_verifier_catches_deleted_row
+FAILED docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py::test_verifier_catches_extra_row
+FAILED docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py::test_verifier_catches_nan_value
+FAILED docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py::test_verifier_catches_unit_error
+FAILED docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_verifier_independent_checks.py::test_verifier_catches_wrong_target
+5 failed, 15 passed in 0.62s

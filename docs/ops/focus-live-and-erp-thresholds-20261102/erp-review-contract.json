@@ -1,0 +1,36 @@
+{
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "No writes outside assigned paths",
+    "No protected input changes, new agents or model replacement",
+    "Stop when exact gap or evidence boundary found; return limitations"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "mission": "Independently check controller ERP sigma comparison arithmetic, event timing, incremental evidence and UI wording",
+  "task_scope": [
+    "Read new ERP comparison method/run/increment/results, original frozen ERP result and frontend ErpSensitivitySummary; independently recalculate headline means/counts from events and common controls; no new model or parameters",
+    "Check original2sigma result exact equality, lookahead/overlap/first-cross thresholds, mild control qualification and inferential limits; distinguish event frequency and independent opportunities",
+    "Report actionable defects or acceptance with evidence; do not change calculation/code/data"
+  ],
+  "read_only_paths": [
+    "docs/ops/focus-live-and-erp-thresholds-20261102/erp-comparison",
+    "docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-effect-display-20261101/compute",
+    "web/src/components/observation-library/ErpSensitivitySummary.tsx",
+    "web/src/components/observation-library/ErpCrossChart.tsx"
+  ],
+  "write_paths": [
+    "docs/ops/focus-live-and-erp-thresholds-20261102/erp-review.md"
+  ],
+  "expected_outputs": [
+    "erp-review.md numerical acceptance and any limitations"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "new_requests": 6,
+  "cumulative_requests": 17,
+  "attempts": [
+    {
+      "operation": "search",
+      "query": "50-day 200-day both breadth 20%"
+    },
+    {
+      "operation": "search",
+      "query": "50-day 200-day both breadth site:lpl.com"
+    },
+    {
+      "operation": "open",
+      "url": "https://research1.ml.com/C/?q=QmRhpQLkIcz12iAPEfYqmA",
+      "result": "expired report page; no readable research body"
+    },
+    {
+      "operation": "open",
+      "url": "https://kathrein.at/assets/Uploads/PDFs/Insti/GECONHND25_08.pdf",
+      "result": "NDR April2025 39-page document text; page10 joint breadth exhibit"
+    },
+    {
+      "operation": "screenshot",
+      "source": "NDR page10",
+      "result": "TimeoutError, no figure verification"
+    },
+    {
+      "operation": "search",
+      "query": "BofA Global Breadth Rule 88",
+      "result": "Primary report table reproduced in indexed PDFs; supporting source excerpt, not full-document read"
+    }
+  ],
+  "facts": [
+    {
+      "source": "BofA The Flow Show 20240531 indexed primary-report Table5",
+      "url": "https://d28lcup14p4e72.cloudfront.net/273862/8818055/BofA%20-%20Hartnett%20-%20The%20Flow%20Show_20240531.pdf",
+      "observed": "BofA Global Breadth Rule: Buy when net88% of markets in MSCI ACWI trade below200-day and50-day averages; horizon3months; reading48.9% neutral in table",
+      "limitations": [
+        "country/market-level breadth is not share of individual stocks in SP500/all-A",
+        "net definition cannot be converted to raw88%/12% without full formula",
+        "read indexed primary-table extract only; official attempt expired",
+        "table extract supports lower-side rule, not independently verified symmetric upper-side exact formula"
+      ],
+      "adoption": "Context in source detail only; do not implement as local stock rule"
+    },
+    {
+      "source": "Ned Davis Research April2025 hosted by Kathrein",
+      "url": "https://kathrein.at/assets/Uploads/PDFs/Insti/GECONHND25_08.pdf",
+      "observed": "Primary text identifies MSCI ACWI breadth50-day and200-day and separates Both in Upper Modes, Mixed, Both in Lower Modes. Search table excerpt reports12.77/4.17/-1.47 gain per annum versus5.61 buy/hold for1994-05-31 through2025-04-04.",
+      "limitations": [
+        "Modes not equivalent to rawcurrent values exceeding symmetric extremes",
+        "exact chart mode thresholds not verified because figure capture failed",
+        "contemporaneous state-return table is not future-return event test",
+        "cross-market/source membership differs from app"
+      ],
+      "adoption": "Only support existence of joint trend-state research; no numeric model transplantation"
+    }
+  ],
+  "conclusion": "Institutional joint usage exists with different objects and definitions. Exact app CN20/80 US15/85 combined extremes have no verified institutional provenance in bounded search. Keep as user-selectable numeric inquiry, not opportunity/risk alert."
+}

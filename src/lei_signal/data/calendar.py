@@ -106,6 +106,57 @@ class WeekdayCalendar:
         raise ValueError(f"{day} 之后 400 天内无交易日（节假日配置异常）")
 
 
+
+class CalendarCoverageError(ValueError):
+    """The calendar has no declared knowledge for the requested date range."""
+
+
+@dataclass(frozen=True)
+class CoveredCalendar:
+    """An explicitly covered calendar; bounds come from source metadata, not prices.
+
+    Coverage includes closed natural days. A last trading date is not coverage_end.
+    Wrapping an existing calendar opts into complete-week input checks.
+    """
+
+    calendar: TradingCalendar
+    coverage_start: date | pd.Timestamp
+    coverage_end: date | pd.Timestamp
+
+    def __post_init__(self) -> None:
+        for name in ("coverage_start", "coverage_end"):
+            value = pd.Timestamp(getattr(self, name))
+            if pd.isna(value) or value.tz is not None or value != value.normalize():
+                raise ValueError("Calendar coverage requires timezone-naive session dates")
+            object.__setattr__(self, name, value)
+        if self.coverage_start > self.coverage_end:
+            raise ValueError("Calendar coverage starts after its end")
+
+    def covers(self, start: date | pd.Timestamp, end: date | pd.Timestamp) -> bool:
+        return self.coverage_start <= pd.Timestamp(start) <= pd.Timestamp(end) <= self.coverage_end
+
+    def is_trading_day(self, day: date | pd.Timestamp) -> bool:
+        if not self.covers(day, day):
+            raise CalendarCoverageError(f"Calendar coverage unknown at {day}")
+        return self.calendar.is_trading_day(day)
+
+    def last_trading_day_in_range(
+        self, start: date | pd.Timestamp, end: date | pd.Timestamp
+    ) -> pd.Timestamp | None:
+        if not self.covers(start, end):
+            raise CalendarCoverageError(f"Calendar coverage unknown for {start}..{end}")
+        return self.calendar.last_trading_day_in_range(start, end)
+
+    def next_trading_day(self, day: date | pd.Timestamp) -> pd.Timestamp:
+        if not self.covers(day, day):
+            raise CalendarCoverageError(f"Calendar coverage unknown at {day}")
+        next_day = self.calendar.next_trading_day(day)
+        if not self.covers(next_day, next_day):
+            raise CalendarCoverageError(
+                f"Next trading day is outside calendar coverage: {next_day}"
+            )
+        return next_day
+
 def weekday_calendar(holidays: Iterable[date] = ()) -> WeekdayCalendar:
     """构造一个周一至周五日历，扣除给定休市日。"""
     return WeekdayCalendar(frozenset(holidays))
@@ -116,6 +167,8 @@ DEFAULT_TRADING_CALENDAR: TradingCalendar = WeekdayCalendar()
 
 
 __all__ = [
+    "CalendarCoverageError",
+    "CoveredCalendar",
     "DEFAULT_TRADING_CALENDAR",
     "TradingCalendar",
     "WeekdayCalendar",

@@ -37,9 +37,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import date
+from typing import Any
 
 import pandas as pd
 
+from lei_signal.data.calendar import TradingCalendar
 from lei_signal.domain.canonical import make_event_id
 from lei_signal.domain.rules_config import RuleSpec, get_rule
 from lei_signal.domain.types import Direction, Severity, SignalEvent
@@ -181,17 +183,34 @@ def _make_event(
     )
 
 
-def detect_first_ma_pullback_events(frame: pd.DataFrame, symbol: str) -> list[SignalEvent]:
+def detect_first_ma_pullback_events(
+    frame: pd.DataFrame, symbol: str, *, calendar: TradingCalendar | None = None,
+    as_of: date | pd.Timestamp | None = None, complete_bar: bool = True,
+    require_qualified_weekly: bool = False,
+) -> list[SignalEvent]:
     """识别模块 A（V2）：时钟二类 + 多头排列 + 周线环境中的均线回撤事件。"""
     spec = get_rule(RULE_ID)
+    from lei_signal.data.point_in_time import completed_daily_view
+    original = frame
+    frame = completed_daily_view(frame, as_of=as_of, calendar=calendar, complete_bar=complete_bar)
+    observation = as_of if as_of is not None else (None if original.empty else original.index[-1])
     periods, distance_atr, atr_period = _params(spec)
     if frame.empty or not _required_columns().issubset(frame.columns):
         return []
 
     atr20 = average_true_range(frame, atr_period)
     clock = clock_series(frame)
-    weekly_bull = weekly_env_series(frame)
+    options: dict[str, Any] = {}
+    if calendar is not None:
+        options["calendar"] = calendar
+    if as_of is not None or not complete_bar:
+        options["as_of"] = observation
+        options["complete_bar"] = complete_bar
+    if require_qualified_weekly:
+        options["require_qualified_weekly"] = True
+    weekly_bull = weekly_env_series(frame, **options)
     structures = detect_strict_structures(frame)
+    structures_by_id = {structure.structure_id: structure for structure in structures}
 
     events: list[SignalEvent] = []
     episode: _Episode | None = None
@@ -321,6 +340,16 @@ def detect_first_ma_pullback_events(frame: pd.DataFrame, symbol: str) -> list[Si
                     and close > float(row["ema20"])
                 ):
                     cycle.reclaim_seen = True
+                if cycle.structure_id is not None:
+                    cached = structures_by_id.get(cycle.structure_id)
+                    if (
+                        cached is None
+                        or (
+                            cached.invalidated_date is not None
+                            and cached.invalidated_date <= day
+                        )
+                    ):
+                        cycle.structure_id = None
                 if cycle.structure_id is None:
                     bottom = _active_bottom_structures(
                         structures, cycle.touch_date or day, day

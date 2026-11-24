@@ -1,0 +1,625 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-02T00:29:54.410131+08:00",
+  "coordination_commit": "fda78467",
+  "status": "prepared_not_installed",
+  "candidate_directory": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102",
+  "manifest_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/manifest.json",
+  "manifest_sha256": "0647edc9f69670a3885d55b908dffe167a4303105ab7a26b0798f408bd3c4e3f",
+  "restore_candidate": {
+    "operation": "merge_only_six_missing_original_backup_records",
+    "live_source_path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_history.json",
+    "live_source_sha256": "cdb537bbfee28c2d25c4657e45ee9c05ba3fcc87604a002558b1c23715a17e4a",
+    "backup_source_path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_history.json.bak-20260827",
+    "backup_source_sha256": "516fde2f132e5530c4b11cdebf76b64e58075e67be756ff363b296c91e8fa4f2",
+    "candidate_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/a_share_ma_breadth_history.json",
+    "candidate_sha256": "8a6c051b14988759a7240cf61c50d16f3aaf66a956fe3ecfb6798cf2719d88ff",
+    "previous_count": 1282,
+    "candidate_count": 1288,
+    "added_dates": [
+      "2026-08-20",
+      "2026-08-21",
+      "2026-08-24",
+      "2026-08-25",
+      "2026-08-26",
+      "2026-08-27"
+    ],
+    "common_backup_live_dates": 1254,
+    "common_dates_exact_values_equal": true,
+    "all_original_live_rows_preserved_in_order": true,
+    "overwritten_dates": [],
+    "qualification_upgraded": false,
+    "qualification_note": "These are exact legacy records recovered from the historical backup, not recomputed or newly qualified all-market observations. No interpolation, forward fill, or change to existing data thresholds.",
+    "installed": false
+  },
+  "source_hashes_unchanged": {
+    "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_history.json": true,
+    "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_history.json.bak-20260827": true,
+    "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_qfq.parquet": true,
+    "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes.json": false
+  },
+  "remaining_missing_CN_price_dates_after_candidate_install": [
+    "2026-08-19",
+    "2026-09-09",
+    "2026-09-22",
+    "2026-09-23",
+    "2026-10-19",
+    "2026-10-20",
+    "2026-10-21",
+    "2026-10-22",
+    "2026-10-23",
+    "2026-10-26",
+    "2026-10-27",
+    "2026-10-28",
+    "2026-10-29",
+    "2026-10-30"
+  ],
+  "probe_policy": {
+    "maximum_requests": 6,
+    "actual_requests": 6,
+    "attempts_per_symbol": 1,
+    "timeout_seconds": 12,
+    "redirects_followed": false,
+    "full_market_download": false,
+    "raw_response_bytes": 207033,
+    "adjusted_prices_merged": false
+  },
+  "probes": [
+    {
+      "symbol": "sh601091",
+      "category": "no_cache_sh",
+      "cache_last_date": null,
+      "url": "https://proxy.finance.qq.com/ifzqgtimg/appstock/app/fqkline/get?param=sh601091,day,,,800,qfq",
+      "started_at": "2026-11-02T00:20:11.796410+08:00",
+      "finished_at": "2026-11-02T00:20:11.977099+08:00",
+      "http_status": 200,
+      "top_keys": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "data_symbol_keys": [
+        "sh601091"
+      ],
+      "symbol_node_keys": [
+        "day",
+        "qt",
+        "mx_price",
+        "prec",
+        "version"
+      ],
+      "series": {
+        "qfqday": null,
+        "day": {
+          "count": 26,
+          "first": "2026-09-17",
+          "last": "2026-10-30",
+          "ascending": true,
+          "unique_dates": true
+        },
+        "hfqday": null
+      },
+      "source_result": "no_qfqday_in_response",
+      "response_bytes": 3264,
+      "response_sha256": "453dafaeced198e88192405916cd4909121359f692b50dd33a954bc64e35e114",
+      "raw_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/probes/sh601091.response"
+    },
+    {
+      "symbol": "sz000001",
+      "category": "no_cache_sz",
+      "cache_last_date": null,
+      "url": "https://proxy.finance.qq.com/ifzqgtimg/appstock/app/fqkline/get?param=sz000001,day,,,800,qfq",
+      "started_at": "2026-11-02T00:20:11.977310+08:00",
+      "finished_at": "2026-11-02T00:20:12.167306+08:00",
+      "http_status": 200,
+      "top_keys": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "data_symbol_keys": [
+        "sz000001"
+      ],
+      "symbol_node_keys": [
+        "qfqday",
+        "qt",
+        "mx_price",
+        "prec",
+        "version"
+      ],
+      "series": {
+        "qfqday": {
+          "count": 800,
+          "first": "2023-07-12",
+          "last": "2026-10-30",
+          "ascending": true,
+          "unique_dates": true
+        },
+        "day": null,
+        "hfqday": null
+      },
+      "source_result": "qfqday_available",
+      "response_bytes": 52520,
+      "response_sha256": "ad9cf698656b714b66b9eb38579d9eba2aabe5ab5d510a570e28d6de31f6f58d",
+      "raw_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/probes/sz000001.response"
+    },
+    {
+      "symbol": "bj920000",
+      "category": "no_cache_bj",
+      "cache_last_date": null,
+      "url": "https://proxy.finance.qq.com/ifzqgtimg/appstock/app/fqkline/get?param=bj920000,day,,,800,qfq",
+      "started_at": "2026-11-02T00:20:12.168025+08:00",
+      "finished_at": "2026-11-02T00:20:12.343157+08:00",
+      "http_status": 200,
+      "top_keys": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "data_symbol_keys": [
+        "bj920000"
+      ],
+      "symbol_node_keys": [
+        "day",
+        "qt",
+        "prec",
+        "version"
+      ],
+      "series": {
+        "qfqday": null,
+        "day": {
+          "count": 1,
+          "first": "2026-10-30",
+          "last": "2026-10-30",
+          "ascending": true,
+          "unique_dates": true
+        },
+        "hfqday": null
+      },
+      "source_result": "no_qfqday_in_response",
+      "response_bytes": 1562,
+      "response_sha256": "32287e6e6a1fe8d5e3b5eb8e138647c08856ebddff8190492a3e18e5ff770da8",
+      "raw_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/probes/bj920000.response"
+    },
+    {
+      "symbol": "sh601326",
+      "category": "stale_sh",
+      "cache_last_date": "2026-10-20",
+      "url": "https://proxy.finance.qq.com/ifzqgtimg/appstock/app/fqkline/get?param=sh601326,day,,,800,qfq",
+      "started_at": "2026-11-02T00:20:12.343976+08:00",
+      "finished_at": "2026-11-02T00:20:12.527618+08:00",
+      "http_status": 200,
+      "top_keys": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "data_symbol_keys": [
+        "sh601326"
+      ],
+      "symbol_node_keys": [
+        "qfqday",
+        "qt",
+        "mx_price",
+        "prec",
+        "version"
+      ],
+      "series": {
+        "qfqday": {
+          "count": 800,
+          "first": "2023-06-30",
+          "last": "2026-10-20",
+          "ascending": true,
+          "unique_dates": true
+        },
+        "day": null,
+        "hfqday": null
+      },
+      "source_result": "qfqday_available",
+      "response_bytes": 49914,
+      "response_sha256": "eb845fb6db2383e1c3a5ee8beee1d402862b8717718409bb9948dfaf7d1db3e9",
+      "raw_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/probes/sh601326.response"
+    },
+    {
+      "symbol": "sz000059",
+      "category": "stale_sz",
+      "cache_last_date": "2026-10-29",
+      "url": "https://proxy.finance.qq.com/ifzqgtimg/appstock/app/fqkline/get?param=sz000059,day,,,800,qfq",
+      "started_at": "2026-11-02T00:20:12.529011+08:00",
+      "finished_at": "2026-11-02T00:20:12.710842+08:00",
+      "http_status": 200,
+      "top_keys": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "data_symbol_keys": [
+        "sz000059"
+      ],
+      "symbol_node_keys": [
+        "qfqday",
+        "qt",
+        "mx_price",
+        "prec",
+        "version"
+      ],
+      "series": {
+        "qfqday": {
+          "count": 800,
+          "first": "2023-07-12",
+          "last": "2026-10-30",
+          "ascending": true,
+          "unique_dates": true
+        },
+        "day": null,
+        "hfqday": null
+      },
+      "source_result": "qfqday_available",
+      "response_bytes": 49655,
+      "response_sha256": "c5db9a5cfbb4bf53836d492730f840a713674bd40bba34c3dd571536c77d372c",
+      "raw_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/probes/sz000059.response"
+    },
+    {
+      "symbol": "sh600017",
+      "category": "adjustment_revision",
+      "cache_last_date": "2026-10-26",
+      "url": "https://proxy.finance.qq.com/ifzqgtimg/appstock/app/fqkline/get?param=sh600017,day,,,800,qfq",
+      "started_at": "2026-11-02T00:20:12.711732+08:00",
+      "finished_at": "2026-11-02T00:20:12.873174+08:00",
+      "http_status": 200,
+      "top_keys": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "data_symbol_keys": [
+        "sh600017"
+      ],
+      "symbol_node_keys": [
+        "qfqday",
+        "qt",
+        "mx_price",
+        "prec",
+        "version"
+      ],
+      "series": {
+        "qfqday": {
+          "count": 800,
+          "first": "2023-07-12",
+          "last": "2026-10-30",
+          "ascending": true,
+          "unique_dates": true
+        },
+        "day": null,
+        "hfqday": null
+      },
+      "source_result": "qfqday_available",
+      "response_bytes": 50118,
+      "response_sha256": "6a73902c74798c964d1f64f03cc33e536e1e195e74536a1916d4751719d4ed86",
+      "raw_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/probes/sh600017.response"
+    }
+  ],
+  "overlap_checks": [
+    {
+      "symbol": "sz000001",
+      "old_count": 0,
+      "new_count": 800,
+      "overlap_count": 0,
+      "overlap_changed_count": 0,
+      "new_date_count": 800,
+      "new_dates_first": "2023-07-12",
+      "new_dates_last": "2026-10-30",
+      "changed_ratio_min": null,
+      "changed_ratio_max": null,
+      "boundary_samples": [],
+      "merged": false
+    },
+    {
+      "symbol": "sh601326",
+      "old_count": 801,
+      "new_count": 800,
+      "overlap_count": 800,
+      "overlap_changed_count": 0,
+      "new_date_count": 0,
+      "new_dates_first": null,
+      "new_dates_last": null,
+      "changed_ratio_min": null,
+      "changed_ratio_max": null,
+      "boundary_samples": [],
+      "merged": false
+    },
+    {
+      "symbol": "sz000059",
+      "old_count": 801,
+      "new_count": 800,
+      "overlap_count": 799,
+      "overlap_changed_count": 0,
+      "new_date_count": 1,
+      "new_dates_first": "2026-10-30",
+      "new_dates_last": "2026-10-30",
+      "changed_ratio_min": null,
+      "changed_ratio_max": null,
+      "boundary_samples": [],
+      "merged": false
+    },
+    {
+      "symbol": "sh600017",
+      "old_count": 805,
+      "new_count": 800,
+      "overlap_count": 796,
+      "overlap_changed_count": 796,
+      "new_date_count": 4,
+      "new_dates_first": "2026-10-27",
+      "new_dates_last": "2026-10-30",
+      "changed_ratio_min": 0.9856957087126138,
+      "changed_ratio_max": 0.990036231884058,
+      "boundary_samples": [
+        {
+          "date": "2023-07-12",
+          "old_close": 2.687,
+          "new_close": 2.654
+        },
+        {
+          "date": "2023-07-13",
+          "old_close": 2.707,
+          "new_close": 2.674
+        },
+        {
+          "date": "2026-10-23",
+          "old_close": 2.75,
+          "new_close": 2.717
+        },
+        {
+          "date": "2026-10-26",
+          "old_close": 2.81,
+          "new_close": 2.777
+        }
+      ],
+      "merged": false
+    }
+  ],
+  "interpretation": [
+    {
+      "symbols": [
+        "sz000001"
+      ],
+      "finding": "Absent from the local qfq cache; the existing source now provides 800 qfq bars through 2026-10-30. Targeted collection can obtain usable candidate input. No old history is available for overlap comparison."
+    },
+    {
+      "symbols": [
+        "sz000059"
+      ],
+      "finding": "Current source adds 2026-10-30; all 799 overlapping bars exactly match within existing merge tolerances. Suitable for an incremental candidate, not yet installed."
+    },
+    {
+      "symbols": [
+        "sh601326"
+      ],
+      "finding": "The upstream qfq series itself ends 2026-10-20; all 800 overlaps match. Repeating the same request cannot be assumed to repair subsequent dates. Suspension, delisting, and source staleness remain unclassified."
+    },
+    {
+      "symbols": [
+        "sh600017"
+      ],
+      "finding": "The upstream qfq series reaches 2026-10-30, but all 796 overlapping observations differ. Do not splice. Preserve old input and review a complete consistent replacement series as a separate candidate before use."
+    },
+    {
+      "symbols": [
+        "sh601091",
+        "bj920000"
+      ],
+      "finding": "Initial Tencent probes provided only day arrays. Follow-up official lists confirm sh601091 was listed 2026-09-17, while bj920000 has a reported list date 2020-12-23. Short age explains the former MA50/200 warm-up boundary, but not the latter one-day provider history. Neither day array was substituted for qfq."
+    }
+  ],
+  "boundaries": [
+    "No outside-repository file or cache was written.",
+    "No source code, thresholds, membership rules, or qualification rules changed.",
+    "Six restored records retain legacy provenance and are not newly qualified all-market observations.",
+    "The six-symbol probe is a bounded diagnostic, not an estimate of failure frequencies across all 5577 symbols.",
+    "A-share complete coverage remains unresolved; this prepared candidate only restores the six exact missing backup records."
+  ],
+  "concurrent_code_cache_change": {
+    "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes.json",
+    "before_sha256": "39b066bf7534192b535b87f27ca7725578cba6469e9241d0c49751fe5aa8f93c",
+    "after_sha256": "4daffceafe31563f8617c9780a6c88dff378655f568a97c23049bfc308d1653c",
+    "before_date": "2026-11-01",
+    "after_date": "2026-11-02",
+    "only_date_changed": true,
+    "proof": "Restoring only the date in the current object and serializing with the existing writer format recreates the exact initial SHA. Codes, sources, order, and formatting are otherwise unchanged.",
+    "writer": "not attributed; concurrent date refresh observed",
+    "this_agent_called_project_codes_writer": false
+  },
+  "listing_validation": {
+    "schema_version": 1,
+    "checked_at": "2026-11-02T00:28:28.349693+08:00",
+    "listing_operations": 4,
+    "listing_operation_attempts": 4,
+    "http_requests": 22,
+    "http_retries": 0,
+    "http_by_operation": {
+      "sh_main": 1,
+      "sh_star": 1,
+      "sz": 1,
+      "bj": 19
+    },
+    "raw_response_bytes": 3498427,
+    "normalized_counts": {
+      "sh_main": 1700,
+      "sh_star": 618,
+      "sz": 2905,
+      "bj": 354
+    },
+    "unique_current_codes": 5577,
+    "official_current_codes_equal_cached_codes": true,
+    "scope_limit": "Current exchange lists with listing-date metadata; not a complete historical membership or suspension dataset. Existing AkShare list functions were called directly, with HTTP timeout injected in process; no project code-list writer was invoked.",
+    "listing_proofs": [
+      {
+        "symbol": "sh601091",
+        "official_list_date": "2026-09-17",
+        "raw_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/listing-evidence/response-001.raw",
+        "raw_sha256": "3f92929122365e98619dfcac4c8b82633a3a97e51c4b3e0d3baa99b46680576c",
+        "raw_record": {
+          "COMPANY_ABBR_EN": "SHENGU",
+          "STOCK_TYPE": "1",
+          "LIST_BOARD": "1",
+          "COMPANY_ABBR": "沈鼓集团",
+          "A_STOCK_CODE": "601091",
+          "AREA_NAME": "210000",
+          "DELIST_DATE": "-",
+          "NUM": "781",
+          "SEC_NAME_CN": "沈鼓集团",
+          "AREA_NAME_DESC": "辽宁省",
+          "FULL_NAME_IN_ENGLISH": "SHENGU GROUP CO., LTD.",
+          "SEC_NAME_FULL": "沈鼓集团",
+          "STATE_CODE": "2",
+          "B_STOCK_CODE": "-",
+          "STATE_CODE_STOCK": "4",
+          "LIST_DATE": "20260917",
+          "CSRC_CODE": "C",
+          "PRODUCT_STATUS": "   D  F  NY         ",
+          "CSRC_CODE_DESC": "制造业",
+          "COMPANY_CODE": "601091",
+          "FULL_NAME": "沈鼓集团股份有限公司"
+        },
+        "price_axis_sessions_from_listing_through_20261030": 26
+      },
+      {
+        "symbol": "sh601112",
+        "official_list_date": "2026-01-29",
+        "raw_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/listing-evidence/response-001.raw",
+        "raw_sha256": "3f92929122365e98619dfcac4c8b82633a3a97e51c4b3e0d3baa99b46680576c",
+        "raw_record": {
+          "COMPANY_ABBR_EN": "ZHENSHI CO.,LTD",
+          "STOCK_TYPE": "1",
+          "LIST_BOARD": "1",
+          "COMPANY_ABBR": "振石股份",
+          "A_STOCK_CODE": "601112",
+          "AREA_NAME": "330000",
+          "DELIST_DATE": "-",
+          "NUM": "791",
+          "SEC_NAME_CN": "振石股份",
+          "AREA_NAME_DESC": "浙江省",
+          "FULL_NAME_IN_ENGLISH": "ZHEJIANG ZHENSHI NEW MATERIALS CO., LTD.",
+          "SEC_NAME_FULL": "振石股份",
+          "STATE_CODE": "2",
+          "B_STOCK_CODE": "-",
+          "STATE_CODE_STOCK": "4",
+          "LIST_DATE": "20260129",
+          "CSRC_CODE": "C",
+          "PRODUCT_STATUS": "   D  F  NY         ",
+          "CSRC_CODE_DESC": "制造业",
+          "COMPANY_CODE": "601112",
+          "FULL_NAME": "浙江振石新材料股份有限公司"
+        },
+        "price_axis_sessions_from_listing_through_20261030": 180
+      },
+      {
+        "symbol": "bj920000",
+        "official_list_date": "2020-12-23",
+        "raw_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/listing-evidence/response-004.raw",
+        "raw_sha256": "273169b23a73e0c243ffef4e72a60bf47a5c7fa969b2d6ed1eafc0225e7604f1",
+        "raw_record": {
+          "fxssrq": "20201223",
+          "xxbldw": 1,
+          "xxbnsy": 0,
+          "xxcfgbz": "",
+          "xxcqcx": "N",
+          "xxcyhbjq": "",
+          "xxdqr": "",
+          "xxdtjg": 7.71,
+          "xxdzdtjg": 0,
+          "xxdzztjg": 99999.99,
+          "xxfcbj": "2",
+          "xxfxsgb": 57593925,
+          "xxghfl": 0,
+          "xxgprq": "20201223",
+          "xxgxsj": "83000",
+          "xxhbzl": "00",
+          "xxhxcs": 0,
+          "xxhyzl": "汽车制造业",
+          "xxisin": "CNE1000048X1",
+          "xxjczq": "",
+          "xxjgdw": 0.01,
+          "xxjsfl": 0.0005,
+          "xxjsrq": "20261030",
+          "xxmbxl": 1000000,
+          "xxmgmz": 1,
+          "xxqtyw": "FF  ",
+          "xxsbcs": 0,
+          "xxsldw": 1,
+          "xxsnsy": 0.7213,
+          "xxssdq": "安徽省",
+          "xxtpbz": "F",
+          "xxwltp": "",
+          "xxxjxz": 1,
+          "xxyhsl": 0.001,
+          "xxywjc": "ANHUI PHOENIX",
+          "xxzbqs": "国元证券股份有限公司",
+          "xxzgb": 91680000,
+          "xxzhbl": 0,
+          "xxzqdm": "920000",
+          "xxzqjb": "T",
+          "xxzqjc": "安徽凤凰",
+          "xxzqqxr": "",
+          "xxzrdw": 1,
+          "xxzrlx": "连续竞价",
+          "xxzrzt": "N",
+          "xxzsssl": 1,
+          "xxztjg": 14.31,
+          "xxzxsbsl": 100
+        }
+      }
+    ],
+    "classification": {
+      "sh601091": "Official list date is 2026-09-17; only 26 index sessions have elapsed through 2026-10-30. This establishes a legitimate pre-listing boundary for MA50/200. Tencent still returns only day, so adjusted-price provenance remains unresolved.",
+      "sh601112": "Official list date is 2026-01-29; 180 index sessions through 2026-10-30 match 180 local qfq records. MA200 cannot yet have 200 post-listing observations; this short history is not recoverable missing pre-listing price data.",
+      "bj920000": "BSE current list gives 2020-12-23, so the one-day Tencent response cannot be explained by a new 2026-10-30 listing. The provider history/identity link is unresolved.",
+      "sh601326": "The SSE list date is 2017-08-16. Upstream qfq still stops October 20. Its embedded October 30 quote has zero volume and raw field 40 equal to S, but no verified field mapping or suspension interval was found in the inspected local parsers."
+    },
+    "bse_identity": {
+      "current_code": "920000",
+      "name": "安徽凤凰",
+      "isin": "CNE1000048X1",
+      "reported_list_date_field": "fxssrq",
+      "reported_list_date_value": "20201223",
+      "alternate_date_field": "xxgprq",
+      "alternate_date_value": "20201223",
+      "historical_code_field_present": false,
+      "historical_code": null,
+      "code_change_effective_date": null,
+      "statement": "No original/historical security-code field is present in this saved BSE row. A code-change explanation remains a hypothesis; no old ticker was guessed or queried."
+    },
+    "suspension_check": {
+      "symbol": "sh601326",
+      "quote_raw_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/probes/sh601326.response",
+      "quote_time_raw": "20261030161457",
+      "volume_field_6": "0",
+      "unmapped_field_40": "S",
+      "status": "unresolved",
+      "inspected_local_parsers": [
+        "src/lei_signal/market_context/a_share_breadth.py:194-211",
+        "src/lei_signal/api/realtime.py:58-68",
+        "src/lei_signal/api/quotes.py",
+        "src/lei_signal/forward_observation/collector.py"
+      ],
+      "parser_mapping_S_to_suspended_found": false,
+      "existing_additional_source_identified_but_not_called": "akshare.stock_tfp_em exposes explicit suspension dates/reason from Eastmoney; no extra request was made after the four-list authorization scope.",
+      "boundary": "No missing price was filled as a suspension or classified solely from zero volume/S."
+    },
+    "qualification_rules_changed": false,
+    "outside_repo_writes": false,
+    "additional_price_download_requests": 0,
+    "concurrent_code_cache_change": {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes.json",
+      "before_sha256": "39b066bf7534192b535b87f27ca7725578cba6469e9241d0c49751fe5aa8f93c",
+      "after_sha256": "4daffceafe31563f8617c9780a6c88dff378655f568a97c23049bfc308d1653c",
+      "before_date": "2026-11-01",
+      "after_date": "2026-11-02",
+      "only_date_changed": true,
+      "proof": "Restoring only the date in the current object and serializing with the existing writer format recreates the exact initial SHA. Codes, sources, order, and formatting are otherwise unchanged.",
+      "writer": "not attributed; concurrent date refresh observed",
+      "this_agent_called_project_codes_writer": false
+    }
+  },
+  "total_source_http_requests": 28
+}

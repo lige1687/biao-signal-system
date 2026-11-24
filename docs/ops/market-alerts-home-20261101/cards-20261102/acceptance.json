@@ -1,0 +1,68 @@
+{
+  "status": "completed_local_desktop_observation_cards",
+  "at": "2026-11-02T19:21:52.289447+08:00",
+  "evidence_review": {
+    "agent": "/root/home_model_review",
+    "actual_model": "gpt-6-sol",
+    "effort": "medium",
+    "preflight": "ready before actual dispatch",
+    "accepted_by_root": "read report, independently checked source meaning, live source values and original adapters; 4 defaults accepted as descriptive additions only"
+  },
+  "source_readback": "source-readback.json",
+  "engineering": {
+    "observation_unit_tests": {
+      "passed": 44,
+      "failed": 0
+    },
+    "typescript": "passed",
+    "vite": "passed; existing bundle-size warning",
+    "hygiene": "passed",
+    "diff_check": "passed",
+    "desktop_width": 1710,
+    "default_dialogs": 4,
+    "additional_dialogs": [
+      "aaii",
+      "baker-wurgler"
+    ],
+    "all_selected_cards": 20,
+    "browser_js_errors": 0,
+    "no_horizontal_overflow": true,
+    "preference_cases": [
+      "null default",
+      "explicit empty retained",
+      "saved pins retained",
+      "UI add AAII then reload",
+      "UI remove Baker",
+      "original pins/seen restored null"
+    ],
+    "keyboard_boundary": "native modal/cancel handler/focus restore verified; real Enter/Escape not tested because CLI drops virtual key codes, native Mac locked"
+  },
+  "failures_and_resolution": [
+    "stale coordination scope detected before writes; avoided active breadth-owned files",
+    "delegate absolute read-path preflight rejected; corrected to root-relative before dispatch",
+    "CLI Enter/Escape did not activate/close native dialog; isolated to missing key codes, used DOM button/cancel handler verification; no source workaround",
+    "build copied public assets, artifact ~32.7MiB exceeded original <5MiB estimate; retained all files; disk reserve still >5GiB"
+  ],
+  "storage_free_gib": 10.550716400146484,
+  "source_changes": [
+    "web/src/components/observation-library/HomeObservationCards.tsx",
+    "web/src/components/observation-library/ObservationDetailDialog.tsx",
+    "web/src/components/observation-library/homeCardModel.ts",
+    "web/src/components/observation-library/homeCardModel.test.mjs",
+    "web/src/components/observation-library/home-observation-cards.css",
+    "web/src/components/observation-library/preferences.ts",
+    "web/src/components/observation-library/preferences.test.mjs",
+    "web/src/components/observation-library/view.tsx",
+    "web/src/components/observation-library/projectionView.tsx"
+  ],
+  "market_observation_alerts_changes": false,
+  "new_financial_experiments": 0,
+  "source_requests": 6,
+  "source_request_budget": 6,
+  "trading_rules_changed": false,
+  "backend_or_market_cache_writes": false,
+  "production_deployment": false,
+  "source_commit": false,
+  "old_registry_entries_preserved": 808,
+  "parent_state_preserved": true
+}

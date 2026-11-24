@@ -1,0 +1,10 @@
+.lib-reader{scroll-margin-top:76px;min-width:0}
+.lib-reader-back{min-height:44px;padding:8px 12px;margin-bottom:12px;color:var(--text-accent,var(--text));background:var(--bg-card);border:1px solid var(--border);border-radius:4px;cursor:pointer}
+.lib-reader-back:focus-visible{outline:2px solid var(--text-accent,#3054a4);outline-offset:3px}
+.lib-reader-bar{flex-wrap:wrap;overflow-wrap:anywhere}
+@media(max-width:900px){
+  .lib-page--reading .lib-list,.lib-page--reading .lib-filters,.lib-page--reading .lib-verdict-note,.lib-page--reading .lib-maintenance-note,.lib-page--reading .pg-head-kv,.lib-page--reading .pg-head-actions{display:none}
+  .lib-page--reading .lib-layout{grid-template-columns:minmax(0,1fr)}
+  .lib-page--reading .lib-reader{scroll-margin-top:152px;max-height:none;overflow:visible}
+  .lib-page:not(.lib-page--reading) .lib-reader{display:none}
+}

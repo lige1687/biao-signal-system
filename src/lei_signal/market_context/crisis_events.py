@@ -24,13 +24,18 @@
 from __future__ import annotations
 
 import json
+import math
 import time
+from datetime import datetime, time as clock_time, timedelta
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 
 from lei_signal.data.cache import DEFAULT_CACHE_DIR
+from lei_signal.data.calendar import DEFAULT_TRADING_CALENDAR
+from lei_signal.market_context.a_share_breadth import get_cached_ma_breadth
 
 
 def _cache_root() -> Path:
@@ -71,12 +76,61 @@ def _load_breadth_series() -> pd.Series | None:
         rows = json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return None
-    data = {str(r["date"]): r.get("ma50_pct") for r in rows if r.get("ma50_pct") is not None}
+    if not isinstance(rows, list):
+        return None
+    data = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        try:
+            day = pd.Timestamp(row["date"])
+            value = float(row["ma50_pct"])
+            if not math.isfinite(value) or not 0 <= value <= 100 or day.time() != clock_time(0):
+                continue
+            data[day.strftime("%Y-%m-%d")] = value
+        except (KeyError, ValueError, TypeError, OverflowError):
+            continue
     if len(data) < _PCTILE_MIN:
         return None
     s = pd.Series(data, dtype=float)
     s.index = pd.to_datetime(s.index)
     return s.sort_index()
+
+
+def _expected_closed_day(now: datetime) -> str | None:
+    local = now.astimezone(ZoneInfo("Asia/Shanghai"))
+    end = local.date() if local.time() >= clock_time(15) else local.date() - timedelta(days=1)
+    day = DEFAULT_TRADING_CALENDAR.last_trading_day_in_range(end - timedelta(days=30), end)
+    return day.strftime("%Y-%m-%d") if day is not None else None
+
+
+def _breadth_quality(day: str, value: float, expected: str | None) -> str | None:
+    """Use the existing same-day breadth receipt and its snapshot invalidation gate."""
+    from lei_signal.api.opportunity_market_watch import _qualified_breadth
+
+    if expected is None:
+        return "最近应有交易日无法核实"
+    if day != expected:
+        return f"宽度截至 {day}，最近应有交易日为 {expected}"
+    qualified, reasons = _qualified_breadth(_cache_root(), pd.Timestamp(expected).date())
+    if qualified is None:
+        return "；".join(reasons) or "宽度资格未核实"
+    quality = qualified["quality"]
+    snapshot = get_cached_ma_breadth()
+    snapshot_ma50 = snapshot.get("ma50_pct") if isinstance(snapshot, dict) else None
+    try:
+        snapshot_ma50 = float(snapshot_ma50)
+    except (TypeError, ValueError, OverflowError):
+        snapshot_ma50 = None
+    if (qualified["date"] != day or quality.get("status") != "verified"
+            or quality.get("applied_to_snapshot") is not True
+            or not isinstance(snapshot, dict) or snapshot.get("date") != day
+            or snapshot.get("breadth_status") != "verified"
+            or not math.isclose(float(qualified["b50"]), value, abs_tol=0.0001)
+            or snapshot_ma50 is None
+            or not math.isclose(snapshot_ma50, value, abs_tol=0.0001)):
+        return "宽度资格、快照与历史读数不一致或旧读数已失效"
+    return None
 
 
 def _load_index_close(symbol: str) -> pd.Series | None:
@@ -92,7 +146,8 @@ def _load_index_close(symbol: str) -> pd.Series | None:
     s = df["close"].astype(float)
     if not isinstance(s.index, pd.DatetimeIndex):
         s.index = pd.to_datetime(s.index)
-    return s.sort_index().dropna()
+    s = s.sort_index().dropna()
+    return s if len(s) >= 60 else None
 
 
 def _pctile_now(series: pd.Series) -> float | None:
@@ -105,55 +160,74 @@ def _pctile_now(series: pd.Series) -> float | None:
     return round(rank, 1)
 
 
-def evaluate_crisis_states() -> dict[str, Any] | None:
-    """逐指数计算 V4/V3 状态。任何数据缺口返回 None（前端不显示，不报错）。"""
+def evaluate_crisis_states(*, now: datetime | None = None) -> dict[str, Any]:
+    """仅同日、近期且有同日资格凭据时发布当前环境事件。"""
+    now = now or datetime.now(ZoneInfo("Asia/Shanghai"))
+    expected = _expected_closed_day(now)
     breadth = _load_breadth_series()
-    if breadth is None:
-        return None
-    b_now = float(breadth.iloc[-1])
-    b20 = breadth.iloc[-21] if len(breadth) >= 21 else None
-    b5 = breadth.iloc[-6] if len(breadth) >= 6 else None
-    delta_20 = round(b_now - float(b20), 1) if b20 is not None and not pd.isna(b20) else None
-    delta_5 = round(b_now - float(b5), 1) if b5 is not None and not pd.isna(b5) else None
-    pctile = _pctile_now(breadth)
-    breadth_date = breadth.index[-1].strftime("%Y-%m-%d")
+    b_now = float(breadth.iloc[-1]) if breadth is not None else None
+    b20 = breadth.iloc[-21] if breadth is not None and len(breadth) >= 21 else None
+    b5 = breadth.iloc[-6] if breadth is not None and len(breadth) >= 6 else None
+    delta_20 = round(b_now - float(b20), 1) if b_now is not None and b20 is not None else None
+    delta_5 = round(b_now - float(b5), 1) if b_now is not None and b5 is not None else None
+    pctile = _pctile_now(breadth) if breadth is not None else None
+    breadth_date = breadth.index[-1].strftime("%Y-%m-%d") if breadth is not None else None
+    breadth_reason = (
+        _breadth_quality(breadth_date, b_now, expected)
+        if breadth_date is not None and b_now is not None else "宽度历史缺失或有效读数不足"
+    )
 
     readings: list[dict[str, Any]] = []
     alerts: list[dict[str, Any]] = []
     for symbol, name in CRISIS_INDEXES.items():
         close = _load_index_close(symbol)
+        idx_date = close.index[-1].strftime("%Y-%m-%d") if close is not None else None
+        reason = breadth_reason
         if close is None:
-            continue
-        if len(close) < 60:
-            continue
-        ma60 = float(close.iloc[-60:].mean())
-        last = float(close.iloc[-1])
-        dev60 = round((last / ma60 - 1.0) * 100.0, 2)
-        state = "none"
-        deep = dev60 < DEV60_THRESHOLD
-        if deep and delta_20 is not None and delta_20 < BREADTH_DROP_20:
+            reason = "指数日 K 缺失或不足 60 日" if reason is None else f"{reason}；指数日 K 缺失或不足 60 日"
+        elif idx_date != expected:
+            detail = f"指数截至 {idx_date}，最近应有交易日为 {expected or '未知'}"
+            reason = detail if reason is None else f"{reason}；{detail}"
+        elif idx_date != breadth_date:
+            detail = f"指数截至 {idx_date}，宽度截至 {breadth_date or '未知'}，日期不一致"
+            reason = detail if reason is None else f"{reason}；{detail}"
+        dev60 = None
+        if close is not None:
+            ma60 = float(close.iloc[-60:].mean())
+            last = float(close.iloc[-1])
+            if math.isfinite(ma60) and ma60 > 0 and math.isfinite(last):
+                dev60 = round((last / ma60 - 1.0) * 100.0, 2)
+            else:
+                reason = "指数收盘价无效" if reason is None else f"{reason}；指数收盘价无效"
+        if reason is None and (delta_20 is None or delta_5 is None or pctile is None):
+            reason = "宽度比较所需历史不足"
+        state = "unknown" if reason else "none"
+        deep = dev60 is not None and dev60 < DEV60_THRESHOLD
+        if not reason and deep and delta_20 is not None and delta_20 < BREADTH_DROP_20:
             state = "crash_warning"  # V4 优先（口径选择 3）
         elif (
-            deep
+            not reason
+            and deep
             and pctile is not None
             and pctile <= BREADTH_PCTILE_FLOOR
             and delta_5 is not None
             and abs(delta_5) <= BREADTH_FLAT_5
         ):
             state = "capitulation_rebound"
-        idx_date = close.index[-1].strftime("%Y-%m-%d")
         readings.append(
             {
                 "symbol": symbol,
                 "name": name,
                 "as_of": idx_date,
                 "dev60_pct": dev60,
-                "breadth_ma50_now": round(b_now, 1),
+                "breadth_ma50_now": round(b_now, 1) if b_now is not None else None,
                 "breadth_delta_20": delta_20,
                 "breadth_pctile_1y": pctile,
                 "breadth_delta_5": delta_5,
                 "breadth_as_of": breadth_date,
                 "state": state,
+                "quality_status": "unknown" if reason else "current",
+                "quality_reason": reason,
             }
         )
         if state == "crash_warning":
@@ -165,8 +239,8 @@ def evaluate_crisis_states() -> dict[str, Any] | None:
                     "symbol": symbol,
                     "desc": (
                         f"深跌（dev60={dev60}%）∧ 宽度20日急坠 {delta_20}pp。"
-                        "历史后60日均值约-15%、胜率24%——补跌未完成，回避窗口20日。"
-                        "（研究代理，提示不挡信号）"
+                        "历史样本后60日均值约-15%、胜率24%。"
+                        "这是当日环境观察（研究代理），不构成固定回避期或交易指令。"
                     ),
                 }
             )
@@ -179,13 +253,11 @@ def evaluate_crisis_states() -> dict[str, Any] | None:
                     "symbol": symbol,
                     "desc": (
                         f"深跌（dev60={dev60}%）∧ 宽度1年分位仅{pctile}% ∧ 近5日走平。"
-                        "历史后60日中小盘+5~9%、胜率67-70%——出清完成，高贝塔行情，"
-                        "关注弹性标的。（研究代理，提示不挡信号）"
+                        "历史样本后60日中小盘+5~9%、胜率67-70%。"
+                        "这是当日环境观察（研究代理），不构成交易指令。"
                     ),
                 }
             )
-    if not readings:
-        return None
     return {"readings": readings, "alerts": alerts}
 
 

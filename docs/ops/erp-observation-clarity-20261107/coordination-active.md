@@ -1,0 +1,9 @@
+# ERP与市场观测板清晰度修复 — active 2026-11-07T18:00:25.635013+08:00
+
+- task-id erp-observation-clarity-20261107；owner 01a1b55e-b30e-7a72-98bc-103222ea9ee5/root；status active；scope_released=false。
+- 用户授权「可以看看有问题的话改一下」，接续本会话对当前桌面 ERP 与观测板的审查。当前用户入口为 5173。用途为基本面/市场环境叙事展示。
+- checked_coordination_sha 3f544e1dc0a33f000980b9807fe37620cbeeda54；已读 COORDINATION、breadth-reading-aid-20261101、focus-stock-universe-20261024、cross-market-risk-context-20261102、research-dispatch-controller 最新记录。相关阶段已释放，本轮另登记准确显示范围，不接管研究或原资料刷新。
+- 基线共享工作分支 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 加既有本地脏区。先按实际字节备份，自身 QA 在 docs/ops/erp-observation-clarity-20261107。两份策略原件 SHA 与确认值一致。
+- root 唯一写者 web/src/components/market-observation-alerts/index.tsx, web/src/components/market-observation-alerts/style.css, web/src/components/market-observation-alerts/UsErpCard.tsx, web/src/components/market-observation-alerts/us-erp-card.css, web/src/components/market-observation-alerts/CombinationReading.tsx, web/src/components/market-observation-alerts/combination-reading.css, web/src/components/market-observation-alerts/conditionalReading.ts, web/src/components/observation-library/ObservationMetric.tsx, web/src/components/observation-library/erpReferenceData.ts, web/src/components/observation-library/erpBands.ts, web/src/components/observation-library/usErpBands.ts, web/src/components/observation-library/erpCrossChart.css, web/src/components/observation-library/ErpCrossChart.tsx。执行代理仅 web/src/pages/FundamentalsPage.tsx, web/src/components/observation-library/ErpReferenceCard.tsx，尚待合同预检与真实派发。自身 QA 与本任务协调记录同 root 维护。
+- 完成目标为各 ERP 可见入口共用观测来源/日期/单位，组合解读前置且短读可用，重复解释收紧，重要样本与来源限制可查。数据原件、研究、后台、阈值、交易只读。8000静态资源差异已核，若更新仅安装经验证的本地前端构建并保留旧构建备份。
+- 验收对应源接线读回、TypeScript/Vite构建、相关既有回归、真实桌面卡片/大图/日期/缺测/展开与收起、跨入口数值一致。当前还未修改源码，验收未运行。

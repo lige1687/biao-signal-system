@@ -1,0 +1,993 @@
+--- B03-frozen-contract-a273ae6c.json
++++ B04-proposed-contract-016b0b016907.json
+@@ -1,29 +1,34 @@
+ {
+-  "schema": "baostock-b03-proposed-gap-contract/1.0",
+-  "job_id": "B03-remaining-gap-120-keys-2026-10-06",
+-  "status": "READY_FOR_BOUNDED_RUNNER_PREPARATION_NETWORK_NOT_RELEASED",
+-  "purpose": "Acquire source evidence for120 exact unqueried old gap keys; qualification only; no research effect, universe change or main-table repair",
+-  "authorized_now": "Read-only reconciliation and concrete proposal/hand-off files only; no new provider session or data call",
++  "schema": "baostock-b04-proposed-gap-contract/1.0",
++  "job_id": "B04-remaining-gap-79-keys-2026-10-06",
++  "status": "EXACT_SCOPE_PREPARED_RUNNER_ADAPTATION_AND_REVIEW_REQUIRED_NETWORK_NOT_RELEASED",
++  "purpose": "Classify provider source evidence for79 exact never-queried keys; no promise of normal traded prices, exchange-suspension proof or main-table repair.",
++  "authorized_now": "Preparation of exact contract/current list and runner adaptation plan only. No B04 provider connection, executable runner adaptation or network grant.",
+   "future_owner": "One parent-assigned Mac executor, no concurrent BaoStock worker",
+   "selected_universe": "Existing439 candidate historical CSI300 codes, fixed2022-01-04..2026-06-30; not a new10-stock research pool",
+   "source_audit": {
+-    "library_file_id": "libfile_457a3c87e3d88191b8b8fc59d449fbbe",
+-    "version": 0,
+-    "zip_bytes": 21329,
+-    "zip_sha256": "3ed11716738a46f4b544a2551048fb178b2e7bf885a012162021592a756fa9e7",
+-    "original_gap_queue_sha256": "86efbc695762692dd4dff168e5bfa922a180549853586f677205a8b46e294578"
+-  },
+-  "selection_rule": "All31 never-queried code partitions sorted by descending exact remaining-key count then six-digit code ascending; first10 partitions in that order. No choice based on price, factor or future results. No buffers.",
++    "library_file_id": "libfile_9bf12aec3b948191a3027598ddaf3b5d",
++    "version_from_dispatch": 0,
++    "bytes": 18667,
++    "sha256": "7c1efbeb30f2e30af5ab191f14cc2b6af4df39e5043b82a200e67064c86c3fb1",
++    "original1944_gap_queue_sha256": "86efbc695762692dd4dff168e5bfa922a180549853586f677205a8b46e294578",
++    "previous_frozen_B03_contract": {
++      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/package/extracted-v1/frozen-contract.json",
++      "bytes": 17773,
++      "sha256": "a273ae6cfe84a5cb8f07fc0fac40cd075233167a8fb402d5bb6b232fab3998a1"
++    }
++  },
++  "selection_rule": "All21 remaining code partitions sorted by exact never-queried key count descending then six-digit code ascending; take first10 complete partitions in that order. Exact dates only, no buffer or outcome ranking.",
+   "scope_counts": {
+     "old_gap_keys": 1944,
+     "normal_raw_observations_existing": 1601,
+-    "provider_placeholders_existing": 106,
+-    "never_queried_existing": 233,
++    "provider_placeholders_existing": 226,
++    "never_queried_existing": 113,
+     "queried_no_return_existing": 4,
+     "selected_queries": 10,
+-    "selected_exact_keys": 120,
+-    "deferred_never_queried_keys": 113,
+-    "deferred_codes": 21,
++    "selected_exact_keys": 79,
++    "deferred_never_queried_keys": 34,
++    "deferred_codes": 11,
+     "main_table_repairs": 0
+   },
+   "provider": {
+@@ -83,313 +88,272 @@
+   },
+   "queries": [
+     {
+-      "query_id": "daily-1-601059",
+-      "kind": "daily_raw",
+-      "method": "query_history_k_data_plus",
+-      "params": {
+-        "code": "sh.601059",
+-        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+-        "start_date": "2025-11-20",
+-        "end_date": "2025-12-17",
+-        "frequency": "d",
+-        "adjustflag": "3"
+-      },
+-      "exchange": "XSHG",
+-      "symbol": "601059",
+-      "exact_old_gap_dates": [
+-        "2025-11-20",
+-        "2025-11-21",
+-        "2025-11-24",
+-        "2025-11-25",
+-        "2025-11-26",
+-        "2025-11-27",
+-        "2025-11-28",
+-        "2025-12-01",
+-        "2025-12-02",
+-        "2025-12-03",
+-        "2025-12-04",
+-        "2025-12-05",
+-        "2025-12-08",
+-        "2025-12-09",
+-        "2025-12-10",
+-        "2025-12-11",
+-        "2025-12-12",
+-        "2025-12-15",
+-        "2025-12-16",
+-        "2025-12-17"
+-      ],
+-      "exact_key_count": 20,
+-      "existing_query_overlap": false
+-    },
+-    {
+-      "query_id": "daily-2-601995",
+-      "kind": "daily_raw",
+-      "method": "query_history_k_data_plus",
+-      "params": {
+-        "code": "sh.601995",
+-        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+-        "start_date": "2025-11-20",
+-        "end_date": "2025-12-17",
+-        "frequency": "d",
+-        "adjustflag": "3"
+-      },
+-      "exchange": "XSHG",
+-      "symbol": "601995",
+-      "exact_old_gap_dates": [
+-        "2025-11-20",
+-        "2025-11-21",
+-        "2025-11-24",
+-        "2025-11-25",
+-        "2025-11-26",
+-        "2025-11-27",
+-        "2025-11-28",
+-        "2025-12-01",
+-        "2025-12-02",
+-        "2025-12-03",
+-        "2025-12-04",
+-        "2025-12-05",
+-        "2025-12-08",
+-        "2025-12-09",
+-        "2025-12-10",
+-        "2025-12-11",
+-        "2025-12-12",
+-        "2025-12-15",
+-        "2025-12-16",
+-        "2025-12-17"
+-      ],
+-      "exact_key_count": 20,
+-      "existing_query_overlap": false
+-    },
+-    {
+-      "query_id": "daily-3-001979",
+-      "kind": "daily_raw",
+-      "method": "query_history_k_data_plus",
+-      "params": {
+-        "code": "sz.001979",
+-        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+-        "start_date": "2022-12-05",
+-        "end_date": "2022-12-16",
++      "query_id": "daily-1-601088",
++      "kind": "daily_raw",
++      "method": "query_history_k_data_plus",
++      "params": {
++        "code": "sh.601088",
++        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
++        "start_date": "2025-08-04",
++        "end_date": "2025-08-15",
++        "frequency": "d",
++        "adjustflag": "3"
++      },
++      "exchange": "XSHG",
++      "symbol": "601088",
++      "exact_old_gap_dates": [
++        "2025-08-04",
++        "2025-08-05",
++        "2025-08-06",
++        "2025-08-07",
++        "2025-08-08",
++        "2025-08-11",
++        "2025-08-12",
++        "2025-08-13",
++        "2025-08-14",
++        "2025-08-15"
++      ],
++      "exact_key_count": 10,
++      "existing_query_overlap": false
++    },
++    {
++      "query_id": "daily-2-603019",
++      "kind": "daily_raw",
++      "method": "query_history_k_data_plus",
++      "params": {
++        "code": "sh.603019",
++        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
++        "start_date": "2025-05-26",
++        "end_date": "2025-06-09",
++        "frequency": "d",
++        "adjustflag": "3"
++      },
++      "exchange": "XSHG",
++      "symbol": "603019",
++      "exact_old_gap_dates": [
++        "2025-05-26",
++        "2025-05-27",
++        "2025-05-28",
++        "2025-05-29",
++        "2025-05-30",
++        "2025-06-03",
++        "2025-06-04",
++        "2025-06-05",
++        "2025-06-06",
++        "2025-06-09"
++      ],
++      "exact_key_count": 10,
++      "existing_query_overlap": false
++    },
++    {
++      "query_id": "daily-3-688041",
++      "kind": "daily_raw",
++      "method": "query_history_k_data_plus",
++      "params": {
++        "code": "sh.688041",
++        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
++        "start_date": "2025-05-26",
++        "end_date": "2025-06-09",
++        "frequency": "d",
++        "adjustflag": "3"
++      },
++      "exchange": "XSHG",
++      "symbol": "688041",
++      "exact_old_gap_dates": [
++        "2025-05-26",
++        "2025-05-27",
++        "2025-05-28",
++        "2025-05-29",
++        "2025-05-30",
++        "2025-06-03",
++        "2025-06-04",
++        "2025-06-05",
++        "2025-06-06",
++        "2025-06-09"
++      ],
++      "exact_key_count": 10,
++      "existing_query_overlap": false
++    },
++    {
++      "query_id": "daily-4-688126",
++      "kind": "daily_raw",
++      "method": "query_history_k_data_plus",
++      "params": {
++        "code": "sh.688126",
++        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
++        "start_date": "2025-02-24",
++        "end_date": "2025-03-07",
++        "frequency": "d",
++        "adjustflag": "3"
++      },
++      "exchange": "XSHG",
++      "symbol": "688126",
++      "exact_old_gap_dates": [
++        "2025-02-24",
++        "2025-02-25",
++        "2025-02-26",
++        "2025-02-27",
++        "2025-02-28",
++        "2025-03-03",
++        "2025-03-04",
++        "2025-03-05",
++        "2025-03-06",
++        "2025-03-07"
++      ],
++      "exact_key_count": 10,
++      "existing_query_overlap": false
++    },
++    {
++      "query_id": "daily-5-688012",
++      "kind": "daily_raw",
++      "method": "query_history_k_data_plus",
++      "params": {
++        "code": "sh.688012",
++        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
++        "start_date": "2025-12-19",
++        "end_date": "2025-12-31",
++        "frequency": "d",
++        "adjustflag": "3"
++      },
++      "exchange": "XSHG",
++      "symbol": "688012",
++      "exact_old_gap_dates": [
++        "2025-12-19",
++        "2025-12-22",
++        "2025-12-23",
++        "2025-12-24",
++        "2025-12-25",
++        "2025-12-26",
++        "2025-12-29",
++        "2025-12-30",
++        "2025-12-31"
++      ],
++      "exact_key_count": 9,
++      "existing_query_overlap": false
++    },
++    {
++      "query_id": "daily-6-300442",
++      "kind": "daily_raw",
++      "method": "query_history_k_data_plus",
++      "params": {
++        "code": "sz.300442",
++        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
++        "start_date": "2026-02-06",
++        "end_date": "2026-02-13",
+         "frequency": "d",
+         "adjustflag": "3"
+       },
+       "exchange": "XSHE",
+-      "symbol": "001979",
+-      "exact_old_gap_dates": [
+-        "2022-12-05",
+-        "2022-12-06",
+-        "2022-12-07",
+-        "2022-12-08",
+-        "2022-12-09",
+-        "2022-12-12",
+-        "2022-12-13",
+-        "2022-12-14",
+-        "2022-12-15",
+-        "2022-12-16"
+-      ],
+-      "exact_key_count": 10,
+-      "existing_query_overlap": false
+-    },
+-    {
+-      "query_id": "daily-4-002049",
+-      "kind": "daily_raw",
+-      "method": "query_history_k_data_plus",
+-      "params": {
+-        "code": "sz.002049",
+-        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+-        "start_date": "2025-12-30",
+-        "end_date": "2026-01-14",
+-        "frequency": "d",
+-        "adjustflag": "3"
+-      },
+-      "exchange": "XSHE",
+-      "symbol": "002049",
+-      "exact_old_gap_dates": [
+-        "2025-12-30",
+-        "2025-12-31",
+-        "2026-01-05",
+-        "2026-01-06",
+-        "2026-01-07",
+-        "2026-01-08",
+-        "2026-01-09",
+-        "2026-01-12",
+-        "2026-01-13",
+-        "2026-01-14"
+-      ],
+-      "exact_key_count": 10,
+-      "existing_query_overlap": false
+-    },
+-    {
+-      "query_id": "daily-5-002252",
+-      "kind": "daily_raw",
+-      "method": "query_history_k_data_plus",
+-      "params": {
+-        "code": "sz.002252",
+-        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+-        "start_date": "2024-12-23",
+-        "end_date": "2025-01-06",
+-        "frequency": "d",
+-        "adjustflag": "3"
+-      },
+-      "exchange": "XSHE",
+-      "symbol": "002252",
+-      "exact_old_gap_dates": [
+-        "2024-12-23",
+-        "2024-12-24",
+-        "2024-12-25",
+-        "2024-12-26",
+-        "2024-12-27",
+-        "2024-12-30",
+-        "2024-12-31",
+-        "2025-01-02",
+-        "2025-01-03",
+-        "2025-01-06"
+-      ],
+-      "exact_key_count": 10,
+-      "existing_query_overlap": false
+-    },
+-    {
+-      "query_id": "daily-6-002736",
+-      "kind": "daily_raw",
+-      "method": "query_history_k_data_plus",
+-      "params": {
+-        "code": "sz.002736",
+-        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+-        "start_date": "2024-08-22",
+-        "end_date": "2024-09-04",
+-        "frequency": "d",
+-        "adjustflag": "3"
+-      },
+-      "exchange": "XSHE",
+-      "symbol": "002736",
+-      "exact_old_gap_dates": [
+-        "2024-08-22",
+-        "2024-08-23",
+-        "2024-08-26",
+-        "2024-08-27",
+-        "2024-08-28",
+-        "2024-08-29",
+-        "2024-08-30",
+-        "2024-09-02",
+-        "2024-09-03",
+-        "2024-09-04"
+-      ],
+-      "exact_key_count": 10,
+-      "existing_query_overlap": false
+-    },
+-    {
+-      "query_id": "daily-7-301269",
+-      "kind": "daily_raw",
+-      "method": "query_history_k_data_plus",
+-      "params": {
+-        "code": "sz.301269",
+-        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+-        "start_date": "2025-03-17",
+-        "end_date": "2025-03-28",
+-        "frequency": "d",
+-        "adjustflag": "3"
+-      },
+-      "exchange": "XSHE",
+-      "symbol": "301269",
+-      "exact_old_gap_dates": [
+-        "2025-03-17",
+-        "2025-03-18",
++      "symbol": "300442",
++      "exact_old_gap_dates": [
++        "2026-02-06",
++        "2026-02-09",
++        "2026-02-10",
++        "2026-02-11",
++        "2026-02-12",
++        "2026-02-13"
++      ],
++      "exact_key_count": 6,
++      "existing_query_overlap": false
++    },
++    {
++      "query_id": "daily-7-600030",
++      "kind": "daily_raw",
++      "method": "query_history_k_data_plus",
++      "params": {
++        "code": "sh.600030",
++        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
++        "start_date": "2022-01-19",
++        "end_date": "2022-01-26",
++        "frequency": "d",
++        "adjustflag": "3"
++      },
++      "exchange": "XSHG",
++      "symbol": "600030",
++      "exact_old_gap_dates": [
++        "2022-01-19",
++        "2022-01-20",
++        "2022-01-21",
++        "2022-01-24",
++        "2022-01-25",
++        "2022-01-26"
++      ],
++      "exact_key_count": 6,
++      "existing_query_overlap": false
++    },
++    {
++      "query_id": "daily-8-600803",
++      "kind": "daily_raw",
++      "method": "query_history_k_data_plus",
++      "params": {
++        "code": "sh.600803",
++        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
++        "start_date": "2025-03-19",
++        "end_date": "2025-03-26",
++        "frequency": "d",
++        "adjustflag": "3"
++      },
++      "exchange": "XSHG",
++      "symbol": "600803",
++      "exact_old_gap_dates": [
+         "2025-03-19",
+         "2025-03-20",
+         "2025-03-21",
+         "2025-03-24",
+         "2025-03-25",
+-        "2025-03-26",
+-        "2025-03-27",
+-        "2025-03-28"
+-      ],
+-      "exact_key_count": 10,
+-      "existing_query_overlap": false
+-    },
+-    {
+-      "query_id": "daily-8-600027",
+-      "kind": "daily_raw",
+-      "method": "query_history_k_data_plus",
+-      "params": {
+-        "code": "sh.600027",
+-        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+-        "start_date": "2024-07-19",
+-        "end_date": "2024-08-01",
+-        "frequency": "d",
+-        "adjustflag": "3"
+-      },
+-      "exchange": "XSHG",
+-      "symbol": "600027",
+-      "exact_old_gap_dates": [
+-        "2024-07-19",
+-        "2024-07-22",
+-        "2024-07-23",
+-        "2024-07-24",
+-        "2024-07-25",
+-        "2024-07-26",
+-        "2024-07-29",
+-        "2024-07-30",
+-        "2024-07-31",
+-        "2024-08-01"
+-      ],
+-      "exact_key_count": 10,
+-      "existing_query_overlap": false
+-    },
+-    {
+-      "query_id": "daily-9-600150",
+-      "kind": "daily_raw",
+-      "method": "query_history_k_data_plus",
+-      "params": {
+-        "code": "sh.600150",
+-        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+-        "start_date": "2024-09-03",
+-        "end_date": "2024-09-18",
+-        "frequency": "d",
+-        "adjustflag": "3"
+-      },
+-      "exchange": "XSHG",
+-      "symbol": "600150",
+-      "exact_old_gap_dates": [
+-        "2024-09-03",
+-        "2024-09-04",
+-        "2024-09-05",
+-        "2024-09-06",
+-        "2024-09-09",
+-        "2024-09-10",
+-        "2024-09-11",
+-        "2024-09-12",
+-        "2024-09-13",
+-        "2024-09-18"
+-      ],
+-      "exact_key_count": 10,
+-      "existing_query_overlap": false
+-    },
+-    {
+-      "query_id": "daily-10-600438",
+-      "kind": "daily_raw",
+-      "method": "query_history_k_data_plus",
+-      "params": {
+-        "code": "sh.600438",
+-        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+-        "start_date": "2026-02-25",
+-        "end_date": "2026-03-10",
+-        "frequency": "d",
+-        "adjustflag": "3"
+-      },
+-      "exchange": "XSHG",
+-      "symbol": "600438",
+-      "exact_old_gap_dates": [
+-        "2026-02-25",
+-        "2026-02-26",
+-        "2026-02-27",
+-        "2026-03-02",
+-        "2026-03-03",
+-        "2026-03-04",
+-        "2026-03-05",
+-        "2026-03-06",
+-        "2026-03-09",
+-        "2026-03-10"
+-      ],
+-      "exact_key_count": 10,
++        "2025-03-26"
++      ],
++      "exact_key_count": 6,
++      "existing_query_overlap": false
++    },
++    {
++      "query_id": "daily-9-600958",
++      "kind": "daily_raw",
++      "method": "query_history_k_data_plus",
++      "params": {
++        "code": "sh.600958",
++        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
++        "start_date": "2022-04-21",
++        "end_date": "2022-04-28",
++        "frequency": "d",
++        "adjustflag": "3"
++      },
++      "exchange": "XSHG",
++      "symbol": "600958",
++      "exact_old_gap_dates": [
++        "2022-04-21",
++        "2022-04-22",
++        "2022-04-25",
++        "2022-04-26",
++        "2022-04-27",
++        "2022-04-28"
++      ],
++      "exact_key_count": 6,
++      "existing_query_overlap": false
++    },
++    {
++      "query_id": "daily-10-601108",
++      "kind": "daily_raw",
++      "method": "query_history_k_data_plus",
++      "params": {
++        "code": "sh.601108",
++        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
++        "start_date": "2022-03-31",
++        "end_date": "2022-04-11",
++        "frequency": "d",
++        "adjustflag": "3"
++      },
++      "exchange": "XSHG",
++      "symbol": "601108",
++      "exact_old_gap_dates": [
++        "2022-03-31",
++        "2022-04-01",
++        "2022-04-06",
++        "2022-04-07",
++        "2022-04-08",
++        "2022-04-11"
++      ],
++      "exact_key_count": 6,
+       "existing_query_overlap": false
+     }
+   ],
+@@ -421,7 +385,7 @@
+     "observed_prior_B01_B02": "Public anonymous method succeeded without personal account or payment; current rights/terms are not certified by successful protocol calls.",
+     "proposed_access": "Use only existing default public access and no payments; no login to personal services, license acceptance, package install or settings change.",
+     "current_market_query_permission": "NOT_RELEASED_BY_THIS_PROPOSAL",
+-    "required_release": "Parent/user explicitly releases exact B03 contract after offline runner review. Existing B01/B02 release does not authorize B03.",
++    "required_release": "Separate parent release of exact new B04 contract + reviewed B04 runner + new B04 execution binding + fresh actual proof/path. Old B03 releases authorize nothing here.",
+     "license_evidence": "Historical point-of-availability and full third-party redistribution license unresolved; preserve available official documentation. Raw-data cloud redistribution requires a separately established lawful scope.",
+     "stop_on_change": "Stop on new credential, payment, explicit agreement, denied access or unexpected permission; no bypass or alternate provider."
+   },
+@@ -435,7 +399,7 @@
+     "adjustflag": "Request and every returned daily row must bind raw3; known client empty header remains verbatim and is warned, never replaced. Nonempty contradictory flags stop further queries.",
+     "price_scale": "Raw only in isolated source directory; no old-qfq numeric comparison or splicing; adjustment factors are not applied.",
+     "classification": "A provider status1 row with valid structure/OHLC is normal raw evidence only, not repaired/wealth/real-time/trading qualification. Provider status0 rows remain separate placeholders; empty volume/amount strings stay empty.",
+-    "exact_key_accounting": "Only selected120 old gap keys enter gap reconciliation. Preserve any additional returned dates inside the requested window separately; never generate keys from span endpoints or weekdays.",
++    "exact_key_accounting": "Only selected79 old gap keys enter gap reconciliation. Preserve any additional returned dates inside the requested window separately; never generate keys from span endpoints or weekdays.",
+     "no_return": "Successful empty/partial date coverage is preserved as unknown/source-no-return, never synthetic prices.4 old terminal no-return keys are excluded from new requests.",
+     "metadata_units": "Volume/amount units and corporate-action meanings are not certified by field names; retain source strings and provenance.",
+     "no_transforms": [
+@@ -452,22 +416,336 @@
+     "Stop on first transport/protocol/provider error, swallowed client exception, timeout, incomplete message or hidden pagination; one attempt only.",
+     "Stop on wrong code, schema, duplicate date, date outside requested window, contradictory row adjustflag or invalid OHLC; preserve response before qualification decision.",
+     "Known blank header is retained and reported; a successful empty record set is unknown rather than fabricated pass or network retry.",
+-    "Stop at all declared caps or after10 data calls; close local socket without another protocol send. No fallbacks, automatic continuation to113 keys or rerun after partial result."
++    "Stop at all declared caps or after10 data calls; close local socket without another protocol send. No fallbacks, automatic continuation to34 keys or rerun after partial result."
+   ],
+   "pre_dispatch_required": [
+-    "Bind exact B03 contract bytes/sha256 and120-key CSV sha256 in adapted runner; reuse reviewed B02 guard kernel, not an unreviewed provider script.",
+-    "Offline exact-plan/caps/error/empty/header/field/string/storage cases and no-socket CLI/preflight tests; do not weaken failed tests.",
+-    "Check new installed package/source hashes and default public session before any network; current7 source hashes are planning evidence only.",
+-    "Read current source hashes and B01/B02/new handoffs again before release; if any target keys newly acquired, stop and revise proposal rather than refetch."
++    "Use existing observed0.9.3 seven-source binding without install/key/settings changes",
++    "Re-read current full acquisition/handoff history and reject any unknown attempt or selected coverage",
++    "Preserve both consumed B03 attempts with no replay/resume/delete; lifetime sessions remain2 before B04",
++    "New separately reviewed B04 contract/runner/execution binding/proof and unique nonexistent B04 root",
++    "Same hard caps, raw3/schema fidelity, first-error no-retry behavior; external daily checksum semantics still unknown"
+   ],
+   "required_outputs": [
+-    "Exact executed contract and runner copy+sha256",
+-    "query-manifest.json with params/send counts/response bytes/gap timing/source paths and hashes",
+-    "receipt.json including failures,empty results and per-key source/status categories",
+-    "Original wire/decoded/client/normalized layers",
+-    "versions and preflight evidence",
+-    "checksums.sha256",
+-    "Read-only selected-key reconciliation and concise Chinese findings"
++    "Actual query statuses and consumed network/storage/pace/deadline ledger",
++    "Original wire/official decoded/client snapshot/string-preserving normalized files with exact hashes",
++    "79 selected-key categories with normal/provider-placeholder/queried-no-return/invalid/unattempted separated",
++    "34 deferred exact keys explicitly untouched, all prior consumed attempts preserved",
++    "Bounded private readable Library handoff and independent source review; no research effect report"
+   ],
+-  "success_boundary": "All planned queries accounted for and evidence preserved within caps, with actual outcomes independently read back; not necessarily120 normal rows or any repaired main data. Historical membership/actions/full feature histories and target endpoints remain separate blockers."
++  "success_boundary": "Successful source capture/classification only. Provider status0 is not proof of exchange suspension, normal trading or data validity for factors. No qfq splice, identity/action research, main data repair or research-effect/production qualification.",
++  "proposed_future_output_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b04-targeted-gap-batch-2026-10-06/run-01",
++  "output_root_created": false,
++  "current_frozen_input_files": {
++    "audited_remaining113": {
++      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/b04-remaining-gaps-2026-10-06/remaining-113-exact.csv",
++      "bytes": 4209,
++      "sha256": "b116a13897d1bbdb1415dffe66867ec7bf389a903bd908f52807496bfb7ad511"
++    },
++    "selected79": {
++      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/b04-remaining-gaps-2026-10-06/B04-selected-79-exact.csv",
++      "bytes": 2951,
++      "sha256": "0a5f7ee45bae6771e00c73ab1f994a11a3df51ea893a9aac89010e00f6ac1ce9"
++    },
++    "deferred34": {
++      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/b04-remaining-gaps-2026-10-06/deferred-34-exact.csv",
++      "bytes": 1286,
++      "sha256": "940b3f8f486c7e265b3aa357eb13dd3b6026e4043dc06b666ce34e647344fd90"
++    },
++    "current_preparation_readback": {
++      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/b04-remaining-gaps-2026-10-06/proposal-verification.json",
++      "bytes": 29409,
++      "sha256": "3558040627e385443d0e7bfdd0162f8fc37b46fe3f2fba02ddaf07f883ad28c1"
++    },
++    "original_cloud_audit": {
++      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/b04-remaining-gaps-2026-10-06/B03-run02-audit-and-next-priority.source.json",
++      "bytes": 18667,
++      "sha256": "7c1efbeb30f2e30af5ab191f14cc2b6af4df39e5043b82a200e67064c86c3fb1"
++    }
++  },
++  "exact_csv_schema_version": "B04-audited-four-column-ledger/1: exchange,symbol,date,status; existing provider aliases and explicit no-release policy are bound in this contract. Different from old B03 six-column CSV interface; must be independently reviewed, no silent compatibility coercion.",
++  "current_source_pins": [
++    {
++      "path": "/opt/homebrew/lib/python3.11/site-packages/baostock/login/loginout.py",
++      "bytes": 4666,
++      "sha256": "91b27a6d0cbce5c41550371c4b336727a8e67ecf81bebbcd6302a37264a7624f",
++      "relative_path": "baostock/login/loginout.py"
++    },
++    {
++      "path": "/opt/homebrew/lib/python3.11/site-packages/baostock/util/socketutil.py",
++      "bytes": 3551,
++      "sha256": "248591168ad087fb9c91b64e8c909608082528ecbecf25541dcbce0fe9cfcd25",
++      "relative_path": "baostock/util/socketutil.py"
++    },
++    {
++      "path": "/opt/homebrew/lib/python3.11/site-packages/baostock/common/contants.py",
++      "bytes": 11341,
++      "sha256": "fe7574dbdd2ca6087e58ce374948f6e7d9b7398dc64b3f4404ab88a2d7ee3792",
++      "relative_path": "baostock/common/contants.py"
++    },
++    {
++      "path": "/opt/homebrew/lib/python3.11/site-packages/baostock/security/history.py",
++      "bytes": 10191,
++      "sha256": "fe653aa09c0f07e9f9479407c8f2f5455b4ec60c3a9571c652cd9343f7d0094f",
++      "relative_path": "baostock/security/history.py"
++    },
++    {
++      "path": "/opt/homebrew/lib/python3.11/site-packages/baostock/evaluation/season_index.py",
++      "bytes": 30420,
++      "sha256": "4a0c2fdc62f0161f47b52b9ff35690a5541db948ed0a2fcb719befa6f8f0bac7",
++      "relative_path": "baostock/evaluation/season_index.py"
++    },
++    {
++      "path": "/opt/homebrew/lib/python3.11/site-packages/baostock/metadata/stock_metadata.py",
++      "bytes": 7237,
++      "sha256": "f24ff4fd6586d1063ac5feeb0ebf8210705a0f139eb15dba1d871e8dd585a5da",
++      "relative_path": "baostock/metadata/stock_metadata.py"
++    },
++    {
++      "path": "/opt/homebrew/lib/python3.11/site-packages/baostock/data/resultset.py",
++      "bytes": 7489,
++      "sha256": "70882a035bc9c20991255d5495c31f68fabc923d313cd35652c33563141797a6",
++      "relative_path": "baostock/data/resultset.py"
++    }
++  ],
++  "prior_acquisition_history": {
++    "B01_B02_consumed_daily_windows": 10,
++    "B03_consumed_sessions": 2,
++    "B03_consumed_daily_windows": 10,
++    "baseline_and_run02_source_files": [
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/query-manifest.json",
++        "bytes": 59796,
++        "sha256": "f2ee1899b77c4ff5e0dda6e54e331429a26f2474a49bc3588627ebf50a61a0bf",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/daily_raw/daily-1-sh-600705.json",
++        "bytes": 16286,
++        "sha256": "a1b2ce5541a4237ba85c87442b3611702fa2c6ad77f2a3726d455fae80a7cc11",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/daily_raw/daily-2-sh-600837.json",
++        "bytes": 45429,
++        "sha256": "3595b420f1831cbd51a298482c18bd2c88d3c2fd413162ebb6e9887fc27c82ae",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/daily_raw/daily-3-sh-601989.json",
++        "bytes": 8181,
++        "sha256": "2c8f857954d527c93089d9e80358ac8e837c2fe9e69fb654d35c2ff2b7528bd1",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/daily_raw/daily-4-sh-600000.json",
++        "bytes": 5385,
++        "sha256": "641b3907a98e2d8d6a690f17b1f3e62a5834ff6b31c392563080f53d8d56b665",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/query-manifest.json",
++        "bytes": 105375,
++        "sha256": "20daf6cbc70ec7922a74178ea443579a63e5e3ffd7aeb8007c1c24f503d9fe21",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/normalized/daily_raw/daily-1-sh-600837.json",
++        "bytes": 289704,
++        "sha256": "920369b30f3caa44da1f1242e628f1ae96a22f43b1efe1742761ce6bfca50ac7",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/normalized/daily_raw/daily-2-sh-601989.json",
++        "bytes": 401038,
++        "sha256": "0f7a1f6411bafaa228db55016cd623dcfa17f4c7b6ef0ffcc3aceea5f2d38c45",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/normalized/daily_raw/daily-3-sh-601211.json",
++        "bytes": 11173,
++        "sha256": "38b9b68fe7c473e7cc74835df034de40d2225f51ed42f40e9c58a1ca8f874f20",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/normalized/daily_raw/daily-4-sh-600150.json",
++        "bytes": 5947,
++        "sha256": "170f34ad30bd258b1318b9c5fe36d3553b33db09cd1fab10b738c40ee415db3c",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/normalized/daily_raw/daily-5-sz-000425.json",
++        "bytes": 8890,
++        "sha256": "53b4be3a4a7430053bf60cb54df1575f90f1849a176f7b51148b55f48c63359a",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/normalized/daily_raw/daily-6-sh-600958.json",
++        "bytes": 8028,
++        "sha256": "7fa42776ab5013ec80b478d2dbade28431784723d320677847169a70e61ef34f",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/query-manifest.json",
++        "bytes": 121960,
++        "sha256": "eb261899587acab84dccd9fedc45ffe396de50e26c02f67b4243e9bdce47fc0c",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/normalized/daily_raw/daily-1-601059.json",
++        "bytes": 9693,
++        "sha256": "c200f30d855a2a42284d19b1f418e8a0e2bf3f8b4f3e707ec72cdaade5a4b087",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/normalized/daily_raw/daily-2-601995.json",
++        "bytes": 9693,
++        "sha256": "59982308a57167b8b697b97ee539471451759022d47c3a2c2e06e836aa03be7f",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/normalized/daily_raw/daily-3-001979.json",
++        "bytes": 5303,
++        "sha256": "b4149ebc91767ab69ee110e4033bb4a6f72d150b9091e4cbd413723756121009",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/normalized/daily_raw/daily-4-002049.json",
++        "bytes": 5303,
++        "sha256": "4d918260152e0e6b7463a619ec61a9f6f3b69d5148bfaa6a0f34e9201ab2383e",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/normalized/daily_raw/daily-5-002252.json",
++        "bytes": 5253,
++        "sha256": "999fab2eb5fb23e4461958122a08e4cf371e0c13c599de273a102762f2daedd1",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/normalized/daily_raw/daily-6-002736.json",
++        "bytes": 5253,
++        "sha256": "ff0ec568f4d5d5da53fc8a84850e5cd719d777ff3c330563b743ae3005385be3",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/normalized/daily_raw/daily-7-301269.json",
++        "bytes": 5353,
++        "sha256": "119e3cf90c7df75149c35d3f891f1461810f43d72f84d06e18833b1a4eb1bd57",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/normalized/daily_raw/daily-8-600027.json",
++        "bytes": 5253,
++        "sha256": "630b6abf93500feb1482c420102ed51232df4b37e08af267ddb3a4e20f8bd292",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/normalized/daily_raw/daily-9-600150.json",
++        "bytes": 5303,
++        "sha256": "99fe7377e3e22dd35a9282c241316231c8dd5ddf9adcac4fd0a99811f5fe0961",
++        "read_only_verified": true
++      },
++      {
++        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/normalized/daily_raw/daily-10-600438.json",
++        "bytes": 5304,
++        "sha256": "50abd1a6caedeaccbd8cafede10f89e38cc0c3981a43bf391c54382c3e1175b2",
++        "read_only_verified": true
++      }
++    ],
++    "B03_run01": {
++      "output_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-01",
++      "session_protocol_sends": 1,
++      "daily_protocol_sends": 0,
++      "authority_consumed": true,
++      "readback_files": [
++        {
++          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-01/attempt-ledger.jsonl",
++          "bytes": 3183,
++          "sha256": "d07d85388debdf3a6e9159528010a8f948b1742d11b10ff3425149d630a915e5"
++        },
++        {
++          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-01/provenance/current-dedup-evidence.json",
++          "bytes": 28320,
++          "sha256": "680a4c51f5a6a6d862d46fdf449ff4ef95423cdbefebfe1ab8df11da74da374b"
++        },
++        {
++          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-01/query-manifest.json",
++          "bytes": 17021,
++          "sha256": "077c2480720faeb2c2c4dab6127dec1ea9dea669df3b0d0933c9554d40cac02f"
++        },
++        {
++          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-01/raw/anonymous-session-wire.bin",
++          "bytes": 87,
++          "sha256": "fb91d860d8401189a211153998f1b7d26a5e54111e9de7936ec8a05bbfa1a692"
++        },
++        {
++          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-01/receipt.json",
++          "bytes": 67249,
++          "sha256": "485b0f7e503e5ad1fcc01cb80594ae1f6d5287fb06d87992dab3f8159842b9a8"
++        }
++      ]
++    },
++    "B03_run02": {
++      "output_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02",
++      "session_protocol_sends": 1,
++      "daily_protocol_sends": 10,
++      "authority_consumed": true,
++      "readback_files": [
++        {
++          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/attempt-ledger.jsonl",
++          "bytes": 22260,
++          "sha256": "ba022cd81117eee3d6d8c5d56b8d4aacf3c81d7f3088f12956222f57821c6602"
++        },
++        {
++          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/provenance/current-dedup-evidence.json",
++          "bytes": 36657,
++          "sha256": "1af347d8d03ab12123bd3f5822083eec66fa723f8c843140459f6c08f0e2da72"
++        },
++        {
++          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/query-manifest.json",
++          "bytes": 121960,
++          "sha256": "eb261899587acab84dccd9fedc45ffe396de50e26c02f67b4243e9bdce47fc0c"
++        },
++        {
++          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/raw/anonymous-session-wire.bin",
++          "bytes": 88,
++          "sha256": "9eedc079aee35f5f7893f458ed279489b1523de6e7bc2fe7799c909b88d596f2"
++        },
++        {
++          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/run-02/receipt.json",
++          "bytes": 166187,
++          "sha256": "ed6b7af8b5d10fa3f706e031436f1e4d7e8c9121ecd19ad3bbceb3112429f4c4"
++        }
++      ]
++    },
++    "unreviewed_additional_attempts_allowed": false
++  },
++  "protocol_compatibility": {
++    "reviewed_protocol_amendment_reference": {
++      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b03-targeted-gap-batch-2026-10-06/package/extracted-v1/protocol-amendment.json",
++      "bytes": 5226,
++      "sha256": "de5ba1ba0b26fdadb311b81bf1dcc528abdcc5bb87962b15033dd4673d5eb238"
++    },
++    "reuse_scope": "Only reviewed wire/framing/zlib/identity semantics and original source pins. The B03 amendment attempt/grant/history fields are not B04 authorization.",
++    "request_client_protocol": "00.9.30",
++    "allowed_server_versions": [
++      "00.9.10"
++    ],
++    "login_uncompressed_crc32_verified": true,
++    "daily_external_numeric_trailer_checksum_semantics": "UNVERIFIED: preserve numeric trailer unchanged. No assertion of fully verified external checksum/protocol.",
++    "protocol_functions_must_remain_unchanged": true
++  },
++  "execution_authority": {
++    "network_release": false,
++    "old_B03_release_contract_proof_amendment_rejected": true,
++    "required_before_any_supplier_connection": [
++      "Cloud preparation/adaptation of B04 runner and a new B04 execution binding, each with independent exact hash review",
++      "Offline base/CLI/storage/real-wire tests against new79/113/34 inputs; guard hardcoded counts, ledger schema and consumed history",
++      "Fresh on-device readback of all23 data-baseline files, both consumed B03 attempts and later handoffs, with no new selected coverage",
++      "New proof bound to the reviewed B04 contract/runner/new B04 execution-binding hashes and this exact nonexistent fresh B04 root",
++      "Explicit separate parent release of these exact hashes/path; no old B03 contract, amendment, current proof or output path reused"
++    ],
++    "proposed_new_attempt_id": "B04-run-01-remaining79-2026-10-06",
++    "new_B04_execution_binding_prepared": false,
++    "B04_runner_prepared": false
++  }
+ }

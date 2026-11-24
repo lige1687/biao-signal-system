@@ -1,0 +1,118 @@
+{
+ "method": "POST",
+ "url": "http://127.0.0.1:8017/api/upgrades",
+ "request": {
+  "kind": "concrete",
+  "title": "上游方向文档对齐：落库、现状映射与下一步方向（2026-09-18）",
+  "parent_id": "okr-cd1a0bd5532c",
+  "priority": "medium",
+  "owner": "Codex主控 / ZCode执行（job a6ac8ecc）",
+  "purpose": "把外部上游仓库lige1687/biao-factor（commit 2fddcdc）的两份v1.1方向文档字节不变落库，逐条对照本地仓库现状形成映射报告，并在因子路线图追加2026-09-18导航。产出仅是事实核对与方向参考，不含任何执行授权。",
+  "next_action": "待主控验收S1/S2交付后收口。后续候选（真实输入排序因子证据链试点、执行成本基线记录、上游P1固定池定向差异裁决）均需用户单独授权，未授权前不启动。两份上游文档维持「仅方向参考，未授权执行」层级。",
+  "evidence": "来源：2026-09-18用户原话「从我们的github仓库factor-doc里边拉一下对应的两个最新的因子建设和agent调用自进化的文档过来，并且去制定下一步方向，更新okr啥的」。已交付（待主控验收）：docs/research/proposals/factor-upstream-alignment-2026-09-18/（sources/两份原件+manifest.json含SHA256；alignment-map.md映射报告含四级状态与证据路径；records/为本OKR写动作留证）；docs/research/factor-research-roadmap-2026-09-10.md顶部2026-09-18导航追加（历史正文零删改）。映射主要结论：通用工具层约半数已实现有证据，成本记账/评估器保护/自优化流程基本仅有规划，未发现影响方向采纳的直接矛盾。登记不等于授权执行，不预设完成百分比。",
+  "milestones": [
+   {
+    "id": "m1-upstream-sources",
+    "title": "两份上游文档字节不变落库且manifest SHA256经主控独立复核",
+    "done": false
+   },
+   {
+    "id": "m2-alignment-map",
+    "title": "现状映射报告覆盖方向稿§01–§08与路线图稿§0/§4/§5/§6/§9，且主控抽查证据路径通过",
+    "done": false
+   },
+   {
+    "id": "m3-roadmap-nav",
+    "title": "因子路线图2026-09-18导航段经主控diff核对，历史正文零删改",
+    "done": false
+   },
+   {
+    "id": "m4-okr-records",
+    "title": "OKR写动作前后JSON留证且GET /api/upgrades可核对",
+    "done": false
+   },
+   {
+    "id": "m5-controller-accept",
+    "title": "主控独立验收通过（S1/S2全部验收项）",
+    "done": false
+   }
+  ],
+  "links": [
+   {
+    "label": "上游对齐提案目录（sources/alignment-map/records）",
+    "url": "/library?report=docs%2Fresearch%2Fproposals%2Ffactor-upstream-alignment-2026-09-18%2Falignment-map.md"
+   },
+   {
+    "label": "因子路线图2026-09-18导航段",
+    "url": "/library?report=docs%2Fresearch%2Ffactor-research-roadmap-2026-09-10.md"
+   }
+  ]
+ },
+ "status": 201,
+ "response": {
+  "title": "上游方向文档对齐：落库、现状映射与下一步方向（2026-09-18）",
+  "purpose": "把外部上游仓库lige1687/biao-factor（commit 2fddcdc）的两份v1.1方向文档字节不变落库，逐条对照本地仓库现状形成映射报告，并在因子路线图追加2026-09-18导航。产出仅是事实核对与方向参考，不含任何执行授权。",
+  "parent_id": "okr-cd1a0bd5532c",
+  "priority": "medium",
+  "owner": "Codex主控 / ZCode执行（job a6ac8ecc）",
+  "target_date": null,
+  "next_action": "待主控验收S1/S2交付后收口。后续候选（真实输入排序因子证据链试点、执行成本基线记录、上游P1固定池定向差异裁决）均需用户单独授权，未授权前不启动。两份上游文档维持「仅方向参考，未授权执行」层级。",
+  "evidence": "来源：2026-09-18用户原话「从我们的github仓库factor-doc里边拉一下对应的两个最新的因子建设和agent调用自进化的文档过来，并且去制定下一步方向，更新okr啥的」。已交付（待主控验收）：docs/research/proposals/factor-upstream-alignment-2026-09-18/（sources/两份原件+manifest.json含SHA256；alignment-map.md映射报告含四级状态与证据路径；records/为本OKR写动作留证）；docs/research/factor-research-roadmap-2026-09-10.md顶部2026-09-18导航追加（历史正文零删改）。映射主要结论：通用工具层约半数已实现有证据，成本记账/评估器保护/自优化流程基本仅有规划，未发现影响方向采纳的直接矛盾。登记不等于授权执行，不预设完成百分比。",
+  "milestones": [
+   {
+    "id": "m1-upstream-sources",
+    "title": "两份上游文档字节不变落库且manifest SHA256经主控独立复核",
+    "done": false
+   },
+   {
+    "id": "m2-alignment-map",
+    "title": "现状映射报告覆盖方向稿§01–§08与路线图稿§0/§4/§5/§6/§9，且主控抽查证据路径通过",
+    "done": false
+   },
+   {
+    "id": "m3-roadmap-nav",
+    "title": "因子路线图2026-09-18导航段经主控diff核对，历史正文零删改",
+    "done": false
+   },
+   {
+    "id": "m4-okr-records",
+    "title": "OKR写动作前后JSON留证且GET /api/upgrades可核对",
+    "done": false
+   },
+   {
+    "id": "m5-controller-accept",
+    "title": "主控独立验收通过（S1/S2全部验收项）",
+    "done": false
+   }
+  ],
+  "links": [
+   {
+    "label": "上游对齐提案目录（sources/alignment-map/records）",
+    "url": "/library?report=docs%2Fresearch%2Fproposals%2Ffactor-upstream-alignment-2026-09-18%2Falignment-map.md"
+   },
+   {
+    "label": "因子路线图2026-09-18导航段",
+    "url": "/library?report=docs%2Fresearch%2Ffactor-research-roadmap-2026-09-10.md"
+   }
+  ],
+  "kind": "concrete",
+  "id": "okr-38463eb924f0",
+  "version": 1,
+  "status": "planned",
+  "created_at": "2026-09-18T15:09:38+00:00",
+  "updated_at": "2026-09-18T15:09:38+00:00",
+  "authorization": {
+   "granted": false,
+   "scope": "",
+   "at": null
+  },
+  "history": [
+   {
+    "at": "2026-09-18T15:09:38+00:00",
+    "action": "created",
+    "note": "目标已登记，登记不会启动执行。"
+   }
+  ]
+ },
+ "note": "首次POST因milestones预置done=True被409拒绝（API规则：新目标先登记授权再记完成）；改为全部done=False重试成功"
+}

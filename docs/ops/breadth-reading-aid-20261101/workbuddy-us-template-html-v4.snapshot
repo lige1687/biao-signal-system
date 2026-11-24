@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>美股阶段性顶底：把情绪指标画到价格上</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  :root{
+    --ink:#2C2C2A; --ink2:#5F5E5A; --ink3:#888780;
+    --paper:#FBFAF7; --card:#FFFFFF; --line:#E5E3DC;
+    --red:#A32D2D; --red-l:#E24B4A; --green:#0F6E56; --green-l:#1D9E75;
+    --blue:#185FA5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.7;}
+  .wrap{max-width:1180px;margin:0 auto;padding:48px 28px 80px}
+  header{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:30px}
+  h1{font-size:27px;font-weight:600;margin:0 0 10px;letter-spacing:-.3px}
+  .sub{font-size:13.5px;color:var(--ink2);margin:0}
+  .meta{font-size:12px;color:var(--ink3);margin-top:10px}
+  h2{font-size:17px;font-weight:600;margin:44px 0 6px;padding-left:11px;border-left:3px solid var(--ink)}
+  h2 .en{font-weight:400;color:var(--ink3);font-size:12px;margin-left:8px}
+  .lead{font-size:14px;color:var(--ink2);margin:0 0 16px;padding-left:14px}
+  .verdict{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:8px;padding:18px 22px;margin-bottom:8px}
+  .verdict ol{margin:0;padding-left:19px}
+  .verdict li{font-size:13.5px;margin:7px 0}
+  .verdict b{font-weight:600}
+  .cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:18px 0 4px}
+  .m{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:13px 14px}
+  .m .k{font-size:11.5px;color:var(--ink3);margin-bottom:5px;white-space:nowrap}
+  .m .v{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+  .m .d{font-size:11px;color:var(--ink3);margin-top:3px}
+  .neg{color:var(--red)} .pos{color:var(--green)}
+  .chart{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 10px 8px;margin-bottom:10px}
+  .cap{font-size:11.5px;color:var(--ink3);padding:0 14px 8px;line-height:1.65}
+  .legendbar{display:flex;flex-wrap:wrap;gap:16px;font-size:11.5px;color:var(--ink2);padding:2px 14px 10px}
+  .legendbar span{display:flex;align-items:center;gap:6px}
+  .sw{width:16px;height:9px;border-radius:2px;display:inline-block}
+  .tri{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;display:inline-block}
+  .tri-up{border-bottom:8px solid var(--green-l)}
+  .tri-dn{border-top:8px solid var(--red-l)}
+  table{width:100%;border-collapse:collapse;background:var(--card);font-size:13px;
+    border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:#F6F4EE;font-weight:600;font-size:12px;color:var(--ink2);white-space:nowrap}
+  td.n{text-align:right;font-variant-numeric:tabular-nums}
+  th.n{text-align:right}
+  tr.hl{background:#F2F8F5}
+  tr.grp td{background:#F6F4EE;font-size:11.5px;color:#888780;font-weight:600;padding:6px 12px;letter-spacing:.3px}
+  tr:last-child td{border-bottom:none}
+  .rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+  .rule{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+  .rule h3{margin:0 0 8px;font-size:13.5px;font-weight:600}
+  .rule p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.65}
+  .rule .tag{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:3px;margin-bottom:8px}
+  .t-red{background:#FCEBEB;color:var(--red)} .t-green{background:#E1F5EE;color:var(--green)}
+  .t-gray{background:#F1EFE8;color:var(--ink2)}
+  .notes{font-size:12px;color:var(--ink2);background:#F6F4EE;border-radius:8px;padding:16px 20px;margin-top:16px}
+  .notes ul{margin:6px 0 0;padding-left:18px}
+  .notes li{margin:4px 0}
+  .disc{font-size:11px;color:var(--ink3);margin-top:34px;padding-top:16px;border-top:1px solid var(--line);line-height:1.7}
+  .tabs{display:flex;gap:8px;align-items:center;padding:0 14px 12px;flex-wrap:wrap}
+  .tab{font-size:12.5px;padding:5px 14px;border:1px solid var(--line);border-radius:20px;
+    background:#fff;color:var(--ink2);cursor:pointer;font-family:inherit}
+  .tab:hover{border-color:#B4B2A9}
+  .tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tabnote{font-size:11.5px;color:var(--ink3);margin-left:4px}
+  .bwtag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:3px;background:#EEEDFE;color:#534AB7;margin-left:6px}
+  .crossgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .one{background:#F6F4EE;border:1px solid var(--line);border-left:3px solid var(--ink);
+    border-radius:8px;padding:20px 24px;margin:26px 0 10px}
+  .one-h{font-size:10.5px;letter-spacing:1.2px;color:var(--ink3);font-weight:600;margin-bottom:10px}
+  .one-v{font-size:27px;font-weight:700;letter-spacing:-.6px;line-height:1.25}
+  .one-s{font-size:13px;color:var(--ink2);margin-top:5px;line-height:1.6}
+  .one-g{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:16px;
+    padding-top:14px;border-top:1px solid var(--line)}
+  .one-g b{display:block;font-size:17px;font-variant-numeric:tabular-nums;letter-spacing:-.3px}
+  .one-g span{display:block;font-size:10.5px;color:var(--ink3);line-height:1.45;margin-top:2px}
+  .one-w{font-size:11.5px;color:var(--ink2);margin-top:14px;padding-top:12px;
+    border-top:1px solid var(--line);line-height:1.75}
+  .two h4{margin:0 0 8px;font-size:12.5px;font-weight:600;color:var(--ink2)}
+  .mini{font-size:12px}
+  .mini th,.mini td{padding:5px 10px}
+  .mini th{font-size:11px}
+  .mini tr.hit td{background:#F2F8F5;font-weight:600}
+  .sm{display:block;font-size:10px;color:var(--ink3);font-weight:400}
+  .crosscard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 8px 6px}
+  .crosscard .ct{font-size:12.5px;font-weight:600;margin:0 0 2px 4px;height:18px;line-height:18px}
+  .crosscard .cs{font-size:10.5px;color:var(--ink3);margin:0 0 8px 4px;height:15px;line-height:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .xtab{width:100%;border-collapse:separate;border-spacing:2px;table-layout:fixed}
+  .xtab th{font-size:10px;color:var(--ink3);font-weight:400;padding:0 0 5px;text-align:center}
+  .xtab th.yl{text-align:right;padding-right:6px;white-space:nowrap}
+  .xtab td{height:58px;text-align:center;vertical-align:middle;border-radius:4px;padding:0}
+  .xtab td .r{display:block;font-size:12px;font-weight:600;line-height:1.3}
+  .xtab td .w{display:block;font-size:9.5px;opacity:.8;line-height:1.3}
+  .xtab td.na{background:#F5F3EC;color:#C4C2B8;font-size:9px;line-height:1.3}
+  @media(max-width:900px){
+    .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .rules{grid-template-columns:1fr}
+    .crossgrid{grid-template-columns:1fr}
+    .two{grid-template-columns:1fr}
+    .one-g{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .wrap{padding:28px 16px 60px}
+    h1{font-size:21px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>美股阶段性顶底：把情绪指标画到价格上</h1>
+  <p class="sub">标普 500 · 多周期偏离度通道 + 20/50/200 日宽度 + 情绪色带 + 信号点标注</p>
+  <p class="meta">数据截至 2026-10-29 收盘 ｜ 价格与波动率来自 FRED，宽度来自 lab.db（至 2026-09-04）</p>
+</header>
+
+<div class="one">
+  <div class="one-h">如果只记一件事</div>
+  <div class="one-v">200 日宽度 ≤ 10%</div>
+  <div class="one-s">标普 500 成分股中站上 200 日均线的比例跌破 10% 时买入，持有约 1 年（250 个交易日）。这是这套体系里唯一一个 45 年零亏损的信号。</div>
+  <div class="one-g">
+    <div><b>100%</b><span>250 日后为正<br>14 次 / 45 年</span></div>
+    <div><b>+36.5%</b><span>平均收益</span></div>
+    <div><b>+6.5%</b><span>最差一次</span></div>
+    <div><b>−10%</b><span>过程中位浮亏</span></div>
+    <div><b>−32%</b><span>过程最差浮亏</span></div>
+    <div><b>67.0%</b><span>当前值<br>离触发还差 57pp</span></div>
+  </div>
+  <div class="one-w"><b>代价必须说清楚：</b>买入后前 60 天只有 <b>57%</b> 概率是赚的，要满 120 天才到 86%。中位浮亏 −10%，最差 −32%（2008 年 10 月买入）。而且这 14 次本质上是 <b>4 次危机</b>——1987、2000–02、2008、2020，不是 14 个独立样本。<b>降噪没有捷径</b>：等价格站回年线再买，浮亏反而更大（−20% vs −10%），因为那时已经反弹过了。</div>
+</div>
+
+<div class="verdict">
+  <ol>
+    <li><b>宽度口径越长，信号越干净——这是最值得记住的一条。</b>「宽度≤20% 且价格跌破均线」后 60 日平均收益：20 日宽度 <b>+7.17%</b>（171 次）、50 日 <b>+10.48%</b>（118 次）、200 日 <b class="pos">+13.90%</b>（57 次，胜率 93.0%）。</li>
+    <li><b>20 日宽度确实过度反应。</b>它年均要跌破 20% 十几次，信号又多又弱；200 日宽度是「长期参与度」，跌到 20% 以下十年只有 57 天，但每次都很准。</li>
+    <li><b>价格通道单独用只在短期有效。</b>MA20 跌破下轨 1σ 后 60 日 +6.21%（胜率 73.9%）；换成 MA200 口径，跌破下轨后胜率只有 <b class="neg">50.0%</b>——抛硬币。</li>
+    <li><b>同一个宽度读数，方向由价格位置决定——这是交叉表最硬的结论。</b>50 日宽度 ≥70%：价格在均线上方时 60 日 <b class="pos">+6.86%</b>、胜率 87.1%；在均线下方时 <b class="neg">−2.96%</b>、胜率 35.6%。<b>宽度本身不带方向，脱离价格位置读宽度等于没读。</b></li>
+    <li><b>跌破下轨不等于超卖，要看宽度崩没崩。</b>下轨之下 + 20 日宽度 ≤30% → <b class="pos">+6.04%</b>、胜率 83.0%；同样是下轨之下但宽度 ≥70% → <b class="neg">−4.02%</b>、胜率仅 12.5%（8 天，方向参考）。<b>宽度还高说明跌的是权重股、大多数股票还没跌，这是开始而不是结束。</b></li>
+    <li><b>和上下轨交叉只能用短宽度——这和第一条不矛盾。</b>200 日宽度之所以准，正因为它已经把「价格在年线上方还是下方」算了进去（r = <b>0.91</b>），所以它和上下轨是同一个信息，叠加等于重复计算（12 格只剩 8 格）。第一条那个 +13.90%、93.0% 的高收益，本质是样本被压到极稀（57 天）——<b>是稀有度换来的准确，不是双因子确认</b>。真正互补的是 20 日宽度（r = 0.40、自相关 −0.13，均值回复），它才提供独立信息。</li>
+    <li><b>三档一起看，看的是一致性，不是平均值。</b>三档同时 ≤30%：60 日 <b class="pos">+12.89%</b>、胜率 95.6%、最差 −3.4%（十年仅 68 天）；三档同时 ≥70%：<b class="neg">+1.50%</b>、最差 −30.6%。<b>共振越彻底信号越强，单档极端只是噪音。</b></li>
+    <li><b>当前正好是「短周期报警、长周期没事」的典型。</b>20 日宽度 35.6%、50 日 47.6%、200 日 <b>67.0%</b>。短期参与度在退，长期趋势参与还在。</li>
+  </ol>
+</div>
+
+<div class="cards">
+  <div class="m"><div class="k">标普 500 收盘</div><div class="v" id="k-px">—</div><div class="d" id="k-date">—</div></div>
+  <div class="m"><div class="k" id="k-mal">均线</div><div class="v" id="k-ma">—</div><div class="d" id="k-mad">—</div></div>
+  <div class="m"><div class="k">上轨 1σ</div><div class="v" id="k-u1">—</div><div class="d" id="k-u1d">—</div></div>
+  <div class="m"><div class="k">下轨 1σ</div><div class="v" id="k-l1">—</div><div class="d" id="k-l1d">—</div></div>
+  <div class="m"><div class="k">情绪温度</div><div class="v" id="k-temp">—</div><div class="d">−100 ~ +100</div></div>
+  <div class="m"><div class="k" id="k-bwl">宽度</div><div class="v" id="k-bw">—</div><div class="d" id="k-bwd">—</div></div>
+</div>
+
+<h2>一、价格与通道<span class="en">price + envelope</span></h2>
+<p class="lead">底色是「情绪温度」：红＝≥+60 过热区，绿＝≤−60 过冷区（宽度、偏离度、VIX、期限结构四项滚动分位合成）。<b>三角是「价格位置 × 内部状态」同时成立的信号点</b>：绿向上＝机会，红向下＝危险。切换周期会同时改变均线、宽度口径、信号点和回测表。</p>
+
+<div class="chart">
+  <div class="tabs">
+    <button class="tab" data-w="20">短期 · MA20 + 20日宽度</button>
+    <button class="tab" data-w="60">中期 · MA60 + 50日宽度</button>
+    <button class="tab on" data-w="200">长期 · MA200 + 200日宽度</button>
+    <span class="tabnote" id="tabnote"></span>
+  </div>
+  <div id="c1" style="width:100%;height:480px"></div>
+  <div class="legendbar">
+    <span><i class="sw" style="background:#2C2C2A"></i>标普500</span>
+    <span><i class="sw" style="background:#185FA5"></i>均线</span>
+    <span><i class="sw" style="background:#D4537E"></i>上轨 ±1σ / ±2σ</span>
+    <span><i class="sw" style="background:#1D9E75"></i>下轨 ±1σ / ±2σ</span>
+    <span><i class="tri tri-up"></i>机会信号</span>
+    <span><i class="tri tri-dn"></i>危险信号</span>
+    <span><i class="sw" style="background:rgba(226,75,74,.28)"></i>过热区</span>
+    <span><i class="sw" style="background:rgba(29,158,117,.30)"></i>过冷区</span>
+  </div>
+  <div class="cap">空心小圆点是算法识别的阶段性顶/底（±60 交易日极值且随后反向波动 &gt;7%），仅作形态参照。拖动滑块可缩放。</div>
+</div>
+
+<h2>二、三档宽度<span class="en">breadth 20 / 50 / 200</span></h2>
+<p class="lead">这是之前没交代清楚的地方：<b>宽度必须说明是几十日</b>。三档含义完全不同——20 日是短线情绪，50 日是中期参与度，200 日是长期趋势参与。当前选中的那档会加粗。</p>
+<div class="chart">
+  <div id="c2" style="width:100%;height:270px"></div>
+  <div class="cap">标普 500 成分股中站上 N 日均线的比例（0–100%）。紫线由浅到深依次是 20 / 50 / 200 日；虚线 20% 为超卖、80% 为过热。<b>20 日线在 10–90 之间反复横跳，200 日线平滑得多</b>——这就是「反应过度」的来源。<br><b>底色是三档共振</b>：<span style="background:rgba(29,158,117,.22);padding:1px 5px;border-radius:3px">绿底</span>＝三档同时 ≤30%（十年只有 __NLOW__ 段），<span style="background:rgba(226,75,74,.09);padding:1px 5px;border-radius:3px">红底</span>＝三档同时 ≥70%（__NHIGH__ 段）。</div>
+</div>
+
+<h2>三、三档宽度怎么一起看：共振才是信号<span class="en">breadth resonance</span></h2>
+<p class="lead">不能只挑一档看，也不该把三档平均。<b>三档的正确用法是看「是否共振」</b>——同一极端水平，从「只有 20 日」到「三档全到」，信号强度差 6 个百分点以上。下面这张阶梯表就是加成的幅度。</p>
+<table id="ltab">
+  <thead>
+    <tr><th>三档共振程度</th><th class="n">样本天数</th><th class="n">60日均</th><th class="n">60日胜率</th><th class="n">60日最差</th></tr>
+  </thead>
+  <tbody>__LADDER__</tbody>
+</table>
+<div class="cap"><b>低位共振是加成的：</b>b20 ≤30 单独看 60 日 +6.35%（313 天）；加上 b50 ≤40 变成 +7.11%；三档全 ≤30 直接跳到 <b class="pos">+12.89%</b>、胜率 <b>95.6%</b>、最差只有 −3.4%——十年 68 天、17 次。<b>高位共振是减成的：</b>b20 ≥70 是 +2.63%，三档全 ≥70 掉到 <b class="neg">+1.50%</b>、最差 −30.6%。<br><br><b>反过来，「三档分化」本身没有方向性。</b>分化度（三档标准差）低 &lt;10 时 60 日 +2.90%、中 10–20 时 +3.79%、高 ≥20 时 +6.08% 但胜率降到 73.7%——分化度高只说明波动大，不代表该买还是该卖。<b>所以别拿「短期崩、长期好」当买入理由，那只是背离，不是信号。</b></div>
+
+<h2>四、三个周期分别看哪个点<span class="en">entry by horizon</span></h2>
+<p class="lead">前面的图都用标普、只有十年数据。<b>但长期买点必须经得起 2000 和 2008</b>，所以我用纳斯达克 1980–2026（__N2__ 个交易日）把三个周期重算了一遍，宽度仍用标普 500 的 20/50/200 日三档。<b>结论很干脆：三个周期看的是同一个东西——对应口径的宽度跌破 10%，而不是跌破下轨。</b></p>
+<table id="btab">
+  <thead>
+    <tr><th>周期</th><th>看哪档宽度</th><th>触发条件</th><th class="n">建议持有</th><th class="n">45年独立机会</th><th class="n">平均收益</th><th class="n">胜率</th><th class="n">最差</th><th class="n">当前值</th></tr>
+  </thead>
+  <tbody>__BUYTAB__</tbody>
+</table>
+<div class="two">
+  <div>
+    <h4>2008 年：宽度多少才敢买</h4>
+    <table class="mini">
+      <thead><tr><th>买入月份</th><th class="n">当时宽度</th><th class="n">250 日后</th></tr></thead>
+      <tbody>__Y08__</tbody>
+    </table>
+  </div>
+  <div>
+    <h4>45 年里 ≤10% 的全部触发点</h4>
+    <table class="mini">
+      <thead><tr><th>触发日</th><th class="n">宽度</th><th class="n">250 日后</th></tr></thead>
+      <tbody>__HIST__</tbody>
+    </table>
+  </div>
+</div>
+<table id="stab" style="margin-top:16px">
+  <thead>
+    <tr><th>宽度阈值</th><th class="n">次数</th><th class="n">250日均</th><th class="n">胜率</th><th class="n">最差一次</th><th class="n">浮亏中位</th><th class="n">浮亏最差</th><th class="n">60日胜率</th><th class="n">120日胜率</th></tr>
+  </thead>
+  <tbody>__SENS__</tbody>
+</table>
+<div class="cap"><b>为什么阈值必须卡在 10%，而不是 20% 或 30%：</b>2008 年 1 月宽度还有 43.7%，那时买入 250 日后亏 <b class="neg">42.1%</b>；3 月宽度 23.2%，亏 39.0%；一直到 11 月宽度跌到 <b>7.4%</b>，才变成 <b>+18.5%</b>；12 月 1.7%，<b>+53.0%</b>。<b>宽度从 43% 一路跌到 2%，250 日后的收益从 −42% 一路改善到 +53%，中间没有例外。</b><br><br><b>45 年里一共 17 段、14 个不同月份，全部为正，最差 +6.5%</b>——包括 1987 黑色星期一当天（宽度 3.7%，+6.5%）、2000 泡沫破裂后（2002-07，8%，+33.7%）、2008 雷曼之后（2%，+53.0%）、2020 疫情熔断（7%，+81.5%）。<b>但这 17 段分散在 45 年里，平均 3 年才有一次。</b><br><br><b>等不到是常态：</b>从当前水平（20 日 35.6% / 50 日 47.6% / 200 日 67.0%）出发，一年内等到 ≤10% 的概率分别只有 <b>66% / 40% / 11%</b>。所以长期买点不能当常规策略，它更像「几年一次的伏击」。<br><br><b>短期为什么噪声大，数据说得很直白：</b>20 日宽度 ≤10% 时 20 日平均 +2.67%，但胜率只有 <b>63.5%</b>——和「随便哪天买」的 62.7% 几乎没区别，只是平均收益高一点，最差能到 −24.1%。<b>短期信号只提高赔率，不提高胜率。</b></div>
+
+<h2>五、价格位置 × 宽度：交叉才有说法<span class="en">envelope × breadth</span></h2>
+<p class="lead">把上下轨和宽度叠成一张表，就能看出<b>这几个宽度到底差在哪</b>。价格位置统一用 <b>MA200 ±1σ 通道</b>，横向对比三档宽度。格子里是信号出现后 60 个交易日的平均收益与胜率（基准 <b>+3.33% / 77.3%</b>）。<b>颜色越红＝收益越高，越绿＝越低。</b></p>
+<div class="crossgrid">
+  <div class="crosscard"><div class="ct">20 日宽度</div><div class="cs">r = __R20__ ｜ 独立性强</div>__XTAB20__</div>
+  <div class="crosscard"><div class="ct">50 日宽度</div><div class="cs">r = __R50__ ｜ 中等</div>__XTAB50__</div>
+  <div class="crosscard"><div class="ct">200 日宽度</div><div class="cs">r = __R200__ ｜ 价格影子</div>__XTAB200__</div>
+</div>
+<div class="cap">三张图的空格数量本身就是结论：<b>200 日宽度与「价格离 MA200 多远」的相关系数是 __R200__，几乎是同一个变量</b>，用它和 MA200 通道交叉等于重复计算——12 格里只剩 __NF200__ 格有样本，而且各行差异很小。20 日宽度相关系数只有 __R20__，独立性最强，交叉才产生新信息。<br><br><b>全表最干净的对照在 50 日那张：同样是宽度 ≥70%，价格在均线上方时 60 日 +6.86%、胜率 87.1%（70 天）；价格在均线下方时变成 −2.96%、胜率 35.6%（45 天）。差 9.8 个百分点、胜率差 51 个点。</b>宽度读数本身没有方向，方向由价格位置给。<br><br><b>再看「跌破下轨」这个最容易误读的位置：</b>下轨之下 + 20 日宽度 ≤30% → +6.04%、胜率 83.0%（53 天）；下轨之下 + 20 日宽度 ≥70% → <b class="neg">−4.02%</b>、胜率 12.5%（8 天）；50 日宽度口径下轨之下 + 30–70% → <b class="neg">−3.10%</b>、胜率 28.6%（14 天）。<b>同样跌破下轨，宽度崩了才是超卖，宽度没崩是刚开始跌。</b>（后两格样本不足 20 天，只作方向参考）</div>
+
+<h2>六、波动率期限结构<span class="en">VIX ÷ VXV</span></h2>
+<p class="lead">比值 &gt; 1 即倒挂，说明近期压力大于远期——比 VIX 绝对值灵敏，也更早。</p>
+<div class="chart">
+  <div id="c3" style="width:100%;height:210px"></div>
+  <div class="cap">左轴 VIX 收盘价；右轴 VIX÷VXV（3 个月波动率）。虚线 1.0 为倒挂分界。</div>
+</div>
+
+<h2>七、信用利差<span class="en">HY OAS</span></h2>
+<p class="lead">这一层有一票否决权：股市跌但利差不动是情绪调整，利差先裂才是真危机。当前 326bp，仍处舒适区。</p>
+<div class="chart">
+  <div id="c4" style="width:100%;height:200px"></div>
+  <div class="cap">美银美国高收益债期权调整利差（BAMLH0A0HYM2），单位 bp。FRED 仅提供 2023-10 起的数据。</div>
+</div>
+
+<h2>八、这些带子到底有没有用<span class="en">十年回测</span></h2>
+<p class="lead">信号出现后 20 / 60 个交易日的平均收益，与「全部交易日」基准对比。表格随上方周期切换。</p>
+
+<table id="tbl">
+  <thead>
+    <tr><th>信号</th><th class="n">样本天数</th><th class="n">20日均</th><th class="n">60日均</th><th class="n">60日胜率</th><th class="n">60日最差</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<h2>九、四条使用规则</h2>
+<div class="rules">
+  <div class="rule">
+    <span class="tag t-green">最可靠</span>
+    <h3>200 日宽度≤20% + 价格低于 MA200</h3>
+    <p>60 日平均 +13.90%，胜率 93.0%，最差 −6.5%，十年只有 57 天。稀有但极准——长周期宽度跌破 20% 意味着绝大多数股票同时失守年线，那是真的便宜。</p>
+  </div>
+  <div class="rule">
+    <span class="tag t-green">短期</span>
+    <h3>MA20 跌破下轨 1σ</h3>
+    <p>60 日 +6.21%，胜率 73.9%，46 次。短期超卖反弹不需要宽度配合，价格自己就够了。但只做反弹，别当趋势反转用。</p>
+  </div>
+  <div class="rule">
+    <span class="tag t-red">最危险</span>
+    <h3>跌破下轨，但宽度还没崩</h3>
+    <p>下轨之下 + 20 日宽度 ≥70%：60 日 <b class="neg">−4.02%</b>、胜率 12.5%（8 天）；50 日宽度口径 30–70%：<b class="neg">−3.10%</b>、胜率 28.6%（14 天）。而宽度 ≤30% 时是 +4.8~+6.0%、胜率 73~83%。<b>跌破下轨只是「价格极端」，宽度崩了才叫「内部极端」。前者是开始跌，后者才是超卖。</b></p>
+  </div>
+  <div class="rule">
+    <span class="tag t-red">别误读</span>
+    <h3>拿 20 日宽度当大周期顶底</h3>
+    <p>20 日宽度跌破 20% 一年要发生十几次，其中大部分只是普通回调。它报警时先看 200 日宽度是否同步恶化——不同步，多半是噪音。</p>
+  </div>
+</div>
+
+<div class="notes">
+  <b>数据与局限</b>
+  <ul>
+    <li>宽度取自本机 <code>~/.lei_signal_lab/lab.db</code> 的 <code>market_breadth_snapshots</code>（SP500，breadth_20/50/200，覆盖率 100%，1980-04 至 <b>2026-09-04</b>）；价格、VIX、VXV、信用利差取自 FRED。</li>
+    <li>与桌面那份「S&amp;P 500 Stocks Above 20-Day Average」CSV 交叉核对：4355 个重叠交易日，<b>中位差 2.1 个百分点</b>、12% 的交易日差超 5pp，差异来自成分股口径（历史成分 vs 当前成分）。本页统一采用 lab.db。</li>
+    <li><b>宽度止于 2026-09-04</b>，最后约 8 周的温度只用偏离度、VIX、期限结构三因子合成，与历史段口径不完全一致；这段时间也不会触发「机会信号」（依赖宽度）。</li>
+    <li>回测按交易日计数，连续多日满足条件会重复计入，样本天数不等于独立事件数；200 日宽度的机会信号仅 57 天，统计上偏少。</li>
+    <li>价格为不含股息的指数口径；通道 σ 为过去三年偏离度标准差（MA20 约 2.0%、MA60 约 3.3%、MA200 约 4.3%），三档带宽不可横向比较。</li>
+  </ul>
+</div>
+
+<p class="disc"><b>免责声明</b>：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。</p>
+
+</div>
+
+<script>
+var D = __DATA__;
+var INK = '#2C2C2A', INK2 = '#5F5E5A', INK3 = '#888780', GRID = '#F1EFE8';
+var BW_COLOR = { '20': '#93B8E8', '50': '#7F77DD', '200': '#2F2A6B' };
+
+function axisX(showLabel) {
+  return {
+    type: 'category', data: D.dates, boundaryGap: false,
+    axisLine: { lineStyle: { color: '#D3D1C7' } }, axisTick: { show: false },
+    axisLabel: { show: !!showLabel, color: INK3, fontSize: 11, hideOverlap: true }
+  };
+}
+function zoomArr(withSlider) {
+  return [
+    { type: 'inside', start: 20, end: 100 },
+    { type: 'slider', show: !!withSlider, start: 20, end: 100, height: 15, bottom: 8,
+      borderColor: 'transparent', backgroundColor: '#F6F4EE',
+      fillerColor: 'rgba(24,95,165,0.10)', handleStyle: { color: '#185FA5' },
+      textStyle: { color: INK3, fontSize: 10 },
+      dataBackground: { lineStyle: { color: '#D3D1C7' }, areaStyle: { color: '#F1EFE8' } } }
+  ];
+}
+function baseLine(name, data, opt) {
+  var o = { name: name, type: 'line', data: data, showSymbol: false, symbol: 'none',
+            connectNulls: false, emphasis: { focus: 'series' } };
+  for (var k in opt) { o[k] = opt[k]; }
+  return o;
+}
+var tip = { trigger: 'axis', confine: true, axisPointer: { type: 'cross', lineStyle: { color: '#B4B2A9' } },
+            textStyle: { fontSize: 11 }, backgroundColor: 'rgba(255,255,255,0.96)',
+            borderColor: '#E5E3DC', borderWidth: 1 };
+
+function bandsOf(W) {
+  var p = D.periods[String(W)], ma = p.ma, sd = p.sd;
+  var u1 = [], u2 = [], l1 = [], l2 = [], i, m, s;
+  for (i = 0; i < ma.length; i++) {
+    m = ma[i]; s = sd[i];
+    if (m === null || s === null) { u1.push(null); u2.push(null); l1.push(null); l2.push(null); }
+    else {
+      u1.push(Math.round(m * (1 + s) * 100) / 100);
+      u2.push(Math.round(m * (1 + 2 * s) * 100) / 100);
+      l1.push(Math.round(m * (1 - s) * 100) / 100);
+      l2.push(Math.round(m * (1 - 2 * s) * 100) / 100);
+    }
+  }
+  return { ma: ma, u1: u1, u2: u2, l1: l1, l2: l2 };
+}
+
+function areaOf(runs, color) {
+  return runs.map(function (r) {
+    return [{ xAxis: r[0], itemStyle: { color: color } }, { xAxis: r[1] }];
+  });
+}
+
+var extPts = D.ext.map(function (e) {
+  return { coord: [e[0], e[1]], value: e[2], symbol: 'circle', symbolSize: 5,
+           itemStyle: { color: '#fff', borderColor: '#B4B2A9', borderWidth: 1.2 },
+           label: { show: false } };
+});
+
+var c1 = echarts.init(document.getElementById('c1'));
+var c2 = echarts.init(document.getElementById('c2'));
+var c3 = echarts.init(document.getElementById('c3'));
+var c4 = echarts.init(document.getElementById('c4'));
+
+function renderMain(W) {
+  var p = D.periods[String(W)];
+  var b = bandsOf(W);
+  var marks = [];
+  p.opp.forEach(function (r) {
+    marks.push({ coord: [D.dates[r[0]], D.px[r[0]]], value: '机会', symbol: 'triangle', symbolRotate: 0,
+                 symbolSize: 11, itemStyle: { color: '#1D9E75' }, label: { show: false },
+                 tooltip: { formatter: '机会信号（宽度≤20% + 跌破 MA' + W + '）' } });
+  });
+  p.risk.forEach(function (r) {
+    marks.push({ coord: [D.dates[r[0]], D.px[r[0]]], value: '危险', symbol: 'triangle', symbolRotate: 180,
+                 symbolSize: 11, itemStyle: { color: '#E24B4A' }, label: { show: false },
+                 tooltip: { formatter: '危险信号（温度≥+60 + 冲上上轨 1σ）' } });
+  });
+  c1.setOption({
+    animation: false,
+    grid: { left: 62, right: 68, top: 26, bottom: 62 },
+    tooltip: tip,
+    xAxis: axisX(true),
+    yAxis: { type: 'value', scale: true, position: 'right',
+             axisLine: { show: false }, axisTick: { show: false },
+             axisLabel: { color: INK3, fontSize: 11, formatter: function (v) { return v.toLocaleString(); } },
+             splitLine: { lineStyle: { color: GRID } } },
+    dataZoom: zoomArr(true),
+    series: [
+      baseLine('上轨 2σ', b.u2, {
+        lineStyle: { width: 1, color: '#D4537E', type: 'dashed', opacity: 0.75 },
+        markArea: { silent: true, data: areaOf(p.hot, 'rgba(226,75,74,0.07)').concat(areaOf(p.cold, 'rgba(29,158,117,0.09)')) },
+        markPoint: { symbol: 'circle', data: marks }
+      }),
+      baseLine('上轨 1σ', b.u1, { lineStyle: { width: 0.8, color: '#D4537E', type: 'dotted', opacity: 0.55 } }),
+      baseLine('下轨 1σ', b.l1, { lineStyle: { width: 0.8, color: '#1D9E75', type: 'dotted', opacity: 0.55 } }),
+      baseLine('下轨 2σ', b.l2, { lineStyle: { width: 1, color: '#1D9E75', type: 'dashed', opacity: 0.75 } }),
+      baseLine('均线 MA' + W, b.ma, { lineStyle: { width: 1.4, color: '#185FA5' } }),
+      baseLine('标普500', D.px, {
+        lineStyle: { width: 1.6, color: INK },
+        areaStyle: { color: 'rgba(44,44,42,0.03)' },
+        markPoint: { symbol: 'circle', data: extPts, silent: true }
+      })
+    ]
+  }, true);
+}
+
+function resonanceAreas() {
+  var out = [];
+  (D.cur.high_runs || []).forEach(function (r) {
+    out.push([{ xAxis: r[0], itemStyle: { color: 'rgba(226,75,74,0.07)' } }, { xAxis: r[1] }]);
+  });
+  (D.cur.low_runs || []).forEach(function (r) {
+    out.push([{ xAxis: r[0], itemStyle: { color: 'rgba(29,158,117,0.26)' } }, { xAxis: r[1] }]);
+  });
+  return out;
+}
+
+function renderBreadth(activeBW) {
+  var series = ['20', '50', '200'].map(function (k) {
+    var on = (k === String(activeBW));
+    return baseLine('宽度 ' + k + ' 日', D.brd[k], {
+      lineStyle: { width: on ? 2 : 0.9, color: BW_COLOR[k], opacity: on ? 1 : 0.28 },
+      z: on ? 5 : 2,
+      markLine: (k === '20') ? { silent: true, symbol: 'none', data: [
+        { yAxis: 80, lineStyle: { color: '#E24B4A', type: 'dashed', width: 1 },
+          label: { formatter: '过热 80', fontSize: 10, color: '#A32D2D', position: 'insideEndTop' } },
+        { yAxis: 20, lineStyle: { color: '#1D9E75', type: 'dashed', width: 1 },
+          label: { formatter: '超卖 20', fontSize: 10, color: '#0F6E56', position: 'insideEndBottom' } }
+      ] } : undefined,
+      markArea: (k === '20') ? { silent: true, data: resonanceAreas() } : undefined
+    });
+  });
+  c2.setOption({
+    animation: false,
+    grid: { left: 52, right: 30, top: 34, bottom: 26 },
+    tooltip: tip,
+    legend: { top: 0, itemWidth: 12, itemHeight: 2, itemGap: 14, textStyle: { fontSize: 11, color: INK2 } },
+    xAxis: axisX(false),
+    yAxis: { type: 'value', min: 0, max: 100, name: '宽度 %', nameTextStyle: { fontSize: 10, color: INK3 },
+             axisLine: { show: false }, axisTick: { show: false },
+             axisLabel: { color: INK3, fontSize: 10 }, splitLine: { lineStyle: { color: GRID } } },
+    dataZoom: zoomArr(false),
+    series: series
+  }, true);
+}
+
+function fmt(n) { return n === null ? '—' : n.toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+
+function renderSide(W) {
+  var p = D.periods[String(W)];
+  var b = bandsOf(W);
+  var ma = b.ma[b.ma.length - 1], u1 = b.u1[b.u1.length - 1], l1 = b.l1[b.l1.length - 1];
+  var px = D.px[D.px.length - 1];
+  document.getElementById('k-mal').textContent = '均线 MA' + W;
+  document.getElementById('k-ma').textContent = fmt(ma);
+  document.getElementById('k-mad').textContent = '距均线 ' + (px / ma * 100 - 100 >= 0 ? '+' : '') + (px / ma * 100 - 100).toFixed(1) + '%';
+  document.getElementById('k-u1').textContent = fmt(u1);
+  document.getElementById('k-u1d').textContent = px > u1 ? '已突破 +' + ((px / u1 - 1) * 100).toFixed(1) + '%' : '还有 ' + ((u1 / px - 1) * 100).toFixed(1) + '% 空间';
+  document.getElementById('k-l1').textContent = fmt(l1);
+  document.getElementById('k-l1d').textContent = '还有 ' + ((px / l1 - 1) * 100).toFixed(1) + '% 空间';
+
+  var tv = p.temp[p.temp.length - 1];
+  document.getElementById('k-temp').textContent = tv === null ? '—' : (tv >= 0 ? '+' : '') + tv.toFixed(0);
+
+  var bwk = String(p.bw), bvals = D.last.brd;
+  document.getElementById('k-bwl').textContent = '宽度 ' + bwk + ' 日';
+  document.getElementById('k-bw').textContent = bvals[bwk] === null ? '—' : bvals[bwk].toFixed(1) + '%';
+  document.getElementById('k-bwd').textContent =
+    '20/50/200日 ' + (bvals['20'] === null ? '—' : bvals['20'].toFixed(0)) + ' · ' +
+    (bvals['50'] === null ? '—' : bvals['50'].toFixed(0)) + ' · ' +
+    (bvals['200'] === null ? '—' : bvals['200'].toFixed(0)) +
+    (D.last.brd_date ? '（' + D.last.brd_date.slice(5) + '）' : '');
+
+  document.getElementById('tabnote').textContent =
+    '机会信号 ' + p.opp.length + ' 段、危险信号 ' + p.risk.length + ' 段（2016-10 起）';
+
+  var rows = p.table, html = '', last = null;
+  rows.forEach(function (r) {
+    var g = r.grp || 'base';
+    if (g !== last) {
+      if (g === 'A') html += '<tr class="grp"><td colspan="6">只看价格通道（MA' + W + '）</td></tr>';
+      if (g === 'B') html += '<tr class="grp"><td colspan="6">价格位置 × 宽度' + p.bw + '日 / 情绪</td></tr>';
+      last = g;
+    }
+    function f(x) { return (x >= 0 ? '+' : '') + x.toFixed(2) + '%'; }
+    html += '<tr' + (g === 'B' ? ' class="hl"' : '') + '><td>' + r.label + '</td>' +
+            '<td class="n">' + r.n + '</td><td class="n">' + f(r.r20) + '</td>' +
+            '<td class="n">' + f(r.r60) + '</td><td class="n">' + r.win60.toFixed(1) + '%</td>' +
+            '<td class="n neg">' + (r.worst >= 0 ? '+' : '') + r.worst.toFixed(1) + '%</td></tr>';
+  });
+  document.querySelector('#tbl tbody').innerHTML = html;
+}
+
+function selectPeriod(W) {
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.classList.toggle('on', t.getAttribute('data-w') === String(W));
+  });
+  renderMain(W);
+  renderSide(W);
+  renderBreadth(D.periods[String(W)].bw);
+}
+
+document.querySelectorAll('.tab').forEach(function (t) {
+  t.addEventListener('click', function () { selectPeriod(parseInt(t.getAttribute('data-w'), 10)); });
+});
+
+/* ---------- 副图 ---------- */
+c3.setOption({
+  animation: false,
+  grid: { left: 46, right: 64, top: 24, bottom: 24 },
+  tooltip: tip,
+  legend: { top: 0, itemWidth: 12, itemHeight: 2, itemGap: 14, textStyle: { fontSize: 11, color: INK2 } },
+  xAxis: axisX(false),
+  yAxis: [
+    { type: 'value', scale: true, name: 'VIX', nameTextStyle: { fontSize: 10, color: INK3 },
+      axisLine: { show: false }, axisTick: { show: false },
+      axisLabel: { color: INK3, fontSize: 10 }, splitLine: { lineStyle: { color: GRID } } },
+    { type: 'value', scale: true, name: 'VIX÷VXV', nameTextStyle: { fontSize: 10, color: INK3 },
+      axisLine: { show: false }, axisTick: { show: false },
+      axisLabel: { color: INK3, fontSize: 10, formatter: function (v) { return v.toFixed(2); } },
+      splitLine: { show: false } }
+  ],
+  dataZoom: zoomArr(false),
+  series: [
+    baseLine('VIX', D.vix, { yAxisIndex: 0, lineStyle: { width: 1.1, color: '#993C1D' },
+      areaStyle: { color: 'rgba(153,60,29,0.05)' } }),
+    baseLine('VIX÷VXV（倒挂=压力）', D.term, { yAxisIndex: 1,
+      lineStyle: { width: 1.2, color: '#185FA5' },
+      markLine: { silent: true, symbol: 'none', data: [
+        { yAxis: 1, lineStyle: { color: '#888780', type: 'dashed', width: 1 },
+          label: { formatter: '倒挂 1.0', fontSize: 10, color: INK3, position: 'insideEndTop' } }
+      ] } })
+  ]
+});
+
+var hyStart = 0;
+while (hyStart < D.hy.length && D.hy[hyStart] === null) { hyStart++; }
+c4.setOption({
+  animation: false,
+  grid: { left: 50, right: 30, top: 20, bottom: 26 },
+  tooltip: tip,
+  xAxis: { type: 'category', data: D.dates.slice(hyStart), boundaryGap: false,
+           axisLine: { lineStyle: { color: '#D3D1C7' } }, axisTick: { show: false },
+           axisLabel: { color: INK3, fontSize: 11, hideOverlap: true } },
+  yAxis: { type: 'value', scale: true, name: 'bp', nameTextStyle: { fontSize: 10, color: INK3 },
+           axisLine: { show: false }, axisTick: { show: false },
+           axisLabel: { color: INK3, fontSize: 10 }, splitLine: { lineStyle: { color: GRID } } },
+  series: [
+    baseLine('高收益债利差', D.hy.slice(hyStart), {
+      lineStyle: { width: 1.3, color: '#A32D2D' },
+      areaStyle: { color: 'rgba(163,45,45,0.08)' },
+      markLine: { silent: true, symbol: 'none', data: [
+        { yAxis: 500, lineStyle: { color: '#E24B4A', type: 'dashed', width: 1 },
+          label: { formatter: '警戒 500', fontSize: 10, color: '#A32D2D', position: 'insideEndTop' } },
+        { yAxis: 350, lineStyle: { color: '#888780', type: 'dotted', width: 1 },
+          label: { formatter: '舒适 350', fontSize: 10, color: INK3, position: 'insideEndBottom' } }
+      ] }
+    })
+  ]
+});
+
+
+echarts.connect([c1, c2, c3]);
+
+document.getElementById('k-px').textContent = D.last.px.toLocaleString('en-US', { maximumFractionDigits: 0 });
+document.getElementById('k-date').textContent = D.last.date;
+
+selectPeriod(200);
+
+window.addEventListener('resize', function () {
+  c1.resize(); c2.resize(); c3.resize(); c4.resize();
+});
+</script>
+</body>
+</html>

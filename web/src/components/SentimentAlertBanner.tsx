@@ -32,8 +32,8 @@ export default function SentimentAlertBanner() {
         <button
           key={a.key}
           className={`sent-banner sent-banner-${a.level}`}
-          onClick={() => navigate("/ops")}
-          title="点开今日操作查看信号明细（叙事层参考，不构成买卖点）"
+          onClick={() => navigate("/fundamentals#fund-sec-sentiment")}
+          title="点开宏观与情绪页查看明细"
         >
           <span className="sent-banner-title">{a.title_cn}</span>
           <span className="sent-banner-body">{a.body_cn}</span>

@@ -1,0 +1,17 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { build } from '../../../../web/node_modules/esbuild/lib/main.js';
+const qa=new URL('./',import.meta.url);
+const repo=new URL('../../../../',qa);
+const bundle=await build({entryPoints:[new URL('web/src/components/observation-library/usErpBands.ts',repo).pathname],bundle:true,platform:'node',format:'esm',write:false});
+const {usErpBands,usErpEvents}=await import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text).toString('base64')}`);
+const data=JSON.parse(readFileSync(new URL('rates-snapshot.json',qa)));
+const s=data.series.erp_us;
+const points=s.dates.map((date,i)=>({date,value:s.values[i]}));
+const rows=usErpBands(points);
+const overlay=JSON.parse(readFileSync(new URL('overlay-snapshot.json',qa)));
+const p=overlay.series.sp500;
+const priceDates=new Set(p.dates.filter((d,i)=>Number.isFinite(p.values[i])));
+const events=usErpEvents(rows,[1.5,2]);
+const out={n:rows.length,range:[rows[0].date,rows.at(-1).date],latest:rows.at(-1),event20200302:events.filter(e=>e.date==='2020-03-02'),priceRange:[p.dates[0],p.dates.at(-1)],eventsWithExactPrice:events.filter(e=>priceDates.has(e.date)).length,unpricedEvents:events.filter(e=>!priceDates.has(e.date)).length};
+writeFileSync(new URL('math-actual.json',qa),JSON.stringify(out,null,2)+'\n');
+console.log(JSON.stringify(out));

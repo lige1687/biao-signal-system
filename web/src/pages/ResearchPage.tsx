@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import FlagshipSection from "../components/FlagshipSection";
 import { REPORTS_INDEX } from "../data/reportsIndex";
 import * as echarts from "echarts";
+import "./page-reading.css";
 import {
   FALSIFIED,
   FUNDAMENTAL_PANEL,
@@ -74,16 +75,24 @@ function GateChart() {
 export default function ResearchPage() {
   return (
     <div className="page rs-page">
-      <div className="page-head">
-        <h1>{SESSION_META.title}</h1>
-        <span className="ph-meta">
-          {SESSION_META.dateRange} · {SESSION_META.rounds} 轮 · 判定量约 {SESSION_META.hypothesisCount} 组
-        </span>
-        <span className="spacer" />
-        <span className="ph-meta">详细档案：{SESSION_META.reports.join(" · ")}</span>
+      <div className="pg-head">
+        <div className="pg-head-title">
+          <h1>历史研究回顾</h1>
+          <span className="pg-head-sub">
+            所有结论都先写死标准再跑数据（防止事后找理由）· 每个结果都重跑两遍验证一致
+          </span>
+        </div>
+        <div className="pg-head-kv">
+          <span className="pg-kv"><span className="k">周期</span><b>{SESSION_META.dateRange}</b></span>
+          <span className="pg-kv"><span className="k">轮次</span><b>{SESSION_META.rounds} 轮</b></span>
+          <span className="pg-kv"><span className="k">判定量</span><b>约 {SESSION_META.hypothesisCount} 组</b></span>
+          <span className="pg-kv"><span className="k">详细档案</span><b>{SESSION_META.reports.length} 份，见下方</b></span>
+        </div>
       </div>
+      <p className="rs-history-note">{SESSION_META.title} · {SESSION_META.dateRange}。这是当时的研究记录；查看已接入的因子证据请到 <a href="/factors">因子研究</a>。</p>
+      <details className="rs-source-paths"><summary>查看当时的原始档案路径</summary><ul>{SESSION_META.reports.map(path => <li key={path}><code>{path}</code></li>)}</ul></details>
       <div className="rs-lede">
-        所有结论都先写死标准再跑数据（防止事后找理由）· 每个结果都重跑两遍验证一致 · {OPS_LINE}
+        <strong>当时的运行安排：</strong>{OPS_LINE}
       </div>
 
       <div className="card-grid">
@@ -124,7 +133,7 @@ export default function ResearchPage() {
         </table>
         <div className="rs-takeaway">{SEMANTIC_CLOSEOUT.takeaway}</div>
       </Section>
-      <Section title="报告存档" sub="多路回测统一归档 · 自包含离线 HTML · 仓库 web/public/reports/">
+      <Section title="报告存档" sub="多路回测统一归档 · 自包含离线 HTML">
         <div className="rs-report-wall">
           {REPORTS_INDEX.map((r) => (
             <a key={r.id} href={r.href} target="_blank" rel="noreferrer" className="rs-report-link">
@@ -133,9 +142,7 @@ export default function ResearchPage() {
             </a>
           ))}
         </div>
-        <div className="rs-note">
-          新增报告：HTML 放 web/public/reports/，条目追加到 web/src/data/reportsIndex.ts（只追加，不改别人的）。
-        </div>
+        <details className="rs-note"><summary>维护说明</summary><p>新增报告：HTML 放 web/public/reports/，条目追加到 web/src/data/reportsIndex.ts（只追加，不改别人的）。</p></details>
       </Section>
       <Section title="① 仓位方案比拼" sub="同样 100 万 · 同样十年 · 同样的买卖点，只有仓位管法不同">
         <GateChart />
@@ -202,7 +209,7 @@ export default function ResearchPage() {
             ))}
           </tbody>
         </table>
-        <div style={{ fontSize: 12.5, marginTop: 8 }}>
+        <div style={{ fontSize: "var(--fs-xs)", marginTop: 8 }}>
           40 年里 14 次触发（全是历史大底）：
           {MODULE_E.v3Signals.map((s) => (
             <span key={s} className="tag" style={{ margin: 2, display: "inline-block" }}>{s}</span>

@@ -1,0 +1,315 @@
+{
+  "schema": "factor-combination-profiles/1",
+  "purpose": "Exact-reference annotations and finite candidate recipes; not an alternative definition registry",
+  "annotations": [
+    {
+      "key": "object:reference.french.joint.op_inv@1.0.0",
+      "family": "profitability_and_investment",
+      "financial_meaning": "检验较强经营盈利与较慢总资产扩张同时成立的股票；扩张速度不等于资本开支或管理纪律。",
+      "markets": [
+        "US"
+      ],
+      "assets": [
+        "stock"
+      ],
+      "purposes": [
+        "comparison"
+      ],
+      "horizon": "年度分组、月度公开组合收益",
+      "evidence": [
+        {
+          "path": "docs/experiments/profitability-investment-combinations-2026-10-24.md",
+          "sha256": "19eec835f958b8ad235a2839ba101c4da8a5932954c1a302ccf72af36cadc280"
+        }
+      ],
+      "review_status": "scope_specific_controller_review",
+      "not_for": [
+        "production_signal",
+        "automatic_forward"
+      ]
+    },
+    {
+      "key": "object:reference.french.longonly.op@1.0.0",
+      "family": "profitability",
+      "financial_meaning": "经营盈利相对账面权益衡量经营支撑；与毛利/总资产定义不同。",
+      "markets": [
+        "US"
+      ],
+      "assets": [
+        "stock"
+      ],
+      "purposes": [
+        "comparison"
+      ],
+      "horizon": "年度分组、月度公开组合收益",
+      "evidence": [
+        {
+          "path": "docs/experiments/profitability-investment-combinations-2026-10-24.md",
+          "sha256": "19eec835f958b8ad235a2839ba101c4da8a5932954c1a302ccf72af36cadc280"
+        }
+      ],
+      "review_status": "scope_specific_controller_review",
+      "not_for": [
+        "production_signal",
+        "automatic_forward"
+      ]
+    },
+    {
+      "key": "object:reference.french.longonly.bm@1.0.0",
+      "family": "valuation",
+      "financial_meaning": "账面权益相对市场价格描述估值；低估与经营恶化是竞争解释。",
+      "markets": [
+        "US"
+      ],
+      "assets": [
+        "stock"
+      ],
+      "purposes": [
+        "comparison"
+      ],
+      "horizon": "年度分组、月度公开组合收益",
+      "evidence": [
+        {
+          "path": "docs/experiments/strategy-combination-expansion-2026-10-23.md",
+          "sha256": "9178f3662d4dcf3593ff1cef54aaf076747860eac27b63249e8962305a838813"
+        }
+      ],
+      "review_status": "scope_specific_controller_review",
+      "not_for": [
+        "production_signal",
+        "automatic_forward"
+      ]
+    },
+    {
+      "key": "object:reference.french.longonly.mom@1.0.0",
+      "family": "momentum",
+      "financial_meaning": "排除最近月的过去涨幅用于观察价格延续；行业集中和共同上涨可能解释表现。",
+      "markets": [
+        "US"
+      ],
+      "assets": [
+        "stock"
+      ],
+      "purposes": [
+        "comparison"
+      ],
+      "horizon": "月度分组；过去第12至第2月涨幅",
+      "evidence": [
+        {
+          "path": "docs/experiments/strategy-combination-expansion-2026-10-23.md",
+          "sha256": "9178f3662d4dcf3593ff1cef54aaf076747860eac27b63249e8962305a838813"
+        }
+      ],
+      "review_status": "scope_specific_controller_review",
+      "not_for": [
+        "production_signal",
+        "automatic_forward"
+      ]
+    },
+    {
+      "key": "object:research.selection.short_reversal.month_return@1.0.0",
+      "family": "short_term_reversal",
+      "financial_meaning": "过去月下跌可能包含暂时卖压，也可能是真实坏消息；反向排序仅沿已冻结反转用途。",
+      "markets": [
+        "CN"
+      ],
+      "assets": [
+        "stock"
+      ],
+      "purposes": [
+        "comparison"
+      ],
+      "horizon": "月末决定、下月持有",
+      "evidence": [
+        {
+          "path": "docs/experiments/reversal-activity-increment-2026-10-23.md",
+          "sha256": "ecaace6cf98d5af59d4e7755c8fc23f143b0b0fe3c7c63f91a9afe60e58fc56f"
+        }
+      ],
+      "review_status": "scope_specific_controller_review",
+      "not_for": [
+        "production_signal",
+        "automatic_forward"
+      ]
+    },
+    {
+      "key": "object:research.selection.short_reversal.vol60@1.0.0",
+      "family": "risk",
+      "financial_meaning": "最近60日波动衡量价格风险；原对象没有统一偏好方向，低波对手的负号来自本例原合同。",
+      "markets": [
+        "CN"
+      ],
+      "assets": [
+        "stock"
+      ],
+      "purposes": [
+        "comparison"
+      ],
+      "horizon": "60交易日观察、月度调整",
+      "evidence": [
+        {
+          "path": "docs/experiments/reversal-activity-increment-2026-10-23.md",
+          "sha256": "ecaace6cf98d5af59d4e7755c8fc23f143b0b0fe3c7c63f91a9afe60e58fc56f"
+        }
+      ],
+      "review_status": "scope_specific_controller_review",
+      "not_for": [
+        "production_signal",
+        "automatic_forward"
+      ]
+    },
+    {
+      "key": "object:research.selection.activity.amount60@1.0.0",
+      "family": "trading_activity",
+      "financial_meaning": "过去60日成交金额区分交易活跃程度；不能等同散户占比或流动性容量。",
+      "markets": [
+        "CN"
+      ],
+      "assets": [
+        "stock"
+      ],
+      "purposes": [
+        "comparison"
+      ],
+      "horizon": "60交易日观察、每月分三档",
+      "evidence": [
+        {
+          "path": "docs/experiments/reversal-activity-increment-2026-10-23.md",
+          "sha256": "ecaace6cf98d5af59d4e7755c8fc23f143b0b0fe3c7c63f91a9afe60e58fc56f"
+        }
+      ],
+      "review_status": "scope_specific_controller_review",
+      "not_for": [
+        "production_signal",
+        "automatic_forward"
+      ]
+    },
+    {
+      "key": "object:research.selection.activity.reversal_volbalanced@1.0.0",
+      "family": "reversal_with_risk_control",
+      "financial_meaning": "在相近波动水平内选反转股票，研究原反转的结果是否来自高波动暴露。",
+      "markets": [
+        "CN"
+      ],
+      "assets": [
+        "stock"
+      ],
+      "purposes": [
+        "comparison"
+      ],
+      "horizon": "月末分组、下月持有",
+      "evidence": [
+        {
+          "path": "docs/experiments/reversal-activity-increment-2026-10-23.md",
+          "sha256": "ecaace6cf98d5af59d4e7755c8fc23f143b0b0fe3c7c63f91a9afe60e58fc56f"
+        }
+      ],
+      "review_status": "scope_specific_controller_review",
+      "not_for": [
+        "production_signal",
+        "automatic_forward"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "us_profitability_slow_growth",
+      "name": "美股：经营盈利＋较慢资产增长",
+      "component_keys": [
+        "object:reference.french.joint.op_inv@1.0.0"
+      ],
+      "mode": "joint_selection",
+      "financial_hypothesis": "较强经营回报配合适度扩张可能改善选择；需检验行业、权益及周期解释。",
+      "competing_explanation": "更高收益可能来自行业/风险暴露、估值或个别时期；低增长也可能是衰退。",
+      "scope": {
+        "market": "US",
+        "universe_id": "french_2x4x4_big_aggregate",
+        "frequency": "monthly",
+        "currency": "USD",
+        "asset_type": "stock",
+        "purpose": "comparison"
+      },
+      "rules": {
+        "universe": "French 2x4x4公开组；本例big，实际逐股历史资格未在本地重构",
+        "signal": "同一32格来源OP4且INV1；两条件不是不同来源收益相加",
+        "decision_time": "沿作者年度形成规则，逐股财报当时可得版本未核",
+        "execution_time": null,
+        "allocation": "作者格内市值加权；同源单项与简单各半按旧合同每月恢复比例",
+        "rebalance": "年度更新作者组；公开月收益照用",
+        "exit": "随作者分组变更；本地逐股退出执行未核",
+        "missing_data": "只在原合同完整32格共同月份比较",
+        "costs": null,
+        "benchmark": "单盈利、单低增长、同源简单各半及16格；无唯一母指数"
+      },
+      "forward_eligible": false,
+      "component_dimensions": [
+        "OP4",
+        "INV1"
+      ]
+    },
+    {
+      "id": "us_value_momentum",
+      "name": "美股：价值＋动量资金配置",
+      "component_keys": [
+        "object:reference.french.longonly.bm@1.0.0",
+        "object:reference.french.longonly.mom@1.0.0"
+      ],
+      "mode": "strategy_allocation",
+      "financial_hypothesis": "估值修复与价格延续可能在不同时间占优，因此考虑分配同一笔资金。",
+      "competing_explanation": "两者仍可能同时暴露股票市场下跌；公开多空互补不保证只买入组合有帮助。",
+      "scope": {
+        "market": "US",
+        "universe_id": "french_big_BM_and_MOM_distinct_source_populations",
+        "frequency": "monthly",
+        "currency": "USD",
+        "asset_type": "stock",
+        "purpose": "comparison"
+      },
+      "rules": {
+        "universe": "French big价值与动量各自作者合格股票集合；不宣称同一逐股池",
+        "signal": "价值H与动量H各自作者排序",
+        "decision_time": "沿作者各自年度/月度形成时点",
+        "execution_time": null,
+        "allocation": "期初各投入50%，随后不在两套方法之间转钱",
+        "rebalance": "各方法沿原作者分组；两账户间不再平衡",
+        "exit": "随作者分组；本地成交未核",
+        "missing_data": "共同完整月份；不填0",
+        "costs": null,
+        "benchmark": "价值单项、动量单项及原普通组配置；母指数未评价"
+      },
+      "forward_eligible": false
+    },
+    {
+      "id": "cn_reversal_lowvol",
+      "name": "A股：反转与低波的互补审查",
+      "component_keys": [
+        "object:research.selection.short_reversal.month_return@1.0.0",
+        "object:research.selection.short_reversal.vol60@1.0.0"
+      ],
+      "mode": "joint_selection",
+      "financial_hypothesis": "暂时卖压后的恢复可能与控制高波动风险配合；先核原相近波动层内反转是否已有增量。",
+      "competing_explanation": "低相关可能只是评分差异；高波、坏消息、缺价和平滑估值仍可造成共同亏损。",
+      "scope": {
+        "market": "CN",
+        "universe_id": "historical2014_fixed300_activity_strata_separate",
+        "frequency": "monthly",
+        "currency": "CNY",
+        "asset_type": "stock",
+        "purpose": "comparison"
+      },
+      "rules": {
+        "universe": "原2014固定300股资料，在各形成月合格股中按过去成交金额分三档分别比较",
+        "signal": "原反转=-hot；原低波对手=-vol60；另复用波动分层后反转的既有结果",
+        "decision_time": "月末收盘形成目标",
+        "execution_time": "原报价场景的下一市场交易日开盘；真实成交队列未核",
+        "allocation": null,
+        "rebalance": "沿既有月度目标规则；本轮不设新混合权重",
+        "exit": "原下一月目标卖出；失败保留旧股/现金",
+        "missing_data": "原未知估值及未成交保持，关系仅描述保存报价",
+        "costs": "原每边25bps情景；个人实际费表仍未评估",
+        "benchmark": "同档同数量低波/全体对照；沪深300仅市场背景非该池母指数"
+      },
+      "forward_eligible": false
+    }
+  ]
+}

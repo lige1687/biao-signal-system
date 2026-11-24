@@ -47,7 +47,7 @@ from datetime import time as dtime
 from lei_signal.api import config, session
 from lei_signal.api.routes.dashboard import dashboard_symbols
 from lei_signal.data.calendar import DEFAULT_TRADING_CALENDAR, TradingCalendar
-from lei_signal.data.symbols import is_a_share, resolve_symbol
+from lei_signal.data.symbols import is_cn_session_symbol, resolve_symbol
 
 logger = logging.getLogger(__name__)
 
@@ -156,20 +156,20 @@ def _refresh_full(
     analysis_service: object, symbols_fn: Callable[[], list[str]]
 ) -> list[str]:
     symbols = symbols_fn()
-    analysis_service.get_many(symbols, refresh=True)  # type: ignore[attr-defined]
+    analysis_service.get_many(symbols, refresh=True, background=True)  # type: ignore[attr-defined]
     return symbols
 
 
 def _refresh_index(analysis_service: object) -> list[str]:
     symbols = [idx.symbol for idx in config.DASHBOARD_INDICES]
-    analysis_service.get_many(symbols, refresh=True)  # type: ignore[attr-defined]
+    analysis_service.get_many(symbols, refresh=True, background=True)  # type: ignore[attr-defined]
     return symbols
 
 
 def _is_overseas(symbol: str) -> bool:
-    """是否非 A 股标的（美股 ETF / 海外指数 / 板块代理）。解析失败视为否。"""
+    """是否海外自选标的（美股/港股 ETF 等）。沪深证券及国内行业板块收盘后不再夜间轮询。"""
     try:
-        return not is_a_share(resolve_symbol(symbol))
+        return not is_cn_session_symbol(resolve_symbol(symbol))
     except ValueError:
         return False
 
@@ -190,16 +190,55 @@ def _refresh_overseas(
     """
     symbols = _overseas_watchlist_symbols(symbols_fn)
     if symbols:
-        analysis_service.get_many(symbols, refresh=True)  # type: ignore[attr-defined]
+        analysis_service.get_many(symbols, refresh=True, background=True)  # type: ignore[attr-defined]
     return symbols
 
 
 def _refresh_fundamentals(fundamentals_service: object) -> None:
-    """基本面页卡片数据：refresh=False 让 TTL 到期自然重拉（12–24h 一次）。"""
+    """基本面页与首页环境卡片数据：refresh=False 让 TTL 到期自然重拉（12–24h 一次）。"""
     fundamentals_service.overview()  # type: ignore[attr-defined]
     fundamentals_service.rates()  # type: ignore[attr-defined]
     fundamentals_service.commodities()  # type: ignore[attr-defined]
+    for method_name, kwargs in (
+        ("rates_history", {"lookback_days": 18250}),
+        ("overlay_history", {"years": 47}),
+        ("us_macro", {}),
+        ("observations", {"market": "cn"}),
+    ):
+        fn = getattr(fundamentals_service, method_name, None)
+        if callable(fn):
+            fn(**kwargs)
     fundamentals_service.etf_strength()  # type: ignore[attr-defined]
+
+
+_OBS_CHECK_INTERVAL = timedelta(minutes=20)
+_obs_last_check: datetime | None = None
+_obs_thread: threading.Thread | None = None
+
+
+def _maybe_spawn_observation_refresh(now: datetime) -> None:
+    """后台非阻塞检查收盘观测（宽度 / 股债利差 / 两融）是否到点待更新。"""
+    global _obs_last_check, _obs_thread
+    if "pytest" in sys.modules or not preheat_allowed():
+        return
+    if _obs_thread is not None and _obs_thread.is_alive():
+        return
+    if _obs_last_check is not None and (now - _obs_last_check) < _OBS_CHECK_INTERVAL:
+        return
+    _obs_last_check = now
+
+    def _worker() -> None:
+        try:
+            from lei_signal.market_context.observation_refresh import run as run_obs_refresh
+
+            res = run_obs_refresh()
+            if res.get("status") == "checked":
+                logger.info("收盘观测自动更新完成: %s", res.get("status"))
+        except Exception:  # noqa: BLE001
+            logger.warning("收盘观测自动更新异常，下轮自动重试", exc_info=True)
+
+    _obs_thread = threading.Thread(target=_worker, daemon=True, name="market-observation-auto")
+    _obs_thread.start()
 
 
 def _run_loop(
@@ -232,6 +271,8 @@ def _run_loop(
                 else:
                     _refresh_fundamentals(fundamentals_service)
                     symbols = []
+                    with state.lock:
+                        state.fundamentals = now
                 logger.info(
                     "预热 %s 完成（%d 个标的，耗时 %.1fs）",
                     scope,
@@ -240,6 +281,7 @@ def _run_loop(
                 )
         except Exception:  # noqa: BLE001 - 预热失败不影响服务，下轮重试
             logger.warning("预热本轮失败，将在下个 tick 重试", exc_info=True)
+        _maybe_spawn_observation_refresh(now)
         stop.wait(_TICK_SECONDS)
 
 

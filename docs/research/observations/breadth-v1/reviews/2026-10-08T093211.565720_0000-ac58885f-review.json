@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-10-08T09:32:11.565720+00:00",
+  "reviewed_at": "2026-10-08T09:32:30Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-10-08T093211.565720_0000-ac58885f.json",
+  "changed_sources": [
+    "source-01",
+    "source-02",
+    "source-03"
+  ],
+  "facts": {
+    "a_share_rows": 4069504,
+    "a_share_latest_date": "2026-10-08",
+    "members_at_latest_market_date": 5207,
+    "symbols_in_a_share_raw": 5222,
+    "current_code_date": "2026-10-08",
+    "current_code_count": 5572,
+    "daily_snapshot_date": "2026-10-08",
+    "daily_snapshot_total": 5572,
+    "daily_snapshot_eligible": 5215
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "逐股原料已更新到10月8日，但仅5207只股票在同一最新日期有收盘；日常快照eligible为5215且仍是MA20口径，不是冻结研究要求的共同200日分母、90%覆盖率和逐日有效成员记录。",
+    "historical_membership": "当前名单日期更新到10月8日，仍只有当前名单；没有新增逐日历史成员版本、生效时刻或可核的真实取得时间链。",
+    "etf_nominal_prices_and_actions": "两只ETF的合格名义价格、公司行动、停牌和限价输入均未变化，原资格缺口仍在。",
+    "availability": "10月8日新行情已实际读到并保存指纹；文件变化本身不代表冻结候选的匹配输入已经齐备。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "已出现10月8日新行情，但冻结定义要求的共同200日分母、历史成员和ETF执行输入仍未齐；继续仅输入观察，不生成信号。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

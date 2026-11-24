@@ -1,0 +1,347 @@
+"""Offline, source-bound dynamic Shanghai/Shenzhen focus observation builder.
+
+This is a retrospective observation, not a PIT investable universe or a return
+series. The command defaults to a read-only plan; --run requires external output.
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import heapq
+import json
+import math
+import re
+import shutil
+import subprocess
+from collections import Counter
+from datetime import date
+from pathlib import Path
+
+from lei_signal.research.fip import SOURCE_FIELDS
+from lei_signal.research.focus_recent import merge_rows, number
+from lei_signal.research.high52_revalidation import ADJUSTMENT_FIELDS, adapt_back_adjusted
+
+ROOT = Path(__file__).resolve().parents[3]
+PLAN = ROOT / "docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/coverage-plan-v2.json"
+RECEIPT = ROOT / "docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-quality/v8-final-verification-v2-20261027T063330Z.json"
+SUPPLEMENT = ROOT / "docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-interior-supplement-validation-prep/supplement-validation-v4-20261027T065248Z.json"
+CATALOG = ROOT / "docs/ops/acquired-data-catalog.json"
+MOUNT = Path("/Volumes/win+mac通用")
+VOLUME_UUID = "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9"
+ORDINARY = re.compile(r"^(?:sh\.(?:600|601|603|605|688)|sz\.(?:000|001|002|003|300|301))\d{3}$")
+START, END = "2014-01-01", "2025-12-31"
+
+
+def sha(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def checked_json(ref: dict) -> dict:
+    path = Path(ref["path"])
+    if not path.is_file() or sha(path) != ref["sha256"]:
+        raise ValueError(f"missing or changed bound source: {path}")
+    return json.loads(path.read_text())
+
+
+def inverse_code(code: str) -> tuple[int, ...]:
+    return tuple(-ord(c) for c in code)
+
+
+def eligible_code(code: str, stock_type: str) -> bool:
+    return stock_type == "1" and bool(ORDINARY.fullmatch(code))
+
+
+def daily_windows(adapted: dict, calendar: list[str], ipo: str, out: str | None,
+                  counts: Counter) -> list[tuple[str, float, float, float]]:
+    """Return only this stock's valid 21-session windows; release after folding."""
+    prices = {row["date"]: row for row in adapted["rows"]}
+    raw = adapted["raw_by_day"]
+    breaks = set(adapted["break_dates"])
+    valid = []
+    # Prefix counts make each 21-session validity check constant time.
+    bad = [0]
+    closes = []
+    amounts = [0.0]
+    for day in calendar:
+        row, price = raw.get(day), prices.get(day)
+        close = number(price["close"]) if price else None
+        amount = number(row["amount"]) if row else None
+        reason = None
+        if day < ipo or (out and day >= out):
+            reason = "outside_lifecycle"
+        elif row is None:
+            reason = "missing_source_day"
+        elif day in breaks or price is None or close is None or close <= 0:
+            reason = "adjusted_price_break"
+        elif row["tradestatus"] != "1":
+            reason = "nontrading"
+        elif amount is None or amount < 0:
+            reason = "invalid_amount"
+        if reason:
+            counts[reason] += 1
+        bad.append(bad[-1] + int(reason is not None))
+        closes.append(close)
+        amounts.append(amounts[-1] + (amount if amount is not None and amount >= 0 else 0.0))
+    for i in range(20, len(calendar)):
+        day = calendar[i]
+        if day < START:
+            continue
+        if bad[i + 1] != bad[i - 20]:
+            counts["invalid_21_session_window"] += 1
+            continue
+        row = raw[day]
+        if row["isST"] != "0":
+            counts["current_st_or_unknown"] += 1
+            continue
+        mean_amount = (amounts[i + 1] - amounts[i - 19]) / 20
+        if mean_amount <= 0 or not math.isfinite(mean_amount):
+            counts["zero_or_invalid_mean_amount"] += 1
+            continue
+        momentum = closes[i] / closes[i - 20] - 1
+        if not math.isfinite(momentum):
+            counts["nonfinite_momentum"] += 1
+            continue
+        valid.append((day, mean_amount, momentum, number(row["amount"]) or 0.0))
+    return valid
+
+
+class DailyAccumulator:
+    def __init__(self, maximum_names: int):
+        self.capacity = math.ceil(maximum_names * 0.05)
+        self.days: dict[str, dict] = {}
+
+    def add(self, day: str, code: str, amount: float, momentum: float) -> None:
+        row = self.days.setdefault(day, {"count": 0, "sum": 0.0, "positive": 0,
+                                          "amount": 0.0, "heap": []})
+        row["count"] += 1
+        row["sum"] += momentum
+        row["positive"] += momentum > 0
+        row["amount"] += amount
+        item = (amount, inverse_code(code), code, momentum)
+        if len(row["heap"]) < self.capacity:
+            heapq.heappush(row["heap"], item)
+        elif item > row["heap"][0]:
+            heapq.heapreplace(row["heap"], item)
+
+    def finish(self, calendar: list[str]) -> list[dict]:
+        result = []
+        for day in calendar:
+            if not START <= day <= END:
+                continue
+            row = self.days.get(day, {"count": 0, "sum": 0.0, "positive": 0,
+                                      "amount": 0.0, "heap": []})
+            count = row["count"]
+            selected = sorted(row["heap"], key=lambda item: (-item[0], item[2]))[:math.ceil(count * 0.05)]
+            valid = count >= 100 and len(selected) == math.ceil(count * 0.05)
+            result.append({"date": day, "qualified_count": count, "signal_valid": valid,
+                           "focus_count": len(selected) if valid else 0,
+                           "focus_members": [item[2] for item in selected] if valid else [],
+                           "focus": sum(item[3] for item in selected) / len(selected) if valid else None,
+                           "pool_momentum": row["sum"] / count if valid else None,
+                           "breadth": row["positive"] / count if valid else None,
+                           "concentration": sum(item[0] for item in selected) / row["amount"]
+                           if valid and row["amount"] > 0 else None})
+        return result
+
+
+def _calendar(plan: dict) -> list[str]:
+    ref = plan["baseline"]["calendar"]
+    path = Path(ref["path"])
+    if sha(path) != ref["sha256"]:
+        raise ValueError("calendar SHA mismatch")
+    days = [r["trade_date"] for r in csv.DictReader(path.open())]
+    days = [d for d in days if "2013-01-01" <= d <= END]
+    if days != sorted(set(days)) or not days or days[-1] != END:
+        raise ValueError("calendar incomplete or unordered")
+    return days
+
+
+def _roster(plan: dict) -> dict[str, dict]:
+    payload = checked_json(plan["baseline"]["stock_basic"])
+    if payload.get("error_code") != "0" or payload.get("fields") != ["code", "code_name", "ipoDate", "outDate", "type", "status"]:
+        raise ValueError("stock roster schema mismatch")
+    rows = {}
+    for code, _name, ipo, out, kind, _status in payload["data"]:
+        if eligible_code(code, kind):
+            if code in rows or not ipo:
+                raise ValueError("duplicate or dateless ordinary stock")
+            date.fromisoformat(ipo)
+            if out:
+                date.fromisoformat(out)
+            rows[code] = {"ipo": ipo, "out": out or None}
+    return rows
+
+
+def _indexed(ref: dict, key: str):
+    path = Path(ref["path"])
+    if sha(path) != ref["sha256"]:
+        raise ValueError(f"{key} SHA mismatch")
+    with path.open() as stream:
+        for line in stream:
+            yield json.loads(line)
+
+
+def _storage_output(path: Path) -> None:
+    info = subprocess.check_output(["diskutil", "info", str(MOUNT)], text=True)
+    if VOLUME_UUID not in info or not path.resolve().is_relative_to(MOUNT.resolve()):
+        raise ValueError("output must be on the registered external volume UUID")
+    if path.exists():
+        raise ValueError("output directory already exists")
+    if shutil.disk_usage(MOUNT).free < 11 * 1024**3:
+        raise ValueError("external free space is below 10 GiB reserve plus 1 GiB output allowance")
+
+
+def _official_outdates(catalog: dict) -> tuple[dict[str, str], list[dict]]:
+    """Use only independently registered official date statuses, never prices."""
+    job = next(item for item in catalog["active_acquisition_jobs"]
+               if item["id"] == "cn-all-equity-2006-20261023")
+    ref = job["lifecycle_status_overlay"]
+    path = Path(ref["path"])
+    if sha(path) != ref["sha256"]:
+        raise ValueError("lifecycle overlay SHA mismatch")
+    result = {}
+    with path.open(newline="") as stream:
+        for row in csv.DictReader(stream):
+            if row["date_status"] != "officially_delisted_on_date" or not row["verified_delisting_date"]:
+                continue
+            code, day = row["code"], row["verified_delisting_date"]
+            date.fromisoformat(day)
+            if code in result and result[code] != day:
+                raise ValueError(f"conflicting official outdates: {code}")
+            result[code] = day
+    references = [{"path": str(path), "sha256": ref["sha256"]}]
+    for registered in (job["lifecycle_addendum"]["acceptance"],
+                       job["lifecycle_addendum"]["followup_three"]):
+        receipt = checked_json(registered)
+        if receipt.get("status") not in ("official_lifecycle_dates_readback_verified_not_exit_prices",
+                                          "three_final_official_lifecycle_dates_verified_not_exit_prices"):
+            raise ValueError("lifecycle acceptance status unrecognized")
+        references.append({"path": registered["path"], "sha256": registered["sha256"]})
+        for event in receipt["events"]:
+            code, day = event["code"], event["official_delisting_date"]
+            date.fromisoformat(day)
+            if code in result and result[code] != day:
+                raise ValueError(f"conflicting official outdates: {code}")
+            result[code] = day
+    return result, references
+
+
+def build(output: Path) -> dict:
+    _storage_output(output)
+    catalog = json.loads(CATALOG.read_text())
+    if catalog.get("external_volume_uuid") != VOLUME_UUID:
+        raise ValueError("catalog volume UUID mismatch")
+    plan = json.loads(PLAN.read_text())
+    receipt = json.loads(RECEIPT.read_text())
+    if receipt.get("status") != "v8_source_pointer_and_row_quality_verified_but_not_strategy_ready":
+        raise ValueError("main v8 receipt not admitted")
+    supplement = json.loads(SUPPLEMENT.read_text())
+    if supplement.get("status") != "additive_source_validated_with_explicit_unknowns" or supplement["unknown_target_dates"]:
+        raise ValueError("interior supplement not fully qualified")
+    main_ref = receipt["v8_outputs"]["all-equity-read-index-v8.jsonl"]
+    old_ref = plan["baseline"]["price_union"]
+    calendar = _calendar(plan)
+    roster = _roster(plan)
+    official_out, official_refs = _official_outdates(catalog)
+    if len(roster) > plan["baseline"]["stock_basic"]["type1_codes"]:
+        raise ValueError("roster count exceeds bound type1 source")
+    supplement_by_code: dict[str, list[dict]] = {}
+    for ref in supplement["sources"]:
+        supplement_by_code.setdefault(ref["code"], []).append(ref)
+    old = {r["code"]: r["source_refs"] for r in _indexed(old_ref, "old union") if r["code"] in roster}
+    acc = DailyAccumulator(len(roster))
+    audit = Counter()
+    per_code = {}
+    verified = []
+    seen = set()
+    for index in _indexed(main_ref, "v8"):
+        code = index["code"]
+        if code not in roster:
+            audit["excluded_nonordinary_or_unbound"] += 1
+            continue
+        seen.add(code)
+        detail = Counter()
+        vendor_out = roster[code]["out"]
+        official_date = official_out.get(code)
+        if official_date and vendor_out and official_date != vendor_out:
+            per_code[code] = {"excluded": "supplier_official_outdate_conflict",
+                              "supplier_out": vendor_out, "official_out": official_date}
+            audit["lifecycle_conflict_codes"] += 1
+            continue
+        effective_out = official_date or vendor_out
+        old_refs = old.get(code, [])
+        raw_refs = [*old_refs, *index.get("reused_raw_sources", []), *index.get("new_price_sources", []),
+                    *supplement_by_code.get(code, [])]
+        if code in old:
+            factor = index.get("old_union_factor_source")
+            factors = [factor] if factor else []
+            detail["alternate_factor_vintage_sources_not_merged"] = len(index.get("reused_factor_sources", [])) + len(index.get("new_factor_sources", []))
+            if not factor or factor.get("query_end", "") < END:
+                per_code[code] = {"excluded": "old_factor_vintage_end_unqualified"}
+                continue
+        else:
+            factors = [*index.get("reused_factor_sources", []), *index.get("new_factor_sources", [])]
+        try:
+            # merge_rows SHA-checks every source, drops conflicting raw dates, and
+            # raises on conflicting factor events. It does not backfill either.
+            raw = merge_rows(code, raw_refs, SOURCE_FIELDS, "2013-01-01", END, detail, verified)
+            actions = merge_rows(code, factors, ADJUSTMENT_FIELDS, "1900-01-01", END, detail, verified)
+            if not raw or not actions:
+                raise ValueError("missing raw or factor events")
+            adapted = adapt_back_adjusted({"error_code": "0", "fields": list(SOURCE_FIELDS), "data": raw},
+                                          {"error_code": "0", "fields": list(ADJUSTMENT_FIELDS), "data": actions},
+                                          code, calendar, factor_field="foreAdjustFactor")
+            for day, amount, momentum, _current_amount in daily_windows(adapted, calendar, roster[code]["ipo"],
+                                                                          effective_out, detail):
+                acc.add(day, code, amount, momentum)
+            per_code[code] = {"audit": dict(detail), "source_count": detail["source_files_verified"]}
+            audit.update(detail)
+        except (ValueError, KeyError, TypeError) as exc:
+            # Individual securities with source ambiguity are quarantined; the
+            # scope and code remain visible in the output audit.
+            per_code[code] = {"excluded": str(exc), "audit": dict(detail)}
+            audit["quarantined_codes"] += 1
+    missing = sorted(set(roster) - seen)
+    if missing:
+        raise ValueError(f"ordinary roster codes absent from v8 index: {missing[:10]}")
+    rows = acc.finish(calendar)
+    manifest = {"status": "retrospective_observation_only", "period": [START, END],
+                "supplier_roster_codes": len(roster), "main_v8_sha256": main_ref["sha256"],
+                "old_union_sha256": old_ref["sha256"], "calendar_sha256": plan["baseline"]["calendar"]["sha256"],
+                "stock_basic_sha256": plan["baseline"]["stock_basic"]["sha256"],
+                "official_lifecycle_references": official_refs,
+                "supplement_receipt_sha256": sha(SUPPLEMENT), "main_receipt_sha256": sha(RECEIPT),
+                "factor_vintage_rule": "Old-union codes use their SHA-bound old_union_factor_source through 2025-12-31; other v8 factor vintages are not merged. New codes use v8 bound factors; overlapping conflicting events quarantine the code.",
+                "limitations": ["Vendor type1 and code prefixes are retrospective candidate scope, not complete PIT membership.",
+                                "Official listing dates and source arrival times are not PIT published-at proofs.",
+                                "Missing exit prices and source days are never imputed; no strategy return is qualified."],
+                "audit": dict(audit), "per_code": per_code, "verified_sources": verified}
+    output.mkdir(parents=True)
+    (output / "daily.json").write_text(json.dumps(rows, ensure_ascii=False, allow_nan=False))
+    (output / "audit.json").write_text(json.dumps(manifest, ensure_ascii=False, allow_nan=False))
+    return {"output": str(output), "daily_sha256": sha(output / "daily.json"),
+            "audit_sha256": sha(output / "audit.json"), "days": len(rows), "quarantined": audit["quarantined_codes"]}
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--run", action="store_true", help="read and build all bound sources")
+    parser.add_argument("--output", type=Path, help="new directory under the registered external volume")
+    args = parser.parse_args()
+    if args.run:
+        if args.output is None:
+            parser.error("--run requires --output")
+        print(json.dumps(build(args.output), ensure_ascii=False))
+    else:
+        print(json.dumps({"status": "planned_only", "period": [START, END],
+                          "sources": [str(PLAN), str(RECEIPT), str(SUPPLEMENT)],
+                          "no_sources_read_or_output_written": True}, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()

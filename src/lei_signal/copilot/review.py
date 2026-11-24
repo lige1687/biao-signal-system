@@ -1,14 +1,18 @@
 """复盘组装：纪律面与结果面分开（监督员 v2 路线第 5 条的落地）。
 
 纪律面全部直读 plans 库既有事实（预案原文、催办次数、推迟原因、复议记录），
-不重跑判定、不做评价；结果面来自基金台账核算。R 倍数 = 实际盈亏 ÷ 初始风险额
+不重跑判定、不做评价；结果面来自基金台账核算。R 倍数 = 实际盈亏 ÷ 当前关联计划的参考风险额
 （风险额 = 卖出金额 × |参考入场价 − 失效价| ÷ 参考入场价），仅有关联计划且
 两价齐备时计算，否则明说不可算。
 """
 from __future__ import annotations
 
 import sqlite3
-from datetime import UTC, datetime
+import hashlib
+import json
+import re
+from datetime import UTC, datetime, time, timedelta, date
+from zoneinfo import ZoneInfo
 
 from lei_signal.api.schemas import ReviewCardDTO, ReviewSectionDTO
 from lei_signal.copilot import trades as trades_mod
@@ -17,6 +21,82 @@ from lei_signal.plans.store import get_plan
 
 def _now() -> str:
     return datetime.now(UTC).isoformat()
+
+
+def _version_date_relation(recorded_at: str, trade_date: str, *, now: datetime | None = None) -> str:
+    """Compare a server record to the whole domestic trade-date interval.
+
+    A date-only report can never establish intraday order. This is evidence
+    availability, not evidence that the user followed the referenced version.
+    """
+    try:
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", trade_date):
+            return "unknown"
+        day = date.fromisoformat(trade_date)
+        reference_now = now or datetime.now(UTC)
+        if reference_now.tzinfo is None or day > reference_now.astimezone(ZoneInfo("Asia/Shanghai")).date():
+            return "unknown"
+        recorded = datetime.fromisoformat(recorded_at.replace("Z", "+00:00"))
+        if recorded.tzinfo is None or recorded > reference_now:
+            return "unknown"
+        start = datetime.combine(day, time.min, tzinfo=ZoneInfo("Asia/Shanghai"))
+        if recorded < start:
+            return "before_date"
+        if recorded >= start + timedelta(days=1):
+            return "after_date"
+        return "same_date_unknown_order"
+    except (TypeError, ValueError, OverflowError):
+        return "unknown"
+
+
+def _recorded_version_section(conn: sqlite3.Connection, trade) -> ReviewSectionDTO:
+    from lei_signal.plans.evidence import get_plan_version
+    from lei_signal.copilot.trade_plan_link import _symbols
+
+    heading = "本次记账留存的计划版本"
+    missing = "本笔未留存完整版本，交易前计划内容未知；当前计划不能代替旧确认记录。"
+    version_id = getattr(trade, "plan_version_id", None)
+    if not version_id:
+        return ReviewSectionDTO(heading_cn=heading, lines=[missing])
+    try:
+        version = get_plan_version(conn, version_id)
+    except (ValueError, TypeError, KeyError):
+        return ReviewSectionDTO(heading_cn=heading, lines=["版本内容核对未通过，不能用于事前评价。"])
+    if version is None:
+        return ReviewSectionDTO(heading_cn=heading, lines=["版本记录缺失，交易前内容未知。"])
+    payload = version.get("payload")
+    try:
+        digest = hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True,
+                                         separators=(",", ":")).encode()).hexdigest()
+        valid = (isinstance(payload, dict) and version["plan_id"] == trade.plan_id
+                 and payload.get("plan_id") == trade.plan_id
+                 and payload.get("symbol") in _symbols(trade.fund_code)
+                 and digest == version["content_sha256"])
+    except (KeyError, ValueError, TypeError):
+        valid = False
+    if not valid:
+        return ReviewSectionDTO(heading_cn=heading, lines=["版本内容或产品身份核对未通过，不能用于事前评价。"])
+    relation = _version_date_relation(version.get("recorded_at", ""), trade.trade_date)
+    words = {
+        "before_date": "这份版本在你填写的成交日前已经记录；仅证明资料的先后，不能证明当时按它交易。",
+        "same_date_unknown_order": "版本记录与填写的成交日是同一天，先后顺序未知，不能据此作事前评价。",
+        "after_date": "这份版本在你填写的成交日之后记录，不能当作交易前计划。",
+        "unknown": "版本时间资料待核，不能判断是否早于交易。",
+    }
+    lines = [words[relation], "成交日期由你填写，未经券商核验；本次关联只表示记账时留存了一份版本。"]
+    if relation == "unknown":
+        return ReviewSectionDTO(heading_cn=heading, lines=lines)
+    recorded = datetime.fromisoformat(version["recorded_at"].replace("Z", "+00:00"))
+    kind = {"initial_confirmation": "确认时留存", "applied_revision": "已生效修订留存"}.get(
+        version.get("event_kind"), "版本留存")
+    lines.extend([
+        f"记录类型：{kind}；记录时间：{recorded.astimezone(ZoneInfo('Asia/Shanghai')).isoformat()}（北京时间）",
+        f"留存的交易假设：{payload.get('thesis_cn') or '-'}",
+        f"留存的失效标准：{payload.get('invalidation_criteria_cn') or '-'}",
+        f"留存的止损预案：{payload.get('stop_plan_cn') or '-'}",
+        f"留存的止盈预案：{payload.get('take_profit_plan_cn') or '-'}",
+    ])
+    return ReviewSectionDTO(heading_cn=heading, lines=lines)
 
 
 def _counts(conn: sqlite3.Connection, plan_id: str) -> dict[str, int]:
@@ -48,28 +128,29 @@ def build_trade_review(
     if trade is None:
         return None
     pnl_info = trades_mod.realized_pnl_of(conn, trade_id)
-    sections: list[ReviewSectionDTO] = []
+    sections: list[ReviewSectionDTO] = [_recorded_version_section(conn, trade)]
 
     plan = get_plan(conn, trade.plan_id) if trade.plan_id else None
     if plan is not None:
         c = _counts(conn, plan.plan_id)
         sections.append(ReviewSectionDTO(
-            heading_cn="当初怎么说的（纪律面）",
+            heading_cn="当前关联计划（纪律面）",
             lines=[
+                "以下来自当前关联计划及累计记录，不能证明事前已确认的版本，也不能据此判断执行偏差。",
                 f"入场理由：{plan.entry_rule_id or '-'}（模块 {plan.module}）",
                 f"交易假设：{plan.thesis_cn or '-'}",
                 f"失效标准：{plan.invalidation_criteria_cn or '-'}",
-                "建计划时盈亏比参考："
+                "当前计划保存的盈亏比参考："
                 + (f"{plan.reward_risk_at_plan}" if plan.reward_risk_at_plan is not None
-                   else "当时未算出"),
+                   else "当前未记录"),
                 f"催办 {c['nags']} 次、推迟 {c['defers']} 次、"
-                f"修订 {c['revisions']} 次（都是监督留痕）",
+                f"修订 {c['revisions']} 次（当前累计监督留痕，不限于该笔成交前）",
             ],
         ))
     else:
         sections.append(ReviewSectionDTO(
-            heading_cn="当初怎么说的（纪律面）",
-            lines=["无关联计划——这笔是计划外操作，复盘时先问自己为什么没走计划流程。"],
+            heading_cn="当前关联计划（纪律面）",
+            lines=["无关联计划——原计划情况未知，不能据此判断是否按原计划执行。"],
         ))
 
     result_lines = [
@@ -94,7 +175,7 @@ def build_trade_review(
             if risk_amount > 0:
                 r_multiple = pnl_info["realized_pnl"] / risk_amount
                 result_lines.append(
-                    f"R 倍数 {r_multiple:.2f}（大白话：当初准备亏的钱为 1 份，"
+                    f"R 倍数 {r_multiple:.2f}（按当前计划参考价计算：参考风险金额为 1 份，"
                     f"这笔结果等于 {r_multiple:.2f} 份）"
                 )
     sections.append(ReviewSectionDTO(

@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-22",
+  "method": "Independent SHA-verified BaoStock row scan and cross-sectional arithmetic; original and revised lifecycle conventions applied separately.",
+  "sourceFingerprints": {
+    "v8Index": "165a695612cfb4022b899d9c20ea5c85e1736994533974551685f58c3a7dd153",
+    "oldUnion": "bb73ebce7e677b1e1b77446c8d832243d01813e53406a48e2792f2e820ff2396",
+    "master": "1af66b18ffd9cdd9ec3c981302bda5ff469a3fe473e4e943572f055ad5860e6e",
+    "newLedger": "888897e87437b9fb594f3fd28b27154c0a160eead2ab2c41c42e23cc7f410dce"
+  },
+  "old": {
+    "n": 5224,
+    "denominator": 1526139597237.64,
+    "k5": 262,
+    "numerator5": 669874543079.32,
+    "top5": 43.89339902403513,
+    "boundary5": [
+      [
+        "sz.300182",
+        1119024613.1
+      ],
+      [
+        "sh.600028",
+        1113878932.05
+      ]
+    ],
+    "k10": 523,
+    "numerator10": 885730274805.43,
+    "top10": 58.037303822574906,
+    "boundary10": [
+      [
+        "sz.002912",
+        626971802.72
+      ],
+      [
+        "sz.003021",
+        626877058.12
+      ]
+    ]
+  },
+  "new": {
+    "n": 5225,
+    "denominator": 1528327301013.06,
+    "k5": 262,
+    "numerator5": 670943222241.64,
+    "top5": 43.90049315986842,
+    "boundary5": [
+      [
+        "sh.601728",
+        1135298743.93
+      ],
+      [
+        "sz.300182",
+        1119024613.1
+      ]
+    ],
+    "k10": 523,
+    "numerator10": 887291006778.13,
+    "top10": 58.05634736682283,
+    "boundary10": [
+      [
+        "sh.603598",
+        627308729.29
+      ],
+      [
+        "sz.002912",
+        626971802.72
+      ]
+    ]
+  },
+  "changed": [
+    {
+      "code": "sz.301718",
+      "oldAmount": null,
+      "newAmount": 2187703775.42,
+      "old": null,
+      "new": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/recent/sz301718-2026-10-08-2026-11-06.json",
+        "sha256": "2a6733550b7f13fea784ed030e4e62b65c8026b00e8e7fb7f71134dc06c84fbc",
+        "value": 2187703775.42,
+        "status": "1",
+        "volume": "27128677"
+      },
+      "oldLifecycle": [
+        "2026-10-22",
+        null
+      ],
+      "newLifecycle": [
+        "2026-10-22",
+        null
+      ]
+    }
+  ],
+  "oldOnly": [],
+  "newOnly": [
+    "sz.301718"
+  ],
+  "oldRawObjectsRead": 5224,
+  "finding": {
+    "cause": "One newly listed security, sz.301718, was absent from the frozen v8 index used by the old daily card. The updated BaoStock stock-basic master lists its IPO on 2026-10-22, and the SHA-bound BaoStock day row supplies 2,187,703,775.42 in traded amount. All 5,224 previously included security amounts are identical; the new universe has 5,225 names.",
+    "addedCode": "sz.301718",
+    "addedAmount": 2187703775.42,
+    "denominatorIncrease": 2187703775.420166,
+    "top5NumeratorIncrease": 1068679162.3200684,
+    "top10NumeratorIncrease": 1560731972.6999512,
+    "oldIndexMissingCode": true,
+    "interpretation": "The later supplier master expands the historical listing-day universe. This is a historical snapshot revision, not a same-day market movement."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-10-07T09:31:15.206305+00:00",
+  "reviewed_at": "2026-10-07T09:31:32Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-10-07T093115.206305_0000-cb3fe881.json",
+  "changed_sources": [
+    "source-02"
+  ],
+  "facts": {
+    "a_share_rows": 4064305,
+    "a_share_latest_date": "2026-09-30",
+    "members_at_latest_market_date": 5211,
+    "current_code_date": "2026-10-07",
+    "current_code_count": 5572,
+    "daily_snapshot_date": "2026-09-30",
+    "daily_snapshot_total": 5572,
+    "daily_snapshot_eligible": 5212
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "逐股行情和日常快照均无变化；快照eligible仍是MA20口径，不是冻结研究要求的共同200日分母和覆盖率。",
+    "historical_membership": "只有当前名单标签从10月5日更新为10月7日，名单数量仍为5572；没有新增历史成员、生效时间或真实取得时间链。",
+    "etf_nominal_prices_and_actions": "ETF名义价格、公司行动和交易限制链均未变化，原资格缺口仍在。",
+    "availability": "没有9月30日之后的新市场行情；日期标签变化不能作为新市场证据。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "仅当前名单日期标签变化，没有可行动新证据；继续仅输入观察，不生成信号。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

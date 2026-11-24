@@ -1,0 +1,89 @@
+{
+  "schema": "b03-key-evidence-library-handoff/1.0",
+  "status": "all_four_exact_original_bytes_reconstructed_from_readable_text",
+  "preferred_reads": [
+    {
+      "role": "selected120 exact keys; bind its original CSV bytes/hash",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/b03-remaining-gaps-2026-10-06/B03-selected-120-exact.csv",
+      "library_file_id": "libfile_a97595e05ad88191be2d9ac2119573ca",
+      "file_id": "file_0000000028e481f4a4c927cc46e161fe",
+      "name": "B03-selected-120-exact.csv.txt",
+      "version": 0,
+      "bytes": 6420,
+      "sha256": "162575d8008e899233babdac9b6dc4c60c2b7d7ae6307ed0e7407b163a14821e",
+      "full_read_complete": true,
+      "exact_source_byte_reconstruction": "Library read shows LF line separators and omits original final newline. Preserve all lines, convert each shown LF to original CRLF and append one final CRLF. Original CSV has only CRLF; selected120 has121 line endings and remaining233 has234. Do not regenerate with a CSV writer or infer dates.",
+      "byte_download_rule": "Use downloaded original bytes unchanged; these read-display reconstruction steps are unnecessary for a byte download."
+    },
+    {
+      "role": "prior-acquisition reconciliation; B01/B02 sources and233 never queried keys",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/b03-remaining-gaps-2026-10-06/local-reconciliation.json",
+      "library_file_id": "libfile_02dc541d79388191a2f70e824686dd48",
+      "file_id": "file_000000002f2481fda2420fa64282bfb5",
+      "name": "local-reconciliation.json",
+      "version": 0,
+      "bytes": 5630,
+      "sha256": "03492e5d548cc53840433aa68f58b706da85a1f91136d3f6c041d8535497009d",
+      "full_read_complete": true,
+      "exact_source_byte_reconstruction": "Preserve full UTF-8 displayed content and append one original terminal LF; verify exact bytes and SHA256.",
+      "byte_download_rule": "Use downloaded original bytes unchanged; these read-display reconstruction steps are unnecessary for a byte download."
+    },
+    {
+      "role": "selected/deferred manifest/hash and no-overlap verification",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/b03-remaining-gaps-2026-10-06/proposal-verification.json",
+      "library_file_id": "libfile_cb1004187dd8819185c7d8b6ba7a3179",
+      "file_id": "file_00000000e3e08230b442be6098b5bb46",
+      "name": "proposal-verification.json",
+      "version": 0,
+      "bytes": 660,
+      "sha256": "ab3f8f29717fe7c49dc23d940b64df73269b15ef1fe8af03c91c792c46a7edc5",
+      "full_read_complete": true,
+      "exact_source_byte_reconstruction": "Preserve full UTF-8 displayed content and append one original terminal LF; verify exact bytes and SHA256.",
+      "byte_download_rule": "Use downloaded original bytes unchanged; these read-display reconstruction steps are unnecessary for a byte download."
+    },
+    {
+      "role": "full233 never-queried ledger bound by proposal-verification",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/b03-remaining-gaps-2026-10-06/remaining-233-exact.csv",
+      "library_file_id": "libfile_3fc8742981608191bc747dc333a4f150",
+      "file_id": "file_00000000c8bc81f6847c112fd97aaa70",
+      "name": "remaining-233-exact.csv.txt",
+      "version": 0,
+      "bytes": 12409,
+      "sha256": "7219d6288ec9637fc958547ef0373da6353e8b4e9adda703942f5e6c7b2d4579",
+      "full_read_complete": true,
+      "exact_source_byte_reconstruction": "Library read shows LF line separators and omits original final newline. Preserve all lines, convert each shown LF to original CRLF and append one final CRLF. Original CSV has only CRLF; selected120 has121 line endings and remaining233 has234. Do not regenerate with a CSV writer or infer dates.",
+      "byte_download_rule": "Use downloaded original bytes unchanged; these read-display reconstruction steps are unnecessary for a byte download."
+    }
+  ],
+  "original_csv_native_items_retained_for_download": [
+    {
+      "name": "B03-selected-120-exact.csv",
+      "library_file_id": "libfile_e76303d796e08191a5af185c166086bb",
+      "version": 0,
+      "bytes": 6420,
+      "read_display_warning": "CSV parsed as sheet: index added and symbol leading zeros removed. This display is not the original text. Use preferred .csv.txt refs for exact read reconstruction."
+    },
+    {
+      "name": "remaining-233-exact.csv",
+      "library_file_id": "libfile_b94fb14d43148191ab597061547db29f",
+      "version": 0,
+      "bytes": 12409,
+      "read_display_warning": "CSV parsed as sheet: index added and symbol leading zeros removed. This display is not the original text. Use preferred .csv.txt refs for exact read reconstruction."
+    }
+  ],
+  "additional_contract_reference": {
+    "role": "Source-audit provenance, not new B03 result output",
+    "library_file_id": "libfile_457a3c87e3d88191b8b8fc59d449fbbe",
+    "version": 0,
+    "archive_sha256": "3ed11716738a46f4b544a2551048fb178b2e7bf885a012162021592a756fa9e7",
+    "member_name": "original-gap-queue-frozen.json",
+    "member_sha256": "86efbc695762692dd4dff168e5bfa922a180549853586f677205a8b46e294578",
+    "note": "Existing approved source reference retained. No ZIP retry, source re-creation or reupload in this handoff. Contract required_outputs describe future execution outputs, not existing prerequisite files."
+  },
+  "new_market_calls": 0,
+  "source_content_changes": 0,
+  "research_script_executions": 0,
+  "main_data_changes": 0,
+  "reuse_checks": "Exact-title and simpler-title searches plus46 recent non-ZIP items found no prior matching files.",
+  "official_route": "Reused last successful official batch-create path after confirmed prepared helper unavailability; did not repeat the same unavailable-helper attempt."
+}

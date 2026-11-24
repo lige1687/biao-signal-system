@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "products": [
+    {
+      "code": "159915.SZ",
+      "name": "易方达创业板交易型开放式指数证券投资基金",
+      "kind": "etf",
+      "aliases": [
+        "易方达创业板ETF",
+        "创业板ETF易方达"
+      ],
+      "ambiguous_terms": [
+        "创业板"
+      ],
+      "factor_refs": [
+        "mixed.momentum.raw@1.0.0"
+      ],
+      "identity_source": {
+        "path": "docs/experiments/etf-pair-h1-action-qualification-2026-10-10.md",
+        "sha256": "bfc53418bdcbb7a1c172cb6e9d437fc0bbd3b4baa9787d687986e7d2b3ff5cde"
+      }
+    },
+    {
+      "code": "588000.SS",
+      "name": "华夏上证科创板50成份交易型开放式指数证券投资基金",
+      "kind": "etf",
+      "aliases": [
+        "科创50ETF华夏",
+        "华夏科创50ETF"
+      ],
+      "ambiguous_terms": [
+        "科创50"
+      ],
+      "factor_refs": [
+        "research.price_volume.range_mean20@1.0.0",
+        "research.price_volume.range_mean60@1.0.0"
+      ],
+      "identity_source": {
+        "path": "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch1/gate1-collection/PERIOD-MATRIX-2026-09-20.md",
+        "sha256": "793dc7c03d7f6311eb3f0142d6386d62aabea9c8a5ee71916ddbb747892a4b60"
+      }
+    },
+    {
+      "code": "012920",
+      "name": "易方达全球成长精选混合(QDII)A",
+      "kind": "fund",
+      "aliases": [
+        "易方达全球成长精选混合(QDII)A",
+        "易方达全球成长精选A"
+      ],
+      "ambiguous_terms": [
+        "易方达全球成长",
+        "易方达全球成长精选混合"
+      ],
+      "factor_refs": [],
+      "identity_source": {
+        "path": "configs/fund-disclosures.v1.json",
+        "sha256": "38825d1120f85a77139e10e3a2b143cf23ceb33d50f06be766fa4e3ce0a779f8"
+      }
+    }
+  ]
+}

@@ -73,27 +73,85 @@ def test_payload_symbol_numbers_whitelists_codes():
 
 
 def test_catalog_layer_resolves_index_not_in_watchlist(monkeypatch):
-    """目录搜索层：自选没有的也能按中文名/别名命中（科创 case）。"""
+    """目录搜索层：自选没有的也能按中文名/别名命中（科创 case）。
+
+    主控裁决（2026-09-15）后的产品定义（原「科创板块→000688.SS」断言
+    是名称轮引入的既有失败，非本轮引入；原失败记录见
+    docs/experiments/raw/agent-ask-stability-2026-09-15/pre-existing-failures.md）：
+    - 明确说「科创50」（即使句中另有「板块」二字）保留指数身份；
+    - 「科创板块/科创板整体」无唯一可核实对象 → None（resolve 层澄清，
+      科创50 只作可选观察参考，不代表整个科创板）。"""
     from lei_signal.api.routes import agent as agent_mod
 
     monkeypatch.setattr(
         "lei_signal.api.catalog.concept_boards", lambda **kw: []
     )
-    # 别名表：科创 → 科创50 指数
-    assert (
-        agent_mod._resolve_symbol_by_catalog("科创板块现在怎么看")
-        == "000688.SS"
-    )
-    # 目录名完整出现在话里：白酒 → TH 行业
-    assert agent_mod._resolve_symbol_by_catalog("白酒板块现在怎么看") == "TH881273"
+    # 明确指定的指数身份不被「板块」关键词截断
+    assert agent_mod._resolve_symbol_by_catalog("科创50指数现在怎么看") == "000688.SS"
+    assert agent_mod._resolve_symbol_by_catalog("科创50板块最近如何看") == "000688.SS"
+    # 板块泛指没有唯一可核实对象：不静默映射到指数
+    assert agent_mod._resolve_symbol_by_catalog("科创板块现在怎么看") is None
+    assert agent_mod._resolve_symbol_by_catalog("科创板整体怎么看") is None
+    # 目录名完整出现在话里：白酒 → TH 行业（真实板块不截断）。
+    # 两条既有查找路径的身份写法不一致（板块专名路径带 .SECTOR 后缀，
+    # 目录扫描路径不带；环境相关、名称轮之前即存在），此处只锁定
+    # 「是白酒行业板块」这一产品身份。
+    assert agent_mod._resolve_symbol_by_catalog("白酒板块现在怎么看") in (
+        "TH881273", "TH881273.SECTOR")
+    # 明确别名同样优先于板块二字（恒生科技指数）
+    assert agent_mod._resolve_symbol_by_catalog("恒生科技板块现在怎么看") == "^HSTECH"
     # 无关文本不命中（曾把「市场环境」误配环保行业，模糊匹配已废）
     assert agent_mod._resolve_symbol_by_catalog("市场环境怎么样") is None
     assert agent_mod._resolve_symbol_by_catalog("大盘还能做吗") is None
 
 
 def test_catalog_alias_longest_key_wins():
+    """别名最长键优先（中概互联 不被 中概 截胡）；板块泛指不再进别名表
+    （主控裁决 2026-09-15：「科创板」「聊聊科创」这类泛指不静默映射指数）。"""
     from lei_signal.api.routes import agent as agent_mod
 
-    # 「科创板」比「科创」长，两者都指向同一标的，此处验证不截胡不崩
-    assert agent_mod._resolve_symbol_by_catalog("科创板") == "000688.SS"
-    assert agent_mod._resolve_symbol_by_catalog("聊聊科创") == "000688.SS"
+    assert agent_mod._resolve_symbol_by_catalog("中概互联") == "513050.SS"
+    assert agent_mod._resolve_symbol_by_catalog("科创板") is None
+    assert agent_mod._resolve_symbol_by_catalog("聊聊科创") is None
+
+
+def test_resolve_api_clarifies_sector_area_with_index_reference(tmp_path):
+    """主控裁决（2026-09-15）：resolve 接口对「科创板块」给简短澄清——
+    科创50 作为可选观察参考并明确不代表整个板块；「科创50指数」则直接
+    解析为指数身份，无此澄清。"""
+    from fastapi import FastAPI
+    from fastapi.testclient import TestClient
+
+    from lei_signal.api.routes import copilot as copilot_routes
+    from lei_signal.storage.sqlite_store import connect
+
+    db = str(tmp_path / "t.db")
+    connect(db).close()
+    app = FastAPI()
+    app.state.plans_db_path = db
+    app.state.watchlist_db_path = db
+    app.include_router(copilot_routes.router)
+    client = TestClient(app)
+
+    r = client.post("/api/copilot/resolve", json={
+        "message": "科创板块现在怎么看", "client_request_id": "cr-area-1",
+        "session_id": None, "selected_symbol": None,
+    })
+    assert r.status_code == 200
+    data = r.json()
+    assert data["resolved_symbol"] is None
+    hits = [c for c in data["clarification"]
+            if c["kind"] == "sector_ambiguous_index_reference"]
+    assert hits, data["clarification"]
+    text = hits[0]["question_cn"]
+    assert "科创50" in text and "000688.SS" in text
+    assert "不代表整个板块" in text  # 明确指数不等于板块整体
+
+    r2 = client.post("/api/copilot/resolve", json={
+        "message": "科创50指数现在怎么看", "client_request_id": "cr-area-2",
+        "session_id": None, "selected_symbol": None,
+    })
+    data2 = r2.json()
+    assert data2["resolved_symbol"] == "000688.SS"
+    assert not [c for c in data2["clarification"]
+                if c["kind"] == "sector_ambiguous_index_reference"]

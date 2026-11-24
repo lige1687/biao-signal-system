@@ -1,0 +1,25 @@
+{
+  "question": "Which primary-source reference values correspond exactly to percent of stocks above 20/50/200-day moving averages, and how to show alongside dynamic percentiles?",
+  "decision_use": "Interpret breadth position and direction, not standalone trade authorization",
+  "mode": "report_only source verification plus authorized desktop UI",
+  "scope": [
+    "Source, market, MA horizon and qualification bound to each fixed value",
+    "Compact reference line beside local dynamic percentile",
+    "No extra mobile work"
+  ],
+  "target_and_baseline": "existing local dynamic P10/P90 vs externally published fixed interpretation examples",
+  "existing_evidence": [
+    "evidence-review-v6.md",
+    "StockCharts percent-above-MA primary source read 2026-11-02 in current chat"
+  ],
+  "success_and_falsification": "Accept only explicit same-indicator primary source values; reject nearby indicators or historical snapshots promoted to general rules",
+  "allowed_actions": "Bounded web primary-source lookup, local UI and own artifacts; no financial model or cache edits",
+  "budget_and_stop": {
+    "prior_sources": 7,
+    "new_max": 6,
+    "new_experiments": 0,
+    "stop": "verified applicable source values or evidence boundary"
+  },
+  "output_location": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/breadth-reading-aid-20261101",
+  "updated_at": "2026-11-02T18:51:56.917230+08:00"
+}

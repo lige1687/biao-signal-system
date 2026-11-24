@@ -1,0 +1,42 @@
+{
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "mission": "Make existing desktop price comparison charts readable while zoomed",
+  "task_scope": [
+    "Fix CN/US ERP and breadth/projection shared display issues: emphasize full daily price where available rather than weekly price sampling; larger price panel; on selected visible time interval independently auto-fit each Y axis using visible finite values (preserve exact values and gaps); improve contrast of rails using clearly distinct solid/dashed strokes no faint dotted rails. Keep user toggles, events on exact dates, zoom and no future top bottom detector. Changes only presentation; avoid new feature approval loops. Verify TS locally and focused pure tests if necessary.",
+    "Fix manual zoom hiding crossings because group representative is outside selected dates; price and ERP exact-date dots both remain visible. Use pure visible marker selection and meaningful regression test."
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "web/AGENTS.md",
+    "web/src/components/observation-library/projectionAlignment.ts",
+    "web/src/components/observation-library/projectionSources.ts",
+    "web/src/components/observation-library/usErpMarkerGroups.ts"
+  ],
+  "write_paths": [
+    "web/src/components/observation-library/ErpCrossChart.tsx",
+    "web/src/components/observation-library/erpCrossChart.css",
+    "web/src/components/observation-library/projectionView.tsx",
+    "web/src/components/observation-library/projection.css",
+    "web/src/components/market-style/BreadthComparison.tsx",
+    "web/src/components/market-observation-alerts/MiniTrend.tsx",
+    "web/src/components/observation-library/erpVisibleMarkers.ts",
+    "web/src/components/observation-library/erpVisibleMarkers.test.mjs"
+  ],
+  "network_allowed": false,
+  "expected_outputs": [
+    "Exact narrow paths changed; readable CN US price panels and stronger rails; zoom scale behavior; tests and material limitations"
+  ],
+  "stop_conditions": [
+    "No other file edits; ask root for adding exact helper/test paths if needed",
+    "No browser interaction; root performs desktop acceptance. No mobile, return research, data or threshold modifications. Preserve all unrelated changes."
+  ]
+}

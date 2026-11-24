@@ -5,11 +5,36 @@
   <key>Label</key>
   <string>com.lei.timing.daily</string>
 
+  <!-- 直接 exec 受管 python3，避免 /bin/bash 包装脚本触发 macOS 桌面沙箱
+       "Operation not permitted"。 -->
   <key>ProgramArguments</key>
   <array>
-    <string>/bin/bash</string>
-    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/timing_daily.sh</string>
+    <string>/Users/yongbiaoli/.workbuddy/binaries/python/envs/default/bin/python3</string>
+    <string>-c</string>
+    <string>import subprocess, sys
+for cmd, optional in (
+    (["scripts/refresh_timing_matrix.py"], True),
+    (["scripts/backfill_timing_data.py", "--refresh"], True),
+    (["-m", "lei_signal.strategy_lab", "one-page", "--refresh", "--top", "10"], True),
+    (["scripts/timing_scorecard.py"], False),
+):
+    rc = subprocess.call([sys.executable, *cmd])
+    if rc != 0:
+        if optional:
+            print(f"[warn] {cmd[0]} failed (rc={rc}), continuing", flush=True)
+        else:
+            sys.exit(rc)
+</string>
   </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/yongbiaoli/Desktop/lei-signal-lab</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PYTHONPATH</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/src</string>
+  </dict>
 
   <!-- 交易日 17:30：16:30 precompute_a_share_ma 更新长表缓存之后 -->
   <key>StartCalendarInterval</key>

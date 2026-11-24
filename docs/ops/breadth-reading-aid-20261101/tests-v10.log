@@ -1,0 +1,33 @@
+✔ a single missing observation remains a one-day run with background disabled (0.820875ms)
+✔ nonfinite and absent values stay missing even when the backend supplies a state (0.109833ms)
+✔ date keys align states independently of map order and a valid zero is not a gap (0.094334ms)
+✔ only supplied directional states receive color; mixed, flat and unknown remain unshaded (0.118125ms)
+✔ equal colors cannot bridge neutral, missing or unclassified observations (0.0865ms)
+✔ an empty date cannot extend color across its position (0.063459ms)
+✔ gap text describes a single internal missing observation without inventing a range (0.109458ms)
+✔ gap text counts observations, distinguishes trailing gaps and ignores colored runs (0.057333ms)
+✔ a one-day trailing gap says not updated and complete input has no gap notice (0.066166ms)
+✔ background legend distinguishes participation states and makes repair/retreat more visible (0.205792ms)
+✔ historical background follows the selected supplied horizon without future filtering (0.1765ms)
+✔ background run identifiers must never change the price axis range (77.758167ms)
+✔ phase background changes retain the current linked zoom and price axis (28.008792ms)
+✔ horizon changes retain the current linked zoom and price axis (16.81475ms)
+✔ reference track changes retain the current linked zoom and price axis (14.300208ms)
+✔ three-line comparison changes retain the current linked zoom and price axis (13.955459ms)
+✔ changing the chart scope to us:sp500:365 resets the linked zoom (13.141916ms)
+✔ changing the chart scope to cn:hs300:365 resets the linked zoom (13.168209ms)
+✔ changing the chart scope to cn:sse:1095 resets the linked zoom (12.734875ms)
+✔ hover marker updates retain the linked zoom (14.15ms)
+✔ joint projection marks each visible range at its same-day price and shows either-period gaps (5.872375ms)
+✔ unqualified opportunity and risk levels no longer render action-coloured zones or lines (0.858291ms)
+✔ PMI 50, zero growth and spread zero retain only their defined meaning (0.104958ms)
+✔ six legacy breadth queries keep numeric truth conditions without predictive metadata (0.238791ms)
+✔ joint AND conditions include boundaries and break ranges at either missing period (0.12375ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 553.122583

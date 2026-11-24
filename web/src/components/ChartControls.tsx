@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import {
   MA_META,
+  RANGE_PRESET_META,
   effectiveDisplay,
   type ChartDisplay,
   type ChipMode,
   type ColorMode,
   type MaKey,
+  type RangePreset,
 } from "./KlineChart";
 import { TIMEFRAME_META, saveTimeframe, type Timeframe } from "./klineTimeframe";
 import type { MarksScope } from "./klineStructureMarks";
@@ -28,6 +30,10 @@ interface Props {
   };
   /** 导出当前 K 线为 PNG（由父组件从 KlineChart 拿到的回调） */
   onDownloadPng?: () => void;
+  /** 当前高亮的快捷时间区间（null 表示用户已手动自由缩放）。 */
+  rangePreset?: RangePreset | null;
+  /** 点击快捷时间区间按钮时触发。 */
+  onRangePreset?: (preset: RangePreset) => void;
 }
 
 /** 徽章文本：口径过滤后数量小于总数时显示「n/total」，提示还有被口径隐藏的标记。 */
@@ -60,6 +66,8 @@ export default function ChartControls({
   counts,
   markTotals,
   onDownloadPng,
+  rangePreset,
+  onRangePreset,
 }: Props) {
   const toggle = (key: "keyVolatility" | "levels") =>
     onChange({ ...display, [key]: !display[key] });
@@ -144,13 +152,32 @@ export default function ChartControls({
         </div>
       </div>
 
+      {onRangePreset && (
+        <div className="ctl-group">
+          <span className="ctl-label">区间</span>
+          <div className="seg">
+            {RANGE_PRESET_META.map((r) => (
+              <button
+                key={r.key}
+                type="button"
+                className={`seg-btn ${rangePreset === r.key ? "on" : ""}`}
+                onClick={() => onRangePreset(r.key)}
+                title={r.title}
+              >
+                {r.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="ctl-group">
-        <span className="ctl-label">K线着色</span>
+        <span className="ctl-label">着色</span>
         <div className="seg">
           <button
             className={`seg-btn ${eff.colorMode === "red_green" ? "on" : ""}`}
             onClick={() => setMode("red_green")}
-            title="中国惯例：红涨绿跌"
+            title="红涨绿跌（底部细色带仍同步显示 BIAO 道路状态）"
           >
             红涨绿跌
           </button>
@@ -158,7 +185,7 @@ export default function ChartControls({
             className={`seg-btn ${eff.colorMode === "biao_state" ? "on" : ""}`}
             onClick={() => setMode("biao_state")}
             disabled={!isDaily}
-            title={isDaily ? "按当日 BIAO 三色着色（颜色只表达状态，涨跌看今日概述）" : dailyOnlyTitle}
+            title={isDaily ? "按当日 BIAO 三色着色（绿多头 / 灰中性 / 黑规避），具体开高低收见上方动态读数栏" : dailyOnlyTitle}
           >
             BIAO 绿灰黑
           </button>
@@ -168,9 +195,9 @@ export default function ChartControls({
           className={`chip ctl-settings-toggle ${settingsOpen ? "on" : ""}`}
           aria-expanded={settingsOpen}
           onClick={() => setSettingsOpen((v) => !v)}
-          title="均线、结构标记、参考线等显示开关"
+          title="均线、结构标记、筹码峰与 MACD 等显示开关"
         >
-          图表设置{activeCount > 0 ? `（已开 ${activeCount} 项）` : ""} {settingsOpen ? "▴" : "▾"}
+          图表设置{activeCount > 0 ? `（${activeCount}）` : ""} {settingsOpen ? "▴" : "▾"}
         </button>
         {isDaily && anyMark && (
           <button
@@ -194,11 +221,26 @@ export default function ChartControls({
           <button
             className="chip export"
             onClick={onDownloadPng}
-            title="把当前 K 线图导出为 PNG（包含你打开的标记、参考线、均线）"
+            title="导出当前 K 线图为 PNG（包含当前打开的均线、筹码与标记）"
           >
-            ⤓ 导出 PNG
+            ⤓ 导出
           </button>
         )}
+        <span
+          className="ctl-help-btn"
+          tabIndex={0}
+          role="note"
+          aria-label="图表口径说明"
+          title={
+            "图面说明：\n" +
+            "• 底部细色带：日线 BIAO 道路状态（绿多头 / 灰中性 / 黑规避），切红涨绿跌也能同看\n" +
+            "• 双20云带：实线 EMA20 与虚线 SMA20 之间的趋势带\n" +
+            "• 右侧筹码：橙=获利盘、紫=套牢盘，虚线标出前3密集成本峰与距现价空间\n" +
+            "• MACD：研究代理强度参考（金叉/死叉与穿0轴仅看强弱，非买卖点）"
+          }
+        >
+          ?
+        </span>
       </div>
 
       {settingsOpen && <>

@@ -1,0 +1,794 @@
+{
+  "schema_version": "csi300-targeted-membership-evidence/1.1",
+  "created_at_utc": "2026-10-06T19:01:46.159012+00:00",
+  "scope": "Four targeted historical-event objects: December 2021, December 2022 and the Haitong / China Shipbuilding temporary changes in 2025. No claim of complete historical membership.",
+  "index": {
+    "name": "沪深300",
+    "code": "000300"
+  },
+  "candidate_sources": [
+    "libfile_7a921354a1688191a0152c1ed11f336f",
+    "libfile_1a431e9c17808191911fbdecf8ff1ec0"
+  ],
+  "key_conclusions": [
+    "The 15-in/15-out candidate dated 2023-03-20 exactly matches a screenshot of the official CSI change table reproduced by Securities Times for the December 2022 rebalance. The same article explicitly reports effectiveness after the 2022-12-09 close. Treat 2023-03-20 as an observation/version date, not the effective membership date.",
+    "The 28-in/28-out candidate dated 2022-01-17 corresponds at the name level to the December 2021 list in a China Securities Journal table citing CSI and Wind, reprinted by Sina. A contemporaneous Securities Times bulletin reports effectiveness after 2021-12-10 close. This is name-level corroboration, not direct original code verification.",
+    "The full exported 2022-01-04 candidate anchor has 300 unique codes. Under the explicitly disclosed name-to-candidate-code mapping it retains all 28 December-2021 reported removals and omits all 28 additions. This fails a targeted staleness test; it does not establish a corrected complete official anchor.",
+    "Public reports independently give 2025-03-04 for Sailun admission and 2025-09-05 for Qingdao Port admission. Formal CSI replacement notices and exact removal/inclusion binding remain missing."
+  ],
+  "evidence_objects": [
+    {
+      "object_id": "december-2022-rebalance",
+      "candidate_observation_date": "2023-03-20",
+      "source_class": "designated-securities-media reproduction of official CSI table plus contemporaneous reporting",
+      "official_original_obtained": false,
+      "source_url": "https://www.stcn.com/article/detail/741239.html",
+      "publisher": "证券时报网",
+      "author": "朱凯",
+      "publication_date_as_printed": "2022-11-26 19:25",
+      "announcement_date_reported": "2022-11-25",
+      "reported_effective_at": "2022-12-09 after market close, Asia/Shanghai",
+      "next_session_state_date": "2022-12-12",
+      "date_source_excerpt": "于2022年12月9日收市后生效。",
+      "date_source_location": "HTML body lines 53-57 in web extraction",
+      "attachment_url": "https://stcn-main.oss-cn-shenzhen.aliyuncs.com/upload/wechat/20221126/YRdSz9epGVia5sXfTEgmRfra74Rwo2uy4a3z8Sia6OSMgjb790yq1REicLWrUPFn4VG5ZpcEBp6rHAOh0klRpuEow.png",
+      "attachment_sha256": "50d76db18a47f4b7c41a5816ca1b14b8154e645f83ee9cc6b2579ddabe27e09b",
+      "attachment_bytes": 132578,
+      "attachment_provenance_text": "数据来源：中证指数官网截图",
+      "read_quality": "All 15 added and 15 removed codes visually read from high-resolution image; zero ambiguous characters; official-source attribution is the newspaper caption, not a CSI-hosted original",
+      "added_codes_as_read": [
+        "000723",
+        "000733",
+        "002180",
+        "002756",
+        "300769",
+        "600039",
+        "600233",
+        "600674",
+        "600803",
+        "600884",
+        "601615",
+        "601689",
+        "605117",
+        "688187",
+        "688303"
+      ],
+      "removed_codes_as_read": [
+        "000066",
+        "000703",
+        "002568",
+        "002607",
+        "002791",
+        "300003",
+        "300866",
+        "600161",
+        "600352",
+        "600489",
+        "600655",
+        "601825",
+        "601916",
+        "603087",
+        "603160"
+      ],
+      "candidate_comparison": {
+        "added_exact_match": true,
+        "removed_exact_match": true,
+        "checked_against": "catalog lines 391-424; candidate dated 2023-03-20"
+      },
+      "confidence": "High for screenshot contents and media-reported effective date. Formal-original provenance gate remains open.",
+      "independent_date_corroboration": {
+        "url": "https://www.cs.com.cn/gppd/gsyj/202211/t20221125_6310359.html",
+        "publisher": "中国证券报·中证网",
+        "publication_date": "2022-11-25 20:33",
+        "body_read": true,
+        "location": "lines 34-38",
+        "supports": "15 changes and effectiveness after 2022-12-09 close; not the full code table"
+      }
+    },
+    {
+      "object_id": "december-2021-rebalance",
+      "candidate_observation_date": "2022-01-17",
+      "source_class": "contemporaneous designated-securities-media bulletin; independent journalist-constructed name table reprinted by Sina",
+      "official_original_obtained": false,
+      "date_source_url": "https://www.stcn.com/kuaixun/egs/202111/t20211126_3911027.html",
+      "publisher": "证券时报·e公司",
+      "author": "许擎天梅",
+      "publication_date_as_printed": "2021-11-26 22:44",
+      "reported_effective_at": "2021-12-10 after market close, Asia/Shanghai",
+      "next_session_state_date": "2021-12-13",
+      "date_source_excerpt": "自12月10日收市后生效。",
+      "date_source_location": "HTML body lines 51-55",
+      "list_article_url": "https://finance.sina.com.cn/wm/2021-11-27/doc-ikyamrmy5416301.shtml",
+      "list_attributed_author": "中国证券报·中证金牛座",
+      "list_published_at": "2021-11-27 14:33",
+      "attachment_url": "https://n.sinaimg.cn/spider20211127/377/w547h630/20211127/a066-6da2a1ab5235f3651471a286fe6f08dc.png",
+      "attachment_sha256": "f905afcff81e3d22c5d261f6d5c126487d639c6e72d7ff0902f6673100314677",
+      "attachment_bytes": 127830,
+      "read_quality": "All 28 added and 28 removed names visually read; table includes market capitalization and industry, but no security codes. Source caption says CSI and Wind; not an official attachment screenshot.",
+      "added_names_as_read": [
+        "东方盛虹",
+        "华峰化学",
+        "晶澳科技",
+        "天齐锂业",
+        "百润股份",
+        "天赐材料",
+        "坚朗五金",
+        "晶盛机电",
+        "宁德时代",
+        "康龙化成",
+        "迈瑞医疗",
+        "卓胜微",
+        "安克创新",
+        "稳健医疗",
+        "爱美客",
+        "金龙鱼",
+        "三峡能源",
+        "中国电信",
+        "福莱特",
+        "中国能建",
+        "中煤能源",
+        "玲珑轮胎",
+        "合盛硅业",
+        "科沃斯",
+        "东鹏饮料",
+        "奇安信-U",
+        "天合光能",
+        "中芯国际"
+      ],
+      "removed_names_as_read": [
+        "金科股份",
+        "国元证券",
+        "顺鑫农业",
+        "石基信息",
+        "东山精密",
+        "欧菲光",
+        "沪电股份",
+        "老板电器",
+        "巨人网络",
+        "西部证券",
+        "万达电影",
+        "康弘药业",
+        "长城证券",
+        "华林证券",
+        "信维通信",
+        "中国卫星",
+        "圆通速递",
+        "安迪苏",
+        "华夏幸福",
+        "中国动力",
+        "华海药业",
+        "中天科技",
+        "三安光电",
+        "中航产融",
+        "渝农商行",
+        "东吴证券",
+        "上海电气",
+        "招商轮船"
+      ],
+      "comparison": "Name-level correspondence to the candidate 28-in/28-out set; no claim that this image independently verifies the 56 security codes.",
+      "confidence": "High that December 2021 was a 28-name rebalance; strong corroboration for the candidate date error; direct official code table still required."
+    },
+    {
+      "object_id": "haitong-sailun-2025",
+      "candidate_change": {
+        "removed_code": "600837",
+        "added_code": "601058"
+      },
+      "formal_csi_notice_obtained": false,
+      "source_class": "secondary report, not issuer or index-provider official notice",
+      "source_url": "https://finance.sina.com.cn/stock/relnews/cn/2025-03-04/doc-inennqmm8628146.shtml",
+      "publisher_as_printed": "挖贝网, reprinted by 新浪财经",
+      "publication_date_as_printed": "2025-03-04 15:34",
+      "admission_date_reported": "2025-03-04",
+      "body_location": "lines 44-50",
+      "source_excerpt": "3月4日，赛轮轮胎正式被纳入沪深300指数",
+      "supports": "Explicit Sailun inclusion date and narrative that the change arises from the Haitong absorption merger and takes effect from its delisting date.",
+      "does_not_establish": "Formal CSI notice attachment binding 600837 removal to 601058 admission; complete chain; any additional changes",
+      "confidence": "Corroboration only; no formal event certification."
+    },
+    {
+      "object_id": "china-shipbuilding-qingdao-2025",
+      "candidate_change": {
+        "removed_code": "601989",
+        "added_code": "601298"
+      },
+      "formal_csi_notice_obtained": false,
+      "source_class": "company-attributed press release reprinted by media; not index-provider notice",
+      "source_url": "https://finance.sina.com.cn/stock/relnews/hk/2025-09-08/doc-infpuftn6264331.shtml",
+      "publisher_as_printed": "青岛港, reprinted by 新浪财经",
+      "publication_date_as_printed": "2025-09-08 14:21",
+      "admission_date_reported": "2025-09-05",
+      "body_location": "lines 44-48",
+      "source_excerpt": "9月5日，青岛港",
+      "supports": "A company-attributed release explicitly reports Qingdao Port admission to CSI300 on 2025-09-05.",
+      "does_not_establish": "Original company post authentication or formal CSI temporary notice; this article does not mention removal of 601989.",
+      "confidence": "Company-attributed inclusion-date corroboration; no formal replacement certification."
+    }
+  ],
+  "raw_html_retrieval_hashes": [
+    {
+      "key": "2022-stcn",
+      "url": "https://www.stcn.com/article/detail/741239.html",
+      "raw_sha256": "326e46430b12c26cab9ccecffda4d8662d9ad0c5c8866ae2010542c49960b115",
+      "raw_bytes": 55775,
+      "retrieved_at_utc": "2026-10-06T19:00:28.913611+00:00",
+      "read_quality": "HTML body read via web extraction; raw response independently saved for hash; hash is retrieval-version-specific"
+    },
+    {
+      "key": "2021-stcn-bulletin",
+      "url": "https://www.stcn.com/kuaixun/egs/202111/t20211126_3911027.html",
+      "raw_sha256": null,
+      "failure": "HTTP Error 404: Not Found"
+    },
+    {
+      "key": "2025-qingdao-issuer-reprint",
+      "url": "https://finance.sina.com.cn/stock/relnews/hk/2025-09-08/doc-infpuftn6264331.shtml",
+      "raw_sha256": "58bff033216fcc645a3d556bc24379e9d96f959f59415cb132b038013740ac6e",
+      "raw_bytes": 99470,
+      "retrieved_at_utc": "2026-10-06T19:00:30.501317+00:00",
+      "read_quality": "HTML body read via web extraction; raw response independently saved for hash; hash is retrieval-version-specific"
+    },
+    {
+      "key": "2025-sailun-media",
+      "url": "https://finance.sina.com.cn/stock/relnews/cn/2025-03-04/doc-inennqmm8628146.shtml",
+      "raw_sha256": "6be2a9feb7a931068189b4915ecde702733fb2ef85a95f276f98896b19003ad2",
+      "raw_bytes": 100968,
+      "retrieved_at_utc": "2026-10-06T19:00:30.904269+00:00",
+      "read_quality": "HTML body read via web extraction; raw response independently saved for hash; hash is retrieval-version-specific"
+    }
+  ],
+  "limitations": [
+    "No new direct CSI-hosted historical member list or formal temporary-change attachment was obtained.",
+    "No initial full 300-member snapshot effective 2022-01-04 was obtained.",
+    "No completeness statement is made for changes through 2026-06-30.",
+    "The next-session dates are normalized membership-state dates derived from the expressly reported after-close effectiveness, not separate announcement quotations.",
+    "No paid API, authenticated account, credential, provider download or bulk history was used; two small public table images and four public article bodies were retrieved.",
+    "Raw-body hashes identify current retrieval versions, which can contain dynamic page elements. Article bodies are not bundled for republication; URLs, short excerpts, paraphrases and hashes are provided."
+  ],
+  "failed_source_reads": [
+    {
+      "url": "https://news.stcn.com/sd/202111/t20211127_3911236.html",
+      "result": "HTTP 502 in web and in one independent public HTML retrieval; no bypass attempted"
+    },
+    {
+      "url": "https://news.stcn.com/sd/202111/t20211129_3912722.html",
+      "result": "HTTP 502 in web; not retried"
+    }
+  ],
+  "updated_at_utc": "2026-10-06T19:58:00.196829+00:00",
+  "initial_anchor_staleness_diagnostic": {
+    "created_at_utc": "2026-10-06T19:58:00.196829+00:00",
+    "source_library_file_id": "libfile_1a431e9c17808191911fbdecf8ff1ec0",
+    "source_file_name": "object-mapping.json",
+    "source_object_id": "anchor-2022-01-04",
+    "source_frozen_parquet_sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30",
+    "source_frozen_parquet_bytes": 136179,
+    "source_read_scope": "The complete 300-code candidate anchor and full first 28-in/28-out candidate delta were read from the exported mapping. The underlying Parquet on the user computer was not reread in this bounded pass.",
+    "candidate_anchor_date": "2022-01-04",
+    "candidate_anchor_count": 300,
+    "candidate_anchor_unique_count": 300,
+    "candidate_anchor_version_tags": [
+      "8e9ddebf7b05"
+    ],
+    "candidate_transition_date": "2022-01-17",
+    "candidate_previous_observed_date": "2022-01-14",
+    "candidate_before_version_tags": [
+      "8e9ddebf7b05"
+    ],
+    "candidate_after_version_tags": [
+      "6ff6f145b2f2"
+    ],
+    "name_to_candidate_code_mapping": {
+      "basis": "Manual one-to-one association of the 56 names visually transcribed from the contemporaneous table with codes in the existing candidate delta. The name table and candidate lists have matching ascending-code order; all associations are shown explicitly below. No ticker directory or direct official code table was newly obtained.",
+      "names_in_media_table": 56,
+      "unique_names_associated": 56,
+      "unique_candidate_codes_associated": 56,
+      "ambiguous_or_duplicate_names": [],
+      "independently_official_code_verified": false,
+      "rows": [
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "000301",
+          "reported_name": "东方盛虹",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "002064",
+          "reported_name": "华峰化学",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "002459",
+          "reported_name": "晶澳科技",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "002466",
+          "reported_name": "天齐锂业",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "002568",
+          "reported_name": "百润股份",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "002709",
+          "reported_name": "天赐材料",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "002791",
+          "reported_name": "坚朗五金",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "300316",
+          "reported_name": "晶盛机电",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "300750",
+          "reported_name": "宁德时代",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "300759",
+          "reported_name": "康龙化成",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "300760",
+          "reported_name": "迈瑞医疗",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "300782",
+          "reported_name": "卓胜微",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "300866",
+          "reported_name": "安克创新",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "300888",
+          "reported_name": "稳健医疗",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "300896",
+          "reported_name": "爱美客",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "300999",
+          "reported_name": "金龙鱼",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "600905",
+          "reported_name": "三峡能源",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "601728",
+          "reported_name": "中国电信",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "601865",
+          "reported_name": "福莱特",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "601868",
+          "reported_name": "中国能建",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "601898",
+          "reported_name": "中煤能源",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "601966",
+          "reported_name": "玲珑轮胎",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "603260",
+          "reported_name": "合盛硅业",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "603486",
+          "reported_name": "科沃斯",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "605499",
+          "reported_name": "东鹏饮料",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "688561",
+          "reported_name": "奇安信-U",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "688599",
+          "reported_name": "天合光能",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "add",
+          "candidate_code": "688981",
+          "reported_name": "中芯国际",
+          "present_in_candidate_initial_anchor": false,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "000656",
+          "reported_name": "金科股份",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "000728",
+          "reported_name": "国元证券",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "000860",
+          "reported_name": "顺鑫农业",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002153",
+          "reported_name": "石基信息",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002384",
+          "reported_name": "东山精密",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002456",
+          "reported_name": "欧菲光",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002463",
+          "reported_name": "沪电股份",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002508",
+          "reported_name": "老板电器",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002558",
+          "reported_name": "巨人网络",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002673",
+          "reported_name": "西部证券",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002739",
+          "reported_name": "万达电影",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002773",
+          "reported_name": "康弘药业",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002939",
+          "reported_name": "长城证券",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "002945",
+          "reported_name": "华林证券",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "300136",
+          "reported_name": "信维通信",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "600118",
+          "reported_name": "中国卫星",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "600233",
+          "reported_name": "圆通速递",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "600299",
+          "reported_name": "安迪苏",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "600340",
+          "reported_name": "华夏幸福",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "600482",
+          "reported_name": "中国动力",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "600521",
+          "reported_name": "华海药业",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "600522",
+          "reported_name": "中天科技",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "600703",
+          "reported_name": "三安光电",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "600705",
+          "reported_name": "中航产融",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "601077",
+          "reported_name": "渝农商行",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "601555",
+          "reported_name": "东吴证券",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "601727",
+          "reported_name": "上海电气",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        },
+        {
+          "direction_reported_dec2021": "remove",
+          "candidate_code": "601872",
+          "reported_name": "招商轮船",
+          "present_in_candidate_initial_anchor": true,
+          "mapping_status": "unique explicit analyst association; NOT independently official-code-verified"
+        }
+      ]
+    },
+    "set_test_results": {
+      "reported_additions_present_in_anchor_count": 0,
+      "reported_additions_missing_from_anchor_count": 28,
+      "reported_removals_still_present_in_anchor_count": 28,
+      "reported_removals_absent_from_anchor_count": 0,
+      "missing_added_candidate_codes": [
+        "000301",
+        "002064",
+        "002459",
+        "002466",
+        "002568",
+        "002709",
+        "002791",
+        "300316",
+        "300750",
+        "300759",
+        "300760",
+        "300782",
+        "300866",
+        "300888",
+        "300896",
+        "300999",
+        "600905",
+        "601728",
+        "601865",
+        "601868",
+        "601898",
+        "601966",
+        "603260",
+        "603486",
+        "605499",
+        "688561",
+        "688599",
+        "688981"
+      ],
+      "retained_removed_candidate_codes": [
+        "000656",
+        "000728",
+        "000860",
+        "002153",
+        "002384",
+        "002456",
+        "002463",
+        "002508",
+        "002558",
+        "002673",
+        "002739",
+        "002773",
+        "002939",
+        "002945",
+        "300136",
+        "600118",
+        "600233",
+        "600299",
+        "600340",
+        "600482",
+        "600521",
+        "600522",
+        "600703",
+        "600705",
+        "601077",
+        "601555",
+        "601727",
+        "601872"
+      ],
+      "affected_slot_count": 28,
+      "affected_slot_fraction_of_300": 0.09333333333333334,
+      "membership_bit_discrepancy_count": 56,
+      "interpretation": "Every one of the 28 expected incoming names is missing and every one of the 28 expected outgoing names is retained, under the explicit candidate-code association. This is a 28-slot / 9.33% targeted staleness diagnosis, NOT an assertion that the remaining 272 positions are correct or that exactly 28 is the total authoritative error count."
+    },
+    "reported_official_event_timing": {
+      "source_url": "https://www.stcn.com/kuaixun/egs/202111/t20211126_3911027.html",
+      "reported_effective_at": "2021-12-10 after market close, Asia/Shanghai",
+      "normalized_first_membership_session": "2021-12-13",
+      "candidate_switch_lag_calendar_days": 35,
+      "qualification": "Effective date is contemporaneous designated-media reporting of the CSI announcement; the direct official original remains missing."
+    },
+    "quarantine_implications": [
+      {
+        "reason": "December 2021 rebalance delayed in candidate record",
+        "start_inclusive": "2022-01-04",
+        "end_inclusive": "2022-01-14",
+        "candidate_transition_date": "2022-01-17",
+        "evidence": "Initial 2022-01-04 version and recorded 2022-01-14 before-version are identical; mapping identifies 2022-01-17 as the next 28-in/28-out change.",
+        "scope": "Quarantine membership-dependent research inputs and conclusions on this interval pending a validated historical universe. This pass does not independently reread every intermediate daily row."
+      },
+      {
+        "reason": "December 2022 rebalance delayed in candidate record",
+        "start_inclusive": "2022-12-12",
+        "end_inclusive": "2023-03-17",
+        "candidate_transition_date": "2023-03-20",
+        "candidate_switch_lag_calendar_days": 98,
+        "evidence": "The previously checked official-table media reproduction matches all 15-in/15-out codes; mapping records the same pre-change version until the observation on 2023-03-17 and switch on 2023-03-20.",
+        "scope": "Quarantine membership-dependent research on the mapped stale interval. The list of every actual exchange session was not recomputed."
+      },
+      {
+        "reason": "Unqualified initial anchor and incomplete official change catalogue",
+        "start_inclusive": "2022-01-04",
+        "end_inclusive": "2026-06-30",
+        "scope": "Entire requested historical universe remains not qualified for certified research, even after the two delayed candidate switches. This is a qualification hold, not a claim that every day or every member is wrong."
+      }
+    ],
+    "not_performed": [
+      "No pool rows were changed",
+      "No reconstructed 300-name replacement anchor was published",
+      "No price/provider calls",
+      "No factor fitting or backtests",
+      "No new broad public-source search"
+    ],
+    "conclusion": "The candidate initial anchor fails the targeted December-2021 consistency test and must not be treated as an authoritative membership state. An official complete initial list and complete effective-change chain are still required; moving the two candidate event dates alone is not a validated repair."
+  }
+}

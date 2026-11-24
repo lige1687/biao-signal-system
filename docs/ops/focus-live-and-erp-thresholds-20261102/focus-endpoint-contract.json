@@ -1,0 +1,35 @@
+{
+  "mission": "Independently check latest selected-13 mean from source endpoint rows and adjustment factors; no new full calculation",
+  "task_scope": [
+    "Read existing continuation audit and original/reused source pointers",
+    "Independently check latest selected names and 20-session endpoint returns, compare mean to published latest",
+    "Do not rerun a full continuation or any ERP experiment"
+  ],
+  "read_only_paths": [
+    "src/lei_signal/research/focus_recent.py",
+    "docs/ops/focus-live-and-erp-thresholds-20261102/focus-continuation",
+    "web/public/research/focus-momentum/continuation.v1.json",
+    "/Volumes/win+mac通用"
+  ],
+  "write_paths": [
+    "docs/ops/focus-live-and-erp-thresholds-20261102/focus-endpoint-review.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "source-bound endpoint arithmetic check and limitation in focus-endpoint-review.md"
+  ],
+  "stop_conditions": [
+    "No full computation or network or protected input write",
+    "Stop if exact input pointers unavailable"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

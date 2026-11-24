@@ -5,8 +5,10 @@ POST refresh 现场重扫并落两表。不推通知（用户决策：只面板+
 """
 from __future__ import annotations
 
+import sqlite3
 from contextlib import closing
 from datetime import date, timedelta
+from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request
 
@@ -46,11 +48,20 @@ def _service(request: Request):
 
 def _build_response(db_path: str, scan_date: str | None = None) -> SignalsTodayResponse:
     scan_date = scan_date or today_date()
-    with closing(connect(db_path)) as conn:
-        buy_rows = list_scan(conn, scan_date)
-        sell_rows = list_signal_alerts(conn, scan_date, side=SIDE_SELL)
-        unavailable_rows = list_signal_alerts(conn, scan_date, side=SIDE_UNAVAILABLE)
-        as_of = get_scan_as_of(conn, scan_date)
+    if not Path(db_path).is_file():
+        return SignalsTodayResponse(scan_date=scan_date, as_of=None, available=False)
+    with closing(sqlite3.connect(Path(db_path).resolve().as_uri() + "?mode=ro", uri=True)) as conn:
+        conn.row_factory = sqlite3.Row
+        tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        buy_rows = list_scan(conn, scan_date) if "daily_opportunity_scan" in tables else []
+        sell_rows = (
+            list_signal_alerts(conn, scan_date, side=SIDE_SELL) if "signal_alerts" in tables else []
+        )
+        unavailable_rows = (
+            list_signal_alerts(conn, scan_date, side=SIDE_UNAVAILABLE)
+            if "signal_alerts" in tables else []
+        )
+        as_of = get_scan_as_of(conn, scan_date) if "signal_alerts" in tables else None
     all_rows = buy_rows + sell_rows + unavailable_rows
     response = SignalsTodayResponse(
         scan_date=scan_date,
@@ -88,6 +99,32 @@ def _build_response(db_path: str, scan_date: str | None = None) -> SignalsTodayR
 def today_signals(request: Request) -> SignalsTodayResponse:
     """今日自选信号（读库）：看盘主页横幅 + 顶栏红点合计的数据源。"""
     return _build_response(_db_path(request))
+
+
+@router.get("/signals/latest", response_model=SignalsTodayResponse)
+def latest_signals(request: Request) -> SignalsTodayResponse:
+    """Read the most recent saved snapshot, preserving its original date. Never scan or migrate."""
+    db_path = _db_path(request)
+    if not Path(db_path).is_file():
+        return SignalsTodayResponse(scan_date=today_date(), as_of=None, available=False)
+    with closing(sqlite3.connect(Path(db_path).resolve().as_uri() + "?mode=ro", uri=True)) as conn:
+        if not conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='signal_alerts'"
+        ).fetchone():
+            return SignalsTodayResponse(scan_date=today_date(), as_of=None, available=False)
+        days = conn.execute(
+            "SELECT DISTINCT scan_date FROM signal_alerts "
+            "WHERE side='meta' AND kind='as_of' AND title IN ('close','intraday') "
+            "AND scan_date <= ? ORDER BY scan_date DESC", (today_date(),)
+        ).fetchall()
+        for (raw_day,) in days:
+            try:
+                if date.fromisoformat(raw_day).isoformat() != raw_day:
+                    continue
+            except (TypeError, ValueError):
+                continue
+            return _build_response(db_path, raw_day)
+    return SignalsTodayResponse(scan_date=today_date(), as_of=None, available=False)
 
 
 @router.post("/signals/today/refresh", response_model=SignalsTodayResponse)

@@ -1,0 +1,216 @@
+{
+  "schema": "sentiment-three-use-evidence/1",
+  "updated_at": "2026-10-03T19:24:17.348884+08:00",
+  "scope_commit": "d53497de0accff778d0db96c010c30078e5b54d9",
+  "scope_authority": "用户：都解决一下吧。注意不要和其他路做的重复了。",
+  "market_scope": "宽基/ETF；已列量化证据仅SPY，不外推A股/板块/所有ETF",
+  "uses": [
+    {
+      "id": "opportunity",
+      "question": "同样价格背景与宽度低状态，情绪是否帮助判断随后涨跌？",
+      "evidence_ids": [
+        "breadth",
+        "aaii_background",
+        "naaim"
+      ],
+      "current_answer": "局部线索存在，稳定额外信息未确认；原E低宽度内AAII确认未评价。",
+      "status": "blocked_for_original_E_joint_question",
+      "next_dependency": "合格真实历史20/50成员/价格/版本；沿原120间隔条件方向正式冻结。"
+    },
+    {
+      "id": "risk",
+      "question": "情绪是否帮助判断随后一段时间内会跌多深？",
+      "evidence_ids": [
+        "aaii_risk"
+      ],
+      "current_answer": "旧限定连续AAII未确认稳定帮助；原E高位/低位组合风险、预警概率及完整对冲未测。",
+      "status": "limited_historical_question_completed_core_remaining_blocked",
+      "next_dependency": "合格同一宽度输入和成熟风险结果；下跌幅度与概率分别定义，不换目标追优势。"
+    },
+    {
+      "id": "state_explanation",
+      "question": "当前指标到底测什么，其高低与变化能够支持哪些说法？",
+      "evidence_ids": [
+        "breadth",
+        "aaii_background",
+        "aaii_risk",
+        "naaim"
+      ],
+      "current_answer": "沿既有research-cards提供含义、证据与反例；可描述不表示可预测，没有装载当前值。",
+      "status": "evidence_mapping_completed_ui_not_started",
+      "next_dependency": "解释呈现由investor-observation-map/market-observation原负责人负责，本线提供准确研究引用。"
+    }
+  ],
+  "performance_and_increment": [
+    {
+      "id": "aaii_background",
+      "result_source": "docs/experiments/raw/sentiment-aaii-background-2026-10-02/run-01/results.json",
+      "result_pointer": "/overall",
+      "report": "docs/experiments/sentiment-aaii-background-2026-10-02.md",
+      "target": "SPY未来120报价间隔涨跌",
+      "existing_information": "五项价格背景＋当前AAII",
+      "added_information": "20个完整调查周AAII平均",
+      "metrics": {
+        "dates": 816,
+        "baseline_rmse_pp": 8.971200864258938,
+        "candidate_rmse_pp": 8.908118289819152,
+        "simple_average_rmse_pp": 8.750926840259678,
+        "increment_squared_error_reduction_pct": 1.4013906786930153
+      },
+      "counterexample": "删2020评价后微弱优势消失；全组合不如过去平均。",
+      "stable_increment": "not_confirmed",
+      "stage": "reused_seen_history",
+      "new_fits": 0
+    },
+    {
+      "id": "aaii_risk",
+      "result_source": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/executor/run-01/results.json",
+      "result_pointer": "/overall",
+      "report": "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md",
+      "target": "SPY未来120报价间隔窗口内最大阶段下跌幅度",
+      "existing_information": "五项价格背景",
+      "added_information": "当前AAII连续多空差",
+      "metrics": {
+        "dates": 835,
+        "baseline_rmse_pp": 6.625551352423564,
+        "candidate_rmse_pp": 6.618618776323697,
+        "simple_average_rmse_pp": 6.496524399591531,
+        "increment_squared_error_reduction_pct": 0.2091584176831307
+      },
+      "counterexample": "删2016优势消失；估计跌幅并非大跌概率/账户回撤。",
+      "stable_increment": "not_confirmed",
+      "stage": "reused_seen_history",
+      "new_fits": 0
+    },
+    {
+      "id": "breadth",
+      "result_source": "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/run-01/results.json",
+      "result_pointer": "/performance/core",
+      "report": "docs/experiments/sentiment-breadth-effects-2026-10-02.md",
+      "target": "SPY未来20报价间隔涨跌",
+      "existing_information": "此前20报价间隔涨跌",
+      "added_information": "供应商B20水平，然后另加20日变化",
+      "metrics": {
+        "dates": 147,
+        "baseline_rmse_pp": 4.2616698387511045,
+        "candidate_rmse_pp": 4.148744901583576,
+        "simple_average_rmse_pp": 4.206816704821633,
+        "increment_squared_error_reduction_pct": 5.229349497294611,
+        "plus_change_rmse_pp": 4.022222678870289,
+        "change_increment_squared_error_reduction_pct": 6.006297462155164
+      },
+      "counterexample": "删学习期2025年4月影响后两项改善反转；低条件4日是一次行情，高条件0日。",
+      "stable_increment": "not_confirmed",
+      "stage": "reused_seen_history",
+      "new_fits": 0
+    },
+    {
+      "id": "naaim",
+      "result_source": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/run-01/results.json",
+      "result_pointer": "/overall",
+      "report": "docs/experiments/sentiment-naaim-public-window-2026-09-30.md",
+      "target": "SPY未来20报价间隔涨跌",
+      "existing_information": "此前20报价间隔涨跌",
+      "added_information": "部分管理人的NAAIM自报敞口",
+      "metrics": {
+        "dates": 78,
+        "baseline_rmse_pp": 4.851836030355086,
+        "candidate_rmse_pp": 4.463580911526556,
+        "simple_average_rmse_pp": 4.670249445063341,
+        "increment_squared_error_reduction_pct": 15.364104684503044
+      },
+      "counterexample": "仅78周、低40条件1周；免费公开表延迟约三月，首发未核。",
+      "stable_increment": "not_confirmed",
+      "stage": "reused_seen_history",
+      "new_fits": 0
+    }
+  ],
+  "sources": [
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-background-2026-10-02/run-01/results.json",
+      "bytes": 39306,
+      "sha256": "b1f2d64b29e00abf0e3e2263cbfd86b3a18b0b04bb9ea34414b4500a3667bd72",
+      "commit": "d53497de0accff778d0db96c010c30078e5b54d9"
+    },
+    {
+      "path": "docs/experiments/sentiment-aaii-background-2026-10-02.md",
+      "bytes": 17322,
+      "sha256": "5c38d47e676a3c5e87446a98c0e3dc5a13c787482b8789bf1e9f11e5b126f941",
+      "commit": "d53497de0accff778d0db96c010c30078e5b54d9"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/executor/run-01/results.json",
+      "bytes": 119478,
+      "sha256": "0239e23eeb654eaac4617251725bd7300c41c75d3e2b02bda69b347d94ae5936",
+      "commit": "d53497de0accff778d0db96c010c30078e5b54d9"
+    },
+    {
+      "path": "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md",
+      "bytes": 22038,
+      "sha256": "023b9c2032929131841db7ce8a7ae9789ed8545ecf9d8f14bd235b54d5e89e4e",
+      "commit": "d53497de0accff778d0db96c010c30078e5b54d9"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/run-01/results.json",
+      "bytes": 24070,
+      "sha256": "65a9253d48a34ae6d2d30a9ff1f5e912ee5b18a40e7f6db2bbae54ac8ca91060",
+      "commit": "d53497de0accff778d0db96c010c30078e5b54d9"
+    },
+    {
+      "path": "docs/experiments/sentiment-breadth-effects-2026-10-02.md",
+      "bytes": 14849,
+      "sha256": "11cd757facc275087bcb0026c096998bf646a50b98b0a8bea9b2fb2f86447ba9",
+      "commit": "d53497de0accff778d0db96c010c30078e5b54d9"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/run-01/results.json",
+      "bytes": 4154,
+      "sha256": "179358653bc4e1caceceb903c55fe6f504da3d05fc7ee6c97968d92fe187c6c9",
+      "commit": "d53497de0accff778d0db96c010c30078e5b54d9"
+    },
+    {
+      "path": "docs/experiments/sentiment-naaim-public-window-2026-09-30.md",
+      "bytes": 11850,
+      "sha256": "b5e409987cb1326d9148d1782dee58208aa4dcc08e39918c29fa1db41e05db29",
+      "commit": "d53497de0accff778d0db96c010c30078e5b54d9"
+    }
+  ],
+  "explanation_contract": {
+    "reuse": "docs/research/sentiment-factor-library/research-cards.md",
+    "fields": [
+      "原指标/对象和单位",
+      "实际时点/已知缺口",
+      "对应已测用途",
+      "基准和新增信息",
+      "反例/限制",
+      "报告及准确版本"
+    ],
+    "does_not_include": [
+      "实时数值",
+      "综合情绪总分",
+      "买卖/仓位建议",
+      "新的宏观说明卡或页面实现"
+    ]
+  },
+  "neighbor_design": {
+    "task_id": "investor-observation-map",
+    "commit": "d58a0740502207ca6dfeb9c9f18b1c135aa54632",
+    "path": "docs/superpowers/specs/2026-10-03-market-understanding-design.md",
+    "interface": "本线输出研究证据引用；对方维护投资目的/市场理解内容和拟议页面。"
+  },
+  "new_experiments": 0,
+  "new_source_requests_in_three_use_mapping": 0,
+  "strategy_benefit": "unmeasured",
+  "online_benefit": "unmeasured",
+  "not_repeat": [
+    "AAII极端/风险/20周平均",
+    "PutCall20日",
+    "NAAIM78周",
+    "供应商宽度147日期"
+  ],
+  "reopen_only_for": [
+    "真正新合格输入",
+    "已定位错误或冲突证据",
+    "明确新问题及有界执行预算"
+  ]
+}

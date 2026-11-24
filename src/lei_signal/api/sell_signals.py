@@ -56,6 +56,16 @@ def _recent_dates(frame: Any, recency_bars: int) -> tuple[set[date], date]:
     return set(dates), dates[-1]
 
 
+def _active_exit_condition(frame: Any) -> bool | None:
+    """Read the already-calculated exit operands on the latest bar, if present."""
+    if not {"close", "ema20", "close_lag20"}.issubset(frame.columns):
+        return None
+    row = frame.iloc[-1]
+    if any(row[k] != row[k] for k in ("close", "ema20", "close_lag20")):
+        return None
+    return bool(row["close"] < row["ema20"] and row["close"] < row["close_lag20"])
+
+
 def extract_sell_signals(result: Any, *, recency_bars: int = RECENCY_BARS) -> list[SellSignal]:
     """从既有分析结果提取四档卖点信号；无 frame 或无命中返回空列表。"""
     frame = getattr(result, "frame", None)
@@ -71,6 +81,7 @@ def extract_sell_signals(result: Any, *, recency_bars: int = RECENCY_BARS) -> li
         s for s in structures
         if getattr(s, "side", "") == "bottom"
         and str(getattr(s, "status", "")) == "invalidated"
+        and getattr(s, "confirmed_date", None) is not None
         and getattr(s, "invalidated_date", None) in window
     ]
     if dead_bottoms:
@@ -96,6 +107,10 @@ def extract_sell_signals(result: Any, *, recency_bars: int = RECENCY_BARS) -> li
         e for e in events
         if getattr(e, "rule_id", "") == EXIT_RULE_ID
         and getattr(e, "available_date", None) in window
+        and (
+            getattr(e, "available_date", None) == today
+            or _active_exit_condition(frame) is not False
+        )
     ]
     if exit_events:
         ev = max(exit_events, key=lambda e: e.available_date)
@@ -116,6 +131,8 @@ def extract_sell_signals(result: Any, *, recency_bars: int = RECENCY_BARS) -> li
     tops_confirmed = [
         s for s in structures
         if getattr(s, "side", "") == "top"
+        and str(getattr(s, "status", "")) in ("confirmed", "active")
+        and getattr(s, "invalidated_date", None) is None
         and getattr(s, "confirmed_date", None) in window
     ]
     if tops_confirmed:
@@ -138,7 +155,16 @@ def extract_sell_signals(result: Any, *, recency_bars: int = RECENCY_BARS) -> li
         e for e in events
         if getattr(e, "rule_id", "") == KEY_WAVE_RULE_ID
         and getattr(e, "available_date", None) in window
+        and (getattr(e, "evidence", None) or {}).get("sub_rule") != "key_wave_black_ended"
+        and str(getattr(e, "direction", "bearish")) == "bearish"
+        and (getattr(e, "valid_until", None) is None or e.valid_until > today)
     ]
+    ended_dates = [
+        e.available_date for e in events
+        if getattr(e, "rule_id", "") == KEY_WAVE_RULE_ID
+        and (getattr(e, "evidence", None) or {}).get("sub_rule") == "key_wave_black_ended"
+    ]
+    key_waves = [e for e in key_waves if not any(day >= e.available_date for day in ended_dates)]
     if key_waves:
         ev = max(key_waves, key=lambda e: e.available_date)
         signals.append(SellSignal(

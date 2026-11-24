@@ -1,0 +1,35 @@
+{
+  "kind": "calculation_only",
+  "data_mode": "historical_reconstruction",
+  "timezone": "Asia/Shanghai",
+  "observation_date": "2026-06-30",
+  "historical_availability": "unknown",
+  "current_observation": "not_qualified",
+  "production_authorization": "not_authorized",
+  "new_fits": 0,
+  "new_downloads": 0,
+  "protocol_id": "multi-factor-historical-read-20261015",
+  "version": "1.0.0",
+  "scope": "One additional existing 60-day range definition on the exact saved 588000.SS date, for same-product multi-material read acceptance; no effect/combination validation.",
+  "case": {
+    "reference": "research.price_volume.range_mean60@1.0.0",
+    "entity_id": "588000.SS",
+    "input_path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/workflow-input.json",
+    "input_sha256": "aaf497e345404bacd0bc3db3899928de4ba5767fc10b332af5351dd13340c00d",
+    "qualification_path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/qualification.json",
+    "qualification_sha256": "113d8a9f4169a5750450c4270545989a31ba88c098d45bbb47d0c6b186c63f7d",
+    "code_path": "src/lei_signal/research/price_volume_path_information.py",
+    "code_sha256": "5986f81ae066f409e4295fa6f86fa584cc0a74e418cfcb833ee37cf11544db66",
+    "formula": "mean((H[j]-L[j])/C[j-1]) for 60 complete economic-price quoted pairs through 2026-06-30",
+    "unit": "ratio",
+    "required_warmup": 253,
+    "lookback": 60
+  },
+  "definition_registry_sha256": "b6a0b500b7c2ccbfb2418ba9a39105595485b03ff7fb85a65aa7c507497fcc12",
+  "current_strategy_sha256": {
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+  },
+  "new_backtests": 0,
+  "estimated_local_bytes": 32768
+}

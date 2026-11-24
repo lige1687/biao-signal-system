@@ -1,0 +1,512 @@
+--- a/web/src/components/market-style/BreadthComparison.tsx
++++ b/web/src/components/market-style/BreadthComparison.tsx
+@@ -6,6 +6,7 @@
+ import { BREADTH_HIGHLIGHT_RULES, BREADTH_LINES, computeHighlightBands, type HighlightBand } from "../trend/zones";
+ import BreadthReading from "./BreadthReading";
+ import { BREADTH_HORIZONS, type BreadthHorizon, type BreadthTrack, type BreadthReadingPoint, type BreadthReadingResponse } from "./breadthReadingTypes";
++import { BACKGROUND_STYLES, backgroundRuns, gapText, type BackgroundRun, type BackgroundMode } from "./breadthChartDisplay";
+ import "./breadth-comparison.css";
+ 
+ type Market = "cn" | "us";
+@@ -89,19 +90,67 @@
+   };
+ }
+ 
+-function BreadthProjectionChart({ view, priceName, readings, horizon, track, compare, market, selectedDate, onDateChange }: {
++/** Paint whole date cells, including a single missing day; never bridge a gap. */
++export function backgroundSeries(runs: readonly BackgroundRun[], axis: number): echarts.CustomSeriesOption {
++  return {
++    name: `__reading_background_${axis}`, type: "custom", coordinateSystem: "cartesian2d",
++    xAxisIndex: axis, yAxisIndex: axis, silent: true, z: -1, clip: true,
++    tooltip: { show: false }, dimensions: ["start", "end", "run"], encode: { x: [0, 1], y: -1 },
++    data: runs.map((run, index) => [run.start, run.end, index]),
++    renderItem: (params, api) => {
++      const run = runs[Number(api.value(2))];
++      if (!run) return;
++      const grid = params.coordSys as typeof params.coordSys & { x: number; y: number; width: number; height: number };
++      const start = api.coord([api.value(0), 0])[0];
++      const end = api.coord([api.value(1), 0])[0];
++      const size = api.size?.([1, 0]);
++      const half = (Array.isArray(size) ? size[0] : size ?? 1) / 2;
++      const left = Math.max(grid.x, start - half);
++      const right = Math.min(grid.x + grid.width, end + half);
++      if (right <= left) return;
++      const style = BACKGROUND_STYLES[run.key];
++      const rect = { type: "rect" as const, shape: { x: left, y: grid.y, width: right - left, height: grid.height },
++        style: { fill: style.fill, stroke: run.key === "missing" ? "#abb5c1" : "none", lineWidth: .7, lineDash: run.key === "missing" ? [3, 3] : undefined } };
++      return { type: "group", children: run.key === "missing" && axis === 1 && right - left >= 25 ? [rect,
++        { type: "text", style: { x: (left + right) / 2, y: grid.y + 7, text: "缺测", align: "center", verticalAlign: "top", font: "11px sans-serif", fill: "#526172" } },
++      ] : [rect] };
++    },
++  };
++}
++
++/** Replace display series without losing the user's current zoom in the same chart scope. */
++export function createBreadthChartUpdater(chart: echarts.ECharts) {
++  let previousScope: string | undefined;
++  return (option: echarts.EChartsCoreOption & Pick<echarts.EChartsOption, "dataZoom">, scope: string) => {
++    const zoom = previousScope === scope
++      ? (chart.getOption().dataZoom as { start?: number; end?: number }[] | undefined)?.[0]
++      : undefined;
++    const zoomOptions = option.dataZoom;
++    const next = zoomOptions && exists(zoom?.start) && exists(zoom?.end)
++      ? { ...option, dataZoom: (Array.isArray(zoomOptions) ? zoomOptions : [zoomOptions])
++        .map((entry) => ({ ...entry, start: zoom.start, end: zoom.end })) }
++      : option;
++    chart.setOption(next, true);
++    previousScope = scope;
++  };
++}
++
++function BreadthProjectionChart({ view, priceName, readings, horizon, track, compare, market, windowDays, runs, selectedDate, onDateChange }: {
+   view: View; priceName: string; readings: ReadonlyMap<string, BreadthReadingPoint>;
+-  horizon: BreadthHorizon; track: BreadthTrack; compare: boolean; market: Market;
++  horizon: BreadthHorizon; track: BreadthTrack; compare: boolean; market: Market; windowDays: number;
++  runs: readonly BackgroundRun[];
+   selectedDate?: string; onDateChange: (date: string) => void;
+ }) {
+   const node = useRef<HTMLDivElement>(null);
+   const chart = useRef<echarts.ECharts | null>(null);
++  const updateChart = useRef<ReturnType<typeof createBreadthChartUpdater> | null>(null);
+   const cursor = useRef({ dates: view.dates, onDateChange });
+   cursor.current = { dates: view.dates, onDateChange };
+   useEffect(() => {
+     if (!node.current) return;
+     const instance = echarts.init(node.current, undefined, { renderer: "svg" });
+     chart.current = instance;
++    updateChart.current = createBreadthChartUpdater(instance);
+     const resize = new ResizeObserver(() => instance.resize());
+     resize.observe(node.current);
+     instance.on("updateAxisPointer", (event: unknown) => {
+@@ -109,10 +158,10 @@
+       const date = typeof value === "number" ? cursor.current.dates[value] : value;
+       if (date && cursor.current.dates.includes(date)) cursor.current.onDateChange(date);
+     });
+-    return () => { resize.disconnect(); instance.dispose(); chart.current = null; };
++    return () => { resize.disconnect(); instance.dispose(); chart.current = null; updateChart.current = null; };
+   }, []);
+   useEffect(() => {
+-    if (!chart.current) return;
++    if (!updateChart.current) return;
+     const marks = shade(view.bands);
+     const focusIndex = BREADTH_HORIZONS.indexOf(horizon);
+     const trackLines = track === "off" ? [] : (["lower", "median", "upper"] as const).map((key, index) => ({
+@@ -129,7 +178,21 @@
+       const event = readings.get(date)?.horizons[horizon]?.event;
+       return event === "exit_high" || event === "exit_low" ? [{ name: exitNames[event], value: [date, view.breadth[focusIndex][i]], itemStyle: { color: event === "exit_high" ? "#ad6d2d" : "#16847b" } }] : [];
+     }) : [];
+-    chart.current.setOption({
++    const turningLabels = runs.filter((run) => ["recovering", "retreating", "low", "high"].includes(run.key))
++      .filter((run) => exists(view.price[run.start])).map((run) => ({
++        name: run.key === "low" ? "历史低位" : run.key === "high" ? "历史高位" : BACKGROUND_STYLES[run.key].label,
++        value: [view.dates[run.start], view.price[run.start]],
++        itemStyle: { color: BACKGROUND_STYLES[run.key].color },
++        label: { color: BACKGROUND_STYLES[run.key].color, backgroundColor: "rgba(255,255,255,.94)" },
++      }));
++    let lastValid = view.breadth[focusIndex].length - 1;
++    while (lastValid >= 0 && !exists(view.breadth[focusIndex][lastValid])) lastValid--;
++    const endMark = lastValid >= 0 && lastValid < view.dates.length - 1 ? {
++      symbol: "circle", symbolSize: 7,
++      label: { show: true, formatter: `宽度止于 ${view.dates[lastValid].slice(5)}`, position: "left", color: "#526172", fontSize: 11, backgroundColor: "rgba(255,255,255,.94)", padding: [3, 4] },
++      data: [{ coord: [view.dates[lastValid], view.breadth[focusIndex][lastValid]] }],
++    } : undefined;
++    updateChart.current({
+       animation: false,
+       grid: [{ left: 40, right: 34, top: 50, height: "32%", containLabel: true }, { left: 40, right: 34, top: "53%", height: "31%", containLabel: true }],
+       legend: { type: "scroll", selectedMode: false, top: 0, left: 0, right: 0, data: [priceName, ...(compare ? ["20日", "50日", "200日"] : [`${horizon}日`]), ...trackLines.map((line) => line.name)], textStyle: { fontSize: 12, color: "#344256" } },
+@@ -138,32 +201,35 @@
+       axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
+       xAxis: [
+         { type: "category", gridIndex: 0, data: view.dates, boundaryGap: false, axisLabel: { show: false }, axisLine: { lineStyle: { color: "#64748b", width: 1.2 } } },
+-        { type: "category", gridIndex: 1, data: view.dates, boundaryGap: false, axisLabel: { color: "#344256", fontSize: 12, hideOverlap: true, showMinLabel: true, showMaxLabel: true, formatter: (date: string) => date.slice(0, 7) }, axisLine: { lineStyle: { color: "#64748b", width: 1.2 } } },
++        { type: "category", gridIndex: 1, data: view.dates, boundaryGap: false, axisLabel: { color: "#344256", fontSize: 11, hideOverlap: true, showMinLabel: true, showMaxLabel: true, formatter: (date: string) => date.slice(2) }, axisLine: { lineStyle: { color: "#64748b", width: 1.2 } } },
+       ],
+       yAxis: [
+         { type: "value", gridIndex: 0, scale: true, name: "指数点位", nameTextStyle: { color: "#26364b", fontSize: 12, padding: [0, 0, 4, 0] }, axisLabel: { color: "#344256", fontSize: 12 }, axisLine: { show: true, lineStyle: { color: "#64748b", width: 1.2 } }, splitLine: { lineStyle: { color: "#cbd3dd" } } },
+         { type: "value", gridIndex: 1, min: 0, max: 100, name: "宽度（%）", nameTextStyle: { color: "#26364b", fontSize: 12, padding: [0, 0, 4, 0] }, axisLabel: { color: "#344256", fontSize: 12, formatter: "{value}%" }, axisLine: { show: true, lineStyle: { color: "#64748b", width: 1.2 } }, splitLine: { lineStyle: { color: "#cbd3dd" } } },
+       ],
+-      dataZoom: [{ type: "inside", xAxisIndex: [0, 1], start: 0, end: 100 }, { type: "slider", xAxisIndex: [0, 1], start: 0, end: 100, bottom: 6, height: 18 }],
++      dataZoom: [{ type: "inside", xAxisIndex: [0, 1], filterMode: "weakFilter", start: 0, end: 100 }, { type: "slider", xAxisIndex: [0, 1], filterMode: "weakFilter", start: 0, end: 100, bottom: 6, height: 18 }],
+       series: [
++        backgroundSeries(runs, 0), backgroundSeries(runs, 1),
+         { name: priceName, type: "line", xAxisIndex: 0, yAxisIndex: 0, data: view.price, showSymbol: false, connectNulls: false, lineStyle: { width: 2.6, color: "#243d61" }, itemStyle: { color: "#243d61" } },
+         ...view.breadth.map((values, index) => ({ name: BREADTH_LINES[index].name, type: "line" as const,
+-          xAxisIndex: 1, yAxisIndex: 1, data: values, showSymbol: false, connectNulls: false,
++          xAxisIndex: 1, yAxisIndex: 1, data: values, showSymbol: false, connectNulls: false, markPoint: index === focusIndex ? endMark : undefined,
+           lineStyle: { width: index === focusIndex ? 2.7 : 1.5, color: BREADTH_LINES[index].color, opacity: index === focusIndex ? 1 : .6 }, itemStyle: { color: BREADTH_LINES[index].color } })).filter((_, index) => compare || index === focusIndex),
+         ...trackLines,
++        { name: "参与转折观察", type: "scatter", xAxisIndex: 0, yAxisIndex: 0, data: turningLabels,
++          symbol: "circle", symbolSize: 7, z: 6, label: { show: true, formatter: "{b}", position: "top", fontSize: 11, padding: [3, 4], borderRadius: 3 }, labelLayout: { hideOverlap: true } },
+         { name: "退出历史极端", type: "scatter", xAxisIndex: 1, yAxisIndex: 1, data: exits, symbol: "diamond", symbolSize: 7, z: 5 },
+         { id: "reading-price-date", name: "__reading_price_date", type: "line", xAxisIndex: 0, yAxisIndex: 0, data: [], silent: true, tooltip: { show: false } },
+         { id: "reading-breadth-date", name: "__reading_breadth_date", type: "line", xAxisIndex: 1, yAxisIndex: 1, data: [], silent: true, tooltip: { show: false } },
+         { name: "__price_conditions", type: "line", xAxisIndex: 0, yAxisIndex: 0, data: [], silent: true, tooltip: { show: false }, lineStyle: { opacity: 0 }, ...marks },
+         { name: "__breadth_conditions", type: "line", xAxisIndex: 1, yAxisIndex: 1, data: [], silent: true, tooltip: { show: false }, lineStyle: { opacity: 0 }, ...marks },
+       ],
+-    }, true);
+-  }, [view, priceName, readings, horizon, track, compare, market]);
++    }, `${market}:${priceName}:${windowDays}`);
++  }, [view, priceName, readings, horizon, track, compare, market, windowDays, runs]);
+   useEffect(() => {
+     const markLine = { silent: true, symbol: "none", label: { show: false }, lineStyle: { color: "#536b80", width: 1, type: "dotted" }, data: selectedDate && view.dates.includes(selectedDate) ? [{ xAxis: selectedDate }] : [] };
+     chart.current?.setOption({ series: [{ id: "reading-price-date", markLine }, { id: "reading-breadth-date", markLine }] });
+-  }, [selectedDate, view, priceName, readings, horizon, track, compare, market]);
+-  return <div ref={node} className="bc-chart" role="img" aria-label={`${priceName}价格与同日${compare ? "20、50、200" : horizon}日市场宽度曲线，${track === "historical" ? `${horizon}日历史10、50、90分位轨道，菱形表示退出历史极端` : track === "fixed" ? "固定高低参考线" : "轨道已关闭"}；可悬停或用下方日期控件回看`} />;
++  }, [selectedDate, view, priceName, readings, horizon, track, compare, market, windowDays, runs]);
++  return <div ref={node} className="bc-chart" role="img" aria-label={`${priceName}价格与同日${compare ? "20、50、200" : horizon}日市场宽度曲线，背景可显示历史高低区间或参与升降，灰带表示所选周期缺测。${track === "historical" ? `${horizon}日历史10、50、90分位轨道，菱形表示退出历史极端` : track === "fixed" ? "固定高低参考线" : "轨道已关闭"}；可悬停或用下方日期控件回看`} />;
+ }
+ 
+ export default function BreadthComparison({ market, onMarketChange, onContextChange }: {
+@@ -178,6 +244,8 @@
+   const [horizon, setHorizon] = useState<BreadthHorizon>("50");
+   const [track, setTrack] = useState<BreadthTrack>("historical");
+   const [compare, setCompare] = useState(false);
++  const [showPhases, setShowPhases] = useState(true);
++  const [backgroundMode, setBackgroundMode] = useState<BackgroundMode>("levels");
+   const [cursorDate, setCursorDate] = useState<string | null>(null);
+   const priceKey: PriceKey = market === "cn" ? cnPrice : usPrice;
+   const breadthId = market === "cn" ? "CN_ALL_A" : "SP500";
+@@ -193,6 +261,8 @@
+   const points = breadth.data?.history ?? EMPTY_BREADTH;
+   const view = useMemo(() => viewFor(priceSeries, points, windowDays, active, market), [priceSeries, points, windowDays, active, market]);
+   const readings = useMemo(() => new Map(breadth.data?.observation?.history.map((row) => [row.date, row]) ?? []), [breadth.data?.observation]);
++  const runs = useMemo(() => backgroundRuns(view.dates, view.breadth[BREADTH_HORIZONS.indexOf(horizon)], readings, showPhases, backgroundMode, horizon), [view, horizon, readings, showPhases, backgroundMode]);
++  const gaps = useMemo(() => gapText(runs, view.dates), [runs, view.dates]);
+   const pointByDate = useMemo(() => new Map(points.map((row) => [row.date, row])), [points]);
+   const lastBreadthDate = points[points.length - 1]?.date;
+   const lastComparableDate = useMemo(() => [...view.dates].reverse().find((date) => pointByDate.has(date)), [view.dates, pointByDate]);
+@@ -241,11 +311,18 @@
+       <label>参照轨道 <select aria-label="参照轨道" value={track} onChange={(event) => setTrack(event.target.value as BreadthTrack)}><option value="historical">历史分位上下轨</option><option value="fixed">固定高低参考</option><option value="off">关闭轨道</option></select></label>
+       <label className="bc-compare-toggle"><input type="checkbox" checked={compare} onChange={(event) => setCompare(event.target.checked)} />三线对照</label>
+     </div>
++    <div className="bc-background-legend" aria-label="背景颜色图例">
++      <label><input type="checkbox" checked={showPhases} onChange={(event) => setShowPhases(event.target.checked)} />背景色带</label>
++      <select aria-label="背景含义" value={backgroundMode} disabled={!showPhases} onChange={(event) => setBackgroundMode(event.target.value as BackgroundMode)}><option value="levels">宽度高低区间</option><option value="phases">宽度参与升降</option></select>
++      {Object.entries(BACKGROUND_STYLES).filter(([key]) => key === "missing" || showPhases && (backgroundMode === "levels" ? ["low", "high"].includes(key) : !["low", "high"].includes(key))).map(([key, style]) => <span key={key}><i style={{ backgroundColor: style.fill, borderColor: style.color }} aria-hidden="true" />{style.label}</span>)}
++      <small>{!showPhases ? "缺测标记始终保留" : backgroundMode === "levels" ? `${horizon}日历史P10/P90 · 看位置；切换「参与升降」看方向` : "20/50日合看 · 空白为分歧、暂稳或状态未知"}</small>
++    </div>
+     <p className="bc-track-hint">{track === "historical" ? `${horizon}日宽度 · 虚线：历史10%／90%分位，点线：中位 · 菱形：退出历史高位或低位。高位可以延续，不等于见顶。`
+       : track === "fixed" ? `${horizon}日宽度 · 高${market === "cn" ? 80 : 85}%／低${market === "cn" ? 20 : 15}%为固定经验参考，50%表示半数股票。尚未验证为顶底阈值。`
+       : `${horizon}日宽度 · 轨道已关闭，仍可查看原始曲线与下方读数。`}</p>
+     {view.dates.length > 0 && view.breadth.some((line) => line.some(exists)) && !breadth.isError && !overlay.isError && <>
+-      <BreadthProjectionChart view={view} priceName={PRICE_NAMES[priceKey]} readings={readings} horizon={horizon} track={track} compare={compare} market={market} selectedDate={selectedDate} onDateChange={setCursorDate} />
++      <BreadthProjectionChart view={view} priceName={PRICE_NAMES[priceKey]} readings={readings} horizon={horizon} track={track} compare={compare} market={market} windowDays={windowDays} runs={runs} selectedDate={selectedDate} onDateChange={setCursorDate} />
++      {gaps && <p className="bc-gap-note" role="note"><b>{horizon}日宽度的断线说明</b><span>{gaps}。灰带内不连接宽度线，也不延用参与状态。</span></p>}
+       <div className="bc-review-controls">
+         <label>回看日期 <select aria-label="宽度回看日期" value={selectedDate ?? ""} onChange={(event) => setCursorDate(event.target.value)}>{view.dates.map((date) => <option key={date} value={date}>{date}{pointByDate.has(date) ? "" : " · 宽度缺失"}</option>)}</select></label>
+         <button type="button" onClick={() => setCursorDate(null)}>最近同日读数</button><span>图上悬停可同步回看</span>
+--- a/web/src/components/market-style/breadth-comparison.css
++++ b/web/src/components/market-style/breadth-comparison.css
+@@ -10,7 +10,7 @@
+ .bc-market-controls { margin: 12px 0 8px; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle); }
+ .bc-market-controls > div:first-child { background: var(--bg); border-radius: var(--radius-sm); padding: 2px; }
+ .bc-controls button:focus-visible, .bc-rules button:focus-visible, .bc-source summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+-.bc-chart { width: 100%; min-width: 0; height: 450px; margin-top: 8px; }
++.bc-chart { width: 100%; min-width: 0; height: 540px; margin-top: 8px; }
+ .bc-dates { font-variant-numeric: tabular-nums; }
+ .bc-dates.bc-stale { color: var(--warn); font-weight: 600; }
+ .bc-error { color: var(--error); }
+@@ -31,6 +31,15 @@
+ .bc-compare-toggle { cursor: pointer; white-space: nowrap; }
+ .bc-compare-toggle input { accent-color: #2563eb; }
+ .bc-track-hint { color: var(--text-secondary); font-size: 12px; line-height: 1.6; margin: 8px 0 0; }
++.bc-background-legend { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; margin-top: 12px; padding: 10px 12px; border: 1px solid var(--border-subtle); border-radius: 5px; font-size: 12px; }
++.bc-background-legend label { display: inline-flex; gap: 5px; align-items: center; font-weight: 600; cursor: pointer; }
++.bc-background-legend input { accent-color: #2563eb; }
++.bc-background-legend select { font: inherit; color: var(--text-primary); background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 5px; padding: 5px 8px; }
++.bc-background-legend > span { display: inline-flex; align-items: center; gap: 5px; color: var(--text-secondary); white-space: nowrap; }
++.bc-background-legend i { width: 15px; height: 12px; border: 1px solid; border-radius: 2px; }
++.bc-background-legend small { color: var(--text-secondary); font-size: 11px; }
++.bc-gap-note { margin: 5px 0 12px; padding: 10px 12px; background: var(--bg-card-hover); border-left: 3px solid #8794a4; font-size: 12px; line-height: 1.65; color: var(--text-secondary); }
++.bc-gap-note b { color: var(--text-primary); display: block; font-weight: 600; margin-bottom: 2px; }
+ .bc-review-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; margin: 6px 0 14px; }
+ .bc-review-controls button { background: transparent; border: 0; padding: 5px 0; color: var(--accent); cursor: pointer; font: inherit; font-size: 12px; }
+ .bc-review-controls > span { color: var(--text-tertiary, var(--text-secondary)); font-size: 11px; margin-left: auto; }
+@@ -60,7 +69,7 @@
+ .bc-legacy .bc-rules { border: 0; padding-top: 0; }
+ .bc-reading button:focus-visible, .bc-review-controls button:focus-visible, .bc-reader-controls select:focus-visible, .bc-review-controls select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ @media (max-width: 600px) {
+-  .bc-chart { height: 420px; }
++  .bc-chart { height: 480px; }
+   .bc-controls { width: 100%; justify-content: flex-start; }
+   .bc-rules { gap: 5px 8px; }
+   .bc-rules button { padding: 6px 4px; }
+@@ -75,4 +84,6 @@
+   .bc-reading-metrics strong { font-size: 20px; }
+   .bc-metric-change { font-size: 10px; }
+   .bc-review-controls > span { display: none; }
++  .bc-background-legend { gap: 8px 12px; padding: 9px; font-size: 11px; }
++  .bc-background-legend label, .bc-background-legend small { flex-basis: 100%; }
+ }
+--- /dev/null
++++ b/web/src/components/market-style/breadthChartDisplay.ts
+@@ -0,0 +1,55 @@
++import type { BreadthHorizon, BreadthReadingPoint } from "./breadthReadingTypes";
++
++export type BackgroundKey = "rising" | "falling" | "recovering" | "retreating" | "low" | "high" | "missing";
++export type BackgroundMode = "levels" | "phases";
++export const BACKGROUND_STYLES: Record<BackgroundKey, { label: string; fill: string; color: string }> = {
++  rising: { label: "参与回升", fill: "rgba(13, 148, 136, 0.16)", color: "#0f766e" },
++  falling: { label: "参与收缩", fill: "rgba(217, 119, 6, 0.16)", color: "#b45309" },
++  recovering: { label: "低位修复", fill: "rgba(13, 148, 136, 0.28)", color: "#0f766e" },
++  retreating: { label: "高位回落", fill: "rgba(217, 119, 6, 0.28)", color: "#b45309" },
++  low: { label: "历史低位 ≤ P10", fill: "rgba(13, 148, 136, 0.22)", color: "#0f766e" },
++  high: { label: "历史高位 ≥ P90", fill: "rgba(217, 119, 6, 0.22)", color: "#b45309" },
++  missing: { label: "宽度缺测", fill: "rgba(100, 116, 139, 0.22)", color: "#64748b" },
++};
++export interface BackgroundRun { start: number; end: number; key: BackgroundKey }
++
++const STATE_KEYS = new Map<string, BackgroundKey>([
++  ["expanding", "rising"], ["improving", "rising"],
++  ["contracting", "falling"], ["weakening", "falling"],
++  ["recovering", "recovering"], ["retreating", "retreating"],
++]);
++
++/** Display supplied states on their exact dates; missing data remain visible with color disabled. */
++export function backgroundRuns(
++  dates: readonly string[], values: readonly (number | null)[],
++  readings: ReadonlyMap<string, BreadthReadingPoint>, enabled: boolean,
++  mode: BackgroundMode = "phases", horizon: BreadthHorizon = "50",
++): BackgroundRun[] {
++  const runs: BackgroundRun[] = [];
++  dates.forEach((date, index) => {
++    if (!date) return;
++    const value = values[index];
++    const reading = readings.get(date);
++    const position = reading?.horizons?.[horizon];
++    const key = typeof value !== "number" || !Number.isFinite(value) ? "missing"
++      : !enabled ? undefined : mode === "phases" ? STATE_KEYS.get(reading?.state.code ?? "")
++      : position?.status === "ready" && (position.position === "low" || position.position === "high") ? position.position : undefined;
++    if (!key) return;
++    const previous = runs[runs.length - 1];
++    if (previous?.key === key && previous.end === index - 1) previous.end = index;
++    else runs.push({ start: index, end: index, key });
++  });
++  return runs;
++}
++
++/** Count displayed observations, not elapsed calendar days. */
++export function gapText(runs: readonly BackgroundRun[], dates: readonly string[]): string {
++  const missing = runs.filter((run) => run.key === "missing");
++  if (!missing.length) return "";
++  const count = missing.reduce((total, run) => total + run.end - run.start + 1, 0);
++  const ranges = missing.map(({ start, end }) => {
++    const range = start === end ? dates[start] : `${dates[start]}—${dates[end]}`;
++    return `${range}（${end === dates.length - 1 ? "尚未更新" : "缺记录"}）`;
++  });
++  return `宽度缺测 ${count} 个观察日：${ranges.join("；")}`;
++}
+--- /dev/null
++++ b/web/src/components/market-style/breadthChartDisplay.test.mjs
+@@ -0,0 +1,211 @@
++import test from "node:test";
++import assert from "node:assert/strict";
++import { build } from "esbuild";
++import { createRequire } from "node:module";
++import * as echarts from "echarts";
++
++const bundle = await build({ entryPoints: [new URL("./breadthChartDisplay.ts", import.meta.url).pathname],
++  bundle: true, platform: "node", format: "esm", write: false });
++const { backgroundRuns, gapText, BACKGROUND_STYLES } = await import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text).toString("base64")}`);
++
++const dates = ["2026-10-23", "2026-10-26", "2026-10-27", "2026-10-28", "2026-10-29", "2026-10-30", "2026-11-02", "2026-11-03"];
++const readings = (codes, days = dates) => new Map(codes.flatMap((code, i) => code == null ? [] : [[days[i], {
++  date: days[i], state: { code, label: "后端描述", summary: "后端原值", tone: "neutral" }, horizons: {},
++}]]));
++
++test("a single missing observation remains a one-day run with background disabled", () => {
++  const days = dates.slice(0, 3);
++  const source = readings(["expanding", "expanding", "expanding"], days);
++  assert.deepEqual(backgroundRuns(days, [30, null, 40], source, false), [{ start: 1, end: 1, key: "missing" }]);
++});
++
++test("nonfinite and absent values stay missing even when the backend supplies a state", () => {
++  const days = dates.slice(0, 5);
++  assert.deepEqual(backgroundRuns(days, [0, null, NaN, Infinity], readings(Array(5).fill("expanding")), false), [
++    { start: 1, end: 4, key: "missing" },
++  ]);
++});
++
++test("date keys align states independently of map order and a valid zero is not a gap", () => {
++  const source = new Map([
++    [dates[2], { date: dates[2], state: { code: "contracting" } }],
++    [dates[0], { date: dates[0], state: { code: "expanding" } }],
++    ["2026-10-22", { date: "2026-10-22", state: { code: "recovering" } }],
++  ]);
++  assert.deepEqual(backgroundRuns(dates.slice(0, 3), [0, 20, 10], source, true), [
++    { start: 0, end: 0, key: "rising" }, { start: 2, end: 2, key: "falling" },
++  ]);
++});
++
++test("only supplied directional states receive color; mixed, flat and unknown remain unshaded", () => {
++  const days = Array.from({ length: 10 }, (_, i) => `2026-10-${String(i + 1).padStart(2, "0")}`);
++  const source = readings(["expanding", "improving", "contracting", "weakening", "recovering", "retreating", "mixed", "flat", "unknown", "new-code"], days);
++  assert.deepEqual(backgroundRuns(days, Array(10).fill(50), source, true), [
++    { start: 0, end: 1, key: "rising" }, { start: 2, end: 3, key: "falling" },
++    { start: 4, end: 4, key: "recovering" }, { start: 5, end: 5, key: "retreating" },
++  ]);
++});
++
++test("equal colors cannot bridge neutral, missing or unclassified observations", () => {
++  const source = readings(["expanding", "improving", "mixed", "expanding", "expanding", "expanding", null, "expanding"]);
++  assert.deepEqual(backgroundRuns(dates, [10, 20, 30, 40, null, 50, 60, 70], source, true), [
++    { start: 0, end: 1, key: "rising" }, { start: 3, end: 3, key: "rising" },
++    { start: 4, end: 4, key: "missing" }, { start: 5, end: 5, key: "rising" },
++    { start: 7, end: 7, key: "rising" },
++  ]);
++});
++
++test("an empty date cannot extend color across its position", () => {
++  const days = [dates[0], "", dates[2]];
++  assert.deepEqual(backgroundRuns(days, [10, 20, 30], readings(["expanding", "expanding", "expanding"], days), true), [
++    { start: 0, end: 0, key: "rising" }, { start: 2, end: 2, key: "rising" },
++  ]);
++});
++
++test("gap text describes a single internal missing observation without inventing a range", () => {
++  assert.equal(gapText([{ start: 1, end: 1, key: "missing" }], dates),
++    "宽度缺测 1 个观察日：2026-10-26（缺记录）");
++});
++
++test("gap text counts observations, distinguishes trailing gaps and ignores colored runs", () => {
++  const days = dates.slice(0, 5);
++  assert.equal(gapText([
++    { start: 0, end: 0, key: "missing" }, { start: 1, end: 1, key: "rising" },
++    { start: 3, end: 4, key: "missing" },
++  ], days), "宽度缺测 3 个观察日：2026-10-23（缺记录）；2026-10-28—2026-10-29（尚未更新）");
++  assert.equal(gapText([{ start: 0, end: 1, key: "missing" }], days),
++    "宽度缺测 2 个观察日：2026-10-23—2026-10-26（缺记录）");
++});
++
++test("a one-day trailing gap says not updated and complete input has no gap notice", () => {
++  assert.equal(gapText([{ start: 0, end: 0, key: "missing" }], [dates[0]]),
++    "宽度缺测 1 个观察日：2026-10-23（尚未更新）");
++  assert.equal(gapText([{ start: 0, end: 0, key: "rising" }], [dates[0]]), "");
++  assert.equal(gapText([], []), "");
++  assert.deepEqual(backgroundRuns([], [], new Map(), true), []);
++});
++
++test("background legend distinguishes participation states and makes repair/retreat more visible", () => {
++  assert.deepEqual(Object.fromEntries(Object.entries(BACKGROUND_STYLES).map(([key, style]) => [key, style.label])), {
++    rising: "参与回升", falling: "参与收缩", recovering: "低位修复", retreating: "高位回落", low: "历史低位 ≤ P10", high: "历史高位 ≥ P90", missing: "宽度缺测",
++  });
++  const alpha = (key) => Number(BACKGROUND_STYLES[key].fill.match(/,\s*([\d.]+)\)$/)?.[1]);
++  assert.ok(alpha("recovering") > alpha("rising"));
++  assert.ok(alpha("retreating") > alpha("falling"));
++  assert.ok(alpha("missing") > 0 && alpha("missing") < 0.3);
++});
++
++test("historical background follows the selected supplied horizon without future filtering", () => {
++  const source = new Map(dates.slice(0, 4).map((date, i) => [date, {date,
++    state: {code: "expanding"}, horizons: {
++      "20": {status: "ready", position: "high"},
++      "50": {status: i === 3 ? "insufficient" : "ready", position: ["low", "middle", "high", "low"][i]},
++    }}]));
++  assert.deepEqual(backgroundRuns(dates.slice(0, 4), [10, 50, 90, 10], source, true, "levels", "50"), [
++    {start: 0, end: 0, key: "low"}, {start: 2, end: 2, key: "high"},
++  ]);
++  assert.deepEqual(backgroundRuns(dates.slice(0, 4), [90, null, 90, 90], source, true, "levels", "20"), [
++    {start: 0, end: 0, key: "high"}, {start: 1, end: 1, key: "missing"}, {start: 2, end: 3, key: "high"},
++  ]);
++  assert.deepEqual(backgroundRuns(dates.slice(0, 1), [10], source, true, "levels", "50"), [{start:0,end:0,key:"low"}]);
++  assert.deepEqual(backgroundRuns(dates.slice(0, 1), [10], source, false, "levels", "50"), []);
++});
++
++test("background run identifiers must never change the price axis range", async () => {
++  const chartBundle = await build({ entryPoints: [new URL("./BreadthComparison.tsx", import.meta.url).pathname],
++    bundle: true, platform: "node", format: "cjs", packages: "external", loader: { ".css": "empty" }, write: false });
++  const module = { exports: {} };
++  new Function("require", "module", "exports", chartBundle.outputFiles[0].text)(createRequire(import.meta.url), module, module.exports);
++  const chart = echarts.init(null, null, { renderer: "svg", ssr: true, width: 600, height: 300 });
++  try {
++    chart.setOption({ animation: false, xAxis: { type: "category", data: dates.slice(0, 3) },
++      yAxis: { type: "value", scale: true }, series: [
++        { type: "line", data: [3600, 3800, 3700] },
++        module.exports.backgroundSeries([{ start: 0, end: 2, key: "rising" }], 0),
++      ] });
++    const extent = chart.getModel().getComponent("yAxis", 0).axis.scale.getExtent();
++    assert.ok(extent[0] >= 3500, `background polluted price extent: ${extent}`);
++    assert.ok(extent[1] <= 3900, `background polluted price extent: ${extent}`);
++  } finally { chart.dispose(); }
++});
++
++async function loadChartModule() {
++  const chartBundle = await build({ entryPoints: [new URL("./BreadthComparison.tsx", import.meta.url).pathname],
++    bundle: true, platform: "node", format: "cjs", packages: "external", loader: { ".css": "empty" }, write: false });
++  const module = { exports: {} };
++  new Function("require", "module", "exports", chartBundle.outputFiles[0].text)(createRequire(import.meta.url), module, module.exports);
++  return module.exports;
++}
++
++function zoomChartOption(backgroundSeries, { background = true, horizon = "50", track = true, compare = false } = {}) {
++  const prices = dates.map((_, i) => 3600 + i * 20);
++  return {
++    animation: false,
++    grid: [{ top: 20, height: 90 }, { top: 140, height: 90 }],
++    xAxis: [0, 1].map((gridIndex) => ({ type: "category", data: dates, gridIndex, boundaryGap: false })),
++    yAxis: [{ type: "value", scale: true, gridIndex: 0 }, { type: "value", min: 0, max: 100, gridIndex: 1 }],
++    dataZoom: [
++      { type: "inside", xAxisIndex: [0, 1], filterMode: "weakFilter", start: 0, end: 100 },
++      { type: "slider", xAxisIndex: [0, 1], filterMode: "weakFilter", start: 0, end: 100 },
++    ],
++    series: [
++      { type: "line", name: "price", data: prices },
++      ...(compare ? ["20", "50", "200"] : [horizon]).map((period) => ({
++        type: "line", name: period, xAxisIndex: 1, yAxisIndex: 1, data: dates.map((_, i) => 30 + i),
++      })),
++      ...(track ? [{ type: "line", name: "track", xAxisIndex: 1, yAxisIndex: 1, data: dates.map(() => 80) }] : []),
++      ...(background ? [0, 1].map((axis) => backgroundSeries([{ start: 0, end: dates.length - 1, key: "rising" }], axis)) : []),
++      { id: "reading-price-date", type: "line", data: [] },
++    ],
++  };
++}
++
++for (const [label, change] of [
++  ["phase background", { background: false }], ["horizon", { horizon: "200" }],
++  ["reference track", { track: false }], ["three-line comparison", { compare: true }],
++]) {
++  test(`${label} changes retain the current linked zoom and price axis`, async () => {
++    const { createBreadthChartUpdater, backgroundSeries } = await loadChartModule();
++    assert.equal(typeof createBreadthChartUpdater, "function", "chart updates must preserve zoom within the same market, price and time window");
++    const chart = echarts.init(null, null, { renderer: "svg", ssr: true, width: 600, height: 300 });
++    try {
++      const update = createBreadthChartUpdater(chart);
++      update(zoomChartOption(backgroundSeries), "cn:sse:365");
++      chart.dispatchAction({ type: "dataZoom", dataZoomIndex: 1, start: 25, end: 75 });
++      const before = [0, 1].map((i) => chart.getModel().getComponent("xAxis", i).axis.scale.getExtent().slice());
++      const priceExtent = chart.getModel().getComponent("yAxis", 0).axis.scale.getExtent().slice();
++      update(zoomChartOption(backgroundSeries, change), "cn:sse:365");
++      assert.deepEqual(chart.getOption().dataZoom.map(({ start, end }) => [start, end]), [[25, 75], [25, 75]]);
++      assert.deepEqual([0, 1].map((i) => chart.getModel().getComponent("xAxis", i).axis.scale.getExtent()), before);
++      assert.deepEqual(chart.getModel().getComponent("yAxis", 0).axis.scale.getExtent(), priceExtent);
++    } finally { chart.dispose(); }
++  });
++}
++
++for (const scope of ["us:sp500:365", "cn:hs300:365", "cn:sse:1095"]) {
++  test(`changing the chart scope to ${scope} resets the linked zoom`, async () => {
++    const { createBreadthChartUpdater, backgroundSeries } = await loadChartModule();
++    assert.equal(typeof createBreadthChartUpdater, "function");
++    const chart = echarts.init(null, null, { renderer: "svg", ssr: true, width: 600, height: 300 });
++    try {
++      const update = createBreadthChartUpdater(chart);
++      update(zoomChartOption(backgroundSeries), "cn:sse:365");
++      chart.dispatchAction({ type: "dataZoom", dataZoomIndex: 0, start: 25, end: 75 });
++      update(zoomChartOption(backgroundSeries), scope);
++      assert.deepEqual(chart.getOption().dataZoom.map(({ start, end }) => [start, end]), [[0, 100], [0, 100]]);
++    } finally { chart.dispose(); }
++  });
++}
++
++test("hover marker updates retain the linked zoom", async () => {
++  const { createBreadthChartUpdater, backgroundSeries } = await loadChartModule();
++  assert.equal(typeof createBreadthChartUpdater, "function");
++  const chart = echarts.init(null, null, { renderer: "svg", ssr: true, width: 600, height: 300 });
++  try {
++    const update = createBreadthChartUpdater(chart);
++    update(zoomChartOption(backgroundSeries), "cn:sse:365");
++    chart.dispatchAction({ type: "dataZoom", dataZoomIndex: 0, start: 25, end: 75 });
++    chart.setOption({ series: [{ id: "reading-price-date", markLine: { data: [{ xAxis: dates[3] }] } }] });
++    assert.deepEqual(chart.getOption().dataZoom.map(({ start, end }) => [start, end]), [[25, 75], [25, 75]]);
++  } finally { chart.dispose(); }
++});

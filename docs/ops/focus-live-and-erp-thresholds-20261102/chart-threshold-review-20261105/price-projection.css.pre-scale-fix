@@ -1,0 +1,63 @@
+.fmp-projection { min-width: 0; padding: 14px 0 18px; border-top: 1px solid var(--border-subtle); color: var(--text-primary); font-size: var(--fs-body); }
+.fmp-heading { display: flex; justify-content: space-between; align-items: start; gap: 10px 20px; flex-wrap: wrap; }
+.fmp-heading h3 { margin: 0; font-size: var(--fs-title); }
+.fmp-heading p, .fmp-dates, .fmp-state, .fmp-note, .fmp-tip { margin: 5px 0 0; color: var(--text-secondary); font-size: var(--fs-xs); line-height: 1.5; }
+.fmp-controls, .fmp-switches { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 8px; }
+.fmp-switches { margin: 12px 0 8px; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle); }
+.fmp-controls button { border: 0; border-radius: var(--radius-sm); padding: 5px 8px; background: transparent; color: var(--text-secondary); cursor: pointer; }
+.fmp-controls button[aria-pressed="true"] { background: var(--bg-card-hover); color: var(--text-primary); font-weight: 600; }
+.fmp-controls button:hover { color: var(--accent); }
+.fmp-controls button:disabled { opacity: .45; cursor: default; }
+.fmp-controls button:focus-visible, .fmp-source summary:focus-visible, .fmp-error button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fmp-scope { margin: 5px 0 0; font-weight: 600; }
+.fmp-dates { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.fmp-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 11px; padding: 7px 0; border-top: 1px solid var(--border-subtle); color: var(--text-primary); font-size: var(--fs-xs); }
+.fmp-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.fmp-line { display: inline-block; width: 18px; height: 0; border-top: 3px solid; }
+.fmp-line.price { border-color: #48524f; }
+.fmp-line.focus { border-color: #83708e; }
+.fmp-line.zero { border-top: 2px dashed #95958e; }
+.fmp-event { font-style: normal; font-size: 12px; line-height: 1; }
+.fmp-event.up { color: #287e71; }
+.fmp-event.down { color: #ad6735; }
+.fmp-selected-ring { width: 9px; height: 9px; border: 2px solid #696f66; border-radius: 50%; background: white; }
+.fmp-event-filter { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-top: 12px; font-size: var(--fs-xs); }
+.fmp-event-filter > span { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.fmp-event-filter .fmp-controls > span { margin-right: 4px; }
+.fmp-tip { margin-top: 0; }
+.fmp-navigation { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 5px 14px; margin-top: 10px; }
+.fmp-navigation > span { color: var(--text-secondary); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
+.fmp-navigation .fmp-controls button { border: 1px solid var(--border-subtle); background: var(--bg-card-hover); }
+.fmp-chart { width: 100%; min-width: 0; height: 470px; margin-top: 4px; }
+.fmp-error { color: var(--error); }
+.fmp-error button { margin-left: 7px; border: 1px solid currentColor; border-radius: var(--radius-sm); background: transparent; color: inherit; cursor: pointer; padding: 2px 8px; }
+.fmp-mark { margin-top: 8px; }
+.fmp-note { margin-top: 8px; }
+.fmp-source { margin-top: 10px; font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.6; }
+.fmp-source summary { width: fit-content; cursor: pointer; color: var(--accent); }
+.fmp-source p { max-width: 850px; margin: 8px 0 0; }
+
+/* Reading colors belong to this observation only; trading signal colors are unchanged. */
+.hoc-dialog:has(.fmp-projection) {
+  --text-primary: #353b36; --text-secondary: #696f66; --accent: #64745c;
+  --border-subtle: #e1e4dc; --bg-card-hover: #f0f2eb;
+  color: #353b36; border-color: #dce0d6;
+  box-shadow: 0 24px 80px #242e2630;
+}
+.hoc-dialog:has(.fmp-projection)::backdrop { background: #303a344f; }
+.hoc-dialog:has(.fmp-projection) .hoc-dialog-header { border-color: #e1e4dc; }
+.hoc-dialog:has(.fmp-projection) .hoc-dialog-header span { color: #757d70; }
+.hoc-dialog:has(.fmp-projection) .hoc-dialog-header button { color: #58614f; background: #f5f6f1; border-color: #dce0d6; }
+.hoc-dialog:has(.fmp-projection) :is(a, .fmp-source summary) { color: #627454; }
+.hoc-dialog:has(.fmp-projection) :is(button, select, summary, a):focus-visible { outline-color: #6a7c5b; }
+.fmp-event-reader { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; margin: 12px 0 4px; background: #f6f7f2; border: 1px solid #e0e4d9; border-radius: 7px; }
+.fmp-event-picker { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.fmp-event-picker label { color: #59634f; font-size: 12px; font-weight: 600; }
+.fmp-event-picker-controls { display: flex; align-items: center; gap: 4px; }
+.fmp-event-reader :is(button, select) { border: 1px solid #d5dbce; background: #fff; color: #4e5946; border-radius: 4px; font: inherit; cursor: pointer; padding: 6px 8px; min-height: 31px; }
+.fmp-event-reader button:disabled { opacity: .35; cursor: default; }
+.fmp-event-picker-controls button { min-width: 29px; font-size: 18px; padding: 1px 5px; }
+.fmp-event-values { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: #5a6255; font-variant-numeric: tabular-nums; }
+.fmp-event-values b { color: #353d31; font-weight: 600; }
+.fmp-event-reader .fmp-nearby { margin-left: auto; background: #e9eddf; border-color: #d3dcc5; font-size: 12px; }
+.fmp-event-reader :is(button, select):focus-visible { outline: 2px solid #6a7c5b; outline-offset: 2px; }

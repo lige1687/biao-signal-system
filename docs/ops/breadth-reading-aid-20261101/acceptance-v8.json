@@ -1,0 +1,57 @@
+{
+  "updated_at": "2026-11-02T19:05:49.506486+08:00",
+  "status": "completed_local_desktop_only",
+  "scope_files": [
+    "web/src/components/market-observation-alerts/index.tsx",
+    "web/src/components/market-observation-alerts/style.css",
+    "web/src/components/market-style/BreadthComparison.tsx",
+    "web/src/components/market-style/breadth-comparison.css",
+    "web/src/components/market-style/BreadthInstitutionalReference.tsx",
+    "web/src/components/market-style/breadthInstitutionalReferences.ts"
+  ],
+  "new_financial_experiments": 0,
+  "new_source_requests": 4,
+  "cumulative_research_source_requests": 11,
+  "new_data_writes": 0,
+  "desktop_width": 1280,
+  "checks": {
+    "CN_transfer_boundary_visible": true,
+    "US_80_percent_not_sell_line": true,
+    "20_day_missing_external_reference_explicit": true,
+    "200_day_50_percent_only_majority_reference": true,
+    "50_day_strict_30_70_reference": true,
+    "external_not_used_in_alerts": true,
+    "MiniTrend_unchanged": true,
+    "console_errors": [],
+    "overview_width": 1246,
+    "overview_scrollWidth": 1246,
+    "temporary_viewport_reset": true,
+    "registry_other_entries_unchanged": true,
+    "build": "pass_existing_chunk_warning",
+    "alert_adapter_tests": "14/14",
+    "hygiene": "pass"
+  },
+  "screenshot": "overview-v8.jpg",
+  "logs": [
+    "build-v8.log",
+    "validation-v8.log"
+  ],
+  "report_sha256": "eb905f76a029ca81637f4f2d2b27afe643a3b2185e94020a1403f3c460edd7c7",
+  "source_review": "institutional-review-v8.md; limited saved-facts semantic review, not independent original-source reading",
+  "limitations": [
+    "No predictive-effect validation",
+    "US examples not validated for all-A",
+    "No verified 20/100 fixed reference in this bounded search",
+    "Shared dirty source remains local; no source commit or deployment"
+  ],
+  "execution_notes": [
+    "Initial prep read used wrong cwd prefix and failed before writing; corrected",
+    "AX checkbox role mismatch in UI; DOM refreshed and actual button used",
+    "First registry inspection assumed list; read-only failed and corrected to dictionary"
+  ],
+  "coordination": {
+    "commit": "bc4f5d05ab38e2ffae72a4f8d57c566a5fc64953",
+    "readback_ref": "bc4f5d05ab38e2ffae72a4f8d57c566a5fc64953",
+    "exact": true
+  }
+}

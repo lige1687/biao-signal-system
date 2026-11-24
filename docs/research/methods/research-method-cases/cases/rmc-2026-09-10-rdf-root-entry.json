@@ -1,0 +1,29 @@
+{
+  "id": "rmc-2026-09-10-rdf-root-entry",
+  "title": "研究数据基础：根治'字段由调用方口头声明、从不与产物核对'",
+  "date": "2026-09-10",
+  "kind": "method_change_case",
+  "status": "approved",
+  "failure_mode": {
+    "category": "input",
+    "reason": "关键字段由调用方口头声明、从不与数据产物核对，本质是输入数据可信度问题（自报身份证、无人核验）。"
+  },
+  "problem": "研究数据基础四轮代码自查发现 17 个缺陷，其中 7 个是同一类毛病：某个关键字段（如价格口径、币种）由调用方口头声明传入，从未与数据产物本身核对——调用方可以谎报而不被发现（大白话：身份证是自报的，没人查）。",
+  "why_changed": "同类缺陷反复出现 7 次，说明不是个案而是入口设计问题；逐个打补丁只会继续漏。",
+  "old_method": "函数签名里留一个让调用方声明口径/币种的参数，信任调用方传值。",
+  "new_method": "根治性改动：新增一个入口，口径与币种一律从数据快照本身派生，函数签名里根本没有让调用方声明的参数——想谎报也没有入口。",
+  "scope": "研究数据基础模块（data_snapshot/data_quality 调用边界）；不涉及策略规则。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/experiments/research-data-foundation-audit-and-handoff-2026-09-10.md",
+    "docs/experiments/research-data-foundation-summary-2026-09-10.md"
+  ],
+  "before_after": {
+    "old_result": "四轮自查 26 个疑点查出 17 个真缺陷，其中 7 个源于'调用方口头声明字段'模式；哈希一致也不能证明结构正确。",
+    "new_result": "新增派生入口后，该类缺陷无入口可发生；后续 09-13 主控复核确认已建成果保留、不重做。",
+    "difference_explanation": "差异来自责任边界移动：从'要求调用方诚实'改为'结构上无法不诚实'。这是研究流程可靠性的改进，不改变任何评估尺子；剩余缺陷类型（见 rmc-2026-09-13-rdf-listing-evidence 等）说明该方法不一次性消除全部问题。"
+  },
+  "object_states": [],
+  "notes": "status=approved（经主控复核与后续 controller review 确认保留）。"
+}

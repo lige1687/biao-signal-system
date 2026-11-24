@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import os
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -1539,7 +1539,7 @@ def _detail_dto(
             adjusted=report.adjusted,
             data_time=data_time,
             last_bar_date=last_bar.isoformat(),
-            is_intraday_forming=is_intraday_forming(result),
+            is_intraday_forming=is_intraday_forming(result, fetched_at=datetime.fromisoformat(data_time)),
             cache_fallback_used=result.cache_fallback_used,
             cache_age_seconds=result.cache_age_seconds,
             sqlite_persisted=result.sqlite_persisted,
@@ -2051,6 +2051,7 @@ def market_context_breadth_history(
     request: Request,
     market_id: str = Query(..., description="e.g. CN_ALL_A, SP500"),
     lookback_days: int = Query(1260, ge=1, le=12600),
+    include_observation: bool = Query(False, description="附加描述性宽度读图信息"),
 ) -> dict:
     """Return the breadth history time-series for one global panel.
 
@@ -2069,7 +2070,7 @@ def market_context_breadth_history(
         # 读侧合并 33 年研究全史 + live 尾部（合并逻辑在 get_ma_breadth_history 内），
         # 强制返回全量，不被前端 lookback 截断，叠加图/趋势图才能铺满整个窗口。
         hist = get_ma_breadth_history(lookback_days=12600)
-        return {
+        payload = {
             "market_id": market_id,
             "lookback_days": lookback_days,
             "history": [
@@ -2082,6 +2083,13 @@ def market_context_breadth_history(
                 for h in hist
             ],
         }
+        if include_observation is True:
+            from lei_signal.market_context.breadth_observation import build_breadth_observation
+
+            payload["observation"] = build_breadth_observation(
+                payload["history"], market_id, tail_observations=lookback_days,
+            )
+        return payload
     # 标普500 走本机预计算落盘的真实宽度历史（成分股站上 MA 占比），
     # 不再返回空（lab.db 无 SP500 快照）。无数据返回 []，前端标「数据缺失」。
     if mid == MarketId.SP500:
@@ -2089,7 +2097,7 @@ def market_context_breadth_history(
         # 强制返回全量（最多 ~1260 交易日），不被前端 lookback 截断，
         # 叠加图/趋势图才能铺满整个窗口，与 A股支路边对称。
         hist = get_sp500_breadth_history(lookback_days=12600)
-        return {
+        payload = {
             "market_id": market_id,
             "lookback_days": lookback_days,
             "history": [
@@ -2102,6 +2110,13 @@ def market_context_breadth_history(
                 for h in hist
             ],
         }
+        if include_observation is True:
+            from lei_signal.market_context.breadth_observation import build_breadth_observation
+
+            payload["observation"] = build_breadth_observation(
+                payload["history"], market_id, tail_observations=lookback_days,
+            )
+        return payload
     history = _market_context_service(request).get_breadth_history(
         mid, lookback_days=lookback_days,
     )

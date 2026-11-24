@@ -40,6 +40,7 @@ import argparse
 import os
 import sys
 import time
+from datetime import datetime
 
 # 腾讯K线源(proxy.finance.qq.com/ifzqgtimg)在 WorkBuddy 透明代理白名单内，受限网络下
 # 走代理即可拉取；本机无代理环境则直连腾讯(国内可达)。两种环境均可用，无需特殊处理。
@@ -53,9 +54,10 @@ from lei_signal.market_context.a_share_breadth import (  # noqa: E402
     backfill_ma_breadth_history,
     fetch_advance_decline,
     fetch_ma_breadth,
-    get_a_share_codes,
+    get_a_share_codes_with_status,
     get_cached_ma_breadth,
     save_ma_breadth_cache,
+    save_ma_breadth_qualification,
 )
 
 
@@ -63,9 +65,9 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="预计算真全A MA 上方占比宽度(冻结快照)")
     ap.add_argument("--limit", type=int, default=0, help="只算前 N 只（调试用，不落盘正式缓存）")
     ap.add_argument("--no-save", action="store_true", help="跳过落盘")
-    ap.add_argument("--force", action="store_true", help="强制重算（忽略同交易日已算的跳过逻辑）")
+    ap.add_argument("--force", action="store_true", help="兼容旧命令；不覆盖既有快照或历史")
     ap.add_argument("--backfill", action="store_true",
-                    help="从 K线缓存回溯全历史宽度序列（补齐趋势图/叠加图所需历史）")
+                    help="从K线缓存回溯历史；须按既有历史重建授权单独运行")
     args = ap.parse_args()
 
     if args.backfill:
@@ -79,7 +81,8 @@ def main() -> int:
 
     t0 = time.time()
     print("▶ 拉取全A代码列表(沪+深+北交所)…")
-    codes = get_a_share_codes(include_bj=True)
+    code_result = get_a_share_codes_with_status(include_bj=True)
+    codes = code_result["codes"]
     if not codes:
         print("✗ 代码列表为空，网络可能无法访问交易所官网(akshare)。请在本机正常网络下运行。")
         return 1
@@ -97,27 +100,43 @@ def main() -> int:
     print(f"  涨 {ad['up']} / 跌 {ad['down']} / 平 {ad['flat']} · 上涨占比 {up_pct:.1f}%")
 
     print("▶ 逐只拉腾讯日K线(带磁盘缓存)，计算 MA20/50/200 上方占比（首跑较慢）…")
-    ma = fetch_ma_breadth(codes)
+    target_day = datetime.now().strftime("%Y-%m-%d")
+    ma = fetch_ma_breadth(
+        codes,
+        target_day=target_day,
+        code_sources=code_result["sources"],
+        persist_cache=not args.no_save and not args.limit,
+    )
     if not ma:
         print("✗ 腾讯K线拉取失败（接口可能临时不可用或被网络策略拦截）。")
         print("  请确认本机可正常访问 web.ifzq.gtimg.cn，或检查代理设置。")
         return 1
 
     trading_day = ma.get("trading_day", "")
+    quality = ma["qualification"]
+    quality["applied_to_snapshot"] = False
     print(f"  代表交易日: {trading_day}")
-    print(f"  真实宽度 → B20={ma['ma20_pct']:.1f}%  B50={ma['ma50_pct']:.1f}%  "
-          f"B200={ma['ma200_pct']:.1f}%  (有效样本 {ma.get('eligible', '?')})")
+    print(f"  同日覆盖 {quality['same_day_available']}/{quality['universe_total']}；"
+          f"E20={quality['eligible20']} E50={quality['eligible50']} E200={quality['eligible200']}；"
+          f"资格={quality['status']} {quality['reasons']}")
+
+    if not args.no_save and not args.limit and not save_ma_breadth_qualification(quality):
+        print("✗ 资格证据写入失败；旧快照和历史保持不变。")
+        return 2
+    if quality["status"] != "verified":
+        print("✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。")
+        return 2
 
     # 同交易日已算过则跳过落盘（除非 --force），保留冻结快照不覆盖
-    if not args.no_save and not args.force:
+    if not args.no_save and not args.limit:
         existing = get_cached_ma_breadth()
-        if existing and existing.get("date") == trading_day:
-            print(f"✓ 交易日 {trading_day} 宽度已计算，跳过落盘（--force 可强制重算）。")
+        if existing and existing.get("date", "") >= trading_day:
+            print(f"✓ 交易日 {trading_day} 已有快照，保留旧原件，不覆盖。")
             print(f"⏱ 耗时 {time.time() - t0:.1f}s")
             return 0
 
-    if not args.no_save:
-        save_ma_breadth_cache(
+    if not args.no_save and not args.limit:
+        saved = save_ma_breadth_cache(
             ma["ma20_pct"], ma["ma50_pct"], ma["ma200_pct"],
             eligible=ma.get("eligible", len(codes)),
             up=ad["up"], down=ad["down"], flat=ad["flat"], total=total,
@@ -125,13 +144,24 @@ def main() -> int:
             limit_up=ad["limit_up"], limit_down=ad["limit_down"],
             trading_day=trading_day,
             source="腾讯日K线(本机收盘后预计算)",
+            qualification=quality,
         )
-        append_ma_breadth_history(ma["ma20_pct"], ma["ma50_pct"], ma["ma200_pct"],
-                                  trading_day=trading_day)
-        print("✓ 已落盘 a_share_ma_breadth.json(冻结快照) + a_share_ma_breadth_history.json + a_share_klines.parquet")
+        if not saved:
+            print("✗ 宽度快照写入失败；未更新历史。")
+            return 2
+        if not append_ma_breadth_history(
+            ma["ma20_pct"], ma["ma50_pct"], ma["ma200_pct"], trading_day=trading_day
+        ):
+            print("✗ 宽度历史写入失败；快照已写入，需核对后再显示。")
+            return 2
+        quality["applied_to_snapshot"] = True
+        if not save_ma_breadth_qualification(quality):
+            print("✗ 资格证据最终读回文件写入失败；宽度仍须待核。")
+            return 2
+        print("✓ 已落盘宽度快照、历史和逐股K线缓存")
         print("  global-strip 直接读冻结快照（次日整天+周末不重算）；刷新页面即见真全A宽度。")
     else:
-        print("  [--no-save] 未落盘")
+        print("  [--no-save/--limit] 未落盘正式宽度快照")
 
     print(f"⏱ 耗时 {time.time() - t0:.1f}s")
     return 0

@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-10-09T09:31:00.316440+00:00",
+  "reviewed_at": "2026-10-09T09:31:22Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-10-09T093100.316440_0000-5c9cff44.json",
+  "coordination_check": {
+    "checked_coordination_sha": "b2e083741fbd302b492de14d79687c52d13e70f4",
+    "checked_at": "2026-10-09T17:30:46+08:00",
+    "read_task_ids": [
+      "research-dispatch-controller",
+      "market-observation",
+      "investor-observation-map"
+    ],
+    "conflict_decision": "本轮仅执行既有冻结宽度输入观察并写入按时间唯一命名的追加记录；未发现协调任务占用该路径。"
+  },
+  "changed_sources": [
+    "source-01",
+    "source-02",
+    "source-03"
+  ],
+  "facts": {
+    "a_share_rows": 4069505,
+    "a_share_latest_date": "2026-10-09",
+    "members_at_latest_market_date": 1,
+    "members_still_at_2026_10_08": 5207,
+    "symbols_in_a_share_raw": 5222,
+    "current_code_date": "2026-10-09",
+    "current_code_count": 5573,
+    "daily_snapshot_date": "2026-10-09",
+    "daily_snapshot_total": 5573,
+    "daily_snapshot_eligible": 5215
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "日常快照标为10月9日，但逐股原料只有1只更新到10月9日，5207只仍停在10月8日；不能证明同一市场日的共同200日分母。快照eligible仍是MA20口径。",
+    "historical_membership": "当前名单日期更新到10月9日且数量增加到5573；仍没有逐日历史成员版本、生效时刻或真实取得时间链。",
+    "etf_nominal_prices_and_actions": "两只ETF的合格名义价格、公司行动、停牌和限价输入均未变化，原资格缺口仍在。",
+    "availability": "快照日期领先于绝大多数逐股行情，属于输入观察失败；不把10月9日快照当成匹配实时输入。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "10月9日输入未同步完成；继续仅输入观察，不生成信号，并通知用户具体失败证据。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

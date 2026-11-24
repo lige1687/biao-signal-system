@@ -1,0 +1,14 @@
+{
+  "stage_id": "S1",
+  "verified": true,
+  "summary": "A停更修复验收通过：根因代码级坐实（自选08-24被清空致19标的脱离刷新范围+全链路无过期检查）；freshness.py机制（交易日历应达窗口/三分台账只进不退/四态判定）落地且17项冻结时钟测试全过；消费端贯通（60s巡检+启动检查+心跳停摆可发现+API+前端横幅+过期价不预填）主控复验50项相关测试与构建通过；真实修复先备份后补齐（513870恰补19交易日、515130至09-18）、修复后healthy告警解除、未来时钟演示再缺更重报。附带发现26个存量stale标的（含2022年历史污染文件）按授权边界保持告警待用户决定——正确的越界处理。",
+  "goal_ids_checked": ["G1", "G2", "G3", "G4"],
+  "evidence": [
+    "主控复跑 test_data_freshness 17项 + 相关50项全过",
+    "主控查真实缓存mtime=09-20 11:06（修复落地）与freshness_ledger.json（records/heartbeat/alerts）",
+    "主控复跑 npm run build 通过（2.68s）",
+    "改动文件清单与合同范围一致（api/preheat/pipeline/web展示层，未碰storage受保护路径）",
+    "hygiene仅worktree已知.git误报；报告含大白话结论"
+  ],
+  "limitations": ["26个存量stale标的的处置待用户决定", "B方向适配实现待另立作业（复用本机制）", "与主仓的合并需逐文件（并行任务web改动仍在）"]
+}

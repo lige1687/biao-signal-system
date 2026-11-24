@@ -1,0 +1,488 @@
+{
+  "schema": "lei-signal/qualification-path/inventory@1.0.0",
+  "generated": "2026-09-19",
+  "inputs": {
+    "normalized_actions": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+    "evidence_bundle": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/evidence-bundle-v1.2.json"
+  },
+  "summary": {
+    "total": 21,
+    "tier1_publication_bound": 8,
+    "tier1_content_only": 1,
+    "tier0": 12,
+    "available_at_null": 21,
+    "by_type": {
+      "cash_dividend": 17,
+      "split": 3,
+      "trading_halt": 1
+    },
+    "note": "tier1_publication_bound=官方原文+hash 在案且 publication_time 有下界（not_before），但 available_at 仍为 null；tier1_content_only=官方原文在案但原文无可用的公布时间（time_evidence.kind=unknown，如 515880 拆分公告落款缺失）；tier0=无官方原文（二手冻结表或 bundle 记录 official_original=missing_locally）。21/21 的 available_at 当前全部为 null。"
+  },
+  "actions": [
+    {
+      "event_id": "510300-cash_dividend-2019-01-16",
+      "symbol": "510300",
+      "type": "cash_dividend",
+      "effective_time": "2019-01-16",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "510300-cash_dividend-2019-12-11",
+      "symbol": "510300",
+      "type": "cash_dividend",
+      "effective_time": "2019-12-11",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "510300-cash_dividend-2021-01-18",
+      "symbol": "510300",
+      "type": "cash_dividend",
+      "effective_time": "2021-01-18",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "512890-split-2021-10-22",
+      "symbol": "512890",
+      "type": "split",
+      "effective_time": "2021-10-22",
+      "frozen_source": "official_original",
+      "current_tier": 1,
+      "tier1": "Tier1 部分：publication_time=2021-10-25（bound=not_before，仅下界）；source.sha256 已登记",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "available_at 到达证据（bound=exact + availability_scope，historical_availability_verified 当前为 false）"
+      ],
+      "fillability": {
+        "tier1_possible": "已补至 Tier1（原文+hash 在案）",
+        "tier2_possible": "仅能补 effective_time 链；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": "2021-10-25",
+      "publication_bound": "not_before"
+    },
+    {
+      "event_id": "512890-halt-2021-10-22",
+      "symbol": "512890",
+      "type": "trading_halt",
+      "effective_time": "2021-10-22",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "510300-cash_dividend-2022-01-19",
+      "symbol": "510300",
+      "type": "cash_dividend",
+      "effective_time": "2022-01-19",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "510300-cash_dividend-2023-01-16",
+      "symbol": "510300",
+      "type": "cash_dividend",
+      "effective_time": "2023-01-16",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "515300-cash_dividend-2023-12-19",
+      "symbol": "515300",
+      "type": "cash_dividend",
+      "effective_time": "2023-12-19",
+      "frozen_source": "official_original",
+      "current_tier": 1,
+      "tier1": "Tier1 部分：publication_time=2023-12-14（bound=not_before，仅下界）；source.sha256 已登记",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "available_at 到达证据（bound=exact + availability_scope，historical_availability_verified 当前为 false）"
+      ],
+      "fillability": {
+        "tier1_possible": "已补至 Tier1（原文+hash 在案）",
+        "tier2_possible": "仅能补 effective_time 链；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": "2023-12-14",
+      "publication_bound": "not_before"
+    },
+    {
+      "event_id": "510300-cash_dividend-2024-01-18",
+      "symbol": "510300",
+      "type": "cash_dividend",
+      "effective_time": "2024-01-18",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "515300-cash_dividend-2024-06-21",
+      "symbol": "515300",
+      "type": "cash_dividend",
+      "effective_time": "2024-06-21",
+      "frozen_source": "official_original",
+      "current_tier": 1,
+      "tier1": "Tier1 部分：publication_time=2024-06-18（bound=not_before，仅下界）；source.sha256 已登记",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "available_at 到达证据（bound=exact + availability_scope，historical_availability_verified 当前为 false）"
+      ],
+      "fillability": {
+        "tier1_possible": "已补至 Tier1（原文+hash 在案）",
+        "tier2_possible": "仅能补 effective_time 链；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": "2024-06-18",
+      "publication_bound": "not_before"
+    },
+    {
+      "event_id": "512400-cash_dividend-2024-09-18",
+      "symbol": "512400",
+      "type": "cash_dividend",
+      "effective_time": "2024-09-18",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "515300-cash_dividend-2024-09-20",
+      "symbol": "515300",
+      "type": "cash_dividend",
+      "effective_time": "2024-09-20",
+      "frozen_source": "official_original",
+      "current_tier": 1,
+      "tier1": "Tier1 部分：publication_time=2024-09-13（bound=not_before，仅下界）；source.sha256 已登记",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "available_at 到达证据（bound=exact + availability_scope，historical_availability_verified 当前为 false）"
+      ],
+      "fillability": {
+        "tier1_possible": "已补至 Tier1（原文+hash 在案）",
+        "tier2_possible": "仅能补 effective_time 链；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": "2024-09-13",
+      "publication_bound": "not_before"
+    },
+    {
+      "event_id": "515300-cash_dividend-2024-12-03",
+      "symbol": "515300",
+      "type": "cash_dividend",
+      "effective_time": "2024-12-03",
+      "frozen_source": "official_original",
+      "current_tier": 1,
+      "tier1": "Tier1 部分：publication_time=2024-11-28（bound=not_before，仅下界）；source.sha256 已登记",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "available_at 到达证据（bound=exact + availability_scope，historical_availability_verified 当前为 false）"
+      ],
+      "fillability": {
+        "tier1_possible": "已补至 Tier1（原文+hash 在案）",
+        "tier2_possible": "仅能补 effective_time 链；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": "2024-11-28",
+      "publication_bound": "not_before"
+    },
+    {
+      "event_id": "515300-cash_dividend-2025-06-17",
+      "symbol": "515300",
+      "type": "cash_dividend",
+      "effective_time": "2025-06-17",
+      "frozen_source": "official_original",
+      "current_tier": 1,
+      "tier1": "Tier1 部分：publication_time=2025-06-12（bound=not_before，仅下界）；source.sha256 已登记",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "available_at 到达证据（bound=exact + availability_scope，historical_availability_verified 当前为 false）"
+      ],
+      "fillability": {
+        "tier1_possible": "已补至 Tier1（原文+hash 在案）",
+        "tier2_possible": "仅能补 effective_time 链；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": "2025-06-12",
+      "publication_bound": "not_before"
+    },
+    {
+      "event_id": "510300-cash_dividend-2025-06-18",
+      "symbol": "510300",
+      "type": "cash_dividend",
+      "effective_time": "2025-06-18",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "512400-cash_dividend-2025-09-15",
+      "symbol": "512400",
+      "type": "cash_dividend",
+      "effective_time": "2025-09-15",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "515300-cash_dividend-2025-09-18",
+      "symbol": "515300",
+      "type": "cash_dividend",
+      "effective_time": "2025-09-18",
+      "frozen_source": "official_original",
+      "current_tier": 1,
+      "tier1": "Tier1 部分：publication_time=2025-09-15（bound=not_before，仅下界）；source.sha256 已登记",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "available_at 到达证据（bound=exact + availability_scope，historical_availability_verified 当前为 false）"
+      ],
+      "fillability": {
+        "tier1_possible": "已补至 Tier1（原文+hash 在案）",
+        "tier2_possible": "仅能补 effective_time 链；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": "2025-09-15",
+      "publication_bound": "not_before"
+    },
+    {
+      "event_id": "515300-cash_dividend-2025-12-15",
+      "symbol": "515300",
+      "type": "cash_dividend",
+      "effective_time": "2025-12-15",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：bundle 记录存在但 official_original=missing_locally",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需检索该次分红的基金公司官方公告原文",
+        "tier2_possible": "仅能补 effective_time 链；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "510300-cash_dividend-2026-01-19",
+      "symbol": "510300",
+      "type": "cash_dividend",
+      "effective_time": "2026-01-19",
+      "frozen_source": "secondhand",
+      "current_tier": 0,
+      "tier1": "无：本地无官方原文，source_url 为二手聚合页",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 官方公告原文（公告日+内容核对）",
+        "Tier2 规则出处（如需规则推导生效链）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：需按基金公司/交易所公告检索官方原文（510300=华泰柏瑞沪深300ETF、512400=南方中证申万有色ETF，公告应在基金公司官网/上交所披露）",
+        "tier2_possible": "仅能补 effective_time 链（除息/登记日已在二手表，需官方规则佐证）；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "515880-split-2026-02-03",
+      "symbol": "515880",
+      "type": "split",
+      "effective_time": "2026-02-03",
+      "frozen_source": "official_original",
+      "current_tier": 1,
+      "tier1": "Tier1 仅内容层：官方原文+hash 在案、事实已核，但原文无可用的公布时间（time_evidence.kind=unknown）",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "Tier1 publication_time（需找到带落款/披露时刻的官方文件）",
+        "available_at 到达证据"
+      ],
+      "fillability": {
+        "tier1_possible": "可补：检索该行动的另一份官方公告（安排/结果公告）以取得公布日期",
+        "tier2_possible": "仅能补 effective_time 链；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": null,
+      "publication_bound": null
+    },
+    {
+      "event_id": "515050-split-2026-05-13",
+      "symbol": "515050",
+      "type": "split",
+      "effective_time": "2026-05-13",
+      "frozen_source": "official_original",
+      "current_tier": 1,
+      "tier1": "Tier1 部分：publication_time=2026-05-07（bound=document_dated，仅下界）；source.sha256 已登记",
+      "tier2": "无",
+      "tier3": "无（本阶段不使用）",
+      "missing_layers": [
+        "available_at 到达证据（bound=exact + availability_scope，historical_availability_verified 当前为 false）"
+      ],
+      "fillability": {
+        "tier1_possible": "已补至 Tier1（原文+hash 在案）",
+        "tier2_possible": "仅能补 effective_time 链；不能推出 publication_time/available_at"
+      },
+      "available_at": null,
+      "publication_time": "2026-05-07",
+      "publication_bound": "document_dated"
+    }
+  ]
+}

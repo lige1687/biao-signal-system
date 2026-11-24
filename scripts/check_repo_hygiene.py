@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""仓库归置自检：任务结案前跑一次，非零退出即有放错位置的内容。
+"""仓库归置与工作区卫生自检：任务结案前跑一次，非零退出即有放错位置或违规堆积的内容。
 
-对应 AGENTS.md「文件归置规约（2026-09-16 起强制）」。检查项：
+对应 AGENTS.md「文件归置规约」与「工作区与分支卫生铁律（2026-11-24）」。检查项：
 
-1. 仓库根层白名单（新文件不落根层）；
+1. 仓库根层白名单（新文件不落根层，且禁止项目内创建 .codex/）；
 2. scripts/ 根层白名单（一次性脚本进 archive/ 或实验 raw/）；
 3. docs/ 根层白名单（过程文档进 archive/handoffs-plans/ 等）；
 4. tests/ 根层只允许 __init__.py 与标准子目录（夹具进 fixtures/）；
-5. configs/ 与 docs/experiments 关键数据文件必须被 git 跟踪
-   （防止部署依赖悬空——2026-09-16 治理时曾发现 dca_evidence.json 未跟踪）。
+5. configs/ 与 docs/experiments 关键数据文件必须被 git 跟踪；
+6. 工作区与分支卫生硬防线：无多余分身工作区、本地分支不超过上限、`.gitignore` 保持忽略 `/.codex/`。
 
 用法：python3 scripts/check_repo_hygiene.py [--quiet]
 """
@@ -23,11 +23,15 @@ REPO = Path(__file__).resolve().parents[1]
 
 #: 仓库根层白名单（文件）。工具配置目录（.streamlit 等）单独列。
 ROOT_KEEP_FILES = {
-    ".DS_Store", ".env", ".env.example", ".gitignore", ".plan.md",
+    # ".git"（文件）= git worktree 指针（本工作区形态），与目录形态一并放行
+    ".DS_Store", ".env", ".env.example", ".git", ".gitignore", ".plan.md",
     "AGENTS.md", "CLAUDE.md", "README.md", "pyproject.toml",
     "project.config.json", "project.private.config.json",
 }
 ROOT_KEEP_DIRS = {
+    # 本机研究依赖缓存：.gitignore 的 data_cache/；读取依据见
+    # docs/experiments/raw/external-multiple-comparison-2026-10-02/independent_core_check.py
+    "data_cache",
     ".git", ".agents", ".streamlit", ".claude", ".superpowers", ".workbuddy", ".zcode",
     ".mypy_cache", ".pytest_cache", ".ruff_cache", ".biao",
     "configs", "data", "docs", "logs", "miniapp", "scripts", "src", "tests", "web",
@@ -49,7 +53,8 @@ SCRIPTS_KEEP = {
     "paper_account.py", "precompute_a_share_ma.py", "precompute_daily_brief.py",
     "precompute_factor_panel.py", "precompute_newsfeed.py",
     "precompute_sector_trend.py", "precompute_us_sector_breadth.py",
-    "prepare_momentum_qualified_inputs.py", "refresh_timing_matrix.py",
+    "prepare_momentum_qualified_inputs.py", "refresh_market_observation_history.py",
+    "refresh_timing_matrix.py",
     "retail_mania_backtest.py", "run_b1_dual_ma_description.py",
     "run_breadth_overlay.py", "run_factor_evidence_reliability.py",
     "run_factor_lab.py", "run_factor_library_v0.py", "run_final_form_v2.py",
@@ -91,6 +96,7 @@ DOCS_KEEP = {
     "plan-agent-superentry-v1.md",     # copilot/sentiment.py 注释锚定
 }
 DOCS_KEEP_DIRS = {
+    "progress",  # 2026-10-03 用户明确要求的持续任务进展。
     "archive", "artifacts", "experiments", "literature-learning", "okr",
     "ops", "prompts", "reports", "research", "superpowers", "timing-sweep",
 }
@@ -114,11 +120,82 @@ MUST_TRACK = [
 ]
 
 
+MAX_LOCAL_BRANCHES = 5
+REQUIRED_GITIGNORE_ENTRIES = ("/.codex/",)
+
+
 def _git_tracked_files() -> set[str]:
     out = subprocess.run(
         ["git", "ls-files"], cwd=REPO, capture_output=True, text=True, check=True
     ).stdout
     return {line for line in out.splitlines() if line}
+
+
+def _git_worktrees(repo: Path) -> list[str]:
+    out = subprocess.run(
+        ["git", "worktree", "list", "--porcelain"],
+        cwd=repo,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    return [
+        line.split(" ", 1)[1].strip()
+        for line in out.splitlines()
+        if line.startswith("worktree ")
+    ]
+
+
+def _git_local_branches(repo: Path) -> list[str]:
+    out = subprocess.run(
+        ["git", "for-each-ref", "--format=%(refname:short)", "refs/heads"],
+        cwd=repo,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    return [line.strip() for line in out.splitlines() if line.strip()]
+
+
+def check_workspace_governance(
+    repo: Path,
+    problems: list[str],
+    *,
+    worktrees: list[str] | None = None,
+    local_branches: list[str] | None = None,
+    max_local_branches: int = MAX_LOCAL_BRANCHES,
+) -> None:
+    """检查工作区与分支卫生红线（2026-11-24 治理后启用）。"""
+    nested_codex = repo / ".codex"
+    if nested_codex.exists():
+        problems.append(
+            "[工作区治理] 禁止在项目目录内保留 .codex/（容易堆积旧代码副本误导 AI），请移到项目目录之外并清理"
+        )
+
+    gitignore_path = repo / ".gitignore"
+    if gitignore_path.is_file():
+        gitignore_lines = {
+            line.strip() for line in gitignore_path.read_text(encoding="utf-8").splitlines()
+        }
+        for entry in REQUIRED_GITIGNORE_ENTRIES:
+            if entry not in gitignore_lines:
+                problems.append(
+                    f"[工作区治理] .gitignore 缺少必需的忽略项 {entry}，请补回防止临时分身目录入库"
+                )
+
+    wt_list = _git_worktrees(repo) if worktrees is None else list(worktrees)
+    if len(wt_list) > 1:
+        extra = [p for p in wt_list if Path(p).resolve() != repo.resolve()]
+        preview = "、".join(extra[:3]) + (f" 等共 {len(extra)} 个" if len(extra) > 3 else "")
+        problems.append(
+            f"[工作区治理] 发现多余的分身工作区（当前共 {len(wt_list)} 个，正常应只留主目录 1 个）：{preview}"
+        )
+
+    br_list = _git_local_branches(repo) if local_branches is None else list(local_branches)
+    if len(br_list) > max_local_branches:
+        problems.append(
+            f"[工作区治理] 本地分支过多（当前 {len(br_list)} 个，上限 {max_local_branches} 个），请合并到 main 后清理过时临时分支"
+        )
 
 
 def check_layer(base: Path, keep_files: set[str], keep_dirs: set[str], label: str,
@@ -163,13 +240,15 @@ def main() -> int:
         if rel not in tracked:
             problems.append(f"[跟踪] {rel} 未被 git 跟踪但被代码按默认路径依赖")
 
+    check_workspace_governance(REPO, problems)
+
     if problems:
-        print(f"✗ 归置自检发现 {len(problems)} 处违规（规约见 AGENTS.md「文件归置规约」）：")
+        print(f"✗ 归置自检发现 {len(problems)} 处违规（规约见 AGENTS.md「工作区与分支卫生铁律」与「文件归置规约」）：")
         for p in problems:
             print(f"  - {p}")
         return 1
     if not args.quiet:
-        print("✓ 归置自检通过：根层四层均在白名单内，关键配置均已入库。")
+        print("✓ 归置自检通过：根层整洁、关键配置已入库、无多余分身工作区且分支数量达标。")
     return 0
 
 

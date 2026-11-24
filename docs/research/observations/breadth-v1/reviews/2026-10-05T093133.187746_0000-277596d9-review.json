@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-10-05T09:31:33.187746+00:00",
+  "reviewed_at": "2026-10-05T09:33:25Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-10-05T093133.187746_0000-277596d9.json",
+  "changed_sources": [
+    "source-01",
+    "source-02"
+  ],
+  "facts": {
+    "a_share_rows": 4064305,
+    "a_share_latest_date": "2026-09-30",
+    "members_at_latest_market_date": 5211,
+    "symbols_in_a_share_raw": 5222,
+    "rows_change_vs_last_review": -3,
+    "current_code_date": "2026-10-05",
+    "current_code_count": 5572,
+    "daily_snapshot_date": "2026-09-30",
+    "daily_snapshot_total": 5572,
+    "daily_snapshot_eligible": 5212
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "逐股原料文件被重写，但市场最新日期仍是9月30日；日常快照的eligible仍是MA20口径，不是冻结研究要求的共同200日分母和覆盖率。",
+    "historical_membership": "当前名单标签更新到10月5日且数量仍为5572；这不补足历史成员、生效时间和真实取得时间链。",
+    "etf_nominal_prices_and_actions": "ETF名义价格、公司行动和交易限制链均未变化，原资格缺口仍在。",
+    "availability": "没有9月30日之后的新市场行情；原料比上次审查少3行，且未归档旧文件字节，无法把重写解释成可用的新市场证据。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "来源文件发生非市场日重写，但没有补齐冻结口径；继续仅输入观察，不生成信号。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

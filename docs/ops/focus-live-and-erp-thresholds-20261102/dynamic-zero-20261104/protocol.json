@@ -1,0 +1,99 @@
+{
+  "research_id": "focus-dynamic-zero-20261104",
+  "parent_research": "focus-stock-momentum-evaluation-20261025",
+  "mode": "research",
+  "delivery_mode": "final_only",
+  "status": "design_fixed_before_effect",
+  "created_at": "2026-11-04T22:22:35.223019+08:00",
+  "question": "历史动态合格股票池的焦点动量上穿0，以及指数长期趋势过滤，是否帮助观察下一个交易月的指数修复，超过指数动量/均线和同池涨跌的解释",
+  "decision_use": "沪深300宽基低频观察，约一月为主、约一季仅固定敏感性；不产生交易规则或账户收益",
+  "evidence_status": "exploratory previously seen history; no unseen validation",
+  "method_identity": "independent local definition; not exact Douyin reconstruction",
+  "definition_id": "research.observation.focus_amount20_momentum20_top5pct_dynamic@0.1.0-local",
+  "definition_source": "builder-context.json /definition",
+  "dates": [
+    "2015-01-01",
+    "2025-12-31"
+  ],
+  "warmup_start": "2014-01-01",
+  "universe_versions": [
+    "vendor_historical_dynamic_eligible",
+    "frozen_fixed300_control"
+  ],
+  "target": "CSI300 total return index, frozen original inputs.json CSI300 SHA; reference index not selected stock portfolio",
+  "horizons_sessions": [
+    20,
+    63
+  ],
+  "primary_horizon_sessions": 20,
+  "label": "close(t+1+h)/close(t+1)-1; minimum close including t+1 through t+1+h relative to t+1; contiguous exchange sessions required",
+  "events": {
+    "focus_up": "focus(t-1)<=0 and focus(t)>0, only adjacent valid exchange sessions",
+    "index_up": "indexM20(t-1)<=0 and indexM20(t)>0, adjacent sessions",
+    "trend": "CSI300 TR close(t)>SMA200(t)",
+    "focus_up_trend": "focus_up AND trend",
+    "focus_negative": "focus<0 state; not event or opportunity label"
+  },
+  "baselines": [
+    "all common valid dates",
+    "indexM20 upward zero crossing",
+    "long-term trend alone",
+    "fixed300 same event definitions",
+    "categorical joint state of indexM20 sign / close>SMA200 / same-poolM20 sign / breadth>=0.5"
+  ],
+  "primary_metric": "next20 mean index return difference between focus_up and non-event controls standardized to event distribution across the 16 baseline states; pp. Descriptive conditional increment, not causality or trading profit. No pre-agreed economically meaningful cutoff.",
+  "performance": [
+    "count",
+    "frequency_per_year",
+    "mean",
+    "median",
+    "positive_share",
+    "mean_future_minimum_return",
+    "worst_future_minimum_return"
+  ],
+  "increment": [
+    "raw candidate minus all-dates mean",
+    "state-standardized event-minus-control mean and positive-share differences",
+    "trend-filter retained vs removed focus_up: count, positive/negative, mean and five largest missed gains/five avoided losses"
+  ],
+  "uncertainty": {
+    "method": "moving calendar block resampling of all common date rows; recompute state-weighted event/control difference preserving event clusters",
+    "block_sessions": 126,
+    "replicates": 2000,
+    "seed": 20261104,
+    "interval": 0.95,
+    "min_cell_support": ">=1 event and >=1 non-event observed; sparse cell counts and unmatched exclusions shown; no significance threshold tuning"
+  },
+  "stability": [
+    "2015-2019",
+    "2020-2022",
+    "2023-2025",
+    "by year",
+    "all first upcross events, overlap counts; no retrospective trough picking"
+  ],
+  "samples": "Each comparison same dates, forecast availability and full target maturity. Both universe versions retained; fields from date t only. Missing rows break crossings. No forward fill. Report unsupported source gaps.",
+  "success_falsification": "Conclude limited benefit only if magnitude/uncertainty and period checks support meaningful separation beyond specified baseline; mixed or null preserved, no parameter search. Complete-account usefulness remains untested.",
+  "budgets": {
+    "prior": "Original core1+independent audit1+literature6 and continuation6/gap600 retained unchanged",
+    "new_input_extraction_max": 1,
+    "new_core_effect_max": 1,
+    "mechanical_correction_max": 2,
+    "new_source_requests_max": 0,
+    "effect_attempts_used": 0,
+    "input_attempts_used": 0
+  },
+  "scope": "No production UI changes/alerts/trades/fees/paid data or downloads. No ERP rerun. No archive raw code imports. Technical FactorLab supports no sentiment-market-state adapter; independent existing observation family route retained.",
+  "outputs": {
+    "large": "new storage-plan external result",
+    "small": "docs/ops/focus-live-and-erp-thresholds-20261102/dynamic-zero-20261104"
+  },
+  "known_limits": [
+    "vendor roster not certified full historical PIT coverage",
+    "source arrival/revision times unknown",
+    "exit cash/recovery unknown",
+    "20day focus returns price-adjusted but index target total return, interpretation stated",
+    "same history used in other studies and model critique",
+    "conditional baseline categorical and may leave continuous confounding",
+    "not an account simulation; fees/slippage/holding rules not modelled"
+  ]
+}

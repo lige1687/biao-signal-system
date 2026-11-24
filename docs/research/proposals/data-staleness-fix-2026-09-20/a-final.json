@@ -1,0 +1,19 @@
+{
+  "verified": true,
+  "summary": "行情缓存停更修复全目标通过：根因坐实、机制落地、消费端贯通、七类冻结反例全过、真实样本备份后修复且再缺更可发现。B方向正式消费的前置条件（A验收通过）达成。26个存量stale标的待用户处置。",
+  "goals": [
+    {"id": "G1", "verified": true, "evidence": ["根因=watchlist清空脱离刷新范围（代码级）", "三端文件清单在报告§G1"]},
+    {"id": "G2", "verified": true, "evidence": ["freshness.py应达窗口+三分台账", "17项冻结时钟测试"]},
+    {"id": "G3", "verified": true, "evidence": ["巡检/心跳/启动检查/API/前端横幅/过期不预填", "主控复验50项相关测试与构建"]},
+    {"id": "G4", "verified": true, "evidence": ["备份后修复至09-18/09-20", "healthy解除告警", "未来时钟再缺更重报演示"]}
+  ],
+  "changed_files": ["src/lei_signal/data/freshness.py（新）", "src/lei_signal/api/app.py", "src/lei_signal/api/preheat.py", "src/lei_signal/api/routes/symbols.py", "src/lei_signal/api/schemas.py", "src/lei_signal/compose/pipeline.py", "web/src/pages/DetailPage.tsx", "web/src/types.ts", "web/src/styles.css", "tests/unit/test_data_freshness.py（新）", "docs/experiments/data-staleness-fix-2026-09-20.md", "docs/experiments/raw/data-staleness-fix-2026-09-20/"],
+  "limitations": ["26个存量stale标的待用户决定", "披露时间戳缺失源待B接入时记unknown"],
+  "pending_actions": ["用户处置26个stale标的", "另立B适配实现作业（glm-high，复用freshness机制）", "主仓合并（与并行任务逐文件）"],
+  "verification": [
+    {"command": "pytest test_data_freshness.py -q", "result": "17 passed"},
+    {"command": "pytest -k freshness/preheat/symbols/compose", "result": "50 passed"},
+    {"command": "npm run build", "result": "通过2.68s"},
+    {"command": "真实缓存mtime与台账检查", "result": "修复落地09-20，台账活"}
+  ]
+}

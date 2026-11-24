@@ -1,0 +1,31 @@
+{
+  "status": "accepted",
+  "agent": "/root/storage_autonomy",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "medium",
+  "dry_run": "ready",
+  "main_controller_review": [
+    "diff against pre-task byte backups",
+    "actual capacity only refuses planned internal bytes",
+    "read-only plans preserve protected fixture",
+    "legacy paths and budget validation retained and advisory refreshed",
+    "all AGENTS non-storage sections unchanged",
+    "actual mount plan readback, no directory created"
+  ],
+  "controller_test_command": "PYTHONPATH=src python3 -m pytest -q tests/unit/test_research_output_storage.py tests/integration/test_research_output_routing_cli.py",
+  "controller_test_result": "58 passed in 0.81s",
+  "hygiene": "passed",
+  "actual_deletions_bytes": 0,
+  "current_internal_free_gib_approx": 13.28,
+  "reason_no_cleanup": "above5GiB cleanup target, sufficient space already available",
+  "frozen_consumers": "not rewritten; historical focus_dynamic.py still has its frozen own reserve check; new calls follow current rule and require independent new-entry adaptation if needed",
+  "remaining_required_work": [],
+  "changed_baseline_files": [
+    "src/lei_signal/research/output_storage.py",
+    "tests/unit/test_research_output_storage.py",
+    "configs/research-output-policy.v1.json",
+    "AGENTS.md",
+    "docs/ops/research-output-storage.md",
+    "docs/ops/codex-storage-management.md"
+  ]
+}

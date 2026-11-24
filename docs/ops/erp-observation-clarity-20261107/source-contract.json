@@ -1,0 +1,43 @@
+{
+  "mission": "Unify ERP display readings, dates, chart history and opening behavior across the current FundamentalsPage and existing market observation sources.",
+  "task_scope": [
+    "Use existing useProjectionSource for erp-cn and erp-us. Show the same dated latest value and series as home. Correct units to percentage points. Reuse the ERP detail dialog. Cover long-period overlay ERP curves as well as rates cards. Preserve missing/error data explicitly."
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "web/AGENTS.md",
+    "web/src/components/observation-library/projectionSources.ts",
+    "web/src/components/observation-library/ObservationDetailDialog.tsx",
+    "web/src/components/market-observation-alerts/UsErpCard.tsx",
+    "web/src/types.ts",
+    "web/src/components/trend",
+    "web/src/components/observation-library/catalog.ts"
+  ],
+  "write_paths": [
+    "web/src/pages/FundamentalsPage.tsx",
+    "web/src/components/observation-library/ErpReferenceCard.tsx",
+    "docs/ops/erp-observation-clarity-20261107/source-worker-result.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Minimal readable source changes with original behavior retained for non-ERP cards",
+    "Fresh TypeScript check and focused existing tests if relevant",
+    "JSON result listing files, checks and known limits"
+  ],
+  "stop_conditions": [
+    "missing permission",
+    "overlapping file ownership",
+    "need to change backend or numerical thresholds"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab"
+}

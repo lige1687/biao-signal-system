@@ -1,0 +1,43 @@
+{
+  "mission": "Build reusable source-backed indicator thumbnails for category browse without pinning",
+  "task_scope": [
+    "Thumbnail rendering only; root owns browser layout, pinning and concentration dedup. Reuse existing hooks/parsers/formulas. No independent data acquisition."
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "web/AGENTS.md",
+    "web/src/components/market-observation-alerts",
+    "web/src/components/observation-library",
+    "web/src/components/market-style",
+    "web/src/components/focus-momentum",
+    "web/src/api",
+    "web/src/types.ts",
+    "web/public/research"
+  ],
+  "write_paths": [
+    "web/src/components/market-observation-alerts/IndicatorThumbnail.tsx",
+    "web/src/components/market-observation-alerts/indicatorThumbnailData.ts",
+    "web/src/components/market-observation-alerts/indicatorThumbnailData.test.mjs"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Compact source-backed thumbnail component for readable catalog types",
+    "Coverage list and unsupported cases",
+    "Focused parser checks and TypeScript"
+  ],
+  "stop_conditions": [
+    "missing permission",
+    "scope ambiguity",
+    "unsafe action"
+  ],
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

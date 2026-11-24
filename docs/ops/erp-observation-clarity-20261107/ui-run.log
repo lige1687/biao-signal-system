@@ -1,0 +1,24 @@
+{
+  "expected": {
+    "cn": {
+      "date": "2026-11-06",
+      "value": 5.8319
+    },
+    "us": {
+      "date": "2026-11-06",
+      "value": -0.9
+    }
+  },
+  "checks": [
+    "cn home, date, detail, display range, close checked",
+    "us home, date, detail, display range, close checked",
+    "combination evidence is unique; collapse/restore works",
+    "cn rates card/date/detail match home canonical observation",
+    "us rates card/date/detail match home canonical observation",
+    "cn overlay dates/values match canonical data with null gaps and visible points",
+    "us overlay dates/values match canonical data with null gaps and visible points",
+    "CN source 503: no competing snapshot fallback in rates/home",
+    "desktop 1280/1440/1920 no page horizontal overflow"
+  ],
+  "pageErrors": []
+}

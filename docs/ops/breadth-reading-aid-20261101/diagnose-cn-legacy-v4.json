@@ -1,0 +1,3093 @@
+{
+  "schema": "diagnose-cn-legacy-v4/1",
+  "fixed_anchor_dates": [
+    "2026-09-08",
+    "2026-09-10",
+    "2026-09-11",
+    "2026-09-14",
+    "2026-09-15",
+    "2026-09-16",
+    "2026-09-17",
+    "2026-09-18",
+    "2026-09-21",
+    "2026-09-24",
+    "2026-09-28",
+    "2026-09-29",
+    "2026-09-30",
+    "2026-10-08",
+    "2026-10-09",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "input_sha256": {
+    "live": "8a6c051b14988759a7240cf61c50d16f3aaf66a956fe3ecfb6798cf2719d88ff",
+    "legacy_cache_unqualified": "194ef85a17febce51f351d46fcf43af1c2c4c48bcb93651d7c29288e94e43fe2",
+    "tencent_qfq_cache": "207462af6bfa3240ddf41c5b5f50f18d10f9146feeb12d6a1403cba5d09fd0e9",
+    "qualified_westock": "915dd4ff5f53243f3aa38680cc84db93815f02283e2ddae32c99a2055e92ce58",
+    "westock_rows": "0cf8bad02212888dfba69961d7028bb8e819bf10a3337a9dea6728b6e3a4abcd",
+    "westock_manifest": "7d043660437102c33d7746a924fd16ba678ed98237ce483b862bce26ea777dea"
+  },
+  "input_files": {
+    "live": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_history.json",
+    "legacy_cache_unqualified": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines.parquet",
+    "tencent_qfq_cache": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_qfq.parquet",
+    "qualified_westock": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/breadth-reading-aid-20261101/qualify-cn-westock-v4.json",
+    "westock_rows": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-westock-candidate-v4/candidate-rows.jsonl.gz",
+    "westock_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/breadth-reading-coordination-20261101/cn-westock-candidate-v4/manifest.json"
+  },
+  "live_rows": 1288,
+  "live_unchanged": true,
+  "legacy_unqualified_cache_symbols": 5224,
+  "legacy_unqualified_cache_latest_dates": {
+    "2026-08-31": 1,
+    "2026-09-03": 1,
+    "2026-09-10": 1,
+    "2026-09-14": 2,
+    "2026-09-28": 1,
+    "2026-09-30": 2,
+    "2026-10-12": 2,
+    "2026-10-13": 3,
+    "2026-10-14": 2,
+    "2026-10-15": 5208,
+    "2026-10-16": 1
+  },
+  "legacy_latest_day_symbols": [
+    {
+      "symbol": "sh600825",
+      "first": "2023-06-06",
+      "last": "2026-10-16",
+      "rows": 801
+    }
+  ],
+  "legacy_saved_cache_exact_function_replay": {
+    "ma20_pct": 15.178229206592563,
+    "ma50_pct": 18.14337881991159,
+    "ma200_pct": 14.812657736361873,
+    "eligible": 5218,
+    "trading_day": "2026-10-16"
+  },
+  "legacy_replay_vs_live_2026_10_16": {
+    "ma20": {
+      "replayed": 15.178229206592563,
+      "live": 15.178229206592563,
+      "exact_equal": true
+    },
+    "ma50": {
+      "replayed": 18.14337881991159,
+      "live": 18.14337881991159,
+      "exact_equal": true
+    },
+    "ma200": {
+      "replayed": 14.812657736361873,
+      "live": 14.812657736361873,
+      "exact_equal": true
+    }
+  },
+  "tencent_qfq_symbols": 3169,
+  "tencent_qfq_latest_dates": {
+    "2026-10-12": 1,
+    "2026-10-16": 1,
+    "2026-10-20": 7,
+    "2026-10-21": 8,
+    "2026-10-22": 20,
+    "2026-10-23": 3,
+    "2026-10-26": 210,
+    "2026-10-27": 864,
+    "2026-10-29": 494,
+    "2026-10-30": 1561
+  },
+  "tencent_qfq_vs_current_list": {
+    "common": 3169,
+    "only_in_tencent": 0,
+    "absent_from_tencent_by_market": {
+      "sz": 1267,
+      "bj": 354,
+      "sh": 787
+    }
+  },
+  "repeated_legacy_values": [
+    {
+      "previous_stored_day": "2026-09-10",
+      "stored_day": "2026-09-11",
+      "identical_windows": [
+        20,
+        50
+      ],
+      "westock_change_pp": {
+        "20": -17.45828423335515,
+        "50": -10.947712418300647
+      }
+    },
+    {
+      "previous_stored_day": "2026-09-15",
+      "stored_day": "2026-09-16",
+      "identical_windows": [
+        20,
+        50,
+        200
+      ],
+      "westock_change_pp": {
+        "20": 6.411147074251929,
+        "50": 6.961988285791378,
+        "200": 1.735918744228993
+      }
+    },
+    {
+      "previous_stored_day": "2026-09-17",
+      "stored_day": "2026-09-18",
+      "identical_windows": [
+        20,
+        50,
+        200
+      ],
+      "westock_change_pp": {
+        "20": 10.420805490337731,
+        "50": 7.671381936887926,
+        "200": 2.2702104097452924
+      }
+    },
+    {
+      "previous_stored_day": "2026-09-28",
+      "stored_day": "2026-09-29",
+      "identical_windows": [
+        200
+      ],
+      "westock_change_pp": {
+        "200": 0.9961261759822939
+      }
+    },
+    {
+      "previous_stored_day": "2026-09-29",
+      "stored_day": "2026-09-30",
+      "identical_windows": [
+        20,
+        50,
+        200
+      ],
+      "westock_change_pp": {
+        "20": 0.7520038118781329,
+        "50": -0.4434148625982104,
+        "200": 0.19872987346297322
+      }
+    },
+    {
+      "previous_stored_day": "2026-10-08",
+      "stored_day": "2026-10-09",
+      "identical_windows": [
+        20,
+        50,
+        200
+      ],
+      "westock_change_pp": {
+        "20": 8.92247093414716,
+        "50": 3.575638164404616,
+        "200": 0.8635108099954039
+      }
+    },
+    {
+      "previous_stored_day": "2026-10-12",
+      "stored_day": "2026-10-13",
+      "identical_windows": [
+        20,
+        200
+      ],
+      "westock_change_pp": {
+        "20": 3.378405984357297,
+        "200": 0.29856431513416126
+      }
+    },
+    {
+      "previous_stored_day": "2026-10-13",
+      "stored_day": "2026-10-14",
+      "identical_windows": [
+        20,
+        50,
+        200
+      ],
+      "westock_change_pp": {
+        "20": -9.594997248205612,
+        "50": -9.058611690485026,
+        "200": -1.4821374577383146
+      }
+    },
+    {
+      "previous_stored_day": "2026-10-15",
+      "stored_day": "2026-10-16",
+      "identical_windows": [
+        20,
+        50,
+        200
+      ],
+      "westock_change_pp": {
+        "20": 2.1564484102409995,
+        "50": 1.5177090594053944,
+        "200": -0.20799275317367538
+      }
+    }
+  ],
+  "git_code_evidence": {
+    "d5534723": {
+      "commit": "d55347238127ae0da228c6e9a5f6f6c4757d3830",
+      "blob_sha256": "2502d6a2fa52037fa2f249626462b1485209b98f5ab53b103701953636b2a43f",
+      "evidence_lines": {
+        "313": "threshold = (datetime.now() - pd.Timedelta(days=2)).strftime(\"%Y-%m-%d\")",
+        "336": "for series in cache.values():",
+        "350": "trading_day = max(last_dates) if last_dates else datetime.now().strftime(\"%Y-%m-%d\")",
+        "421": "append_ma_breadth_history(ma20, ma50, ma200)",
+        "503": "today = datetime.now().strftime(\"%Y-%m-%d\")"
+      }
+    },
+    "cdbe2083": {
+      "commit": "cdbe2083250a8adebdd2d228ef7a4eab8f815921",
+      "blob_sha256": "ad5f53def5e2ca754a2eb920fb0b3ee90a9af95f3c5197de65584abe1dd949f4",
+      "evidence_lines": {
+        "313": "threshold = (datetime.now() - pd.Timedelta(days=2)).strftime(\"%Y-%m-%d\")",
+        "336": "for series in cache.values():",
+        "352": "trading_day = max(last_dates) if last_dates else datetime.now().strftime(\"%Y-%m-%d\")",
+        "423": "append_ma_breadth_history(ma20, ma50, ma200, trading_day=ma.get(\"trading_day\"))",
+        "509": "today = trading_day or datetime.now().strftime(\"%Y-%m-%d\")"
+      }
+    },
+    "HEAD": {
+      "commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+      "blob_sha256": "1c224f23bdbfd468da4c81af6a4e1eaa856b93c336d200203d80c8ef13fb0f2b",
+      "evidence_lines": {
+        "313": "threshold = (datetime.now() - pd.Timedelta(days=2)).strftime(\"%Y-%m-%d\")",
+        "336": "for series in cache.values():",
+        "352": "trading_day = max(last_dates) if last_dates else datetime.now().strftime(\"%Y-%m-%d\")",
+        "423": "append_ma_breadth_history(ma20, ma50, ma200, trading_day=ma.get(\"trading_day\"))",
+        "565": "today = trading_day or datetime.now().strftime(\"%Y-%m-%d\")"
+      }
+    }
+  },
+  "twenty_day_bounded_bridge": {
+    "2026-09-08": {
+      "20": {
+        "live": 53.64823348694316,
+        "groups": {
+          "westock_all": {
+            "eligible": 5532,
+            "above": 3334,
+            "pct": 60.26753434562545
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3166,
+            "above": 2060,
+            "pct": 65.06632975363235
+          },
+          "westock_common_eligible": {
+            "eligible": 3166,
+            "above": 2060,
+            "pct": 65.06632975363235
+          },
+          "tencent_common_eligible": {
+            "eligible": 3166,
+            "above": 2060,
+            "pct": 65.06632975363235
+          },
+          "tencent_same_day": {
+            "eligible": 3166,
+            "above": 2060,
+            "pct": 65.06632975363235
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5208,
+            "above": 3116,
+            "pct": 59.8310291858679
+          }
+        },
+        "westock_minus_live_pp": 6.619300858682287,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -4.798795408006896,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 11.418096266689183
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 62.947287418237785,
+        "groups": {
+          "westock_all": {
+            "eligible": 5509,
+            "above": 3618,
+            "pct": 65.6743510618987
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3165,
+            "above": 2207,
+            "pct": 69.73143759873618
+          },
+          "westock_common_eligible": {
+            "eligible": 3165,
+            "above": 2207,
+            "pct": 69.73143759873618
+          },
+          "tencent_common_eligible": {
+            "eligible": 3165,
+            "above": 2206,
+            "pct": 69.69984202211691
+          },
+          "tencent_same_day": {
+            "eligible": 3165,
+            "above": 2206,
+            "pct": 69.69984202211691
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5198,
+            "above": 3405,
+            "pct": 65.50596383224317
+          }
+        },
+        "westock_minus_live_pp": 2.7270636436609195,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -4.057086536837474,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.03159557661926726,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 6.752554603879126
+        },
+        "common_eligible_sign_disagreements": 1,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 26.82215743440233,
+        "groups": {
+          "westock_all": {
+            "eligible": 5414,
+            "above": 1463,
+            "pct": 27.02253417066864
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3140,
+            "above": 875,
+            "pct": 27.86624203821656
+          },
+          "westock_common_eligible": {
+            "eligible": 3140,
+            "above": 875,
+            "pct": 27.86624203821656
+          },
+          "tencent_common_eligible": {
+            "eligible": 3140,
+            "above": 875,
+            "pct": 27.86624203821656
+          },
+          "tencent_same_day": {
+            "eligible": 3140,
+            "above": 875,
+            "pct": 27.86624203821656
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5145,
+            "above": 1445,
+            "pct": 28.085519922254615
+          }
+        },
+        "westock_minus_live_pp": 0.20037673626630692,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -0.8437078675479199,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 1.0440846038142269
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-09-10": {
+      "20": {
+        "live": 45.08448540706605,
+        "groups": {
+          "westock_all": {
+            "eligible": 5529,
+            "above": 2450,
+            "pct": 44.311810453969976
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3164,
+            "above": 1629,
+            "pct": 51.48546144121365
+          },
+          "westock_common_eligible": {
+            "eligible": 3164,
+            "above": 1629,
+            "pct": 51.48546144121365
+          },
+          "tencent_common_eligible": {
+            "eligible": 3164,
+            "above": 1629,
+            "pct": 51.48546144121365
+          },
+          "tencent_same_day": {
+            "eligible": 3164,
+            "above": 1629,
+            "pct": 51.48546144121365
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5208,
+            "above": 2349,
+            "pct": 45.1036866359447
+          }
+        },
+        "westock_minus_live_pp": -0.7726749530960717,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -7.173650987243676,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 6.400976034147604
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 58.95364493171764,
+        "groups": {
+          "westock_all": {
+            "eligible": 5508,
+            "above": 3212,
+            "pct": 58.315177923021054
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3163,
+            "above": 2019,
+            "pct": 63.83180524818211
+          },
+          "westock_common_eligible": {
+            "eligible": 3163,
+            "above": 2019,
+            "pct": 63.83180524818211
+          },
+          "tencent_common_eligible": {
+            "eligible": 3163,
+            "above": 2019,
+            "pct": 63.83180524818211
+          },
+          "tencent_same_day": {
+            "eligible": 3163,
+            "above": 2019,
+            "pct": 63.83180524818211
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5199,
+            "above": 3065,
+            "pct": 58.95364493171764
+          }
+        },
+        "westock_minus_live_pp": -0.6384670086965869,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -5.516627325161053,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 4.8781603164644665
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "200": {
+        "live": 25.47114824169419,
+        "groups": {
+          "westock_all": {
+            "eligible": 5414,
+            "above": 1316,
+            "pct": 24.307351311414852
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3139,
+            "above": 804,
+            "pct": 25.613252628225545
+          },
+          "westock_common_eligible": {
+            "eligible": 3139,
+            "above": 804,
+            "pct": 25.613252628225545
+          },
+          "tencent_common_eligible": {
+            "eligible": 3139,
+            "above": 805,
+            "pct": 25.64510990761389
+          },
+          "tencent_same_day": {
+            "eligible": 3139,
+            "above": 805,
+            "pct": 25.64510990761389
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5147,
+            "above": 1311,
+            "pct": 25.47114824169419
+          }
+        },
+        "westock_minus_live_pp": -1.1637969302793394,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.3059013168106937,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": -0.03185727938834404,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.1739616659196983
+        },
+        "common_eligible_sign_disagreements": 1,
+        "legacy_asof_matches_live_exact": true
+      }
+    },
+    "2026-09-11": {
+      "20": {
+        "live": 45.08448540706605,
+        "groups": {
+          "westock_all": {
+            "eligible": 5530,
+            "above": 1485,
+            "pct": 26.853526220614825
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3164,
+            "above": 984,
+            "pct": 31.099873577749683
+          },
+          "westock_common_eligible": {
+            "eligible": 3164,
+            "above": 984,
+            "pct": 31.099873577749683
+          },
+          "tencent_common_eligible": {
+            "eligible": 3164,
+            "above": 984,
+            "pct": 31.099873577749683
+          },
+          "tencent_same_day": {
+            "eligible": 3164,
+            "above": 984,
+            "pct": 31.099873577749683
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5208,
+            "above": 1447,
+            "pct": 27.784178187403995
+          }
+        },
+        "westock_minus_live_pp": -18.230959186451223,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -4.246347357134859,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -13.984611829316364
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 58.95364493171764,
+        "groups": {
+          "westock_all": {
+            "eligible": 5508,
+            "above": 2609,
+            "pct": 47.36746550472041
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3163,
+            "above": 1663,
+            "pct": 52.5766677205185
+          },
+          "westock_common_eligible": {
+            "eligible": 3163,
+            "above": 1663,
+            "pct": 52.5766677205185
+          },
+          "tencent_common_eligible": {
+            "eligible": 3163,
+            "above": 1663,
+            "pct": 52.5766677205185
+          },
+          "tencent_same_day": {
+            "eligible": 3163,
+            "above": 1663,
+            "pct": 52.5766677205185
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5199,
+            "above": 2508,
+            "pct": 48.2400461627236
+          }
+        },
+        "westock_minus_live_pp": -11.586179426997234,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -5.2092022157980935,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -6.37697721119914
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 25.49057703516612,
+        "groups": {
+          "westock_all": {
+            "eligible": 5414,
+            "above": 1141,
+            "pct": 21.074990764684152
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3139,
+            "above": 676,
+            "pct": 21.535520866518
+          },
+          "westock_common_eligible": {
+            "eligible": 3139,
+            "above": 676,
+            "pct": 21.535520866518
+          },
+          "tencent_common_eligible": {
+            "eligible": 3139,
+            "above": 676,
+            "pct": 21.535520866518
+          },
+          "tencent_same_day": {
+            "eligible": 3139,
+            "above": 676,
+            "pct": 21.535520866518
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5147,
+            "above": 1136,
+            "pct": 22.071109384107245
+          }
+        },
+        "westock_minus_live_pp": -4.415586270481967,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -0.4605301018338466,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -3.9550561686481203
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-09-14": {
+      "20": {
+        "live": 29.353042810520254,
+        "groups": {
+          "westock_all": {
+            "eligible": 5531,
+            "above": 1570,
+            "pct": 28.385463749774004
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3163,
+            "above": 1009,
+            "pct": 31.900094846664555
+          },
+          "westock_common_eligible": {
+            "eligible": 3163,
+            "above": 1009,
+            "pct": 31.900094846664555
+          },
+          "tencent_common_eligible": {
+            "eligible": 3163,
+            "above": 1009,
+            "pct": 31.900094846664555
+          },
+          "tencent_same_day": {
+            "eligible": 3163,
+            "above": 1009,
+            "pct": 31.900094846664555
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5209,
+            "above": 1529,
+            "pct": 29.353042810520254
+          }
+        },
+        "westock_minus_live_pp": -0.9675790607462496,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -3.5146310968905503,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 2.5470520361443008
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "50": {
+        "live": 51.68301596460858,
+        "groups": {
+          "westock_all": {
+            "eligible": 5508,
+            "above": 2798,
+            "pct": 50.79883805374001
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3162,
+            "above": 1754,
+            "pct": 55.47122074636306
+          },
+          "westock_common_eligible": {
+            "eligible": 3162,
+            "above": 1754,
+            "pct": 55.47122074636306
+          },
+          "tencent_common_eligible": {
+            "eligible": 3162,
+            "above": 1754,
+            "pct": 55.47122074636306
+          },
+          "tencent_same_day": {
+            "eligible": 3162,
+            "above": 1754,
+            "pct": 55.47122074636306
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5199,
+            "above": 2687,
+            "pct": 51.68301596460858
+          }
+        },
+        "westock_minus_live_pp": -0.8841779108685657,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -4.672382692623046,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 3.78820478175448
+        },
+        "common_eligible_sign_disagreements": 2,
+        "legacy_asof_matches_live_exact": true
+      },
+      "200": {
+        "live": 22.673401981736934,
+        "groups": {
+          "westock_all": {
+            "eligible": 5414,
+            "above": 1177,
+            "pct": 21.739933505725894
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3138,
+            "above": 688,
+            "pct": 21.924792861695348
+          },
+          "westock_common_eligible": {
+            "eligible": 3138,
+            "above": 688,
+            "pct": 21.924792861695348
+          },
+          "tencent_common_eligible": {
+            "eligible": 3138,
+            "above": 688,
+            "pct": 21.924792861695348
+          },
+          "tencent_same_day": {
+            "eligible": 3138,
+            "above": 688,
+            "pct": 21.924792861695348
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5147,
+            "above": 1167,
+            "pct": 22.673401981736934
+          }
+        },
+        "westock_minus_live_pp": -0.9334684760110399,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -0.18485935596945424,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -0.7486091200415856
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      }
+    },
+    "2026-09-15": {
+      "20": {
+        "live": 29.33384526780572,
+        "groups": {
+          "westock_all": {
+            "eligible": 5533,
+            "above": 1146,
+            "pct": 20.71209108982469
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3161,
+            "above": 691,
+            "pct": 21.860170832015186
+          },
+          "westock_common_eligible": {
+            "eligible": 3161,
+            "above": 691,
+            "pct": 21.860170832015186
+          },
+          "tencent_common_eligible": {
+            "eligible": 3161,
+            "above": 691,
+            "pct": 21.860170832015186
+          },
+          "tencent_same_day": {
+            "eligible": 3161,
+            "above": 691,
+            "pct": 21.860170832015186
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5210,
+            "above": 1120,
+            "pct": 21.497120921305182
+          }
+        },
+        "westock_minus_live_pp": -8.621754177981032,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.1480797421904967,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -7.473674435790535
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 51.663781496441615,
+        "groups": {
+          "westock_all": {
+            "eligible": 5509,
+            "above": 2173,
+            "pct": 39.444545289526225
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3160,
+            "above": 1349,
+            "pct": 42.68987341772152
+          },
+          "westock_common_eligible": {
+            "eligible": 3160,
+            "above": 1349,
+            "pct": 42.68987341772152
+          },
+          "tencent_common_eligible": {
+            "eligible": 3160,
+            "above": 1349,
+            "pct": 42.68987341772152
+          },
+          "tencent_same_day": {
+            "eligible": 3160,
+            "above": 1349,
+            "pct": 42.68987341772152
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5199,
+            "above": 2089,
+            "pct": 40.18080400076938
+          }
+        },
+        "westock_minus_live_pp": -12.21923620691539,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -3.245328128195297,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -8.973908078720093
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 22.65397318826501,
+        "groups": {
+          "westock_all": {
+            "eligible": 5415,
+            "above": 1100,
+            "pct": 20.313942751615883
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3136,
+            "above": 625,
+            "pct": 19.929846938775512
+          },
+          "westock_common_eligible": {
+            "eligible": 3136,
+            "above": 625,
+            "pct": 19.929846938775512
+          },
+          "tencent_common_eligible": {
+            "eligible": 3136,
+            "above": 625,
+            "pct": 19.929846938775512
+          },
+          "tencent_same_day": {
+            "eligible": 3136,
+            "above": 625,
+            "pct": 19.929846938775512
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5147,
+            "above": 1093,
+            "pct": 21.235671264814453
+          }
+        },
+        "westock_minus_live_pp": -2.3400304366491262,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.3840958128403713,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -2.7241262494894976
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-09-16": {
+      "20": {
+        "live": 29.33384526780572,
+        "groups": {
+          "westock_all": {
+            "eligible": 5534,
+            "above": 1501,
+            "pct": 27.123238164076618
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3161,
+            "above": 808,
+            "pct": 25.56153116102499
+          },
+          "westock_common_eligible": {
+            "eligible": 3161,
+            "above": 808,
+            "pct": 25.56153116102499
+          },
+          "tencent_common_eligible": {
+            "eligible": 3161,
+            "above": 808,
+            "pct": 25.56153116102499
+          },
+          "tencent_same_day": {
+            "eligible": 3161,
+            "above": 808,
+            "pct": 25.56153116102499
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5211,
+            "above": 1466,
+            "pct": 28.132796008443677
+          }
+        },
+        "westock_minus_live_pp": -2.210607103729103,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 1.5617070030516267,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -3.7723141067807298
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 51.663781496441615,
+        "groups": {
+          "westock_all": {
+            "eligible": 5510,
+            "above": 2557,
+            "pct": 46.4065335753176
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3160,
+            "above": 1514,
+            "pct": 47.91139240506329
+          },
+          "westock_common_eligible": {
+            "eligible": 3160,
+            "above": 1514,
+            "pct": 47.91139240506329
+          },
+          "tencent_common_eligible": {
+            "eligible": 3160,
+            "above": 1514,
+            "pct": 47.91139240506329
+          },
+          "tencent_same_day": {
+            "eligible": 3160,
+            "above": 1514,
+            "pct": 47.91139240506329
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5199,
+            "above": 2455,
+            "pct": 47.22061934987497
+          }
+        },
+        "westock_minus_live_pp": -5.257247921124012,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.504858829745686,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -3.752389091378326
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 22.65397318826501,
+        "groups": {
+          "westock_all": {
+            "eligible": 5415,
+            "above": 1194,
+            "pct": 22.049861495844876
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3136,
+            "above": 672,
+            "pct": 21.428571428571427
+          },
+          "westock_common_eligible": {
+            "eligible": 3136,
+            "above": 672,
+            "pct": 21.428571428571427
+          },
+          "tencent_common_eligible": {
+            "eligible": 3136,
+            "above": 672,
+            "pct": 21.428571428571427
+          },
+          "tencent_same_day": {
+            "eligible": 3136,
+            "above": 672,
+            "pct": 21.428571428571427
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5147,
+            "above": 1188,
+            "pct": 23.081406644647366
+          }
+        },
+        "westock_minus_live_pp": -0.6041116924201333,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.6212900672734492,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -1.2254017596935824
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-09-17": {
+      "20": {
+        "live": 28.324697754749568,
+        "groups": {
+          "westock_all": {
+            "eligible": 5537,
+            "above": 1512,
+            "pct": 27.307206068268012
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3163,
+            "above": 821,
+            "pct": 25.956370534302874
+          },
+          "westock_common_eligible": {
+            "eligible": 3163,
+            "above": 821,
+            "pct": 25.956370534302874
+          },
+          "tencent_common_eligible": {
+            "eligible": 3163,
+            "above": 821,
+            "pct": 25.956370534302874
+          },
+          "tencent_same_day": {
+            "eligible": 3163,
+            "above": 821,
+            "pct": 25.956370534302874
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5211,
+            "above": 1477,
+            "pct": 28.343887929380156
+          }
+        },
+        "westock_minus_live_pp": -1.0174916864815557,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 1.3508355339651388,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -2.3683272204466945
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 48.30769230769231,
+        "groups": {
+          "westock_all": {
+            "eligible": 5514,
+            "above": 2604,
+            "pct": 47.22524483133841
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3162,
+            "above": 1537,
+            "pct": 48.60847564832385
+          },
+          "westock_common_eligible": {
+            "eligible": 3162,
+            "above": 1537,
+            "pct": 48.60847564832385
+          },
+          "tencent_common_eligible": {
+            "eligible": 3162,
+            "above": 1537,
+            "pct": 48.60847564832385
+          },
+          "tencent_same_day": {
+            "eligible": 3162,
+            "above": 1537,
+            "pct": 48.60847564832385
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5200,
+            "above": 2512,
+            "pct": 48.30769230769231
+          }
+        },
+        "westock_minus_live_pp": -1.0824474763538987,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.3832308169854386,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.3007833406315399
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "200": {
+        "live": 22.999222999222997,
+        "groups": {
+          "westock_all": {
+            "eligible": 5418,
+            "above": 1194,
+            "pct": 22.03765227021041
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3139,
+            "above": 667,
+            "pct": 21.248805352022938
+          },
+          "westock_common_eligible": {
+            "eligible": 3139,
+            "above": 667,
+            "pct": 21.248805352022938
+          },
+          "tencent_common_eligible": {
+            "eligible": 3139,
+            "above": 667,
+            "pct": 21.248805352022938
+          },
+          "tencent_same_day": {
+            "eligible": 3139,
+            "above": 667,
+            "pct": 21.248805352022938
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5148,
+            "above": 1184,
+            "pct": 22.999222999222997
+          }
+        },
+        "westock_minus_live_pp": -0.961570729012589,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.7888469181874704,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -1.7504176472000594
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      }
+    },
+    "2026-09-18": {
+      "20": {
+        "live": 28.324697754749568,
+        "groups": {
+          "westock_all": {
+            "eligible": 5537,
+            "above": 2089,
+            "pct": 37.72801155860574
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3163,
+            "above": 1078,
+            "pct": 34.081568131520704
+          },
+          "westock_common_eligible": {
+            "eligible": 3163,
+            "above": 1078,
+            "pct": 34.081568131520704
+          },
+          "tencent_common_eligible": {
+            "eligible": 3163,
+            "above": 1078,
+            "pct": 34.081568131520704
+          },
+          "tencent_same_day": {
+            "eligible": 3163,
+            "above": 1078,
+            "pct": 34.081568131520704
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5211,
+            "above": 2041,
+            "pct": 39.167146421032434
+          }
+        },
+        "westock_minus_live_pp": 9.403313803856175,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 3.646443427085039,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 5.756870376771136
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 48.30769230769231,
+        "groups": {
+          "westock_all": {
+            "eligible": 5514,
+            "above": 3027,
+            "pct": 54.896626768226334
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3162,
+            "above": 1722,
+            "pct": 54.459203036053125
+          },
+          "westock_common_eligible": {
+            "eligible": 3162,
+            "above": 1722,
+            "pct": 54.459203036053125
+          },
+          "tencent_common_eligible": {
+            "eligible": 3162,
+            "above": 1722,
+            "pct": 54.459203036053125
+          },
+          "tencent_same_day": {
+            "eligible": 3162,
+            "above": 1722,
+            "pct": 54.459203036053125
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5200,
+            "above": 2894,
+            "pct": 55.65384615384615
+          }
+        },
+        "westock_minus_live_pp": 6.588934460534027,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.4374237321732082,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 6.151510728360819
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 22.999222999222997,
+        "groups": {
+          "westock_all": {
+            "eligible": 5418,
+            "above": 1317,
+            "pct": 24.3078626799557
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3139,
+            "above": 741,
+            "pct": 23.606244026760116
+          },
+          "westock_common_eligible": {
+            "eligible": 3139,
+            "above": 741,
+            "pct": 23.606244026760116
+          },
+          "tencent_common_eligible": {
+            "eligible": 3139,
+            "above": 740,
+            "pct": 23.574386747371776
+          },
+          "tencent_same_day": {
+            "eligible": 3139,
+            "above": 740,
+            "pct": 23.574386747371776
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5148,
+            "above": 1306,
+            "pct": 25.369075369075368
+          }
+        },
+        "westock_minus_live_pp": 1.3086396807327034,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.7016186531955846,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.03185727938834049,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.5751637481487784
+        },
+        "common_eligible_sign_disagreements": 1,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-09-21": {
+      "20": {
+        "live": 56.08211818879509,
+        "groups": {
+          "westock_all": {
+            "eligible": 5538,
+            "above": 3053,
+            "pct": 55.12820512820513
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3164,
+            "above": 1642,
+            "pct": 51.89633375474083
+          },
+          "westock_common_eligible": {
+            "eligible": 3164,
+            "above": 1642,
+            "pct": 51.89633375474083
+          },
+          "tencent_common_eligible": {
+            "eligible": 3164,
+            "above": 1642,
+            "pct": 51.89633375474083
+          },
+          "tencent_same_day": {
+            "eligible": 3164,
+            "above": 1642,
+            "pct": 51.89633375474083
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5212,
+            "above": 2923,
+            "pct": 56.08211818879509
+          }
+        },
+        "westock_minus_live_pp": -0.9539130605899615,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 3.231871373464301,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -4.185784434054263
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "50": {
+        "live": 66.1923076923077,
+        "groups": {
+          "westock_all": {
+            "eligible": 5514,
+            "above": 3621,
+            "pct": 65.66920565832427
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3163,
+            "above": 2060,
+            "pct": 65.1280429971546
+          },
+          "westock_common_eligible": {
+            "eligible": 3163,
+            "above": 2060,
+            "pct": 65.1280429971546
+          },
+          "tencent_common_eligible": {
+            "eligible": 3163,
+            "above": 2060,
+            "pct": 65.1280429971546
+          },
+          "tencent_same_day": {
+            "eligible": 3163,
+            "above": 2060,
+            "pct": 65.1280429971546
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5200,
+            "above": 3442,
+            "pct": 66.1923076923077
+          }
+        },
+        "westock_minus_live_pp": -0.5231020339834203,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.5411626611696789,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -1.0642646951530992
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "200": {
+        "live": 28.613053613053612,
+        "groups": {
+          "westock_all": {
+            "eligible": 5419,
+            "above": 1486,
+            "pct": 27.422033585532386
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3140,
+            "above": 843,
+            "pct": 26.84713375796178
+          },
+          "westock_common_eligible": {
+            "eligible": 3140,
+            "above": 843,
+            "pct": 26.84713375796178
+          },
+          "tencent_common_eligible": {
+            "eligible": 3140,
+            "above": 843,
+            "pct": 26.84713375796178
+          },
+          "tencent_same_day": {
+            "eligible": 3140,
+            "above": 843,
+            "pct": 26.84713375796178
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5148,
+            "above": 1473,
+            "pct": 28.613053613053612
+          }
+        },
+        "westock_minus_live_pp": -1.1910200275212262,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.5748998275706043,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -1.7659198550918305
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      }
+    },
+    "2026-09-24": {
+      "20": {
+        "live": 47.50575594781274,
+        "groups": {
+          "westock_all": {
+            "eligible": 5539,
+            "above": 2199,
+            "pct": 39.70030691460553
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3166,
+            "above": 1103,
+            "pct": 34.83891345546431
+          },
+          "westock_common_eligible": {
+            "eligible": 3166,
+            "above": 1103,
+            "pct": 34.83891345546431
+          },
+          "tencent_common_eligible": {
+            "eligible": 3166,
+            "above": 1103,
+            "pct": 34.83891345546431
+          },
+          "tencent_same_day": {
+            "eligible": 3166,
+            "above": 1103,
+            "pct": 34.83891345546431
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5212,
+            "above": 2144,
+            "pct": 41.13584036838066
+          }
+        },
+        "westock_minus_live_pp": -7.805449033207211,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 4.861393459141219,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -12.66684249234843
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 59.5,
+        "groups": {
+          "westock_all": {
+            "eligible": 5515,
+            "above": 3008,
+            "pct": 54.542157751586586
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3165,
+            "above": 1654,
+            "pct": 52.25908372827804
+          },
+          "westock_common_eligible": {
+            "eligible": 3165,
+            "above": 1654,
+            "pct": 52.25908372827804
+          },
+          "tencent_common_eligible": {
+            "eligible": 3165,
+            "above": 1654,
+            "pct": 52.25908372827804
+          },
+          "tencent_same_day": {
+            "eligible": 3165,
+            "above": 1654,
+            "pct": 52.25908372827804
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5200,
+            "above": 2896,
+            "pct": 55.69230769230769
+          }
+        },
+        "westock_minus_live_pp": -4.957842248413414,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 2.2830740233085436,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -7.240916271721957
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 27.214452214452216,
+        "groups": {
+          "westock_all": {
+            "eligible": 5420,
+            "above": 1382,
+            "pct": 25.498154981549813
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3142,
+            "above": 748,
+            "pct": 23.80649267982177
+          },
+          "westock_common_eligible": {
+            "eligible": 3142,
+            "above": 748,
+            "pct": 23.80649267982177
+          },
+          "tencent_common_eligible": {
+            "eligible": 3142,
+            "above": 747,
+            "pct": 23.77466581795035
+          },
+          "tencent_same_day": {
+            "eligible": 3142,
+            "above": 747,
+            "pct": 23.77466581795035
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5148,
+            "above": 1369,
+            "pct": 26.59285159285159
+          }
+        },
+        "westock_minus_live_pp": -1.7162972329024022,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 1.6916623017280443,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.031826861871419254,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -3.439786396501866
+        },
+        "common_eligible_sign_disagreements": 1,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-09-28": {
+      "20": {
+        "live": 27.398311588641594,
+        "groups": {
+          "westock_all": {
+            "eligible": 5539,
+            "above": 1471,
+            "pct": 26.557140278028523
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3166,
+            "above": 766,
+            "pct": 24.19456727732154
+          },
+          "westock_common_eligible": {
+            "eligible": 3166,
+            "above": 766,
+            "pct": 24.19456727732154
+          },
+          "tencent_common_eligible": {
+            "eligible": 3166,
+            "above": 766,
+            "pct": 24.19456727732154
+          },
+          "tencent_same_day": {
+            "eligible": 3166,
+            "above": 766,
+            "pct": 24.19456727732154
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5212,
+            "above": 1428,
+            "pct": 27.398311588641594
+          }
+        },
+        "westock_minus_live_pp": -0.8411713106130705,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 2.362573000706984,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -3.2037443113200545
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "50": {
+        "live": 44.42307692307692,
+        "groups": {
+          "westock_all": {
+            "eligible": 5515,
+            "above": 2388,
+            "pct": 43.30009066183137
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3165,
+            "above": 1336,
+            "pct": 42.21169036334913
+          },
+          "westock_common_eligible": {
+            "eligible": 3165,
+            "above": 1336,
+            "pct": 42.21169036334913
+          },
+          "tencent_common_eligible": {
+            "eligible": 3165,
+            "above": 1336,
+            "pct": 42.21169036334913
+          },
+          "tencent_same_day": {
+            "eligible": 3165,
+            "above": 1336,
+            "pct": 42.21169036334913
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5200,
+            "above": 2310,
+            "pct": 44.42307692307692
+          }
+        },
+        "westock_minus_live_pp": -1.1229862612455506,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 1.0884002984822416,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -2.211386559727792
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "200": {
+        "live": 22.45096135171878,
+        "groups": {
+          "westock_all": {
+            "eligible": 5421,
+            "above": 1165,
+            "pct": 21.490499907766093
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3143,
+            "above": 645,
+            "pct": 20.521794463888003
+          },
+          "westock_common_eligible": {
+            "eligible": 3143,
+            "above": 645,
+            "pct": 20.521794463888003
+          },
+          "tencent_common_eligible": {
+            "eligible": 3143,
+            "above": 644,
+            "pct": 20.489977728285076
+          },
+          "tencent_same_day": {
+            "eligible": 3143,
+            "above": 644,
+            "pct": 20.489977728285076
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5149,
+            "above": 1156,
+            "pct": 22.45096135171878
+          }
+        },
+        "westock_minus_live_pp": -0.9604614439526884,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.9687054438780898,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.03181673560292708,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -1.9609836234337052
+        },
+        "common_eligible_sign_disagreements": 1,
+        "legacy_asof_matches_live_exact": true
+      }
+    },
+    "2026-09-29": {
+      "20": {
+        "live": 27.43668457405986,
+        "groups": {
+          "westock_all": {
+            "eligible": 5541,
+            "above": 1795,
+            "pct": 32.39487457137701
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3165,
+            "above": 945,
+            "pct": 29.85781990521327
+          },
+          "westock_common_eligible": {
+            "eligible": 3165,
+            "above": 945,
+            "pct": 29.85781990521327
+          },
+          "tencent_common_eligible": {
+            "eligible": 3165,
+            "above": 946,
+            "pct": 29.889415481832543
+          },
+          "tencent_same_day": {
+            "eligible": 3165,
+            "above": 946,
+            "pct": 29.889415481832543
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5214,
+            "above": 1756,
+            "pct": 33.678557729190636
+          }
+        },
+        "westock_minus_live_pp": 4.958189997317149,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 2.5370546661637405,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": -0.03159557661927437,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 2.4527309077726827
+        },
+        "common_eligible_sign_disagreements": 1,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 44.46153846153847,
+        "groups": {
+          "westock_all": {
+            "eligible": 5516,
+            "above": 2555,
+            "pct": 46.31979695431472
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3164,
+            "above": 1434,
+            "pct": 45.32237673830594
+          },
+          "westock_common_eligible": {
+            "eligible": 3164,
+            "above": 1434,
+            "pct": 45.32237673830594
+          },
+          "tencent_common_eligible": {
+            "eligible": 3164,
+            "above": 1434,
+            "pct": 45.32237673830594
+          },
+          "tencent_same_day": {
+            "eligible": 3164,
+            "above": 1434,
+            "pct": 45.32237673830594
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5201,
+            "above": 2475,
+            "pct": 47.58700249951932
+          }
+        },
+        "westock_minus_live_pp": 1.858258492776251,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.9974202160087771,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.860838276767474
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 22.45096135171878,
+        "groups": {
+          "westock_all": {
+            "eligible": 5421,
+            "above": 1219,
+            "pct": 22.486626083748387
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3142,
+            "above": 678,
+            "pct": 21.578612348822407
+          },
+          "westock_common_eligible": {
+            "eligible": 3142,
+            "above": 678,
+            "pct": 21.578612348822407
+          },
+          "tencent_common_eligible": {
+            "eligible": 3142,
+            "above": 678,
+            "pct": 21.578612348822407
+          },
+          "tencent_same_day": {
+            "eligible": 3142,
+            "above": 678,
+            "pct": 21.578612348822407
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5149,
+            "above": 1213,
+            "pct": 23.557972421829483
+          }
+        },
+        "westock_minus_live_pp": 0.03566473202960552,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.90801373492598,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -0.8723490028963745
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-09-30": {
+      "20": {
+        "live": 27.43668457405986,
+        "groups": {
+          "westock_all": {
+            "eligible": 5542,
+            "above": 1837,
+            "pct": 33.14687838325514
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3165,
+            "above": 1013,
+            "pct": 32.006319115323855
+          },
+          "westock_common_eligible": {
+            "eligible": 3165,
+            "above": 1013,
+            "pct": 32.006319115323855
+          },
+          "tencent_common_eligible": {
+            "eligible": 3165,
+            "above": 1012,
+            "pct": 31.97472353870458
+          },
+          "tencent_same_day": {
+            "eligible": 3165,
+            "above": 1012,
+            "pct": 31.97472353870458
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5215,
+            "above": 1786,
+            "pct": 34.24736337488015
+          }
+        },
+        "westock_minus_live_pp": 5.710193809195282,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 1.1405592679312875,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.03159557661927437,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 4.53803896464472
+        },
+        "common_eligible_sign_disagreements": 1,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 44.46153846153847,
+        "groups": {
+          "westock_all": {
+            "eligible": 5517,
+            "above": 2531,
+            "pct": 45.87638209171651
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3164,
+            "above": 1449,
+            "pct": 45.79646017699115
+          },
+          "westock_common_eligible": {
+            "eligible": 3164,
+            "above": 1449,
+            "pct": 45.79646017699115
+          },
+          "tencent_common_eligible": {
+            "eligible": 3164,
+            "above": 1449,
+            "pct": 45.79646017699115
+          },
+          "tencent_same_day": {
+            "eligible": 3164,
+            "above": 1449,
+            "pct": 45.79646017699115
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5201,
+            "above": 2451,
+            "pct": 47.125552778311864
+          }
+        },
+        "westock_minus_live_pp": 1.4148436301780407,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.07992191472536092,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 1.3349217154526798
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 22.45096135171878,
+        "groups": {
+          "westock_all": {
+            "eligible": 5422,
+            "above": 1230,
+            "pct": 22.68535595721136
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3142,
+            "above": 702,
+            "pct": 22.342457033736473
+          },
+          "westock_common_eligible": {
+            "eligible": 3142,
+            "above": 702,
+            "pct": 22.342457033736473
+          },
+          "tencent_common_eligible": {
+            "eligible": 3142,
+            "above": 702,
+            "pct": 22.342457033736473
+          },
+          "tencent_same_day": {
+            "eligible": 3142,
+            "above": 702,
+            "pct": 22.342457033736473
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5150,
+            "above": 1223,
+            "pct": 23.747572815533978
+          }
+        },
+        "westock_minus_live_pp": 0.23439460549257873,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": 0.3428989234748876,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -0.10850431798230886
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-10-08": {
+      "20": {
+        "live": 31.505273250239696,
+        "groups": {
+          "westock_all": {
+            "eligible": 5539,
+            "above": 1678,
+            "pct": 30.294276945296982
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3161,
+            "above": 1014,
+            "pct": 32.078456184751666
+          },
+          "westock_common_eligible": {
+            "eligible": 3161,
+            "above": 1014,
+            "pct": 32.078456184751666
+          },
+          "tencent_common_eligible": {
+            "eligible": 3161,
+            "above": 1014,
+            "pct": 32.078456184751666
+          },
+          "tencent_same_day": {
+            "eligible": 3161,
+            "above": 1014,
+            "pct": 32.078456184751666
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5215,
+            "above": 1643,
+            "pct": 31.505273250239696
+          }
+        },
+        "westock_minus_live_pp": -1.2109963049427144,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.7841792394546836,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.5731829345119692
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "50": {
+        "live": 41.492020765237456,
+        "groups": {
+          "westock_all": {
+            "eligible": 5513,
+            "above": 2215,
+            "pct": 40.17776165427172
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3160,
+            "above": 1329,
+            "pct": 42.05696202531646
+          },
+          "westock_common_eligible": {
+            "eligible": 3160,
+            "above": 1329,
+            "pct": 42.05696202531646
+          },
+          "tencent_common_eligible": {
+            "eligible": 3160,
+            "above": 1329,
+            "pct": 42.05696202531646
+          },
+          "tencent_same_day": {
+            "eligible": 3160,
+            "above": 1329,
+            "pct": 42.05696202531646
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5201,
+            "above": 2158,
+            "pct": 41.492020765237456
+          }
+        },
+        "westock_minus_live_pp": -1.314259110965736,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.879200371044739,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.5649412600790029
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "200": {
+        "live": 21.689320388349515,
+        "groups": {
+          "westock_all": {
+            "eligible": 5418,
+            "above": 1118,
+            "pct": 20.634920634920633
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3138,
+            "above": 662,
+            "pct": 21.09623964308477
+          },
+          "westock_common_eligible": {
+            "eligible": 3138,
+            "above": 662,
+            "pct": 21.09623964308477
+          },
+          "tencent_common_eligible": {
+            "eligible": 3138,
+            "above": 663,
+            "pct": 21.12810707456979
+          },
+          "tencent_same_day": {
+            "eligible": 3138,
+            "above": 663,
+            "pct": 21.12810707456979
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5150,
+            "above": 1117,
+            "pct": 21.689320388349515
+          }
+        },
+        "westock_minus_live_pp": -1.054399753428882,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -0.4613190081641356,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": -0.031867431485022024,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -0.5612133137797244
+        },
+        "common_eligible_sign_disagreements": 1,
+        "legacy_asof_matches_live_exact": true
+      }
+    },
+    "2026-10-09": {
+      "20": {
+        "live": 31.505273250239696,
+        "groups": {
+          "westock_all": {
+            "eligible": 5541,
+            "above": 2173,
+            "pct": 39.21674787944414
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3162,
+            "above": 1340,
+            "pct": 42.37824161922833
+          },
+          "westock_common_eligible": {
+            "eligible": 3162,
+            "above": 1340,
+            "pct": 42.37824161922833
+          },
+          "tencent_common_eligible": {
+            "eligible": 3162,
+            "above": 1340,
+            "pct": 42.37824161922833
+          },
+          "tencent_same_day": {
+            "eligible": 3162,
+            "above": 1340,
+            "pct": 42.37824161922833
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5215,
+            "above": 2099,
+            "pct": 40.24928092042186
+          }
+        },
+        "westock_minus_live_pp": 7.711474629204446,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -3.1614937397841913,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 10.872968368988637
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 41.492020765237456,
+        "groups": {
+          "westock_all": {
+            "eligible": 5515,
+            "above": 2413,
+            "pct": 43.753399818676336
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3161,
+            "above": 1460,
+            "pct": 46.18791521670357
+          },
+          "westock_common_eligible": {
+            "eligible": 3161,
+            "above": 1460,
+            "pct": 46.18791521670357
+          },
+          "tencent_common_eligible": {
+            "eligible": 3161,
+            "above": 1460,
+            "pct": 46.18791521670357
+          },
+          "tencent_same_day": {
+            "eligible": 3161,
+            "above": 1460,
+            "pct": 46.18791521670357
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5201,
+            "above": 2319,
+            "pct": 44.58757931167084
+          }
+        },
+        "westock_minus_live_pp": 2.26137905343888,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -2.434515398027237,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 4.695894451466117
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 21.689320388349515,
+        "groups": {
+          "westock_all": {
+            "eligible": 5419,
+            "above": 1165,
+            "pct": 21.498431444916037
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3139,
+            "above": 711,
+            "pct": 22.650525645109905
+          },
+          "westock_common_eligible": {
+            "eligible": 3139,
+            "above": 711,
+            "pct": 22.650525645109905
+          },
+          "tencent_common_eligible": {
+            "eligible": 3139,
+            "above": 711,
+            "pct": 22.650525645109905
+          },
+          "tencent_same_day": {
+            "eligible": 3139,
+            "above": 711,
+            "pct": 22.650525645109905
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5150,
+            "above": 1160,
+            "pct": 22.52427184466019
+          }
+        },
+        "westock_minus_live_pp": -0.19088894343347818,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.1520942001938685,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.9612052567603904
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-10-12": {
+      "20": {
+        "live": 30.540644171779142,
+        "groups": {
+          "westock_all": {
+            "eligible": 5545,
+            "above": 1657,
+            "pct": 29.882777276825966
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3164,
+            "above": 1023,
+            "pct": 32.33249051833123
+          },
+          "westock_common_eligible": {
+            "eligible": 3164,
+            "above": 1023,
+            "pct": 32.33249051833123
+          },
+          "tencent_common_eligible": {
+            "eligible": 3164,
+            "above": 1023,
+            "pct": 32.33249051833123
+          },
+          "tencent_same_day": {
+            "eligible": 3164,
+            "above": 1023,
+            "pct": 32.33249051833123
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5216,
+            "above": 1593,
+            "pct": 30.540644171779142
+          }
+        },
+        "westock_minus_live_pp": -0.6578668949531767,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -2.449713241505261,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 1.7918463465520844
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "50": {
+        "live": 36.96655132641292,
+        "groups": {
+          "westock_all": {
+            "eligible": 5519,
+            "above": 1992,
+            "pct": 36.093495198405506
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3163,
+            "above": 1224,
+            "pct": 38.69743914005691
+          },
+          "westock_common_eligible": {
+            "eligible": 3163,
+            "above": 1224,
+            "pct": 38.69743914005691
+          },
+          "tencent_common_eligible": {
+            "eligible": 3163,
+            "above": 1223,
+            "pct": 38.66582358520392
+          },
+          "tencent_same_day": {
+            "eligible": 3163,
+            "above": 1223,
+            "pct": 38.66582358520392
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5202,
+            "above": 1923,
+            "pct": 36.96655132641292
+          }
+        },
+        "westock_minus_live_pp": -0.8730561280074127,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -2.6039439416514014,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.03161555485299061,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 1.699272258790998
+        },
+        "common_eligible_sign_disagreements": 1,
+        "legacy_asof_matches_live_exact": true
+      },
+      "200": {
+        "live": 19.355464958260534,
+        "groups": {
+          "westock_all": {
+            "eligible": 5422,
+            "above": 1004,
+            "pct": 18.517152342309114
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3141,
+            "above": 615,
+            "pct": 19.579751671442217
+          },
+          "westock_common_eligible": {
+            "eligible": 3141,
+            "above": 615,
+            "pct": 19.579751671442217
+          },
+          "tencent_common_eligible": {
+            "eligible": 3141,
+            "above": 615,
+            "pct": 19.579751671442217
+          },
+          "tencent_same_day": {
+            "eligible": 3141,
+            "above": 615,
+            "pct": 19.579751671442217
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5151,
+            "above": 997,
+            "pct": 19.355464958260534
+          }
+        },
+        "westock_minus_live_pp": -0.8383126159514198,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.0625993291331035,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.2242867131816837
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      }
+    },
+    "2026-10-13": {
+      "20": {
+        "live": 30.540644171779142,
+        "groups": {
+          "westock_all": {
+            "eligible": 5544,
+            "above": 1844,
+            "pct": 33.26118326118326
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3162,
+            "above": 1153,
+            "pct": 36.46426312460468
+          },
+          "westock_common_eligible": {
+            "eligible": 3162,
+            "above": 1153,
+            "pct": 36.46426312460468
+          },
+          "tencent_common_eligible": {
+            "eligible": 3162,
+            "above": 1153,
+            "pct": 36.46426312460468
+          },
+          "tencent_same_day": {
+            "eligible": 3162,
+            "above": 1153,
+            "pct": 36.46426312460468
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5216,
+            "above": 1789,
+            "pct": 34.298312883435585
+          }
+        },
+        "westock_minus_live_pp": 2.72053908940412,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -3.203079863421415,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 5.923618952825535
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 36.94732795078816,
+        "groups": {
+          "westock_all": {
+            "eligible": 5518,
+            "above": 2071,
+            "pct": 37.53171438927148
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3161,
+            "above": 1280,
+            "pct": 40.49351471053464
+          },
+          "westock_common_eligible": {
+            "eligible": 3161,
+            "above": 1280,
+            "pct": 40.49351471053464
+          },
+          "tencent_common_eligible": {
+            "eligible": 3161,
+            "above": 1280,
+            "pct": 40.49351471053464
+          },
+          "tencent_same_day": {
+            "eligible": 3161,
+            "above": 1280,
+            "pct": 40.49351471053464
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5202,
+            "above": 2009,
+            "pct": 38.61976163014225
+          }
+        },
+        "westock_minus_live_pp": 0.5843864384833211,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -2.961800321263162,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 3.546186759746483
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 19.355464958260534,
+        "groups": {
+          "westock_all": {
+            "eligible": 5421,
+            "above": 1020,
+            "pct": 18.815716657443275
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3139,
+            "above": 627,
+            "pct": 19.97451417648933
+          },
+          "westock_common_eligible": {
+            "eligible": 3139,
+            "above": 627,
+            "pct": 19.97451417648933
+          },
+          "tencent_common_eligible": {
+            "eligible": 3139,
+            "above": 627,
+            "pct": 19.97451417648933
+          },
+          "tencent_same_day": {
+            "eligible": 3139,
+            "above": 627,
+            "pct": 19.97451417648933
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5151,
+            "above": 1015,
+            "pct": 19.70491166763735
+          }
+        },
+        "westock_minus_live_pp": -0.5397483008172586,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.158797519046054,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.6190492182287954
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-10-14": {
+      "20": {
+        "live": 30.540644171779142,
+        "groups": {
+          "westock_all": {
+            "eligible": 5548,
+            "above": 1313,
+            "pct": 23.66618601297765
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3162,
+            "above": 867,
+            "pct": 27.419354838709676
+          },
+          "westock_common_eligible": {
+            "eligible": 3162,
+            "above": 867,
+            "pct": 27.419354838709676
+          },
+          "tencent_common_eligible": {
+            "eligible": 3162,
+            "above": 867,
+            "pct": 27.419354838709676
+          },
+          "tencent_same_day": {
+            "eligible": 3162,
+            "above": 867,
+            "pct": 27.419354838709676
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5217,
+            "above": 1260,
+            "pct": 24.15181138585394
+          }
+        },
+        "westock_minus_live_pp": -6.874458158801492,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -3.7531688257320255,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -3.121289333069466
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "50": {
+        "live": 36.94732795078816,
+        "groups": {
+          "westock_all": {
+            "eligible": 5521,
+            "above": 1572,
+            "pct": 28.47310269878645
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3161,
+            "above": 1013,
+            "pct": 32.046820626384054
+          },
+          "westock_common_eligible": {
+            "eligible": 3161,
+            "above": 1013,
+            "pct": 32.046820626384054
+          },
+          "tencent_common_eligible": {
+            "eligible": 3161,
+            "above": 1013,
+            "pct": 32.046820626384054
+          },
+          "tencent_same_day": {
+            "eligible": 3161,
+            "above": 1013,
+            "pct": 32.046820626384054
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5202,
+            "above": 1520,
+            "pct": 29.219530949634752
+          }
+        },
+        "westock_minus_live_pp": -8.474225252001705,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -3.5737179275976025,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -4.900507324404103
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      },
+      "200": {
+        "live": 19.355464958260534,
+        "groups": {
+          "westock_all": {
+            "eligible": 5423,
+            "above": 940,
+            "pct": 17.33357919970496
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3139,
+            "above": 581,
+            "pct": 18.509079324625677
+          },
+          "westock_common_eligible": {
+            "eligible": 3139,
+            "above": 581,
+            "pct": 18.509079324625677
+          },
+          "tencent_common_eligible": {
+            "eligible": 3139,
+            "above": 581,
+            "pct": 18.509079324625677
+          },
+          "tencent_same_day": {
+            "eligible": 3139,
+            "above": 581,
+            "pct": 18.509079324625677
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5151,
+            "above": 933,
+            "pct": 18.112987769365173
+          }
+        },
+        "westock_minus_live_pp": -2.021885758555573,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.1755001249207169,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": -0.8463856336348563
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": false
+      }
+    },
+    "2026-10-15": {
+      "20": {
+        "live": 15.178229206592563,
+        "groups": {
+          "westock_all": {
+            "eligible": 5549,
+            "above": 820,
+            "pct": 14.777437376103803
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3162,
+            "above": 530,
+            "pct": 16.761543327008223
+          },
+          "westock_common_eligible": {
+            "eligible": 3162,
+            "above": 530,
+            "pct": 16.761543327008223
+          },
+          "tencent_common_eligible": {
+            "eligible": 3162,
+            "above": 530,
+            "pct": 16.761543327008223
+          },
+          "tencent_same_day": {
+            "eligible": 3162,
+            "above": 530,
+            "pct": 16.761543327008223
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5218,
+            "above": 792,
+            "pct": 15.178229206592563
+          }
+        },
+        "westock_minus_live_pp": -0.4007918304887603,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.9841059509044197,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 1.5833141204156593
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "50": {
+        "live": 18.14337881991159,
+        "groups": {
+          "westock_all": {
+            "eligible": 5522,
+            "above": 977,
+            "pct": 17.692864904020283
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3161,
+            "above": 614,
+            "pct": 19.424232837709585
+          },
+          "westock_common_eligible": {
+            "eligible": 3161,
+            "above": 614,
+            "pct": 19.424232837709585
+          },
+          "tencent_common_eligible": {
+            "eligible": 3161,
+            "above": 614,
+            "pct": 19.424232837709585
+          },
+          "tencent_same_day": {
+            "eligible": 3161,
+            "above": 614,
+            "pct": 19.424232837709585
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5203,
+            "above": 944,
+            "pct": 18.14337881991159
+          }
+        },
+        "westock_minus_live_pp": -0.45051391589130674,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.7313679336893024,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 1.2808540177979957
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "200": {
+        "live": 14.812657736361873,
+        "groups": {
+          "westock_all": {
+            "eligible": 5423,
+            "above": 769,
+            "pct": 14.180342983588421
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3139,
+            "above": 477,
+            "pct": 15.195922268238293
+          },
+          "westock_common_eligible": {
+            "eligible": 3139,
+            "above": 477,
+            "pct": 15.195922268238293
+          },
+          "tencent_common_eligible": {
+            "eligible": 3139,
+            "above": 477,
+            "pct": 15.195922268238293
+          },
+          "tencent_same_day": {
+            "eligible": 3139,
+            "above": 477,
+            "pct": 15.195922268238293
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5151,
+            "above": 763,
+            "pct": 14.812657736361873
+          }
+        },
+        "westock_minus_live_pp": -0.6323147527734516,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.0155792846498723,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.38326453187642073
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      }
+    },
+    "2026-10-16": {
+      "20": {
+        "live": 15.178229206592563,
+        "groups": {
+          "westock_all": {
+            "eligible": 5551,
+            "above": 940,
+            "pct": 16.933885786344803
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3163,
+            "above": 639,
+            "pct": 20.20233955105912
+          },
+          "westock_common_eligible": {
+            "eligible": 3163,
+            "above": 639,
+            "pct": 20.20233955105912
+          },
+          "tencent_common_eligible": {
+            "eligible": 3163,
+            "above": 639,
+            "pct": 20.20233955105912
+          },
+          "tencent_same_day": {
+            "eligible": 3163,
+            "above": 639,
+            "pct": 20.20233955105912
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5218,
+            "above": 792,
+            "pct": 15.178229206592563
+          }
+        },
+        "westock_minus_live_pp": 1.7556565797522392,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -3.268453764714316,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 5.024110344466555
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      },
+      "50": {
+        "live": 18.14337881991159,
+        "groups": {
+          "westock_all": {
+            "eligible": 5523,
+            "above": 1061,
+            "pct": 19.210573963425677
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3162,
+            "above": 702,
+            "pct": 22.2011385199241
+          },
+          "westock_common_eligible": {
+            "eligible": 3162,
+            "above": 702,
+            "pct": 22.2011385199241
+          },
+          "tencent_common_eligible": {
+            "eligible": 3162,
+            "above": 703,
+            "pct": 22.232764073371282
+          },
+          "tencent_same_day": {
+            "eligible": 3162,
+            "above": 703,
+            "pct": 22.232764073371282
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5203,
+            "above": 944,
+            "pct": 18.14337881991159
+          }
+        },
+        "westock_minus_live_pp": 1.0671951435140876,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -2.9905645564984233,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": -0.03162555344718143,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 4.089385253459692
+        },
+        "common_eligible_sign_disagreements": 1,
+        "legacy_asof_matches_live_exact": true
+      },
+      "200": {
+        "live": 14.812657736361873,
+        "groups": {
+          "westock_all": {
+            "eligible": 5425,
+            "above": 758,
+            "pct": 13.972350230414746
+          },
+          "westock_tencent_symbols": {
+            "eligible": 3140,
+            "above": 471,
+            "pct": 15.0
+          },
+          "westock_common_eligible": {
+            "eligible": 3140,
+            "above": 471,
+            "pct": 15.0
+          },
+          "tencent_common_eligible": {
+            "eligible": 3140,
+            "above": 471,
+            "pct": 15.0
+          },
+          "tencent_same_day": {
+            "eligible": 3140,
+            "above": 471,
+            "pct": 15.0
+          },
+          "legacy_asof_any_last_day": {
+            "eligible": 5151,
+            "above": 763,
+            "pct": 14.812657736361873
+          }
+        },
+        "westock_minus_live_pp": -0.840307505947127,
+        "additive_bridge_pp": {
+          "extra_current_symbols_pp": -1.0276497695852544,
+          "candidate_only_eligible_within_old_symbols_pp": 0.0,
+          "same_symbols_provider_and_window_inputs_pp": 0.0,
+          "tencent_only_eligible_composition_pp": 0.0,
+          "current_tencent_same_day_to_legacy_live_unattributed_pp": 0.18734226363812745
+        },
+        "common_eligible_sign_disagreements": 0,
+        "legacy_asof_matches_live_exact": true
+      }
+    }
+  },
+  "twenty_day_bridge_summary": {
+    "20": {
+      "mean_absolute_component_pp": {
+        "extra_current_symbols_pp": 3.0589068474246064,
+        "candidate_only_eligible_within_old_symbols_pp": 0.0,
+        "same_symbols_provider_and_window_inputs_pp": 0.003159557661927437,
+        "tencent_only_eligible_composition_pp": 0.0,
+        "current_tencent_same_day_to_legacy_live_unattributed_pp": 5.48296969085283
+      },
+      "max_absolute_same_symbol_input_difference_pp": 0.03159557661927437,
+      "same_symbol_sign_disagreements_total": 2,
+      "same_symbol_eligible_range": [
+        3161,
+        3166
+      ],
+      "legacy_asof_exact_match_dates": [
+        "2026-09-14",
+        "2026-09-21",
+        "2026-09-28",
+        "2026-10-08",
+        "2026-10-12",
+        "2026-10-15",
+        "2026-10-16"
+      ]
+    },
+    "50": {
+      "mean_absolute_component_pp": {
+        "extra_current_symbols_pp": 2.4595614920492883,
+        "candidate_only_eligible_within_old_symbols_pp": 0.0,
+        "same_symbols_provider_and_window_inputs_pp": 0.004741834245971965,
+        "tencent_only_eligible_composition_pp": 0.0,
+        "current_tencent_same_day_to_legacy_live_unattributed_pp": 3.723192849847769
+      },
+      "max_absolute_same_symbol_input_difference_pp": 0.03162555344718143,
+      "same_symbol_sign_disagreements_total": 5,
+      "same_symbol_eligible_range": [
+        3160,
+        3165
+      ],
+      "legacy_asof_exact_match_dates": [
+        "2026-09-10",
+        "2026-09-14",
+        "2026-09-17",
+        "2026-09-21",
+        "2026-09-28",
+        "2026-10-08",
+        "2026-10-12",
+        "2026-10-15",
+        "2026-10-16"
+      ]
+    },
+    "200": {
+      "mean_absolute_component_pp": {
+        "extra_current_symbols_pp": 0.84152847804647,
+        "candidate_only_eligible_within_old_symbols_pp": 0.0,
+        "same_symbols_provider_and_window_inputs_pp": 0.007961279386802644,
+        "tencent_only_eligible_composition_pp": 0.0,
+        "current_tencent_same_day_to_legacy_live_unattributed_pp": 1.2063555544980815
+      },
+      "max_absolute_same_symbol_input_difference_pp": 0.031867431485022024,
+      "same_symbol_sign_disagreements_total": 5,
+      "same_symbol_eligible_range": [
+        3136,
+        3143
+      ],
+      "legacy_asof_exact_match_dates": [
+        "2026-09-10",
+        "2026-09-14",
+        "2026-09-17",
+        "2026-09-21",
+        "2026-09-28",
+        "2026-10-08",
+        "2026-10-12",
+        "2026-10-15",
+        "2026-10-16"
+      ]
+    }
+  },
+  "limits": [
+    "The old unqualified cache explains a lineage defect; it is not approved repair data.",
+    "The exact 10/16 replay does not identify historical writer/process or prove every repeated date cause.",
+    "The additive bridge is descriptive input decomposition, not causal attribution of data-source differences.",
+    "Old snapshot membership and vendor revisions at each original run are not recoverable from these current files.",
+    "No source-specific rows were spliced, and no existing observations were replaced."
+  ]
+}

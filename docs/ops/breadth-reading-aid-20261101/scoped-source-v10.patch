@@ -1,0 +1,305 @@
+--- before/web/src/components/market-style/BreadthComparison.tsx
++++ after/web/src/components/market-style/BreadthComparison.tsx
+@@ -14,6 +14,7 @@
+ type Market = "cn" | "us";
+ type PriceKey = "sse" | "hs300" | "sp500" | "nasdaq";
+ type View = { dates: string[]; price: (number | null)[]; breadth: (number | null)[][]; bands: HighlightBand[] };
++const JOINT_RULES = new Set(["reversal_bottom", "reversal_top"]);
+ const EMPTY_BREADTH: BreadthHistoryPoint[] = [];
+ 
+ const WINDOWS = [
+@@ -30,8 +31,8 @@
+   switch (key) {
+     case "stage_top": return `B50 ≥ ${high}%`;
+     case "stage_bottom": return `B50 ≤ ${low}%`;
+-    case "reversal_top": return `B50、B200 ≥ ${high}%`;
+-    case "reversal_bottom": return `B50、B200 ≤ ${low}%`;
++    case "reversal_top": return `双高：50日、200日均 ≥ ${high}%`;
++    case "reversal_bottom": return `双低：50日、200日均 ≤ ${low}%`;
+     case "bull_base": return "B200 > 50%";
+     case "bear_base": return "B200 < 50%";
+     default: return key;
+@@ -93,6 +94,20 @@
+     markArea: areas.length ? { silent: true, label: { show: false }, data: areas as never } : undefined,
+     markLine: singleDays.length ? { silent: true, symbol: "none", data: singleDays as never } : undefined,
+   };
++}
++
++/** Joint display needs both same-day values; never move a marker to a later valid price. */
++export function jointProjection(view: View) {
++  const values = view.dates.map((_, i) => exists(view.breadth[1][i]) && exists(view.breadth[2][i]) ? view.breadth[1][i] : null);
++  const dateIndex = new Map(view.dates.map((date, i) => [date, i]));
++  const markers = view.bands.filter((band) => JOINT_RULES.has(band.key)).flatMap((band) =>
++    band.ranges.flatMap(([start]) => {
++      const i = dateIndex.get(start);
++      if (i === undefined || !exists(values[i]) || !exists(view.price[i])) return [];
++      return [{ name: band.key === "reversal_bottom" ? "双低" : "双高", value: [start, view.price[i]],
++        itemStyle: { color: band.color }, label: { color: band.color, backgroundColor: "rgba(255,255,255,.94)" } }];
++    }));
++  return { values, markers };
+ }
+ 
+ /** Paint whole date cells, including a single missing day; never bridge a gap. */
+@@ -140,10 +155,10 @@
+   };
+ }
+ 
+-function BreadthProjectionChart({ view, priceName, readings, horizon, track, compare, market, windowDays, runs, selectedDate, onDateChange }: {
++function BreadthProjectionChart({ view, priceName, readings, horizon, track, compare, market, windowDays, runs, joint, selectedDate, onDateChange }: {
+   view: View; priceName: string; readings: ReadonlyMap<string, BreadthReadingPoint>;
+   horizon: BreadthHorizon; track: BreadthTrack; compare: boolean; market: Market; windowDays: number;
+-  runs: readonly BackgroundRun[];
++  runs: readonly BackgroundRun[]; joint: boolean;
+   selectedDate?: string; onDateChange: (date: string) => void;
+ }) {
+   const node = useRef<HTMLDivElement>(null);
+@@ -183,7 +198,7 @@
+       const event = readings.get(date)?.horizons[horizon]?.event;
+       return event === "exit_high" || event === "exit_low" ? [{ name: exitNames[event], value: [date, view.breadth[focusIndex][i]], itemStyle: { color: event === "exit_high" ? "#ad6d2d" : "#16847b" } }] : [];
+     }) : [];
+-    const turningLabels = breadthChangeAnnotations(view.dates, view.price, readings).slice(-12).map((mark) => ({
++    const turningLabels = joint ? jointProjection(view).markers : breadthChangeAnnotations(view.dates, view.price, readings).slice(-12).map((mark) => ({
+       name: mark.label, value: [mark.date, mark.price],
+       itemStyle: { color: mark.tone === "supportive" ? "#0f766e" : "#b45309" },
+       label: { color: mark.tone === "supportive" ? "#0f766e" : "#b45309", backgroundColor: "rgba(255,255,255,.94)" },
+@@ -218,7 +233,7 @@
+           xAxisIndex: 1, yAxisIndex: 1, data: values, showSymbol: false, connectNulls: false, markPoint: index === focusIndex ? endMark : undefined,
+           lineStyle: { width: index === focusIndex ? 2.7 : 1.5, color: BREADTH_LINES[index].color, opacity: index === focusIndex ? 1 : .6 }, itemStyle: { color: BREADTH_LINES[index].color } })).filter((_, index) => compare || index === focusIndex),
+         ...trackLines,
+-        { name: "参与转折观察", type: "scatter", xAxisIndex: 0, yAxisIndex: 0, data: turningLabels,
++        { name: joint ? "联合条件区段起点" : "参与转折观察", type: "scatter", xAxisIndex: 0, yAxisIndex: 0, data: turningLabels,
+           symbol: "circle", symbolSize: 7, z: 6, label: { show: true, formatter: "{b}", position: "top", fontSize: 11, padding: [3, 4], borderRadius: 3 }, labelLayout: { hideOverlap: true } },
+         { name: "退出历史极端", type: "scatter", xAxisIndex: 1, yAxisIndex: 1, data: exits, symbol: "diamond", symbolSize: 7, z: 5 },
+         { id: "reading-price-date", name: "__reading_price_date", type: "line", xAxisIndex: 0, yAxisIndex: 0, data: [], silent: true, tooltip: { show: false } },
+@@ -227,12 +242,12 @@
+         { name: "__breadth_conditions", type: "line", xAxisIndex: 1, yAxisIndex: 1, data: [], silent: true, tooltip: { show: false }, lineStyle: { opacity: 0 }, ...marks },
+       ],
+     }, `${market}:${priceName}:${windowDays}`);
+-  }, [view, priceName, readings, horizon, track, compare, market, windowDays, runs]);
++  }, [view, priceName, readings, horizon, track, compare, market, windowDays, runs, joint]);
+   useEffect(() => {
+     const markLine = { silent: true, symbol: "none", label: { show: false }, lineStyle: { color: "#536b80", width: 1, type: "dotted" }, data: selectedDate && view.dates.includes(selectedDate) ? [{ xAxis: selectedDate }] : [] };
+     chart.current?.setOption({ series: [{ id: "reading-price-date", markLine }, { id: "reading-breadth-date", markLine }] });
+-  }, [selectedDate, view, priceName, readings, horizon, track, compare, market, windowDays, runs]);
+-  return <div ref={node} className="bc-chart" role="img" aria-label={`${priceName}价格与同日${compare ? "20、50、200" : horizon}日市场宽度曲线，背景可显示历史高低区间或参与升降，灰带表示所选周期缺测。${track === "historical" ? `${horizon}日历史10、50、90分位轨道，菱形表示退出历史极端` : track === "fixed" ? "固定高低参考线" : "轨道已关闭"}；可悬停或用下方日期控件回看`} />;
++  }, [selectedDate, view, priceName, readings, horizon, track, compare, market, windowDays, runs, joint]);
++  return <div ref={node} className="bc-chart" role="img" aria-label={`${priceName}价格与同日${compare ? "20、50、200" : horizon}日市场宽度曲线，${joint ? "底色表示50日与200日同时满足所选条件，圆点标示图示区段起点；灰带表示50日或200日缺测。" : "背景可显示历史高低区间或参与升降，灰带表示所选周期缺测。"}${track === "historical" ? `${horizon}日历史10、50、90分位轨道，菱形表示退出历史极端` : track === "fixed" ? "固定高低参考线" : "轨道已关闭"}；可悬停或用下方日期控件回看`} />;
+ }
+ 
+ export default function BreadthComparison({ market, onMarketChange, onContextChange }: {
+@@ -264,7 +279,10 @@
+   const points = breadth.data?.history ?? EMPTY_BREADTH;
+   const view = useMemo(() => viewFor(priceSeries, points, windowDays, active, market), [priceSeries, points, windowDays, active, market]);
+   const readings = useMemo(() => new Map(breadth.data?.observation?.history.map((row) => [row.date, row]) ?? []), [breadth.data?.observation]);
+-  const runs = useMemo(() => backgroundRuns(view.dates, view.breadth[BREADTH_HORIZONS.indexOf(horizon)], readings, showPhases, backgroundMode, horizon), [view, horizon, readings, showPhases, backgroundMode]);
++  const joint = [...active].some((key) => JOINT_RULES.has(key));
++  const runs = useMemo(() => backgroundRuns(view.dates,
++    joint ? jointProjection(view).values : view.breadth[BREADTH_HORIZONS.indexOf(horizon)],
++    readings, showPhases && !joint, backgroundMode, horizon), [view, horizon, readings, showPhases, backgroundMode, joint]);
+   const gaps = useMemo(() => gapText(runs, view.dates), [runs, view.dates]);
+   const pointByDate = useMemo(() => new Map(points.map((row) => [row.date, row])), [points]);
+   const lastBreadthDate = points[points.length - 1]?.date;
+@@ -287,7 +305,12 @@
+   useEffect(() => { callback.current?.({ windowDays, ruleIds: activeRuleIds, priceKey, fingerprint }); }, [fingerprint]);
+   const toggle = (id: string) => setActive((previous) => {
+     const next = new Set(previous);
+-    if (next.has(id)) next.delete(id); else next.add(id);
++    if (next.has(id)) next.delete(id);
++    else {
++      // One background meaning at a time; joint conditions can be selected together.
++      for (const key of next) if (JOINT_RULES.has(key) !== JOINT_RULES.has(id)) next.delete(key);
++      next.add(id);
++    }
+     return next;
+   });
+ 
+@@ -313,29 +336,42 @@
+       <p className="bc-state">此期间没有价格与宽度同日可比资料。</p>}
+     {view.dates.length > 0 && view.breadth.some((line) => line.some(exists)) && !breadth.isError && !overlay.isError && <div className="bc-main">
+       <div className="bc-chart-pane">
+-      {showPhases && <div className="bc-inline-legend">{backgroundMode === "levels" ? <><span>底色 · {horizon}日宽度</span><span className="bc-low">历史低位</span><span className="bc-high">历史高位</span></> : <><span>底色 · 20/50日参与</span><span className="bc-low">回升</span><span className="bc-high">收缩</span></>}</div>}
+-      <BreadthProjectionChart view={view} priceName={PRICE_NAMES[priceKey]} readings={readings} horizon={horizon} track={track} compare={compare} market={market} windowDays={windowDays} runs={runs} selectedDate={selectedDate} onDateChange={setCursorDate} />
+-      <BreadthInstitutionalReference market={market} horizon={horizon} />
++      <div className="bc-joint-rules bc-rules" role="group" aria-label="50日与200日联合筛选">
++        <span>联合筛选</span>{["reversal_bottom", "reversal_top"].map((id) => {
++          const rule = BREADTH_HIGHLIGHT_RULES.find((item) => item.key === id)!;
++          return <button key={id} type="button" aria-pressed={active.has(id)} onClick={() => toggle(id)}>
++            <span className="bc-rule-dot" style={{ background: rule.color }} aria-hidden="true" />{numericRuleLabel(id, market)}</button>;
++        })}
++      </div>
++      {joint && <p className="bc-joint-hint">色带对齐同日价格，圆点标示区段起点；灰带为资料不足。仅数值筛选，未验证为买卖点。</p>}
++      {showPhases && !joint && <div className="bc-inline-legend">{backgroundMode === "levels" ? <><span>底色 · {horizon}日宽度</span><span className="bc-low">历史低位</span><span className="bc-high">历史高位</span></> : <><span>底色 · 20/50日参与</span><span className="bc-low">回升</span><span className="bc-high">收缩</span></>}</div>}
++      <BreadthProjectionChart view={view} priceName={PRICE_NAMES[priceKey]} readings={readings} horizon={horizon} track={joint ? "off" : track} compare={joint || compare} market={market} windowDays={windowDays} runs={runs} joint={joint} selectedDate={selectedDate} onDateChange={setCursorDate} />
++      {!joint && <BreadthInstitutionalReference market={market} horizon={horizon} />}
+       <details className="bc-chart-settings"><summary>图表设置与资料说明</summary>
+       <div className="bc-reader-controls bc-controls">
+         <div role="group" aria-label="图中主要宽度周期"><span className="bc-control-label">强调周期</span>{BREADTH_HORIZONS.map((period) => <button type="button" key={period} aria-pressed={horizon === period} onClick={() => setHorizon(period)}>{period}日</button>)}</div>
+-        <label>参照轨道 <select aria-label="参照轨道" value={track} onChange={(event) => setTrack(event.target.value as BreadthTrack)}><option value="off">关闭轨道</option><option value="historical">历史分位上下轨</option><option value="fixed">固定高低参考</option></select></label>
+-        <label className="bc-compare-toggle"><input type="checkbox" checked={compare} onChange={(event) => setCompare(event.target.checked)} />三线对照</label>
++        <label>参照轨道 <select aria-label="参照轨道" disabled={joint} value={track} onChange={(event) => setTrack(event.target.value as BreadthTrack)}><option value="off">关闭轨道</option><option value="historical">历史分位上下轨</option><option value="fixed">固定高低参考</option></select></label>
++        <label className="bc-compare-toggle"><input type="checkbox" checked={joint || compare} disabled={joint} onChange={(event) => setCompare(event.target.checked)} />三线对照</label>
+       </div>
+       <div className="bc-background-legend" aria-label="背景颜色图例">
+-      <label><input type="checkbox" checked={showPhases} onChange={(event) => setShowPhases(event.target.checked)} />背景色带</label>
+-      <select aria-label="背景含义" value={backgroundMode} disabled={!showPhases} onChange={(event) => setBackgroundMode(event.target.value as BackgroundMode)}><option value="levels">宽度高低区间</option><option value="phases">宽度参与升降</option></select>
+-      {Object.entries(BACKGROUND_STYLES).filter(([key]) => key === "missing" || showPhases && (backgroundMode === "levels" ? ["low", "high"].includes(key) : !["low", "high"].includes(key))).map(([key, style]) => <span key={key}><i style={{ backgroundColor: style.fill, borderColor: style.color }} aria-hidden="true" />{style.label}</span>)}
+-      <small>{!showPhases ? "缺测标记始终保留" : backgroundMode === "levels" ? `${horizon}日历史P10/P90 · 看位置；切换「参与升降」看方向` : "20/50日合看 · 空白为分歧、暂稳或状态未知"}</small>
+-      </div>
+-      <p className="bc-track-hint">{track === "historical" ? `${horizon}日宽度 · 虚线：历史10%／90%分位，点线：中位 · 菱形：退出历史高位或低位。高位可以延续，不等于见顶。`
++      <label><input type="checkbox" checked={showPhases && !joint} disabled={joint} onChange={(event) => setShowPhases(event.target.checked)} />背景色带</label>
++      <select aria-label="背景含义" value={backgroundMode} disabled={!showPhases || joint} onChange={(event) => setBackgroundMode(event.target.value as BackgroundMode)}><option value="levels">宽度高低区间</option><option value="phases">宽度参与升降</option></select>
++      {Object.entries(BACKGROUND_STYLES).filter(([key]) => key === "missing" || showPhases && !joint && (backgroundMode === "levels" ? ["low", "high"].includes(key) : !["low", "high"].includes(key))).map(([key, style]) => <span key={key}><i style={{ backgroundColor: style.fill, borderColor: style.color }} aria-hidden="true" />{style.label}</span>)}
++      <small>{joint ? "联合筛选期间只显示联合条件与缺测色带" : !showPhases ? "缺测标记始终保留" : backgroundMode === "levels" ? `${horizon}日历史P10/P90 · 看位置；切换「参与升降」看方向` : "20/50日合看 · 空白为分歧、暂稳或状态未知"}</small>
++      </div>
++      <p className="bc-track-hint">{joint ? "联合筛选要求50日与200日同一天均满足条件；缺任一项不作判断。历史分位与其他轨道暂隐，关闭筛选后恢复。" : track === "historical" ? `${horizon}日宽度 · 虚线：历史10%／90%分位，点线：中位 · 菱形：退出历史高位或低位。高位可以延续，不等于见顶。`
+       : track === "fixed" ? `${horizon}日宽度 · 高${market === "cn" ? 80 : 85}%／低${market === "cn" ? 20 : 15}%为固定经验参考，50%表示半数股票。尚未验证为顶底阈值。`
+       : `${horizon}日宽度 · 轨道已关闭，仍可查看原始曲线与下方读数。`}</p>
+-      <p className="bc-caption">为避免拥挤，图上只显示部分参与变化标签；背景保留所选含义的逐日状态，缺测留白。</p>
+-      {gaps && <p className="bc-gap-note" role="note"><b>{horizon}日宽度的断线说明</b><span>{gaps}。灰带内不连接宽度线，也不延用参与状态。</span></p>}
+-    <details className="bc-source bc-legacy"><summary>更多数值条件标记{active.size > 0 ? `（已开${active.size}项）` : ""}</summary><div className="bc-rules" role="group" aria-label="可选标记历史宽度数值条件">
+-      <span>数值标记（默认关闭）：</span>{BREADTH_HIGHLIGHT_RULES.map((rule) => <button key={rule.key} type="button" aria-pressed={active.has(rule.key)} onClick={() => toggle(rule.key)} title={rule.full}><span className="bc-rule-dot" style={{ background: rule.color }} aria-hidden="true" />{numericRuleLabel(rule.key, market)}</button>)}
+-    </div><p className="bc-caption">条件色带同时标在价格与宽度上；它们只是数值筛选，未验证为顶底或收益信号。20日宽度不参与这六项旧筛选。</p></details>
++      <p className="bc-caption">{joint ? "圆点是当前图示区间内连续满足条件的起点，不是价格顶底；若区间从中途开始，圆点也不代表首次触发。" : "为避免拥挤，图上只显示部分参与变化标签；背景保留所选含义的逐日状态，缺测留白。"}</p>
++      {gaps && <p className="bc-gap-note" role="note"><b>{joint ? "50日／200日联合资料" : `${horizon}日宽度`}的断线说明</b><span>{gaps}。{joint ? "缺失周期断线，其余有效曲线保留；该日不作联合判断。" : "灰带内不连接宽度线，也不延用参与状态。"}</span></p>}
++    <details className="bc-source bc-legacy"><summary>更多数值条件标记</summary><div className="bc-rules" role="group" aria-label="可选标记历史宽度数值条件">
++      <span>数值标记（默认关闭）：</span>{BREADTH_HIGHLIGHT_RULES.filter((rule) => !JOINT_RULES.has(rule.key)).map((rule) => <button key={rule.key} type="button" aria-pressed={active.has(rule.key)} onClick={() => toggle(rule.key)} title={rule.full}><span className="bc-rule-dot" style={{ background: rule.color }} aria-hidden="true" />{numericRuleLabel(rule.key, market)}</button>)}
++    </div><p className="bc-caption">条件色带同时标在价格与宽度上；它们只是数值筛选，未验证为顶底或收益信号。200日的50%中线只描述长期参与基础；20日不参与这些筛选。</p></details>
++    <details className="bc-source"><summary>联合阈值有机构依据吗？</summary>
++      <p>当前A股20/80、美股15/85沿用本系统已有数值条件。本轮未找到同一股票范围、同一数值及同一联合条件的机构验证，不能直接称为机会线或风险线。</p>
++      <p><a href="https://d28lcup14p4e72.cloudfront.net/273862/8818055/BofA%20-%20Hartnett%20-%20The%20Flow%20Show_20240531.pdf" target="_blank" rel="noreferrer">BofA 2024-05-31报告</a>的索引表格提到50/200日联合规则，但对象是MSCI ACWI中的市场指数，使用“net 88%”；官方正文链接已失效，完整公式未核定，不能换算成本图个股比例。</p>
++      <p><a href="https://kathrein.at/assets/Uploads/PDFs/Insti/GECONHND25_08.pdf" target="_blank" rel="noreferrer">Ned Davis Research 2025年4月资料</a>使用50/200日联合趋势状态；具体模式阈值未核定，不能据此认定“双低见底、双高见顶”。高宽度也可能代表上涨参与广泛。</p>
++    </details>
+     <p className="bc-caption"><a href="/fundamentals?section=overlay#fund-sec-overlay">原长周期叠加：指数 × 利率／两融／VIX →</a></p>
+     <details className="bc-source"><summary>轨道口径、状态依据与来源</summary><p>价格资料截至 {lastPriceDate ?? "未提供"}，宽度资料截至 {lastBreadthDate ?? "未提供"}；同日有效区间 {comparableDates[0] ?? "—"}—{lastComparableDate ?? "—"}。</p><p>历史轨道采用截至所示日期最近1260个有效读数（含当日）的10%、50%、90%分位，至少252个有效值才显示；它描述历史分布，不是预测区间。历史百分位采用不高于当日值的样本比例；变化比较5条记录前，不承诺等于5个交易日。缺值留白，不填补。</p><p>“上涨支撑增强”表示20/50日宽度均回升且三周期均≥50%；“低位参与回暖／高位参与转弱”表示此前5条记录中20/50日宽度曾同处固定低位／高位，目前均反向变化。其余状态描述参与回升、收缩或分歧。状态依据固定经验值（A股20/80、美股15/85），越轨事件依据历史分位，两者含义不同。当前没有100日宽度数据。</p><p>宽度是股票中有多少比例站在各自均线上方。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源，也不为本图的分位参数背书。</p>{market === "cn" && <p>2026-11-02修复记录：08-19至10-30按当日取得的5,577只股票名单回看，以WeStock前复权日线统一重建；各周期分别排除当日非交易股票及上市后有效记录不足的新股。它不是逐日历史成员还原。更早的旧记录保留原值；本次补齐不代表长期分位阈值已通过效果验证。</p>}<p>价格与宽度沿用现有接口，严格同日对齐。全A宽度不是沪深300成分股专属宽度，美股沿用标普500股票样本，尚非逐日还原的官方成分股，也非纳指专属宽度。当前接口未给出逐日完整覆盖率；这些限制会影响历史对照。新轨道和状态仅帮助读图，尚无顶底识别或收益增量验证。</p></details>
+       </details>
+--- before/web/src/components/market-style/breadth-comparison.css
++++ after/web/src/components/market-style/breadth-comparison.css
+@@ -115,3 +115,8 @@
+ .bc-external-detail a { color: var(--accent, #2458c6); }
+ .bc-external-note { margin: 5px 0 0; font-size: 11px; }
+ .bc-external-reference :is(a, summary):focus-visible { outline: 2px solid var(--accent, #2458c6); outline-offset: 2px; }
++
++.bc-joint-rules { margin: 0 0 8px; padding: 8px; border: 1px solid var(--border-subtle); border-radius: 6px; background: var(--bg-card); gap: 5px 8px; }
++.bc-joint-rules button { border: 1px solid transparent; padding: 6px 8px; }
++.bc-joint-rules button[aria-pressed="true"] { border-color: currentColor; background: var(--bg-card-hover); }
++.bc-joint-hint { margin: 0 0 8px; color: var(--text-secondary); font-size: 11px; line-height: 1.5; }
+--- before/web/src/components/market-style/breadthChartDisplay.test.mjs
++++ after/web/src/components/market-style/breadthChartDisplay.test.mjs
+@@ -209,3 +209,24 @@
+     assert.deepEqual(chart.getOption().dataZoom.map(({ start, end }) => [start, end]), [[25, 75], [25, 75]]);
+   } finally { chart.dispose(); }
+ });
++
++test("joint projection marks each visible range at its same-day price and shows either-period gaps", async () => {
++  const { jointProjection } = await loadChartModule();
++  const view = { dates: dates.slice(0, 6), price: [100, 101, 102, null, 104, 105],
++    breadth: [Array(6).fill(null), [20, 19, 18, 80, 81, 82], [20, null, 19, 80, 81, null]],
++    bands: [
++      {key: "reversal_bottom", color: "#506f91", ranges: [[dates[0], dates[0]], [dates[2], dates[2]]]},
++      {key: "reversal_top", color: "#8d6f60", ranges: [[dates[3], dates[4]]]},
++      {key: "stage_bottom", color: "gray", ranges: [[dates[0], dates[2]]]},
++    ] };
++  const projected = jointProjection(view);
++  assert.deepEqual(projected.values, [20, null, 18, 80, 81, null]);
++  assert.deepEqual(projected.markers.map(({name, value}) => ({name, value})), [
++    {name: "双低", value: [dates[0], 100]}, {name: "双低", value: [dates[2], 102]},
++  ]);
++  assert.deepEqual(backgroundRuns(view.dates, projected.values, new Map(), false), [
++    {start: 1, end: 1, key: "missing"}, {start: 5, end: 5, key: "missing"},
++  ]);
++  // A high range that starts without a valid price must not slide to the following day.
++  assert.ok(!projected.markers.some(({value}) => value[0] === dates[4]));
++});
+--- before/web/src/components/trend/zones.display.test.mjs
++++ after/web/src/components/trend/zones.display.test.mjs
+@@ -53,3 +53,20 @@
+   assert.deepEqual(zones.computeHighlightBands(new Set(["stage_top"]), "US", ["2026-01-01"], [0], [85], [0])[0].ranges,
+     [["2026-01-01", "2026-01-01"]]);
+ });
++
++test("joint AND conditions include boundaries and break ranges at either missing period", () => {
++  for (const [market, low, high] of [["CN", 20, 80], ["US", 15, 85]]) {
++    assert.equal(zones.evalBreadthRule("reversal_bottom", market, null, low, low), true);
++    assert.equal(zones.evalBreadthRule("reversal_bottom", market, null, low - 1, low + 1), false);
++    assert.equal(zones.evalBreadthRule("reversal_top", market, null, high, high), true);
++    assert.equal(zones.evalBreadthRule("reversal_top", market, null, high + 1, high - 1), false);
++    for (const key of ["reversal_top", "reversal_bottom"]) {
++      assert.equal(zones.evalBreadthRule(key, market, null, low, null), false);
++      assert.equal(zones.evalBreadthRule(key, market, null, null, high), false);
++    }
++    const days = ["2026-10-26", "2026-10-27", "2026-10-28", "2026-10-29", "2026-10-30"];
++    const bands = zones.computeHighlightBands(new Set(["reversal_bottom"]), market, days,
++      Array(5).fill(null), [low, low - 1, low, low, low], [low, low - 1, null, low, low]);
++    assert.deepEqual(bands[0].ranges, [[days[0], days[1]], [days[3], days[4]]]);
++  }
++});
+--- before/web/src/components/market-observation-alerts/index.tsx
++++ after/web/src/components/market-observation-alerts/index.tsx
+@@ -43,7 +43,7 @@
+   snapshot: AlertSnapshot; href: string; pending: boolean; onRead: () => void;
+   participation?: BreadthReadingPoint | null; breadth?: BreadthReadingResponse; points: AlertPoint[];
+ }) {
+-  const [reference, setReference] = useState<"dynamic50" | "stockcharts50" | "stockcharts200">("dynamic50");
++  const [reference, setReference] = useState<"dynamic50" | "stockcharts50">("dynamic50");
+   const fresh = s.quality === "ready";
+   const reading = fresh && participation?.date === s.latest?.date ? participation : null;
+   const interpretation = breadthInterpretation(reading);
+@@ -59,17 +59,15 @@
+   const latest = rows[rows.length - 1];
+   const boundsByDate = new Map((breadth?.observation?.history ?? []).map(p => [p.date, p.horizons["50"]]));
+   const fixed = BREADTH_EXTERNAL_REFERENCES.stockcharts;
+-  const low = reference === "stockcharts200" ? undefined : rows.map(p => reference === "stockcharts50"
++  const low = rows.map(p => reference === "stockcharts50"
+     ? p.breadth_50 == null ? null : fixed.sma50.lower
+     : boundsByDate.get(p.date)?.status === "ready" ? boundsByDate.get(p.date)!.lower : null);
+-  const high = reference === "stockcharts200" ? undefined : rows.map(p => reference === "stockcharts50"
++  const high = rows.map(p => reference === "stockcharts50"
+     ? p.breadth_50 == null ? null : fixed.sma50.upper
+     : boundsByDate.get(p.date)?.status === "ready" ? boundsByDate.get(p.date)!.upper : null);
+-  const chartPeriod = reference === "stockcharts200" ? "200" : "50";
+-  const lineOrder = chartPeriod === "200" ? ["200", "20", "50"] as const : ["50", "20", "200"] as const;
++  const lineOrder = ["50", "20", "200"] as const;
+   const referenceDescription = reference === "dynamic50" ? "50日动态P10/P90，高低边界随历史变化"
+-    : reference === "stockcharts50" ? "StockCharts 50日固定参考，低于30%、高于70%"
+-    : "StockCharts 200日参考，50%为半数股票中线，不划高低区";
++    : "StockCharts 50日固定参考，低于30%、高于70%";
+   // Display-only position follows the chosen reference; alert state remains unchanged.
+   const displayPhase = reference === "dynamic50" ? s.latest?.phase
+     : reference === "stockcharts50" && latest?.breadth_50 != null
+@@ -91,14 +89,11 @@
+       <div className="moa-reference-picker" role="group" aria-label="小图参考阈值">
+         <button type="button" aria-pressed={reference === "dynamic50"} onClick={() => setReference("dynamic50")}><span>动态50日</span><strong>{format(s.latest?.lower)}% / {format(s.latest?.upper)}%</strong></button>
+         <button type="button" aria-pressed={reference === "stockcharts50"} onClick={() => setReference("stockcharts50")}><span>StockCharts 50日</span><strong>&lt;{fixed.sma50.lower}% / &gt;{fixed.sma50.upper}%</strong></button>
+-        <button type="button" aria-pressed={reference === "stockcharts200"} onClick={() => setReference("stockcharts200")}><span>StockCharts 200日</span><strong>{fixed.sma200.majority}% 半数线</strong></button>
+       </div>
+-      <div className="moa-reference-caption" aria-live="polite">{reference === "dynamic50" ? "50日动态分位" : `StockCharts ${chartPeriod}日固定参考`} · {chartPeriod === "200" ? "紫线为主，看长期参与" : "蓝线为主，非买卖线"}</div>
++      <div className="moa-reference-caption" aria-live="polite">{reference === "dynamic50" ? "50日动态分位" : "StockCharts 50日固定参考"} · 蓝线为主，非买卖线</div>
+       <MiniTrend dates={rows.map(p => p.date)} percent lower={low} upper={high} lines={lineOrder.map(period => ({ name: `${period}日`, color: colors[period], values: rows.map(p => p[`breadth_${period}`] ?? null) }))}
+-        label={`${s.label.replace("50日宽度", "市场宽度")}近90条记录，蓝色50日、橙色20日、紫色200日；${referenceDescription}。${chartPeriod}日曲线加粗，非已验证买卖线`} />
+-      <div className={`moa-threshold-meaning${chartPeriod === "200" ? " moa-majority-meaning" : ""}`}>{chartPeriod === "200"
+-        ? <span>200日宽度高于50%：多数股票站上年线</span>
+-        : <><span>低位回升时看机会</span><span>高位转弱时看风险</span></>}</div>
++        label={`${s.label.replace("50日宽度", "市场宽度")}近90条记录，蓝色50日、橙色20日、紫色200日；${referenceDescription}。50日曲线加粗，非已验证买卖线`} />
++      <div className="moa-threshold-meaning"><span>低位回升时看机会</span><span>高位转弱时看风险</span></div>
+     </>}
+     <p className="moa-use">{isErp ? "上穿上轨有历史反弹线索；下穿下轨未可靠地提示顶部。" : reading && displayPhase === "low" ? `已在低位观察区。${interpretation.watch}` : reading && displayPhase === "high" ? `已在高位观察区。${interpretation.watch}` : interpretation.meaning}</p>
+     {!isErp && <BreadthInstitutionalReference market={s.id.startsWith("SP500:") ? "us" : "cn"} showValues={false} />}
+--- before/web/src/components/market-observation-alerts/style.css
++++ after/web/src/components/market-observation-alerts/style.css
+@@ -28,7 +28,7 @@
+ .moa-key-lines span:first-child { color: #287c70; }
+ .moa-key-lines b { font-weight: 650; }
+ .moa-mini svg { display: block; width: 100%; height: 116px; }
+-.moa-reference-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 3px 0 6px; }
++.moa-reference-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; margin: 3px 0 6px; }
+ .moa-reference-picker button { display: flex; flex-direction: column; justify-content: center; gap: 4px; min-width: 0; padding: 7px 3px; color: #68788d; font-size: 10px; line-height: 1.35; }
+ .moa-reference-picker button strong { color: #465970; font-size: 11px; font-variant-numeric: tabular-nums; font-weight: 600; }
+ .moa-reference-picker button:hover { border-color: #8aa9d0; background: #f2f6fc; }
+@@ -37,7 +37,6 @@
+ .moa-reference-caption { min-height: 16px; color: #68788d; font-size: 10px; }
+ .moa-threshold-meaning { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: #287c70; margin-top: 7px; }
+ .moa-threshold-meaning > span:last-child { color: #92662f; }
+-.moa-majority-meaning > span:last-child { color: #68788d; }
+ .moa-mini-dates { display: flex; justify-content: space-between; color: #8490a1; font-size: 9px; font-variant-numeric: tabular-nums; }
+ .moa-mini-empty { display: grid; place-items: center; height: 132px; color: #8490a1; }
+ .moa-use { min-height: 33px; margin: 10px 0; color: #4e5f76; font-size: 12px; line-height: 1.5; }

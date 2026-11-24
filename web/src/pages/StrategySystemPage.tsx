@@ -176,6 +176,7 @@ export default function StrategySystemPage() {
     {guide && <section className="strategy-guide-intro" aria-label="因子指南包说明">
       <p>研究指南、候选注册表与模板。候选登记和研究优先级不代表已验证、已实现或获准交易。
         指导包不替代两份权威技术文档；接入时指纹只用于识别文件变化。</p>
+      <Link to="/factors">查看已接入研究结果</Link>
       <label htmlFor="strategy-guide-document">包内资料</label>
       <select id="strategy-guide-document" value={selectedId ?? ""} disabled={!ids.length}
         onChange={(event) => {
@@ -195,13 +196,13 @@ export default function StrategySystemPage() {
         : "源文件已变化，尚未确认。当前内容可以阅读，但不能据此扩大或缩小因子研究范围。"}
     </div>}
     {source && <section className="strategy-provenance" aria-label="来源与职责">
-      <p><strong>{source.title}</strong> · {source.role}</p>
-      <dl>
+      <p><strong>{source.title}</strong> · {source.role} · {sourceLabels[source.approvalStatus]} · 更新时间：{source.modifiedAt ? new Date(source.modifiedAt).toLocaleString("zh-CN") : "不可用"}</p>
+      <details><summary>查看来源路径与指纹</summary><dl>
         <dt>真实路径</dt><dd>{source.path}</dd>
         <dt>当前 SHA-256</dt><dd>{source.currentSha256 ?? "源文件缺失，无法计算"}</dd>
         <dt>{guide ? "接入时 SHA-256" : "已确认 SHA-256"}</dt><dd>{guide ? source.baseline_sha256 : source.approved_sha256}</dd>
         <dt>{guide ? "接入日期" : "确认日期"}</dt><dd>{guide ? source.recorded_at : source.confirmed_at}</dd>
-      </dl>
+      </dl></details>
     </section>}
     {detailQuery.isFetching && !detail && selectedId && <p role="status">正在读取文档…</p>}
     {detailQuery.isError && <div className="strategy-source-alert" role="alert">

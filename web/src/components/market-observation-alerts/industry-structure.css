@@ -1,0 +1,68 @@
+.industry-structure { min-width: 0; width: 100%; margin-top: 14px; padding: 16px; border: 1px solid #dce4ee; border-radius: 9px; background: #fff; color: #283238; box-sizing: border-box; font-size: 13px; line-height: 1.45; }
+.is-header, .is-ranking-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.is-header h3, .is-dialog h2 { margin: 0; font-size: 17px; line-height: 1.35; color: #25332e; }
+.is-header p { margin: 3px 0 0; color: #58655f; font-size: 13px; }
+.industry-structure button, .is-dialog button { flex: none; min-height: 30px; padding: 4px 10px; border: 1px solid #cbd5cf; border-radius: 5px; background: #fff; color: #345d52; font-size: 13px; font-weight: 600; line-height: 1.35; cursor: pointer; }
+.industry-structure button:hover, .is-dialog button:hover { background: #edf3ef; }
+.industry-structure :is(button, a, summary):focus-visible, .is-dialog :is(button, a, summary):focus-visible { outline: 2px solid #397766; outline-offset: 2px; }
+.is-date { margin: 10px 0 0; padding: 6px 9px; border-radius: 5px; background: #eff4f0; color: #4d6258; font-size: 13px; }
+.is-date.is-old { background: #fff2e1; color: #80541f; }
+.is-reading { margin: 9px 0 11px; color: #283c33; font-size: 13px; font-weight: 600; }
+.is-status { padding: 18px 4px; color: #58655f; font-size: 13px; }
+.is-timeline { min-width: 0; }
+.is-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.is-metric { min-width: 0; padding: 9px 11px; border: 1px solid #dce6de; border-radius: 7px; background: #f8faf8; }
+.is-metric-label { display: flex; align-items: center; gap: 7px; margin: 0 0 2px; color: #465a50; font-size: 13px; font-weight: 600; }
+.is-metric-label i { flex: none; width: 15px; height: 3px; border-radius: 2px; }
+.is-metric strong { display: block; color: #27312c; font-size: 25px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.is-metric strong em { padding-left: 4px; color: #52625a; font-size: 13px; font-style: normal; font-weight: 500; }
+.is-metric-meta { margin: 2px 0 0; color: #52625a; font-size: 13px; line-height: 1.35; }
+.is-metric-meta b { margin-left: 4px; color: #29382f; font-variant-numeric: tabular-nums; }
+.is-timeline-controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 9px; color: #5b6860; font-size: 13px; }
+.is-range-buttons { display: flex; flex-wrap: wrap; gap: 5px; }
+.is-range-buttons button { min-height: 28px; padding: 3px 8px; }
+.is-range-buttons button[aria-pressed="true"] { border-color: #567b69; background: #e5efe8; color: #2e5847; }
+.is-timeline-range { margin: 5px 0 0; color: #52625a; font-size: 13px; font-variant-numeric: tabular-nums; }
+.is-linked-chart { width: 100%; min-width: 0; }
+.is-timeline-method { margin-top: 5px; color: #56645a; font-size: 13px; }
+.is-timeline-method summary { width: fit-content; color: #3d6655; cursor: pointer; }
+.is-timeline-method p { margin: 5px 0; }
+.is-ranking { margin-top: 10px; padding: 10px 11px; border: 1px solid #dce6de; border-radius: 7px; background: #f8faf8; }
+.is-ranking h4 { margin: 0; color: #354c3f; font-size: 14px; }
+.is-ranking-head span { color: #4d6258; font-size: 13px; }
+.is-ranking-list { margin-top: 7px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px 17px; }
+.is-rank { display: grid; grid-template-columns: 17px minmax(64px, 77px) minmax(35px, 1fr) 65px; align-items: center; gap: 5px; min-width: 0; min-height: 21px; font-size: 13px; }
+.is-rank-no { color: #748078; font-variant-numeric: tabular-nums; }
+.is-rank-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #34483d; }
+.is-rank-track { position: relative; height: 7px; background: #e7ede8; }
+.is-rank-track::after { content: ""; position: absolute; top: -2px; bottom: -2px; left: 50%; width: 1px; background: #849188; }
+.is-rank-track i { display: block; position: absolute; top: 1px; height: 5px; min-width: 1px; border-radius: 3px; }
+.is-rank strong { text-align: right; font-size: 13px; font-variant-numeric: tabular-nums; }
+.is-positive { color: #327c72; }.is-negative { color: #986737; }
+.is-ranking-note, .is-source { color: #59685f; font-size: 13px; line-height: 1.4; }
+.is-ranking-note { margin: 7px 0 0; }.is-source { margin: 9px 0 0; }
+.is-source a { color: #345d52; text-decoration: underline; }
+.is-dialog { width: min(1100px, 92vw); max-height: 90vh; padding: 0; border: 0; border-radius: 10px; box-shadow: 0 22px 80px #172b4550; color: #283238; }
+.is-dialog::backdrop { background: #172b45a8; }
+.is-dialog-surface { padding: 16px 18px; max-height: 90vh; overflow: auto; box-sizing: border-box; }
+.is-dialog header { display: flex; align-items: start; justify-content: space-between; gap: 15px; margin-bottom: 12px; }
+.is-dialog header p { margin: 3px 0 0; color: #59685f; font-size: 13px; }
+.is-detail-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(305px, 1fr); align-items: start; gap: 14px; }
+.is-detail-timeline { min-width: 0; }
+.is-dialog .is-ranking { margin-top: 0; }
+.is-dialog .is-ranking-list { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+.is-dialog .is-rank { min-height: 24px; }
+.is-dialog .is-metric { padding: 7px 9px; }
+.is-dialog .is-metric-meta { font-size: 13px; }
+.is-home-layout { display: grid; grid-template-columns: minmax(0, 1fr) 210px; column-gap: 12px; align-items: start; }
+.is-home-layout > .is-timeline { display: contents; }
+.is-home-layout .is-metrics { grid-column: 1 / -1; grid-row: 1; }
+.is-home-layout .is-timeline-controls { grid-column: 1; grid-row: 2; }
+.is-home-layout .is-timeline-controls > span { display: none; }
+.is-home-layout .is-timeline-range { grid-column: 1; grid-row: 3; line-height: 1.45; }
+.is-home-layout .is-linked-chart { grid-column: 1; grid-row: 4; }
+.is-home-layout .is-timeline-method { grid-column: 1; grid-row: 5; }
+.is-home-layout .is-ranking { grid-column: 2; grid-row: 2 / 6; margin-top: 9px; padding: 9px 8px; }
+.is-home-layout .is-ranking-head { flex-wrap: wrap; gap: 2px 8px; }
+.is-home-layout .is-ranking-list { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+.is-home-layout .is-rank { grid-template-columns: 12px 56px minmax(20px, 1fr) 60px; gap: 3px; }

@@ -1,0 +1,35 @@
+✔ three calendar years exclude the left boundary, include today, and use population sigma (1.768667ms)
+✔ future observations cannot change past bands; a displayed crop must retain full-history warmup (0.477458ms)
+✔ nulls are neither zero-filled nor silently removed from a statistical window (0.108917ms)
+✔ flat series have valid coincident bands and no spurious cheap/expensive or infinite Z (0.083375ms)
+✔ invalid and duplicate dates fail closed; leap-day window is calendar based (0.171708ms)
+✔ distance is explicit, with no invented near-band threshold (0.105459ms)
+✔ a jump across both thresholds keeps both events independently selectable (12.686833ms)
+✔ shallower observation can occur before the extreme event; equality alone is not a crossing (0.170875ms)
+✔ missing observations or a missing week never manufacture crossings (0.092584ms)
+✔ markers preserve both identities on the same price date, and omit unpriced weeks (0.220083ms)
+✔ mini inner rails use the same supplied 2-sigma window and preserve unknowns (0.190708ms)
+✔ comparison requires two joint finite observations, not just a priced date axis (0.107958ms)
+✔ first usable row and persistent excursions are not repeated events (0.867083ms)
+✔ strict edge, missing data, and historical prefix (0.180833ms)
+✔ a missing week does not create a crossing across a 14-day gap (0.094166ms)
+✔ prior three-calendar-year window includes cutoff, excludes current, and uses population sigma (29.779958ms)
+✔ January cutoff and leap-day February 28 mapping keep calendar boundaries (15.410334ms)
+✔ missing, duplicate, unsorted, and nonfinite inputs fail or blank explicitly (11.016417ms)
+✔ 500 records guard and zero variance leave no fabricated extreme (8.031416ms)
+✔ same-day crossings retain each sigma; equality alone and first valid row do not cross (14.434458ms)
+✔ missing values, unresolved bands, and gaps over seven days reset crossing state (0.269167ms)
+✔ span is anchored to the first member, never chained indefinitely (0.839833ms)
+✔ opposite-kind event starts a new group even within the span (0.131709ms)
+✔ same-date thresholds are retained; representative prefers highest sigma only on earliest date (0.132375ms)
+✔ only supplied observation dates are eligible; no event is shifted to another date (0.081ms)
+✔ duplicate ids are deduplicated while original events and inputs stay unchanged (0.216208ms)
+✔ empty and invalid spans fall back to one observation (0.268333ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 293.262417

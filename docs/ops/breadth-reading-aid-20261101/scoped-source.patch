@@ -1,0 +1,910 @@
+--- a/src/lei_signal/api/routes/symbols.py
++++ b/src/lei_signal/api/routes/symbols.py
+@@ -2051,6 +2051,7 @@
+     request: Request,
+     market_id: str = Query(..., description="e.g. CN_ALL_A, SP500"),
+     lookback_days: int = Query(1260, ge=1, le=12600),
++    include_observation: bool = Query(False, description="附加描述性宽度读图信息"),
+ ) -> dict:
+     """Return the breadth history time-series for one global panel.
+ 
+@@ -2069,7 +2070,7 @@
+         # 读侧合并 33 年研究全史 + live 尾部（合并逻辑在 get_ma_breadth_history 内），
+         # 强制返回全量，不被前端 lookback 截断，叠加图/趋势图才能铺满整个窗口。
+         hist = get_ma_breadth_history(lookback_days=12600)
+-        return {
++        payload = {
+             "market_id": market_id,
+             "lookback_days": lookback_days,
+             "history": [
+@@ -2082,6 +2083,13 @@
+                 for h in hist
+             ],
+         }
++        if include_observation is True:
++            from lei_signal.market_context.breadth_observation import build_breadth_observation
++
++            payload["observation"] = build_breadth_observation(
++                payload["history"], market_id, tail_observations=lookback_days,
++            )
++        return payload
+     # 标普500 走本机预计算落盘的真实宽度历史（成分股站上 MA 占比），
+     # 不再返回空（lab.db 无 SP500 快照）。无数据返回 []，前端标「数据缺失」。
+     if mid == MarketId.SP500:
+@@ -2089,7 +2097,7 @@
+         # 强制返回全量（最多 ~1260 交易日），不被前端 lookback 截断，
+         # 叠加图/趋势图才能铺满整个窗口，与 A股支路边对称。
+         hist = get_sp500_breadth_history(lookback_days=12600)
+-        return {
++        payload = {
+             "market_id": market_id,
+             "lookback_days": lookback_days,
+             "history": [
+@@ -2102,6 +2110,13 @@
+                 for h in hist
+             ],
+         }
++        if include_observation is True:
++            from lei_signal.market_context.breadth_observation import build_breadth_observation
++
++            payload["observation"] = build_breadth_observation(
++                payload["history"], market_id, tail_observations=lookback_days,
++            )
++        return payload
+     history = _market_context_service(request).get_breadth_history(
+         mid, lookback_days=lookback_days,
+     )
+--- /dev/null
++++ b/src/lei_signal/market_context/breadth_observation.py
+@@ -0,0 +1,192 @@
++"""Pure breadth reading aids; descriptive only, separate from trading classifiers.
++
++Bands use the last 1260 valid observations, including the current reading, with
++252 observations required. Quantiles use linear interpolation and percentile
++uses the same <= convention as breadth.rolling_percentile_at. Five-record
++changes retain the original date axis; missing values are never forward-filled.
++This module neither qualifies historical constituents nor reads index prices.
++"""
++from __future__ import annotations
++
++import math
++from bisect import bisect_left, bisect_right, insort
++from collections import deque
++from collections.abc import Mapping, Sequence
++from datetime import date
++from numbers import Real
++from typing import Any
++
++_LOOKBACK = 1260
++_MIN_OBSERVATIONS = 252
++_PERIODS = (20, 50, 200)
++_MARKET_LIMITS = {"CN_ALL_A": (20.0, 80.0), "SP500": (15.0, 85.0)}
++
++
++def _percentage(value: Any) -> float | None:
++    if isinstance(value, bool) or not isinstance(value, Real):
++        return None
++    number = float(value)
++    return number if math.isfinite(number) and 0 <= number <= 100 else None
++
++
++def _valid_dates(history: Sequence[Mapping[str, Any]]) -> bool:
++    previous = ""
++    for row in history:
++        if not isinstance(row, Mapping):
++            return False
++        day = row.get("date")
++        if not isinstance(day, str) or len(day) != 10 or day <= previous:
++            return False
++        try:
++            if date.fromisoformat(day).isoformat() != day:
++                return False
++        except ValueError:
++            return False
++        previous = day
++    return True
++
++
++def _quantile(ordered: list[float], q: float) -> float:
++    index = (len(ordered) - 1) * q
++    lower = math.floor(index)
++    upper = math.ceil(index)
++    return ordered[lower] + (ordered[upper] - ordered[lower]) * (index - lower)
++
++
++def _event(position: str, previous: str) -> str:
++    if "unknown" in (position, previous):
++        return "unknown"
++    if position == "high":
++        return "stay_high" if previous == "high" else "enter_high"
++    if position == "low":
++        return "stay_low" if previous == "low" else "enter_low"
++    if previous == "high":
++        return "exit_high"
++    if previous == "low":
++        return "exit_low"
++    return "none"
++
++
++def _horizon_history(values: list[float | None]) -> list[dict[str, Any]]:
++    queue: deque[float] = deque()
++    ordered: list[float] = []
++    result: list[dict[str, Any]] = []
++    previous_position = "unknown"
++    for i, value in enumerate(values):
++        if value is not None:
++            if len(queue) == _LOOKBACK:
++                ordered.pop(bisect_left(ordered, queue.popleft()))
++            queue.append(value)
++            insort(ordered, value)
++        sample_count = len(queue)
++        delta = None
++        if value is not None and i >= 5 and values[i - 5] is not None:
++            delta = value - values[i - 5]
++        status = ("missing" if value is None else
++                  "ready" if sample_count >= _MIN_OBSERVATIONS else "insufficient")
++        row = {
++            "lower": None, "median": None, "upper": None, "percentile": None,
++            "delta_5": delta, "sample_count": sample_count, "status": status,
++            "position": "unknown", "event": "unknown",
++        }
++        if status == "ready":
++            lower, median, upper = (_quantile(ordered, q) for q in (.1, .5, .9))
++            position = ("flat" if lower == upper == value else "low" if value <= lower else
++                        "high" if value >= upper else "middle")
++            row.update({
++                "lower": lower, "median": median, "upper": upper,
++                "percentile": bisect_right(ordered, value) / sample_count * 100.0,
++                "position": position, "event": _event(position, previous_position),
++            })
++        previous_position = row["position"]
++        result.append(row)
++    return result
++
++
++def _state(
++    values: dict[int, list[float | None]],
++    horizons: dict[str, dict[str, Any]],
++    i: int,
++    limits: tuple[float, float],
++) -> dict[str, str]:
++    b20, b50, b200 = (values[period][i] for period in _PERIODS)
++    d20, d50 = (horizons[str(period)]["delta_5"] for period in (20, 50))
++    if any(value is None for value in (b20, b50, d20, d50)):
++        return {"code": "unknown", "label": "参与状态待观察", "tone": "unknown",
++                "summary": "20/50日宽度或5条记录前的比较值不足，暂不能描述参与变化。"}
++
++    low, high = limits
++    prior = [(values[20][j], values[50][j]) for j in range(max(0, i - 5), i)]
++    recent_low = any(a is not None and b is not None and a <= low and b <= low
++                     for a, b in prior)
++    recent_high = any(a is not None and b is not None and a >= high and b >= high
++                      for a, b in prior)
++    if d20 > 0 and d50 > 0:
++        if recent_low:
++            code, label, tone = "recovering", "低位修复", "supportive"
++            detail = f"此前5条记录曾有20/50日宽度同时不高于{low:g}%，目前均回升。"
++        elif b20 >= 50 and b50 >= 50 and b200 is not None and b200 >= 50:
++            code, label, tone = "expanding", "上涨参与延续", "supportive"
++            detail = "20/50日宽度均回升，三个周期均至少有半数股票站在均线上方。"
++        else:
++            code, label, tone = "improving", "参与回升", "supportive"
++            detail = "20/50日宽度均回升，三个周期尚未同时支持广泛参与。"
++    elif d20 < 0 and d50 < 0:
++        if recent_high:
++            code, label, tone = "retreating", "高位回落", "caution"
++            detail = f"此前5条记录曾有20/50日宽度同时不低于{high:g}%，目前均回落。"
++        elif b200 is not None and b200 < 50:
++            code, label, tone = "weakening", "弱势参与延续", "caution"
++            detail = "20/50日宽度均回落，200日均线上方股票仍不足半数。"
++        else:
++            code, label, tone = "contracting", "上涨参与收缩", "caution"
++            detail = "20/50日均线上方股票的比例均减少。"
++    elif d20 == 0 and d50 == 0:
++        code, label, tone = "flat", "参与暂稳", "neutral"
++        detail = "20/50日宽度与5条记录前相同。"
++    else:
++        code, label, tone = "mixed", "短期分歧", "neutral"
++        detail = "20/50日宽度的变化方向不一致。"
++    changes = f"较5条记录前分别变化{d20:+.1f}、{d50:+.1f}个百分点。"
++    long_note = "200日宽度资料不足，长期参与情况未知。" if b200 is None else ""
++    return {"code": code, "label": label, "tone": tone,
++            "summary": detail + changes + long_note}
++
++
++def build_breadth_observation(
++    history: Sequence[Mapping[str, Any]], market_id: str,
++    *, tail_observations: int | None = None,
++) -> dict[str, Any]:
++    """Return reading metadata without mutating history or changing trading rules.
++
++    Invalid date axes produce a local explicit error, leaving the original API
++    history untouched. A missing current reading never inherits yesterday's
++    bands or position. Missing observations still occupy their original dates
++    for delta_5 and prevent invented crossings between adjacent rows.
++    tail_observations limits only transport, after the full history calculation.
++    """
++    result: dict[str, Any] = {
++        "method_version": "breadth.observation@1.0.0",
++        "lookback_observations": _LOOKBACK, "min_observations": _MIN_OBSERVATIONS,
++        "lower_quantile": .1, "upper_quantile": .9, "includes_current": True,
++        "total_observations": len(history) if isinstance(history, Sequence) else 0,
++        "returned_observations": 0,
++        "history": [], "latest": None,
++    }
++    if market_id not in _MARKET_LIMITS:
++        return {**result, "error": "unsupported_market"}
++    if not isinstance(history, Sequence) or not _valid_dates(history):
++        return {**result, "error": "invalid_date_axis"}
++    values = {period: [_percentage(row.get(f"breadth_{period}")) for row in history]
++              for period in _PERIODS}
++    readings = {period: _horizon_history(values[period]) for period in _PERIODS}
++    rows = []
++    for i, source in enumerate(history):
++        horizons = {str(period): readings[period][i] for period in _PERIODS}
++        rows.append({"date": source["date"], "horizons": horizons,
++                     "state": _state(values, horizons, i, _MARKET_LIMITS[market_id])})
++    result["history"] = (rows if tail_observations is None else
++                         rows[max(0, len(rows) - tail_observations):])
++    result["returned_observations"] = len(result["history"])
++    result["latest"] = rows[-1] if rows else None
++    return result
+--- /dev/null
++++ b/tests/unit/test_breadth_observation.py
+@@ -0,0 +1,209 @@
++"""Descriptive breadth observations: no real quotes, network, or strategy simulation."""
++from __future__ import annotations
++
++import copy
++import importlib
++import importlib.util
++import math
++from datetime import date, timedelta
++
++import pandas as pd
++import pytest
++
++from lei_signal.market_context.breadth import rolling_percentile_at
++
++
++def _build(history, market_id="CN_ALL_A", **kwargs):
++    name = "lei_signal.market_context.breadth_observation"
++    assert importlib.util.find_spec(name) is not None, "breadth observation reader is missing"
++    return importlib.import_module(name).build_breadth_observation(history, market_id, **kwargs)
++
++
++def _rows(values, *, b50=None, b200=None):
++    return [
++        {"date": (date(2010, 1, 1) + timedelta(days=i)).isoformat(),
++         "breadth_20": value,
++         "breadth_50": value if b50 is None else b50[i],
++         "breadth_200": value if b200 is None else b200[i]}
++        for i, value in enumerate(values)
++    ]
++
++
++def test_warmup_quantiles_and_percentile_use_actual_valid_count():
++    rows = _rows([float(i % 101) for i in range(252)])
++    result = _build(rows)
++    assert result["lookback_observations"] == 1260
++    assert result["min_observations"] == 252
++    assert result["lower_quantile"] == 0.1
++    assert result["upper_quantile"] == 0.9
++    assert result["includes_current"] is True
++    prior = result["history"][250]["horizons"]["20"]
++    assert prior["status"] == "insufficient"
++    assert prior["sample_count"] == 251
++    assert prior["lower"] is None
++    last = result["latest"]["horizons"]["20"]
++    values = pd.Series([row["breadth_20"] for row in rows])
++    assert last["status"] == "ready"
++    assert last["sample_count"] == 252
++    assert last["lower"] == pytest.approx(values.quantile(.1))
++    assert last["median"] == pytest.approx(values.quantile(.5))
++    assert last["upper"] == pytest.approx(values.quantile(.9))
++
++
++def test_prefix_is_unchanged_and_matches_existing_less_equal_rank():
++    rows = _rows([float(i % 101) for i in range(1310)])
++    before = _build(rows[:1301])
++    after = _build(rows)
++    assert before["history"] == after["history"][:1301]
++    series = pd.Series([r["breadth_20"] for r in rows],
++                       index=pd.to_datetime([r["date"] for r in rows]))
++    for i in (251, 900, 1300):
++        expected = rolling_percentile_at(
++            series, as_of=date.fromisoformat(rows[i]["date"]),
++            lookback=1260, min_periods=252,
++        )
++        horizon = after["history"][i]["horizons"]["20"]
++        assert horizon["percentile"] == pytest.approx(expected)
++        assert horizon["sample_count"] == min(i + 1, 1260)
++
++
++def test_missing_invalid_values_and_horizons_do_not_share_warmup():
++    rows = _rows([40.0] * 252)
++    rows[100]["breadth_50"] = None
++    rows[-1]["breadth_200"] = math.inf
++    original = copy.deepcopy(rows)
++    result = _build(rows)
++    assert rows == original
++    last = result["latest"]["horizons"]
++    assert last["20"]["status"] == "ready"
++    assert last["50"]["status"] == "insufficient"
++    assert last["50"]["sample_count"] == 251
++    assert last["200"]["status"] == "missing"
++    assert last["200"]["sample_count"] == 251
++    for field in ("lower", "median", "upper", "percentile", "delta_5"):
++        assert last["200"][field] is None
++
++
++@pytest.mark.parametrize("bad", [-.01, 100.01, math.nan, math.inf, True, "50"])
++def test_non_percentage_values_are_missing(bad):
++    result = _build(_rows([50.0] * 252 + [bad]))
++    horizon = result["latest"]["horizons"]["20"]
++    assert horizon["status"] == "missing"
++    assert horizon["position"] == "unknown"
++    assert horizon["event"] == "unknown"
++    assert result["latest"]["state"]["code"] == "unknown"
++
++
++def test_constant_history_is_flat_not_both_extremes():
++    result = _build(_rows([50.0] * 253))
++    horizon = result["latest"]["horizons"]["20"]
++    assert horizon["lower"] == horizon["median"] == horizon["upper"] == 50
++    assert horizon["percentile"] == 100
++    assert horizon["position"] == "flat"
++    assert horizon["event"] == "none"
++    assert result["latest"]["state"]["code"] == "flat"
++
++
++@pytest.mark.parametrize(("value", "position", "event"), [
++    (0.0, "low", "enter_low"), (100.0, "high", "enter_high"),
++])
++def test_collapsed_band_keeps_current_outside_visible(value, position, event):
++    result = _build(_rows([50.0] * 252 + [value]))
++    horizon = result["latest"]["horizons"]["20"]
++    assert horizon["lower"] == horizon["median"] == horizon["upper"] == 50
++    assert horizon["position"] == position
++    assert horizon["event"] == event
++
++
++def test_five_record_delta_uses_original_dates_not_nonmissing_rows():
++    rows = _rows([10, 20, 30, 40, 50, 60, 70])
++    rows[1]["breadth_50"] = None
++    result = _build(rows)
++    assert result["history"][4]["horizons"]["20"]["delta_5"] is None
++    assert result["latest"]["horizons"]["20"]["delta_5"] == 50
++    assert result["latest"]["horizons"]["50"]["delta_5"] is None
++    assert result["latest"]["state"]["code"] == "unknown"
++
++
++def test_valid_observation_window_does_not_count_missing_rows():
++    values = [float(i % 101) for i in range(1261)]
++    values.insert(1255, None)
++    result = _build(_rows(values))
++    last = result["latest"]["horizons"]["20"]
++    expected = pd.Series([v for v in values if v is not None][-1260:])
++    assert last["sample_count"] == 1260
++    assert last["lower"] == pytest.approx(expected.quantile(.1))
++    assert last["upper"] == pytest.approx(expected.quantile(.9))
++
++
++def test_events_enter_stay_exit_and_do_not_cross_missing_or_warmup():
++    base = [float(i % 101) for i in range(252)]
++    values = base + [100, 100, 50, 0, 0, 50, None, 100, 100]
++    result = _build(_rows(values))
++    events = [r["horizons"]["20"]["event"] for r in result["history"]]
++    assert events[251] == "unknown"
++    assert events[252:] == ["enter_high", "stay_high", "exit_high", "enter_low",
++                            "stay_low", "exit_low", "unknown", "unknown", "stay_high"]
++
++
++@pytest.mark.parametrize(
++    ("values", "b200", "market_id", "code"),
++    [([10, 20, 35, 45, 55, 60], [70] * 6, "CN_ALL_A", "recovering"),
++     ([18, 25, 35, 45, 55, 60], [70] * 6, "SP500", "expanding"),
++     ([30, 35, 40, 50, 55, 60], [70] * 6, "CN_ALL_A", "expanding"),
++     ([25, 27, 30, 35, 40, 45], [70] * 6, "CN_ALL_A", "improving"),
++     ([90, 85, 70, 60, 50, 40], [30] * 6, "CN_ALL_A", "retreating"),
++     ([70, 65, 60, 55, 50, 40], [30] * 6, "CN_ALL_A", "weakening"),
++     ([70, 65, 60, 55, 50, 40], [70] * 6, "CN_ALL_A", "contracting"),
++     ([60] * 6, [70] * 6, "CN_ALL_A", "flat"),
++     ([30, 35, 40, 50, 55, 60], [None] * 6, "CN_ALL_A", "improving")],
++)
++def test_state_is_breadth_only_and_recent_extreme_has_priority(values, b200, market_id, code):
++    state = _build(_rows(values, b200=b200), market_id)["latest"]["state"]
++    assert state["code"] == code
++    assert state["tone"] in {"supportive", "caution", "neutral", "unknown"}
++    assert not any(word in state["summary"] for word in ["买入", "卖出", "确认顶", "确认底"])
++    if b200[-1] is None:
++        assert "200日" in state["summary"] and "不足" in state["summary"]
++
++
++def test_mixed_direction_is_not_confirmation():
++    state = _build(_rows([30, 35, 40, 50, 55, 60], b50=[70, 65, 60, 55, 50, 40]))
++    assert state["latest"]["state"]["code"] == "mixed"
++
++
++@pytest.mark.parametrize("dates", [
++    ["2024-01-02", "2024-01-02"], ["2024-01-03", "2024-01-02"],
++    ["2024-01-02", "2024-02-30"], ["2024-01-02", "20240103"],
++    ["2024-01-02", None],
++])
++def test_invalid_date_axis_is_explicit_without_mutating_original(dates):
++    rows = _rows([30, 40])
++    for row, day in zip(rows, dates, strict=True):
++        row["date"] = day
++    original = copy.deepcopy(rows)
++    result = _build(rows)
++    assert rows == original
++    assert result["error"] == "invalid_date_axis"
++    assert result["history"] == []
++    assert result["latest"] is None
++
++
++def test_empty_history_is_honest():
++    result = _build([])
++    assert result["history"] == []
++    assert result["latest"] is None
++
++
++def test_tail_limits_transport_only_and_keeps_full_history_warmup():
++    rows = _rows([float(i % 101) for i in range(1400)])
++    full = _build(rows)
++    tail = _build(rows, tail_observations=30)
++    assert tail["history"] == full["history"][-30:]
++    assert tail["latest"] == full["latest"]
++    assert tail["history"][0]["horizons"]["20"]["status"] == "ready"
++    assert tail["history"][0]["horizons"]["20"]["sample_count"] == 1260
++    assert tail["total_observations"] == full["total_observations"] == 1400
++    assert full["returned_observations"] == 1400
++    assert tail["returned_observations"] == 30
++    assert _build(rows, tail_observations=2000)["history"] == full["history"]
+--- /dev/null
++++ b/tests/unit/test_breadth_observation_route.py
+@@ -0,0 +1,81 @@
++"""Exercise only the history HTTP route, without app startup or database writes."""
++from __future__ import annotations
++
++import copy
++from datetime import date, timedelta
++
++import pytest
++from fastapi import FastAPI
++from fastapi.testclient import TestClient
++
++from lei_signal.api.routes.symbols import market_context_breadth_history
++from lei_signal.market_context import a_share_breadth, us_breadth
++
++
++@pytest.fixture()
++def client():
++    app = FastAPI()
++    app.add_api_route("/api/market-context/breadth-history", market_context_breadth_history)
++    return TestClient(app)
++
++
++@pytest.mark.parametrize("market", ["CN_ALL_A", "SP500"])
++def test_observation_is_opt_in_and_preserves_original_history(client, monkeypatch, market):
++    row = {"date": "2026-10-30", "ma20_pct": 40.0, "ma50_pct": 45.0,
++           "ma200_pct": 60.0, "breadth_20": 40.0, "breadth_50": 45.0,
++           "breadth_200": 60.0}
++    original = copy.deepcopy(row)
++    module, getter = (a_share_breadth, "get_ma_breadth_history") if market == "CN_ALL_A" else (
++        us_breadth, "get_sp500_breadth_history")
++    monkeypatch.setattr(module, getter, lambda **kwargs: [row])
++    base = f"/api/market-context/breadth-history?market_id={market}&lookback_days=365"
++    legacy = client.get(base)
++    observed = client.get(base + "&include_observation=true")
++    assert legacy.status_code == observed.status_code == 200
++    legacy_data, observed_data = legacy.json(), observed.json()
++    assert "observation" not in legacy_data
++    assert "observation" in observed_data
++    assert {key: value for key, value in observed_data.items() if key != "observation"} == (
++        legacy_data)
++    assert observed_data["observation"]["latest"]["date"] == row["date"]
++    assert row == original
++
++
++def test_bad_date_does_not_turn_optional_reader_into_500(client, monkeypatch):
++    monkeypatch.setattr(us_breadth, "get_sp500_breadth_history", lambda **kwargs: [
++        {"date": "bad-date", "breadth_20": 20.0, "breadth_50": 30.0, "breadth_200": 50.0}])
++    response = client.get(
++        "/api/market-context/breadth-history?market_id=SP500&include_observation=true")
++    assert response.status_code == 200
++    assert response.json()["history"][0]["date"] == "bad-date"
++    assert response.json().get("observation", {}).get("error") == "invalid_date_axis"
++
++
++def test_unknown_market_preserves_legacy_error(client):
++    response = client.get(
++        "/api/market-context/breadth-history?market_id=NO_SUCH_MARKET&include_observation=true")
++    assert response.status_code == 200
++    assert response.json() == {
++        "market_id": "NO_SUCH_MARKET", "error": "unknown_market", "history": []}
++
++
++@pytest.mark.parametrize("market", ["CN_ALL_A", "SP500"])
++def test_lookback_only_limits_observation_transport(client, monkeypatch, market):
++    rows = [
++        {"date": (date(2020, 1, 1) + timedelta(days=i)).isoformat(),
++         "ma20_pct": float(i % 101), "ma50_pct": 50.0, "ma200_pct": 60.0,
++         "breadth_20": float(i % 101), "breadth_50": 50.0, "breadth_200": 60.0}
++        for i in range(300)
++    ]
++    module, getter = (a_share_breadth, "get_ma_breadth_history") if market == "CN_ALL_A" else (
++        us_breadth, "get_sp500_breadth_history")
++    monkeypatch.setattr(module, getter, lambda **kwargs: rows)
++    base = f"/api/market-context/breadth-history?market_id={market}&include_observation=true"
++    short = client.get(base + "&lookback_days=10").json()
++    long = client.get(base + "&lookback_days=300").json()
++    assert short["history"] == long["history"]
++    assert len(short["history"]) == 300
++    assert short["observation"]["history"] == long["observation"]["history"][-10:]
++    assert short["observation"]["latest"] == long["observation"]["latest"]
++    assert short["observation"]["total_observations"] == 300
++    assert short["observation"]["returned_observations"] == 10
+--- a/web/src/components/market-style/BreadthComparison.tsx
++++ b/web/src/components/market-style/BreadthComparison.tsx
+@@ -1,9 +1,11 @@
+ import { useEffect, useMemo, useRef, useState } from "react";
+ import { useQuery } from "@tanstack/react-query";
+ import * as echarts from "echarts";
+-import { api, fundamentalsApi } from "../../api/client";
++import { fundamentalsApi } from "../../api/client";
+ import type { BreadthHistoryPoint, RatesHistorySeries } from "../../types";
+ import { BREADTH_HIGHLIGHT_RULES, BREADTH_LINES, computeHighlightBands, type HighlightBand } from "../trend/zones";
++import BreadthReading from "./BreadthReading";
++import { BREADTH_HORIZONS, type BreadthHorizon, type BreadthTrack, type BreadthReadingPoint, type BreadthReadingResponse } from "./breadthReadingTypes";
+ import "./breadth-comparison.css";
+ 
+ type Market = "cn" | "us";
+@@ -87,24 +89,50 @@
+   };
+ }
+ 
+-function BreadthProjectionChart({ view, priceName }: { view: View; priceName: string }) {
++function BreadthProjectionChart({ view, priceName, readings, horizon, track, compare, market, selectedDate, onDateChange }: {
++  view: View; priceName: string; readings: ReadonlyMap<string, BreadthReadingPoint>;
++  horizon: BreadthHorizon; track: BreadthTrack; compare: boolean; market: Market;
++  selectedDate?: string; onDateChange: (date: string) => void;
++}) {
+   const node = useRef<HTMLDivElement>(null);
+   const chart = useRef<echarts.ECharts | null>(null);
++  const cursor = useRef({ dates: view.dates, onDateChange });
++  cursor.current = { dates: view.dates, onDateChange };
+   useEffect(() => {
+     if (!node.current) return;
+     const instance = echarts.init(node.current, undefined, { renderer: "svg" });
+     chart.current = instance;
+     const resize = new ResizeObserver(() => instance.resize());
+     resize.observe(node.current);
++    instance.on("updateAxisPointer", (event: unknown) => {
++      const value = (event as { axesInfo?: { value: number | string }[] }).axesInfo?.[0]?.value;
++      const date = typeof value === "number" ? cursor.current.dates[value] : value;
++      if (date && cursor.current.dates.includes(date)) cursor.current.onDateChange(date);
++    });
+     return () => { resize.disconnect(); instance.dispose(); chart.current = null; };
+   }, []);
+   useEffect(() => {
+     if (!chart.current) return;
+     const marks = shade(view.bands);
++    const focusIndex = BREADTH_HORIZONS.indexOf(horizon);
++    const trackLines = track === "off" ? [] : (["lower", "median", "upper"] as const).map((key, index) => ({
++      name: track === "historical" ? ["历史下轨 P10", "历史中位 P50", "历史上轨 P90"][index] : ["固定低位参考", "半数股票 50%", "固定高位参考"][index],
++      type: "line" as const, xAxisIndex: 1, yAxisIndex: 1, showSymbol: false, connectNulls: false,
++      data: view.dates.map((date, i) => view.breadth[focusIndex][i] == null ? null
++        : track === "historical" ? readings.get(date)?.horizons[horizon]?.[key] ?? null
++        : [market === "cn" ? 20 : 15, 50, market === "cn" ? 80 : 85][index]),
++      lineStyle: { color: index === 1 ? "#94a3b8" : "#6b8594", width: 1.2, type: index === 1 ? "dotted" as const : "dashed" as const },
++      itemStyle: { color: "#6b8594" },
++    }));
++    const exitNames = { exit_high: "退出历史高位", exit_low: "退出历史低位" };
++    const exits = track === "historical" ? view.dates.flatMap((date, i) => {
++      const event = readings.get(date)?.horizons[horizon]?.event;
++      return event === "exit_high" || event === "exit_low" ? [{ name: exitNames[event], value: [date, view.breadth[focusIndex][i]], itemStyle: { color: event === "exit_high" ? "#ad6d2d" : "#16847b" } }] : [];
++    }) : [];
+     chart.current.setOption({
+       animation: false,
+       grid: [{ left: 40, right: 34, top: 50, height: "32%", containLabel: true }, { left: 40, right: 34, top: "53%", height: "31%", containLabel: true }],
+-      legend: { type: "scroll", top: 0, left: 0, right: 0, data: [priceName, "20日", "50日", "200日"], textStyle: { fontSize: 12, color: "#344256" } },
++      legend: { type: "scroll", selectedMode: false, top: 0, left: 0, right: 0, data: [priceName, ...(compare ? ["20日", "50日", "200日"] : [`${horizon}日`]), ...trackLines.map((line) => line.name)], textStyle: { fontSize: 12, color: "#344256" } },
+       tooltip: { trigger: "axis", confine: true, axisPointer: { type: "cross", link: [{ xAxisIndex: [0, 1] }] },
+         valueFormatter: (value: unknown) => value == null ? "—" : Number(value).toFixed(1) },
+       axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
+@@ -121,13 +149,21 @@
+         { name: priceName, type: "line", xAxisIndex: 0, yAxisIndex: 0, data: view.price, showSymbol: false, connectNulls: false, lineStyle: { width: 2.6, color: "#243d61" }, itemStyle: { color: "#243d61" } },
+         ...view.breadth.map((values, index) => ({ name: BREADTH_LINES[index].name, type: "line" as const,
+           xAxisIndex: 1, yAxisIndex: 1, data: values, showSymbol: false, connectNulls: false,
+-          lineStyle: { width: index === 1 ? 2.6 : 1.8, color: BREADTH_LINES[index].color, opacity: 1 }, itemStyle: { color: BREADTH_LINES[index].color } })),
++          lineStyle: { width: index === focusIndex ? 2.7 : 1.5, color: BREADTH_LINES[index].color, opacity: index === focusIndex ? 1 : .6 }, itemStyle: { color: BREADTH_LINES[index].color } })).filter((_, index) => compare || index === focusIndex),
++        ...trackLines,
++        { name: "退出历史极端", type: "scatter", xAxisIndex: 1, yAxisIndex: 1, data: exits, symbol: "diamond", symbolSize: 7, z: 5 },
++        { id: "reading-price-date", name: "__reading_price_date", type: "line", xAxisIndex: 0, yAxisIndex: 0, data: [], silent: true, tooltip: { show: false } },
++        { id: "reading-breadth-date", name: "__reading_breadth_date", type: "line", xAxisIndex: 1, yAxisIndex: 1, data: [], silent: true, tooltip: { show: false } },
+         { name: "__price_conditions", type: "line", xAxisIndex: 0, yAxisIndex: 0, data: [], silent: true, tooltip: { show: false }, lineStyle: { opacity: 0 }, ...marks },
+         { name: "__breadth_conditions", type: "line", xAxisIndex: 1, yAxisIndex: 1, data: [], silent: true, tooltip: { show: false }, lineStyle: { opacity: 0 }, ...marks },
+       ],
+     }, true);
+-  }, [view, priceName]);
+-  return <div ref={node} className="bc-chart" role="img" aria-label={`${priceName}价格与同日20、50、200日市场宽度曲线，条件色带同步标在两图；详情可用鼠标或触屏查看`} />;
++  }, [view, priceName, readings, horizon, track, compare, market]);
++  useEffect(() => {
++    const markLine = { silent: true, symbol: "none", label: { show: false }, lineStyle: { color: "#536b80", width: 1, type: "dotted" }, data: selectedDate && view.dates.includes(selectedDate) ? [{ xAxis: selectedDate }] : [] };
++    chart.current?.setOption({ series: [{ id: "reading-price-date", markLine }, { id: "reading-breadth-date", markLine }] });
++  }, [selectedDate, view, priceName, readings, horizon, track, compare, market]);
++  return <div ref={node} className="bc-chart" role="img" aria-label={`${priceName}价格与同日${compare ? "20、50、200" : horizon}日市场宽度曲线，${track === "historical" ? `${horizon}日历史10、50、90分位轨道，菱形表示退出历史极端` : track === "fixed" ? "固定高低参考线" : "轨道已关闭"}；可悬停或用下方日期控件回看`} />;
+ }
+ 
+ export default function BreadthComparison({ market, onMarketChange, onContextChange }: {
+@@ -139,16 +175,31 @@
+   const [cnPrice, setCnPrice] = useState<"sse" | "hs300">("sse");
+   const [usPrice, setUsPrice] = useState<"sp500" | "nasdaq">("sp500");
+   const [active, setActive] = useState<ReadonlySet<string>>(() => new Set());
++  const [horizon, setHorizon] = useState<BreadthHorizon>("50");
++  const [track, setTrack] = useState<BreadthTrack>("historical");
++  const [compare, setCompare] = useState(false);
++  const [cursorDate, setCursorDate] = useState<string | null>(null);
+   const priceKey: PriceKey = market === "cn" ? cnPrice : usPrice;
+   const breadthId = market === "cn" ? "CN_ALL_A" : "SP500";
+-  const breadth = useQuery({ queryKey: ["overlayBreadth", breadthId, 1260],
+-    queryFn: () => api.marketContextBreadthHistory(breadthId, 1260), staleTime: 5 * 60_000, refetchInterval: 5 * 60_000 });
++  const breadth = useQuery({ queryKey: ["overlayBreadthReading", breadthId, 1825],
++    queryFn: async ({ signal }): Promise<BreadthReadingResponse> => {
++      const response = await fetch(`/api/market-context/breadth-history?market_id=${breadthId}&lookback_days=1825&include_observation=true`, { signal });
++      if (!response.ok) throw new Error(`宽度历史读取失败 (${response.status})`);
++      return response.json();
++    }, staleTime: 5 * 60_000, refetchInterval: 5 * 60_000 });
+   const overlay = useQuery({ queryKey: ["fundOverlay", 20],
+     queryFn: () => fundamentalsApi.overlayHistory(20), staleTime: 5 * 60_000, refetchInterval: 5 * 60_000 });
+   const priceSeries = overlay.data?.series[priceKey];
+   const points = breadth.data?.history ?? EMPTY_BREADTH;
+   const view = useMemo(() => viewFor(priceSeries, points, windowDays, active, market), [priceSeries, points, windowDays, active, market]);
++  const readings = useMemo(() => new Map(breadth.data?.observation?.history.map((row) => [row.date, row]) ?? []), [breadth.data?.observation]);
++  const pointByDate = useMemo(() => new Map(points.map((row) => [row.date, row])), [points]);
+   const lastBreadthDate = points[points.length - 1]?.date;
++  const lastComparableDate = useMemo(() => [...view.dates].reverse().find((date) => pointByDate.has(date)), [view.dates, pointByDate]);
++  const selectedDate = cursorDate && view.dates.includes(cursorDate) ? cursorDate : lastComparableDate;
++  const reading = selectedDate ? readings.get(selectedDate) : undefined;
++  const selectedPoint = selectedDate ? pointByDate.get(selectedDate) : undefined;
++  useEffect(() => { setCursorDate(null); }, [market, windowDays, priceKey]);
+   const lastPriceDate = priceSeries?.dates[priceSeries.dates.length - 1];
+   const breadthBehindPrice = !!(lastBreadthDate && lastPriceDate && lastBreadthDate < lastPriceDate);
+   const activeRuleIds = useMemo(() => BREADTH_HIGHLIGHT_RULES.filter((rule) => active.has(rule.key)).map((rule) => rule.key), [active]);
+@@ -173,7 +224,7 @@
+       </div>
+     </header>
+     <div className="bc-controls bc-market-controls">
+-      <div className="bc-price-switch" role="group" aria-label="宽度投影市场"><button type="button" aria-pressed={market === "cn"} onClick={() => onMarketChange("cn")}>A股 · 高≥80%／低≤20%</button><button type="button" aria-pressed={market === "us"} onClick={() => onMarketChange("us")}>美股 · 高≥85%／低≤15%</button></div>
++      <div className="bc-price-switch" role="group" aria-label="宽度投影市场"><button type="button" aria-pressed={market === "cn"} onClick={() => onMarketChange("cn")}>A股</button><button type="button" aria-pressed={market === "us"} onClick={() => onMarketChange("us")}>美股</button></div>
+       <div className="bc-price-switch" role="group" aria-label="宽度投影价格指数">
+         {market === "cn" ? <><button type="button" aria-pressed={cnPrice === "sse"} onClick={() => setCnPrice("sse")}>上证指数</button><button type="button" aria-pressed={cnPrice === "hs300"} onClick={() => setCnPrice("hs300")}>沪深300</button></>
+           : <><button type="button" aria-pressed={usPrice === "sp500"} onClick={() => setUsPrice("sp500")}>标普500</button><button type="button" aria-pressed={usPrice === "nasdaq"} onClick={() => setUsPrice("nasdaq")}>纳斯达克</button></>}
+@@ -185,12 +236,26 @@
+     {breadth.isError || overlay.isError ? <p className="bc-state bc-error" role="alert">{breadth.isError ? "宽度历史读取失败。" : "指数价格历史读取失败。"}暂不能显示同期对照。</p> : null}
+     {!breadth.isPending && !overlay.isPending && !breadth.isError && !overlay.isError && (!view.dates.length || !view.breadth.some((line) => line.some(exists))) &&
+       <p className="bc-state">此期间没有价格与宽度同日可比资料。</p>}
+-    {view.dates.length > 0 && view.breadth.some((line) => line.some(exists)) && !breadth.isError && !overlay.isError && <BreadthProjectionChart view={view} priceName={PRICE_NAMES[priceKey]} />}
+-    <div className="bc-rules" role="group" aria-label="可选标记历史宽度数值条件">
++    <div className="bc-reader-controls bc-controls">
++      <div role="group" aria-label="图中主要宽度周期"><span className="bc-control-label">观察周期</span>{BREADTH_HORIZONS.map((period) => <button type="button" key={period} aria-pressed={horizon === period} onClick={() => setHorizon(period)}>{period}日</button>)}</div>
++      <label>参照轨道 <select aria-label="参照轨道" value={track} onChange={(event) => setTrack(event.target.value as BreadthTrack)}><option value="historical">历史分位上下轨</option><option value="fixed">固定高低参考</option><option value="off">关闭轨道</option></select></label>
++      <label className="bc-compare-toggle"><input type="checkbox" checked={compare} onChange={(event) => setCompare(event.target.checked)} />三线对照</label>
++    </div>
++    <p className="bc-track-hint">{track === "historical" ? `${horizon}日宽度 · 虚线：历史10%／90%分位，点线：中位 · 菱形：退出历史高位或低位。高位可以延续，不等于见顶。`
++      : track === "fixed" ? `${horizon}日宽度 · 高${market === "cn" ? 80 : 85}%／低${market === "cn" ? 20 : 15}%为固定经验参考，50%表示半数股票。尚未验证为顶底阈值。`
++      : `${horizon}日宽度 · 轨道已关闭，仍可查看原始曲线与下方读数。`}</p>
++    {view.dates.length > 0 && view.breadth.some((line) => line.some(exists)) && !breadth.isError && !overlay.isError && <>
++      <BreadthProjectionChart view={view} priceName={PRICE_NAMES[priceKey]} readings={readings} horizon={horizon} track={track} compare={compare} market={market} selectedDate={selectedDate} onDateChange={setCursorDate} />
++      <div className="bc-review-controls">
++        <label>回看日期 <select aria-label="宽度回看日期" value={selectedDate ?? ""} onChange={(event) => setCursorDate(event.target.value)}>{view.dates.map((date) => <option key={date} value={date}>{date}{pointByDate.has(date) ? "" : " · 宽度缺失"}</option>)}</select></label>
++        <button type="button" onClick={() => setCursorDate(null)}>最近同日读数</button><span>图上悬停可同步回看</span>
++      </div>
++      <BreadthReading date={selectedDate} point={selectedPoint} reading={reading} horizon={horizon} onHorizonChange={setHorizon} error={breadth.data?.observation?.error} />
++    </>}
++    <details className="bc-source bc-legacy"><summary>更多数值条件标记{active.size > 0 ? `（已开${active.size}项）` : ""}</summary><div className="bc-rules" role="group" aria-label="可选标记历史宽度数值条件">
+       <span>数值标记（默认关闭）：</span>{BREADTH_HIGHLIGHT_RULES.map((rule) => <button key={rule.key} type="button" aria-pressed={active.has(rule.key)} onClick={() => toggle(rule.key)} title={rule.full}><span className="bc-rule-dot" style={{ background: rule.color }} aria-hidden="true" />{numericRuleLabel(rule.key, market)}</button>)}
+-    </div>
+-    <p className="bc-caption">按需开启色带，可把现有数值查询条件标在同期价格上：A股高≥80%／低≤20%，美股高≥85%／低≤15%；B200的50%仅表示半数上方。20日宽度只作短期参与范围对照，未进入这六项查询。条件和颜色没有经过顶底或收益增量验证。</p>
++    </div><p className="bc-caption">条件色带同时标在价格与宽度上；它们只是数值筛选，未验证为顶底或收益信号。20日宽度不参与这六项旧筛选。</p></details>
+     <p className="bc-caption"><a href="/fundamentals?section=overlay#fund-sec-overlay">原长周期叠加：指数 × 利率／两融／VIX →</a></p>
+-    <details className="bc-source"><summary>来源与如何读</summary><p>宽度是股票中有多少比例站在各自20、50或200日均线上方。将指数价格和宽度放在相同日期轴上，可对照价格变化有多少股票一起参与。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源。</p><p>本图价格来自现有指数历史接口，宽度来自现有市场宽度历史接口。两者交易日严格对齐，缺值不连线；全A宽度不是沪深300成分股专属宽度，美股沿用已有的标普500股票样本名单，并非逐日还原的官方成分股，亦非纳指专属宽度。历史名单、有效股票分母与修订可能不同，当前接口未给出逐日完整覆盖率，不能用这张图直接判定交易或证明未来效果。科创50、科创100与创业板当前接口未提供价格序列，本图暂不显示。</p></details>
++    <details className="bc-source"><summary>轨道口径、状态依据与来源</summary><p>历史轨道采用截至所示日期最近1260个有效读数（含当日）的10%、50%、90%分位，至少252个有效值才显示；它描述历史分布，不是预测区间。历史百分位采用不高于当日值的样本比例；变化比较5条记录前，不承诺等于5个交易日。缺值留白，不填补。</p><p>“上涨参与延续”表示20/50日宽度均回升且三周期均≥50%；“低位修复／高位回落”表示此前5条记录中20/50日宽度曾同处固定低位／高位，目前均反向变化。其余状态描述参与回升、收缩或分歧。状态依据固定经验值（A股20/80、美股15/85），越轨事件依据历史分位，两者含义不同。当前没有100日宽度数据。</p><p>宽度是股票中有多少比例站在各自均线上方。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源，也不为本图的分位参数背书。</p><p>价格与宽度沿用现有接口，严格同日对齐。全A宽度不是沪深300成分股专属宽度，美股沿用标普500股票样本，尚非逐日还原的官方成分股，也非纳指专属宽度。当前接口未给出逐日完整覆盖率；这些限制会影响历史对照。新轨道和状态仅帮助读图，尚无顶底识别或收益增量验证。</p></details>
+   </section>;
+ }
+--- /dev/null
++++ b/web/src/components/market-style/BreadthReading.tsx
+@@ -0,0 +1,51 @@
++import type { BreadthHistoryPoint } from "../../types";
++import { BREADTH_HORIZONS, type BreadthHorizon, type BreadthReadingPoint } from "./breadthReadingTypes";
++
++const eventNames = {
++  enter_low: "进入历史低位", exit_low: "退出历史低位", enter_high: "进入历史高位", exit_high: "退出历史高位",
++  stay_low: "仍在历史低位", stay_high: "仍在历史高位", none: "轨道内", unknown: "越轨状态未知",
++};
++const positionNames = { low: "历史低位", middle: "历史中段", high: "历史高位", flat: "轨道重合", unknown: "位置未知" };
++const horizonNames = { "20": "短期参与", "50": "中期参与", "200": "长期基础" };
++const number = (value: number | null | undefined, suffix = "") =>
++  typeof value === "number" && Number.isFinite(value) ? `${value.toFixed(1)}${suffix}` : "—";
++
++/** Only renders server observations. No classification or threshold calculation lives here. */
++export default function BreadthReading({ date, point, reading, horizon, onHorizonChange, error }: {
++  date?: string;
++  point?: BreadthHistoryPoint;
++  reading?: BreadthReadingPoint;
++  horizon: BreadthHorizon;
++  onHorizonChange: (horizon: BreadthHorizon) => void;
++  error?: string;
++}) {
++  const selected = reading?.horizons[horizon];
++  const state = reading?.state;
++  return <div className="bc-reading" data-tone={state?.tone ?? "unknown"} aria-label="所选日期宽度判读">
++    <div className="bc-reading-head">
++      <div><span className="bc-eyebrow">{date ?? "日期未提供"} · 参与状态</span>
++        <h3>{state?.label ?? (point ? "判读暂未提供" : "当日宽度缺失")}</h3></div>
++      <span className="bc-reading-tag">观察描述</span>
++    </div>
++    <p className="bc-reading-summary">{state?.summary ?? (error ? "历史日期或输入需要核验，暂不生成轨道与状态。" : point ? "原始曲线仍可查看，判读资料尚未加载。" : "这一天没有宽度记录，不能沿用此前读数判断当前状态。")}</p>
++    <div className="bc-reading-metrics" role="group" aria-label="选择宽度周期">
++      {BREADTH_HORIZONS.map((period) => {
++        const stats = reading?.horizons[period];
++        const delta = stats?.delta_5;
++        return <button key={period} type="button" aria-pressed={horizon === period} onClick={() => onHorizonChange(period)}>
++          <span className="bc-metric-label">{period}日 <span>{horizonNames[period]}</span></span>
++          <strong>{number(point?.[`breadth_${period}`], "%")}</strong>
++          <span className="bc-metric-change">较5条前 <b>{delta == null ? "—" : `${delta > 0 ? "+" : ""}${delta.toFixed(1)}`}</b> 个百分点</span>
++        </button>;
++      })}
++    </div>
++    <div className="bc-track-reading">
++      <div><b>{horizon}日 · {selected ? positionNames[selected.position] : "位置未知"}</b>
++        <span>{selected?.status === "ready" ? `${eventNames[selected.event]} · 历史百分位 ${number(selected.percentile)}`
++          : selected?.status === "insufficient" ? `历史不足 ${selected.sample_count}/252 条，轨道暂缺`
++          : "当日轨道暂无有效读数"}</span></div>
++      {selected?.status === "ready" && <div className="bc-track-values"><span>下轨 <b>{number(selected.lower, "%")}</b></span><span>中位 <b>{number(selected.median, "%")}</b></span><span>上轨 <b>{number(selected.upper, "%")}</b></span></div>}
++    </div>
++    <p className="bc-reading-footnote">高位回落、低位修复是转折观察；是否形成价格顶底，仍需对照上方指数走势。这里不确认顶底。</p>
++  </div>;
++}
+--- /dev/null
++++ b/web/src/components/market-style/breadthReadingTypes.ts
+@@ -0,0 +1,36 @@
++import type { BreadthHistoryResponse } from "../../types";
++
++export const BREADTH_HORIZONS = ["20", "50", "200"] as const;
++export type BreadthHorizon = typeof BREADTH_HORIZONS[number];
++export type BreadthTrack = "historical" | "fixed" | "off";
++
++export interface BreadthHorizonReading {
++  lower: number | null;
++  median: number | null;
++  upper: number | null;
++  percentile: number | null;
++  delta_5: number | null;
++  sample_count: number;
++  status: "ready" | "insufficient" | "missing";
++  position: "low" | "middle" | "high" | "flat" | "unknown";
++  event: "enter_low" | "exit_low" | "enter_high" | "exit_high" | "stay_low" | "stay_high" | "none" | "unknown";
++}
++export interface BreadthReadingPoint {
++  date: string;
++  horizons: Record<BreadthHorizon, BreadthHorizonReading>;
++  state: { code: string; label: string; summary: string; tone: "supportive" | "caution" | "neutral" | "unknown" };
++}
++export interface BreadthObservation {
++  method_version: string;
++  lookback_observations: number;
++  min_observations: number;
++  lower_quantile: number;
++  upper_quantile: number;
++  includes_current: boolean;
++  history: BreadthReadingPoint[];
++  latest: BreadthReadingPoint | null;
++  error?: string;
++}
++export interface BreadthReadingResponse extends BreadthHistoryResponse {
++  observation?: BreadthObservation;
++}
+--- a/web/src/components/market-style/breadth-comparison.css
++++ b/web/src/components/market-style/breadth-comparison.css
+@@ -23,9 +23,56 @@
+ .bc-source summary { width: fit-content; cursor: pointer; color: var(--accent); }
+ .bc-source p { max-width: 820px; margin: 8px 0 0; }
+ .bc-source a { color: var(--accent); margin-left: 4px; }
++.bc-reader-controls { margin-top: 16px; justify-content: space-between; gap: 10px 16px; }
++.bc-reader-controls > div { display: flex; align-items: center; gap: 3px; }
++.bc-control-label { color: var(--text-secondary); margin-right: 6px; font-size: 12px; }
++.bc-reader-controls label, .bc-review-controls label { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-secondary); }
++.bc-reader-controls select, .bc-review-controls select { color: var(--text-primary); background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 5px; padding: 6px 8px; font: inherit; max-width: 100%; }
++.bc-compare-toggle { cursor: pointer; white-space: nowrap; }
++.bc-compare-toggle input { accent-color: #2563eb; }
++.bc-track-hint { color: var(--text-secondary); font-size: 12px; line-height: 1.6; margin: 8px 0 0; }
++.bc-review-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; margin: 6px 0 14px; }
++.bc-review-controls button { background: transparent; border: 0; padding: 5px 0; color: var(--accent); cursor: pointer; font: inherit; font-size: 12px; }
++.bc-review-controls > span { color: var(--text-tertiary, var(--text-secondary)); font-size: 11px; margin-left: auto; }
++.bc-reading { border: 1px solid var(--border-subtle); border-top: 3px solid #7890a3; border-radius: 6px; padding: 16px; background: var(--bg-card); }
++.bc-reading[data-tone="supportive"] { border-top-color: #16847b; }
++.bc-reading[data-tone="caution"] { border-top-color: #ad6d2d; }
++.bc-reading-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
++.bc-eyebrow { color: var(--text-secondary); font-size: 11px; font-variant-numeric: tabular-nums; }
++.bc-reading-head h3 { font-size: 21px; margin: 4px 0 0; font-weight: 650; letter-spacing: .01em; color: var(--text-primary); }
++.bc-reading-tag { color: var(--text-secondary); border: 1px solid var(--border-subtle); border-radius: 4px; padding: 3px 7px; font-size: 11px; flex-shrink: 0; }
++.bc-reading-summary { color: var(--text-secondary); margin: 8px 0 14px; line-height: 1.65; font-size: 12px; }
++.bc-reading-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
++.bc-reading-metrics button { text-align: left; padding: 10px 12px; border: 1px solid var(--border-subtle); border-radius: 5px; background: transparent; font: inherit; color: var(--text-primary); cursor: pointer; min-width: 0; }
++.bc-reading-metrics button[aria-pressed="true"] { border-color: #7b9bbb; background: var(--bg-card-hover); }
++.bc-metric-label { display: flex; justify-content: space-between; align-items: center; gap: 5px; font-size: 12px; }
++.bc-metric-label > span { color: var(--text-secondary); font-size: 11px; }
++.bc-reading-metrics strong { display: block; font-size: 25px; font-weight: 600; font-variant-numeric: tabular-nums; margin: 6px 0; }
++.bc-metric-change { color: var(--text-secondary); font-size: 11px; line-height: 1.5; display: block; }
++.bc-metric-change b { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--text-primary); }
++.bc-track-reading { margin-top: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; font-size: 12px; }
++.bc-track-reading > div:first-child { display: flex; flex-direction: column; gap: 4px; }
++.bc-track-reading > div:first-child > span { color: var(--text-secondary); font-size: 11px; }
++.bc-track-values { display: flex; flex-wrap: wrap; gap: 10px 18px; color: var(--text-secondary); font-size: 11px; }
++.bc-track-values b { color: var(--text-primary); margin-left: 3px; font-variant-numeric: tabular-nums; font-weight: 500; }
++.bc-reading-footnote { font-size: 11px; color: var(--text-secondary); line-height: 1.6; margin: 12px 0 0; padding-top: 10px; border-top: 1px solid var(--border-subtle); }
++.bc-legacy { margin-top: 15px; }
++.bc-legacy .bc-rules { border: 0; padding-top: 0; }
++.bc-reading button:focus-visible, .bc-review-controls button:focus-visible, .bc-reader-controls select:focus-visible, .bc-review-controls select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ @media (max-width: 600px) {
+   .bc-chart { height: 420px; }
+   .bc-controls { width: 100%; justify-content: flex-start; }
+   .bc-rules { gap: 5px 8px; }
+   .bc-rules button { padding: 6px 4px; }
++  .bc-reader-controls { gap: 8px 14px; }
++  .bc-reader-controls > div { flex-basis: 100%; }
++  .bc-reading { padding: 12px; }
++  .bc-reading-head h3 { font-size: 20px; }
++  .bc-reading-metrics { gap: 5px; }
++  .bc-reading-metrics button { padding: 8px 6px; }
++  .bc-metric-label { display: block; }
++  .bc-metric-label > span { display: block; font-size: 10px; margin-top: 3px; }
++  .bc-reading-metrics strong { font-size: 20px; }
++  .bc-metric-change { font-size: 10px; }
++  .bc-review-controls > span { display: none; }
+ }
+--- /dev/null
++++ b/web/src/components/market-style/breadthReading.display.test.mjs
+@@ -0,0 +1,40 @@
++import test from "node:test";
++import assert from "node:assert/strict";
++import { createRequire } from "node:module";
++import { build } from "esbuild";
++import React from "react";
++import { renderToStaticMarkup } from "react-dom/server";
++
++const bundle = await build({ entryPoints: [new URL("./BreadthReading.tsx", import.meta.url).pathname],
++  bundle: true, format: "cjs", platform: "node", packages: "external", write: false });
++const compiled = { exports: {} };
++new Function("require", "module", "exports", bundle.outputFiles[0].text)(createRequire(import.meta.url), compiled, compiled.exports);
++const Reading = compiled.exports.default;
++const render = (props = {}) => renderToStaticMarkup(React.createElement(Reading, {
++  date: "2026-10-30", horizon: "50", onHorizonChange: () => {}, ...props,
++}));
++const stats = { lower: 10, median: 50, upper: 80, percentile: 0, delta_5: 0, sample_count: 300, status: "ready", position: "low", event: "stay_low" };
++const reading = { date: "2026-10-30", horizons: { "20": stats, "50": stats, "200": stats },
++  state: { code: "flat", label: "参与暂稳", summary: "上游提供的描述", tone: "neutral" } };
++
++test("missing current date cannot inherit a prior state or render a zero reading", () => {
++  const html = render();
++  assert.match(html, /当日宽度缺失/);
++  assert.match(html, /不能沿用此前读数/);
++  assert.doesNotMatch(html, /0\.0%|上涨参与延续|低位修复<\/h3>/);
++});
++
++test("valid zeros remain visible and state is exactly the supplied backend description", () => {
++  const html = render({ point: { breadth_20: 0, breadth_50: 0, breadth_200: null }, reading });
++  assert.match(html, /0\.0%/);
++  assert.match(html, /历史百分位 0\.0/);
++  assert.match(html, /上游提供的描述/);
++  assert.doesNotMatch(html, /已确认底部|买入|卖出/);
++});
++
++test("a warmup reading does not render invented bands", () => {
++  const warmup = { ...stats, lower: null, median: null, upper: null, percentile: null, sample_count: 30, status: "insufficient", position: "unknown", event: "unknown" };
++  const html = render({ point: { breadth_50: 20 }, reading: { ...reading, horizons: { ...reading.horizons, "50": warmup } } });
++  assert.match(html, /历史不足 30\/252/);
++  assert.doesNotMatch(html, /bc-track-values/);
++});

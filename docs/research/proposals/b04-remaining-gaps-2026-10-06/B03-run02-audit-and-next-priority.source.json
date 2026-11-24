@@ -1,0 +1,391 @@
+{
+  "schema": "B03-run02-compact-audit-handoff/1",
+  "summary_zh": "已核实本轮120条全部是供应商非交易占位，新增正常成交行情0条。尚未查询113键；主行情未修复。下一优先级是10窗口79键，仅为提案，尚未放行。",
+  "source_capture_audit": {
+    "schema": "B03-run02-independent-final-audit/1",
+    "status": "PASS_SOURCE_CAPTURE_FIDELITY_AND_RECORDED_EXECUTION_ONLY",
+    "reviewed_at_utc": "2026-10-06T16:30:00Z",
+    "result": {
+      "daily_queries": 10,
+      "returned_rows": 120,
+      "exact_selected_unique_keys": 120,
+      "normal_raw_rows": 0,
+      "provider_status0_placeholders": 120,
+      "empty_volume_amount_rows": 120,
+      "queried_no_return_selected": 0,
+      "duplicate_keys": 0,
+      "outside_selected_keys": 0,
+      "main_repairs": 0
+    },
+    "interpretation": "All120 are provider repeated-price/nontrading placeholders. This does not establish genuine exchange suspension, vendor-gap cause, normal traded observations or research/production usability. No synthetic prices/fill or qfq splice was performed.",
+    "old1944_source_status": {
+      "normal_raw_observation": 1601,
+      "provider_placeholder": 226,
+      "never_queried": 113,
+      "queried_no_return": 4
+    },
+    "classification_basis": "Original full233-key ledger minus independently decoded exact120 selected keys, joined to frozen old1944 classification; not producer totals alone.",
+    "remaining": {
+      "unqueried_keys": 113,
+      "codes": 21,
+      "csv_file": "remaining-113-exact.csv",
+      "bytes": 4209,
+      "sha256": "b116a13897d1bbdb1415dffe66867ec7bf389a903bd908f52807496bfb7ad511"
+    },
+    "actual_run": {
+      "connections_new": 1,
+      "anonymous_sessions_new": 1,
+      "B03_sessions_cumulative": 2,
+      "daily_protocol_sends": 10,
+      "retry_reconnect_logout_extra_calls": 0,
+      "response_bytes": 2960,
+      "ledger_entries_verified": 46,
+      "ledger_last_sha256": "278c08ed12bac89ff664de597cf4efe4f69bba72fc72177cf874d4d05eb00471",
+      "minimum_actual_all_send_gap_seconds": 2.0108422500197776,
+      "maximum_application_call_seconds": 2.22099,
+      "recorded_output_bytes": 786571,
+      "output_cap_bytes": 8388608,
+      "before_disk_free_recorded_bytes": 7200964608,
+      "after_disk_free_recorded_bytes": 7491854336,
+      "minimum_free_disk_requirement_bytes": 536870912
+    },
+    "verification_scope": {
+      "source_layer_original_files_byte_verified": 52,
+      "additional_original_run_manifest_receipt_reconciliation_ledger_files_byte_verified": 4,
+      "producer_Air_payload_file_checks_reported": 77,
+      "producer_Air_total_files_reported": 78,
+      "all78_actual_Air_files_independently_opened_by_cloud_reviewer": false,
+      "all78_fingerprint_list_and_reconstructed_checksum_manifest_consistency_verified": true,
+      "wire_response_count": 11,
+      "saved_request_wire_count": 10,
+      "request_CRC_and_exact_frozen_params_verified": true,
+      "session_CRC_verified": true,
+      "daily_zlib_eof_Adler_integrity_verified": true,
+      "wire_to_original_decoded_client_normalized_scalar_strings_equal": true,
+      "all10_client_blank_adjustment_headers_preserved": true,
+      "all_original_daily_headers_and_rows_raw3": true,
+      "external_daily_numeric_trailer_checksum_semantics": "UNVERIFIED; values preserved, not certified",
+      "main_source_unchanged_basis": "Producer recorded before/after fingerprints match frozen baseline; cloud reviewer did not access Air filesystem.",
+      "disk_observation_limit": "Before/after readings and verified per-action guards; no continuous physical disk trace."
+    },
+    "bindings": {
+      "runner_sha256": "c9ee0652a026f59ce7b688617752aa8e84add16354ea0317fef20b19aee16cc1",
+      "contract_sha256": "a273ae6cfe84a5cb8f07fc0fac40cd075233167a8fb402d5bb6b232fab3998a1",
+      "protocol_amendment_sha256": "de5ba1ba0b26fdadb311b81bf1dcc528abdcc5bb87962b15033dd4673d5eb238",
+      "current_proof_sha256": "a79f0ab0547a27838dfa703a22f883d8307a2d39276b65a0a727a65a3f237cfe",
+      "current_proof_exact_bytes_verified": true,
+      "recorded_source_pins_match": 7,
+      "recorded_B01_B02_baseline_readbacks_match": 12,
+      "recorded_consumed_run01_readbacks_match": 5,
+      "run01_history_preserved": true
+    },
+    "superseding_release": {
+      "thread_id": "01a10c3f-0e1d-731d-958a-f4a36e8480fc",
+      "turn_id": "01a111f3-de5e-73f5-8b24-c96a62c87a9f",
+      "sent_at_utc": "2026-10-06T16:02:37+00:00",
+      "scope": "One superseding run02; consumed run01 preserved; no automatic next batch",
+      "source": "Parent supplied exact sent text and admission identifiers; official read confirmed completed turn but did not expose the prompt."
+    },
+    "future_authority": {
+      "run02_authority_consumed": true,
+      "new_network_release": false,
+      "parent_controls_future_batches": true,
+      "next_priority_proposal_only": {
+        "windows": 10,
+        "exact_keys": 79,
+        "would_leave": 34,
+        "verified_no_overlap_with_consumed_daily_windows": 20,
+        "frozen": false,
+        "released": false
+      }
+    },
+    "outstanding_material_source_fidelity_or_accounting_findings": [],
+    "reviewer_actions": {
+      "provider_network": 0,
+      "Air_access": 0,
+      "install": 0,
+      "original_input_write": 0,
+      "feature_label_model_fit": 0
+    },
+    "input_hashes": [
+      {
+        "file": "acceptance.json",
+        "bytes": 40025,
+        "sha256": "5ef176c45ba4e8255501687f41d04ab28637c50840bcc1dd52bab4b1e356dee0"
+      },
+      {
+        "file": "attempt-ledger.jsonl",
+        "bytes": 22260,
+        "sha256": "ba022cd81117eee3d6d8c5d56b8d4aacf3c81d7f3088f12956222f57821c6602"
+      },
+      {
+        "file": "deferred-113-exact.csv",
+        "bytes": 4209,
+        "sha256": "b116a13897d1bbdb1415dffe66867ec7bf389a903bd908f52807496bfb7ad511"
+      },
+      {
+        "file": "handoff.json",
+        "bytes": 7465,
+        "sha256": "fb9034ce5f48a8a093467a65b0dc38584f007dbf1632536f36342d5c0f8fc561"
+      },
+      {
+        "file": "producer-findings.md",
+        "bytes": 3666,
+        "sha256": "7da3bd2c5c62b0b035ddbabf7ae4adb9084e8c281ba3f6ccfab1b62ce8e387a1"
+      },
+      {
+        "file": "query-manifest.json",
+        "bytes": 121960,
+        "sha256": "eb261899587acab84dccd9fedc45ffe396de50e26c02f67b4243e9bdce47fc0c"
+      },
+      {
+        "file": "receipt.json",
+        "bytes": 166187,
+        "sha256": "ed6b7af8b5d10fa3f706e031436f1e4d7e8c9121ecd19ad3bbceb3112429f4c4"
+      },
+      {
+        "file": "selected-key-reconciliation.json",
+        "bytes": 24925,
+        "sha256": "d0982787db8cf3205f1c7fb2fad8a04ef82fe45d8d84257ac0bb7fe983abdf17"
+      },
+      {
+        "file": "source-layers.json",
+        "bytes": 158449,
+        "sha256": "49ee5ee10fc317d10d812a884395231e7a7678c02e4404167b1a5858e52cd16d"
+      }
+    ]
+  },
+  "independent_review_original_identity": {
+    "bytes": 6282,
+    "sha256": "4700c3d1c9874eacdeafbdf4844f64783164328acc3a7297cf87ec284565de9c",
+    "byte_reconstruction": "json.dumps(source_capture_audit, indent=2) plus one LF, UTF-8, preserves original supplied review bytes"
+  },
+  "remaining_exact_csv": {
+    "text_utf8": "exchange,symbol,date,status\nXSHE,000408,2025-01-10,never_queried\nXSHE,000408,2025-01-13,never_queried\nXSHE,000408,2025-01-14,never_queried\nXSHE,000408,2025-01-15,never_queried\nXSHE,000408,2025-01-16,never_queried\nXSHE,000425,2022-05-27,never_queried\nXSHE,002024,2022-05-05,never_queried\nXSHE,300442,2026-02-06,never_queried\nXSHE,300442,2026-02-09,never_queried\nXSHE,300442,2026-02-10,never_queried\nXSHE,300442,2026-02-11,never_queried\nXSHE,300442,2026-02-12,never_queried\nXSHE,300442,2026-02-13,never_queried\nXSHG,600009,2022-04-08,never_queried\nXSHG,600030,2022-01-19,never_queried\nXSHG,600030,2022-01-20,never_queried\nXSHG,600030,2022-01-21,never_queried\nXSHG,600030,2022-01-24,never_queried\nXSHG,600030,2022-01-25,never_queried\nXSHG,600030,2022-01-26,never_queried\nXSHG,600584,2024-03-20,never_queried\nXSHG,600584,2024-03-21,never_queried\nXSHG,600584,2024-03-22,never_queried\nXSHG,600584,2024-03-25,never_queried\nXSHG,600584,2024-03-26,never_queried\nXSHG,600803,2025-03-19,never_queried\nXSHG,600803,2025-03-20,never_queried\nXSHG,600803,2025-03-21,never_queried\nXSHG,600803,2025-03-24,never_queried\nXSHG,600803,2025-03-25,never_queried\nXSHG,600803,2025-03-26,never_queried\nXSHG,600900,2022-10-26,never_queried\nXSHG,600958,2022-04-21,never_queried\nXSHG,600958,2022-04-22,never_queried\nXSHG,600958,2022-04-25,never_queried\nXSHG,600958,2022-04-26,never_queried\nXSHG,600958,2022-04-27,never_queried\nXSHG,600958,2022-04-28,never_queried\nXSHG,601088,2025-08-04,never_queried\nXSHG,601088,2025-08-05,never_queried\nXSHG,601088,2025-08-06,never_queried\nXSHG,601088,2025-08-07,never_queried\nXSHG,601088,2025-08-08,never_queried\nXSHG,601088,2025-08-11,never_queried\nXSHG,601088,2025-08-12,never_queried\nXSHG,601088,2025-08-13,never_queried\nXSHG,601088,2025-08-14,never_queried\nXSHG,601088,2025-08-15,never_queried\nXSHG,601108,2022-03-31,never_queried\nXSHG,601108,2022-04-01,never_queried\nXSHG,601108,2022-04-06,never_queried\nXSHG,601108,2022-04-07,never_queried\nXSHG,601108,2022-04-08,never_queried\nXSHG,601108,2022-04-11,never_queried\nXSHG,601211,2025-02-06,never_queried\nXSHG,601211,2025-02-07,never_queried\nXSHG,601377,2022-08-17,never_queried\nXSHG,601377,2022-08-18,never_queried\nXSHG,601377,2022-08-19,never_queried\nXSHG,601377,2022-08-22,never_queried\nXSHG,601377,2022-08-23,never_queried\nXSHG,601377,2022-08-24,never_queried\nXSHG,603019,2025-05-26,never_queried\nXSHG,603019,2025-05-27,never_queried\nXSHG,603019,2025-05-28,never_queried\nXSHG,603019,2025-05-29,never_queried\nXSHG,603019,2025-05-30,never_queried\nXSHG,603019,2025-06-03,never_queried\nXSHG,603019,2025-06-04,never_queried\nXSHG,603019,2025-06-05,never_queried\nXSHG,603019,2025-06-06,never_queried\nXSHG,603019,2025-06-09,never_queried\nXSHG,688012,2025-12-19,never_queried\nXSHG,688012,2025-12-22,never_queried\nXSHG,688012,2025-12-23,never_queried\nXSHG,688012,2025-12-24,never_queried\nXSHG,688012,2025-12-25,never_queried\nXSHG,688012,2025-12-26,never_queried\nXSHG,688012,2025-12-29,never_queried\nXSHG,688012,2025-12-30,never_queried\nXSHG,688012,2025-12-31,never_queried\nXSHG,688041,2025-05-26,never_queried\nXSHG,688041,2025-05-27,never_queried\nXSHG,688041,2025-05-28,never_queried\nXSHG,688041,2025-05-29,never_queried\nXSHG,688041,2025-05-30,never_queried\nXSHG,688041,2025-06-03,never_queried\nXSHG,688041,2025-06-04,never_queried\nXSHG,688041,2025-06-05,never_queried\nXSHG,688041,2025-06-06,never_queried\nXSHG,688041,2025-06-09,never_queried\nXSHG,688065,2023-06-16,never_queried\nXSHG,688065,2023-06-19,never_queried\nXSHG,688065,2023-06-20,never_queried\nXSHG,688065,2023-06-21,never_queried\nXSHG,688072,2026-06-29,never_queried\nXSHG,688072,2026-06-30,never_queried\nXSHG,688126,2025-02-24,never_queried\nXSHG,688126,2025-02-25,never_queried\nXSHG,688126,2025-02-26,never_queried\nXSHG,688126,2025-02-27,never_queried\nXSHG,688126,2025-02-28,never_queried\nXSHG,688126,2025-03-03,never_queried\nXSHG,688126,2025-03-04,never_queried\nXSHG,688126,2025-03-05,never_queried\nXSHG,688126,2025-03-06,never_queried\nXSHG,688126,2025-03-07,never_queried\nXSHG,688981,2025-09-01,never_queried\nXSHG,688981,2025-09-02,never_queried\nXSHG,688981,2025-09-03,never_queried\nXSHG,688981,2025-09-04,never_queried\nXSHG,688981,2025-09-05,never_queried\nXSHG,688981,2025-09-08,never_queried\n",
+    "bytes": 4209,
+    "sha256": "b116a13897d1bbdb1415dffe66867ec7bf389a903bd908f52807496bfb7ad511",
+    "original_library_file_id": "libfile_7616019f9aa081919ecce23503136947",
+    "version": 0
+  },
+  "next_priority_proposal": {
+    "schema": "post-B03-remaining-priority-proposal/1",
+    "status": "PRIORITY_ONLY_NOT_A_FROZEN_OR_RELEASED_FETCH_CONTRACT",
+    "selection_rule": "Remaining exact key count descending, six-digit code ascending; unchanged deterministic rule, no price/outcome ranking",
+    "remaining_exact_keys": 113,
+    "remaining_codes": 21,
+    "source_remaining_csv_sha256": "b116a13897d1bbdb1415dffe66867ec7bf389a903bd908f52807496bfb7ad511",
+    "next_bounded_candidate": {
+      "calls": 10,
+      "exact_keys": 79,
+      "would_leave_unqueried": 34,
+      "queries": [
+        {
+          "exchange": "XSHG",
+          "symbol": "601088",
+          "code": "sh.601088",
+          "start_date": "2025-08-04",
+          "end_date": "2025-08-15",
+          "exact_dates": [
+            "2025-08-04",
+            "2025-08-05",
+            "2025-08-06",
+            "2025-08-07",
+            "2025-08-08",
+            "2025-08-11",
+            "2025-08-12",
+            "2025-08-13",
+            "2025-08-14",
+            "2025-08-15"
+          ],
+          "exact_key_count": 10
+        },
+        {
+          "exchange": "XSHG",
+          "symbol": "603019",
+          "code": "sh.603019",
+          "start_date": "2025-05-26",
+          "end_date": "2025-06-09",
+          "exact_dates": [
+            "2025-05-26",
+            "2025-05-27",
+            "2025-05-28",
+            "2025-05-29",
+            "2025-05-30",
+            "2025-06-03",
+            "2025-06-04",
+            "2025-06-05",
+            "2025-06-06",
+            "2025-06-09"
+          ],
+          "exact_key_count": 10
+        },
+        {
+          "exchange": "XSHG",
+          "symbol": "688041",
+          "code": "sh.688041",
+          "start_date": "2025-05-26",
+          "end_date": "2025-06-09",
+          "exact_dates": [
+            "2025-05-26",
+            "2025-05-27",
+            "2025-05-28",
+            "2025-05-29",
+            "2025-05-30",
+            "2025-06-03",
+            "2025-06-04",
+            "2025-06-05",
+            "2025-06-06",
+            "2025-06-09"
+          ],
+          "exact_key_count": 10
+        },
+        {
+          "exchange": "XSHG",
+          "symbol": "688126",
+          "code": "sh.688126",
+          "start_date": "2025-02-24",
+          "end_date": "2025-03-07",
+          "exact_dates": [
+            "2025-02-24",
+            "2025-02-25",
+            "2025-02-26",
+            "2025-02-27",
+            "2025-02-28",
+            "2025-03-03",
+            "2025-03-04",
+            "2025-03-05",
+            "2025-03-06",
+            "2025-03-07"
+          ],
+          "exact_key_count": 10
+        },
+        {
+          "exchange": "XSHG",
+          "symbol": "688012",
+          "code": "sh.688012",
+          "start_date": "2025-12-19",
+          "end_date": "2025-12-31",
+          "exact_dates": [
+            "2025-12-19",
+            "2025-12-22",
+            "2025-12-23",
+            "2025-12-24",
+            "2025-12-25",
+            "2025-12-26",
+            "2025-12-29",
+            "2025-12-30",
+            "2025-12-31"
+          ],
+          "exact_key_count": 9
+        },
+        {
+          "exchange": "XSHE",
+          "symbol": "300442",
+          "code": "sz.300442",
+          "start_date": "2026-02-06",
+          "end_date": "2026-02-13",
+          "exact_dates": [
+            "2026-02-06",
+            "2026-02-09",
+            "2026-02-10",
+            "2026-02-11",
+            "2026-02-12",
+            "2026-02-13"
+          ],
+          "exact_key_count": 6
+        },
+        {
+          "exchange": "XSHG",
+          "symbol": "600030",
+          "code": "sh.600030",
+          "start_date": "2022-01-19",
+          "end_date": "2022-01-26",
+          "exact_dates": [
+            "2022-01-19",
+            "2022-01-20",
+            "2022-01-21",
+            "2022-01-24",
+            "2022-01-25",
+            "2022-01-26"
+          ],
+          "exact_key_count": 6
+        },
+        {
+          "exchange": "XSHG",
+          "symbol": "600803",
+          "code": "sh.600803",
+          "start_date": "2025-03-19",
+          "end_date": "2025-03-26",
+          "exact_dates": [
+            "2025-03-19",
+            "2025-03-20",
+            "2025-03-21",
+            "2025-03-24",
+            "2025-03-25",
+            "2025-03-26"
+          ],
+          "exact_key_count": 6
+        },
+        {
+          "exchange": "XSHG",
+          "symbol": "600958",
+          "code": "sh.600958",
+          "start_date": "2022-04-21",
+          "end_date": "2022-04-28",
+          "exact_dates": [
+            "2022-04-21",
+            "2022-04-22",
+            "2022-04-25",
+            "2022-04-26",
+            "2022-04-27",
+            "2022-04-28"
+          ],
+          "exact_key_count": 6
+        },
+        {
+          "exchange": "XSHG",
+          "symbol": "601108",
+          "code": "sh.601108",
+          "start_date": "2022-03-31",
+          "end_date": "2022-04-11",
+          "exact_dates": [
+            "2022-03-31",
+            "2022-04-01",
+            "2022-04-06",
+            "2022-04-07",
+            "2022-04-08",
+            "2022-04-11"
+          ],
+          "exact_key_count": 6
+        }
+      ]
+    },
+    "consumed_window_snapshot": {
+      "B01_B02_windows": 10,
+      "B03_run02_windows": 10,
+      "manifest_sha256": "eb261899587acab84dccd9fedc45ffe396de50e26c02f67b4243e9bdce47fc0c",
+      "window_overlap_count": 0
+    },
+    "requires_before_dispatch": [
+      "New exact frozen contract/runner review and fresh full-history dedup readback",
+      "Separate parent network release and one fresh output path",
+      "Retain B03 run01 consumed session and run02 ten consumed daily requests",
+      "Expected result is provider status/quote classification, not a promise of added normal prices"
+    ],
+    "parallel_research_priority": "Use bounded official dated notices to qualify suspension/action causes for provider-status0 intervals; do not label provider placeholders as verified exchange suspensions. Historical membership/action/scale/PIT qualification remains separate.",
+    "new_provider_calls": 0,
+    "main_repairs": 0,
+    "network_release": false
+  },
+  "source_library_references": {
+    "result_index": "libfile_d71ee8cbb534819192f0463bed38a6bf",
+    "raw_source_layers": "libfile_bd87bb04876c819198f59204779e4136",
+    "receipt": "libfile_3721ed1bf4648191a34fb4590e3e81a5",
+    "manifest": "libfile_f50bb8a6cf8081918795ff71e52d4056",
+    "key_reconciliation": "libfile_0ab35c6a389881918dc279e2e07e85a3",
+    "ledger": "libfile_e921ee491d0c8191b8a97486a594aa98",
+    "producer_acceptance": "libfile_1a206da1d3948191a67bf3a058b40efd"
+  },
+  "release_status": "B03 run02 consumed. No next batch released.",
+  "scope_boundary": "Provider status is evidence, not proof of exchange suspension or an executable traded price. Membership/actions/PIT/price-scale qualification remains separate."
+}

@@ -1,0 +1,51 @@
+{
+  "mission": "Implement an offline dynamic candidate-universe focus observation builder with explicit input qualification; no effect statistics or full data execution yet",
+  "task_scope": [
+    "Implement separate focus_dynamic.py and meaningful synthetic tests",
+    "Inspect registered local read indices and small existing examples to resolve schemas; offline access only",
+    "Preserve original focus_recent and old fixed300/ERP inputs; return any factor-vintage ambiguity"
+  ],
+  "read_only_paths": [
+    "docs/ops/acquired-data-catalog.json",
+    "docs/experiments/raw/public-universe-deep-completion-2026-10-26",
+    "src/lei_signal/research/focus_recent.py",
+    "src/lei_signal/research/high52_revalidation.py",
+    "docs/experiments/raw/focus-stock-momentum-evaluation-2026-10-25"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/focus_dynamic.py",
+    "tests/unit/test_focus_dynamic.py",
+    "docs/ops/focus-live-and-erp-thresholds-20261102/dynamic-zero-20261104/builder-delivery.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "working build module with storage-bound explicit output and audit",
+    "synthetic tests for rank, tie, missing/suspension/ST/IPO, factor conflict",
+    "builder-delivery.json with source references and unresolved input issues"
+  ],
+  "stop_conditions": [
+    "no real full-universe run or target/outcome statistics",
+    "no unknown source hash/vintage silently patched",
+    "no writes outside own paths or code imports from raw archive"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "identity": {
+    "task_id": "focus-stock-universe-20261024",
+    "stage_id": "dynamic-builder-20261104",
+    "attempt_id": "1"
+  },
+  "external_read_only_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果"
+  ],
+  "dirty_worktree": "present_preserve",
+  "existing_writers": {}
+}

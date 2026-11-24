@@ -1,0 +1,75 @@
+{
+  "schema_version": "stock-price-scale-field-samples/1.0.0",
+  "nature": "qualification ledger definitions and existing-record samples only; no new registered factor or implemented merger adapter",
+  "field_definitions": {
+    "sourcehash": "SHA-256 of exact existing file bytes, not evidence the source is accurate",
+    "period_or_trade_date": "Date the market observation describes; not vendor arrival time",
+    "factor_operating_date": "Provider dividOperateDate; event purpose/announcement still unknown",
+    "published_at": "Original public version timestamp; unknown remainsnull",
+    "available_at": "Actually available through the declared data path at a historical decision; unknown remainsnull",
+    "retrieved_at": "Saved actual2026 retrieval timestamp; never substitute for historic availability",
+    "scale_policy_id": "Frozen policy identity required before price transformation; proposed/null means not adopted",
+    "scale_reference_date": "Verified per-security adjustment reference; not inferred from file last date or mtime",
+    "instrument_id": "Permanent security identity, currently unresolved; six-digit symbol alone insufficient for rename/merger",
+    "effective_from/effective_to": "Official effective interval for membership or identity; not interval-probe change date",
+    "terminal_rights": "Verified lawful cash or successor security entitlement with effective/payment dates; does not default to0",
+    "claim_scope": "retrospective declared snapshot, publicly-known-at-time, vendor-known-at-time or executable trading, assessed independently"
+  },
+  "real_saved_factor_sample": {
+    "source": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/factor/factor-2-sh-600837.json",
+      "bytes": 787,
+      "sourcehash": "75cc27cb412fa1030bc15e9ce0c20bbbe268a8f8947cf58b0837e4eb52f47297",
+      "hash_algorithm": "sha256",
+      "filesystem_mtime_utc_not_retrieval_time": "2026-10-05T15:01:01.104313+00:00"
+    },
+    "request_params_original": {
+      "code": "sh.600837",
+      "start_date": "2024-08-01",
+      "end_date": "2025-03-14"
+    },
+    "retrieved_at": "2026-10-05T15:01:01.103436+00:00",
+    "record_original_strings": {
+      "code": "sh.600837",
+      "dividOperateDate": "2024-08-08",
+      "foreAdjustFactor": "0.997619",
+      "backAdjustFactor": "22.323626",
+      "adjustFactor": "22.323626"
+    },
+    "published_at": null,
+    "available_at": null,
+    "official_event_type": null,
+    "official_event_source": null,
+    "original_Sina_qfq_factor_correspondence": null,
+    "actual_old_qfq_anchor": null,
+    "computed_adjusted_price": null
+  },
+  "membership_evidence_schema_only": {
+    "index_id": "000300",
+    "candidate_difference_detected_date": "2025-03-10",
+    "candidate_removed_code": "600837",
+    "candidate_added_code": "601058",
+    "official_effective_date": null,
+    "official_document_url": null,
+    "original_document_sourcehash": null,
+    "initial_anchor_sourcehash": null,
+    "chain_completeness_verified": false
+  },
+  "identity_and_terminal_schema_only": {
+    "exchange": "XSHG",
+    "symbol": "600837",
+    "instrument_id": null,
+    "historic_name_sourcehash": null,
+    "code_effective_from": null,
+    "code_effective_to": null,
+    "successor_instrument_id": null,
+    "exchange_ratio": null,
+    "cash_entitlement_per_old_share": null,
+    "payment_date": null,
+    "effective_date": null,
+    "official_document_url": null,
+    "original_document_sourcehash": null,
+    "automatically_supported_by_existing_action_validator": false
+  },
+  "proof_boundary": "null/false record is a missing-evidence declaration, not successful validation or permission to query"
+}

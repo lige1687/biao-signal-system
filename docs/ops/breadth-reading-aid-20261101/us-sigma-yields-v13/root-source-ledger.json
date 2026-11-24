@@ -1,0 +1,30 @@
+{
+  "used": 2,
+  "helperUsed": 4,
+  "total": 6,
+  "budget": 6,
+  "ownTaskCumulative": 34,
+  "priorOtherOwnerCallsSeparate": 6,
+  "rootCalls": [
+    {
+      "type": "batch_open",
+      "urls": [
+        "https://pages.stern.nyu.edu/adamodar/New_Home_Page/valquestions/riskfreerates.htm",
+        "https://www.federalreserve.gov/data/tips-yield-curve-and-inflation-compensation.htm",
+        "https://fred.stlouisfed.org/series/T5YIE"
+      ],
+      "result": "method/definition verified; no current quote installed"
+    },
+    {
+      "type": "batch_open",
+      "urls": [
+        "https://www.newyorkfed.org/research/data_indicators/term-premia-tabs",
+        "https://data.eastmoney.com/cjsj/zmgzsyl.html"
+      ],
+      "result": "NY Fed dynamic body extract limited; Eastmoney source-page identity verified, not independent quote certification"
+    }
+  ],
+  "localReadSnapshots": 3,
+  "forcedBackfill": false,
+  "notes": "Ordinary existing API requests/browser can trigger their own TTL refresh; no new raw financial data collector or cache write program in this scope."
+}

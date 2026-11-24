@@ -1,0 +1,68 @@
+{
+  "authority": "上交所 query.sse.com.cn（清单公告接口 + 基金详情接口 + 申赎清单正式 XML）",
+  "verified_at_cst": "2026-09-20",
+  "old_experiment_tables_used_as": "线索（发现旧表把 515130 标为『医药ETF』，与上交所权威口径不符，证明旧表不可作为身份依据）",
+  "samples": [
+    {
+      "ticker": "510300.SS",
+      "exchange": "上海证券交易所",
+      "fund_code": "510300",
+      "full_name": "华泰柏瑞沪深300交易型开放式指数证券投资基金",
+      "manager": "华泰柏瑞基金管理有限公司",
+      "fund_manager": "柳军",
+      "tracking_index_name": "沪深300指数",
+      "tracking_index_code": "待核（上交所接口未提供指数代码）",
+      "currency": "CNY（人民币计价净值，依据申赎清单金额单位）",
+      "share_type": "场内交易 ETF 份额（申赎单位 900,000 份）",
+      "establish_date": "2012-05-04",
+      "listing_date": "2012-05-28",
+      "effective_as_of": "上交所清单 TRADING_DAY=2026-09-18",
+      "management_rate": "0.15%/年",
+      "custody_rate": "0.05%/年",
+      "formal_doc": {"url": "https://query.sse.com.cn/etfDownload/downloadETF2Bulletin.do?fundCode=510300", "format": "XML (SSEPortfolioComposite)", "trading_day": "20260918", "sha256待补": "见 raw/sse_etf2bulletin_510300.xml"},
+      "cross_check": "上交所清单 NAV 4.5310(归属20260917) = 天天基金单位净值 2026-09-17 回推值 4.5308（涨1.07%口径），一致"
+    },
+    {
+      "ticker": "515130.SS",
+      "exchange": "上海证券交易所",
+      "fund_code": "515130",
+      "full_name": "博时沪深300交易型开放式指数证券投资基金",
+      "manager": "博时基金管理有限公司",
+      "fund_manager": "万琼",
+      "tracking_index_name": "沪深300指数",
+      "tracking_index_code": "待核",
+      "currency": "CNY",
+      "share_type": "场内交易 ETF 份额（申赎单位 3,000,000 份）",
+      "establish_date": "2020-04-03",
+      "listing_date": "2020-05-11",
+      "effective_as_of": "上交所清单 TRADING_DAY=2026-09-18",
+      "management_rate": "0.15%/年",
+      "custody_rate": "0.05%/年",
+      "formal_doc": {"url": "https://query.sse.com.cn/etfDownload/downloadETF2Bulletin.do?fundCode=515130", "format": "XML", "trading_day": "20260918"},
+      "cross_check": "上交所 NAV 1.5011(归属T-1) 与天天基金 2026-09-18 单位净值 1.5167（当日+1.04%→前日≈1.5010）一致；单位净值=累计净值（无分红/拆分差异）"
+    },
+    {
+      "ticker": "513870.SS",
+      "exchange": "上海证券交易所",
+      "fund_code": "513870",
+      "full_name": "富国纳斯达克100交易型开放式指数证券投资基金（QDII）",
+      "manager": "富国基金管理有限公司",
+      "fund_manager": "葛俊阳",
+      "tracking_index_name": "纳斯达克100指数",
+      "tracking_index_code": "待核",
+      "currency": "CNY（QDII，人民币计价净值）",
+      "share_type": "场内交易跨境 ETF 份额（申赎单位 1,000,000 份，现金替代比例上限100%）",
+      "establish_date": "2023-10-25",
+      "listing_date": "2023-11-02",
+      "effective_as_of": "上交所清单 TRADING_DAY=2026-09-18（PRE_TRADING_DAY=2026-09-16，即 T-2）",
+      "management_rate": "0.50%/年",
+      "custody_rate": "0.10%/年",
+      "formal_doc": {"url": "https://query.sse.com.cn/etfDownload/downloadETF2Bulletin.do?fundCode=513870", "format": "XML", "trading_day": "20260918"},
+      "cross_check": "跨境滞后口径成立：天天基金最新单位净值归属 2026-09-17（境内两只为 09-18）；上交所清单 TRADING_DAY 20260918 对应 PRE_TRADING_DAY 20260916"
+    }
+  ],
+  "pending": [
+    "三家管理人官网域名：上交所已采页面未提供管理人官网链接，按冻结口径记录待核、未访问",
+    "跟踪指数权威代码（000300 等）：上交所接口只给指数名称，指数代码待权威源补充"
+  ]
+}

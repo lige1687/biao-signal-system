@@ -1,0 +1,48 @@
+{
+  "network_allowed": true,
+  "max_agents": 2,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "No writes outside assigned paths",
+    "No protected input changes, new agents or model replacement",
+    "Stop when exact gap or evidence boundary found; return limitations"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "mission": "ERP threshold1/1.5 sigma versus existing2 sigma: same historical definitions, event frequency and incremental information, public source evidence",
+  "task_scope": [
+    "Read frozen existing ERP effect method and results; preserve all prior evidence",
+    "Write method.json before computing exact multipliers1,1.5,2; same3year calendar window, ddof0, weekly observations, first strict crossing rules and next-session close outcomes; main63 trading days and existing21/126 sensitivity",
+    "Compute one core batch: counts, dates, fraction beyond bands, event separation, future returns and adverse/favorable movement, frequency matched baseline, existing2sigma and incremental looser events, pre/post split and uncertainty with same frozen bootstrap conventions; do not optimize",
+    "At most6 primary-source web requests including failures about ERP1/1.5sigma practices, no price acquisition",
+    "Results must answer whether more frequent thresholds add useful observation/timing information; no invented best threshold, no trade/account claims",
+    "Artifacts small under5MiB, total one core batch plus at most2 arithmetic repair reruns; preserve failed results and all attempts"
+  ],
+  "read_only_paths": [
+    "docs/experiments/equity-bond-bands-effect-2026-11-01.md",
+    "docs/experiments/equity-bond-bands-replication-2026-11-01.md",
+    "docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-effect-display-20261101",
+    "web/public/research/erp-bands",
+    "web/src/components/observation-library/erpBands.ts"
+  ],
+  "write_paths": [
+    "docs/ops/focus-live-and-erp-thresholds-20261102/erp-comparison"
+  ],
+  "expected_outputs": [
+    "frozen method and source/attempt ledger",
+    "small reproducible code/input hashes/results/event and increment tables",
+    "report.md: plain-language answer, same baseline, effect sizes, range, counterexamples, uncertainty, primary links, no UI edits"
+  ],
+  "budget": {
+    "core_batches": 1,
+    "repair_reruns": 2,
+    "source_requests": 6,
+    "artifact_bytes": 5000000
+  }
+}

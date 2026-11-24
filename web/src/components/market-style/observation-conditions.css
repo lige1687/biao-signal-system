@@ -1,0 +1,47 @@
+.observation-conditions {
+  margin-top: 20px;
+  padding: 16px 18px;
+  color: var(--text-primary);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.oc-header h2 { margin: 0; font-size: var(--fs-md); font-weight: 650; }
+.oc-header p,
+.oc-card-head p,
+.oc-range,
+.oc-details,
+.oc-empty,
+.oc-fetch-error { color: var(--text-secondary); font-size: var(--fs-xs); line-height: 1.5; }
+.oc-header p { margin: 4px 0 14px; }
+.oc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.oc-card { min-width: 0; padding-top: 10px; border-top: 1px solid var(--border-subtle); }
+.oc-card-head { display: flex; align-items: start; justify-content: space-between; gap: 10px; min-height: 42px; }
+.oc-card-head h3 { margin: 0; font-size: var(--fs-body); font-weight: 650; }
+.oc-card-head p { margin: 4px 0 0; }
+.oc-window { display: inline-flex; flex-shrink: 0; padding: 2px; border-radius: var(--radius-sm); background: var(--bg); }
+.oc-window button { border: 0; border-radius: var(--radius-sm); padding: 4px 7px; background: transparent; color: var(--text-secondary); font-size: var(--fs-xs); cursor: pointer; }
+.oc-window button[aria-pressed="true"] { background: var(--bg-panel); color: var(--accent); font-weight: 650; }
+.oc-current { margin: 8px 0 0; font-size: var(--fs-body); font-variant-numeric: tabular-nums; }
+.oc-current b { font-size: var(--fs-md); font-weight: 650; }
+.oc-current small { display: block; margin-top: 3px; color: var(--text-secondary); font-size: var(--fs-xs); }
+.oc-range { margin: 5px 0 0; }
+.oc-range-lead { margin: 7px 0 0; }
+.oc-empty { min-height: 210px; display: flex; align-items: center; margin: 8px 0 0; }
+.oc-details { margin-top: 10px; border-top: 1px solid var(--border-subtle); padding-top: 8px; }
+.oc-details summary { cursor: pointer; width: fit-content; font-weight: 600; }
+.oc-details p { margin: 7px 0 0; }
+.oc-details a { color: var(--accent); }
+.oc-fetch-error { margin: 0 0 10px; color: #a54f27; }
+.oc-window button:focus-visible,
+.oc-details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 800px) {
+  .oc-grid { grid-template-columns: 1fr; gap: 18px; }
+}
+
+@media (max-width: 430px) {
+  .observation-conditions { padding: 13px 12px; }
+  .oc-card-head { flex-direction: column; }
+}

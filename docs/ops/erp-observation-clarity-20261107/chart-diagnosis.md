@@ -1,0 +1,5 @@
+# 稀疏ERP点与重复坐标轴
+
+初始假设为采样丢点；查源码后撤回：OverlayChart无lttb sampling。ECharts line虽然showSymbol=true，默认showAllSymbol=auto仍可按类目标签间距隐藏稀疏点，断线周频使曲线也不连接。改为connectNulls=false时showAllSymbol=true，保留真实日期和缺口。
+
+同时发现shouldSeparate=false分支依旧逐条创建不同y轴，却全部offset=0：同一位置重复标签且价格缩放不同。改为同格共轴分支创建一条轴并把全部价格序列映射过去；量级确需分轴的分支保持。将用真实叠图和原OverlayChart回归核对。

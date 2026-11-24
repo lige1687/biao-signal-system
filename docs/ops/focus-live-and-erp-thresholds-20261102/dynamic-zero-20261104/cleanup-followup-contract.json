@@ -1,0 +1,34 @@
+{
+  "mission": "Read-only audit of additional inactive cache candidates while research continues",
+  "task_scope": [
+    "Inspect directory metadata and process open handles for regenerable caches, duplicates or old installers",
+    "Report exact inactive candidates with byte size and preservation risks; do not delete or stop any process"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Library/Caches",
+    "Users/yongbiaoli/.cache",
+    "Users/yongbiaoli/Downloads",
+    "Users/yongbiaoli/Desktop",
+    "Applications"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Exact safe candidates or explicit no safe candidate, versions and handle checks"
+  ],
+  "stop_conditions": [
+    "no file writes or deletion",
+    "no personal file contents, credentials or browser profiles",
+    "no networking or subprocess agents"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

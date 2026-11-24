@@ -1,0 +1,51 @@
+{
+  "mission": "Implement and qualify equity observation packet per packet-contract.md",
+  "task_scope": [
+    "User authorized all previously identified observation supplements",
+    "Observation engineering only; no new financial efficacy experiments",
+    "Public source retrieval up to 30 HTTP objects / 50MiB; source failures preserved",
+    "External write path explicitly authorized below"
+  ],
+  "read_only_paths": [
+    "docs/ops/acquired-data-catalog.json",
+    "configs",
+    "data",
+    "src/lei_signal/fundamentals",
+    "docs/experiments"
+  ],
+  "write_paths": [
+    "src/lei_signal/market_context/microstructure_equity.py",
+    "tests/unit/test_microstructure_equity.py",
+    "web/public/research/microstructure-observations-20261108/equity.json",
+    "docs/ops/microstructure-observations-20261108/equity"
+  ],
+  "external_write_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/equity"
+  ],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Qualified packet with real values, dates, units and unavailable requirements",
+    "Runnable builder and tests covering financial units/missing date semantics",
+    "Source ledger actual counts/failures/paths/SHA and concise acceptance handoff"
+  ],
+  "stop_conditions": [
+    "Protected inputs require modifications",
+    "Missing data budget or permission; report affected item and continue independent items",
+    "Finish only after building and validating available scope"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "engineering_budget_update": {
+    "max_public_http_objects": 100,
+    "max_new_raw_bytes": 52428800,
+    "authority": "root instruction under user implementation request; not financial experiment budget"
+  }
+}

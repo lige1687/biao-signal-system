@@ -56,7 +56,11 @@ def load_naaim_observations(path: str | Path) -> tuple[SentimentObservation, ...
 
     for _, row in df.iterrows():
         available_at = _parse_available_at(row["available_at"], "NAAIM")
+        time_basis = _optional_text(row.get("publication_time_basis"))
         survey_week = _parse_date(row["survey_week"])
+        exposure = float(row["exposure_index"])
+        if not -200 <= exposure <= 200:
+            raise ValueError(f"NAAIM exposure index outside plausible survey range: {exposure}")
 
         observations.append(SentimentObservation(
             series_id="NAAIM",
@@ -64,13 +68,15 @@ def load_naaim_observations(path: str | Path) -> tuple[SentimentObservation, ...
             available_at=available_at,
             source=str(row["source"]),
             license_status=str(row["license_status"]),
+            publication_time_basis=time_basis,
+            first_fetched_at=_optional_datetime(row.get("first_fetched_at")),
             publication_delay_days=int(row.get("publication_delay_days", 0)),
-            current_eligible=_is_current_eligible(
+            current_eligible=_time_basis_allows_current(time_basis) and not str(row["source"]).startswith("auto:naaim.org") and _is_current_eligible(
                 str(row["license_status"]),
                 available_at,
                 max_delay_days=14,
             ),
-            exposure_index=float(row["exposure_index"]),
+            exposure_index=exposure,
             percentile=None,
             label=SentimentLabel.UNKNOWN,
         ))
@@ -104,10 +110,14 @@ def load_aaii_observations(path: str | Path) -> tuple[SentimentObservation, ...]
 
     for _, row in df.iterrows():
         available_at = _parse_available_at(row["available_at"], "AAII")
+        time_basis = _optional_text(row.get("publication_time_basis"))
         survey_week = _parse_date(row["survey_week"])
         bullish = float(row["bullish"])
         neutral_val = float(row["neutral"])
         bearish = float(row["bearish"])
+        if not (all(0 <= value <= 100 for value in (bullish, neutral_val, bearish))
+                and 97 <= bullish + neutral_val + bearish <= 103):
+            raise ValueError("AAII percentages must each be 0–100 and sum to about 100")
 
         observations.append(SentimentObservation(
             series_id="AAII",
@@ -115,8 +125,10 @@ def load_aaii_observations(path: str | Path) -> tuple[SentimentObservation, ...]
             available_at=available_at,
             source=str(row["source"]),
             license_status=str(row["license_status"]),
+            publication_time_basis=time_basis,
+            first_fetched_at=_optional_datetime(row.get("first_fetched_at")),
             publication_delay_days=None,
-            current_eligible=_is_current_eligible(
+            current_eligible=_time_basis_allows_current(time_basis) and not str(row["source"]).startswith("auto:") and _is_current_eligible(
                 str(row["license_status"]),
                 available_at,
                 max_delay_days=10,
@@ -197,7 +209,7 @@ def latest_available_sentiment_at(
     if latest is None:
         return None
 
-    rederived = _is_current_eligible_at(
+    rederived = _time_basis_allows_current(latest.publication_time_basis) and not latest.source.startswith("auto:") and _is_current_eligible_at(
         latest.license_status, latest.available_at, decision_at, max_age_days,
     )
     if rederived == latest.current_eligible:
@@ -212,6 +224,8 @@ def latest_available_sentiment_at(
         available_at=latest.available_at,
         source=latest.source,
         license_status=latest.license_status,
+        publication_time_basis=latest.publication_time_basis,
+        first_fetched_at=latest.first_fetched_at,
         publication_delay_days=latest.publication_delay_days,
         current_eligible=rederived,
         exposure_index=latest.exposure_index,
@@ -236,7 +250,7 @@ def _is_current_eligible_at(
     `decision_at` and `available_at` must not exceed `max_delay_days`.
     """
     status = license_status.lower()
-    if "public_delayed" in status:
+    if status != "licensed":
         return False
 
     if available_at.tzinfo is None:
@@ -245,7 +259,7 @@ def _is_current_eligible_at(
         decision_at = decision_at.replace(tzinfo=UTC)
 
     age = decision_at - available_at
-    return age.days <= max_delay_days
+    return 0 <= age.days <= max_delay_days
 
 
 def classify_sentiment_percentile(
@@ -311,23 +325,29 @@ def _parse_available_at(val: str, series: str) -> datetime:
     return ts.to_pydatetime()
 
 
+def _optional_text(value: object) -> str | None:
+    return None if value is None or pd.isna(value) or str(value).strip() == "" else str(value)
+
+
+def _optional_datetime(value: object) -> datetime | None:
+    return _parse_available_at(value, "first_fetched_at") if _optional_text(value) else None
+
+
+def _time_basis_allows_current(basis: str | None) -> bool:
+    # Missing column is the legacy behavior. An explicit unverified time must
+    # never become a current reading solely because license_status says licensed.
+    return basis is None or basis == "verified_publication"
+
+
 def _is_current_eligible(
     license_status: str,
     available_at: datetime,
     max_delay_days: int,
 ) -> bool:
-    """Determine if an observation is eligible for current summary.
-
-    Public delayed data (with multi-month delay) is not current-eligible.
-    Licensed data within max_delay_days of now is current-eligible.
-    """
-    status = license_status.lower()
-    if "public_delayed" in status:
-        return False
-
-    now = datetime.now(UTC)
-    age = now - available_at
-    return age.days <= max_delay_days
+    """与指定决策时点使用同一许可、未来时间和时效检查。"""
+    return _is_current_eligible_at(
+        license_status, available_at, datetime.now(UTC), max_delay_days,
+    )
 
 
 def _compute_percentiles(observations: list[SentimentObservation]) -> None:
@@ -356,6 +376,8 @@ def _compute_percentiles(observations: list[SentimentObservation]) -> None:
                 available_at=obs.available_at,
                 source=obs.source,
                 license_status=obs.license_status,
+                publication_time_basis=obs.publication_time_basis,
+                first_fetched_at=obs.first_fetched_at,
                 publication_delay_days=obs.publication_delay_days,
                 current_eligible=obs.current_eligible,
                 exposure_index=obs.exposure_index,
@@ -380,6 +402,8 @@ def _compute_percentiles(observations: list[SentimentObservation]) -> None:
             available_at=obs.available_at,
             source=obs.source,
             license_status=obs.license_status,
+            publication_time_basis=obs.publication_time_basis,
+            first_fetched_at=obs.first_fetched_at,
             publication_delay_days=obs.publication_delay_days,
             current_eligible=obs.current_eligible,
             exposure_index=obs.exposure_index,

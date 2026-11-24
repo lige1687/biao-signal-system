@@ -1,0 +1,514 @@
+{
+  "schemaVersion": 1,
+  "scope": "six positive-amount historical anomalies only; read-only exact witness verification",
+  "acceptedCount": 6,
+  "candidateCount": 6,
+  "witnesses": [
+    {
+      "code": "sh.600647",
+      "date": "2024-06-13",
+      "accepted": true,
+      "checks": {
+        "sameCode": true,
+        "sameDate": true,
+        "baoPositiveAmountAndShares": true,
+        "baoStatusConflictPreserved": true,
+        "ohlcExactNumericMatch": true,
+        "ohlcOrdered": true,
+        "baoAveragePriceWithinOhlc": true,
+        "amountDifferenceAtMost1Yuan": true,
+        "sharesDifferenceAtMost100": true
+      },
+      "bao": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sh600647-2024-06-13-2024-06-13.json",
+        "sha256": "d5d2ea1d8a9d507cd2dc68e040dbcce5a34466ee6b9d8478a2ea1c87aeb265f4",
+        "rawRow": {
+          "date": "2024-06-13",
+          "code": "sh.600647",
+          "open": "1.6300",
+          "high": "1.8000",
+          "low": "1.6300",
+          "close": "1.7900",
+          "preclose": "1.6400",
+          "volume": "2621826",
+          "amount": "4530486.7800",
+          "adjustflag": "3",
+          "tradestatus": "0",
+          "pctChg": "9.146300",
+          "isST": "0"
+        },
+        "amountYuan": "4530486.7800",
+        "volumeShares": "2621826",
+        "status": "0"
+      },
+      "eastmoney": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sh600647-2024-06-13.json",
+        "sha256": "587092082e97f6c4a5f0c5f1cf6b1193aecfe0ea75bbce473b658be58067ee81",
+        "rawKline": "2024-06-13,1.63,1.79,1.80,1.63,26218,4530487.00,10.37,9.15,0.15,1.88",
+        "responseCode": 0,
+        "sourceCode": "sh.600647",
+        "amountYuan": "4530487.00",
+        "volumeLots100Shares": "26218",
+        "volumeConvertedShares": "2621800"
+      },
+      "comparison": {
+        "absoluteAmountDifferenceYuan": "0.2200",
+        "absoluteShareDifference": "26",
+        "baoAveragePriceYuan": "1.727989111405562382858359022",
+        "ohlc": {
+          "open": "1.63",
+          "close": "1.79",
+          "high": "1.80",
+          "low": "1.63"
+        }
+      },
+      "limitation": "BaoStock tradestatus=0 remains contradictory; independent K-line witnesses positive numerical amount and volume only, not supplier status semantics.",
+      "baoPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sh600647-2024-06-13-2024-06-13.json",
+      "baoSha256": "d5d2ea1d8a9d507cd2dc68e040dbcce5a34466ee6b9d8478a2ea1c87aeb265f4",
+      "baoRow": {
+        "date": "2024-06-13",
+        "code": "sh.600647",
+        "open": "1.6300",
+        "high": "1.8000",
+        "low": "1.6300",
+        "close": "1.7900",
+        "preclose": "1.6400",
+        "volume": "2621826",
+        "amount": "4530486.7800",
+        "adjustflag": "3",
+        "tradestatus": "0",
+        "pctChg": "9.146300",
+        "isST": "0"
+      },
+      "emPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sh600647-2024-06-13.json",
+      "emSha256": "587092082e97f6c4a5f0c5f1cf6b1193aecfe0ea75bbce473b658be58067ee81",
+      "emKline": "2024-06-13,1.63,1.79,1.80,1.63,26218,4530487.00,10.37,9.15,0.15,1.88"
+    },
+    {
+      "code": "sh.600766",
+      "date": "2024-06-13",
+      "accepted": true,
+      "checks": {
+        "sameCode": true,
+        "sameDate": true,
+        "baoPositiveAmountAndShares": true,
+        "baoStatusConflictPreserved": true,
+        "ohlcExactNumericMatch": true,
+        "ohlcOrdered": true,
+        "baoAveragePriceWithinOhlc": true,
+        "amountDifferenceAtMost1Yuan": true,
+        "sharesDifferenceAtMost100": true
+      },
+      "bao": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sh600766-2024-06-13-2024-06-13.json",
+        "sha256": "ed81cf9dd34f9bcd6c02bbc6f238237997b910d575411aff3f69c3cd303c8e2c",
+        "rawRow": {
+          "date": "2024-06-13",
+          "code": "sh.600766",
+          "open": "0.3700",
+          "high": "0.3900",
+          "low": "0.3600",
+          "close": "0.3600",
+          "preclose": "0.4000",
+          "volume": "8069162",
+          "amount": "2959539.3200",
+          "adjustflag": "3",
+          "tradestatus": "0",
+          "pctChg": "-10.000000",
+          "isST": "0"
+        },
+        "amountYuan": "2959539.3200",
+        "volumeShares": "8069162",
+        "status": "0"
+      },
+      "eastmoney": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sh600766-2024-06-13.json",
+        "sha256": "b9a84cbd720689a30f459cc36fc4d1de53aef8f3f993d02686168e76d4a0b1d5",
+        "rawKline": "2024-06-13,0.37,0.36,0.39,0.36,80692,2959539.00,7.50,-10.00,-0.04,3.60",
+        "responseCode": 0,
+        "sourceCode": "sh.600766",
+        "amountYuan": "2959539.00",
+        "volumeLots100Shares": "80692",
+        "volumeConvertedShares": "8069200"
+      },
+      "comparison": {
+        "absoluteAmountDifferenceYuan": "0.3200",
+        "absoluteShareDifference": "38",
+        "baoAveragePriceYuan": "0.3667715829723086486552135154",
+        "ohlc": {
+          "open": "0.37",
+          "close": "0.36",
+          "high": "0.39",
+          "low": "0.36"
+        }
+      },
+      "limitation": "BaoStock tradestatus=0 remains contradictory; independent K-line witnesses positive numerical amount and volume only, not supplier status semantics.",
+      "baoPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sh600766-2024-06-13-2024-06-13.json",
+      "baoSha256": "ed81cf9dd34f9bcd6c02bbc6f238237997b910d575411aff3f69c3cd303c8e2c",
+      "baoRow": {
+        "date": "2024-06-13",
+        "code": "sh.600766",
+        "open": "0.3700",
+        "high": "0.3900",
+        "low": "0.3600",
+        "close": "0.3600",
+        "preclose": "0.4000",
+        "volume": "8069162",
+        "amount": "2959539.3200",
+        "adjustflag": "3",
+        "tradestatus": "0",
+        "pctChg": "-10.000000",
+        "isST": "0"
+      },
+      "emPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sh600766-2024-06-13.json",
+      "emSha256": "b9a84cbd720689a30f459cc36fc4d1de53aef8f3f993d02686168e76d4a0b1d5",
+      "emKline": "2024-06-13,0.37,0.36,0.39,0.36,80692,2959539.00,7.50,-10.00,-0.04,3.60"
+    },
+    {
+      "code": "sh.603133",
+      "date": "2024-06-13",
+      "accepted": true,
+      "checks": {
+        "sameCode": true,
+        "sameDate": true,
+        "baoPositiveAmountAndShares": true,
+        "baoStatusConflictPreserved": true,
+        "ohlcExactNumericMatch": true,
+        "ohlcOrdered": true,
+        "baoAveragePriceWithinOhlc": true,
+        "amountDifferenceAtMost1Yuan": true,
+        "sharesDifferenceAtMost100": true
+      },
+      "bao": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sh603133-2024-06-13-2024-06-13.json",
+        "sha256": "ae8e3a91359e67e50ece149631038324ade348b30d5c03f0676ff3a0e66d26ea",
+        "rawRow": {
+          "date": "2024-06-13",
+          "code": "sh.603133",
+          "open": "0.3000",
+          "high": "0.3100",
+          "low": "0.2900",
+          "close": "0.3000",
+          "preclose": "0.3000",
+          "volume": "6181300",
+          "amount": "1840155.0000",
+          "adjustflag": "3",
+          "tradestatus": "0",
+          "pctChg": "0.000000",
+          "isST": "0"
+        },
+        "amountYuan": "1840155.0000",
+        "volumeShares": "6181300",
+        "status": "0"
+      },
+      "eastmoney": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sh603133-2024-06-13.json",
+        "sha256": "9cc1ba6d7b978dae3ae2faf25f495928eee3606a42576c04a100437ae2a90079",
+        "rawKline": "2024-06-13,0.30,0.30,0.31,0.29,61813,1840155.00,6.67,0.00,0.00,2.95",
+        "responseCode": 0,
+        "sourceCode": "sh.603133",
+        "amountYuan": "1840155.00",
+        "volumeLots100Shares": "61813",
+        "volumeConvertedShares": "6181300"
+      },
+      "comparison": {
+        "absoluteAmountDifferenceYuan": "0.0000",
+        "absoluteShareDifference": "0",
+        "baoAveragePriceYuan": "0.2976970863734165952145988708",
+        "ohlc": {
+          "open": "0.30",
+          "close": "0.30",
+          "high": "0.31",
+          "low": "0.29"
+        }
+      },
+      "limitation": "BaoStock tradestatus=0 remains contradictory; independent K-line witnesses positive numerical amount and volume only, not supplier status semantics.",
+      "baoPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sh603133-2024-06-13-2024-06-13.json",
+      "baoSha256": "ae8e3a91359e67e50ece149631038324ade348b30d5c03f0676ff3a0e66d26ea",
+      "baoRow": {
+        "date": "2024-06-13",
+        "code": "sh.603133",
+        "open": "0.3000",
+        "high": "0.3100",
+        "low": "0.2900",
+        "close": "0.3000",
+        "preclose": "0.3000",
+        "volume": "6181300",
+        "amount": "1840155.0000",
+        "adjustflag": "3",
+        "tradestatus": "0",
+        "pctChg": "0.000000",
+        "isST": "0"
+      },
+      "emPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sh603133-2024-06-13.json",
+      "emSha256": "9cc1ba6d7b978dae3ae2faf25f495928eee3606a42576c04a100437ae2a90079",
+      "emKline": "2024-06-13,0.30,0.30,0.31,0.29,61813,1840155.00,6.67,0.00,0.00,2.95"
+    },
+    {
+      "code": "sh.688065",
+      "date": "2023-06-15",
+      "accepted": true,
+      "checks": {
+        "sameCode": true,
+        "sameDate": true,
+        "baoPositiveAmountAndShares": true,
+        "baoStatusConflictPreserved": true,
+        "ohlcExactNumericMatch": true,
+        "ohlcOrdered": true,
+        "baoAveragePriceWithinOhlc": true,
+        "amountDifferenceAtMost1Yuan": true,
+        "sharesDifferenceAtMost100": true
+      },
+      "bao": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sh688065-2023-06-15-2023-06-15.json",
+        "sha256": "cdb2def322e9d6d9e4aec3a7d0b5d7dc8a44fdd03f2028aba3a641de3399c703",
+        "rawRow": {
+          "date": "2023-06-15",
+          "code": "sh.688065",
+          "open": "55.0400",
+          "high": "55.8000",
+          "low": "54.7600",
+          "close": "55.5300",
+          "preclose": "55.0200",
+          "volume": "353426",
+          "amount": "19589785.9900",
+          "adjustflag": "3",
+          "tradestatus": "0",
+          "pctChg": "0.926900",
+          "isST": "0"
+        },
+        "amountYuan": "19589785.9900",
+        "volumeShares": "353426",
+        "status": "0"
+      },
+      "eastmoney": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sh688065-2023-06-15.json",
+        "sha256": "efb649e660a3a0ce1ce35dbdd95ef7fc457a66af8cb391c0d83493d7e43f4e20",
+        "rawKline": "2023-06-15,55.04,55.53,55.80,54.76,3534,19589786.00,1.89,0.93,0.51,0.13",
+        "responseCode": 0,
+        "sourceCode": "sh.688065",
+        "amountYuan": "19589786.00",
+        "volumeLots100Shares": "3534",
+        "volumeConvertedShares": "353400"
+      },
+      "comparison": {
+        "absoluteAmountDifferenceYuan": "0.0100",
+        "absoluteShareDifference": "26",
+        "baoAveragePriceYuan": "55.42825369384255827245307363",
+        "ohlc": {
+          "open": "55.04",
+          "close": "55.53",
+          "high": "55.80",
+          "low": "54.76"
+        }
+      },
+      "limitation": "BaoStock tradestatus=0 remains contradictory; independent K-line witnesses positive numerical amount and volume only, not supplier status semantics.",
+      "baoPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sh688065-2023-06-15-2023-06-15.json",
+      "baoSha256": "cdb2def322e9d6d9e4aec3a7d0b5d7dc8a44fdd03f2028aba3a641de3399c703",
+      "baoRow": {
+        "date": "2023-06-15",
+        "code": "sh.688065",
+        "open": "55.0400",
+        "high": "55.8000",
+        "low": "54.7600",
+        "close": "55.5300",
+        "preclose": "55.0200",
+        "volume": "353426",
+        "amount": "19589785.9900",
+        "adjustflag": "3",
+        "tradestatus": "0",
+        "pctChg": "0.926900",
+        "isST": "0"
+      },
+      "emPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sh688065-2023-06-15.json",
+      "emSha256": "efb649e660a3a0ce1ce35dbdd95ef7fc457a66af8cb391c0d83493d7e43f4e20",
+      "emKline": "2023-06-15,55.04,55.53,55.80,54.76,3534,19589786.00,1.89,0.93,0.51,0.13"
+    },
+    {
+      "code": "sz.002087",
+      "date": "2024-06-13",
+      "accepted": true,
+      "checks": {
+        "sameCode": true,
+        "sameDate": true,
+        "baoPositiveAmountAndShares": true,
+        "baoStatusConflictPreserved": true,
+        "ohlcExactNumericMatch": true,
+        "ohlcOrdered": true,
+        "baoAveragePriceWithinOhlc": true,
+        "amountDifferenceAtMost1Yuan": true,
+        "sharesDifferenceAtMost100": true
+      },
+      "bao": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sz002087-2024-06-13-2024-06-13.json",
+        "sha256": "21e30ee2d27ea8096c746c1942cd61b8dddc57faa1692f3ce5b2d7d566052d11",
+        "rawRow": {
+          "date": "2024-06-13",
+          "code": "sz.002087",
+          "open": "0.1700",
+          "high": "0.1800",
+          "low": "0.1600",
+          "close": "0.1600",
+          "preclose": "0.1700",
+          "volume": "20061549",
+          "amount": "3286917.8400",
+          "adjustflag": "3",
+          "tradestatus": "0",
+          "pctChg": "-5.882400",
+          "isST": "0"
+        },
+        "amountYuan": "3286917.8400",
+        "volumeShares": "20061549",
+        "status": "0"
+      },
+      "eastmoney": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sz002087-2024-06-13.json",
+        "sha256": "4ab65f85ae4f0a1da40689b32721385d6704711e6a9b75449df398e1f6a1a500",
+        "rawKline": "2024-06-13,0.17,0.16,0.18,0.16,200615,3286917.84,11.76,-5.88,-0.01,2.46",
+        "responseCode": 0,
+        "sourceCode": "sz.002087",
+        "amountYuan": "3286917.84",
+        "volumeLots100Shares": "200615",
+        "volumeConvertedShares": "20061500"
+      },
+      "comparison": {
+        "absoluteAmountDifferenceYuan": "0.0000",
+        "absoluteShareDifference": "49",
+        "baoAveragePriceYuan": "0.1638416774297936814350676511",
+        "ohlc": {
+          "open": "0.17",
+          "close": "0.16",
+          "high": "0.18",
+          "low": "0.16"
+        }
+      },
+      "limitation": "BaoStock tradestatus=0 remains contradictory; independent K-line witnesses positive numerical amount and volume only, not supplier status semantics.",
+      "baoPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sz002087-2024-06-13-2024-06-13.json",
+      "baoSha256": "21e30ee2d27ea8096c746c1942cd61b8dddc57faa1692f3ce5b2d7d566052d11",
+      "baoRow": {
+        "date": "2024-06-13",
+        "code": "sz.002087",
+        "open": "0.1700",
+        "high": "0.1800",
+        "low": "0.1600",
+        "close": "0.1600",
+        "preclose": "0.1700",
+        "volume": "20061549",
+        "amount": "3286917.8400",
+        "adjustflag": "3",
+        "tradestatus": "0",
+        "pctChg": "-5.882400",
+        "isST": "0"
+      },
+      "emPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sz002087-2024-06-13.json",
+      "emSha256": "4ab65f85ae4f0a1da40689b32721385d6704711e6a9b75449df398e1f6a1a500",
+      "emKline": "2024-06-13,0.17,0.16,0.18,0.16,200615,3286917.84,11.76,-5.88,-0.01,2.46"
+    },
+    {
+      "code": "sz.300356",
+      "date": "2023-06-20",
+      "accepted": true,
+      "checks": {
+        "sameCode": true,
+        "sameDate": true,
+        "baoPositiveAmountAndShares": true,
+        "baoStatusConflictPreserved": true,
+        "ohlcExactNumericMatch": true,
+        "ohlcOrdered": true,
+        "baoAveragePriceWithinOhlc": true,
+        "amountDifferenceAtMost1Yuan": true,
+        "sharesDifferenceAtMost100": true
+      },
+      "bao": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sz300356-2023-06-20-2023-06-20.json",
+        "sha256": "fcdd647e396023bab5f00766815877f8e7cbb3ffe6b9fdd513757f14b6d434b0",
+        "rawRow": {
+          "date": "2023-06-20",
+          "code": "sz.300356",
+          "open": "0.7300",
+          "high": "1.1300",
+          "low": "0.7200",
+          "close": "0.8800",
+          "preclose": "4.5600",
+          "volume": "78417871",
+          "amount": "67956348.9800",
+          "adjustflag": "3",
+          "tradestatus": "0",
+          "pctChg": "-80.701800",
+          "isST": "0"
+        },
+        "amountYuan": "67956348.9800",
+        "volumeShares": "78417871",
+        "status": "0"
+      },
+      "eastmoney": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sz300356-2023-06-20.json",
+        "sha256": "302f5a3049a465ab1ae4822ca05f1c3ea34eb1d363e52e6f4b7f86ab5cd05fd9",
+        "rawKline": "2023-06-20,0.73,0.88,1.13,0.72,784179,67956348.00,8.99,-80.70,-3.68,19.53",
+        "responseCode": 0,
+        "sourceCode": "sz.300356",
+        "amountYuan": "67956348.00",
+        "volumeLots100Shares": "784179",
+        "volumeConvertedShares": "78417900"
+      },
+      "comparison": {
+        "absoluteAmountDifferenceYuan": "0.9800",
+        "absoluteShareDifference": "29",
+        "baoAveragePriceYuan": "0.8665926288664480574842436107",
+        "ohlc": {
+          "open": "0.73",
+          "close": "0.88",
+          "high": "1.13",
+          "low": "0.72"
+        }
+      },
+      "limitation": "BaoStock tradestatus=0 remains contradictory; independent K-line witnesses positive numerical amount and volume only, not supplier status semantics.",
+      "baoPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/history/sz300356-2023-06-20-2023-06-20.json",
+      "baoSha256": "fcdd647e396023bab5f00766815877f8e7cbb3ffe6b9fdd513757f14b6d434b0",
+      "baoRow": {
+        "date": "2023-06-20",
+        "code": "sz.300356",
+        "open": "0.7300",
+        "high": "1.1300",
+        "low": "0.7200",
+        "close": "0.8800",
+        "preclose": "4.5600",
+        "volume": "78417871",
+        "amount": "67956348.9800",
+        "adjustflag": "3",
+        "tradestatus": "0",
+        "pctChg": "-80.701800",
+        "isST": "0"
+      },
+      "emPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/anomaly-probes/sz300356-2023-06-20.json",
+      "emSha256": "302f5a3049a465ab1ae4822ca05f1c3ea34eb1d363e52e6f4b7f86ab5cd05fd9",
+      "emKline": "2023-06-20,0.73,0.88,1.13,0.72,784179,67956348.00,8.99,-80.70,-3.68,19.53"
+    }
+  ],
+  "excluded": [
+    {
+      "code": "sz.002336",
+      "date": "2020-06-17",
+      "reason": "No independent target-date K-line; not a positive-amount witness."
+    },
+    {
+      "code": "sz.002500",
+      "date": "2020-06-17",
+      "reason": "No independent target-date K-line; not a positive-amount witness."
+    }
+  ],
+  "acceptanceRule": "Same code/date, exact numeric Bao/Eastmoney OHLC, valid OHLC and implied Bao average price, positive Bao amount/shares, |amount difference|<=1 yuan, |Eastmoney lots×100−Bao shares|<=100; original tradestatus=0 conflict remains.",
+  "sourceAccounting": {
+    "collectorOperations": 5319,
+    "collectorResponseBytes": 18227747,
+    "probeOperations": 25,
+    "probeResponseBytes": 1009888,
+    "anomalyProbeOperations": 8,
+    "anomalyProbeResponseBytes": 6172,
+    "rootSourceSearchesReported": 6,
+    "knownTotalOperations": 5358,
+    "knownResponseBytesExcludingRoot": 19243807,
+    "overallOperationCap": 5600,
+    "overallResponseByteCap": 52428800
+  }
+}

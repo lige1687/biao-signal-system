@@ -1,0 +1,93 @@
+{
+  "status": "completed_bounded_engineering",
+  "checked_at": "2026-11-02T14:56:29.788860+08:00",
+  "user_authorizations": [
+    "CN exact 47-day correction with full backup",
+    "Task-required outside-repository writes without repeated confirmation",
+    "Promote useful breadth and equity-bond observations"
+  ],
+  "policy_readback": {
+    "global": "/Users/yongbiaoli/.codex/AGENTS.md:13",
+    "repository": "AGENTS.md:254",
+    "rule": "Task-related outside-repository edits permitted; verify target, retain necessary backup, read back. Deletion and force-push confirmation unchanged."
+  },
+  "installation_receipt": "installation-v4.json",
+  "independent_api_receipt": "api-install-verification-v4.json",
+  "historical_missing_through_2026_10_30": 0,
+  "browser_current_incomplete_day": {
+    "date": "2026-11-02",
+    "observed_before_market_close": true,
+    "width_pending": true,
+    "count": 1
+  },
+  "changes": [
+    "Reuse existing three cards on home and fundamentals market top",
+    "Show same-date breadth participation and B50 delta_5 without financial recomputation",
+    "Visible date and most recent historical crossing; historical ERP cannot emit current new alerts",
+    "Quick breadth/ERP controls, US VIX/HY controls, ERP catalogue reading priority",
+    "Persist market in breadth URL across quick controls, inner/outer market switches and reload",
+    "CN reconstruction source and interval disclosure"
+  ],
+  "verification": {
+    "build": "npm run build passed (existing chunk size warning)",
+    "unit_tests": "17/17 existing alert-model, adapter and catalogue/preference tests passed",
+    "independent_review": "One breadth market URL persistence finding fixed; no other substantive new findings",
+    "browser": [
+      "Desktop 1280x900: three cards and chart quick access visible",
+      "Mobile 390x844: page and cards no horizontal overflow; controls wrap",
+      "CN ERP quick entry shows true historical crossings and institutional reference bands",
+      "US ERP entry shows original values and no invented bands",
+      "US ERP to breadth then reload retains us",
+      "CN ERP to outer US switch falls back to breadth/us",
+      "Breadth inner switch to cn then reload retains cn",
+      "Breadth outer switch to us then reload retains us",
+      "Bare market URL after settled load -> US -> reload retains us",
+      "CN rebuilt historical interval draws without prior missing-date gaps",
+      "Home cards show loaded actual readings",
+      "Browser console error list empty; viewport reset; user tab returned to CN market top"
+    ],
+    "hygiene": "passed"
+  },
+  "dates_and_readings": {
+    "CN": {
+      "date": "2026-10-30",
+      "B50": 11.368155,
+      "delta_5": -6.696944,
+      "state": "弱势参与延续"
+    },
+    "US": {
+      "date": "2026-10-30",
+      "B50": 61.9919,
+      "delta_5": 3.2521,
+      "state": "短期分歧"
+    }
+  },
+  "limits": [
+    "Current-list reconstruction is not historical PIT membership or strict_all_verified",
+    "Historical distribution bands do not confirm tops or bottoms",
+    "CN ERP reference is historical, not an automatically refreshed current alert; US ERP qualified band absent",
+    "No new financial experiment, predictive thresholds, trade, source-code push or user pin/seen state modification"
+  ],
+  "screenshots": [
+    {
+      "path": "docs/ops/breadth-reading-aid-20261101/priority-desktop-v5.jpg",
+      "sha256": "119d7c94ffe4d07b9327db6fd18619791e1b8e9c5e7e5f50ae1dbecf18d1d0cf"
+    },
+    {
+      "path": "docs/ops/breadth-reading-aid-20261101/priority-mobile-v5.jpg",
+      "sha256": "906a5294242bbebb4e9df2477db0eaed2f328ed06bd8a3bcea0f2afeef99946a"
+    },
+    {
+      "path": "docs/ops/breadth-reading-aid-20261101/priority-mobile-controls-v5.jpg",
+      "sha256": "934c1d3b0a0dd9251dd2e4b2136c4c79d24a4b31a57ca397dd4169d10c09db02"
+    },
+    {
+      "path": "docs/ops/breadth-reading-aid-20261101/priority-home-v5.jpg",
+      "sha256": "fd205be50cef0a7d57b41f41b2703b19e2818a4ba484a314132c45a08cf9d472"
+    },
+    {
+      "path": "docs/ops/breadth-reading-aid-20261101/priority-cn-filled-v5.jpg",
+      "sha256": "7b1291015a86e5f76e9c29853bc79660f04ebfad0bbbbf7de36ee871fc24064f"
+    }
+  ]
+}

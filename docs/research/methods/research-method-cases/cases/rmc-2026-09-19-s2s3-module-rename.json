@@ -1,0 +1,31 @@
+{
+  "id": "rmc-2026-09-19-s2s3-module-rename",
+  "title": "S2/S3 同名测试产物互染，改名执行产物恢复测试隔离",
+  "date": "2026-09-19",
+  "kind": "method_change_case",
+  "problem": "同一 workspace 里两个研究阶段的产物目录都叫 pilot.py（S2 与 S3），两个测试文件在同一进程合跑时互相污染，14 个测试失败——即测试隔离被同名文件冲突破坏（test isolation contamination via same filename collision）。",
+  "why_changed": "测试结果不可信会污染全部下游结论；必须先恢复隔离再谈验收。",
+  "old_method": "不同阶段的执行产物沿用相同的高冲突入口名（如都叫 pilot.py），依赖目录区分，不做进程内命名隔离。",
+  "new_method": "同一 workspace 不同阶段的测试/脚本不得共享高冲突入口名：执行产物显式改名（pilot_s3.py / reference_check_s3.py），使两序列合跑互不干扰。",
+  "scope": "testing workflow only——只改研究脚本的测试隔离，不改生产源码、不改规则、不改评估标准。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "status": "approved",
+  "failure_mode": {
+    "category": "engineering",
+    "reason": "同名测试产物互染破坏测试隔离，是纯粹的工程命名/目录冲突。"
+  },
+  "references": [
+    "docs/experiments/factor-p2-restricted-pilot-2026-09-19.md",
+    "docs/experiments/raw/factor-p2-pilot-s3-2026-09-19/pilot_s3.py"
+  ],
+  "before_after": {
+    "old_result": "同名入口下两测试文件同进程合跑 14 个失败，测试结果不可采信。",
+    "new_result": "改名后两序合跑 41 个测试全部通过；主控亲测并经 GPT S4 终审 PASS_RESTRICTED_PILOT。",
+    "difference_explanation": "失败原因是文件名冲突导致的导入互染，不是被测逻辑错误；改名消除冲突后同一批逻辑全部通过。注意：run-manifest.json 的 code_digests 记录的是运行时（改名前）路径，复跑以 manifest 为准。本条证明的是方法改进（命名隔离）可提高研究流程可靠性，不是'系统自我修复成功'。"
+  },
+  "object_states": [
+    "mixed.momentum.rank@1.0.0: exists"
+  ],
+  "notes": "合同 §1 指定的首条 method_change_case；S3 的 target 阻塞另见 rmc-2026-09-19-s3-target-block。"
+}

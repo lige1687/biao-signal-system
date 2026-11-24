@@ -3,6 +3,7 @@
 export interface SparkPoint {
   date: string;
   close: number;
+  ema20?: number | null;
 }
 
 export interface Explanation {
@@ -81,6 +82,14 @@ export interface Card {
   primary_structure: StructureBrief | null;
   b1_price: number | null;
   distance_to_b1_pct: number | null;
+  tradable?: boolean | null;
+  trend_type_cn?: string | null;
+  daily_long_trend_cn?: string | null;
+  weekly_long_trend_cn?: string | null;
+  dist_ema20_pct?: number | null;
+  dist_ema60_pct?: number | null;
+  ret_20d_pct?: number | null;
+  mom_121_pct?: number | null;
   sparkline: SparkPoint[];
 }
 
@@ -587,12 +596,14 @@ export interface CrisisReading {
   /** 收盘相对 60 日均线偏离（%）。 */
   dev60_pct: number;
   /** 全市场 MA50 上方占比（%）。 */
-  breadth_ma50_now: number;
+  breadth_ma50_now: number | null;
   breadth_delta_20: number | null;
   breadth_pctile_1y: number | null;
   breadth_delta_5: number | null;
-  breadth_as_of: string;
-  state: "crash_warning" | "capitulation_rebound" | "none";
+  breadth_as_of: string | null;
+  state: "crash_warning" | "capitulation_rebound" | "none" | "unknown";
+  quality_status?: "current" | "unknown";
+  quality_reason?: string;
 }
 
 export interface GlobalStripResponse {
@@ -866,6 +877,10 @@ export interface ActionItem {
   resume_on: string | null;
   closed_on: string | null;
   close_kind: string | null;
+  actual_action_date?: string | null;
+  done_recorded_at?: string | null;
+  done_source?: string | null;
+  completion_evidence_supported?: boolean;
 }
 
 export interface PlanAlert {
@@ -1190,6 +1205,24 @@ export interface BuyPointChatReply {
 
 // ---- 基本面参考层 (/api/fundamentals) ----
 
+/** 市场观察只承载后端核对过的事实，不由页面推导交易状态。 */
+export interface MarketObservation {
+  metric_id: string; label: string; market: string; universe: string;
+  value: number | null; unit: string; change: number | null; change_unit?: string | null;
+  comparison_period: string | null; observation_date: string | null;
+  published_at: string | null; publication_precision: "timestamp" | "date" | "unknown";
+  fetched_at: string | null; source_name: string; source_url: string | null;
+  source_access: string; definition_version: string;
+  quality_status: "current" | "delayed" | "stale" | "time_unverified" | "missing" | "insufficient_history";
+  quality_reason: string | null; history_start: string | null; history_end: string | null;
+  observation_count: number | null; valid_count: number | null; eligible_count: number | null;
+  reading: string; reference_note?: string; components?: { bullish_pct: number; neutral_pct: number; bearish_pct: number }; limitations: string[]; evidence_refs: string[];
+}
+export interface MarketObservationsResponse {
+  market: "cn" | "us"; generated_at: string;
+  items: MarketObservation[]; errors: string[];
+}
+
 export interface MacroIndicator {
   key: string; // pmi | cpi | ppi
   name_cn: string;
@@ -1310,6 +1343,7 @@ export interface RatesHistoryResponse {
   as_of: string;
   series: Record<string, RatesHistorySeries>;
   errors: string[];
+  valuation_full?: boolean;
 }
 
 // ---- 宏观月度历史序列（PMI/CPI/PPI，趋势图）----
@@ -1336,6 +1370,18 @@ export interface CommodityRatios {
   copper: number;
   gold: number;
   crude: number;
+  /** Absent for old cached five-field payloads. Unknowns are not inferred. */
+  meta?: {
+    quote_date?: string;
+    latest_dates?: Record<string, string>;
+    retrieved_at_utc?: string;
+    provider?: string;
+    tickers?: { copper?: string; gold?: string; crude?: string };
+    publication_time?: string;
+    quote_units?: string;
+    roll_contract_identity?: string;
+    data_usage_license?: string;
+  };
 }
 
 export interface EtfItem {
@@ -2389,7 +2435,7 @@ export interface FundTrade {
   amount: number; trade_date: string;
   priced_nav: number | null;
   price_status: "pending" | "priced" | "failed"; price_status_cn: string;
-  plan_id: string | null; source: string; note: string; created_at: string;
+  plan_id: string | null; plan_version_id?: string | null; source: string; note: string; created_at: string;
 }
 export interface FundPosition {
   fund_code: string; fund_name: string;
@@ -2437,6 +2483,7 @@ export interface MajorEventsBlock {
 export interface OpsCard {
   run_date: string; generated_at: string;
   holdings_actions: OpsLine[];
+  portfolio_snapshot_as_of?: string;
   recommendations: RecommendCard | null;
   plan_todos: OpsTodo[];
   watch_triggers: OpsLine[];
@@ -2553,7 +2600,7 @@ export interface UsSurvey {
   available: boolean;
   root?: string | null;
   hint_cn: string;
-  thresholds?: Record<string, number>;
+  thresholds?: Record<string, number> | null;
   threshold_source_cn?: string;
   aaii?: { available: boolean; as_of: string; bullish: number; bearish: number; spread: number; state_cn: string };
   naaim?: { available: boolean; as_of: string; exposure_index: number; state_cn: string; threshold_source_cn?: string };
@@ -2800,6 +2847,51 @@ export interface LearningResponse {
   papers: LearningPaper[];
   entries: LearningEntry[];
   stats: LearningStats;
+}
+
+// ---- 前向验证成绩单（/api/fwd-ledger/scorecard，只读）----
+export interface FwdBucketStat {
+  n: number;
+  winRatePct?: number;
+  meanPct?: number;
+}
+
+export interface FwdSentimentBucket extends FwdBucketStat {
+  key: "pick10" | "pick20" | "alarm10" | "alarm20";
+  labelCn: string;
+  horizonDays: number;
+}
+
+export interface FwdSentimentSection {
+  available: boolean;
+  reason: string;
+  records?: number;
+  reviewedRecords?: number;
+  buckets?: FwdSentimentBucket[];
+}
+
+export interface FwdSymbolRow {
+  symbol: string;
+  nameCn: string | null;
+  samples: number;
+  t1: FwdBucketStat | null;
+  t5: FwdBucketStat | null;
+  t20: FwdBucketStat | null;
+}
+
+export interface FwdRecommendationSection {
+  available: boolean;
+  reason: string;
+  scoredDates?: number;
+  latestDate?: string;
+  horizonsCn?: Record<string, string>;
+  bySymbol?: FwdSymbolRow[];
+}
+
+export interface FwdLedgerResponse {
+  sentiment: FwdSentimentSection;
+  recommendation: FwdRecommendationSection;
+  disclaimerCn: string;
 }
 
 // ---- 只读权威策略文档 ----

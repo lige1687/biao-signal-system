@@ -1,0 +1,33 @@
+{
+  "mission": "Review source attribution and UI reference semantics using saved primary facts",
+  "task_scope": [
+    "Read saved source facts and compare the planned compact reference values against existing evidence boundaries",
+    "Return source-mislabeling and cross-market or horizon-mixing risks"
+  ],
+  "read_only_paths": [
+    "docs/ops/breadth-reading-aid-20261101/institutional-source-facts-v8.json",
+    "docs/ops/breadth-reading-aid-20261101/institutional-contract-v8.json",
+    "docs/ops/breadth-reading-aid-20261101/evidence-review-v6.md"
+  ],
+  "write_paths": [
+    "docs/ops/breadth-reading-aid-20261101/institutional-review-v8.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Concise source and display acceptance review with exact qualifications"
+  ],
+  "stop_conditions": [
+    "Need additional financial experiment or external source",
+    "Scope or authority ambiguity"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

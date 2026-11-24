@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "purpose": "近期公开原文自动更新，仅解释市场与行业背景。相关市场用于产业链参考，不推断ETF持有该公司。",
+  "sources": [
+    {
+      "id": "cn-nbs",
+      "name": "国家统计局",
+      "kind": "macro",
+      "market": "cn",
+      "feed_type": "html_index",
+      "feed_url": "https://www.stats.gov.cn/sj/zxfb/",
+      "official_domains": [
+        "stats.gov.cn"
+      ],
+      "article_url_pattern": "/sj/zxfb/\\d{6}/t\\d{8}_\\d+\\.html",
+      "importance": 3,
+      "keywords": [
+        "居民消费价格",
+        "工业生产者",
+        "国内生产总值",
+        "国民经济",
+        "采购经理",
+        "工业增加值",
+        "社会消费品",
+        "固定资产",
+        "工业企业利润",
+        "科技经费"
+      ],
+      "event_type": "macro_release"
+    },
+    {
+      "id": "us-fed-g17",
+      "name": "美联储工业产出发布",
+      "kind": "macro",
+      "market": "us",
+      "feed_type": "rss",
+      "feed_url": "https://www.federalreserve.gov/feeds/g17.xml",
+      "official_domains": [
+        "federalreserve.gov"
+      ],
+      "article_url_pattern": "/releases/g17/",
+      "importance": 3,
+      "event_type": "macro_release"
+    },
+    {
+      "id": "us-bls-cpi",
+      "name": "美国劳工统计局CPI",
+      "kind": "macro",
+      "market": "us",
+      "feed_type": "rss",
+      "feed_url": "https://www.bls.gov/feed/cpi.rss",
+      "official_domains": [
+        "bls.gov"
+      ],
+      "article_url_pattern": "/news.release/",
+      "importance": 3,
+      "event_type": "macro_release"
+    },
+    {
+      "id": "nvidia-ai-hardware",
+      "name": "英伟达官方新闻",
+      "kind": "industry",
+      "market": "us",
+      "related_markets": [
+        "us",
+        "cn"
+      ],
+      "feed_type": "rss",
+      "feed_url": "https://nvidianews.nvidia.com/releases.xml",
+      "official_domains": [
+        "nvidianews.nvidia.com"
+      ],
+      "topics": [
+        "光模块",
+        "数据中心互联",
+        "通信设备",
+        "半导体",
+        "半导体设备",
+        "硬件"
+      ],
+      "keywords": [
+        "data center",
+        "datacenter",
+        "networking",
+        "interconnect",
+        "spectrum",
+        "gpu",
+        "blackwell",
+        "rubin",
+        "AI infrastructure",
+        "chip",
+        "semiconductor",
+        "optics",
+        "pluggable"
+      ],
+      "importance": 2
+    },
+    {
+      "id": "tsmc-business",
+      "name": "台积电官方经营公告",
+      "kind": "industry",
+      "market": "us",
+      "feed_type": "html_index",
+      "feed_url": "https://pr.tsmc.com/english/latest-news",
+      "official_domains": [
+        "pr.tsmc.com"
+      ],
+      "article_url_pattern": "/english/news/\\d+",
+      "topics": [
+        "半导体",
+        "半导体设备"
+      ],
+      "keywords": [
+        "revenue",
+        "earnings",
+        "results",
+        "quarter",
+        "technology",
+        "advanced",
+        "nanometer"
+      ],
+      "importance": 3
+    }
+  ]
+}

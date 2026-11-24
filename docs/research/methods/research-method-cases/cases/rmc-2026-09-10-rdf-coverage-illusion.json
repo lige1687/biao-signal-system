@@ -1,0 +1,29 @@
+{
+  "id": "rmc-2026-09-10-rdf-coverage-illusion",
+  "title": "研究数据基础自查：四类漏放与覆盖假象（测试没在看的地方）",
+  "date": "2026-09-10",
+  "kind": "observation_case",
+  "status": "observed",
+  "failure_mode": {
+    "category": "engineering",
+    "reason": "覆盖假象是测试实现没看关键分支，属工程/测试流程缺陷，与数据来源或样本范围无关。"
+  },
+  "problem": "主控独立复现发现研究数据基础的报告与实现存在四类漏放（未覆盖的路径被写成像已覆盖），第五轮换方向查测试本身又发现 5 处覆盖假象——测试声称在验证，实际没在看关键分支（大白话：考试卷上写了'已检查'，但根本没翻那几页）。",
+  "why_changed": "覆盖假象比没有测试更危险：它给人'已验证'的错觉。留档自查方法本身（不看自己的测试、直接对可疑点写探测脚本）作为可复用的研究流程手段。",
+  "old_method": "以测试通过与哈希一致作为'已验证'的证据；报告把已验证范围与未覆盖路径混写。",
+  "new_method": "五轮自查：前四轮不看自己的测试、直接对可疑点写探测脚本（26 个疑点→17 个缺陷）；第五轮查测试本身的覆盖假象（5 处）；报告改为'已验证的范围如实列出，未覆盖的保持未知'。",
+  "scope": "研究数据基础线（data_snapshot/data_quality 及其测试）；不涉及策略规则。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/experiments/research-data-foundation-audit-and-handoff-2026-09-10.md",
+    "docs/experiments/research-data-foundation-summary-2026-09-10.md"
+  ],
+  "before_after": {
+    "old_result": "五轮之前：测试通过被当作验证完成；哈希一致被当作结构正确；四类漏放路径在报告里呈现为已覆盖。",
+    "new_result": "五轮自查后：17 个代码缺陷与 5 处覆盖假象被点名并处理；报告口径改为已验证/未覆盖分开陈述，未知保持未知。",
+    "difference_explanation": "差异来自验证手段更换：从'看测试绿不绿'换成'对可疑点写独立探测脚本'，暴露出测试本身没在看的地方。方法教训：测试通过≠覆盖到位，哈希一致≠结构正确。"
+  },
+  "object_states": [],
+  "notes": ""
+}

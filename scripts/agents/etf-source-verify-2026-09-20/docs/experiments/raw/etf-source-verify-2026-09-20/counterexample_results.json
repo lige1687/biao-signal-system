@@ -1,0 +1,44 @@
+{
+  "counterexamples": [
+    {
+      "id": "CE1-ETF联接错配拒绝",
+      "construction": "准入规则：标的必须同时满足 (a) 代码在上交所 ETF 清单接口 TRADE_CODE 中；(b) 天天基金全量代码表中该代码名称与上交所 FUND_NAME 归一后一致；(c) 名称不含『联接』等场外基金标识。用真实采集数据喂入四个候选。",
+      "cases": [
+        {"input": "513870", "result": "ACCEPT", "reason": "上交所有记录且名称逐字匹配（富国纳斯达克100交易型开放式指数证券投资基金（QDII））"},
+        {"input": "040046 华安纳斯达克100ETF联接(QDII)A", "result": "REJECT", "reason": "名称含『联接』，为场外联接基金；不在上交所 ETF 清单；pingzhongdata 实采 fS_name='华安纳斯达克100ETF联接(QDII)A' 确认"},
+        {"input": "513300 纳斯达克ETF华夏", "result": "REJECT", "reason": "同为交易所纳指 ETF，但管理人与全名和 513870 不符，属于同名指数不同产品错配"},
+        {"input": "160213 国泰纳斯达克100指数", "result": "REJECT", "reason": "LOF/场外指数基金，非目标 ETF"}
+      ],
+      "note": "全表 27878 条中『富国+纳斯达克』仅命中 513870 本体：513870 目前没有联接基金记录，错配风险主要来自别家纳指联接/同指数 ETF",
+      "evidence_raw": ["eastmoney_fundcode_search.js", "eastmoney_nasdaq_candidates.json", "eastmoney_pingzhongdata_040046_linkage.js"]
+    },
+    {
+      "id": "CE2-单位净值与累计净值不混用",
+      "construction": "同一时点取 Data_netWorthTrend 与 Data_ACWorthTrend 最新值对比",
+      "cases": [
+        {"fund": "510300", "date": "2026-09-18", "unit_nav": 4.5793, "accum_nav": 2.0251, "verdict": "两列差异巨大（历史份额分拆），任何把累计净值当单位净值使用的管道都会把净值错记约 -55.8%，规则必须锁定 Data_netWorthTrend"},
+        {"fund": "515130", "date": "2026-09-18", "unit_nav": 1.5167, "accum_nav": 1.5167, "verdict": "两列当前相等（未发生分红/拆分），不能因此放松字段校验"}
+      ],
+      "evidence_raw": ["eastmoney_nav_extract.json"]
+    },
+    {
+      "id": "CE3-未知费率不得记为零",
+      "construction": "费率证据分级：上交所基金详情接口给出显式费率字段则记实际值；字段缺失或未取到则记 unknown，禁止默认 0",
+      "cases": [
+        {"fund": "510300", "management_rate": "0.15", "custody_rate": "0.05", "source": "上交所 JBXX 接口（sse_fund_jbxx_510300.json），显式字段 → 记实际值"},
+        {"fund": "513870", "management_rate": "0.50", "custody_rate": "0.10", "source": "sse_fund_jbxx_513870.json"},
+        {"field": "天天基金侧费率", "verdict": "UNKNOWN（费率明细在 fundf10.eastmoney.com，白名单外未访问；fund.eastmoney.com 产品页无费率字段，见 eastmoney_510300_page.html）→ 记 unknown，不记 0，也不与上交所数值互相填充"}
+      ]
+    },
+    {
+      "id": "CE4-跨境净值晚一天口径",
+      "construction": "对比同一抓取时点三只样本天天基金序列最新归属日",
+      "cases": [
+        {"fund": "510300", "latest_nav_date": "2026-09-18"},
+        {"fund": "515130", "latest_nav_date": "2026-09-18"},
+        {"fund": "513870", "latest_nav_date": "2026-09-17", "verdict": "跨境 QDII 最新归属日比境内样本晚 1 个交易日，属正常披露节奏而非数据缺失；接入层必须按基金类型记录『T-1（跨境）』口径，禁止把 9-17 当作数据源故障"}
+      ],
+      "evidence_raw": ["eastmoney_nav_extract.json", "sse_etf_basic_list.json"]
+    }
+  ]
+}

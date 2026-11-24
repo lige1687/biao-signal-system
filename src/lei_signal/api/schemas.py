@@ -13,6 +13,7 @@ from pydantic import BaseModel, field_validator
 class SparkPoint(BaseModel):
     date: str
     close: float
+    ema20: float | None = None
 
 
 class ExplanationDTO(BaseModel):
@@ -101,6 +102,14 @@ class CardDTO(BaseModel):
     primary_structure: StructureBriefDTO | None = None
     b1_price: float | None = None
     distance_to_b1_pct: float | None = None
+    tradable: bool | None = None
+    trend_type_cn: str | None = None
+    daily_long_trend_cn: str | None = None
+    weekly_long_trend_cn: str | None = None
+    dist_ema20_pct: float | None = None
+    dist_ema60_pct: float | None = None
+    ret_20d_pct: float | None = None
+    mom_121_pct: float | None = None
 
     sparkline: list[SparkPoint] = []
 
@@ -589,6 +598,10 @@ class ActionItemDTO(BaseModel):
     resume_on: str | None = None
     closed_on: str | None = None
     close_kind: str | None = None
+    actual_action_date: str | None = None
+    done_recorded_at: str | None = None
+    done_source: str | None = None
+    completion_evidence_supported: bool = True
 
 
 class PlanDTO(BaseModel):
@@ -1065,8 +1078,9 @@ class TraceItem(BaseModel):
 
 class AgentChatRequest(BaseModel):
     session_id: str | None = None
-    context_kind: str = "symbol"  # symbol | global
+    context_kind: str = "symbol"  # symbol | global | portfolio
     symbol: str | None = None
+    portfolio_holding_id: str | None = None
     message: str = ""
     client_request_id: str | None = None  # 03B：幂等键，随快照保存
 
@@ -1171,6 +1185,8 @@ class CopilotDispatchReply(BaseModel):
     card: dict | None = None        # {card_type, data}
     preview: TradePreviewDTO | None = None
     chat_fallback: bool = False
+    #: 识别成功但下游未就绪时的显式回落原因（如 mindset_seed_missing）；无标注为 None。
+    fallback_reason: str | None = None
     note_cn: str = ""
 
 
@@ -1188,6 +1204,7 @@ class FundTradeDTO(BaseModel):
     price_status: str          # pending | priced | failed
     price_status_cn: str
     plan_id: str | None = None
+    plan_version_id: str | None = None
     source: str = "web"
     note: str = ""
     created_at: str = ""
@@ -1286,17 +1303,38 @@ class MajorEventsBlockDTO(BaseModel):
     note_cn: str = ""
 
 
+class DcaBlockDTO(BaseModel):
+    """定投状态区块（2026-09-20 接入，V1 状态位：只报状态事实）。
+
+    数据来自既有 DCA 只读服务（证据账本可用性 + 中美宽度读数 +
+    跟踪池逐状态），形态对齐 agent.py 话题块 / routes/copilot.py
+    dca 分支先例；缺数据=null 与未触发=false 的区分在服务层。
+    本块不携带解释文案、不新增任何判断；数据缺失时 available=False
+    并给 reason_cn（如实原因），不编数。零下单零记账——实际买卖
+    仍走报单确认台账。
+    """
+
+    available: bool = False
+    reason_cn: str = ""                # 降级原因（可用时为空）
+    evidence_available: bool = False   # 证据账本可读
+    evidence_version: str = ""         # 账本版本（可读时）
+    breadth: dict = {}                 # {cn: 引用卡|None, us: 引用卡|None}
+    states: list[dict] = []            # 跟踪池逐标的状态（服务原样输出）
+
+
 class OpsCardDTO(BaseModel):
     """每日操作清单（确定性组装，零 LLM；页面与推送共用）。"""
 
     run_date: str
     generated_at: str = ""
     holdings_actions: list[OpsLineDTO] = []
+    portfolio_snapshot_as_of: str = ""
     recommendations: RecommendCardDTO | None = None
     plan_todos: list[OpsTodoDTO] = []
     watch_triggers: list[OpsLineDTO] = []
     sentiment: SentimentBlockDTO | None = None
     major_events: MajorEventsBlockDTO | None = None
+    dca: DcaBlockDTO | None = None
     push_summary_cn: str = ""
 
 
@@ -1355,6 +1393,8 @@ class AgentMessageDTO(BaseModel):
     # 主控复核 2026-09-15 补修二：回答未完成原因（流中断/未正常收尾/截断）；
     # None=完成。历史/恢复据此区分「未完成」与其他未过校验的回答
     answer_incomplete: dict | None = None
+    verify_note: str | None = None       # 流式回答未过校验的持久化说明
+    fallback: str | None = None          # 同问题系统直出，刷新后仍可核对
     # 二轮复验 2026-09-15 遗漏二：原问题重试身份（可核实的 cid+原始三输入）；
     # None=旧记录不可考或已完成，明确不可原问题重试
     retry: dict | None = None

@@ -1,0 +1,17 @@
+--- before/preferences.ts
++++ after/preferences.ts
+@@ -1,4 +1,5 @@
+ import { READABLE_IDS } from "./catalog";
++import { DEFAULT_HOME_IDS } from "./homeCardModel";
+ 
+ export const PINS_STORAGE_KEY = "ws.marketPins.v1";
+ export const PINS_CHANGE_EVENT = "lei:market-pins-changed";
+@@ -15,7 +16,7 @@
+ }
+ 
+ export function parsePins(raw: string | null): PinsRead {
+-  if (raw === null) return { ids: [], warning: null };
++  if (raw === null) return { ids: [...DEFAULT_HOME_IDS], warning: null };
+   try {
+     const value: unknown = JSON.parse(raw);
+     if (!Array.isArray(value)) return { ids: [], warning: "已忽略损坏的首页观察偏好，请重新选择。" };

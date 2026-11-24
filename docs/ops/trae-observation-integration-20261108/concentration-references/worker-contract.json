@@ -1,0 +1,38 @@
+{
+  "mission": "Implement and verify pure concentration reference arithmetic",
+  "task_scope": [
+    "Prior 120/60 calendar-month quantiles P80/P90/P95 and strict-lower empirical rank; contiguous 20-session average for daily. Calculation only."
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "web/AGENTS.md",
+    "web/public/research/microstructure-observations-20261108/equity.json",
+    "web/src/components/market-observation-alerts/microstructureData.ts",
+    "web/src/components/market-observation-alerts/indicatorThumbnailData.test.mjs",
+    "web/package.json"
+  ],
+  "write_paths": [
+    "web/src/components/market-observation-alerts/concentrationReferenceMath.ts",
+    "web/src/components/market-observation-alerts/concentrationReferenceMath.test.mjs"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Two exact source/test files; packet numeric checks and missing/future boundary checks."
+  ],
+  "stop_conditions": [
+    "source drift",
+    "overlap",
+    "scope ambiguity",
+    "missing permission"
+  ],
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

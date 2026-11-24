@@ -28,7 +28,7 @@ def _frame(n: int = 3) -> pd.DataFrame:
 def _bottom_invalidated(day, reason="跌破 C 点"):
     return SimpleNamespace(
         side="bottom", status="invalidated", invalidated_date=day,
-        invalidated_reason=reason, c_price=9.5, confirmed_date=None, neckline=None,
+        invalidated_reason=reason, c_price=9.5, confirmed_date=day, neckline=None,
     )
 
 
@@ -155,4 +155,49 @@ def test_black_to_black_is_not_a_transition() -> None:
 
 def test_empty_frame_returns_empty() -> None:
     result = SimpleNamespace(frame=pd.DataFrame(), events=[], structures=[], history=[])
+    assert extract_sell_signals(result) == []
+
+
+def test_candidate_bottom_failure_does_not_claim_confirmed_exit() -> None:
+    today = _frame().index[-1].date()
+    bottom = _bottom_invalidated(today)
+    bottom.confirmed_date = None
+    result = SimpleNamespace(frame=_frame(), events=[], structures=[bottom], history=[])
+    assert extract_sell_signals(result) == []
+
+
+def test_recent_confirmed_top_cleared_by_new_high_is_not_current_risk() -> None:
+    frame = _frame()
+    top = SimpleNamespace(
+        side="top", status="invalidated", confirmed_date=frame.index[0].date(),
+        invalidated_date=frame.index[-1].date(), neckline=11.2,
+    )
+    result = SimpleNamespace(frame=frame, events=[], structures=[top], history=[])
+    assert extract_sell_signals(result) == []
+
+
+def test_ended_key_wave_is_never_a_new_warning_and_reopened_wave_is() -> None:
+    frame = _frame()
+    first, middle, today = [ts.date() for ts in frame.index]
+    def wave(day, sub_rule, direction):
+        return SimpleNamespace(
+            rule_id="key_wave_black", available_date=day, direction=direction,
+            reason_cn=sub_rule, evidence={"sub_rule": sub_rule},
+        )
+    started = wave(first, "key_wave_black_started", "bearish")
+    ended = wave(middle, "key_wave_black_ended", "neutral")
+    result = SimpleNamespace(frame=frame, events=[started, ended], structures=[], history=[])
+    assert extract_sell_signals(result) == []
+    result.events.append(wave(today, "key_wave_black_started", "bearish"))
+    signals = extract_sell_signals(result)
+    assert len(signals) == 1 and signals[0].available_date == today.isoformat()
+
+
+def test_recovered_exit_proxy_does_not_remain_current_warning() -> None:
+    frame = _frame()
+    frame["ema20"] = [10.5, 10.5, 9.5]
+    frame["close_lag20"] = [10.8, 10.8, 9.8]
+    result = SimpleNamespace(
+        frame=frame, events=[_exit_event(frame.index[0].date())], structures=[], history=[]
+    )
     assert extract_sell_signals(result) == []

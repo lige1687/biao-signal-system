@@ -9,6 +9,10 @@ export default defineConfig({
     // 不占用 8000/5173；不设时行为与原来完全一致）。
     port: Number(process.env.LEI_WEB_PORT ?? 5173),
     proxy: {
+      "/api/factor-workbench": process.env.LEI_WORKBENCH_PROXY ?? process.env.LEI_API_PROXY ?? "http://127.0.0.1:8000",
+      "/api/strategy-portfolios": process.env.LEI_PORTFOLIOS_PROXY ?? process.env.LEI_API_PROXY ?? "http://127.0.0.1:8000",
+      // Optional isolated observation service; other API routes keep their owner.
+      "/api/fwd-ledger/strategies": process.env.LEI_FORWARD_PROXY ?? process.env.LEI_API_PROXY ?? "http://127.0.0.1:8000",
       "/api": process.env.LEI_API_PROXY ?? "http://127.0.0.1:8000",
     },
   },

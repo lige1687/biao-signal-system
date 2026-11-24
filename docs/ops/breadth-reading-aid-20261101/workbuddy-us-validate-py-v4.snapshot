@@ -1,0 +1,548 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""严格验证流程：口径修正 / 分布替代极值 / 有效样本 / 样本外 / walk-forward /
+   条件化随机检验 / 多重检验校正 / 股债利差增量检验"""
+import json, csv, os, re, sqlite3, random, math, statistics as st
+from datetime import datetime
+
+TMP = "/tmp"
+LAB = os.path.expanduser("~/.lei_signal_lab/lab.db")
+RNG = random.Random(20261102)
+
+# ---------------- 数据层 ----------------
+def load_spx():
+    d = json.load(open(os.path.join(TMP, "gspc.json")))
+    r = d["chart"]["result"][0]
+    ts, cl = r["timestamp"], r["indicators"]["quote"][0]["close"]
+    out = {}
+    for t, c in zip(ts, cl):
+        if c is None:
+            continue
+        out[datetime.utcfromtimestamp(t).strftime("%Y-%m-%d")] = c
+    return out
+
+def load_fred(name, col=None):
+    out = {}
+    p = os.path.join(TMP, name)
+    if not os.path.exists(p):
+        return out
+    with open(p, newline="", encoding="utf-8-sig") as f:
+        r = csv.reader(f); next(r)
+        for row in r:
+            if len(row) < 2: continue
+            d, v = row[0].strip(), row[1].strip()
+            if not v or v in (".", "NA"): continue
+            try: out[d] = float(v)
+            except ValueError: pass
+    return out
+
+def load_monthly(html, name):
+    h = open(os.path.join(TMP, html), encoding="utf-8", errors="ignore").read()
+    rows = re.findall(
+        r"<td>([A-Z][a-z]{2} \d{1,2}, \d{4})</td>\s*<td>\s*(?:&#x2002;)?\s*([\d.]+)\s*</td>", h)
+    out = {}
+    for ds, v in rows:
+        try:
+            dt = datetime.strptime(ds, "%b %d, %Y")
+        except ValueError:
+            continue
+        out[dt.strftime("%Y-%m")] = float(v)
+    return out
+
+def load_breadth():
+    db = sqlite3.connect(LAB)
+    b = {20: {}, 50: {}, 200: {}}
+    for d, x20, x50, x200 in db.execute(
+            "select as_of, breadth_20, breadth_50, breadth_200 from market_breadth_snapshots "
+            "where market_id='SP500' and breadth_50 is not null order by as_of"):
+        if x20 is not None: b[20][d] = x20
+        if x50 is not None: b[50][d] = x50
+        if x200 is not None: b[200][d] = x200
+    db.close()
+    return b
+
+spx = load_spx()
+BRD_RAW = load_breadth()
+DGS10 = load_fred("dgs10.csv")
+VIX = load_fred("vix.csv")
+VXV = load_fred("VXVCLS.csv")
+HY = load_fred("hy.csv")
+CAPE_M = load_monthly("cape.html", "cape")
+PE_M = load_monthly("pe_month.html", "pe")
+
+# 主时间轴：标普 500 交易日 ∩ 宽度有值
+dates = sorted(d for d in spx if d >= "1980-04-01")
+n = len(dates)
+px = [spx[d] for d in dates]
+
+def ff(src, keys, is_month=False):
+    """前向填充到目标日期轴"""
+    if is_month:
+        src = {k + "-01": v for k, v in src.items()}
+        keys = [k[:7] + "-01" for k in keys]
+    s = sorted(src)
+    out, j, last = [], 0, None
+    for k in keys:
+        while j < len(s) and s[j] <= k:
+            last = src[s[j]]; j += 1
+        out.append(last)
+    return out
+
+BRD = {k: ff(v, dates) for k, v in BRD_RAW.items()}
+D10 = ff(DGS10, dates)
+VX = ff(VIX, dates)
+VXV_ = ff(VXV, dates)
+HY_ = ff(HY, dates)
+CAPE = ff(CAPE_M, dates, is_month=True)
+PE = ff(PE_M, dates, is_month=True)
+
+ERP = [None if (CAPE[i] in (None, 0) or D10[i] is None) else 100.0 / CAPE[i] - D10[i]
+       for i in range(n)]
+
+MA200 = [None] * n
+for i in range(n):
+    if i >= 199:
+        MA200[i] = sum(px[i - 199:i + 1]) / 200.0
+
+STD200 = [None] * n
+_dev = [None if MA200[i] is None else px[i] / MA200[i] - 1 for i in range(n)]
+for i in range(n):
+    if _dev[i] is None or i < 950:
+        continue
+    w = [x for x in _dev[i - 749:i + 1] if x is not None]
+    if len(w) >= 600:
+        STD200[i] = st.pstdev(w)
+
+def fwd(i, k):
+    return None if i + k >= n else px[i + k] / px[i] - 1
+
+def at(arr, i):
+    return arr[i] if 0 <= i < n else None
+
+# ---------------- 触发点与簇 ----------------
+def triggers(bw, thr):
+    b = BRD[BWKEY.get(bw, bw)]
+    return [i for i in range(n) if b[i] is not None and b[i] <= thr]
+
+def clusters(idx, gap=250):
+    """相邻触发日间隔 > gap 个交易日则视为新簇"""
+    out = []
+    for i in idx:
+        if out and i - out[-1][-1] <= gap:
+            out[-1].append(i)
+        else:
+            out.append([i])
+    return out
+
+def firsts(cl):
+    return [c[0] for c in cl]
+
+# ---------------- 统计工具 ----------------
+def cp_ci(k, nn, z=1.96):
+    """Wilson 区间，胜率的置信区间"""
+    if nn == 0: return (None, None)
+    p = k / nn
+    d = 1 + z * z / nn
+    c = (p + z * z / (2 * nn)) / d
+    h = z * math.sqrt(p * (1 - p) / nn + z * z / (4 * nn * nn)) / d
+    return (100 * max(0, c - h), 100 * min(1, c + h))
+
+def desc(vals):
+    if not vals: return None
+    v = sorted(vals)
+    m = sum(v) / len(v)
+    sd = st.pstdev(v) if len(v) > 1 else 0.0
+    return {"n": len(v), "mean": 100 * m, "median": 100 * st.median(v),
+            "p25": 100 * v[int(0.25 * (len(v) - 1))],
+            "p75": 100 * v[int(0.75 * (len(v) - 1))],
+            "min": 100 * v[0], "max": 100 * v[-1],
+            "sd": 100 * sd, "se": 100 * sd / math.sqrt(len(v)) if len(v) > 1 else None,
+            "win": 100 * sum(1 for x in v if x > 0) / len(v)}
+
+def cluster_boot(idx, hold, B=10000, gap=250):
+    """簇 bootstrap：以危机簇为重抽样单元，得到均值与胜率的分布"""
+    cl = clusters(idx, gap)
+    if len(cl) < 2: return None
+    means, wins = [], []
+    for _ in range(B):
+        pick = [cl[RNG.randrange(len(cl))] for _ in cl]
+        pts = [i for c in pick for i in c]
+        r = [fwd(i, hold) for i in pts]
+        r = [x for x in r if x is not None]
+        if not r: continue
+        means.append(100 * sum(r) / len(r))
+        wins.append(100 * sum(1 for x in r if x > 0) / len(r))
+    means.sort(); wins.sort()
+    lo, hi = int(0.025 * len(means)), int(0.975 * len(means)) - 1
+    wlo, whi = int(0.025 * len(wins)), int(0.975 * len(wins)) - 1
+    return {"mean_lo": means[lo], "mean_hi": means[hi],
+            "win_lo": wins[wlo], "win_hi": wins[whi],
+            "p_mean_neg": 100 * sum(1 for x in means if x <= 0) / len(means)}
+
+def pval(actual, null):
+    """单侧 p：随机情况下 >= 实际值的概率"""
+    if not null: return None
+    return 100.0 * sum(1 for x in null if x >= actual) / len(null)
+
+# ---------------- 检验 1：修正口径后的分布 ----------------
+HOLD = {"b20": 20, "b50": 60, "b200": 250}
+BWKEY = {"b20": 20, "b50": 50, "b200": 200}
+
+def run_thr(bw, thr, hold, mode="first"):
+    idx = triggers(bw, thr)
+    cl = clusters(idx)
+    pts = firsts(cl) if mode == "first" else idx
+    r = [fwd(i, hold) for i in pts]
+    r = [x for x in r if x is not None]
+    return pts, cl, r
+
+base_r = [fwd(i, 250) for i in range(n) if fwd(i, 250) is not None]
+
+dist = {}
+for bw, hold in HOLD.items():
+    rows = []
+    for thr in (3, 5, 7, 10, 15, 20, 30):
+        pts, cl, r = run_thr(bw, thr, hold, "first")
+        d = desc(r)
+        if not d: continue
+        d["thr"] = thr
+        d["clusters"] = len(cl)
+        d["raw_n"] = len(triggers(bw, thr))
+        lo, hi = cp_ci(sum(1 for x in r if x > 0), len(r))
+        d["win_lo"], d["win_hi"] = lo, hi
+        rows.append(d)
+    dist[bw] = rows
+
+# ---------------- 检验 2：样本外分割 ----------------
+SPLIT = "2010-01-01"
+sp = next((i for i, d in enumerate(dates) if d >= SPLIT), n)
+
+def seg_stats(bw, thr, hold, lo, hi):
+    idx = [i for i in triggers(bw, thr) if lo <= i < hi]
+    cl = clusters(idx)
+    pts = firsts(cl)
+    r = [fwd(i, hold) for i in pts]
+    r = [x for x in r if x is not None]
+    if not r: return None
+    return {"n": len(r), "clusters": len(cl), "mean": 100 * sum(r) / len(r),
+            "win": 100 * sum(1 for x in r if x > 0) / len(r),
+            "median": 100 * st.median(r)}
+
+# 训练期选阈值：只看得见训练集，选均值最高且簇数 >= 5 的
+oos = {}
+for bw, hold in HOLD.items():
+    cand = []
+    for thr in (3, 5, 7, 10, 15, 20, 30):
+        s = seg_stats(bw, thr, hold, 0, sp)
+        if s and s["clusters"] >= 5:
+            cand.append((s["mean"], thr, s))
+    if not cand:
+        oos[bw] = {"pick": None}
+        continue
+    cand.sort(reverse=True)
+    best_mean, best_thr, best_s = cand[0]
+    test = seg_stats(bw, best_thr, hold, sp, n)
+    test_base = desc([fwd(i, hold) for i in range(sp, n) if fwd(i, hold) is not None])
+    oos[bw] = {"pick": best_thr, "train": best_s, "test": test,
+               "test_base": test_base, "cand": [(t, round(m, 1)) for m, t, _ in cand]}
+
+# ---------------- 检验 3：walk-forward ----------------
+def walk_forward(bw, hold, start_year=1995):
+    steps = []
+    for y in range(start_year, 2027):
+        y0 = "%d-01-01" % y
+        cut = next((i for i, d in enumerate(dates) if d >= y0), n)
+        if cut >= n: break
+        # 训练集只能用到 cut-hold 之前，保证 250 日收益已实现
+        train_end = max(0, cut - hold)
+        cand = []
+        for thr in (3, 5, 7, 10, 15, 20, 30):
+            idx = [i for i in triggers(bw, thr) if i < train_end]
+            cl = clusters(idx)
+            if len(cl) < 4: continue
+            r = [fwd(i, hold) for i in firsts(cl) if fwd(i, hold) is not None]
+            if not r: continue
+            cand.append((100 * sum(r) / len(r), thr))
+        if not cand:
+            steps.append({"y": y, "thr": None}); continue
+        cand.sort(reverse=True)
+        thr = cand[0][1]
+        idx = [i for i in triggers(bw, thr) if cut <= i < next(
+            (j for j, d in enumerate(dates) if d >= "%d-01-01" % (y + 1)), n)]
+        cl = clusters(idx)
+        r = [fwd(i, hold) for i in firsts(cl) if fwd(i, hold) is not None]
+        steps.append({"y": y, "thr": thr,
+                      "n": len(r),
+                      "mean": 100 * sum(r) / len(r) if r else None})
+    return steps
+
+wf = {bw: walk_forward(bw, h) for bw, h in HOLD.items()}
+
+# ---------------- 检验 4：条件化随机检验 ----------------
+def cond_null(mask_pool, k, hold, B=20000):
+    """在给定池子里随机抽 k 个时点，返回 250 日均值收益的 null 分布"""
+    pool = [i for i in range(n) if mask_pool[i] and fwd(i, hold) is not None]
+    if len(pool) < k * 3: return []
+    out = []
+    for _ in range(B):
+        s = RNG.sample(pool, k)
+        r = [fwd(i, hold) for i in s]
+        out.append(100 * sum(r) / len(r))
+    return out
+
+cond = {}
+sig_idx = firsts(clusters(triggers(200, 10)))
+k = len(sig_idx)
+sig_mean = 100 * sum(fwd(i, 250) for i in sig_idx) / k
+
+pool_all = [True] * n
+pool_below_ma = [MA200[i] is not None and px[i] < MA200[i] for i in range(n)]
+pool_below_1s = [MA200[i] is not None and STD200[i] is not None
+                 and px[i] < MA200[i] * (1 - STD200[i]) for i in range(n)]
+pool_below_2s = [MA200[i] is not None and STD200[i] is not None
+                 and px[i] < MA200[i] * (1 - 2 * STD200[i]) for i in range(n)]
+
+for name, pool in (("任意日期", pool_all), ("价格<MA200", pool_below_ma),
+                   ("价格<MA200-1σ", pool_below_1s), ("价格<MA200-2σ", pool_below_2s)):
+    nul = cond_null(pool, k, 250)
+    cond[name] = {"pool": sum(1 for x in pool if x), "mean": sum(nul) / len(nul) if nul else None,
+                  "p": pval(sig_mean, nul) if nul else None,
+                  "p5": sorted(nul)[int(0.05 * len(nul))] if nul else None,
+                  "p95": sorted(nul)[int(0.95 * len(nul))] if nul else None}
+
+# ---------------- 检验 4b：留一法（超额收益是不是靠一次事件撑起来的） ----------------
+sig_r = [100 * fwd(i, 250) for i in sig_idx]
+loo = []
+for j in range(len(sig_r)):
+    rest = [x for t, x in enumerate(sig_r) if t != j]
+    loo.append({"drop": dates[sig_idx[j]], "drop_ret": sig_r[j],
+                "mean": sum(rest) / len(rest) if rest else None,
+                "win": 100 * sum(1 for x in rest if x > 0) / len(rest) if rest else None})
+
+# ---------------- 检验 4c：各持有期上是否都成立 ----------------
+by_hold = {}
+for h in (20, 60, 120, 250, 500):
+    r = [100 * fwd(i, h) for i in sig_idx if fwd(i, h) is not None]
+    b = [100 * fwd(i, h) for i in range(n) if fwd(i, h) is not None]
+    if r and b:
+        by_hold[str(h)] = {"n": len(r), "mean": sum(r) / len(r), "win": 100 * sum(1 for x in r if x > 0) / len(r),
+                           "base_mean": sum(b) / len(b), "base_win": 100 * sum(1 for x in b if x > 0) / len(b),
+                           "edge": sum(r) / len(r) - sum(b) / len(b)}
+
+# ---------------- 检验 5：多重检验 ----------------
+MULT = 3 * 7
+sig_list = []
+for bw, hold in HOLD.items():
+    for thr in (3, 5, 7, 10, 15, 20, 30):
+        pts, cl, r = run_thr(bw, thr, hold, "first")
+        if len(r) < 5: continue
+        m = 100 * sum(r) / len(r)
+        nul = cond_null(pool_all, len(r), hold, B=4000)
+        sig_list.append({"bw": BWKEY[bw], "thr": thr, "n": len(r), "mean": m,
+                         "p": pval(m, nul) if nul else None})
+bonf = 5.0 / MULT
+sig_list.sort(key=lambda x: (x["p"] if x["p"] is not None else 999))
+for s in sig_list:
+    s["bonf_ok"] = bool(s["p"] is not None and s["p"] < bonf)
+
+# ---------------- 检验 6：股债利差 ----------------
+def corr(a, b, lo=0, hi=None):
+    hi = hi or n
+    xs = [(a[i], b[i]) for i in range(lo, hi) if a[i] is not None and b[i] is not None]
+    if len(xs) < 30: return None
+    mx = sum(x for x, _ in xs) / len(xs); my = sum(y for _, y in xs) / len(xs)
+    cov = sum((x - mx) * (y - my) for x, y in xs) / len(xs)
+    sx = st.pstdev([x for x, _ in xs]); sy = st.pstdev([y for _, y in xs])
+    return None if sx == 0 or sy == 0 else cov / (sx * sy)
+
+erp_corr = {"vs_b200": corr(ERP, BRD[200]), "vs_b20": corr(ERP, BRD[20]),
+            "vs_disp": corr(ERP, _dev)}
+
+# ERP 分层（按滚动三年分位，避免用未来信息）
+def roll_pct(series, win=750):
+    out = [None] * n
+    for i in range(n):
+        if series[i] is None: continue
+        w = [x for x in series[i - win + 1:i + 1] if x is not None]
+        if len(w) >= win * 0.7:
+            out[i] = 100.0 * sum(1 for x in w if x <= series[i]) / len(w)
+    return out
+
+erp_p = roll_pct(ERP)
+
+def corr_lists(a, b):
+    if len(a) < 5: return None
+    mx = sum(a) / len(a); my = sum(b) / len(b)
+    cov = sum((x - mx) * (y - my) for x, y in zip(a, b)) / len(a)
+    sx = st.pstdev(a); sy = st.pstdev(b)
+    return None if sx == 0 or sy == 0 else cov / (sx * sy)
+
+# 年度采样（每年首个交易日），避免重叠窗口把样本数吹大
+annual = []
+for y in range(1980, 2027):
+    i = next((k for k, d in enumerate(dates) if d >= "%d-01-01" % y), None)
+    if i is None or ERP[i] is None: continue
+    row = {"y": y, "erp": ERP[i], "cape": CAPE[i], "d10": D10[i]}
+    for h, lab in ((250, "r1"), (1250, "r5"), (2500, "r10")):
+        v = fwd(i, h)
+        row[lab] = 100 * v if v is not None else None
+    annual.append(row)
+
+erp_rows = []
+srt = sorted([a for a in annual if a["r1"] is not None], key=lambda a: a["erp"])
+if len(srt) >= 10:
+    gsz = len(srt) / 5.0
+    for k in range(5):
+        grp = srt[int(k * gsz):int((k + 1) * gsz)]
+        if not grp: continue
+        r5 = [a["r5"] for a in grp if a["r5"] is not None]
+        r10 = [a["r10"] for a in grp if a["r10"] is not None]
+        erp_rows.append({"q": "%d-%d" % (k * 20, (k + 1) * 20), "n": len(grp),
+                         "erp_lo": grp[0]["erp"], "erp_hi": grp[-1]["erp"],
+                         "r1": sum(a["r1"] for a in grp) / len(grp),
+                         "r5": sum(r5) / len(r5) if r5 else None,
+                         "r10": sum(r10) / len(r10) if r10 else None})
+
+erp_ret_corr = {}
+for lab in ("r1", "r5", "r10"):
+    xs = [a for a in annual if a[lab] is not None]
+    erp_ret_corr[lab] = corr_lists([a["erp"] for a in xs], [a[lab] for a in xs])
+
+erp_hist_pct = 100.0 * sum(1 for a in annual if a["erp"] <= ERP[-1]) / len(annual) if annual else None
+
+# 双因子：宽度低 且 ERP 高
+dual = []
+for bw in (20, 50, 200):
+    hold = HOLD["b%d" % bw]
+    b = BRD[bw]
+    for tag, cond_fn in (
+            ("仅宽度≤10", lambda i: b[i] is not None and b[i] <= 10),
+            ("宽度≤10 且 ERP 分位≥60", lambda i: b[i] is not None and b[i] <= 10
+             and erp_p[i] is not None and erp_p[i] >= 60),
+            ("宽度≤10 且 ERP 分位<40", lambda i: b[i] is not None and b[i] <= 10
+             and erp_p[i] is not None and erp_p[i] < 40),
+            ("仅 ERP 分位≥80", lambda i: erp_p[i] is not None and erp_p[i] >= 80)):
+        idx = [i for i in range(n) if cond_fn(i)]
+        cl = clusters(idx)
+        pts = firsts(cl)
+        r = [fwd(i, hold) for i in pts]
+        r = [x for x in r if x is not None]
+        if len(r) >= 3:
+            dual.append({"bw": bw, "tag": tag, "n": len(r), "cl": len(cl),
+                         "mean": 100 * sum(r) / len(r),
+                         "win": 100 * sum(1 for x in r if x > 0) / len(r),
+                         "median": 100 * st.median(r)})
+
+# ---------------- 输出 ----------------
+out = {
+    "range": [dates[0], dates[-1]], "n": n,
+    "base250": desc(base_r),
+    "dist": dist,
+    "oos": oos, "split": SPLIT,
+    "wf": wf,
+    "cond": cond, "sig_mean": sig_mean, "sig_k": k,
+    "sig_idx": [[dates[i], round(BRD[200][i], 1)] for i in sig_idx],
+    "sig_r": [round(x, 1) for x in sig_r],
+    "loo": loo, "by_hold": by_hold,
+    "mult": sig_list, "bonf": bonf, "mult_n": MULT,
+    "erp": {"corr": erp_corr, "rows": erp_rows, "dual": dual,
+            "last": ERP[-1], "cape": CAPE[-1], "d10": D10[-1],
+            "pct": erp_p[-1], "hist_pct": erp_hist_pct,
+            "ret_corr": erp_ret_corr, "annual": annual},
+    "clusters_200_10": [[dates[c[0]], dates[c[-1]], len(c)]
+                        for c in clusters(triggers(200, 10))],
+}
+json.dump(out, open("validation.json", "w"), ensure_ascii=False, indent=1)
+
+# ---------------- 控制台报告 ----------------
+print("=" * 78)
+print("样本 %s → %s  %d 个交易日（标普500 价格 + 标普500 宽度，口径一致）" % (dates[0], dates[-1], n))
+b = desc(base_r)
+print("基准：任意日买入持 250 日  均值 %+.1f%%  中位 %+.1f%%  胜率 %.1f%%  n=%d"
+      % (b["mean"], b["median"], b["win"], b["n"]))
+print()
+print("【1】分布，不报极值")
+for bw in ("b200", "b50", "b20"):
+    print("  宽度 %s 日（持 %d 日，每簇首日）" % (BWKEY[bw], HOLD[bw]))
+    print("    阈值  簇数  均值    中位    25%    75%   胜率(95%CI)      标准差")
+    for d in dist[bw]:
+        print("    ≤%-3d  %3d  %+6.1f  %+6.1f  %+6.1f  %+6.1f  %5.1f%% (%.0f–%.0f)  %5.1f"
+              % (d["thr"], d["clusters"], d["mean"], d["median"], d["p25"], d["p75"],
+                 d["win"], d["win_lo"], d["win_hi"], d["sd"]))
+    print()
+print("【2】样本外：训练 ≤2009 选阈值 → 测试 2010+ 只报结果")
+for bw in ("b200", "b50", "b20"):
+    o = oos[bw]
+    if not o.get("pick"):
+        print("  %s: 训练期无足够样本" % bw); continue
+    t = o["test"]
+    print("  %s: 训练选出阈值 ≤%d%%（训练均值 %+.1f%%, %d 簇）" %
+          (bw, o["pick"], o["train"]["mean"], o["train"]["clusters"]))
+    if t:
+        print("     样本外：%d 簇 %d 次  均值 %+.1f%%  中位 %+.1f%%  胜率 %.0f%%  |  同期基准 %+.1f%%"
+              % (t["clusters"], t["n"], t["mean"], t["median"], t["win"], o["test_base"]["mean"]))
+    else:
+        print("     样本外：无触发")
+print()
+print("【3】walk-forward 每年重选阈值（阈值是否稳定）")
+for bw in ("b200", "b50", "b20"):
+    thrs = [s["thr"] for s in wf[bw] if s.get("thr")]
+    if not thrs: continue
+    from collections import Counter
+    c = Counter(thrs)
+    print("  %s: %d 年中有 %d 年可选；阈值分布 %s" %
+          (bw, len(wf[bw]), len(thrs), dict(sorted(c.items()))))
+print()
+print("【4】条件化随机检验 —— 实际 %d 个独立触发点，250 日均值 %+.1f%%" % (k, sig_mean))
+print("  对照池                    池大小    随机均值   随机5%分位   实际优于随机的概率(p)")
+for name, v in cond.items():
+    if v["mean"] is None: continue
+    print("  %-22s %6d  %+8.1f%%  %+9.1f%%   %s"
+          % (name, v["pool"], v["mean"], v["p5"],
+             ("%.2f%%" % v["p"]) if v["p"] is not None else "n/a"))
+print()
+print("【4b】逐次明细（200日宽度≤10%）")
+for (dt, bv), rv in zip(out["sig_idx"], out["sig_r"]):
+    print("   %s  宽度 %4.1f%%  →  250日 %+7.1f%%" % (dt, bv, rv))
+print("【4c】留一法：每次去掉一个，剩下的均值还剩多少")
+for x in loo:
+    print("   去掉 %s(%+.1f%%) → 剩余均值 %+.1f%%  胜率 %.0f%%"
+          % (x["drop"], x["drop_ret"], x["mean"], x["win"]))
+print("【4d】不同持有期上的超额（对比全样本基准）")
+print("   持有期   次数   信号均值   基准均值   超额     信号胜率  基准胜率")
+for h in ("20", "60", "120", "250", "500"):
+    v = by_hold.get(h)
+    if not v: continue
+    print("   %4s日  %4d  %+8.1f%%  %+8.1f%%  %+7.1f%%  %6.1f%%   %6.1f%%"
+          % (h, v["n"], v["mean"], v["base_mean"], v["edge"], v["win"], v["base_win"]))
+print()
+print("【5】多重检验：%d 个组合，Bonferroni 门槛 p < %.4f%%" % (MULT, bonf))
+print("  宽度  阈值   簇数   均值      p值      通过校正")
+for s in sig_list[:10]:
+    print("  %3d   ≤%-3d  %3d  %+6.1f%%  %6.2f%%   %s"
+          % (s["bw"], s["thr"], s["n"], s["mean"],
+             s["p"] if s["p"] is not None else -1, "是" if s["bonf_ok"] else "否"))
+print()
+print("【6】股债利差（ERP = 1/CAPE − 10Y）")
+print("  与 200日宽度相关 r=%.3f | 与 20日宽度 r=%.3f | 与价格偏离 r=%.3f"
+      % (erp_corr["vs_b200"] or 0, erp_corr["vs_b20"] or 0, erp_corr["vs_disp"] or 0))
+print("  当前 ERP=%.2f%%（CAPE %.1f, 10Y %.2f%%）全样本分位 %.0f | 三年滚动分位 %.0f"
+      % (ERP[-1], CAPE[-1], D10[-1], erp_hist_pct or 0, erp_p[-1]))
+print("  ERP 与未来收益的相关：1年 %s | 5年 %s | 10年 %s"
+      % tuple(("%+.3f" % erp_ret_corr[k]) if erp_ret_corr[k] is not None else "n/a"
+              for k in ("r1", "r5", "r10")))
+print("  ERP 五分位（每年一个点）   n   ERP区间          未来1年   未来5年   未来10年")
+for r in erp_rows:
+    print("   %-7s %2d  %6.2f ~ %5.2f  %+8.1f%%  %s  %s"
+          % (r["q"], r["n"], r["erp_lo"], r["erp_hi"], r["r1"],
+             ("%+8.1f%%" % r["r5"]) if r["r5"] is not None else "     n/a",
+             ("%+8.1f%%" % r["r10"]) if r["r10"] is not None else "     n/a"))
+print("  双因子：")
+for d in dual:
+    print("   宽度%3d日  %-24s %2d簇 %3d次  %+7.1f%%  中位%+6.1f%%  胜率%5.1f%%"
+          % (d["bw"], d["tag"], d["cl"], d["n"], d["mean"], d["median"], d["win"]))
+print()
+print("【7】200日宽度≤10% 的触发簇（间隔>250交易日算独立）")
+for a, z, c in out["clusters_200_10"]:
+    print("  %s → %s  %d 个交易日" % (a, z, c))
+print("\n写出 validation.json")

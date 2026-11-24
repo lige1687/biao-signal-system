@@ -198,11 +198,14 @@ function Group({
 
 export default function TodaySignalBanner({
   onPick,
+  defaultOpen = false,
 }: {
   onPick: (symbol: string, side: "buy" | "sell") => void;
+  defaultOpen?: boolean;
 }) {
   const qc = useQueryClient();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
+  const [showSectorSells, setShowSectorSells] = useState(false);
   // 回放模式：选了过去交易日则切换数据源（红点/今日查询不受影响）
   const [replayDate, setReplayDate] = useState("");
   const isReplay = replayDate !== "";
@@ -269,12 +272,20 @@ export default function TodaySignalBanner({
         minute: "2-digit",
       })
     : null;
+  const isSectorIndex = (sym: string) => sym.toUpperCase().endsWith(".SECTOR");
   const buyA = active?.actionable ?? [];
   const buyW = active?.waiting ?? [];
   const buyB = active?.blocked ?? [];
-  const sellH = active?.sell_hard ?? [];
-  const sellWarn = active?.sell_warn ?? [];
-  const sellS = active?.sell_soft ?? [];
+  const rawSellH = active?.sell_hard ?? [];
+  const rawSellWarn = active?.sell_warn ?? [];
+  const rawSellS = active?.sell_soft ?? [];
+  const hiddenSectorSellCount =
+    rawSellH.filter((s) => isSectorIndex(s.symbol)).length +
+    rawSellWarn.filter((s) => isSectorIndex(s.symbol)).length +
+    rawSellS.filter((s) => isSectorIndex(s.symbol)).length;
+  const sellH = showSectorSells ? rawSellH : rawSellH.filter((s) => !isSectorIndex(s.symbol));
+  const sellWarn = showSectorSells ? rawSellWarn : rawSellWarn.filter((s) => !isSectorIndex(s.symbol));
+  const sellS = showSectorSells ? rawSellS : rawSellS.filter((s) => !isSectorIndex(s.symbol));
   const unavailable = active?.unavailable ?? [];
   const empty =
     buyA.length + buyW.length + buyB.length + sellH.length + sellWarn.length +
@@ -283,14 +294,14 @@ export default function TodaySignalBanner({
   return (
     <div className="sig-banner">
       <div className="sig-banner-head">
-        <b>{isReplay ? `🔔 自选信号 · ${replayDate}` : "🔔 今日自选信号"}</b>
+        <b>{isReplay ? `自选动态 · ${replayDate}` : "自选动态"}</b>
         {isReplay && <span className="sig-asof replay">回放</span>}
         {scanned && (
           <span className={`sig-asof${asOf === "intraday" ? " intraday" : ""}`}>
             {asOf === "intraday" ? "盘中临时" : "收盘"}
           </span>
         )}
-        {scanTime && <span className="muted">上次扫描 {scanTime}</span>}
+        {scanTime && <span className="muted">扫描 {scanTime}</span>}
         {failed ? (
           <span
             style={{ color: "var(--error, #e5484d)", fontSize: "12px" }}
@@ -301,24 +312,26 @@ export default function TodaySignalBanner({
         ) : (
           <span className="muted">
             {scanned
-              ? `买·行动 ${buyA.length} · 买·等待 ${buyW.length} · 卖·硬 ${sellH.length} · 卖·预警 ${sellWarn.length} · 卖·提醒 ${sellS.length}`
+              ? `可行动买点 ${buyA.length} · 等待买点 ${buyW.length} · 标的转弱提醒 ${sellH.length + sellWarn.length}`
               : scanTime
-                ? `今日尚未扫描 · 上次扫描 ${scanTime}`
+                ? `今日尚未扫描 · 上次 ${scanTime}`
                 : "今日尚未扫描"}
           </span>
         )}
         <span className="sig-spacer" />
-        <input
-          type="date"
-          className="sig-date"
-          value={replayDate}
-          max={new Date(Date.now() - 86400_000).toISOString().slice(0, 10)}
-          onChange={(e) => {
-            setReplayDate(e.target.value);
-            setOpen(true);
-          }}
-          aria-label="选择回放交易日"
-        />
+        {(open || isReplay) && (
+          <input
+            type="date"
+            className="sig-date"
+            value={replayDate}
+            max={new Date(Date.now() - 86400_000).toISOString().slice(0, 10)}
+            onChange={(e) => {
+              setReplayDate(e.target.value);
+              setOpen(true);
+            }}
+            aria-label="选择回放交易日"
+          />
+        )}
         {isReplay ? (
           <>
             <button
@@ -360,6 +373,18 @@ export default function TodaySignalBanner({
       {open && scanned && (
         <div className="sig-groups">
           <RegimeRouteNote />
+          {hiddenSectorSellCount > 0 && (
+            <div className="muted sig-replay-note" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+              <span>
+                {showSectorSells
+                  ? `当前包含 ${hiddenSectorSellCount} 条板块指数（.SECTOR）转弱观察`
+                  : `已默认收起 ${hiddenSectorSellCount} 条未持仓板块指数（.SECTOR）的转弱提示，聚焦可交易 ETF/标的`}
+              </span>
+              <button type="button" className="btn small" onClick={() => setShowSectorSells((v) => !v)}>
+                {showSectorSells ? "收起板块指数" : "显示板块指数"}
+              </button>
+            </div>
+          )}
           {isReplay && (
             <div className="muted sig-replay-note">
               回放口径：当前自选 × 行情截至 {replayDate} 重算，含成分前视，仅形态参考，不构成买卖建议。

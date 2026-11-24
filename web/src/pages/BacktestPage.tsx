@@ -180,12 +180,20 @@ export default function BacktestPage() {
       {tab === "timing" && <BreadthTimingPanel />}
       {tab === "tech" && (
         <>
-      <div className="header">
-        <h1>回测工作台 · 模块 A（稳定上涨回调）</h1>
-        <p className="bt-sub">
-          自己选参数、跑全池或单个标的、看每笔买卖点。所有信号与
-          <b>线上系统用同一套规则</b>计算；术语悬停有解释。
-        </p>
+      <div className="pg-head">
+        <div className="pg-head-title">
+          <h1>回测工作台</h1>
+          <p className="pg-head-sub">
+            自己选参数、跑全池或单个标的、看每笔买卖点。所有信号与
+            <b>线上系统用同一套规则</b>计算；术语悬停有解释。
+          </p>
+        </div>
+        <div className="pg-head-kv">
+          <span className="pg-kv">
+            <span className="k">交易模块</span>
+            <b>{options?.modules.find((m) => m.value === module)?.label ?? module}</b>
+          </span>
+        </div>
       </div>
 
       {error && <div className="fund-errors">{error}</div>}

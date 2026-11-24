@@ -1,0 +1,108 @@
+{
+  "schema": "buy-side-method-reference/1",
+  "created_at": "2026-11-05",
+  "scope": "Research conventions and saved-data evaluation, not a replacement definition registry or trading rule",
+  "sources": [
+    {
+      "id": "jkp-current",
+      "url": "https://github.com/bkelly-lab/jkp-data/blob/5429dcb786155228135df840ca97f9e33920c5c0/CHANGELOG_DATA.md",
+      "version": "5429dcb786155228135df840ca97f9e33920c5c0",
+      "checked_at": "2026-11-04",
+      "reading_scope": "2026-11-01 change log and selected accounting/scaling tests; not a full JKP factor replication",
+      "adopt": [
+        "Use current Python repository and version-specific definitions",
+        "Quarterly TTM requires consecutive fiscal quarters"
+      ],
+      "local_application": "Annual GP/assets input is not quarterly TTM; no reason to replace annual source or fill missing values",
+      "exclude": [
+        "Old SAS pipeline as current implementation",
+        "Universal minimum-five-industry deletion",
+        "Assuming JKP quarterly changes improve our annual GP returns"
+      ]
+    },
+    {
+      "id": "tidy-portfolios",
+      "url": "https://github.com/tidy-finance/py-tidyfinance/blob/c67253aafab1f48eb798da933dc94a0fd5fdddb5/tidyfinance/portfolios.py",
+      "version": "c67253aafab1f48eb798da933dc94a0fd5fdddb5",
+      "checked_at": "2026-11-04",
+      "reading_scope": "compute_portfolio_returns and related aggregation/formation source",
+      "adopt": [
+        "Zero return is a value; missing return must remain unknown",
+        "Minimum size belongs to a specified aggregation stage, not a universal trading exclusion",
+        "Formation and holding periods must remain distinct"
+      ],
+      "local_application": "Portfolio-date min size defaults1; bivariate threshold applies main portfolio-date across secondary buckets. Local industry budget and singleton rule remain explicitly local.",
+      "exclude": [
+        "Treating example5 as mandatory international standard",
+        "Installing whole package or replacing research engine"
+      ]
+    },
+    {
+      "id": "aqr-construction",
+      "url": "https://www.aqr.com/insights/research/journal-article/craftsmanship-alpha-an-application-to-style-investing",
+      "version": "2017-12-31 official page; JPM PDF",
+      "checked_at": "2026-11-04",
+      "reading_scope": "Official abstract and selected construction/cost discussion",
+      "adopt": [
+        "Evaluate signal choice, holdings construction and trading cost jointly"
+      ],
+      "local_application": "Reuse saved G1/FI30/FH30 and global negative control; separate gross increment and cost difference.",
+      "exclude": [
+        "Attributing local70/85 thresholds to AQR",
+        "Importing published performance to local account"
+      ]
+    },
+    {
+      "id": "robeco-conservative",
+      "url": "https://www.robeco.com/docm/docu-202302-guide-to-conservative-investing.pdf",
+      "version": "2023-02 guide; not live product specification",
+      "checked_at": "2026-11-04",
+      "reading_scope": "Conservative formula passage and guide overview",
+      "adopt": [
+        "Risk filtering and return information are distinct design choices"
+      ],
+      "local_application": "Net payout yield, GP/assets and operatingCFO/assets are different variables; retain local definitions.",
+      "exclude": [
+        "Copying1000/500/100-stock or3year-vol parameters to our account",
+        "Calling local60day-total-vol idiosyncratic volatility",
+        "Using old illustrative returns as current expected return"
+      ]
+    },
+    {
+      "id": "factorbench-evaluation",
+      "url": "https://arxiv.org/html/2610.06947v1",
+      "version": "v1 2026-10-03",
+      "checked_at": "2026-11-04",
+      "reading_scope": "Abstract, section3.3 factor/pool/portfolio protocols; not released-code replication",
+      "adopt": [
+        "Factor, factor-pool distinctness and after-cost portfolio evidence are separate levels"
+      ],
+      "local_application": "Existing score_relationship supplies score comparison; new portfolio-review supplies same-month gross/net and baseline increment. Active-return correlation is not factor-score redundancy or regression alpha.",
+      "exclude": [
+        "Full FactorBench benchmark claim",
+        "Treating many factors or highIC as portfolio improvement",
+        "Test period selection or new model training"
+      ]
+    }
+  ],
+  "local_definitions": [
+    {
+      "id": "annual_gp_assets",
+      "formula": "(consolidated operating revenue - consolidated operating cost) / same-report year-end total assets",
+      "not_equivalent_to": [
+        "operating_profit_assets",
+        "operating_cfo_assets",
+        "net_payout_yield"
+      ],
+      "availability": "qualified publication_date strictly earlier than decision_date; do not certify original publisher PIT from downstream rows"
+    },
+    {
+      "id": "vol60",
+      "meaning": "60-trading-observation total return volatility",
+      "not_equivalent_to": [
+        "idiosyncratic_volatility"
+      ]
+    }
+  ],
+  "current_adoption": "Source conventions and existing result review only; no automatic return/holding change"
+}

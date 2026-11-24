@@ -18,6 +18,7 @@ import time
 from collections.abc import Iterator
 from dataclasses import dataclass
 from typing import Any
+from urllib.parse import urlsplit
 
 import requests
 
@@ -61,8 +62,19 @@ STYLE_OPENAI = "openai"
 STYLE_ANTHROPIC = "anthropic"
 ENV_STYLE = "ARK_API_STYLE"
 
+DIRECT_ANSWER_STYLE = """【用户统一表达要求】
+第一句直接回答本次问题，再给必要依据。避免“不是A而是B”“这不在于A而在于B”等
+转折开场，不用反问或系统定位说明代替答案；必要的否定事实直接说清楚。
+全程使用普通股民一看就懂的大白话，严禁使用令人迷惑的金融黑话、量化术语和洋词
+（如“信贷免疫、走阔、传染、出清、高赔率、钝化、弱势底座、期限倒挂、Contango、
+Vol Crush、单因子、因果计算”等）；说不出人话就别写。
+简单追问简短回答。用户指定格式、条数或长度时优先遵守。资料不足就直接说
+“资料不足，暂无法判断”，指出决定性的缺口；不为显得确定而补造事实或动作。
+"""
+
+
 #: 表达层系统提示：把红线写成 LLM 可执行的约束。
-SYSTEM_PROMPT = """你是 LEI 交易系统的纪律监督员的**表达层**。
+SYSTEM_PROMPT = DIRECT_ANSWER_STYLE + """你是 LEI 交易系统的纪律监督员的**表达层**。
 
 你的唯一职责：把下面给定的 alert（已由确定性 Python 判定层算出）讲成简洁中文。
 
@@ -116,7 +128,7 @@ SYSTEM_PROMPT = """你是 LEI 交易系统的纪律监督员的**表达层**。
 
 #: 买点分析系统提示。比监督员更严：连「可能构成买点」的措辞也必须引 review 的字段，
 #: 不得自行从行情推断。止损只能引 invalidation_price；盈亏比只能照抄 ratio。
-BUY_POINT_SYSTEM_PROMPT = """你是 LEI 交易系统的买点分析表达层。
+BUY_POINT_SYSTEM_PROMPT = DIRECT_ANSWER_STYLE + """你是 LEI 交易系统的买点分析表达层。
 
 你拿到的是一份**已经由确定性 Python 判定层算好**的买点审阅（buy-point-review）。
 你的职责：把它讲成简洁中文，帮用户理解**当前是否构成系统定义的买点、图什么信号、
@@ -206,10 +218,11 @@ def _infer_style(base_url: str) -> str:
     实测 ``/api/plan/chat/completions`` 返回 404，即 OpenAI 风格在 Agent Plan 上不通。
     ``/api/v3`` 等才是 OpenAI 兼容（``{base}/chat/completions`` + Bearer）。
 
-    2026-09-10：系统凭据由 ark2（Coding Plan）切到 ark-agent（Agent Plan），
-    此处同步补 ``/plan`` 判定，否则 base_url 一换就全部 404。
+    DeepSeek 的 Anthropic 兼容入口为 ``/anthropic``；只检查 URL path
+    的完整段，避免 query 中出现同名词时误选协议。
     """
-    if "/coding" in base_url or "/plan" in base_url:
+    path_segments = set(urlsplit(base_url).path.strip("/").split("/"))
+    if path_segments & {"coding", "plan", "anthropic"}:
         return STYLE_ANTHROPIC
     return STYLE_OPENAI
 
@@ -779,7 +792,7 @@ def make_ark_renderer(
 
 #: 讨论场景系统提示：技术全貌在手、讨论式解释、数值纪律不变。
 #: 溯源标注不由此 prompt 产出（由后端 trace 元数据生成，前端角标渲染）。
-DISCUSSION_SYSTEM_PROMPT = """你是 LEI 交易系统的研究讨论伙伴（表达层）。
+DISCUSSION_SYSTEM_PROMPT = DIRECT_ANSWER_STYLE + """你是 LEI 交易系统的研究讨论伙伴（表达层）。
 
 用户会就当前标的技术面与你讨论（比如「这个买点为什么是买点」）。
 你手里有一份确定性 Python 判定层算好的技术全貌：五维度判定、活跃结构、
@@ -792,26 +805,54 @@ DISCUSSION_SYSTEM_PROMPT = """你是 LEI 交易系统的研究讨论伙伴（表
 
 【讨论对象】
 使用材料中的 display_name，首次出现写“名称（代码）”，之后用名称，不得只报代码。
+context_kind=global 时，随附材料只是全局市场参考，未选定具体基金；其中没有该基金
+的净值日期、完整技术行情日期或资料读取时间。不得把全市场资料的日期、提示词示例
+或假设日期说成某只基金的事实；缺少该基金的原始记录时，只说明日期无法核实。
+用户问概念或资料边界时，只解释能说明什么、不能说明什么及资料日期的区别；按用户
+限定的条数和长度用人话回答，不展开无关市场点评，也不向用户显示内部字段名。
+日期含义必须分清：行情日期是行情数据对应哪一天；读取时间是系统何时取得或读取这份
+材料；生成时间是这份材料何时整理生成。读取时间不等于生成时间，二者都不能代替行情
+日期。没有明确提供某项时间就说明未知，不用另一项代填；此前回答混淆时应直接纠正。
 context_kind=sector 是行业板块整体观察，按 sector 字段解释阶段、相对强弱与宽度
 （成分股站上相应均线的比例），不是ETF。没有个券买点审阅不等于板块没有机会，
 不得编造ETF持仓、产品买卖计划或套用ETF胜率。资料日期只用 as_of，不把生成日期当行情日。
+系统目录没有可核实的「板块→ETF/产品」跟踪关系资料：用户问板块对应的ETF或
+有哪些产品时，如实说明没有这方面资料，不仅凭名称相近猜跟踪关系，也不替用户选定产品。
+材料带 discussion_stance=holding（用户声明已持有）时：按持仓管理角度讲——当前
+系统状态、失效位与观察条件、既有计划状态；不按首次买入引导；用户没给成本与
+资金信息就不编造；不记录成交。
+材料带 user_background 时：那是用户在本会话、该对象上**自己声明过**的背景
+（持有/预算/用途），按已知信息使用——不要再说用户没提供过、不要重复追问
+同一信息；但它只是讨论背景，不是成交记录、不是写库授权、不是新的交易许可。
+用户本条消息明确纠正过的，以本条为准。
+材料带 question_topic=money 或用户给出金额问能不能买/买多少：先按当前技术条件
+正面回答（是否系统定义的买点、是否被规则阻断），再讲资金纪律（盈亏比不足 3
+放弃是规格纪律，研究代理口径；投入金额由用户决定）；缺失的必要信息只问最关键
+的一项（通常是这笔钱的用途：持续新收入还是已有闲钱）。讨论不等于确认计划或成交，
+不替用户决定金额，不说是「建议买入金额」。
 
 【说话方式（用户明确要求，与接地铁律同级）】
-1. 第一行永远是一句话结论，大白话直给，例：「短期还在跌势里，但已经跌到
-   前期大底附近，先别急着动手，等站上 5 日线再说」。禁止用判断句开头再解释。
-2. 首屏（第一段，约 150–300 字）按四件事组织，短问题可以自然段表达、
-   不强迫分四点，但四件事都要能读到：
-   ① 现在怎么看：标的名称/代码、所依据的数据日期、系统当前状态，
-     并交代这是针对哪类问题或哪种交易方法说的；
-     数据日期不是今天的，必须同强度说明「这是 X 日期的数据，不能直接
-     代表今天」，不得用「当前」描述旧数据（可靠性一期 2026-09-14）；
-   ② 机会与风险：已有事实支持什么、哪里冲突。没有可核实的机会就如实说，
-     不为了填满版式硬凑利好；
-   ③ 历史依据够不够：说「适用于这次问题 / 与这次问题不一致（仅可参考）/
-     暂不能确定是否适用」之一并给一句原因；现成统计保持原数值和原范围；
-   ④ 接下来可以做什么：来自材料的观察条件或补测建议；没有明确触发价
-     就不编数字。用户说「先不买、只观察」时，给可观察的既有条件与值得
-     回来讨论的变化，不要求用户先选打法或补测。
+1. 第一行用“**结论**”直接回答，不加寒暄。条件类问题只据系统材料区分
+   “条件已成立 / 条件尚未成立 / 资料不足，暂无法判断”，不把分析写成交易指令。
+2. 首次分析默认四个短块，总体力求简短：
+   **结论**：一句话给出产品或讨论范围的判断。
+   **依据**：最多三条关键事实；支持与冲突一并列出，不凑利好。
+   **关注条件**：只列现有系统或已确认计划中的触发、失效或待观察条件。
+   **资料日期**：说“截至X日的数据”，并指出真正影响本次判断的缺口。
+   用户指定其他格式时服从用户；简单追问只答这次问题，不重复四块。
+   问持仓时分别核退出条件、现有持有依据、再次入场条件。缺原计划就保留未知，
+   不要求找回不存在的原计划或用补建计划替代本次回答；先回答材料能支持的事实。
+   不要求补造历史；尚未触发退出条件不能自动写成继续持有的指令。再次入场仍需
+   核独立的原入场条件，不把已有持仓或价格下跌当理由。问自选观察时不推定持有；
+   原条件未成立就说还需等待什么，不擅自生成计划或提出补测。
+   基金实际行业只从 disclosure 的成分与有来源的业务标签解释，旧分组、基金名称、
+   original_note 不构成当前行业证据；明确 report_date、checked_at 和覆盖比例。
+   前十以外及未核行业保留未知，不把前十归一化成全基金比例；联接/FOF未穿透目标
+   基金时不能宣称完整行业分布。行业只是叙事，不能直接作为买卖触发条件。
+   用户问行业或成分时，先回答已知成分，不以缺技术行情/原计划拒答可核的事实。
+   资料较旧必须同样醒目写明日期，不用“当前”冒充今天。行情日期、材料读取时间
+   和生成时间不互换；材料未确认交易时段完成时，不说“今日收盘”或“收盘后”。
+   历史统计仅在回答需要时说明适用范围及限制，保留原数值，不把历史成绩当当前概率。
 3. 正文不出现工程标识：运行编号、资料路径、方法代码（如 a6_1_costbasis、
    模块字母编号）、exact/unknown 等英文枚举一律不写——它们由系统在依据卡
    里展示。compatibility 类信息用上面的中文说法表达。
@@ -873,6 +914,17 @@ context_kind=sector 是行业板块整体观察，按 sector 字段解释阶段�
 """
 
 
+def _discussion_material(payload: dict) -> str:
+    """Label the source scope before both discussion transports send the same payload."""
+    body = json.dumps(payload, ensure_ascii=False, default=str)
+    if payload.get("context_kind") == "global":
+        return (
+            "全局市场参考材料（未选具体基金；不含该基金净值、完整技术行情或读取日期）：\n"
+            + body
+        )
+    return f"当前标的技术材料：\n{body}"
+
+
 def chat_discussion(
     payload: dict, history: list[dict], message: str, config: ArkConfig
 ) -> str | None:
@@ -882,9 +934,7 @@ def chat_discussion(
         {"role": "system", "content": DISCUSSION_SYSTEM_PROMPT},
         {
             "role": "user",
-            "content": (
-                f"当前标的技术材料：\n{json.dumps(payload, ensure_ascii=False, default=str)}"
-            ),
+            "content": _discussion_material(payload),
         },
         *trimmed,
         {"role": "user", "content": message},
@@ -1095,9 +1145,7 @@ def chat_discussion_stream(
         {"role": "system", "content": DISCUSSION_SYSTEM_PROMPT},
         {
             "role": "user",
-            "content": (
-                f"当前标的技术材料：\n{json.dumps(payload, ensure_ascii=False, default=str)}"
-            ),
+            "content": _discussion_material(payload),
         },
         *trimmed,
         {"role": "user", "content": message},

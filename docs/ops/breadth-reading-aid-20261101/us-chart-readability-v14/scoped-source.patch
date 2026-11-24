@@ -1,0 +1,293 @@
+--- a/web/src/components/observation-library/ErpCrossChart.tsx
++++ b/web/src/components/observation-library/ErpCrossChart.tsx
+@@ -10,6 +10,7 @@
+ import { comparedErpEvents, erpEventMarkers, hasErpPriceHistory, DEFAULT_ERP_SIGMAS } from "./erpComparisonDisplay";
+ import ErpSensitivitySummary from "./ErpSensitivitySummary";
+ import { usErpBands, usErpEvents } from "./usErpBands";
++import { groupUsErpMarkers } from "./usErpMarkerGroups";
+ import "./erpCrossChart.css";
+ 
+ type PriceKey = "hs300" | "sse" | "sp500";
+@@ -29,7 +30,10 @@
+   const source = useProjectionSource(isUs ? "erp-us" : "erp-cn");
+   const [priceChoice, setPriceKey] = useState<PriceKey>("hs300");
+   const priceKey = isUs ? "sp500" : priceChoice === "sp500" ? "hs300" : priceChoice;
+-  const [years, setYears] = useState<number | null>(isUs ? 5 : null);
++  const [years, setYears] = useState<number | null>(isUs ? 3 : null);
++  const [overviewYears, setOverviewYears] = useState<number | null>(isUs ? 3 : null);
++  const [showAllMarkers, setShowAllMarkers] = useState(false);
++  const [selectedGroup, setSelectedGroup] = useState<{ endDate: string; count: number } | null>(null);
+   const bands = useMemo(() => isUs ? usErpBands(source.points) : source.bands ?? [], [isUs, source.points, source.bands]);
+   const [selectedId, setSelectedId] = useState("");
+   const [showHistory, setShowHistory] = useState(false);
+@@ -52,14 +56,24 @@
+     const priceDates = new Set(price?.dates.filter((_, i) => typeof price.values[i] === "number" && Number.isFinite(price.values[i])));
+     return usErpEvents(bands, sigmas).filter(event => priceDates.has(event.date));
+   }, [bands, sigmas, isUs, price]);
++  // Display density only: keep every crossing, group nearby dates without selecting price extrema.
++  const markerGroups = useMemo(() => isUs ? groupUsErpMarkers(events, aligned.dates, Math.max(1, Math.ceil(aligned.dates.length / 10))) : [], [events, aligned.dates, isUs]);
+   const selected = events.find(event => event.id === selectedId);
++  const groupedView = isUs && !showAllMarkers && !selected;
++  const plottedEvents = groupedView ? markerGroups.map(group => group.representative) : events;
++  const focusEvent = (id: string, group?: { endDate: string; count: number }) => {
++    if (!selected) setOverviewYears(years);
++    setSelectedId(id); setSelectedGroup(group ?? null); setYears(null);
++  };
++  const clearFocus = () => { setSelectedId(""); setSelectedGroup(null); setYears(isUs ? overviewYears : null); };
+   const latest = bands[bands.length - 1];
+   const readout = selected ?? latest;
+   const chartNode = useRef<HTMLDivElement>(null);
+   const enough = hasErpPriceHistory(aligned.values, aligned.price);
+   const toggleSigma = (sigma: ErpSigma) => {
+     if (sigmas.includes(sigma) && sigmas.length === 1) return;
+-    setSigmas(sigmas.includes(sigma) ? sigmas.filter(k => k !== sigma) : [...sigmas, sigma].sort()); setSelectedId("");
++    setSigmas(sigmas.includes(sigma) ? sigmas.filter(k => k !== sigma) : [...sigmas, sigma].sort());
++    if (selected) clearFocus();
+   };
+ 
+   useEffect(() => {
+@@ -73,7 +87,7 @@
+       const dated = new Map(aligned.dates.map((date, index) => [date, index]));
+       const selectedIndex = selected ? dated.get(selected.date) : undefined;
+       const prior = selected ? aligned.dates.findIndex(date => date >= shiftMonths(selected.date, -3)) : 0;
+-      const after = selected ? aligned.dates.findIndex(date => date > shiftMonths(selected.date, 6)) : -1;
++      const after = selected ? aligned.dates.findIndex(date => date > shiftMonths(selectedGroup?.endDate ?? selected.date, 6)) : -1;
+       const endIndex = after === -1 ? aligned.dates.length - 1 : Math.max(0, after - 1);
+       const startValue = selectedIndex === undefined ? aligned.dates[0] : aligned.dates[Math.max(0, prior)];
+       const endValue = selectedIndex === undefined ? aligned.dates[aligned.dates.length - 1] : aligned.dates[endIndex];
+@@ -85,11 +99,13 @@
+         return labelInterval === 1 || (Number(date.slice(5, 7)) - 1) % labelInterval === 0;
+       };
+       const axisLabel = { color: "#64748b", fontSize: 12 };
++      const groupById = new Map(markerGroups.map(group => [group.representative.id, group]));
+       chart.setOption({
+         animation: false, textStyle: { fontFamily: 'system-ui, -apple-system, "PingFang SC", sans-serif' },
+-        title: [{ text: "股债利差（百分点）", left: 0, top: 4, textStyle: { fontSize: 13, fontWeight: 600, color: "#173d68" } },
+-          { text: `${names[priceKey]}价格（点） · ${isUs ? "同日" : "对应周"}穿轨位置`, left: 0, top: "54%", textStyle: { fontSize: 13, fontWeight: 600, color: "#a47736" } }],
+-        grid: [{ left: 58, right: 94, top: 34, height: "43%" }, { left: 58, right: 94, top: "61%", height: "25%" }],
++        title: [{ text: isUs ? "股债利差（百分点） · 上轨相对便宜，下轨相对偏贵" : "股债利差（百分点）", left: 0, top: isUs ? "62%" : 4, textStyle: { fontSize: 13, fontWeight: 600, color: "#173d68" } },
++          { text: `${names[priceKey]}价格（点）${isUs ? " · 看触轨后上涨还是下跌" : " · 对应周穿轨位置"}`, left: 0, top: isUs ? 4 : "54%", textStyle: { fontSize: isUs ? 15 : 13, fontWeight: 600, color: isUs ? "#243f63" : "#a47736" } }],
++        grid: isUs ? [{ left: 62, right: 86, top: "70%", height: "19%" }, { left: 62, right: 86, top: 40, height: "47%" }]
++          : [{ left: 58, right: 94, top: 34, height: "43%" }, { left: 58, right: 94, top: "61%", height: "25%" }],
+         axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
+         tooltip: { trigger: "axis", confine: true, axisPointer: { type: "cross" }, formatter: (raw: unknown) => {
+           const series = Array.isArray(raw) ? raw : [raw];
+@@ -99,52 +115,67 @@
+           const date = aligned.dates[index]; if (!date) return "—";
+           const rails = comparisons.map(({ sigma, visible }) => `${sigma}σ：下轨 ${fmt(visible[index]?.lower, 3)} ／ 上轨 ${fmt(visible[index]?.upper, 3)}`).join("<br/>");
+           const crossings = events.filter(event => event.date === date).map(event => `${event.sigma}σ ${event.kind === "upper" ? "上穿上轨" : "下穿下轨"}`).join(" · ");
+-          return `<b>${date}</b><br/>股债利差：${fmt(aligned.values[index], 3)} 个百分点<br/>${rails}<br/>${names[priceKey]}：${fmt(aligned.price[index])}${aligned.priceDates[index] !== date ? `<br/>价格日：${aligned.priceDates[index] ?? "—"}` : ""}${crossings ? `<br/>${crossings}` : ""}`;
++          const group = groupedView ? markerGroups.find(group => group.representative.date === date) : undefined;
++          return `<b>${date}</b><br/>${names[priceKey]}：${fmt(aligned.price[index])}<br/>股债利差：${fmt(aligned.values[index], 3)} 个百分点<br/>${rails}${aligned.priceDates[index] !== date ? `<br/>价格日：${aligned.priceDates[index] ?? "—"}` : ""}${crossings ? `<br/>${crossings}` : ""}${group && group.count > 1 ? `<br/>至 ${group.endDate} 共 ${group.count} 次同向穿轨，点击展开` : ""}`;
+         } },
+         xAxis: [0, 1].map(index => ({ type: "category", gridIndex: index, data: aligned.dates, boundaryGap: false,
+           axisLabel: { ...axisLabel, show: index === 1, interval: showDateLabel, hideOverlap: true, showMinLabel: true, showMaxLabel: true, formatter: (date: string) => selected ? date.slice(2, 7) : date.slice(0, 7) }, axisLine: { lineStyle: { color: "#cbd5e1" } } })),
+-        yAxis: [0, 1].map(index => ({ type: "value", gridIndex: index, scale: true, splitNumber: 4,
+-          axisLabel: { ...axisLabel, formatter: (value: number) => index === 0 ? value.toFixed(1) : Math.round(value).toLocaleString("zh-CN") }, splitLine: { lineStyle: { color: "#e5eaf0" } } })),
++        yAxis: [0, 1].map(index => ({ type: "value", gridIndex: index, scale: true, splitNumber: isUs && index === 0 ? 3 : 4,
++          ...(isUs && index === 1 ? { min: (value: { min: number; max: number }) => value.min - (value.max - value.min) * .08,
++            max: (value: { min: number; max: number }) => value.max + (value.max - value.min) * .12 } : {}),
++          axisLabel: { ...axisLabel, ...(isUs && index === 1 ? { showMinLabel: false, showMaxLabel: false } : {}), formatter: (value: number) => index === 0 ? value.toFixed(1) : Math.round(value).toLocaleString("zh-CN") }, splitLine: { lineStyle: { color: "#e5eaf0" } } })),
+         dataZoom: [{ type: "inside", xAxisIndex: [0, 1], startValue, endValue }, { type: "slider", xAxisIndex: [0, 1], startValue, endValue, bottom: 4, height: 20, showDetail: false }],
+         series: [
+-          { name: "股债利差", type: "line", data: aligned.values, showSymbol: false, connectNulls: false, lineStyle: { color: "#173d68", width: 2.3 }, markLine: selectedLine },
++          { name: "股债利差", type: "line", data: aligned.values, showSymbol: false, connectNulls: false, lineStyle: { color: "#173d68", width: isUs ? 1.8 : 2.3 }, markLine: selectedLine },
+           { name: isUs ? "此前3年均值" : "3年均值", type: "line", data: comparisons[0]?.visible.map(row => row?.middle ?? null), showSymbol: false, connectNulls: false, lineStyle: { color: colors.middle, width: 1, type: "dotted" } },
+           ...comparisons.flatMap(({ sigma, visible }) => (["upper", "lower"] as const).map(key => ({
+             name: `${key === "upper" ? "上轨" : "下轨"} ${sigma}σ`, type: "line", data: visible.map(row => row?.[key] ?? null), connectNulls: false, showSymbol: false,
+             endLabel: { show: true, formatter: `${key === "upper" ? "+" : "−"}${sigma}σ`, color: colors[key], fontSize: 12, distance: 7 }, labelLayout: { moveOverlap: "shiftY" },
+             lineStyle: { color: colors[key], width: sigma === 2 ? 1.8 : 1.3, opacity: sigma === 1 ? .45 : sigma === 1.5 ? .7 : 1, type: sigma === 2 ? "dashed" : "dotted" },
+           }))),
+-          { name: names[priceKey], type: "line", data: aligned.price, xAxisIndex: 1, yAxisIndex: 1, connectNulls: false, showSymbol: false, lineStyle: { color: "#bd873c", width: 2 }, markLine: selectedLine },
+-          ...comparisons.flatMap(({ sigma }) => (["upper", "lower"] as const).flatMap(kind => ([0, 1] as const).map(panel => ({
++          { name: names[priceKey], type: "line", data: aligned.price, xAxisIndex: 1, yAxisIndex: 1, connectNulls: false, showSymbol: false, lineStyle: { color: isUs ? "#243f63" : "#bd873c", width: isUs ? 2.8 : 2 }, markLine: selectedLine },
++          ...comparisons.flatMap(({ sigma }) => (["upper", "lower"] as const).flatMap(kind => (isUs ? [1] as const : [0, 1] as const).map(panel => ({
+             name: `${sigma}σ ${kind === "upper" ? "上穿上轨" : "下穿下轨"}`, type: "scatter", xAxisIndex: panel, yAxisIndex: panel,
+-            data: erpEventMarkers(events.filter(event => event.sigma === sigma && event.kind === kind), aligned.dates, panel === 0 ? aligned.values : aligned.price),
++            data: erpEventMarkers(plottedEvents.filter(event => event.sigma === sigma && event.kind === kind), aligned.dates, panel === 0 ? aligned.values : aligned.price)
++              .map(marker => ({ ...marker, group: groupedView ? groupById.get(marker.eventId) : undefined })),
+             symbol: sigma === 2 ? "diamond" : sigma === 1.5 ? "circle" : "rect", symbolSize: sigma === 2 ? 12 : sigma === 1.5 ? 8 : 6,
+             itemStyle: { color: sigma === 2 ? colors[kind] : "#fff", borderColor: colors[kind], borderWidth: 1.5, opacity: 1 }, z: sigma === 2 ? 8 : 9, emphasis: { scale: 1.5 },
++            ...(isUs && groupedView ? { label: { show: true, position: kind === "lower" ? "top" : "bottom", distance: 10, color: colors[kind], fontSize: 12, fontWeight: 600,
++              backgroundColor: "rgba(255,255,255,.94)", borderRadius: 3, padding: [3, 5],
++              formatter: (params: { data: { eventId: string } }) => { const count = groupById.get(params.data.eventId)?.count ?? 1; return `估值${kind === "upper" ? "偏便宜" : "偏贵"}${count > 1 ? ` ×${count}` : ` · ${sigma}σ`}`; } }, labelLayout: { hideOverlap: true } } : {}),
+           })))),
+         ],
+       });
+       chart.on("click", (params: { seriesType?: string; data?: unknown }) => {
+-        const data = params.data as { eventId?: string } | undefined;
+-        if (params.seriesType === "scatter" && data?.eventId) setSelectedId(data.eventId);
++        const data = params.data as { eventId?: string; group?: { endDate: string; count: number } } | undefined;
++        if (params.seriesType === "scatter" && data?.eventId) {
++          if (isUs) focusEvent(data.eventId, data.group); else setSelectedId(data.eventId);
++        }
+       });
+     };
+     const resize = new ResizeObserver(renderWhenVisible); resize.observe(node); renderWhenVisible();
+     return () => { resize.disconnect(); chart?.dispose(); };
+-  }, [aligned, comparisons, events, selected, priceKey, years, enough, isUs]);
+-
+-  return <div className="erp-cross">
++  }, [aligned, comparisons, events, selected, priceKey, years, enough, isUs, markerGroups, groupedView, selectedGroup]);
++
++  return <div className={`erp-cross${isUs ? " erp-cross-us" : ""}`}>
+     <div className="erp-cross-controls"><label>对照股指 <select aria-label="对照股指" value={priceKey} onChange={event => setPriceKey(event.target.value as PriceKey)}>{isUs ? <option value="sp500">标普500</option> : <><option value="hs300">沪深300</option><option value="sse">上证指数</option></>}</select></label>
+-      <span className="op-windows" role="group" aria-label="对照期间">{windows.map(window => <button type="button" key={window.label} aria-pressed={years === window.years && !selected} onClick={() => { setSelectedId(""); setYears(window.years); }}>{window.label}</button>)}</span></div>
+-    <div className="erp-cross-sigmas" role="group" aria-label="同时显示轨道">{(isUs ? [1.5, 2] as const : [1, 1.5, 2] as const).map(sigma => <button type="button" key={sigma} aria-pressed={sigmas.includes(sigma)} disabled={sigmas.length === 1 && sigmas.includes(sigma)} onClick={() => toggleSigma(sigma)}>{sigma === 2 ? "◆ 2σ · 极端位置" : sigma === 1.5 ? "○ 1.5σ · 较早观察" : "□ 1σ · 更敏感"}</button>)}<span>可同时选；点图中标记对照价格</span></div>
+-    <p className="erp-cross-meaning"><span className="erp-cross-up">{isUs ? "上轨：相对估值改善，结合价格看修复" : "上轨：相对便宜，观察反弹线索"}</span><span className="erp-cross-down">下轨：相对偏贵，观察估值压力</span></p>
+-    <div className="erp-cross-reading"><strong>{selected ? `${selected.date} · ${selected.sigma}σ ${selected.kind === "upper" ? "上穿上轨" : "下穿下轨"}` : `最新 ${latest?.date ?? "—"}`}<br/>股债利差 {fmt(readout?.value)} <small>个百分点</small></strong>
++      <span className="op-windows" role="group" aria-label="对照期间">{windows.map(window => <button type="button" key={window.label} aria-pressed={years === window.years && !selected} onClick={() => { setSelectedId(""); setSelectedGroup(null); setYears(window.years); setOverviewYears(window.years); }}>{window.label}</button>)}</span></div>
++    <div className="erp-cross-sigmas" role="group" aria-label="同时显示轨道">{(isUs ? [1.5, 2] as const : [1, 1.5, 2] as const).map(sigma => <button type="button" key={sigma} aria-pressed={sigmas.includes(sigma)} disabled={sigmas.length === 1 && sigmas.includes(sigma)} onClick={() => toggleSigma(sigma)}>{sigma === 2 ? "◆ 2σ · 极端位置" : sigma === 1.5 ? "○ 1.5σ · 较早观察" : "□ 1σ · 更敏感"}</button>)}<span>{isUs ? "点标记，放大查看前后价格" : "可同时选；点图中标记对照价格"}</span></div>
++    {!isUs && <p className="erp-cross-meaning"><span className="erp-cross-up">上轨：相对便宜，观察反弹线索</span><span className="erp-cross-down">下轨：相对偏贵，观察估值压力</span></p>}
++    <div className="erp-cross-reading"><strong>{selected ? `${selected.date} · ${selected.sigma}σ ${selected.kind === "upper" ? isUs ? "相对偏便宜" : "上穿上轨" : isUs ? "相对偏贵" : "下穿下轨"}` : `最新 ${latest?.date ?? "—"}`}{isUs ? " · " : <br/>}股债利差 {fmt(readout?.value)} <small>个百分点</small></strong>
+       {comparisons.map(({ sigma, byDate }) => { const row = readout ? byDate.get(readout.date) : undefined; return <span key={sigma}><b>{sigma}σ</b> 下轨 <b className="erp-cross-down">{fmt(row?.lower)}</b> ／ 上轨 <b className="erp-cross-up">{fmt(row?.upper)}</b></span>; })}</div>
+-    <div className="erp-cross-event"><label>回看穿轨 <select aria-label="查看穿轨日期" value={selectedId} onChange={event => { setSelectedId(event.target.value); setYears(null); }}><option value="">完整历史 · 最新读数</option>{[...events].reverse().map(event => <option key={event.id} value={event.id}>{event.date} · {event.sigma}σ {event.kind === "upper" ? "上穿上轨" : "下穿下轨"}</option>)}</select></label>
+-      {selected && <button type="button" onClick={() => { setSelectedId(""); setYears(null); }}>返回完整历史</button>}<span className="erp-cross-legend"><i className="erp-cross-swatch erp-cross-erp"/>股债利差 <i className="erp-cross-swatch erp-cross-price"/>{names[priceKey]}</span></div>
++    <div className="erp-cross-event"><label>{isUs ? "回看位置" : "回看穿轨"} <select aria-label="查看穿轨日期" value={selectedId} onChange={event => {
++      const id = event.target.value; if (!id) { clearFocus(); return; }
++      focusEvent(id, groupedView ? markerGroups.find(group => group.representative.id === id) : undefined);
++    }}><option value="">{isUs ? "区间概览 · 最新读数" : "完整历史 · 最新读数"}</option>{[...(groupedView ? markerGroups.map(group => ({ ...group.representative, count: group.count, endDate: group.endDate })) : events.map(event => ({ ...event, count: 1, endDate: event.date })))].reverse().map(event => <option key={event.id} value={event.id}>{event.date}{event.count > 1 ? `—${event.endDate} · ${event.count}次` : ` · ${event.sigma}σ`} {event.kind === "upper" ? isUs ? "偏便宜" : "上穿上轨" : isUs ? "偏贵" : "下穿下轨"}</option>)}</select></label>
++      {selected && <button type="button" onClick={clearFocus}>{isUs ? "返回区间概览" : "返回完整历史"}</button>}
++      {isUs ? selected ? <span className="erp-cross-density">{selectedGroup && selectedGroup.count > 1 ? `已展开这段的 ${selectedGroup.count} 次穿轨` : "已放大穿轨前后价格"}</span>
++        : <label className="erp-cross-density"><input type="checkbox" checked={showAllMarkers} onChange={event => setShowAllMarkers(event.target.checked)} />显示每次穿轨</label>
++        : <span className="erp-cross-legend"><i className="erp-cross-swatch erp-cross-erp"/>股债利差 <i className="erp-cross-swatch erp-cross-price"/>{names[priceKey]}</span>}</div>
+     {source.isPending || (priceKey !== "hs300" && otherPrice.isPending) ? <p role="status">历史资料读取中…</p> : source.error || (priceKey !== "hs300" && otherPrice.isError) ? <p role="alert">对照资料暂时不可用。<button type="button" onClick={() => { source.retry(); if (priceKey !== "hs300") void otherPrice.refetch(); }}>重试</button></p>
+-      : enough ? <div ref={chartNode} className="erp-cross-chart" role="img" aria-label={`上方股债利差与所选标准差轨道，下方${names[priceKey]}价格；共用日期、光标和缩放；空心圆为1.5倍，实心菱形为2倍穿轨事件，两图按${isUs ? "同日" : "观测周"}对齐`} /> : <p className="op-empty">股债利差与价格缺少足够的共同历史。</p>}
++      : enough ? <div ref={chartNode} className="erp-cross-chart" role="img" aria-label={isUs ? `上方标普500价格主图，下方股债利差与${sigmas.join("和")}倍标准差轨道；${groupedView ? `密集穿轨合并为${markerGroups.length}处，标注偏贵或偏便宜，点击展开` : "显示每次穿轨"}；两图按同日对齐` : `上方股债利差与所选标准差轨道，下方${names[priceKey]}价格；共用日期、光标和缩放；空心圆为1.5倍，实心菱形为2倍穿轨事件，两图按观测周对齐`} /> : <p className="op-empty">股债利差与价格缺少足够的共同历史。</p>}
+     {isUs ? <>
+-      <p className="erp-cross-note">1.5σ观察较早偏离，2σ观察更极端的位置。两档是本地历史参照；盈利端月度更新，尚未验证触轨后的收益。<br/>利差 {source.points[0]?.date ?? "—"}—{latest?.date ?? "—"}；价格至 {price?.dates[price.dates.length - 1] ?? "—"}。仅标同日有价格的穿轨点。</p>
++      <p className="erp-cross-note">标记读股债相对估值，价格转折看上方走势。×数字表示合并的穿轨次数，点击可展开；同一区域反复触轨只作一段观察。两档为本地历史参考，触轨收益未验证。<br/>价格至 {price?.dates[price.dates.length - 1] ?? "—"}；利差至 {latest?.date ?? "—"}，盈利端月度更新。</p>
+       <details className="op-source"><summary>5年与10年国债：多提供什么信息</summary>
+         {curve !== null ? <p><b>{treasury?.as_of_us}</b> · 5年 <b>{fmt(y5)}%</b> ／ 10年 <b>{fmt(y10)}%</b> ／ 10年−5年 <b>{curve >= 0 ? "+" : ""}{(curve * 100).toFixed(0)} 基点</b>。来源：<a href="https://data.eastmoney.com/cjsj/zmgzsyl.html" target="_blank" rel="noreferrer">东方财富国债收益率</a>。</p> : <p>5年与10年的同日收益率暂未齐备，期限差留空。</p>}
+         <p>使用同一盈利收益率时，“盈利收益率−5年国债”比当前10年版本多出的部分，恰好是“10年−5年”的期限差。因此这里直接看两期限及其差值，避免把重复信息当成两份估值支持。</p>
+--- a/web/src/components/observation-library/erpCrossChart.css
++++ b/web/src/components/observation-library/erpCrossChart.css
+@@ -21,3 +21,8 @@
+ .erp-cross-chart { width: 100%; height: clamp(380px, calc(88vh - 360px), 540px); min-width: 0; }
+ .erp-cross-note { margin: 8px 0 12px; color: var(--text-secondary); font-size: 13px; line-height: 1.7; }
+ .erp-cross select:focus-visible, .erp-cross button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
++.erp-cross-us .erp-cross-chart { height: clamp(500px, calc(88vh - 290px), 650px); }
++.erp-cross-us .erp-cross-reading { margin-top: 12px; padding: 9px 12px; gap: 6px 20px; }
++.erp-cross-us .erp-cross-reading strong { font-size: 14px; }
++.erp-cross-density { color: var(--text-secondary); font-size: 12px; }
++.erp-cross-density input { accent-color: #243f63; }
+--- /dev/null
++++ b/web/src/components/observation-library/usErpMarkerGroups.ts
+@@ -0,0 +1,44 @@
++import type { ComparedErpEvent } from "./erpComparisonDisplay";
++
++export type UsErpMarkerGroup = {
++  representative: ComparedErpEvent;
++  members: ComparedErpEvent[];
++  count: number;
++  endDate: string;
++};
++
++/** Condense plotted markers only. Every original event stays available in members. */
++export function groupUsErpMarkers(
++  events: readonly ComparedErpEvent[],
++  dates: readonly string[],
++  maxSpanObservations: number,
++): UsErpMarkerGroup[] {
++  const span = Number.isInteger(maxSpanObservations) && maxSpanObservations >= 1 ? maxSpanObservations : 1;
++  const positions = new Map(dates.map((date, index) => [date, index]));
++  const seen = new Set<string>();
++  const eligible = events.filter(event => {
++    if (!positions.has(event.date) || seen.has(event.id)) return false;
++    seen.add(event.id);
++    return true;
++  }).sort((a, b) => positions.get(a.date)! - positions.get(b.date)! || a.sigma - b.sigma);
++
++  const groups: UsErpMarkerGroup[] = [];
++  let firstIndex = -1;
++  for (const event of eligible) {
++    const index = positions.get(event.date)!;
++    const group = groups[groups.length - 1];
++    if (!group || event.kind !== group.representative.kind || index - firstIndex > span) {
++      groups.push({ representative: event, members: [event], count: 1, endDate: event.date });
++      firstIndex = index;
++      continue;
++    }
++    group.members.push(event);
++    group.count++;
++    group.endDate = event.date;
++    // Representative is fixed to the earliest date. For a same-date tie, show the stronger rail.
++    if (event.date === group.representative.date && event.sigma > group.representative.sigma) {
++      group.representative = event;
++    }
++  }
++  return groups;
++}
+--- /dev/null
++++ b/web/src/components/observation-library/usErpMarkerGroups.test.mjs
+@@ -0,0 +1,70 @@
++import test from "node:test";
++import assert from "node:assert/strict";
++import { build } from "esbuild";
++
++const bundle = await build({ entryPoints: [new URL("./usErpMarkerGroups.ts", import.meta.url).pathname],
++  bundle: true, platform: "node", format: "esm", write: false });
++const { groupUsErpMarkers } = await import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text).toString("base64")}`);
++
++const dates = ["2026-10-01", "2026-10-02", "2026-10-03", "2026-10-04", "2026-10-05"];
++const event = (date, sigma = 1.5, kind = "upper") => ({ id: `${sigma}:${date}:${kind}`, date, sigma, kind,
++  value: 8, upper: 7, middle: 5, lower: 3 });
++
++test("span is anchored to the first member, never chained indefinitely", () => {
++  const raw = [event(dates[3]), event(dates[1]), event(dates[2]), event(dates[0])];
++  const groups = groupUsErpMarkers(raw, dates, 2);
++  assert.deepEqual(groups.map(group => [group.representative.date, group.endDate, group.count]), [
++    [dates[0], dates[2], 3], [dates[3], dates[3], 1],
++  ]);
++  assert.deepEqual(groups.flatMap(group => group.members.map(member => member.id)),
++    [dates[0], dates[1], dates[2], dates[3]].map(date => `1.5:${date}:upper`));
++});
++
++test("opposite-kind event starts a new group even within the span", () => {
++  const groups = groupUsErpMarkers([event(dates[0]), event(dates[1], 1.5, "lower"), event(dates[2])], dates, 3);
++  assert.deepEqual(groups.map(group => [group.representative.kind, group.count]),
++    [["upper", 1], ["lower", 1], ["upper", 1]]);
++});
++
++test("same-date thresholds are retained; representative prefers highest sigma only on earliest date", () => {
++  const firstInner = event(dates[0], 1.5), firstOuter = event(dates[0], 2);
++  const laterOuter = event(dates[1], 2);
++  const groups = groupUsErpMarkers([laterOuter, firstInner, firstOuter], dates, 2);
++  assert.equal(groups.length, 1);
++  assert.equal(groups[0].representative, firstOuter);
++  assert.deepEqual(groups[0].members.map(member => member.id), [firstInner.id, firstOuter.id, laterOuter.id]);
++  assert.equal(groups[0].count, 3);
++  assert.equal(groups[0].endDate, dates[1]);
++});
++
++test("only supplied observation dates are eligible; no event is shifted to another date", () => {
++  const absent = event("2026-10-01");
++  const kept = event("2026-10-02");
++  const groups = groupUsErpMarkers([absent, kept], dates.slice(1), 2);
++  assert.equal(groups.length, 1);
++  assert.equal(groups[0].representative, kept);
++  assert.deepEqual(groups[0].members.map(member => member.date), [kept.date]);
++});
++
++test("duplicate ids are deduplicated while original events and inputs stay unchanged", () => {
++  const first = Object.freeze(event(dates[0]));
++  const second = Object.freeze(event(dates[1], 2));
++  const inputs = Object.freeze([second, first, first]);
++  const axis = Object.freeze([...dates]);
++  const before = structuredClone(inputs);
++  const groups = groupUsErpMarkers(inputs, axis, 2);
++  assert.equal(groups.length, 1);
++  assert.equal(groups[0].count, 2);
++  assert.deepEqual(groups[0].members, [first, second]);
++  assert.equal(groups[0].members[0], first);
++  assert.deepEqual(inputs, before);
++  assert.deepEqual(axis, dates);
++});
++
++test("empty and invalid spans fall back to one observation", () => {
++  assert.deepEqual(groupUsErpMarkers([], dates, 2), []);
++  const raw = [event(dates[0]), event(dates[1]), event(dates[2])];
++  for (const invalid of [0, -2, NaN, Infinity, 1.5]) {
++    assert.deepEqual(groupUsErpMarkers(raw, dates, invalid).map(group => group.count), [2, 1]);
++  }
++});

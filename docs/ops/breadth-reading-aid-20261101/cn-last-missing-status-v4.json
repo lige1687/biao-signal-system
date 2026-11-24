@@ -1,0 +1,320 @@
+{
+  "schema": "cn-last-missing-status-v4/1",
+  "checked_at": "2026-11-02T05:16:37.997725+00:00",
+  "source_qualification": "docs/ops/breadth-reading-aid-20261101/qualify-cn-westock-v4.json",
+  "scope": "Only 2026-10-26 through 2026-10-30, eight symbols, 33 absent WeStock symbol-days",
+  "search_budget_used": 8,
+  "opened_sources": [
+    "SSE suspension page",
+    "Sina per-symbol announcement listings",
+    "issuer original 600621 halt PDF",
+    "SSE issuer resumption PDF pointer"
+  ],
+  "status_counts": {
+    "verified_suspended": 2,
+    "unknown": 31
+  },
+  "records": [
+    {
+      "symbol": "sh600621",
+      "date": "2026-10-26",
+      "status": "verified_suspended",
+      "effective_halt_interval": "2026-10-26 through 2026-10-27; resumed 2026-10-28",
+      "evidence": [
+        {
+          "kind": "issuer_original_announcement",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-10-26/1225621903.PDF",
+          "supports": "halt from 2026-10-26 open; expected at most two trading days"
+        },
+        {
+          "kind": "issuer_resumption_announcement_pointer",
+          "url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-10-28/600621_20261028_R80L.pdf",
+          "supports": "issuer resumption announcement dated 2026-10-28; PDF text could not be extracted by browser"
+        },
+        {
+          "kind": "secondary_announcement_listing",
+          "url": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllMemordDetail.php?stockid=600621",
+          "supports": "reports trading resumed 2026-10-28"
+        }
+      ],
+      "qualification_note": "No valid trading close should be inferred for either halt day."
+    },
+    {
+      "symbol": "sh600621",
+      "date": "2026-10-27",
+      "status": "verified_suspended",
+      "effective_halt_interval": "2026-10-26 through 2026-10-27; resumed 2026-10-28",
+      "evidence": [
+        {
+          "kind": "issuer_original_announcement",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-10-26/1225621903.PDF",
+          "supports": "halt from 2026-10-26 open; expected at most two trading days"
+        },
+        {
+          "kind": "issuer_resumption_announcement_pointer",
+          "url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-10-28/600621_20261028_R80L.pdf",
+          "supports": "issuer resumption announcement dated 2026-10-28; PDF text could not be extracted by browser"
+        },
+        {
+          "kind": "secondary_announcement_listing",
+          "url": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllMemordDetail.php?stockid=600621",
+          "supports": "reports trading resumed 2026-10-28"
+        }
+      ],
+      "qualification_note": "No valid trading close should be inferred for either halt day."
+    },
+    {
+      "symbol": "sh601326",
+      "date": "2026-10-26",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh601326",
+      "date": "2026-10-27",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh601326",
+      "date": "2026-10-28",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh601326",
+      "date": "2026-10-29",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh601326",
+      "date": "2026-10-30",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh605258",
+      "date": "2026-10-26",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh605258",
+      "date": "2026-10-27",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh605258",
+      "date": "2026-10-28",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh605258",
+      "date": "2026-10-29",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh605258",
+      "date": "2026-10-30",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh688121",
+      "date": "2026-10-29",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh688121",
+      "date": "2026-10-30",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh688496",
+      "date": "2026-10-26",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh688496",
+      "date": "2026-10-27",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh688496",
+      "date": "2026-10-28",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh688496",
+      "date": "2026-10-29",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sh688496",
+      "date": "2026-10-30",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz002717",
+      "date": "2026-10-26",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz002717",
+      "date": "2026-10-27",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz002717",
+      "date": "2026-10-28",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz002717",
+      "date": "2026-10-29",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz002717",
+      "date": "2026-10-30",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz002827",
+      "date": "2026-10-26",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz002827",
+      "date": "2026-10-27",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz002827",
+      "date": "2026-10-28",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz002827",
+      "date": "2026-10-29",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz002827",
+      "date": "2026-10-30",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz301468",
+      "date": "2026-10-26",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz301468",
+      "date": "2026-10-27",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz301468",
+      "date": "2026-10-28",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    },
+    {
+      "symbol": "sz301468",
+      "date": "2026-10-29",
+      "status": "unknown",
+      "effective_halt_interval": null,
+      "evidence": [],
+      "qualification_note": "No original issuer/exchange announcement or independent day-specific trade-status record was verified in this bounded pass; missing K-line alone is not evidence of suspension."
+    }
+  ],
+  "limits": [
+    "No K-line row is not by itself suspension evidence",
+    "Unknown rows remain unknown",
+    "No production cache or breadth value changed"
+  ]
+}

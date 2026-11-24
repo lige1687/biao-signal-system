@@ -2,7 +2,7 @@
 """每周自动抓取 NAAIM / AAII 情绪读数并落盘（launchd: com.lei.sentiment.weekly）。
 
 数据源（均为官方公开页面，纯 HTTP 可达，无需登录）：
-  - NAAIM 暴露指数：index.naaim.org/embeddable/number（官方嵌入组件，静态 HTML 里就是数值）
+  - NAAIM 暴露指数：index.naaim.org/embeddable/number 只有数字没有观测日期；仅诊断，不入库
   - AAII 多空调查：www.aaii.com/sentimentsurvey（页面含最新一期 Bullish/Neutral/Bearish 与
     "Week ending <Month DD, YYYY>"，调查周以周三收尾、周四发布）
 
@@ -23,7 +23,7 @@ import importlib.util
 import re
 import sys
 import urllib.request
-from datetime import date, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -67,30 +67,20 @@ def monday_of_week(d: date) -> date:
     return d - timedelta(days=d.weekday())
 
 
-def latest_release_monday(now: date) -> date:
-    """NAAIM 组件当前数值对应的调查周周一。
-
-    组件数值在「最近的周四（含今天）」发布（NAAIM 周四 07:00 UTC ≈ 15:00 北京时间），
-    对应调查周 = 该周四所在周的周一。补跑/延迟重试时据此回溯，不会把旧值贴错周。
-    """
-    days_back = (now.weekday() - 3) % 7  # Thursday == 3
-    release_thursday = now - timedelta(days=days_back)
-    return monday_of_week(release_thursday)
-
-
 def fetch_naaim() -> tuple[date, float] | None:
     html = http_get(NAAIM_URL)
-    m = re.search(r'<div class="h1 text-center">\s*([0-9]{1,3}(?:\.[0-9]+)?)\s*</div>', html)
+    m = re.search(r'<div class="h1 text-center">\s*([+-]?[0-9]{1,3}(?:\.[0-9]+)?)\s*</div>', html)
     if not m:
         log(f"NAAIM: 页面解析失败（数值组件结构变化？），跳过。长度={len(html)}")
         return None
     value = float(m.group(1))
-    if not (0 < value <= 100):
+    # NAAIM 问卷可表达空头及杠杆仓位，指数并非 0–100 的百分比。
+    if not (-200 <= value <= 200):
         log(f"NAAIM: 数值越界 {value}，疑似解析错误，跳过。")
         return None
-    week = latest_release_monday(date.today())
-    log(f"NAAIM: 暴露指数 {value}（调查周 {week}）")
-    return week, value
+    # embeddable/number 只有读数而没有观测日期；按运行日猜周会把旧值贴上新日期。
+    log(f"NAAIM: 读到 {value}，但组件没有观测日期；仅诊断，不写入最新周")
+    return None
 
 
 def fetch_aaii() -> tuple[date, float, float, float] | None:
@@ -148,7 +138,10 @@ def main() -> int:
         ok_any = True
         week, bull, neut, bear = aaii
         if not args.dry_run:
-            row = mod.build_aaii_row(week, bull, neut, bear, source="auto:aaii.com")
+            row = mod.build_aaii_row(
+                week, bull, neut, bear, source="auto:aaii.com",
+                first_fetched_at=datetime.now(UTC).isoformat(),
+            )
             path = mod.append_observation(SENTIMENT_ROOT, "aaii", row, mod.AAII_COLUMNS, mod.AAII_FILENAME)
             log(f"AAII: 已写入 {path}")
     else:

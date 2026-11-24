@@ -23,11 +23,11 @@ Output files (written to ``--root``, default ``LEI_SENTIMENT_ROOT`` or
     aaii.csv    →  survey_week, available_at, bullish, neutral, bearish,
                    source, license_status
 
-These column sets are exactly what ``load_naaim_observations`` /
-``load_aaii_observations`` require.
+The loaders require the core columns and also read the optional provenance
+columns added here. Older CSVs remain readable.
 
-Release-time semantics: ``available_at`` must be the *publication* time, never
-the survey-week start (the loader refuses to default it). Because we cannot
+Release-time semantics: ``available_at`` is an estimated publication time unless
+independently verified. Because we cannot
 verify each vendor's exact release clock offline, every path defaults
 ``available_at`` to the **Thursday on or after the survey date** at 07:00 UTC
 (NAAIM) / 08:00 UTC (AAII) — matching the Round 4 test convention — and lets
@@ -64,11 +64,11 @@ DEFAULT_ROOT = REPO_ROOT / "tests" / "fixtures" / "market_context" / "sentiment"
 # Canonical output schemas (must match the Round 4 loaders exactly).
 NAAIM_COLUMNS = [
     "survey_week", "available_at", "exposure_index", "source",
-    "license_status", "publication_delay_days",
+    "license_status", "publication_delay_days", "publication_time_basis", "first_fetched_at",
 ]
 AAII_COLUMNS = [
     "survey_week", "available_at", "bullish", "neutral", "bearish",
-    "source", "license_status",
+    "source", "license_status", "publication_time_basis", "first_fetched_at",
 ]
 
 NAAIM_FILENAME = "naaim.csv"
@@ -116,8 +116,9 @@ def build_naaim_row(
     exposure_index: float,
     available_at: datetime | str | None = None,
     source: str = "official",
-    license_status: str = "licensed",
+    license_status: str = "unknown",
     publication_delay_days: int = 3,
+    first_fetched_at: str | None = None,
 ) -> dict:
     """Build one NAAIM row in the canonical schema."""
     return {
@@ -127,6 +128,8 @@ def build_naaim_row(
         "source": source,
         "license_status": license_status,
         "publication_delay_days": int(publication_delay_days),
+        "publication_time_basis": "operator_supplied_unverified" if available_at else "estimated_from_survey_week",
+        "first_fetched_at": first_fetched_at or "",
     }
 
 
@@ -137,7 +140,8 @@ def build_aaii_row(
     bearish: float,
     available_at: datetime | str | None = None,
     source: str = "official",
-    license_status: str = "licensed",
+    license_status: str = "unknown",
+    first_fetched_at: str | None = None,
 ) -> dict:
     """Build one AAII row in the canonical schema."""
     return {
@@ -148,12 +152,16 @@ def build_aaii_row(
         "bearish": float(bearish),
         "source": source,
         "license_status": license_status,
+        "publication_time_basis": "operator_supplied_unverified" if available_at else "estimated_from_survey_week",
+        "first_fetched_at": first_fetched_at or "",
     }
 
 
 def dedupe_and_sort(df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
     """Drop duplicate survey_week rows (keep last) and sort by available_at."""
-    df = df[columns].copy()
+    # Older local files lack provenance columns; preserve their rows with blank
+    # provenance when a later append upgrades the schema.
+    df = df.reindex(columns=columns).copy()
     df = df.drop_duplicates(subset=["survey_week"], keep="last")
     df["_sort"] = pd.to_datetime(df["available_at"], utc=True)
     df = df.sort_values("_sort").drop(columns="_sort")
@@ -180,6 +188,15 @@ def append_observation(
 ) -> Path:
     """Append one row to the series file, dedupe by survey_week, and write."""
     existing = load_existing(root, filename, columns)
+    if row.get("first_fetched_at") and "first_fetched_at" in existing.columns:
+        same_auto = existing.loc[
+            (existing["survey_week"].astype(str) == row["survey_week"])
+            & (existing["source"].astype(str) == row.get("source")),
+            "first_fetched_at",
+        ].dropna()
+        earlier = [str(value) for value in same_auto if str(value).strip()]
+        if earlier:
+            row = {**row, "first_fetched_at": min([*earlier, row["first_fetched_at"]])}
     new_row = pd.DataFrame([row])
     combined = new_row if existing.empty else pd.concat(
         [existing, new_row], ignore_index=True,
@@ -245,6 +262,8 @@ def from_naaim_xlsx(
             "source": source,
             "license_status": license_status,
             "publication_delay_days": int(publication_delay_days),
+            "publication_time_basis": "estimated_from_survey_week",
+            "first_fetched_at": "",
         })
     return dedupe_and_sort(pd.DataFrame(rows), NAAIM_COLUMNS)
 
@@ -257,7 +276,7 @@ def from_aaii_csv(
     neutral_column: str | None = None,
     bearish_column: str | None = None,
     source: str = "aaii",
-    license_status: str = "licensed",
+    license_status: str = "unknown",
     release_offset_days: int | None = None,
 ) -> pd.DataFrame:
     """Convert an AAII member-export CSV into the canonical schema.
@@ -292,6 +311,8 @@ def from_aaii_csv(
             "bearish": float(r[s_col]),
             "source": source,
             "license_status": license_status,
+            "publication_time_basis": "estimated_from_survey_week",
+            "first_fetched_at": "",
         })
     return dedupe_and_sort(pd.DataFrame(rows), AAII_COLUMNS)
 
@@ -379,7 +400,7 @@ def _cmd_from_aaii(args) -> int:
 def _add_common_parser(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--root", help="输出目录（默认 LEI_SENTIMENT_ROOT 或 fixtures/sentiment）")
     parser.add_argument("--source", default="official")
-    parser.add_argument("--license-status", default="licensed",
+    parser.add_argument("--license-status", default="unknown",
                         help="licensed / public_delayed 等（public_delayed 不参与当前摘要）")
 
 

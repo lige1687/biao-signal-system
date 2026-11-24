@@ -23,9 +23,10 @@ interface PanelStatus {
  *   - 其余 → 平
  */
 function panelStatus(p: GlobalPanel): PanelStatus {
+  const medium = p.breadth_50 ?? p.breadth_20;
+  if (medium == null || !Number.isFinite(medium)) return { label: "未知", tone: "neutral" };
   const reversal = (p.alerts ?? []).some((a) => a.level === "reversal");
   if (reversal) return { label: "反转", tone: "reversal" };
-  const medium = p.breadth_50 != null ? p.breadth_50 : p.breadth_20;
   if (medium != null) {
     if (medium >= 80) return { label: "热", tone: "hot" };
     if (medium <= 20) return { label: "冷", tone: "cold" };

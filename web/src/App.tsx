@@ -6,6 +6,7 @@ import AgentConsole from "./components/AgentConsole";
 import DetailPage from "./pages/DetailPage";
 import FactorPanelPage from "./pages/FactorPanelPage";
 import FundamentalsPage from "./pages/FundamentalsPage";
+import FwdLedgerPage from "./pages/FwdLedgerPage";
 import NewsPage from "./pages/NewsPage";
 import SectorsPage from "./pages/SectorsPage";
 import DailyBriefPage from "./pages/DailyBriefPage";
@@ -15,6 +16,7 @@ import MindsetPage from "./pages/MindsetPage";
 import OpsPage from "./pages/OpsPage";
 import SupervisorPage from "./pages/SupervisorPage";
 import PortfolioPage from "./pages/PortfolioPage";
+import OnePageOverviewPage from "./pages/OnePageOverviewPage";
 import WorkspacePage from "./pages/WorkspacePage";
 import BacktestPage from "./pages/BacktestPage";
 import ResearchPage from "./pages/ResearchPage";
@@ -85,6 +87,7 @@ export default function App() {
         {/* 本轮研究展示：宽度/模块E/终审 轮次结果（静态数据页） */}
         <Route path="/research" element={<ResearchPage />} />
         {/* 实验报告库：全量实验/调研文档统一浏览（登记簿分类 + 一句话结论） */}
+        <Route path="/fwd" element={<FwdLedgerPage />} />
         <Route path="/library" element={<ReportsLibraryPage />} />
         {/* 文献学习库：以论文为线索的学习目录（只读学习层，不参与交易判定） */}
         <Route path="/learning" element={<LearningLibraryPage />} />
@@ -99,6 +102,8 @@ export default function App() {
         <Route path="/sentiment" element={<SentimentPage />} />
         {/* 我的持仓：基金/ETF 快照 + 赛道分组 + 系统结论（叙事标注层） */}
         <Route path="/portfolio" element={<PortfolioPage />} />
+        {/* 一页看全：左半屏手头持仓动态健康灯 + 右半屏今日基金与真龙头尖子生 */}
+        <Route path="/onepage" element={<OnePageOverviewPage />} />
         {/* 认知与心态：调研观点判断题卡片 + 温习篮子（纯认知沉淀，不进判定） */}
         <Route path="/mindset" element={<MindsetPage />} />
         {/* 未知路径兜底：回看盘工作台，避免白屏 */}

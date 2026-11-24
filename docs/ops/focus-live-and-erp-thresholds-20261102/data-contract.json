@@ -1,0 +1,38 @@
+{
+  "network_allowed": false,
+  "max_agents": 2,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "No writes outside assigned paths",
+    "No protected input changes, new agents or model replacement",
+    "Stop when exact gap or evidence boundary found; return limitations"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "mission": "Find usable latest existing data for whole Shanghai/Shenzhen A-share focus momentum without collecting anything",
+  "task_scope": [
+    "Inspect existing acquired-data metadata and active market breadth cache adapters for amount, adjusted close/pctChg, tradestatus/isST, lifecycle and latest date",
+    "Return exact recorded paths and dates of all-A history including recent 2026 rows, and minimal gaps versus 20 trading day mean amount plus20day momentum",
+    "Do not scan entire caches, compute models or modify source; metadata and targeted samples only"
+  ],
+  "read_only_paths": [
+    "docs/ops/acquired-data-catalog.json",
+    "docs/ops/acquired-data-catalog.md",
+    "docs/experiments",
+    "src/lei_signal",
+    "configs",
+    "data/cache"
+  ],
+  "write_paths": [
+    "docs/ops/focus-live-and-erp-thresholds-20261102/data-review.md"
+  ],
+  "expected_outputs": [
+    "data-review.md exact useful local/external pointer references; newest coverage; whether broad cache can serve amount and returns; minimal acquisition needed"
+  ]
+}

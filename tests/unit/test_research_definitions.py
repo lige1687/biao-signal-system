@@ -1,6 +1,7 @@
 """Research-only contracts; expected values are hand calculations, not copied engines."""
 
 import importlib
+import hashlib
 import json
 from copy import deepcopy
 from pathlib import Path
@@ -374,3 +375,108 @@ def test_trend_cross_uses_previous_valid_quote():
     assert np.isnan(r.cross_up.iloc[1])
     with pytest.raises(ValueError):
         api().historical_percentile(pd.Series([1.0, np.inf]))
+
+
+def test_lifecycle_states_on_real_registry():
+    registry = api().load_registry()
+    cards = api().validate_registry(registry)
+    refs = [f"{obj['id']}@{obj['version']}" for obj in registry['objects']]
+    # The active registry grows. Exact identities and evidence must remain valid.
+    assert len(refs) == len(set(refs)) == len(cards)
+    for ref, c in cards.items():
+        assert api().resolve(registry, ref) == c
+        assert all(dep in cards for dep in c['dependencies'])
+        lc = c["lifecycle"]
+        assert lc["state"] in set(api().LIFECYCLE_STATES) - {"production_approved"}
+        assert lc["basis"]
+        assert all((api().ROOT / path).is_file() for path in lc['basis'])
+        if lc["state"] != "exists":
+            assert lc['verification_scope'].strip()
+            assert any(path != api().LIFECYCLE_REGISTRY_PATH for path in lc['basis'])
+
+
+def test_frozen_a02_registry_snapshot_keeps_its_identity():
+    # A genuine retained snapshot: fixed counts belong here, not to current cards.
+    path = api().ROOT / 'docs/experiments/raw/a02-sma-maintenance-2026-09-29/registry-frozen.json'
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == '341f850936e263ca4294f7f90759597718e372db652d7d0071625dec8e81a2c1'
+    registry = api().load_registry(path)
+    cards = api().validate_registry(registry)
+    assert registry['version'] == '1.5.5'
+    assert len(cards) == 124
+    assert len({card['id'] for card in cards.values()}) == 121
+    assert cards['research.a02.sma_maintenance@1.0.0']['lifecycle']['state'] == 'exists'
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "remove_lifecycle",
+        "bad_state",
+        "production_approved",
+        "verified_without_evidence",
+        "verified_registry_only_basis",
+        "verified_without_scope",
+        "research_ready_without_report",
+        "missing_basis_file",
+    ],
+)
+def test_registry_rejects_lifecycle_violations(mutation):
+    bad = api().load_registry()
+    obj = next(c for c in bad["objects"] if c["id"] == "trend.sma50")
+    if mutation == "remove_lifecycle":
+        del obj["lifecycle"]
+    if mutation == "bad_state":
+        obj["lifecycle"]["state"] = "validated"
+    if mutation == "production_approved":
+        obj["lifecycle"] = {
+            "state": "production_approved",
+            "basis": ["tests/unit/test_research_definitions.py"],
+            "verification_scope": "not granted here",
+        }
+    if mutation == "verified_without_evidence":
+        obj["lifecycle"] = {"state": "verified", "basis": ["does/not/exist.py"]}
+    if mutation == "verified_registry_only_basis":
+        obj["lifecycle"] = {
+            "state": "verified",
+            "basis": ["docs/research/definitions.v1.json"],
+            "verification_scope": "only the registry itself",
+        }
+    if mutation == "verified_without_scope":
+        obj["lifecycle"] = {
+            "state": "verified",
+            "basis": ["tests/unit/test_research_definitions.py"],
+        }
+    if mutation == "research_ready_without_report":
+        obj["lifecycle"] = {
+            "state": "research_ready",
+            "basis": ["tests/unit/test_research_definitions.py"],
+            "verification_scope": "no research report yet",
+        }
+    if mutation == "missing_basis_file":
+        obj["lifecycle"]["basis"].append("tests/unit/missing_evidence.py")
+    with pytest.raises(ValueError):
+        api().validate_registry(bad)
+
+
+def test_lifecycle_upgrade_path_accepted():
+    reg = api().load_registry()
+    obj = next(c for c in reg["objects"] if c["id"] == "trend.sma50")
+    obj["lifecycle"] = {
+        "state": "research_ready",
+        "basis": [
+            "docs/research/definitions.v1.json",
+            "tests/unit/test_research_definitions.py",
+            "docs/experiments/INDEX.md",
+        ],
+        "verification_scope": "synthetic tests plus an archived research report",
+    }
+    cards = api().validate_registry(reg)
+    assert cards["trend.sma50@1.0.0"]["lifecycle"]["state"] == "research_ready"
+
+
+def test_old_registry_version_keeps_lifecycle_optional():
+    reg = api().load_registry()
+    reg["version"] = "1.2.0"
+    obj = next(c for c in reg["objects"] if c["id"] == "trend.sma50")
+    del obj["lifecycle"]
+    api().validate_registry(reg)  # pre-1.3.0 registries validate as before

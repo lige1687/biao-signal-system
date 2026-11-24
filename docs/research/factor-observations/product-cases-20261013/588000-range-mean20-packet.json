@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "kind": "research_batch",
+  "metadata": {
+    "reference": "research.price_volume.range_mean20@1.0.0",
+    "card": {
+      "scope": "固定8只不同指数/行业ETF近20个完整日线的平均日内波动范围；研究未来收盘下探信息，不比较同指数ETF产品",
+      "not_for": [
+        "production_trade",
+        "automatic_buy_or_sell",
+        "LEI_original_rule",
+        "account_return_claim"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "economic_price",
+        "currency": "CNY ETF economic price index",
+        "frequency": "daily",
+        "calendar": "eight-ETF aligned Shanghai daily calendar",
+        "sources": "qualified saved broad and sector OHLC evidence"
+      },
+      "universe": {
+        "version": "price-volume-eight-etf-20261004",
+        "eligibility": "Four broad and four distinct sector ETFs, all 8 evaluated on common date support",
+        "warmup": "252 consecutive target/anchor quoted sessions",
+        "missing": "Missing quote resets price state; no interpolation",
+        "quality_gate": "price-volume-universe-qualification-2026-10-04/qualification.json",
+        "degrade": "Historical arrival and complete corporate-action coverage unknown; no stock generalization"
+      },
+      "time": {
+        "observation_time": "After complete t close",
+        "available_at": "Historical provider arrival not certified",
+        "decision_at": "After t close in retrospective research only",
+        "execution_at": "No trade",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-04 research proposal"
+      },
+      "validation": {
+        "method": "Independent price-scale and missing-gap arithmetic; prefix invariance; mature labels and four fixed date evaluations",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_price_volume_path_information.py"
+        ],
+        "limitations": "Retrospective sources; eight selected ETFs, no unseen holdout and no actual traded returns"
+      },
+      "status": {
+        "definition_clarity": "fixed_research_proxy",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "verified_research_only",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/qualification.json",
+        "src/lei_signal/research/price_volume_path_information.py",
+        "tests/unit/test_price_volume_path_information.py"
+      ],
+      "id": "research.price_volume.range_mean20",
+      "version": "1.0.0",
+      "name": "20日每日波动范围平均值",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison",
+        "diagnostic"
+      ],
+      "spec_anchor": [
+        "LEI技术体系§2.5量价/波动观察研究扩展；非原文交易规则",
+        "用户2026-10-04授权大规模多资产因子验证"
+      ],
+      "spec_layer": "technical_risk_observation_research_extension",
+      "definition": {
+        "formula": "mean((H[j]-L[j])/C[j-1]) for j=t-19..t; same economic price scale, 20 consecutive quoted pairs",
+        "parameters": {
+          "candidate": "range_mean20",
+          "lookback": 20,
+          "warmup": 252,
+          "anchor": "510300.SS",
+          "baseline": [
+            "S",
+            "E",
+            "return1",
+            "return20",
+            "return60",
+            "volatility5",
+            "volatility20",
+            "volatility60",
+            "market_return20",
+            "market_volatility20",
+            "beta60",
+            "relative_return20",
+            "negative_fraction60",
+            "downside_rms60",
+            "return_autocorr1_60",
+            "current_negative_run",
+            "direction20",
+            "overnight_minus_intraday20",
+            "atr20_fraction",
+            "today_range",
+            "today_close_location",
+            "asset_510050",
+            "asset_510500",
+            "asset_588000",
+            "asset_512480",
+            "asset_512400",
+            "asset_512800",
+            "asset_512170"
+          ]
+        },
+        "endpoints": "Complete quoted t-19..t and their previous closes; future target begins t+1 close and ends t+21 close",
+        "unit": "ratio",
+        "direction": "Higher means wider daily ranges; no assumed risk or trading direction",
+        "transforms": "Economic OHLC; no price-level fitting, no zero-filled gaps; all sources are historical reconstructions"
+      },
+      "dependencies": [],
+      "lifecycle": {
+        "state": "verified",
+        "basis": [
+          "tests/unit/test_price_volume_path_information.py"
+        ],
+        "verification_scope": "Independent arithmetic, scale and missing/prefix boundaries passed; market effect separate"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "origin": "用户授权的价格路径候选，非LEI原始触发或过滤规则"
+    },
+    "card_kind": "registered",
+    "type": "feature",
+    "unit": "ratio",
+    "purpose": "calculation_only",
+    "entity_axis": "instrument",
+    "value_type": "continuous",
+    "protocol": {
+      "protocol_id": "factor-product-historical-observation-20261013",
+      "version": "1.0.0",
+      "kind": "calculation_only",
+      "data_mode": "historical_reconstruction",
+      "sha256": "9436ee768e2351fed362760a77053e9e584c2c998709f2b20277ec7b32f31b17"
+    },
+    "data_identity": {
+      "synthetic": false,
+      "source": {
+        "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/workflow-input.json",
+        "sha256": "aaf497e345404bacd0bc3db3899928de4ba5767fc10b332af5351dd13340c00d"
+      },
+      "qualification": "retrospective_only",
+      "data_cutoff": "2026-06-30",
+      "price_basis": "economic_price"
+    },
+    "code_identity": {
+      "path": "src/lei_signal/research/price_volume_path_information.py",
+      "sha256": "5986f81ae066f409e4295fa6f86fa584cc0a74e418cfcb833ee37cf11544db66"
+    },
+    "calendar": {
+      "timezone": "Asia/Shanghai",
+      "warmup_rows": 253,
+      "window_prior": "2026-06-01",
+      "window_first": "2026-06-02",
+      "window_last": "2026-06-30",
+      "window_pairs": 20,
+      "independent_value": 0.0458578365757186,
+      "absolute_difference": 0.0,
+      "price_basis": "economic_price"
+    },
+    "time_evidence": {
+      "observation_time": "2026-06-30T15:00:00+08:00",
+      "historical_availability": "unknown",
+      "available_at": null,
+      "current_qualified": false
+    },
+    "synthetic": false,
+    "definition_status": "fixed_research_proxy",
+    "data_status": "historical_reconstruction",
+    "implementation_status": "verified_research_only",
+    "effectiveness_status": "not_evaluated",
+    "production_authorization": "not_authorized"
+  },
+  "values": [
+    {
+      "observation_date": "2026-06-30",
+      "entity_id": "588000.SS",
+      "value": 0.0458578365757186,
+      "missing_reason": null
+    }
+  ],
+  "findings": [
+    {
+      "kind": "arithmetic_check",
+      "warmup_rows": 253,
+      "window_prior": "2026-06-01",
+      "window_first": "2026-06-02",
+      "window_last": "2026-06-30",
+      "window_pairs": 20,
+      "independent_value": 0.0458578365757186,
+      "absolute_difference": 0.0,
+      "price_basis": "economic_price"
+    }
+  ],
+  "sources": [
+    {
+      "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/workflow-input.json",
+      "sha256": "aaf497e345404bacd0bc3db3899928de4ba5767fc10b332af5351dd13340c00d"
+    },
+    {
+      "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/qualification.json",
+      "sha256": "113d8a9f4169a5750450c4270545989a31ba88c098d45bbb47d0c6b186c63f7d"
+    }
+  ],
+  "calculated_at": "2026-10-13T10:26:12.677277+08:00",
+  "definition_contract_sha256": "69b09783e58b93d2adc1e6bcb20d93492d729655c68c131f759448e19b5ef4d5"
+}

@@ -1,0 +1,473 @@
+{
+  "schema": "baostock-b03-proposed-gap-contract/1.0",
+  "job_id": "B03-remaining-gap-120-keys-2026-10-06",
+  "status": "READY_FOR_BOUNDED_RUNNER_PREPARATION_NETWORK_NOT_RELEASED",
+  "purpose": "Acquire source evidence for120 exact unqueried old gap keys; qualification only; no research effect, universe change or main-table repair",
+  "authorized_now": "Read-only reconciliation and concrete proposal/hand-off files only; no new provider session or data call",
+  "future_owner": "One parent-assigned Mac executor, no concurrent BaoStock worker",
+  "selected_universe": "Existing439 candidate historical CSI300 codes, fixed2022-01-04..2026-06-30; not a new10-stock research pool",
+  "source_audit": {
+    "library_file_id": "libfile_457a3c87e3d88191b8b8fc59d449fbbe",
+    "version": 0,
+    "zip_bytes": 21329,
+    "zip_sha256": "3ed11716738a46f4b544a2551048fb178b2e7bf885a012162021592a756fa9e7",
+    "original_gap_queue_sha256": "86efbc695762692dd4dff168e5bfa922a180549853586f677205a8b46e294578"
+  },
+  "selection_rule": "All31 never-queried code partitions sorted by descending exact remaining-key count then six-digit code ascending; first10 partitions in that order. No choice based on price, factor or future results. No buffers.",
+  "scope_counts": {
+    "old_gap_keys": 1944,
+    "normal_raw_observations_existing": 1601,
+    "provider_placeholders_existing": 106,
+    "never_queried_existing": 233,
+    "queried_no_return_existing": 4,
+    "selected_queries": 10,
+    "selected_exact_keys": 120,
+    "deferred_never_queried_keys": 113,
+    "deferred_codes": 21,
+    "main_table_repairs": 0
+  },
+  "provider": {
+    "source_id": "baostock_provider_api",
+    "host": "public-api.baostock.com",
+    "port": 10030,
+    "session": "one official-client default anonymous/public session",
+    "version": "0.9.3",
+    "protocol": "00.9.30",
+    "qualified_source_modules": [
+      {
+        "relative_path": "baostock/login/loginout.py",
+        "bytes": 4666,
+        "sha256": "91b27a6d0cbce5c41550371c4b336727a8e67ecf81bebbcd6302a37264a7624f",
+        "current_matches_B02": true
+      },
+      {
+        "relative_path": "baostock/util/socketutil.py",
+        "bytes": 3551,
+        "sha256": "248591168ad087fb9c91b64e8c909608082528ecbecf25541dcbce0fe9cfcd25",
+        "current_matches_B02": true
+      },
+      {
+        "relative_path": "baostock/common/contants.py",
+        "bytes": 11341,
+        "sha256": "fe7574dbdd2ca6087e58ce374948f6e7d9b7398dc64b3f4404ab88a2d7ee3792",
+        "current_matches_B02": true
+      },
+      {
+        "relative_path": "baostock/security/history.py",
+        "bytes": 10191,
+        "sha256": "fe653aa09c0f07e9f9479407c8f2f5455b4ec60c3a9571c652cd9343f7d0094f",
+        "current_matches_B02": true
+      },
+      {
+        "relative_path": "baostock/evaluation/season_index.py",
+        "bytes": 30420,
+        "sha256": "4a0c2fdc62f0161f47b52b9ff35690a5541db948ed0a2fcb719befa6f8f0bac7",
+        "current_matches_B02": true
+      },
+      {
+        "relative_path": "baostock/metadata/stock_metadata.py",
+        "bytes": 7237,
+        "sha256": "f24ff4fd6586d1063ac5feeb0ebf8210705a0f139eb15dba1d871e8dd585a5da",
+        "current_matches_B02": true
+      },
+      {
+        "relative_path": "baostock/data/resultset.py",
+        "bytes": 7489,
+        "sha256": "70882a035bc9c20991255d5495c31f68fabc923d313cd35652c33563141797a6",
+        "current_matches_B02": true
+      }
+    ],
+    "qualification_basis": "Observed installed client version/source hashes and successful independently audited anonymous public-protocol use; NOT independent wheel-origin verification.",
+    "current_source_hash_check_only": true,
+    "new_install_update_or_credentials": false
+  },
+  "queries": [
+    {
+      "query_id": "daily-1-601059",
+      "kind": "daily_raw",
+      "method": "query_history_k_data_plus",
+      "params": {
+        "code": "sh.601059",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+        "start_date": "2025-11-20",
+        "end_date": "2025-12-17",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "exchange": "XSHG",
+      "symbol": "601059",
+      "exact_old_gap_dates": [
+        "2025-11-20",
+        "2025-11-21",
+        "2025-11-24",
+        "2025-11-25",
+        "2025-11-26",
+        "2025-11-27",
+        "2025-11-28",
+        "2025-12-01",
+        "2025-12-02",
+        "2025-12-03",
+        "2025-12-04",
+        "2025-12-05",
+        "2025-12-08",
+        "2025-12-09",
+        "2025-12-10",
+        "2025-12-11",
+        "2025-12-12",
+        "2025-12-15",
+        "2025-12-16",
+        "2025-12-17"
+      ],
+      "exact_key_count": 20,
+      "existing_query_overlap": false
+    },
+    {
+      "query_id": "daily-2-601995",
+      "kind": "daily_raw",
+      "method": "query_history_k_data_plus",
+      "params": {
+        "code": "sh.601995",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+        "start_date": "2025-11-20",
+        "end_date": "2025-12-17",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "exchange": "XSHG",
+      "symbol": "601995",
+      "exact_old_gap_dates": [
+        "2025-11-20",
+        "2025-11-21",
+        "2025-11-24",
+        "2025-11-25",
+        "2025-11-26",
+        "2025-11-27",
+        "2025-11-28",
+        "2025-12-01",
+        "2025-12-02",
+        "2025-12-03",
+        "2025-12-04",
+        "2025-12-05",
+        "2025-12-08",
+        "2025-12-09",
+        "2025-12-10",
+        "2025-12-11",
+        "2025-12-12",
+        "2025-12-15",
+        "2025-12-16",
+        "2025-12-17"
+      ],
+      "exact_key_count": 20,
+      "existing_query_overlap": false
+    },
+    {
+      "query_id": "daily-3-001979",
+      "kind": "daily_raw",
+      "method": "query_history_k_data_plus",
+      "params": {
+        "code": "sz.001979",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+        "start_date": "2022-12-05",
+        "end_date": "2022-12-16",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "exchange": "XSHE",
+      "symbol": "001979",
+      "exact_old_gap_dates": [
+        "2022-12-05",
+        "2022-12-06",
+        "2022-12-07",
+        "2022-12-08",
+        "2022-12-09",
+        "2022-12-12",
+        "2022-12-13",
+        "2022-12-14",
+        "2022-12-15",
+        "2022-12-16"
+      ],
+      "exact_key_count": 10,
+      "existing_query_overlap": false
+    },
+    {
+      "query_id": "daily-4-002049",
+      "kind": "daily_raw",
+      "method": "query_history_k_data_plus",
+      "params": {
+        "code": "sz.002049",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+        "start_date": "2025-12-30",
+        "end_date": "2026-01-14",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "exchange": "XSHE",
+      "symbol": "002049",
+      "exact_old_gap_dates": [
+        "2025-12-30",
+        "2025-12-31",
+        "2026-01-05",
+        "2026-01-06",
+        "2026-01-07",
+        "2026-01-08",
+        "2026-01-09",
+        "2026-01-12",
+        "2026-01-13",
+        "2026-01-14"
+      ],
+      "exact_key_count": 10,
+      "existing_query_overlap": false
+    },
+    {
+      "query_id": "daily-5-002252",
+      "kind": "daily_raw",
+      "method": "query_history_k_data_plus",
+      "params": {
+        "code": "sz.002252",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+        "start_date": "2024-12-23",
+        "end_date": "2025-01-06",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "exchange": "XSHE",
+      "symbol": "002252",
+      "exact_old_gap_dates": [
+        "2024-12-23",
+        "2024-12-24",
+        "2024-12-25",
+        "2024-12-26",
+        "2024-12-27",
+        "2024-12-30",
+        "2024-12-31",
+        "2025-01-02",
+        "2025-01-03",
+        "2025-01-06"
+      ],
+      "exact_key_count": 10,
+      "existing_query_overlap": false
+    },
+    {
+      "query_id": "daily-6-002736",
+      "kind": "daily_raw",
+      "method": "query_history_k_data_plus",
+      "params": {
+        "code": "sz.002736",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+        "start_date": "2024-08-22",
+        "end_date": "2024-09-04",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "exchange": "XSHE",
+      "symbol": "002736",
+      "exact_old_gap_dates": [
+        "2024-08-22",
+        "2024-08-23",
+        "2024-08-26",
+        "2024-08-27",
+        "2024-08-28",
+        "2024-08-29",
+        "2024-08-30",
+        "2024-09-02",
+        "2024-09-03",
+        "2024-09-04"
+      ],
+      "exact_key_count": 10,
+      "existing_query_overlap": false
+    },
+    {
+      "query_id": "daily-7-301269",
+      "kind": "daily_raw",
+      "method": "query_history_k_data_plus",
+      "params": {
+        "code": "sz.301269",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+        "start_date": "2025-03-17",
+        "end_date": "2025-03-28",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "exchange": "XSHE",
+      "symbol": "301269",
+      "exact_old_gap_dates": [
+        "2025-03-17",
+        "2025-03-18",
+        "2025-03-19",
+        "2025-03-20",
+        "2025-03-21",
+        "2025-03-24",
+        "2025-03-25",
+        "2025-03-26",
+        "2025-03-27",
+        "2025-03-28"
+      ],
+      "exact_key_count": 10,
+      "existing_query_overlap": false
+    },
+    {
+      "query_id": "daily-8-600027",
+      "kind": "daily_raw",
+      "method": "query_history_k_data_plus",
+      "params": {
+        "code": "sh.600027",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+        "start_date": "2024-07-19",
+        "end_date": "2024-08-01",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "exchange": "XSHG",
+      "symbol": "600027",
+      "exact_old_gap_dates": [
+        "2024-07-19",
+        "2024-07-22",
+        "2024-07-23",
+        "2024-07-24",
+        "2024-07-25",
+        "2024-07-26",
+        "2024-07-29",
+        "2024-07-30",
+        "2024-07-31",
+        "2024-08-01"
+      ],
+      "exact_key_count": 10,
+      "existing_query_overlap": false
+    },
+    {
+      "query_id": "daily-9-600150",
+      "kind": "daily_raw",
+      "method": "query_history_k_data_plus",
+      "params": {
+        "code": "sh.600150",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+        "start_date": "2024-09-03",
+        "end_date": "2024-09-18",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "exchange": "XSHG",
+      "symbol": "600150",
+      "exact_old_gap_dates": [
+        "2024-09-03",
+        "2024-09-04",
+        "2024-09-05",
+        "2024-09-06",
+        "2024-09-09",
+        "2024-09-10",
+        "2024-09-11",
+        "2024-09-12",
+        "2024-09-13",
+        "2024-09-18"
+      ],
+      "exact_key_count": 10,
+      "existing_query_overlap": false
+    },
+    {
+      "query_id": "daily-10-600438",
+      "kind": "daily_raw",
+      "method": "query_history_k_data_plus",
+      "params": {
+        "code": "sh.600438",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,isST",
+        "start_date": "2026-02-25",
+        "end_date": "2026-03-10",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "exchange": "XSHG",
+      "symbol": "600438",
+      "exact_old_gap_dates": [
+        "2026-02-25",
+        "2026-02-26",
+        "2026-02-27",
+        "2026-03-02",
+        "2026-03-03",
+        "2026-03-04",
+        "2026-03-05",
+        "2026-03-06",
+        "2026-03-09",
+        "2026-03-10"
+      ],
+      "exact_key_count": 10,
+      "existing_query_overlap": false
+    }
+  ],
+  "factor_queries": [],
+  "security_basic_queries": [],
+  "historical_membership_queries": [],
+  "caps": {
+    "connect_attempts": 1,
+    "sessions": 1,
+    "anonymous_login_protocol_sends": 1,
+    "daily_queries": 10,
+    "data_protocol_sends": 10,
+    "factor_queries": 0,
+    "security_basic_queries": 0,
+    "attempts_per_data_query": 1,
+    "provider_internal_retries": 0,
+    "service_response_bytes": 2097152,
+    "minimum_seconds_between_protocol_sends": 2,
+    "socket_timeout_seconds": 30,
+    "whole_call_deadline_seconds": 30,
+    "automatic_pagination": false,
+    "automatic_reconnect": false,
+    "logout_protocol_send": false,
+    "local_output_bytes": 8388608,
+    "minimum_free_disk_bytes_before_and_during_run": 536870912,
+    "paid_spend_ceiling": 0
+  },
+  "permissions_and_cost": {
+    "observed_prior_B01_B02": "Public anonymous method succeeded without personal account or payment; current rights/terms are not certified by successful protocol calls.",
+    "proposed_access": "Use only existing default public access and no payments; no login to personal services, license acceptance, package install or settings change.",
+    "current_market_query_permission": "NOT_RELEASED_BY_THIS_PROPOSAL",
+    "required_release": "Parent/user explicitly releases exact B03 contract after offline runner review. Existing B01/B02 release does not authorize B03.",
+    "license_evidence": "Historical point-of-availability and full third-party redistribution license unresolved; preserve available official documentation. Raw-data cloud redistribution requires a separately established lawful scope.",
+    "stop_on_change": "Stop on new credential, payment, explicit agreement, denied access or unexpected permission; no bypass or alternate provider."
+  },
+  "representation_policy": {
+    "immutable_original_layers": [
+      "Exact received wire bytes",
+      "Original official-client decoded protocol text",
+      "Original client field/row snapshot including blank header",
+      "Column-key-only normalized records preserving scalar strings"
+    ],
+    "adjustflag": "Request and every returned daily row must bind raw3; known client empty header remains verbatim and is warned, never replaced. Nonempty contradictory flags stop further queries.",
+    "price_scale": "Raw only in isolated source directory; no old-qfq numeric comparison or splicing; adjustment factors are not applied.",
+    "classification": "A provider status1 row with valid structure/OHLC is normal raw evidence only, not repaired/wealth/real-time/trading qualification. Provider status0 rows remain separate placeholders; empty volume/amount strings stay empty.",
+    "exact_key_accounting": "Only selected120 old gap keys enter gap reconciliation. Preserve any additional returned dates inside the requested window separately; never generate keys from span endpoints or weekdays.",
+    "no_return": "Successful empty/partial date coverage is preserved as unknown/source-no-return, never synthetic prices.4 old terminal no-return keys are excluded from new requests.",
+    "metadata_units": "Volume/amount units and corporate-action meanings are not certified by field names; retain source strings and provenance.",
+    "no_transforms": [
+      "No fill zero/forward/backward",
+      "No successor merge",
+      "No main cache writes",
+      "No features/targets/returns/fits",
+      "No member or sector backfill"
+    ]
+  },
+  "stop_policy": [
+    "Do not connect before exact contract release plus successful B03 offline tests, CLI no-socket checks and current-client/source preflight.",
+    "Stop before first write if proposed fresh run directory already exists or free disk below536870912bytes; during run stop at storage cap/threshold, preserve existing files.",
+    "Stop on first transport/protocol/provider error, swallowed client exception, timeout, incomplete message or hidden pagination; one attempt only.",
+    "Stop on wrong code, schema, duplicate date, date outside requested window, contradictory row adjustflag or invalid OHLC; preserve response before qualification decision.",
+    "Known blank header is retained and reported; a successful empty record set is unknown rather than fabricated pass or network retry.",
+    "Stop at all declared caps or after10 data calls; close local socket without another protocol send. No fallbacks, automatic continuation to113 keys or rerun after partial result."
+  ],
+  "pre_dispatch_required": [
+    "Bind exact B03 contract bytes/sha256 and120-key CSV sha256 in adapted runner; reuse reviewed B02 guard kernel, not an unreviewed provider script.",
+    "Offline exact-plan/caps/error/empty/header/field/string/storage cases and no-socket CLI/preflight tests; do not weaken failed tests.",
+    "Check new installed package/source hashes and default public session before any network; current7 source hashes are planning evidence only.",
+    "Read current source hashes and B01/B02/new handoffs again before release; if any target keys newly acquired, stop and revise proposal rather than refetch."
+  ],
+  "required_outputs": [
+    "Exact executed contract and runner copy+sha256",
+    "query-manifest.json with params/send counts/response bytes/gap timing/source paths and hashes",
+    "receipt.json including failures,empty results and per-key source/status categories",
+    "Original wire/decoded/client/normalized layers",
+    "versions and preflight evidence",
+    "checksums.sha256",
+    "Read-only selected-key reconciliation and concise Chinese findings"
+  ],
+  "success_boundary": "All planned queries accounted for and evidence preserved within caps, with actual outcomes independently read back; not necessarily120 normal rows or any repaired main data. Historical membership/actions/full feature histories and target endpoints remain separate blockers."
+}

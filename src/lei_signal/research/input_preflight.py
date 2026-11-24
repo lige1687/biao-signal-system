@@ -443,3 +443,14 @@ def _resolve_closure(d, registry: dict, ref: str, _seen: dict | None = None) -> 
 
 
 __all__ = ["USES", "combine_checks", "inspect_input"]
+
+
+def inspect_workflow_input(payload: dict, contract: dict) -> dict:
+    """Shared workflow adapter; source identity qualification stays with root.
+
+    Legal missing rows remain observations with reasons. Invalid temporal input
+    raises ValueError from the causal builder before downstream evaluation.
+    """
+    from lei_signal.research.workflow_inputs import prepare_observations
+
+    return prepare_observations(payload, contract)

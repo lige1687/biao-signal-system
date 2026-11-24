@@ -1,0 +1,70 @@
+--- before/web/src/components/market-observation-alerts/index.tsx
++++ after/web/src/components/market-observation-alerts/index.tsx
+@@ -43,7 +43,7 @@
+   snapshot: AlertSnapshot; href: string; pending: boolean; onRead: () => void;
+   participation?: BreadthReadingPoint | null; breadth?: BreadthReadingResponse; points: AlertPoint[];
+ }) {
+-  const [reference, setReference] = useState<"dynamic50" | "stockcharts50" | "stockcharts200">("dynamic50");
++  const [reference, setReference] = useState<"dynamic50" | "stockcharts50">("dynamic50");
+   const fresh = s.quality === "ready";
+   const reading = fresh && participation?.date === s.latest?.date ? participation : null;
+   const interpretation = breadthInterpretation(reading);
+@@ -59,17 +59,15 @@
+   const latest = rows[rows.length - 1];
+   const boundsByDate = new Map((breadth?.observation?.history ?? []).map(p => [p.date, p.horizons["50"]]));
+   const fixed = BREADTH_EXTERNAL_REFERENCES.stockcharts;
+-  const low = reference === "stockcharts200" ? undefined : rows.map(p => reference === "stockcharts50"
++  const low = rows.map(p => reference === "stockcharts50"
+     ? p.breadth_50 == null ? null : fixed.sma50.lower
+     : boundsByDate.get(p.date)?.status === "ready" ? boundsByDate.get(p.date)!.lower : null);
+-  const high = reference === "stockcharts200" ? undefined : rows.map(p => reference === "stockcharts50"
++  const high = rows.map(p => reference === "stockcharts50"
+     ? p.breadth_50 == null ? null : fixed.sma50.upper
+     : boundsByDate.get(p.date)?.status === "ready" ? boundsByDate.get(p.date)!.upper : null);
+-  const chartPeriod = reference === "stockcharts200" ? "200" : "50";
+-  const lineOrder = chartPeriod === "200" ? ["200", "20", "50"] as const : ["50", "20", "200"] as const;
++  const lineOrder = ["50", "20", "200"] as const;
+   const referenceDescription = reference === "dynamic50" ? "50日动态P10/P90，高低边界随历史变化"
+-    : reference === "stockcharts50" ? "StockCharts 50日固定参考，低于30%、高于70%"
+-    : "StockCharts 200日参考，50%为半数股票中线，不划高低区";
++    : "StockCharts 50日固定参考，低于30%、高于70%";
+   // Display-only position follows the chosen reference; alert state remains unchanged.
+   const displayPhase = reference === "dynamic50" ? s.latest?.phase
+     : reference === "stockcharts50" && latest?.breadth_50 != null
+@@ -91,14 +89,11 @@
+       <div className="moa-reference-picker" role="group" aria-label="小图参考阈值">
+         <button type="button" aria-pressed={reference === "dynamic50"} onClick={() => setReference("dynamic50")}><span>动态50日</span><strong>{format(s.latest?.lower)}% / {format(s.latest?.upper)}%</strong></button>
+         <button type="button" aria-pressed={reference === "stockcharts50"} onClick={() => setReference("stockcharts50")}><span>StockCharts 50日</span><strong>&lt;{fixed.sma50.lower}% / &gt;{fixed.sma50.upper}%</strong></button>
+-        <button type="button" aria-pressed={reference === "stockcharts200"} onClick={() => setReference("stockcharts200")}><span>StockCharts 200日</span><strong>{fixed.sma200.majority}% 半数线</strong></button>
+       </div>
+-      <div className="moa-reference-caption" aria-live="polite">{reference === "dynamic50" ? "50日动态分位" : `StockCharts ${chartPeriod}日固定参考`} · {chartPeriod === "200" ? "紫线为主，看长期参与" : "蓝线为主，非买卖线"}</div>
++      <div className="moa-reference-caption" aria-live="polite">{reference === "dynamic50" ? "50日动态分位" : "StockCharts 50日固定参考"} · 蓝线为主，非买卖线</div>
+       <MiniTrend dates={rows.map(p => p.date)} percent lower={low} upper={high} lines={lineOrder.map(period => ({ name: `${period}日`, color: colors[period], values: rows.map(p => p[`breadth_${period}`] ?? null) }))}
+-        label={`${s.label.replace("50日宽度", "市场宽度")}近90条记录，蓝色50日、橙色20日、紫色200日；${referenceDescription}。${chartPeriod}日曲线加粗，非已验证买卖线`} />
+-      <div className={`moa-threshold-meaning${chartPeriod === "200" ? " moa-majority-meaning" : ""}`}>{chartPeriod === "200"
+-        ? <span>200日宽度高于50%：多数股票站上年线</span>
+-        : <><span>低位回升时看机会</span><span>高位转弱时看风险</span></>}</div>
++        label={`${s.label.replace("50日宽度", "市场宽度")}近90条记录，蓝色50日、橙色20日、紫色200日；${referenceDescription}。50日曲线加粗，非已验证买卖线`} />
++      <div className="moa-threshold-meaning"><span>低位回升时看机会</span><span>高位转弱时看风险</span></div>
+     </>}
+     <p className="moa-use">{isErp ? "上穿上轨有历史反弹线索；下穿下轨未可靠地提示顶部。" : reading && displayPhase === "low" ? `已在低位观察区。${interpretation.watch}` : reading && displayPhase === "high" ? `已在高位观察区。${interpretation.watch}` : interpretation.meaning}</p>
+     {!isErp && <BreadthInstitutionalReference market={s.id.startsWith("SP500:") ? "us" : "cn"} showValues={false} />}
+--- before/web/src/components/market-observation-alerts/style.css
++++ after/web/src/components/market-observation-alerts/style.css
+@@ -28,7 +28,7 @@
+ .moa-key-lines span:first-child { color: #287c70; }
+ .moa-key-lines b { font-weight: 650; }
+ .moa-mini svg { display: block; width: 100%; height: 116px; }
+-.moa-reference-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 3px 0 6px; }
++.moa-reference-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; margin: 3px 0 6px; }
+ .moa-reference-picker button { display: flex; flex-direction: column; justify-content: center; gap: 4px; min-width: 0; padding: 7px 3px; color: #68788d; font-size: 10px; line-height: 1.35; }
+ .moa-reference-picker button strong { color: #465970; font-size: 11px; font-variant-numeric: tabular-nums; font-weight: 600; }
+ .moa-reference-picker button:hover { border-color: #8aa9d0; background: #f2f6fc; }
+@@ -37,7 +37,6 @@
+ .moa-reference-caption { min-height: 16px; color: #68788d; font-size: 10px; }
+ .moa-threshold-meaning { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: #287c70; margin-top: 7px; }
+ .moa-threshold-meaning > span:last-child { color: #92662f; }
+-.moa-majority-meaning > span:last-child { color: #68788d; }
+ .moa-mini-dates { display: flex; justify-content: space-between; color: #8490a1; font-size: 9px; font-variant-numeric: tabular-nums; }
+ .moa-mini-empty { display: grid; place-items: center; height: 132px; color: #8490a1; }
+ .moa-use { min-height: 33px; margin: 10px 0; color: #4e5f76; font-size: 12px; line-height: 1.5; }

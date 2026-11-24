@@ -1,0 +1,11 @@
+{
+  "page_errors": [],
+  "matrix": "仓位映射实验 · 阶梯 10% ／ 连续 9.1%\n趋势方法 \n均线计分\n带宽＋斜率\n框选为当前状态；数值为实验目标仓位\nERP × 趋势阶梯矩阵\nERP位置\t偏弱\t分歧／过渡\t偏强\nZ ≤ −1.5\t0%\t5%\t30%\n−1.5 < Z < −1\t0%\t20%\t50%\n−1 ≤ Z < +1.5\t10%\t40%\t70%\n+1.5 ≤ Z < +2\t40%\t60%\t85%\nZ ≥ +2\t70%\t85%\t100%\n\n连续版在各档代表位置之间平滑过渡；模拟按周判断，目标与实际仓位相差超过10个百分点才调仓，下一交易日收盘成交。\n\n这里只演示两种映射，不读取账户持仓，也未用于交易。区间仓位取中点；完整定义、费用与历史代价见下方比较。",
+  "checks": [
+    "5x3 matrix",
+    "current cell matches 0/3 score",
+    "both method switches",
+    "continuous mapping matches independent value",
+    "no overflow"
+  ]
+}

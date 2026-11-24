@@ -1,0 +1,78 @@
+{
+  "checked_at": "2026-11-05T11:30:31.806635+00:00",
+  "files": {
+    "a_share_ma_breadth_history.json": {
+      "sha256": "91828747a0e6e466d77a0159df0f38303c4bf25b6ae27ecaec5971938429a015",
+      "as_of": "2026-11-05",
+      "records": 1306,
+      "backups": [
+        "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_history.json.before-reconstruction-20261102T143541751703.bak",
+        "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_history.json.before-20261102T124019530589.bak",
+        "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_history.json.before-20261105T111339569773.bak"
+      ]
+    },
+    "sp500_ma_breadth_history.json": {
+      "sha256": "54dcb39f19a0ff1a5ed4901f4ff982155de0ee836dd6a7c03a524770825b50ee",
+      "as_of": "2026-11-04",
+      "records": 11736,
+      "backups": [
+        "/Users/yongbiaoli/.lei_signal_lab/cache/sp500_ma_breadth_history.json.before-20261105T054944099111.bak",
+        "/Users/yongbiaoli/.lei_signal_lab/cache/sp500_ma_breadth_history.json.before-20261101T234020177676.bak",
+        "/Users/yongbiaoli/.lei_signal_lab/cache/sp500_ma_breadth_history.json.before-20261021T121734822792.bak"
+      ]
+    },
+    "erp_cn_reference_live.json": {
+      "sha256": "fe7c0b21dd9fe1a43d3a8ff6a57c513e4e8a10c44241afb5cb4589f30c182b45",
+      "as_of": "2026-11-04",
+      "records": 1072,
+      "backups": []
+    },
+    "erp_us_history_live.json": {
+      "sha256": "8c8b6f02f36cd7239272fd8ab1494d3b1d454eedda68c3257cc39c5c1b81922b",
+      "as_of": "2026-11-04",
+      "records": 5249,
+      "backups": []
+    },
+    "turnover_concentration_live.json": {
+      "sha256": "02c39651e55f394ff9509a758dbc7126393cd6ee74011588ea2b9ce3587c471e",
+      "as_of": "2026-09-30",
+      "records": 129,
+      "backups": []
+    }
+  },
+  "job": {
+    "label": "com.lei.market.observations",
+    "interval_seconds": 1800,
+    "retry_hours": 4,
+    "last_exit_code": 0,
+    "plist": "/Users/yongbiaoli/Library/LaunchAgents/com.lei.market.observations.plist"
+  },
+  "state": {
+    "erp-cn": {
+      "cutoff": "2026-11-05",
+      "checked_at": "2026-11-05T10:59:03.969643+00:00",
+      "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/breadth-reading-aid-20261101/breadth-reading-aid-20261101-20261105T185903-d3a5b0c36ab0/result/erp-cn",
+      "as_of": "2026-11-04",
+      "target": "/Users/yongbiaoli/.lei_signal_lab/cache/erp_cn_reference_live.json",
+      "overlap_anchors": 51,
+      "sha256": "fe7c0b21dd9fe1a43d3a8ff6a57c513e4e8a10c44241afb5cb4589f30c182b45",
+      "status": "updated"
+    },
+    "erp-us": {
+      "cutoff": "2026-11-04",
+      "checked_at": "2026-11-05T10:59:05.548991+00:00",
+      "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/breadth-reading-aid-20261101/breadth-reading-aid-20261101-20261105T185903-d3a5b0c36ab0/result/erp-us",
+      "as_of": "2026-11-04",
+      "target": "/Users/yongbiaoli/.lei_signal_lab/cache/erp_us_history_live.json",
+      "sha256": "8c8b6f02f36cd7239272fd8ab1494d3b1d454eedda68c3257cc39c5c1b81922b",
+      "status": "updated"
+    },
+    "breadth-cn": {
+      "as_of": "2026-11-05"
+    },
+    "breadth-us": {
+      "as_of": "2026-11-04"
+    }
+  },
+  "scope": "Four observation histories, not a change to trading qualification or every data widget."
+}

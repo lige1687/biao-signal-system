@@ -1,0 +1,30 @@
+{
+  "mission": "Independent acceptance of completed CN breadth candidate only",
+  "task_scope": [
+    "Read new candidate and source receipts/raw from frozen v15 output. Independently recompute each new date and 20/50/200 breadth count using actual raw tables, verify old prefix, receipt SHA, IPO/nontrading exclusions. Do not recollect, install, change source or run financial experiment. Write short acceptance with exact date values and any mismatch."
+  ],
+  "read_only_paths": [
+    "src/lei_signal/market_context/cn_breadth_refresh.py",
+    "docs/ops/breadth-reading-aid-20261101/live-refresh-v15/storage-plan.json"
+  ],
+  "write_paths": [
+    "docs/ops/breadth-reading-aid-20261101/live-refresh-v15/cn-independent-acceptance.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Independent arithmetic/source/prefix acceptance JSON"
+  ],
+  "stop_conditions": [
+    "No other writes, no live installation or source requests"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

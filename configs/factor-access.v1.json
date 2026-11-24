@@ -1,0 +1,975 @@
+{
+  "schema_version": 1,
+  "bindings": [
+    {
+      "reference": "mixed.momentum.raw@1.0.0",
+      "kind": "registered",
+      "label": "普通12-1动量",
+      "aliases": [
+        "普通动量",
+        "12-1动量",
+        "动量"
+      ],
+      "definition_notes": [
+        "按每只产品自己的有效报价行，比较第t-21条与第t-252条的价格；第253条有效报价首次可算，最近21条不进入这段涨幅。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/factor-reuse-refresh-2026-09-22.md",
+          "sha256": "2df4b7be38bcb315fbd575b119b7d3d2ac727f70139de261ee0ca85eef7cebc7"
+        },
+        {
+          "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+          "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+        },
+        {
+          "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+          "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "calculation_check",
+          "summary": "首批绑定的三份报告核对了已有接口与人工计算；这些材料不能证明普通动量对真实ETF投资有效。",
+          "scope": "人工数据与现有研究入口复用；没有新增真实ETF收益检验。",
+          "limitations": [
+            "这只是这三份材料的范围，不代表其他未接入材料没有证据。",
+            "计算核验通过不等于投资有效，也没有生产或交易授权。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/factor-reuse-refresh-2026-09-22.md",
+              "sha256": "2df4b7be38bcb315fbd575b119b7d3d2ac727f70139de261ee0ca85eef7cebc7"
+            },
+            {
+              "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+              "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+            },
+            {
+              "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+              "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+            }
+          ]
+        }
+      ],
+      "batches": [
+        {
+          "path": "docs/research/factor-observations/product-cases-20261013/159915-momentum-packet.json",
+          "sha256": "32ac0edf92e6132eeeef91b0792c629fc39594d11e84b967f697ef1d25cc7ef8"
+        }
+      ],
+      "legacy_panel": {
+        "field": "mom_121"
+      }
+    },
+    {
+      "reference": "mixed.momentum.rank@1.0.0",
+      "kind": "registered",
+      "label": "完整动量排序",
+      "aliases": [
+        "完整动量排序",
+        "动量排序",
+        "动量排名"
+      ],
+      "definition_notes": [
+        "在同一个月末截面内，把合格且动量有限的对象按分数降序排列；精确同分时按代码升序。完整有序名单不是前三名，也不是经过波动筛选后的名单。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+          "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "calculation_check",
+          "summary": "既有排序阶段在人工数据上能输出完整有序名单并处理精确并列；调用者仍需核实记录唯一、输入可追溯和完整月末。",
+          "scope": "人工数据，完整排序阶段，不是收益回测。",
+          "limitations": [
+            "不能证明排序能赚钱，不能证明真实ETF输入合格。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+              "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "candidate:mixed.high52.proximity@draft-2",
+      "kind": "candidate",
+      "label": "高点位置候选",
+      "aliases": [
+        "高点位置",
+        "此前高点",
+        "high52"
+      ],
+      "definition_notes": [],
+      "draft_definition": "拟计算当前经济指数（反映分红拆股影响的价格序列）÷此前252个有效收盘的最高值；当日加此前252个值共需253个有效值。",
+      "sources": [
+        {
+          "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+          "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+        },
+        {
+          "path": "docs/research/proposals/factor-candidate-exploration-2026-09-22/candidate-definitions.md",
+          "sha256": "c6ddc7b99032ac168c3199c765f45f856c152b2a680de3deb34f92d8a893a54d"
+        }
+      ],
+      "evidence": [],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.range_mean20@1.0.0",
+      "kind": "registered",
+      "label": "20日平均日内波动",
+      "aliases": [
+        "20日平均日内波动"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.range_mean20@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。",
+        "另接入沪深300ETF（510300.SS）2026-06-30的一条回溯观察；不能代表当前值或当时已经可得。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-range-mean20-eight-etf-2026-10-04.md",
+          "sha256": "eea974e387f9507d5b3e293d74f9c16bfee615184be253abfd1edbab38d4732f"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+          "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "20日平均日内波动：已有28项价格背景误差15.499，加上本项后15.425，少错0.074；每只ETF用较早已成熟历史结果取平均的简单对照为14.058，比新增模型少错1.367。本项少错的历史波动参考范围为-0.037至0.172；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6072条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于价格组已封存历史训练（整组原有48次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "六项同时考虑时，微小改善也可能随历史片段变化而转成恶化；这六项是研究代理，不等于原文买卖条件。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-range-mean20-eight-etf-2026-10-04.md",
+              "sha256": "eea974e387f9507d5b3e293d74f9c16bfee615184be253abfd1edbab38d4732f"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+              "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+            }
+          ]
+        }
+      ],
+      "batches": [
+        {
+          "path": "docs/research/factor-observations/510300-range-mean20-20261012/packet.json",
+          "sha256": "38189e7caa31f45631fd2e8dadf535480162bad2e2ed0bc98b0c037d541bdf26"
+        },
+        {
+          "path": "docs/research/factor-observations/product-cases-20261013/588000-range-mean20-packet.json",
+          "sha256": "e49710fd2a1829291d4a74b7bd630a08c7d03c7c8d7648d73827d4a4a521d914"
+        }
+      ]
+    },
+    {
+      "reference": "research.price_volume.range_mean60@1.0.0",
+      "kind": "registered",
+      "label": "60日平均日内波动",
+      "aliases": [
+        "60日平均日内波动"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.range_mean60@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。",
+        "另接入科创50ETF（588000.SS）2026-06-30的一条回溯观察；与20日窗口同源，不代表独立确认、组合增益或当前值。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-range_mean60-eight-etf-2026-10-04.md",
+          "sha256": "f816007e74c01aa2e1aa42f7a9d741c53276e69659dc9b760dd66e3dd97235b3"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+          "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "60日平均日内波动：已有28项价格背景误差15.499，加上本项后15.418，少错0.081；每只ETF用较早已成熟历史结果取平均的简单对照为14.058，比新增模型少错1.360。本项少错的历史波动参考范围为0.016至0.143；单独看这项是少错，但价格六项一并考虑后的范围容许变差，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6072条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于价格组已封存历史训练（整组原有48次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "六项同时考虑时，微小改善也可能随历史片段变化而转成恶化；这六项是研究代理，不等于原文买卖条件。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-range_mean60-eight-etf-2026-10-04.md",
+              "sha256": "f816007e74c01aa2e1aa42f7a9d741c53276e69659dc9b760dd66e3dd97235b3"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+              "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+            }
+          ]
+        }
+      ],
+      "batches": [
+        {
+          "path": "docs/research/factor-observations/multi-factor-20261015/588000-range-mean60-packet.json",
+          "sha256": "dffd1c888ea9516b430fe19193b654ff6a41029bd195630884c0e01b6f37e0f7"
+        }
+      ]
+    },
+    {
+      "reference": "research.price_volume.close_location_mean20@1.0.0",
+      "kind": "registered",
+      "label": "20日平均收盘位置",
+      "aliases": [
+        "20日平均收盘位置"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.close_location_mean20@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-close_location_mean20-eight-etf-2026-10-04.md",
+          "sha256": "1cb8734e056acaf03446243c67c005df15e499400941f8898fba2853cdb4451b"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+          "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "20日平均收盘位置：已有28项价格背景误差15.499，加上本项后15.458，少错0.041；每只ETF用较早已成熟历史结果取平均的简单对照为14.058，比新增模型少错1.400。本项少错的历史波动参考范围为-0.030至0.113；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6072条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于价格组已封存历史训练（整组原有48次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "六项同时考虑时，微小改善也可能随历史片段变化而转成恶化；这六项是研究代理，不等于原文买卖条件。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-close_location_mean20-eight-etf-2026-10-04.md",
+              "sha256": "1cb8734e056acaf03446243c67c005df15e499400941f8898fba2853cdb4451b"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+              "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.close_location_mean60@1.0.0",
+      "kind": "registered",
+      "label": "60日平均收盘位置",
+      "aliases": [
+        "60日平均收盘位置"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.close_location_mean60@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-close_location_mean60-eight-etf-2026-10-04.md",
+          "sha256": "696f1253c419fdeb864dc957f25365c4d8565f6880f213859589e5eea7b18b88"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+          "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "60日平均收盘位置：已有28项价格背景误差15.499，加上本项后15.529，少错-0.030；每只ETF用较早已成熟历史结果取平均的简单对照为14.058，比新增模型少错1.471。本项少错的历史波动参考范围为-0.102至0.055；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6072条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于价格组已封存历史训练（整组原有48次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "六项同时考虑时，微小改善也可能随历史片段变化而转成恶化；这六项是研究代理，不等于原文买卖条件。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-close_location_mean60-eight-etf-2026-10-04.md",
+              "sha256": "696f1253c419fdeb864dc957f25365c4d8565f6880f213859589e5eea7b18b88"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+              "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.wick_balance_mean20@1.0.0",
+      "kind": "registered",
+      "label": "20日平均上下影线差",
+      "aliases": [
+        "20日平均上下影线差"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.wick_balance_mean20@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-wick_balance_mean20-eight-etf-2026-10-04.md",
+          "sha256": "6dae2dbabda4b1717568555f79315c5d61d145dae5c726d7de7860ab80a0e6df"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+          "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "20日平均上下影线差：已有28项价格背景误差15.499，加上本项后15.509，少错-0.010；每只ETF用较早已成熟历史结果取平均的简单对照为14.058，比新增模型少错1.451。本项少错的历史波动参考范围为-0.193至0.174；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6072条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于价格组已封存历史训练（整组原有48次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "六项同时考虑时，微小改善也可能随历史片段变化而转成恶化；这六项是研究代理，不等于原文买卖条件。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-wick_balance_mean20-eight-etf-2026-10-04.md",
+              "sha256": "6dae2dbabda4b1717568555f79315c5d61d145dae5c726d7de7860ab80a0e6df"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+              "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.wick_balance_mean60@1.0.0",
+      "kind": "registered",
+      "label": "60日平均上下影线差",
+      "aliases": [
+        "60日平均上下影线差"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.wick_balance_mean60@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-wick_balance_mean60-eight-etf-2026-10-04.md",
+          "sha256": "d05b691f4ae6b64ae27ff8267420982d060881a1098b4bfb4e4621c97ac29f40"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+          "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "60日平均上下影线差：已有28项价格背景误差15.499，加上本项后15.524，少错-0.025；每只ETF用较早已成熟历史结果取平均的简单对照为14.058，比新增模型少错1.466。本项少错的历史波动参考范围为-0.163至0.104；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6072条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于价格组已封存历史训练（整组原有48次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "六项同时考虑时，微小改善也可能随历史片段变化而转成恶化；这六项是研究代理，不等于原文买卖条件。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-wick_balance_mean60-eight-etf-2026-10-04.md",
+              "sha256": "d05b691f4ae6b64ae27ff8267420982d060881a1098b4bfb4e4621c97ac29f40"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/price-only-six-candidate-comparison.json",
+              "sha256": "1c85132ea65ec71758efbe55807c149cb35a49bb5e2f00fdc661173c9633296d"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.volume_concentration20@1.0.0",
+      "kind": "registered",
+      "label": "20日成交量集中度",
+      "aliases": [
+        "20日成交量集中度"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.volume_concentration20@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-volume_concentration20-eight-etf-2026-10-04.md",
+          "sha256": "6ac1281d298b891fbe7db020dc78c25302653f73254112896d08ccc0112927a6"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "20日成交量集中度：已有28项价格背景误差15.482，加上本项后15.423，少错0.059；每只ETF用较早已成熟历史结果取平均的简单对照为14.065，比新增模型少错1.358。本项少错的历史波动参考范围为-0.120至0.310；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6053条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-volume_concentration20-eight-etf-2026-10-04.md",
+              "sha256": "6ac1281d298b891fbe7db020dc78c25302653f73254112896d08ccc0112927a6"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.volume_concentration60@1.0.0",
+      "kind": "registered",
+      "label": "60日成交量集中度",
+      "aliases": [
+        "60日成交量集中度"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.volume_concentration60@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-volume_concentration60-eight-etf-2026-10-04.md",
+          "sha256": "567c073d8a78fb96be56013740eb609dff3259a42809d9dbcb4de969eb3464fe"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "60日成交量集中度：已有28项价格背景误差15.753，加上本项后15.396，少错0.357；每只ETF用较早已成熟历史结果取平均的简单对照为14.038，比新增模型少错1.358。本项少错的历史波动参考范围为-0.129至0.844；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6013条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-volume_concentration60-eight-etf-2026-10-04.md",
+              "sha256": "567c073d8a78fb96be56013740eb609dff3259a42809d9dbcb4de969eb3464fe"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.log_volume_std20@1.0.0",
+      "kind": "registered",
+      "label": "20日成交量起伏",
+      "aliases": [
+        "20日成交量起伏"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.log_volume_std20@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-log_volume_std20-eight-etf-2026-10-04.md",
+          "sha256": "bac7364b5f51227f966e726a98e27e6cc780ac263d6492a3eaa9e7cde6829820"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "20日成交量起伏：已有28项价格背景误差15.482，加上本项后15.484，少错-0.002；每只ETF用较早已成熟历史结果取平均的简单对照为14.065，比新增模型少错1.419。本项少错的历史波动参考范围为-0.256至0.231；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6053条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-log_volume_std20-eight-etf-2026-10-04.md",
+              "sha256": "bac7364b5f51227f966e726a98e27e6cc780ac263d6492a3eaa9e7cde6829820"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.log_volume_std60@1.0.0",
+      "kind": "registered",
+      "label": "60日成交量起伏",
+      "aliases": [
+        "60日成交量起伏"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.log_volume_std60@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-log_volume_std60-eight-etf-2026-10-04.md",
+          "sha256": "38b2a61531ded1dc184e8116daa8a3a90f1d6f17f57219d37f98547e3dbc6692"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "60日成交量起伏：已有28项价格背景误差15.753，加上本项后15.618，少错0.135；每只ETF用较早已成熟历史结果取平均的简单对照为14.038，比新增模型少错1.580。本项少错的历史波动参考范围为-0.273至0.509；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6013条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-log_volume_std60-eight-etf-2026-10-04.md",
+              "sha256": "38b2a61531ded1dc184e8116daa8a3a90f1d6f17f57219d37f98547e3dbc6692"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.log_volume_slope20@1.0.0",
+      "kind": "registered",
+      "label": "20日成交量变化方向",
+      "aliases": [
+        "20日成交量变化方向"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.log_volume_slope20@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-log_volume_slope20-eight-etf-2026-10-04.md",
+          "sha256": "4a3152e96eb504eb2679b6ca3b672c64e7d615f4f51a7eafb6e4c174061e0728"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "20日成交量变化方向：已有28项价格背景误差15.482，加上本项后15.509，少错-0.027；每只ETF用较早已成熟历史结果取平均的简单对照为14.065，比新增模型少错1.444。本项少错的历史波动参考范围为-0.199至0.119；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6053条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-log_volume_slope20-eight-etf-2026-10-04.md",
+              "sha256": "4a3152e96eb504eb2679b6ca3b672c64e7d615f4f51a7eafb6e4c174061e0728"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.log_volume_slope60@1.0.0",
+      "kind": "registered",
+      "label": "60日成交量变化方向",
+      "aliases": [
+        "60日成交量变化方向"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.log_volume_slope60@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-log_volume_slope60-eight-etf-2026-10-04.md",
+          "sha256": "9f97c4ee14de219572fd42792b650c7ea75baaa7fabfdeadd81361d798f4d9e4"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "60日成交量变化方向：已有28项价格背景误差15.753，加上本项后15.751，少错0.002；每只ETF用较早已成熟历史结果取平均的简单对照为14.038，比新增模型少错1.713。本项少错的历史波动参考范围为-0.128至0.108；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6013条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-log_volume_slope60-eight-etf-2026-10-04.md",
+              "sha256": "9f97c4ee14de219572fd42792b650c7ea75baaa7fabfdeadd81361d798f4d9e4"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.volume_close_location_excess20@1.0.0",
+      "kind": "registered",
+      "label": "20日成交量偏重收盘位置",
+      "aliases": [
+        "20日成交量偏重收盘位置"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.volume_close_location_excess20@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-volume_close_location_excess20-eight-etf-2026-10-04.md",
+          "sha256": "aff341ee25fcab49e83b620a42a43993555ef5e1556cc439606e62aef8ab8b59"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "20日成交量偏重收盘位置：已有28项价格背景误差15.482，加上本项后15.363，少错0.119；每只ETF用较早已成熟历史结果取平均的简单对照为14.065，比新增模型少错1.298。本项少错的历史波动参考范围为-0.052至0.278；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6053条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-volume_close_location_excess20-eight-etf-2026-10-04.md",
+              "sha256": "aff341ee25fcab49e83b620a42a43993555ef5e1556cc439606e62aef8ab8b59"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.volume_close_location_excess60@1.0.0",
+      "kind": "registered",
+      "label": "60日成交量偏重收盘位置",
+      "aliases": [
+        "60日成交量偏重收盘位置"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.volume_close_location_excess60@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-volume_close_location_excess60-eight-etf-2026-10-04.md",
+          "sha256": "96ba717bcbeea0da2d81e5b7f00ee6fd69949a7daeedc4e3fd72bc5de0eae0f6"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "60日成交量偏重收盘位置：已有28项价格背景误差15.753，加上本项后15.499，少错0.254；每只ETF用较早已成熟历史结果取平均的简单对照为14.038，比新增模型少错1.461。本项少错的历史波动参考范围为-0.017至0.515；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6013条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-volume_close_location_excess60-eight-etf-2026-10-04.md",
+              "sha256": "96ba717bcbeea0da2d81e5b7f00ee6fd69949a7daeedc4e3fd72bc5de0eae0f6"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.volume_range_excess20@1.0.0",
+      "kind": "registered",
+      "label": "20日成交量偏重日内波动",
+      "aliases": [
+        "20日成交量偏重日内波动"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.volume_range_excess20@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-volume_range_excess20-eight-etf-2026-10-04.md",
+          "sha256": "9dc2e86d4da6bb90d01c399aa8e02963b529a191ab9d0880456cc83b79a2edd4"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "20日成交量偏重日内波动：已有28项价格背景误差15.482，加上本项后16.153，少错-0.671；每只ETF用较早已成熟历史结果取平均的简单对照为14.065，比新增模型少错2.088。本项少错的历史波动参考范围为-2.064至0.049；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6053条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-volume_range_excess20-eight-etf-2026-10-04.md",
+              "sha256": "9dc2e86d4da6bb90d01c399aa8e02963b529a191ab9d0880456cc83b79a2edd4"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.volume_range_excess60@1.0.0",
+      "kind": "registered",
+      "label": "60日成交量偏重日内波动",
+      "aliases": [
+        "60日成交量偏重日内波动"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.volume_range_excess60@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-volume_range_excess60-eight-etf-2026-10-04.md",
+          "sha256": "e88f266dd2093aa82502145620f164c6c77db52911469d59e1b63af1a6bf30cb"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "60日成交量偏重日内波动：已有28项价格背景误差15.753，加上本项后15.540，少错0.213；每只ETF用较早已成熟历史结果取平均的简单对照为14.038，比新增模型少错1.502。本项少错的历史波动参考范围为-0.094至0.621；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6013条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-volume_range_excess60-eight-etf-2026-10-04.md",
+              "sha256": "e88f266dd2093aa82502145620f164c6c77db52911469d59e1b63af1a6bf30cb"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.volume_wick_excess20@1.0.0",
+      "kind": "registered",
+      "label": "20日成交量偏重影线差",
+      "aliases": [
+        "20日成交量偏重影线差"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.volume_wick_excess20@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-volume_wick_excess20-eight-etf-2026-10-04.md",
+          "sha256": "0553f4cd1d6c4c867220de29f86356aa002e488c53f90c58885c10c2fa4ec4fe"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "20日成交量偏重影线差：已有28项价格背景误差15.482，加上本项后15.605，少错-0.123；每只ETF用较早已成熟历史结果取平均的简单对照为14.065，比新增模型少错1.540。本项少错的历史波动参考范围为-0.269至-0.0001；这个单项范围仅显示多错，但18项共同辅助检查仍容纳零，不能认定稳定有害。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6053条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-volume_wick_excess20-eight-etf-2026-10-04.md",
+              "sha256": "0553f4cd1d6c4c867220de29f86356aa002e488c53f90c58885c10c2fa4ec4fe"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "research.price_volume.volume_wick_excess60@1.0.0",
+      "kind": "registered",
+      "label": "60日成交量偏重影线差",
+      "aliases": [
+        "60日成交量偏重影线差"
+      ],
+      "definition_notes": [
+        "只对应登记对象 research.price_volume.volume_wick_excess60@1.0.0；此处展示已封存历史研究证据，不提供今天的读数。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/price-volume-volume_wick_excess60-eight-etf-2026-10-04.md",
+          "sha256": "4c0dd4af48db5321f508d289b0454dbd866799156579d92905cad36539a2d216"
+        },
+        {
+          "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+          "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "predictive_study",
+          "summary": "60日成交量偏重影线差：已有28项价格背景误差15.753，加上本项后15.939，少错-0.186；每只ETF用较早已成熟历史结果取平均的简单对照为14.038，比新增模型少错1.901。本项少错的历史波动参考范围为-0.404至0.078；范围包含零，不能认定稳定增益。",
+          "scope": "固定4只宽基与4只行业ETF，2023、2024、2025、2026上半年已见历史；每项6013条ETF日期、759个日期。预测从下一日收盘起的未来20个收盘间隔最大下探，误差单位是百分点的平方；本项属于成交量组已封存历史训练（整组原有96次拟合），接入时没有新增拟合。",
+          "limitations": [
+            "这是固定线性方法和固定风险目标的历史预测误差，不是买卖、账户收益、仓位或当前因子值。",
+            "全部评价日期已被研究者见过；历史行情到达时刻和全部公司行动链未完整核准，不能证明当时可交易。",
+            "接入只读取冻结报告和汇总，不重算旧模型；不因比复杂背景少错就忽略逐ETF成熟均值这个更强的简单对照。",
+            "量与价格配合特有的增量尚未测完对应普通价格控制，不能把本项称为资金流或正式交易规则。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/price-volume-volume_wick_excess60-eight-etf-2026-10-04.md",
+              "sha256": "4c0dd4af48db5321f508d289b0454dbd866799156579d92905cad36539a2d216"
+            },
+            {
+              "path": "docs/experiments/raw/price-volume-universe-qualification-2026-10-04/quantity-twelve-candidate-comparison.json",
+              "sha256": "7f3e958ef54d405332a552d86313c987e0070bbfda7fff66f4cb7f1f29de20a1"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    }
+  ],
+  "comparisons": [
+    {
+      "references": [
+        "candidate:mixed.high52.proximity@draft-2",
+        "mixed.momentum.raw@1.0.0"
+      ],
+      "summary": "高点位置候选用当前经济指数÷此前252个有效收盘的最高值；普通12-1动量用I(t-21)/I(t-252)-1，只看两个端点，并跳过最近21个有效报价。公式不同不能证明高点位置多提供了有用信息。",
+      "limitations": [
+        "已有报告只提出同范围同日期的公平比较，尚未运行这项真实效果研究。",
+        "这里只解释旧材料，不执行新实验，也不能把任一读数当买卖信号。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+          "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+        },
+        {
+          "path": "docs/research/proposals/factor-candidate-exploration-2026-09-22/candidate-definitions.md",
+          "sha256": "c6ddc7b99032ac168c3199c765f45f856c152b2a680de3deb34f92d8a893a54d"
+        }
+      ]
+    }
+  ]
+}

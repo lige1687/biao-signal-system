@@ -113,7 +113,12 @@ def compute_metrics(trades: list[Trade], *, label: str = "all", net: bool = True
     return Metrics(
         label=label,
         trade_count=len(closed),
-        open_count=len(trades) - len(closed),
+        open_count=sum(
+            t.is_open and t.exit_reason not in (
+                "skipped_limit_up_at_entry", "signal_at_end_not_entered"
+            )
+            for t in trades
+        ),
         win_rate=(len(wins) / len(values)) if values else None,
         avg_win_r=(sum(wins) / len(wins)) if wins else None,
         avg_loss_r=(sum(losses) / len(losses)) if losses else None,
@@ -198,8 +203,8 @@ def full_group_metrics(
         result["样本内外"] = [
             compute_metrics(group, label=label, net=net)
             for label, group in (
-                ("样本内（<= 切分日）", [t for t in trades if t.signal_date < sample_split]),
-                ("样本外（> 切分日）", [t for t in trades if t.signal_date >= sample_split]),
+                ("样本内（< 切分日）", [t for t in trades if t.signal_date < sample_split]),
+                ("样本外（>= 切分日）", [t for t in trades if t.signal_date >= sample_split]),
             )
         ]
     return result

@@ -1,0 +1,56 @@
+{
+  "schema": "focus-dynamic-builder-delivery/1",
+  "identity": {
+    "task_id": "focus-stock-universe-20261024",
+    "stage_id": "dynamic-builder-20261104",
+    "attempt_id": "1"
+  },
+  "status": "code_and_synthetic_tests_ready_full_sources_not_run",
+  "handoff_packet_sha256": "54142c36cfbb7057e9726d09280ab2cd4c19a338b67a69c7473a214ccdcee2c3",
+  "contract_sha256": "9ee6e21e97e35d8e57362422800f8c7da01d2a6b0356ce6a41b074a490cfabc3",
+  "code": {
+    "path": "src/lei_signal/research/focus_dynamic.py",
+    "sha256": "fa17742f2a731dd5def6731233b1c1c7ed166836e69b8ffb42cd2ea9b8490021"
+  },
+  "tests": {
+    "path": "tests/unit/test_focus_dynamic.py",
+    "sha256": "0f2be97f1c71bdd5e72785a226f330adc7d51f4fc892e1c288f8bffc118f1dad",
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider tests/unit/test_focus_dynamic.py",
+    "result": "4 passed"
+  },
+  "registered_sources": {
+    "main_v8_index_sha256": "165a695612cfb4022b899d9c20ea5c85e1736994533974551685f58c3a7dd153",
+    "main_v8_meta_sha256": "34f918863dd4f665a84e254d1e7879b7e5fbfff902a1a4c09692503259e22e7e",
+    "interior_supplement_receipt_sha256": "49adb53aaf667ce0f25aa4ddbbae645ce2613c651d3ad6dd9871393b51678958",
+    "old_union_source_sha256": "bb73ebce7e677b1e1b77446c8d832243d01813e53406a48e2792f2e820ff2396",
+    "registered_volume_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9"
+  },
+  "small_metadata_readback": {
+    "ordinary_codes_with_frozen_prefixes": 5561,
+    "official_delisting_dates": 18,
+    "calendar_days_from_2013_warmup_through_2025_end": 3157,
+    "calendar_end": "2025-12-31",
+    "full_raw_sources_read": false
+  },
+  "implementation": {
+    "period": ["2014-01-01", "2025-12-31"],
+    "roster": "Vendor type1 with frozen ordinary Shanghai/Shenzhen A-share prefixes; IPO and exit dates applied per day; official lifecycle dates retained separately",
+    "formula": "21 adjacent sessions; adjusted close 20-session return; mean 20 daily amounts; top ceil(5 percent) by amount then code; equal mean momentum; min 100 qualified stocks",
+    "memory": "Process one stock's source rows at a time and fold into per-day count, sums and bounded top heap; old union date arrays are discarded after source-ref extraction",
+    "output": "New external-volume directory with daily.json and audit.json; no effect labels or financial statistics",
+    "invocation": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -B -m lei_signal.research.focus_dynamic --run --output /Volumes/win+mac通用/LeiSignal-新实验结果/<new-directory>",
+    "default": "Without --run, print read-only plan and write nothing"
+  },
+  "qualification_limits": [
+    "Full-source run and root review remain outstanding; the synthetic tests do not qualify the real output.",
+    "Vendor roster is a retrospective candidate list, not complete point-in-time ordinary-equity membership.",
+    "Old-union codes use their SHA-bound old factor vintage through 2025-12-31; alternate v8 factor vintages are counted but not merged. Same-date conflicting factor events quarantine a code.",
+    "Official lifecycle addenda provide delisting dates, not exit prices or decision-time public availability.",
+    "Raw source dates and factor events have no certified decision-time arrival or revision timestamp; all output is retrospective observation only.",
+    "Main 31 missing source days and absent exit prices remain unresolved; missing, suspended, ST and invalid adjustment windows are excluded and audited."
+  ],
+  "network_requests": 0,
+  "real_full_input_runs": 0,
+  "effect_runs": 0,
+  "other_files_modified": false
+}

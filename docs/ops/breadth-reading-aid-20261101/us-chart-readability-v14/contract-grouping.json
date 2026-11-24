@@ -1,0 +1,33 @@
+{
+  "mission": "美股股债价格图密集标记显示修复",
+  "task_scope": [
+    "Implement display-only grouping of existing ComparedErpEvent records in usErpMarkerGroups.ts and focused tests. Function groupUsErpMarkers(events, dates, maxSpanObservations) returns groups with representative original event, members, count, endDate. Keep only dates present in supplied ordered dates; sort chronologically and by sigma. Group consecutive same-kind events only while their index minus the first member index <= maxSpanObservations. Do not chain an unlimited span. Opposite-kind starts new group. Pick earliest original event, prefer highest sigma only among that same earliest date; never choose a later/better price. Every member retains its exact id/date, no mutation. Empty/invalid span fallback minimum1. Duplicate ids dedupe. This is presentation only, no research threshold/signal change. Tests cover anchored span, opposite kind, same-date thresholds retained, no date shifting, immutable inputs, and group preserves members. Export type UsErpMarkerGroup with representative:ComparedErpEvent, members:ComparedErpEvent[], count:number, endDate:string."
+  ],
+  "read_only_paths": [
+    "web/src/components/observation-library/erpComparisonDisplay.ts",
+    "web/src/components/observation-library/usErpBands.ts",
+    "web/src/components/observation-library/usErpBands.test.mjs"
+  ],
+  "write_paths": [
+    "web/src/components/observation-library/usErpMarkerGroups.ts",
+    "web/src/components/observation-library/usErpMarkerGroups.test.mjs"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Two files and focused test results; concrete limitations"
+  ],
+  "stop_conditions": [
+    "No extra files, sources, data requests, research runs or child agents",
+    "If ambiguous stop report; preserve other changes"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "verified_date": "2026-11-02",
+  "new_requests": 4,
+  "prior_requests": 7,
+  "cumulative_requests": 11,
+  "new_financial_experiments": 0,
+  "sources": [
+    {
+      "id": "stockcharts",
+      "title": "Percent Above Moving Average",
+      "publisher": "StockCharts ChartSchool",
+      "publisher_type": "technical chart education, not an exchange or regulator",
+      "url": "https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average",
+      "readback": "Reused current-chat primary page opened in preceding turn; text supplied in tool output",
+      "publication_date": null,
+      "indicator": "percentage of stocks above their own simple moving averages",
+      "facts": [
+        {
+          "horizon": 50,
+          "values": {
+            "lower": 30,
+            "upper": 70
+          },
+          "operators": [
+            "<",
+            ">"
+          ],
+          "meaning": "Conventional oversold/overbought examples; levels may vary with the index. Strong trends can keep readings extreme; low level alone is not a buy signal."
+        },
+        {
+          "horizon": 200,
+          "values": {
+            "middle": 50
+          },
+          "meaning": "A majority-participation reference, discussed for150/200-day breadth; crossings can whipsaw. No symmetric top/bottom bands inferred."
+        }
+      ],
+      "scope": "US-index examples including S&P500 for50-day and S&P100 for200-day; all-A transfer not validated",
+      "adoption": "compact fixed-reference row, distinct from local P10/P90; no20/100-day values invented"
+    },
+    {
+      "id": "schwab",
+      "title": "Breadth Check: Strength and Weakness Trend Tracker",
+      "publisher": "Charles Schwab",
+      "publisher_type": "broker educational article quoting Joe Mazzola",
+      "url": "https://www.schwab.com/learn/story/breadth-check-strength-and-weakness-trend-tracker",
+      "publication_date": "2025-06-26",
+      "indicator": "S&P500 percentage above own50-day moving average",
+      "facts": [
+        {
+          "horizon": 50,
+          "values": {
+            "strong_participation": 80
+          },
+          "meaning": "Around80% while the index rallies is broad bullish participation, not automatic overbought or top."
+        },
+        {
+          "horizon": 50,
+          "values": {
+            "extreme_weakness": 10
+          },
+          "operator": "<",
+          "meaning": "Below10% in a selloff can indicate overdone selling; explicitly does not establish the selloff is over."
+        },
+        {
+          "horizon": 200,
+          "values": {},
+          "meaning": "Longer-horizon investor context; no fixed200-day extreme thresholds supplied in this article."
+        }
+      ],
+      "scope": "S&P500; article illustration includes April-May2025, not a backtest",
+      "adoption": "US compact source comparison and source details; never transpose80 to a sell risk line; noCN endorsement"
+    },
+    {
+      "id": "fidelity_guest",
+      "title": "In the Money: Is Market Complacency Setting In?",
+      "publisher": "Fidelity-hosted discussion with OptionsPlay guest Tony Zhang",
+      "publisher_type": "guest opinion, not Fidelity institutional standard",
+      "url": "https://www.fidelity.com/bin-public/600_Fidelity_Com_English/documents/learning-center/050825_EXTERNAL_PODCAST_ITM.pdf",
+      "publication_date": "2025-05-08",
+      "page": 4,
+      "facts": [
+        {
+          "horizon": 50,
+          "values": {
+            "guest_top_range": [
+              70,
+              80
+            ]
+          },
+          "meaning": "Guest associated70-80% with market tops while discussing then-current S&P500 recovery. No event sample, validation or rule supplied."
+        }
+      ],
+      "adoption": "exclude from default reference as a consensus top threshold; document disagreement with Schwab strength interpretation"
+    }
+  ],
+  "research_decision": "Primary-source reference values verified; external published examples are not new efficacy evidence. Stop source discovery, implement compact desktop reference without changing any model or rails."
+}

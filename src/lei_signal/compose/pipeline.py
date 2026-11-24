@@ -8,12 +8,19 @@ import sqlite3
 from contextlib import closing, suppress
 from dataclasses import dataclass, field
 from datetime import UTC, date
+from typing import Any
 
 import pandas as pd
 
 from lei_signal.compose.interpreter import build_assessment
-from lei_signal.data.calendar import TradingCalendar
-from lei_signal.data.point_in_time import aggregate_weekly
+from lei_signal.data.calendar import CoveredCalendar, TradingCalendar
+from lei_signal.data.point_in_time import (
+    aggregate_weekly,
+    completed_daily_view,
+    require_weekly_qualification,
+    validate_session_date,
+    weekly_input_quality,
+)
 from lei_signal.data.providers import PriceData, PriceProvider, default_provider
 from lei_signal.data.validation import DataUnavailableError, detect_unadjusted_gaps
 from lei_signal.domain.canonical import make_event_id
@@ -112,6 +119,8 @@ class AnalysisResult:
     cache_age_seconds: float | None = None
     # 研究库持久化状态：None=未配置/未尝试，True=成功，False=失败（失败须可见，不静默）
     sqlite_persisted: bool | None = None
+    observation_date: pd.Timestamp | None = None
+    weekly_quality: dict[str, object] = field(default_factory=dict)
 
     @property
     def bottoms(self) -> list[StructureInstance]:
@@ -139,6 +148,8 @@ def analyze(
     sqlite_path: str | None = None,
     run_id: str | None = None,
     calendar: TradingCalendar | None = None,
+    complete_bar: bool = True,
+    require_qualified_weekly: bool = False,
 ) -> AnalysisResult:
     """完整分析（修复 8：行情成功获取后写入 Parquet 缓存 + SQLite 持久化）。
 
@@ -160,6 +171,12 @@ def analyze(
         立即形成完整周线。留空时使用 ``DEFAULT_TRADING_CALENDAR``
         （周一至周五、无节假日表），保守且永不提前完成周线。
     """
+    if as_of is not None:
+        validate_session_date(as_of)
+    if not isinstance(complete_bar, bool):
+        raise TypeError("complete_bar must explicitly be True or False")
+    if not isinstance(require_qualified_weekly, bool):
+        raise TypeError("require_qualified_weekly must explicitly be True or False")
     from datetime import datetime
 
     from lei_signal.data.cache import ParquetCache
@@ -214,13 +231,15 @@ def analyze(
             info=info,
         )
 
-    bars = price_data.bars
-    if as_of is not None:
-        bars = bars.loc[bars.index <= pd.Timestamp(as_of)]
-        if len(bars) < MIN_BARS:
-            raise DataUnavailableError(
-                f"{price_data.symbol} 截止 {as_of} 只有 {len(bars)} 根日K线，至少需要 {MIN_BARS} 根"
-            )
+    observation = as_of if as_of is not None else price_data.bars.index[-1]
+    bars = completed_daily_view(
+        price_data.bars, as_of=as_of, calendar=calendar, complete_bar=complete_bar
+    )
+    if len(bars) < MIN_BARS:
+        raise DataUnavailableError(
+            f"{price_data.symbol} 截止 {observation} 只有 {len(bars)} 根完整日K线，"
+            f"至少需要 {MIN_BARS} 根"
+        )
 
     # 成功获取行情：写入 Parquet 缓存（仅在未使用缓存兜底时）。
     # 只吞掉「写缓存本身」会遇到的错误：磁盘/权限（OSError）、
@@ -232,7 +251,7 @@ def analyze(
             # 不带来源标记的缓存无法与合成/夹具数据区分（见 cache.py 模块注释）。
             cache.write(
                 price_data.symbol,
-                price_data.bars,
+                price_data.bars if complete_bar else bars,
                 provider=price_data.report.provider,
             )
 
@@ -243,6 +262,9 @@ def analyze(
         price_data=price_data,
         build_history=build_history,
         calendar=calendar,
+        as_of=observation,
+        complete_bar=complete_bar,
+        require_qualified_weekly=require_qualified_weekly,
     )
     # 标记是否用了缓存兜底
     if cache_fallback_used:
@@ -300,6 +322,9 @@ def analyze_bars(
     price_data: PriceData | None = None,
     build_history: bool = False,
     calendar: TradingCalendar | None = None,
+    as_of: date | pd.Timestamp | None = None,
+    complete_bar: bool = True,
+    require_qualified_weekly: bool = False,
 ) -> AnalysisResult:
     """对已获取的行情执行完整分析。便于测试与离线复算。
 
@@ -310,12 +335,23 @@ def analyze_bars(
         与底层测试使用同一注入口径——不允许「底层能注入、生产注不进」。
         留空时 ``aggregate_weekly`` 使用 ``DEFAULT_TRADING_CALENDAR``。
     """
+    observation = (validate_session_date(as_of) if as_of is not None else
+                   None if bars.empty else bars.index[-1])
+    bars = completed_daily_view(bars, as_of=as_of, complete_bar=complete_bar, calendar=calendar)
     if len(bars) < MIN_BARS:
         raise DataUnavailableError(f"{symbol} 只有 {len(bars)} 根日K线，至少需要 {MIN_BARS} 根")
 
+    protected_clock = isinstance(calendar, CoveredCalendar) or not complete_bar
+    weekly_bars = aggregate_weekly(
+        bars, calendar=calendar,
+        as_of=observation if protected_clock else None, complete_bar=complete_bar,
+    )
+    quality = weekly_input_quality(bars, weekly_bars, as_of=observation,
+                                   calendar=calendar, complete_bar=complete_bar)
+    require_weekly_qualification(quality, require_qualified_weekly)
     # 特征与逐日状态
     frame = compute_volume_labels(compute_long_trend(classify_colors(compute_features(bars))))
-    weekly_trend = compute_weekly_long_trend(aggregate_weekly(bars, calendar=calendar))
+    weekly_trend = compute_weekly_long_trend(weekly_bars)
     pivots = confirmed_pivots(frame)
 
     # 原子事件
@@ -326,7 +362,15 @@ def analyze_bars(
     log.extend(detect_spread_events(frame, symbol))
     # 用户交易笔记的研究代理：完整多头趋势成立后，分别识别 SMA20/60/120
     # 的首次回撤。严格前向推进，不能由旧 Streamlit 泛化文案代替。
-    log.extend(detect_first_ma_pullback_events(frame, symbol))
+    a3_options: dict[str, Any] = {}
+    if calendar is not None:
+        a3_options["calendar"] = calendar
+    if protected_clock and (as_of is not None or not complete_bar):
+        a3_options["as_of"] = observation
+        a3_options["complete_bar"] = complete_bar
+    if require_qualified_weekly:
+        a3_options["require_qualified_weekly"] = True
+    log.extend(detect_first_ma_pullback_events(frame, symbol, **a3_options))
     # 模块 B 均线密集区突破：横盘密集区识别 -> 突破确认 -> 跌回失效（研究代理）。
     log.extend(detect_dense_breakout_events(frame, symbol))
     # 模块 C 2B/破底翻：L1/L2 结构 -> 破底翻三版本确认 -> 跌破 L2 失效（研究代理）。
@@ -460,6 +504,8 @@ def analyze_bars(
         price_data=price_data,  # type: ignore[arg-type]
         suspicious_gaps=detect_unadjusted_gaps(bars),
         assessments_by_date=assessments,
+        observation_date=observation,
+        weekly_quality=quality,
     )
 
 

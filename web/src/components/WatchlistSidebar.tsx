@@ -3,13 +3,19 @@ import { useEffect, useState } from "react";
 import { api } from "../api/client";
 import type { Card, WatchlistGroup } from "../types";
 import ColorBadge from "./ColorBadge";
-import Sparkline from "./Sparkline";
+
+export type SidebarSignalBadge = {
+  kind: "buy" | "watch" | "sell";
+  label: string;
+  title: string;
+};
 
 interface Props {
   cards: Card[];
   selected: string;
   onSelect: (symbol: string) => void;
   onAddClick: (groupId: number | null) => void;
+  signalBadges?: Map<string, SidebarSignalBadge>;
 }
 
 function fmtChange(v: number | null): { text: string; cls: string } {
@@ -28,6 +34,7 @@ function SideItem({
   groups,
   onMove,
   onRemove,
+  signalBadge,
 }: {
   card: Card;
   active: boolean;
@@ -35,6 +42,7 @@ function SideItem({
   groups: WatchlistGroup[];
   onMove: (symbol: string, groupId: number | null) => void;
   onRemove: (symbol: string) => void;
+  signalBadge?: SidebarSignalBadge;
 }) {
   const [menu, setMenu] = useState(false);
   const change = fmtChange(card.change_pct);
@@ -76,10 +84,42 @@ function SideItem({
     );
   }
 
+  const weeklyShort =
+    card.weekly_long_trend_cn && card.weekly_long_trend_cn !== "数据不足"
+      ? `周·${card.weekly_long_trend_cn}`
+      : null;
+  const dist20 = card.dist_ema20_pct ?? null;
+  const dist60 = card.dist_ema60_pct ?? null;
+  const gaugeMax = 15; // 统一 ±15% 固定刻度，跨标的偏离幅度一眼可比
+  const gaugeHalfPct = dist20 != null ? Math.min(50, (Math.abs(dist20) / gaugeMax) * 50) : 0;
+  const gaugePositive = (dist20 ?? 0) >= 0;
+  const gaugeStretched = dist20 != null && Math.abs(dist20) >= 10;
+
+  const gaugeTooltip = [
+    dist20 != null ? `距 20日均线(EMA20)：${dist20 > 0 ? "+" : ""}${dist20.toFixed(2)}%（标尺中线=20日线，左右满格 ±15%）` : "距 20日均线：暂无",
+    dist60 != null ? `距 60日均线(EMA60)：${dist60 > 0 ? "+" : ""}${dist60.toFixed(2)}%` : null,
+    card.mom_121_pct != null ? `12-1 中期动量：${card.mom_121_pct > 0 ? "+" : ""}${card.mom_121_pct.toFixed(1)}%` : null,
+    card.stage_cn ? `当前阶段：${card.stage_cn}` : null,
+    card.key_change_cn ? `最近变化：${card.key_change_cn}` : null,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const showTickerBadge =
+    card.symbol && !card.display_name.toUpperCase().includes(card.symbol.toUpperCase());
+
   return (
-    <div className={`side-item ${active ? "active" : ""}`} onClick={onSelect} title={card.symbol}>
+    <div className={`side-item ${active ? "active" : ""}`} onClick={onSelect} title={gaugeTooltip || card.symbol}>
       <div className="si-row">
-        <span className="si-name" title={card.display_name}>{card.display_name}</span>
+        <span className="si-row-title">
+          <span className="si-name" title={`${card.display_name} (${card.symbol})`}>{card.display_name}</span>
+          {showTickerBadge && <span className="si-symbol">{card.symbol}</span>}
+          {signalBadge && (
+            <span className={`si-sig-tag is-${signalBadge.kind}`} title={signalBadge.title}>
+              {signalBadge.label}
+            </span>
+          )}
+        </span>
         <span className="spacer" style={{ flex: 1 }} />
         <span className={`si-change ${change.cls}`}>{change.text}</span>
         {card.group === "watchlist" && (
@@ -110,14 +150,33 @@ function SideItem({
         )}
       </div>
       <div className="si-row2">
-        <span className="si-price">{card.price != null ? card.price.toFixed(2) : "--"}</span>
+        <span className="si-price-group">
+          <span className="si-price">{card.price != null ? card.price.toFixed(2) : "--"}</span>
+          {weeklyShort && <b className="si-wk-tag">{weeklyShort}</b>}
+        </span>
         <ColorBadge color={card.color} colorCn={card.color_cn} days={card.color_days} />
       </div>
-      <Sparkline
-        points={card.sparkline}
-        up={card.change_pct == null ? null : card.change_pct >= 0}
-        height={20}
-      />
+      <div className="si-gauge-row">
+        <span className="si-gauge-val">
+          {dist20 != null ? `20日 ${dist20 > 0 ? "+" : ""}${dist20.toFixed(1)}%` : "20日 —"}
+        </span>
+        <span className="si-gauge-track" aria-hidden="true">
+          {dist20 != null && gaugeHalfPct > 0 && (
+            <i
+              className={`si-gauge-fill ${gaugePositive ? "pos" : "neg"}${gaugeStretched ? " stretched" : ""}`}
+              style={
+                gaugePositive
+                  ? { left: "50%", width: `${gaugeHalfPct.toFixed(1)}%` }
+                  : { right: "50%", width: `${gaugeHalfPct.toFixed(1)}%` }
+              }
+            />
+          )}
+          <i className="si-gauge-zero" />
+        </span>
+        <span className="si-stage-tag" title="最新价相对 60日均线(季线)偏离百分比">
+          {dist60 != null ? `60日 ${dist60 > 0 ? "+" : ""}${dist60.toFixed(1)}%` : card.stage_cn || "—"}
+        </span>
+      </div>
       {menu && (
         <div className="si-menu" onClick={(e) => e.stopPropagation()}>
           <div className="si-menu-label">移动到分组</div>
@@ -164,7 +223,7 @@ function SideItem({
  * 点标的只切换中栏，不跳转页面——这样右栏解释与图表开关状态
  * 都不会因为「回首页再点进来」而丢失。
  */
-export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick }: Props) {
+export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick, signalBadges }: Props) {
   const queryClient = useQueryClient();
   const [activeKey, setActiveKey] = useState<string>("");
   const [newGroupName, setNewGroupName] = useState("");
@@ -265,15 +324,17 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
       <nav className="sb-rail" aria-label="分组导航">
         {groups.map((g) => {
           const key = groupKey(g);
+          const isEmpty = g.symbols.length === 0;
           return (
             <button
               key={key}
               type="button"
-              className={`sb-rail-btn${key === activeGroupKey ? " active" : ""}`}
-              title={`${g.name}（${g.symbols.length}）`}
+              className={`sb-rail-btn${key === activeGroupKey ? " active" : ""}${isEmpty ? " is-empty" : ""}`}
+              title={`${g.name}（${g.symbols.length} 只）`}
               onClick={() => setActiveKey(key)}
             >
               <span>{g.name}</span>
+              <small className="sb-rail-cnt">{g.symbols.length}</small>
             </button>
           );
         })}
@@ -281,14 +342,54 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
 
       <div className="sb-main">
         <div className="sb-head">
-          <span>自选与大盘</span>
-          <button
-            className="btn small"
-            onClick={() => setAdding(!adding)}
-            title="新建分组"
-          >
-            ＋组
-          </button>
+          <span className="sb-head-title">
+            <span>{activeGroup ? activeGroup.name : "自选"}</span>
+            {activeGroup && <small className="sb-head-cnt">{activeGroup.symbols.length}</small>}
+          </span>
+          <div className="sb-head-tools">
+            {activeGroup && !activeGroup.builtin && activeGroup.group_id != null && (
+              <>
+                <button
+                  type="button"
+                  className="btn small sb-icon-btn"
+                  title="添加标的到该组"
+                  onClick={() => onAddClick(activeGroup.group_id)}
+                >
+                  ＋
+                </button>
+                <button
+                  type="button"
+                  className="btn small sb-icon-btn"
+                  title="重命名分组"
+                  onClick={() => {
+                    setGroupFeedback(null);
+                    setRenaming(activeGroup.group_id);
+                    setRenameText(activeGroup.name);
+                  }}
+                >
+                  ✎
+                </button>
+                <button
+                  type="button"
+                  className="btn small sb-icon-btn"
+                  title="删除分组（组内标的转为未分组，不会删除）"
+                  onClick={() => {
+                    if (window.confirm(`删除分组「${activeGroup.name}」？组内标的将转为未分组，不会被删除。`))
+                      deleteGroup.mutate(activeGroup.group_id!);
+                  }}
+                >
+                  ✕
+                </button>
+              </>
+            )}
+            <button
+              className="btn small"
+              onClick={() => setAdding(!adding)}
+              title="新建分组"
+            >
+              ＋组
+            </button>
+          </div>
         </div>
 
         {adding && (
@@ -333,17 +434,23 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
           </div>
         )}
 
-        <div className="sb-state-key" aria-label="BIAO 状态图例">
-          <span className="sb-state-key-label">状态图例</span>
-          <span><i className="state-dot black" />黑 · 空头规避</span>
-          <span><i className="state-dot gray" />灰 · 中性</span>
-          <span><i className="state-dot green" />绿 · 多头观察</span>
+        <div className="sb-state-key" aria-label="BIAO 状态说明">
+          <span><i className="state-dot black" />黑·规避</span>
+          <span><i className="state-dot gray" />灰·中性</span>
+          <span><i className="state-dot green" />绿·多头</span>
+          <span
+            className="sb-key-help"
+            tabIndex={0}
+            title="卡片底部标尺中线 = 20日均线(EMA20)，左右满格 ±15%，条长可跨标的直接比较偏离幅度"
+          >
+            ?
+          </span>
         </div>
         <div className="sb-scroll">
           {activeGroup && (
             <section className="sb-group expanded">
-              <div className="sb-group-head">
-                {activeGroup.group_id != null && renaming === activeGroup.group_id ? (
+              {activeGroup.group_id != null && renaming === activeGroup.group_id && (
+                <div className="sb-group-head">
                   <form
                     className="sb-rename-form"
                     onClick={(e) => e.stopPropagation()}
@@ -375,14 +482,12 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
                         }
                       }}
                       onBlur={(e) => {
-                        // 失焦视为取消；提交中不撤销，避免请求完成前编辑行跳走。
                         if (!renameGroup.isPending && e.relatedTarget?.tagName !== "BUTTON") {
                           setRenaming(null);
                           setRenameText("");
                         }
                       }}
                     />
-                    {/* 显式提交按钮：点击 / Enter 都触发 form onSubmit */}
                     <button
                       type="submit"
                       className="sb-rename-ok"
@@ -393,42 +498,8 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
                       {renameGroup.isPending ? "…" : "✓"}
                     </button>
                   </form>
-                ) : (
-                  <span className="sb-group-title">{activeGroup.name}</span>
-                )}
-                <span className="sb-count" aria-label={`${activeGroup.symbols.length} 个标的`}>
-                  {activeGroup.symbols.length}
-                </span>
-                {!activeGroup.builtin && activeGroup.group_id != null && (
-                  <span className="sb-group-actions" onClick={(e) => e.stopPropagation()}>
-                    <button
-                      title="添加标的到该组"
-                      onClick={() => onAddClick(activeGroup.group_id)}
-                    >
-                      ＋
-                    </button>
-                    <button
-                      title="重命名"
-                      onClick={() => {
-                        setGroupFeedback(null);
-                        setRenaming(activeGroup.group_id);
-                        setRenameText(activeGroup.name);
-                      }}
-                    >
-                      ✎
-                    </button>
-                    <button
-                      title="删除分组（组内标的转为未分组，不会删除）"
-                      onClick={() => {
-                        if (window.confirm(`删除分组「${activeGroup.name}」？组内标的将转为未分组，不会被删除。`))
-                          deleteGroup.mutate(activeGroup.group_id!);
-                      }}
-                    >
-                      ✕
-                    </button>
-                  </span>
-                )}
-              </div>
+                </div>
+              )}
 
               <div className="sb-items">
                 {activeCards.length === 0 && (
@@ -450,6 +521,7 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
                     groups={groups}
                     onMove={(symbol, groupId) => moveItem.mutate({ symbol, groupId })}
                     onRemove={(symbol) => removeItem.mutate(symbol)}
+                    signalBadge={signalBadges?.get(c.symbol)}
                   />
                 ))}
               </div>
@@ -460,10 +532,10 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
             ＋ 添加自选
           </button>
           <div
-            style={{ padding: "6px 12px", fontSize: 11, opacity: 0.65 }}
+            className="sb-kbd-hint"
             title="不用鼠标，直接用方向键在自选列表里快速换标的"
           >
-            ↑↓ 方向键切换标的
+            ↑↓ 方向键切换标的 · ←→ 平移 K 线
           </div>
         </div>
       </div>

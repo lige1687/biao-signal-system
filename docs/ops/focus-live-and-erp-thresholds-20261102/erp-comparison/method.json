@@ -1,0 +1,79 @@
+{
+  "question": "Does loosening ERP bands add more useful stage-turning observation beyond the same price-state baseline and original 2sigma?",
+  "mode": "research",
+  "status": "contract_frozen_before_outcomes",
+  "evidenceStage": "reused_history_not_out_of_sample",
+  "decisionUse": "Low-frequency broad-index observation of stage reversal, not a trading rule or portfolio backtest.",
+  "inputs": {
+    "weeklyErp": {
+      "path": "web/public/research/erp-bands/cn-reference.json",
+      "sha256": "2065067faa2144a88487af14da64e2af3f4e3c7ef83e48d136c8fcbc3b46724f"
+    },
+    "dailyPrice": {
+      "path": "docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-bands-replication-20261101/data/overlay-history-20.json",
+      "sha256": "e66d4ec5aff0d6a66642870a12d890483487d081e24a525ddc90610ae25c2cee"
+    },
+    "oldBandsCheckOnly": {
+      "path": "docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-bands-replication-20261101/analysis/python-bands.json",
+      "sha256": "9e3015bc06a686658b2dbecf0fc6320c9905e80ab23375356e2d352f3e63f923"
+    },
+    "sourceWeeklySpine": {
+      "path": "docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-bands-replication-20261101/data/qualified-guchacha-csi300-weekly-pe.json",
+      "sha256": "5471527e5b5b83f659d31847449647d476dc3f9cf3d145926bf0d14c3852f4a8"
+    }
+  },
+  "sourceBoundary": "CSI300 weekly PE source date +1 market-date alignment is inferred from calendar and 52 cross-source points, not proven timezone metadata. Weekly samples omit intrawweek crossings; index price is non-total-return and no PIT/cost/dividend handling.",
+  "signal": {
+    "formula": "X=100/PE_TTM-China10Y percentage points. Rolling 3 calendar years (t-3Y,t] including current; population std ddof=0; middle +/-2sigma. Strict first weekly upper/lower crossing after previous valid week not in same-side outside state. No event after missing or warmup until previous valid band row.",
+    "availability": "Signal known only after weekly close; outcomes start next CSI300 price trading close.",
+    "adjacency": "Current and prior row must be consecutive in qualified source weekly spine, each with valid 10Y/band; if calendar gap between source weeks >10 days, do not infer a first entry across an unobserved week. Current/prior bands must both be past warmup."
+  },
+  "outcomes": {
+    "primaryHTradingDays": 63,
+    "checksHTradingDays": [
+      21,
+      126
+    ],
+    "entry": "next trading day close at price index index i+1",
+    "exit": "entry close i+1+H, requiring complete H",
+    "path": "min and max close from entry through exit inclusive and offsets 0..H, both relative to entry close",
+    "direction": "upper expects positive return; lower expects negative return; directional metric sign*future return and directional success is sign*return>0; no top/bottom hit-rate claim."
+  },
+  "priceBaseline": {
+    "eligible": "All valid weekly band rows with available price 63-day past return, 200-day SMA, and complete horizon outcome.",
+    "B": "past 63 trading-day price change <=-10%,(-10,0],(0,10],>10% x close>SMA200 boolean x <=2016 or >=2017; values known at signal close.",
+    "controls": "Primary: all non-entry weeks in the same current-time B cell, no future-event exclusion. At least 5 controls in a cell for common sample. Event and control return windows may overlap; 2-year cluster resampling addresses dependence imperfectly.",
+    "supersededControlRule": "Original +/-63-trading-day exclusion based on all future crossings is retained only in contract-pre-review.json; not run as primary or sensitivity because it is post-event selection."
+  },
+  "uncertainty": {
+    "clusters": "Nonoverlapping calendar blocks 2008-09,2010-11,...2026-27; assign by signal week date.",
+    "resamples": 2000,
+    "seed": 20261101,
+    "estimand": "Event mean and event-minus-all-week baseline, event-minus-matched-B-control on common eligible events; percentile 2.5/97.5, report valid and empty resamples.",
+    "limitations": "Few blocks and repeat/overlapping events; interval is descriptive cluster sensitivity, not independent confirmation."
+  },
+  "stability": [
+    "<=2016 vs >=2017",
+    "same-side 63 trading-day cooldown (first same-side only)",
+    "leave-one-2-year-block-out differences",
+    "worst counterexample and largest missed subsequent rise/continued decline"
+  ],
+  "stop": "One frozen core batch; no parameter tuning or new data. Finish with raw and incremental tables, uncertainty, exclusions, failures, reproducible files.",
+  "allowedWrites": [
+    "docs/ops/focus-live-and-erp-thresholds-20261102/erp-comparison"
+  ],
+  "codeStandard": "Python 3 standard library only; one script under compute, deterministic sort, fixture tests, input SHA assertions, finite numeric checks, no network.",
+  "oldResultBoundary": "oldBandsCheckOnly is read exclusively for numerical cross-check; never import, modify, or use old outcome labels.",
+  "revision": {
+    "number": 1,
+    "time": "2026-11-01 before first computation",
+    "reason": "Independent pre-outcome method review: excluding control weeks within +/-63 trading days of any future crossing uses future event knowledge in control selection. Primary conditional comparison must use only contemporaneous B and current crossing status. Original frozen text preserved in contract-pre-review.json. No outcome run or result inspected before revision.",
+    "originalSha256": "38ceaae994608ef32671911481cf811f7717034bd498ccb505c1c265d91d2f12"
+  },
+  "multipliers": [
+    1,
+    1.5,
+    2
+  ],
+  "incrementExtension": "For each looser first crossing, attribute at-signal abs(z) in [k,2) as earlier/milder condition; not claim independent new events. Report 63-session same-side cooldown; comparisons are descriptive, not causal or independent validation."
+}

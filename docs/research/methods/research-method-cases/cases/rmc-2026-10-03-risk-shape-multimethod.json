@@ -1,0 +1,31 @@
+{
+  "id": "rmc-2026-10-03-risk-shape-multimethod",
+  "title": "三价格风险候选多方法核对：保留缺组和失败，原增量结论不被辅助结果覆盖",
+  "date": "2026-10-03",
+  "kind": "observation_case",
+  "status": "observed",
+  "problem": "同一批历史的几种检查各有不同支持范围；固定高低组在后期缺失，部分重新抽取不能估计，不能只展示能计算或改善的部分。",
+  "why_changed": "用户要求沉淀有效性方法并保留本轮因子研究证据；记录已经完成的检查及其局限，供后续选择方法和防错复用。",
+  "old_method": "原六组冻结比较，三因子分别单独加入最低ETF身份信息和18项已有信息；简单参照、时期/对象反例、原日期相关性核对保留。",
+  "new_method": "用户追加授权后，复用原预测核对排序、较早资料固定分组、相近背景、全部21个错开起点及三候选共同误差；原主要目标、评价器与参数不变，补充记录为已见历史探索。",
+  "scope": "本轮三价格风险定义@1.0.0、国内三ETF、20收盘间隔亏损风险、原两个后续评价期；仅证据整理和已发生事实，不授予新实验或生产采用。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/experiments/risk-shape-information-2026-10-03.md",
+    "docs/experiments/risk-shape-multimethod-2026-10-03.md",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/multimethod-01/methods.json",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/multimethod-01/completion.json",
+    "docs/research/methods/factor-validation-guide.md"
+  ],
+  "before_after": {
+    "old_result": "波动变化、跟随差、亏损连续性比已有信息分别少1.2628%、0.0257%、0.5114%的预测平方错误，但三者均未胜简单各ETF历史平均。原结论未确认足以采用的稳定增量，24次真实拟合。",
+    "new_result": "0新增拟合：波动变化21个错开起点均微改善；固定分组或相近背景的后期完整支持不足。波动分组1000次历史抽取中490次无法估计，其他两项全部无法完整估计；三候选共同检查对已有信息的数值为0.108/0.311。综合仍未确认稳定增量。",
+    "difference_explanation": "新增方法提供各自角度的线索和反例，仍是同一批历史、不能当独立新验证；不按方法投票，不改高低界限或删除缺组对象，不用辅助好结果覆盖原目标和强简单参照。"
+  },
+  "failure_mode": {
+    "category": "sample",
+    "reason": "核心经验是固定评价组在后期缺失及大量历史抽取无法形成完整可比组，覆盖不足限制推断；不是修改因子或交易规则。"
+  },
+  "notes": "已发生事实记录，不标approved，不虚构人工评审；工具对象范围不一致的拒绝及限定替代接口也保留在原补充完成记录。"
+}

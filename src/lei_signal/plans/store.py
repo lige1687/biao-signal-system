@@ -156,6 +156,9 @@ def _row_to_action(row: sqlite3.Row) -> ActionItem:
         closed_on=row["closed_on"],
         close_kind=row["close_kind"],
         created_at=row["created_at"],
+        actual_action_date=row["actual_action_date"],
+        done_recorded_at=row["done_recorded_at"],
+        done_source=row["done_source"],
     )
 
 
@@ -305,23 +308,29 @@ def _snapshot_value(field: str, invalidation_price: float | None, thesis_cn: str
     }[field]
 
 
-def confirm_plan(conn: sqlite3.Connection, plan_id: str) -> TradePlan:
+def confirm_plan(conn: sqlite3.Connection, plan_id: str, *, expected_fingerprint: str | None = None, commit: bool = True) -> TradePlan:
     """draft -> armed。armed 必须五项预案 + reason + valid_until 全部非空；
     技术 entry 计划还必须有明确且合法（有限正数）的失效价（04B，2026-09-08）。"""
-    plan = get_plan(conn, plan_id)
-    if plan is None:
-        raise KeyError(f"计划不存在: {plan_id}")
-    if plan.state != PLAN_DRAFT:
-        raise ValueError(f"只有 draft 可确认，当前 state={plan.state}")
-    validate_entry_confirm_fields(plan)
-    missing = [f for f in (PLAYBOOK_FIELDS + ("reason", "valid_until")) if not getattr(plan, f)]
-    if missing:
-        raise ValueError(f"armed 必填字段为空: {missing}")
-    return transition_state(conn, plan_id, PLAN_ARMED)
+    from lei_signal.plans import evidence
+    with evidence.atomic(conn, commit=commit):
+        plan = get_plan(conn, plan_id)
+        if plan is None:
+            raise KeyError(f"计划不存在: {plan_id}")
+        if expected_fingerprint is not None and evidence.plan_fingerprint(plan) != expected_fingerprint:
+            raise evidence.PlanFingerprintConflict("草稿已改变，请重新核查后确认")
+        if plan.state != PLAN_DRAFT:
+            raise ValueError(f"只有 draft 可确认，当前 state={plan.state}")
+        validate_entry_confirm_fields(plan)
+        missing = [f for f in (PLAYBOOK_FIELDS + ("reason", "valid_until")) if not getattr(plan, f)]
+        if missing:
+            raise ValueError(f"armed 必填字段为空: {missing}")
+        confirmed = transition_state(conn, plan_id, PLAN_ARMED, commit=False)
+        evidence.record_plan_version(conn, confirmed, event_kind="initial_confirmation")
+        return confirmed
 
 
 def confirm_holding_watch(
-    conn: sqlite3.Connection, plan_id: str, *, entered_on: str
+    conn: sqlite3.Connection, plan_id: str, *, entered_on: str, expected_fingerprint: str | None = None, commit: bool = True
 ) -> TradePlan:
     """持仓盯盘 draft -> entered（已在场内，不经 armed 入场判定）。
 
@@ -332,33 +341,38 @@ def confirm_holding_watch(
       - 至少一个退出触发条件：止盈价 / 止损价 / 信号 rule_id。三者全空则无从监督。
     入场理由（五项里的另外三项、entry_rule_id、R/R）不强制--你已经在场内了。
     """
-    plan = get_plan(conn, plan_id)
-    if plan is None:
-        raise KeyError(f"计划不存在: {plan_id}")
-    if plan.plan_kind != PLAN_KIND_HOLDING_WATCH:
-        raise ValueError(
-            f"confirm_holding_watch 只接受 plan_kind=holding_watch，得到 {plan.plan_kind}"
+    from lei_signal.plans import evidence
+    with evidence.atomic(conn, commit=commit):
+        plan = get_plan(conn, plan_id)
+        if plan is None:
+            raise KeyError(f"计划不存在: {plan_id}")
+        if expected_fingerprint is not None and evidence.plan_fingerprint(plan) != expected_fingerprint:
+            raise evidence.PlanFingerprintConflict("草稿已改变，请重新核查后确认")
+        if plan.plan_kind != PLAN_KIND_HOLDING_WATCH:
+            raise ValueError(
+                f"confirm_holding_watch 只接受 plan_kind=holding_watch，得到 {plan.plan_kind}"
+            )
+        if plan.state != PLAN_DRAFT:
+            raise ValueError(f"只有 draft 可确认，当前 state={plan.state}")
+        missing = [f for f in REQUIRED_FOR_HOLDING_WATCH if not getattr(plan, f)]
+        if missing:
+            raise ValueError(f"持仓盯盘必填字段为空: {missing}")
+        if (
+            plan.take_profit_price is None
+            and plan.stop_price is None
+            and not plan.watch_signal_rule_ids
+        ):
+            raise ValueError(
+                "持仓盯盘至少需要一个退出触发条件：止盈价 / 止损价 / 信号 rule_id"
+            )
+        transition_state(conn, plan_id, PLAN_ENTERED, commit=False)
+        conn.execute(
+            "UPDATE trade_plans SET entered_on = ?, updated_at = ? WHERE plan_id = ?",
+            (entered_on, _now(), plan_id),
         )
-    if plan.state != PLAN_DRAFT:
-        raise ValueError(f"只有 draft 可确认，当前 state={plan.state}")
-    missing = [f for f in REQUIRED_FOR_HOLDING_WATCH if not getattr(plan, f)]
-    if missing:
-        raise ValueError(f"持仓盯盘必填字段为空: {missing}")
-    if (
-        plan.take_profit_price is None
-        and plan.stop_price is None
-        and not plan.watch_signal_rule_ids
-    ):
-        raise ValueError(
-            "持仓盯盘至少需要一个退出触发条件：止盈价 / 止损价 / 信号 rule_id"
-        )
-    transition_state(conn, plan_id, PLAN_ENTERED)
-    conn.execute(
-        "UPDATE trade_plans SET entered_on = ?, updated_at = ? WHERE plan_id = ?",
-        (entered_on, _now(), plan_id),
-    )
-    conn.commit()
-    return get_plan(conn, plan_id)  # type: ignore[return-value]
+        confirmed = get_plan(conn, plan_id)
+        evidence.record_plan_version(conn, confirmed, event_kind="initial_confirmation")
+        return confirmed
 
 
 def update_draft(
@@ -428,7 +442,7 @@ def list_plans(
 
 
 def transition_state(
-    conn: sqlite3.Connection, plan_id: str, new_state: str
+    conn: sqlite3.Connection, plan_id: str, new_state: str, *, commit: bool = True
 ) -> TradePlan:
     """状态机迁移。非法迁移即报错。"""
     plan = get_plan(conn, plan_id)
@@ -443,51 +457,53 @@ def transition_state(
         "UPDATE trade_plans SET state = ?, updated_at = ? WHERE plan_id = ?",
         (new_state, _now(), plan_id),
     )
-    conn.commit()
+    if commit:
+        conn.commit()
     return get_plan(conn, plan_id)  # type: ignore[return-value]
 
 
 def set_entered(
-    conn: sqlite3.Connection, plan_id: str, *, entered_on: str
+    conn: sqlite3.Connection, plan_id: str, *, entered_on: str | None, commit: bool = True
 ) -> TradePlan:
-    """armed -> entered，记 entered_on（仅日期，无数量金额）。"""
-    transition_state(conn, plan_id, "entered")
+    """armed -> entered，留存用户声明的日期；未提供时保持未知。"""
+    transition_state(conn, plan_id, "entered", commit=False)
     conn.execute(
         "UPDATE trade_plans SET entered_on = ?, updated_at = ? WHERE plan_id = ?",
         (entered_on, _now(), plan_id),
     )
-    conn.commit()
+    if commit:
+        conn.commit()
     return get_plan(conn, plan_id)  # type: ignore[return-value]
 
 
 def set_exited(
-    conn: sqlite3.Connection, plan_id: str, *, exited_on: str
+    conn: sqlite3.Connection, plan_id: str, *, exited_on: str | None, commit: bool = True
 ) -> TradePlan:
-    """entered -> exited，记 exited_on（仅日期，无数量金额）。
+    """entered -> exited，留存用户声明的日期；未提供时保持未知。
 
-    与 set_entered 对称：EXIT 确认同样盖 exited_on，使计划时间线（持有时长、
-    有效期）在入场/退出两侧口径一致。exited_on 取 EXIT 待办的 due_from（系统
-    判定的可执行日），与 entered_on 取 ENTER 待办 due_from 同源。
+    系统判定的最早可处理日 due_from 不代表用户实际交易日期。
     """
-    transition_state(conn, plan_id, "exited")
+    transition_state(conn, plan_id, "exited", commit=False)
     conn.execute(
         "UPDATE trade_plans SET exited_on = ?, updated_at = ? WHERE plan_id = ?",
         (exited_on, _now(), plan_id),
     )
-    conn.commit()
+    if commit:
+        conn.commit()
     return get_plan(conn, plan_id)  # type: ignore[return-value]
 
 
 def mark_superseded(
-    conn: sqlite3.Connection, plan_id: str, *, by_plan_id: str
+    conn: sqlite3.Connection, plan_id: str, *, by_plan_id: str, commit: bool = True
 ) -> TradePlan:
     """armed -> superseded，记 superseded_by（决策 5）。"""
-    transition_state(conn, plan_id, "superseded")
+    transition_state(conn, plan_id, "superseded", commit=False)
     conn.execute(
         "UPDATE trade_plans SET superseded_by = ?, updated_at = ? WHERE plan_id = ?",
         (by_plan_id, _now(), plan_id),
     )
-    conn.commit()
+    if commit:
+        conn.commit()
     return get_plan(conn, plan_id)  # type: ignore[return-value]
 
 
@@ -537,28 +553,32 @@ def append_revision(
     verdict_reason_cn: str | None,
     changed_by: str,
     apply_change: bool = False,
+    commit: bool = True,
 ) -> PlanRevision:
     """追加修订记录（append-only）。apply_change=True 时同步更新 trade_plans 当前值。
 
     revision_no 自增；revision_no=0 永不触碰。verdict 由 drift.py 判定传入。
     """
-    if changed_field == "__snapshot__":
-        raise ValueError("不得手动追加 __snapshot__ 修订")
-    row = conn.execute(
-        "SELECT COALESCE(MAX(revision_no), 0) AS n FROM trade_plan_revisions WHERE plan_id = ?",
-        (plan_id,),
-    ).fetchone()
-    revision_no = int(row["n"]) + 1
-    rev = _insert_revision(
-        conn, plan_id=plan_id, revision_no=revision_no, changed_field=changed_field,
-        old_value=old_value, new_value=new_value, verdict=verdict,
-        verdict_reason_cn=verdict_reason_cn, changed_by=changed_by,
-    )
-    if apply_change and changed_field in _FREEZABLE_FIELDS:
-        # within_playbook 的收紧可更新当前值；冻结的 revision_no=0 不动
-        _update_plan_field(conn, plan_id, changed_field, new_value)
-    conn.commit()
-    return rev
+    from lei_signal.plans import evidence
+    with evidence.atomic(conn, commit=commit):
+        if changed_field == "__snapshot__":
+            raise ValueError("不得手动追加 __snapshot__ 修订")
+        row = conn.execute(
+            "SELECT COALESCE(MAX(revision_no), 0) AS n FROM trade_plan_revisions WHERE plan_id = ?",
+            (plan_id,),
+        ).fetchone()
+        revision_no = int(row["n"]) + 1
+        rev = _insert_revision(
+            conn, plan_id=plan_id, revision_no=revision_no, changed_field=changed_field,
+            old_value=old_value, new_value=new_value, verdict=verdict,
+            verdict_reason_cn=verdict_reason_cn, changed_by=changed_by,
+        )
+        if apply_change and changed_field in _FREEZABLE_FIELDS:
+            # within_playbook 的收紧可更新当前值；冻结的 revision_no=0 不动
+            _update_plan_field(conn, plan_id, changed_field, new_value)
+        if apply_change and changed_field in _FREEZABLE_FIELDS and evidence.latest_plan_version(conn, plan_id) is not None:
+            evidence.record_plan_version(conn, get_plan(conn, plan_id), event_kind="applied_revision", source_revision_id=rev.revision_id)
+        return rev
 
 
 def _update_plan_field(
@@ -611,6 +631,7 @@ def add_annotation(
     kind: str,
     reason_cn: str,
     author: str,
+    commit: bool = True,
 ) -> Annotation:
     annotation_id = f"ann_{plan_id}_{uuid.uuid4().hex[:8]}"
     created_at = _now()
@@ -622,7 +643,8 @@ def add_annotation(
         """,
         (annotation_id, plan_id, ref_kind, ref_id, kind, reason_cn, created_at, author),
     )
-    conn.commit()
+    if commit:
+        conn.commit()
     return Annotation(
         annotation_id=annotation_id, plan_id=plan_id, ref_kind=ref_kind, ref_id=ref_id,
         kind=kind, reason_cn=reason_cn, created_at=created_at, author=author,
@@ -730,6 +752,7 @@ def update_action_item(
     resume_on: str | None = None,
     closed_on: str | None = None,
     close_kind: str | None = None,
+    commit: bool = True,
 ) -> ActionItem | None:
     item = get_action_item(conn, action_id)
     if item is None:
@@ -751,7 +774,8 @@ def update_action_item(
             action_id,
         ),
     )
-    conn.commit()
+    if commit:
+        conn.commit()
     return get_action_item(conn, action_id)
 
 

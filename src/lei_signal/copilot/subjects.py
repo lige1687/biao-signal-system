@@ -6,7 +6,7 @@ import json
 import re
 from pathlib import Path
 
-from lei_signal.api.config import STRATEGY_INDICES, US_ETFS, cache_root
+from lei_signal.api.config import DASHBOARD_INDICES, STRATEGY_INDICES, US_ETFS, cache_root
 from lei_signal.api.labels import THS_INDUSTRY_NAMES
 
 PRODUCT_NAMES = {
@@ -33,7 +33,12 @@ def sector_rows() -> list[dict]:
 
 
 def catalog_names() -> dict[str, str]:
-    names = {x.symbol: x.display_name for x in (*STRATEGY_INDICES, *US_ETFS)}
+    # 默认大盘一并纳入（2026-09-18 名称绑定修复）：否则沪深300/上证指数
+    # 解析成功后 display_name 取不到中文名，识别接口只回空名或旧对象名。
+    names = {
+        x.symbol: x.display_name
+        for x in (*DASHBOARD_INDICES, *STRATEGY_INDICES, *US_ETFS)
+    }
     names.update(PRODUCT_NAMES)
     names.update({f"TH{k}.SECTOR": v for k, v in THS_INDUSTRY_NAMES.items()})
     names.update(SECTOR_NAMES)

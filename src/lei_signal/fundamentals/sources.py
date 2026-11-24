@@ -12,9 +12,12 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+import threading
 import time
 from datetime import UTC, datetime, timedelta
+from pathlib import Path
 from typing import Any
 
 import requests
@@ -735,11 +738,11 @@ def _fetch_multpl_monthly(url: str, *, require_percent: bool) -> dict[str, float
     last_exc: Exception | None = None
     for attempt in range(3):
         if attempt:
-            time.sleep(1.5)
+            time.sleep(1.5 * attempt)
         try:
             resp = requests.get(
                 url,
-                headers={**_HEADERS, "Referer": "https://www.multpl.com/"},
+                headers={**_HEADERS, "Referer": "https://www.multpl.com/", "Connection": "close"},
                 timeout=_TIMEOUT,
             )
             resp.raise_for_status()
@@ -867,6 +870,44 @@ def fetch_cn_pe(hist: dict[str, float] | None = None) -> dict[str, Any]:
     return _valuation_snapshot(hist, _CN_PE_CALIB_FROM)
 
 
+def _us_ey_cache_path() -> Path:
+    from lei_signal.api.config import cache_root
+
+    return Path(cache_root()) / "us_ey_monthly_cache.json"
+
+
+def _read_cached_us_ey() -> dict[str, float] | None:
+    path = _us_ey_cache_path()
+    if not path.is_file():
+        return None
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        pts = raw.get("points") if isinstance(raw, dict) else None
+        if not isinstance(pts, dict) or len(pts) < 120:
+            return None
+        return dict(sorted((str(k), float(v)) for k, v in pts.items()))
+    except (OSError, ValueError, TypeError):
+        return None
+
+
+def _write_cached_us_ey(ey_hist: dict[str, float]) -> None:
+    if len(ey_hist) < 120:
+        return
+    try:
+        path = _us_ey_cache_path()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_suffix(".json.tmp")
+        payload = {
+            "updated_at": datetime.now(UTC).isoformat(),
+            "as_of": max(ey_hist),
+            "points": ey_hist,
+        }
+        tmp.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+        os.replace(tmp, path)
+    except OSError:
+        pass
+
+
 def fetch_us_erp_history(
     lookback_days: int = 730,
     treasury_hist: dict[str, dict[str, float | None]] | None = None,
@@ -882,7 +923,27 @@ def fetch_us_erp_history(
     us10 = {d: v.get("us_10y") for d, v in treasury_hist.items() if v.get("us_10y") is not None}
     if not us10:
         raise FundamentalsSourceError("美债10Y历史缺失，无法计算美股ERP历史")
-    ey_hist = fetch_us_ey_history()
+    if int(lookback_days) > 7300 or min(us10) > "1985-01-01":
+        # 东财美债 10Y 仅约 20 年，长历史回补 FRED DGS10（1977 起）供 3 年滚动轨预热
+        try:
+            fred_us10 = _fetch_fred_series("DGS10", cosd="1977-01-01")
+        except FundamentalsSourceError:
+            fred_us10 = {}
+        if fred_us10:
+            us10 = {**fred_us10, **us10}
+    try:
+        ey_hist = fetch_us_ey_history()
+        _write_cached_us_ey(ey_hist)
+    except FundamentalsSourceError:
+        cached_ey = _read_cached_us_ey()
+        if not cached_ey:
+            raise
+        # Only fall back when the cached monthly EY is reasonably fresh (within 95 days of latest us10)
+        latest_us10 = datetime.strptime(max(us10), "%Y-%m-%d").date()
+        latest_ey = datetime.strptime(max(cached_ey), "%Y-%m-%d").date()
+        if (latest_us10 - latest_ey).days > 95:
+            raise
+        ey_hist = cached_ey
     ey_dates = sorted(ey_hist)
     out: dict[str, float] = {}
     # 双指针 as-of join：ey_dates 与 us10 均升序。
@@ -904,13 +965,20 @@ def fetch_us_erp_history(
 
 _MARGIN_DC_URL = "https://datacenter-web.eastmoney.com/api/data/v1/get"
 
+# 两融历史进程内记忆化（2026-09-15 agent-ask-stability）：日频叙事层指标，
+# TTL 内复用；键=lookback_days，值=(monotonic 抓取时刻, 结果)。线程安全。
+_MARGIN_HISTORY_TTL_SECONDS = int(
+    os.environ.get("LEI_MARGIN_HISTORY_TTL_SECONDS", "900"))
+_MARGIN_HISTORY_MEMO: dict[int, tuple[float, dict[str, dict[str, float | None]]]] = {}
+_MARGIN_HISTORY_MEMO_LOCK = threading.Lock()
+
 
 def _fetch_margin_rows(page_size: int = 1) -> list[dict[str, Any]]:
     """东财 RPTA_RZRQ_LSHJ，按日期倒序返回最近 page_size 个交易日。
 
-    接口单页上限 800 行，超过则翻页拼接（2026-08 实测：全史 3,977 行）。
+    接口单页上限 800 行，超过则翻页拼接（2026-11 实测：全史超 4,000 行）。
     """
-    want = min(int(page_size), 4000)
+    want = min(int(page_size), 5000)
     rows: list[dict[str, Any]] = []
     page = 1
     while len(rows) < want:
@@ -1028,14 +1096,28 @@ def fetch_margin_history(lookback_days: int = 730) -> dict[str, dict[str, float 
     """沪深融资融券余额历史（东财数据中心，日频，含占流通市值比）。
 
     _fetch_margin_rows 自动翻页；两融 2010-03 开闸，全史约 3,977 个交易日。
-    """
+
+    2026-09-15（agent-ask-stability）：进程内 TTL 记忆化——该指标是日频
+    叙事层数据，同一 lookback 在 ``_MARGIN_HISTORY_TTL_SECONDS``（默认
+    900 秒）内复用上次抓取结果，不再每个提问都重新翻页联网（实测单次
+    ~1 秒、且是讨论准备段的重复工作）。复用保留真实数据日期：返回字典
+    以日期字符串为键、原样返回，不把旧数据说成当前数据；日频指标最长
+    滞后一个 TTL 窗口。失败不缓存（下次调用重试真实抓取）。"""
+    now = time.monotonic()
+    key = int(lookback_days)
+    with _MARGIN_HISTORY_MEMO_LOCK:
+        hit = _MARGIN_HISTORY_MEMO.get(key)
+        if hit is not None and now - hit[0] < _MARGIN_HISTORY_TTL_SECONDS:
+            return hit[1]
     out: dict[str, dict[str, float | None]] = {}
-    for row in _fetch_margin_rows(min(int(lookback_days), 4000)):
+    for row in _fetch_margin_rows(min(int(lookback_days), 5000)):
         parsed = _margin_row(row)
         if parsed["date"]:
             out[parsed["date"]] = parsed
     if not out:
         raise FundamentalsSourceError("两融余额历史为空")
+    with _MARGIN_HISTORY_MEMO_LOCK:
+        _MARGIN_HISTORY_MEMO[key] = (now, out)
     return out
 
 
@@ -1132,9 +1214,70 @@ def _fetch_fred_series(series_id: str, *, cosd: str | None = None) -> dict[str, 
     raise FundamentalsSourceError(f"FRED {series_id}: {last_exc}")
 
 
+_US_INDEX_EPOCH = 315532800  # 1980-01-01T00:00:00Z
+
+
+def _yahoo_period_params(lookback_days: int) -> dict[str, Any]:
+    now_ts = int(time.time())
+    period1 = (
+        _US_INDEX_EPOCH
+        if int(lookback_days) >= 16500
+        else max(_US_INDEX_EPOCH, now_ts - max(int(lookback_days), 30) * 86400)
+    )
+    return {"period1": period1, "period2": now_ts + 86400, "interval": "1d"}
+
+
+def _fetch_us_index_history(
+    yahoo_symbol: str,
+    fred_series: str,
+    lookback_days: int = 18250,
+) -> dict[str, float]:
+    """美股指数日线：Yahoo v8 为主（含 1980+ 全史与最新交易日），合并 FRED 序列兜底。"""
+    yahoo_hist: dict[str, float] = {}
+    fred_hist: dict[str, float] = {}
+    last_exc: FundamentalsSourceError | None = None
+    try:
+        yahoo_hist = _fetch_yahoo_closes(yahoo_symbol, _yahoo_period_params(lookback_days))
+    except FundamentalsSourceError as exc:
+        last_exc = exc
+    try:
+        fred_hist = _fetch_fred_series(fred_series)
+    except FundamentalsSourceError as exc:
+        last_exc = exc
+    merged = {**fred_hist, **yahoo_hist}
+    if not merged:
+        raise last_exc or FundamentalsSourceError(f"美股指数无数据：{yahoo_symbol}/{fred_series}")
+    return _tail_days(dict(sorted(merged.items())), lookback_days)
+
+
 def fetch_fred_index_history(series_id: str) -> dict[str, float]:
     """FRED 官方 CSV -> 升序 {date: value}（美联储圣路易斯联储）。"""
     return _fetch_fred_series(series_id)
+
+
+def fetch_sp500_index_history(lookback_days: int = 18250) -> dict[str, float]:
+    """标普500指数日线：Yahoo ^GSPC（1980+）合并 FRED SP500。"""
+    return _fetch_us_index_history("^GSPC", FRED_INDEX_SERIES["sp500"], lookback_days)
+
+
+def fetch_nasdaq_index_history(lookback_days: int = 18250) -> dict[str, float]:
+    """纳斯达克综合指数日线：Yahoo ^IXIC 合并 FRED NASDAQCOM。"""
+    return _fetch_us_index_history("^IXIC", FRED_INDEX_SERIES["nasdaq"], lookback_days)
+
+
+def fetch_vix_term_history(lookback_days: int = 18250) -> dict[str, float]:
+    """VIX 期限结构日线：Yahoo ^VIX / ^VIX3M，保留 3 位小数。"""
+    params = _yahoo_period_params(lookback_days)
+    vix = _fetch_yahoo_closes("^VIX", params)
+    vix3m = _fetch_yahoo_closes("^VIX3M", params)
+    out = {
+        d: round(vix[d] / vix3m[d], 3)
+        for d in sorted(vix.keys() & vix3m.keys())
+        if vix3m[d] > 0
+    }
+    if not out:
+        raise FundamentalsSourceError("VIX / VIX3M 无有效交集")
+    return _tail_days(out, lookback_days)
 
 
 # ── 美国宏观（FRED 公开 CSV，无需 API key）──────────────────────────────
@@ -1251,7 +1394,7 @@ _US_MACRO_SPEC: list[dict[str, Any]] = [
     {
         "key": "hy_oas",
         "series": "BAMLH0A0HYM2",
-        "cosd": "2020-01-01",
+        "cosd": "2010-01-01",
         "name_cn": "高收益债利差",
         "label": "高收益债 OAS 利差",
         "unit": "%",
@@ -1404,24 +1547,65 @@ def _yf_closes(tickers: list[str], period: str = "6mo") -> dict[str, list[tuple[
 
 
 def fetch_commodity_ratios() -> dict[str, Any] | None:
-    """铜金比 / 油金比（铜/原油相对黄金）。
+    """Existing Yahoo daily futures ratios, aligned to one common quote date.
 
-    thememo：铜金比反映工业需求与避险的角力，油金比反映通胀与避险，
-    二者 + 国债 + PMI 可抽象化把握全球经济。via yfinance，失败返回 None。
+    Narrative reference only. Provider publication time, quote units and rolled
+    contract identity are not verified here. Failure or ambiguous input returns
+    None; no prices are filled or borrowed from a different quote date.
     """
+    import math
+    from numbers import Real
+
     try:
-        px = _yf_last(["HG=F", "GC=F", "CL=F"], period="3mo")
-        cu = px.get("HG=F", {}).get("last")
-        gold = px.get("GC=F", {}).get("last")
-        crude = px.get("CL=F", {}).get("last")
-        if cu is None or gold is None or crude is None:
+        tickers = ["HG=F", "GC=F", "CL=F"]
+        closes = _yf_closes(tickers, period="3mo")
+        retrieved_at = datetime.now(UTC)
+        prices: dict[str, dict[str, float]] = {}
+        for ticker in tickers:
+            rows = closes.get(ticker)
+            if not rows:
+                return None
+            dated: dict[str, float] = {}
+            for day, value in rows:
+                # Do not silently collapse repeated dates, even identical ones.
+                if (
+                    day in dated
+                    or datetime.strptime(day, "%Y-%m-%d").date().isoformat() != day
+                    or day > retrieved_at.date().isoformat()
+                ):
+                    return None
+                if isinstance(value, bool) or not isinstance(value, Real):
+                    return None
+                value = float(value)
+                if not math.isfinite(value) or (ticker == "GC=F" and value <= 0):
+                    return None
+                dated[day] = value
+            prices[ticker] = dated
+        common = set.intersection(*(set(prices[t]) for t in tickers))
+        if not common:
+            return None
+        quote_date = max(common)
+        cu, gold, crude = (prices[t][quote_date] for t in tickers)
+        copper_gold, crude_gold = cu / gold, crude / gold
+        if not math.isfinite(copper_gold) or not math.isfinite(crude_gold):
             return None
         return {
-            "copper_gold": round(cu / gold, 4),
-            "crude_gold": round(crude / gold, 4),
+            "copper_gold": copper_gold,
+            "crude_gold": crude_gold,
             "copper": cu,
             "gold": gold,
             "crude": crude,
+            "meta": {
+                "quote_date": quote_date,
+                "latest_dates": {t: max(prices[t]) for t in tickers},
+                "retrieved_at_utc": retrieved_at.isoformat(),
+                "provider": "Yahoo Finance via yfinance",
+                "tickers": {"copper": "HG=F", "gold": "GC=F", "crude": "CL=F"},
+                "publication_time": "unknown",
+                "quote_units": "unknown",
+                "roll_contract_identity": "unknown",
+                "data_usage_license": "unknown",
+            },
         }
     except Exception:  # noqa: BLE001
         return None

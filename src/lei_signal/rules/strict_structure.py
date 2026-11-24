@@ -134,70 +134,88 @@ def merge_contained_bars(frame: pd.DataFrame) -> list[MergedBar]:
 def detect_strict_structures(frame: pd.DataFrame) -> list[StrictStructure]:
     """识别全部严格顶/底构造（含后续失效轨迹），按确认日升序。
 
+    本研究修复按每根真实日线发布首次确认，后续包含关系不回写已发布字段。
     顶部与底部是两台独立的状态机（各自跟踪 LH/HL 起点），同一根合并 K 线
     可能同时推进两台机器（顶部确认后底部构造随后形成，波段交替）。
     """
     _containment, _min_bars, _min_wave = _params(get_rule(RULE_ID))
-    bars = merge_contained_bars(frame)
+    # Research repair of §3.2: publish each setup at its first actual close.
+    # Only the last merged bar can change on the next raw bar. Retain the
+    # machine state before that tail, re-evaluate its current form, and keep
+    # already published confirmations immutable. A later raw extreme still
+    # invalidates them in the independent pass below.
+    bars: list[MergedBar] = []
     structures: list[StrictStructure] = []
     pending_top: _Pending | None = None
     pending_bottom: _Pending | None = None
+    before_tail: tuple[_Pending | None, _Pending | None] = (None, None)
+    published: set[tuple[str, date, date, float, float]] = set()
 
-    for index, bar in enumerate(bars):
-        previous = bars[index - 1] if index > 0 else None
+    def publish(side: str, candidate: _Pending, bar: MergedBar) -> None:
+        # Stable setup identity uses the two already observed anchor bars,
+        # not the mutable completion date of the final merged bar.
+        key = (side, candidate.ref_date, candidate.trigger_date,
+               candidate.ref_price, candidate.trigger_price)
+        if key in published:
+            return
+        published.add(key)
+        structures.append(StrictStructure(
+            side=side,
+            confirmed_date=bar.completed_date,
+            reference_price=candidate.ref_price,
+            trigger_price=candidate.trigger_price,
+            final_price=bar.low if side == SIDE_TOP else bar.high,
+            reference_date=candidate.ref_date,
+            contained_bars_merged=candidate.merged_count,
+        ))
 
-        # ---- 顶部：LH = M2.high < M1.high；LL = M_k.low < M2.low ----
+    for timestamp, row in frame.iterrows():
+        day = timestamp.date()
+        high, low = float(row["high"]), float(row["low"])
+        last = bars[-1] if bars else None
+        contains = last is not None and (
+            (high <= last.high and low >= last.low)
+            or (high >= last.high and low <= last.low)
+        )
+        if contains:
+            assert last is not None
+            bars[-1] = MergedBar(
+                high=max(last.high, high), low=min(last.low, low),
+                first_date=last.first_date, completed_date=day,
+                source_bars=last.source_bars + 1,
+            )
+            pending_top, pending_bottom = before_tail
+        else:
+            before_tail = (pending_top, pending_bottom)
+            bars.append(MergedBar(high, low, day, day, 1))
+        bar = bars[-1]
+        previous = bars[-2] if len(bars) > 1 else None
+
         if pending_top is not None:
             if bar.high > pending_top.ref_price:
-                pending_top = None  # 构造前最高点被突破：候选作废，重新找下一个
+                pending_top = None
             elif bar.low < pending_top.trigger_price:
-                structures.append(
-                    StrictStructure(
-                        side=SIDE_TOP,
-                        confirmed_date=bar.completed_date,
-                        reference_price=pending_top.ref_price,
-                        trigger_price=pending_top.trigger_price,
-                        final_price=bar.low,
-                        reference_date=pending_top.ref_date,
-                        contained_bars_merged=pending_top.merged_count,
-                    )
-                )
+                publish(SIDE_TOP, pending_top, bar)
                 pending_top = None
 
-        # ---- 底部：HL = M2.low > M1.low；HH = M_k.high > M2.high ----
         if pending_bottom is not None:
             if bar.low < pending_bottom.ref_price:
-                pending_bottom = None  # 构造前最低点被跌破：候选作废
+                pending_bottom = None
             elif bar.high > pending_bottom.trigger_price:
-                structures.append(
-                    StrictStructure(
-                        side=SIDE_BOTTOM,
-                        confirmed_date=bar.completed_date,
-                        reference_price=pending_bottom.ref_price,
-                        trigger_price=pending_bottom.trigger_price,
-                        final_price=bar.high,
-                        reference_date=pending_bottom.ref_date,
-                        contained_bars_merged=pending_bottom.merged_count,
-                    )
-                )
+                publish(SIDE_BOTTOM, pending_bottom, bar)
                 pending_bottom = None
 
-        # ---- 新候选起点：与前一合并 K 线比较 ----
         if previous is not None:
             if pending_top is None and bar.high < previous.high:
                 pending_top = _Pending(
-                    ref_price=previous.high,
-                    ref_date=previous.completed_date,
-                    trigger_price=bar.low,
-                    trigger_date=bar.completed_date,
+                    ref_price=previous.high, ref_date=previous.completed_date,
+                    trigger_price=bar.low, trigger_date=bar.completed_date,
                     merged_count=previous.source_bars + bar.source_bars,
                 )
             if pending_bottom is None and bar.low > previous.low:
                 pending_bottom = _Pending(
-                    ref_price=previous.low,
-                    ref_date=previous.completed_date,
-                    trigger_price=bar.high,
-                    trigger_date=bar.completed_date,
+                    ref_price=previous.low, ref_date=previous.completed_date,
+                    trigger_price=bar.high, trigger_date=bar.completed_date,
                     merged_count=previous.source_bars + bar.source_bars,
                 )
 

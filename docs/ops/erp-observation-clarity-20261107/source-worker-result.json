@@ -1,0 +1,24 @@
+{
+  "status": "ready_for_controller_review",
+  "scope": "FundamentalsPage ERP display wiring only",
+  "files_changed": [
+    "web/src/pages/FundamentalsPage.tsx",
+    "web/src/components/observation-library/ErpReferenceCard.tsx"
+  ],
+  "result": [
+    "Rates ERP cards now read the same erp-cn and erp-us useProjectionSource points as the home observation, show dated values in percentage points, and open ObservationDetailDialog for the same historical series and rails.",
+    "Long-period ERP overlays now use those dated projection points. The shared date calendar includes projection dates; unmatched observations remain null and do not connect across gaps. Loading and source errors do not fall back to old ERP series.",
+    "Removed incompatible snapshot earnings-yield and bond-yield decomposition from the rates cards; non-ERP cards and overlay controls were left in place."
+  ],
+  "checks": [
+    { "command": "web/node_modules/.bin/tsc --noEmit -p web/tsconfig.json", "result": "pass" },
+    { "command": "node --test web/src/components/observation-library/erpReferenceData.test.mjs web/src/components/observation-library/erpData.test.mjs", "result": "pass, 4 tests" },
+    { "command": "git diff --check -- web/src/pages/FundamentalsPage.tsx", "result": "pass" },
+    { "command": "diff against docs/ops/erp-observation-clarity-20261107/before/web/src/pages/FundamentalsPage.tsx", "result": "only bounded ERP imports, card replacement, overlay source/date alignment and captions differ" }
+  ],
+  "limits": [
+    "No live browser verification or web/dist build was done by this worker; controller owns both.",
+    "A-share ERP remains a weekly historical reference; in the daily long-period overlay it appears as individual dated observations rather than a filled daily curve.",
+    "Other ERP displays outside the allowed files were not edited."
+  ]
+}

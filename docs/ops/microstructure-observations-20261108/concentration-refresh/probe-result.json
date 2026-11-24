@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "scope": "bounded source availability probe; no concentration recomputation or packet change",
+  "budget": {
+    "workerCapRequests": 26,
+    "workerUsedRequests": 25,
+    "workerCapResponseBytes": 29360128,
+    "workerUsedResponseBytes": 1009888,
+    "rootReservedRequests": 4
+  },
+  "ledger": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/probe-ledger.json",
+    "sha256": "5a0cf38f6c5afafbfd41dfbe489999bea4a5c6aaf04c4ed4641018e54b9b9939"
+  },
+  "sources": {
+    "baoRecentNormal": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/baostock-sh601326-2026-10-19-2026-11-06.json",
+      "sha256": "28da5aea06f156a04d70dc9e21a63bd0b4b3e81f11da393544702353ba2adc06",
+      "bytes": 2162
+    },
+    "baoMissingSuspension": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/baostock-sz000016-2026-10-19-2026-11-06.json",
+      "sha256": "a570e73f59d7fc5f29741945545968016d564064663d12e69f882ac0af74243d",
+      "bytes": 843
+    },
+    "baoHistoricalGap": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/baostock-sh600696-2023-01-01-2023-01-31.json",
+      "sha256": "979e50b5fab43c166cf4c331985566a121b2c6650f247e2b6ecc577f31a6c877",
+      "bytes": 2647
+    },
+    "baoMaster": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/baostock-stock-basic.json",
+      "sha256": "1af66b18ffd9cdd9ec3c981302bda5ff469a3fe473e4e943572f055ad5860e6e",
+      "bytes": 579606
+    },
+    "baoDailyUniverse": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/baostock-all-stock-20261106.json",
+      "sha256": "92f3738707d5a5cba8cbc5855f7d065aa424c03751d37f0ecf04f38da5118612",
+      "bytes": 417925
+    },
+    "baoNewIpo": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/baostock-sz001381-recent.json",
+      "sha256": "8957ba1bef44c775f3fac84dfb23ce64fe7d019eeb23e4972df05dd999f4a5e5",
+      "bytes": 502
+    },
+    "eastmoneyOverlap": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/eastmoney-sh601326-2026-10-19-2026-11-06.json",
+      "sha256": "3c1108a01a9ffb7f1aeffb1edf3ea81dfaf4de7db8acdcc57e12f30f680dc21e",
+      "bytes": 556
+    },
+    "eastmoneyOverlapLimited": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/eastmoney-sh601326-window-lmt30.json",
+      "sha256": "25a3471dacc726f23824af782bc2f7eaea62992d6d0730748acd84167563a98f",
+      "bytes": 556
+    },
+    "eastmoneyHistory": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/eastmoney-sh600696-2023-01-01-2023-01-31.json",
+      "sha256": "0a95a3c7f0dc722edc48128e8493cfa6cfc04bda8500d680d62238a435c641b4",
+      "bytes": 1395
+    }
+  },
+  "findings": {
+    "baoUsableNow": "BaoStock login, three recent stock history queries, one 2023 historical gap query and both catalog queries returned errorCode=0. One stock query covers the 11 recent trading dates plus earlier overlap. This is a small sample, not proof of full-market reliability.",
+    "normalRecent": {
+      "code": "sh.601326",
+      "window": "2026-10-19 through 2026-11-06",
+      "baoRows": 15,
+      "latestDate": "2026-11-06",
+      "latestAmountYuan": "160994562.0000"
+    },
+    "historicalGap": {
+      "code": "sh.600696",
+      "window": "2023-01",
+      "baoRows": 16,
+      "first": "2023-01-03",
+      "last": "2023-01-31"
+    },
+    "lifecycle": {
+      "sh.601059": {
+        "ipoDate": "2023-02-01",
+        "outDate": "2026-10-19",
+        "type": "1",
+        "status": "0"
+      },
+      "sh.601198": {
+        "ipoDate": "2015-02-26",
+        "outDate": "2026-10-19",
+        "type": "1",
+        "status": "0"
+      },
+      "sz.000016": {
+        "ipoDate": "1992-03-27",
+        "outDate": "2026-10-23",
+        "type": "1",
+        "status": "0"
+      },
+      "sz.301139": {
+        "ipoDate": "2022-07-08",
+        "outDate": "2026-10-28",
+        "type": "1",
+        "status": "0"
+      },
+      "sz.001381": {
+        "ipoDate": "2026-11-03",
+        "outDate": "",
+        "type": "1",
+        "status": "1"
+      }
+    },
+    "lifecycleInterpretation": "Bao history has no outDate-day row for three tested exited securities. Treat supplier outDate as exclusive in the observed supplier pool only after the builder checks this lifecycle change against its frozen source set; missing amount is not zero. 601198 also has independently located exchange termination notice in root audit. Current Bao master is a Nov 8 snapshot, not point-in-time historical membership evidence.",
+    "suspension": "sz.000016 had status=0 with blank amount and volume on Oct 19-22, and no row Oct 23-Nov 6. Its supplier outDate=Oct 23; do not extend zero amount past Oct 22.",
+    "eastmoneyAmountUnit": "f57 is displayed in yuan: sh.601326 Oct 19 Eastmoney 99034859.00 vs BaoStock 99034859.2000; sh.600696 Jan 3 2023 Eastmoney 65828041.00 vs BaoStock 65828040.7900. Eastmoney integer-yuan rounding should not silently replace Bao originals.",
+    "eastmoneyCompleteness": "sh.601326 Eastmoney returned only Oct 19, Oct 20, Nov 4, Nov 5, Nov 6 for a window in which BaoStock returned 15 rows. Adding lmt=30 did not recover missing dates. Hence this Eastmoney endpoint is not a safe complete-window primary source.",
+    "newIpo": {
+      "code": "sz.001381",
+      "supplierIpoDate": "2026-11-03",
+      "baoRowsNov3to6": 4,
+      "latestAmountYuan": "1256266054.5800"
+    },
+    "catalog": {
+      "supplierType1FilteredAStockUniverseUnionRecent": 5225,
+      "dailyPoolSize": {
+        "2026-10-23": 5224,
+        "2026-10-26": 5224,
+        "2026-10-27": 5224,
+        "2026-10-28": 5223,
+        "2026-10-29": 5223,
+        "2026-10-30": 5223,
+        "2026-11-02": 5223,
+        "2026-11-03": 5224,
+        "2026-11-04": 5224,
+        "2026-11-05": 5224,
+        "2026-11-06": 5224
+      },
+      "note": "Snapshot catalog uses type=1 and sh.60/sh.68/sz.00/sz.30 prefixes; reconcile against old v8 source membership before changing historical denominator."
+    }
+  },
+  "fullRecentAcquisitionEstimate": {
+    "necessaryHistoryObjects": 5225,
+    "sessionAndCatalogObjects": "about 2-3 additional requests if a fresh session/master is needed",
+    "totalSourceRequests": "about 5,228 including login/logout/catalog, before retries; Oct 23 old originals can be reused where full coverage and lifecycle agree",
+    "responseBytes": "roughly 8-20 MiB for 11 daily rows per symbol using observed 13-field 15-row Bao response of 2,162 bytes, plus around 1 MiB catalog; raw payload estimate, not storage allocation size",
+    "elapsedTime": "rough planning range 15-90 minutes with bounded rate and network failures; 25-probe sample is insufficient to assert throughput for 5,225 objects",
+    "qualityGates": [
+      "track every expected listed A-stock each day; preserve explicit suspension status vs absent record",
+      "exclude outDate day only after supplier lifecycle and index reconciliation",
+      "no subset result or mixed rounded amount silently shown as full market",
+      "save raw response and SHA, URL/parameters, status, bytes and failure for every object",
+      "verify daily denominator and October monthly rank from summed per-stock amount"
+    ]
+  }
+}

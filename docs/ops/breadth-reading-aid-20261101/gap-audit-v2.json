@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-02T00:04:44.944048+08:00",
+  "scope": "Read-only diagnosis of live breadth history and already-visible CN price dates. No new market data, cache repairs, backfills, or research experiments.",
+  "markets": {
+    "CN_ALL_A": {
+      "source_path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_history.json",
+      "source_sha256": "cdb537bbfee28c2d25c4657e45ee9c05ba3fcc87604a002558b1c23715a17e4a",
+      "endpoint": "http://127.0.0.1:8000/api/market-context/breadth-history?market_id=CN_ALL_A&lookback_days=1825",
+      "api_equals_source_normalized": true,
+      "history_count": 1282,
+      "first": "2021-06-17",
+      "last": "2026-10-16",
+      "range_checked": [
+        "2025-10-30",
+        "2026-10-30"
+      ],
+      "range_rows": 223,
+      "range_null_or_invalid_fields": [],
+      "price_axis_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/breadth-reading-aid-20261101/price-axis-v2.json",
+      "price_axis_sha256": "f199eaac65a558ea8e7337141560a35ee3d661d66bd4ad4dd66d19750b88ffb5",
+      "price_axis_source": "current visible CN SSE 1 year date selector",
+      "price_axis_count": 243,
+      "missing_date_count": 20,
+      "missing_dates": [
+        "2026-08-19",
+        "2026-08-20",
+        "2026-08-21",
+        "2026-08-24",
+        "2026-08-25",
+        "2026-08-26",
+        "2026-08-27",
+        "2026-09-09",
+        "2026-09-22",
+        "2026-09-23",
+        "2026-10-19",
+        "2026-10-20",
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-26",
+        "2026-10-27",
+        "2026-10-28",
+        "2026-10-29",
+        "2026-10-30"
+      ],
+      "gaps": [
+        {
+          "dates": [
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27"
+          ],
+          "before": "2026-08-18",
+          "after": "2026-08-28",
+          "count": 7
+        },
+        {
+          "dates": [
+            "2026-09-09"
+          ],
+          "before": "2026-09-08",
+          "after": "2026-09-10",
+          "count": 1
+        },
+        {
+          "dates": [
+            "2026-09-22",
+            "2026-09-23"
+          ],
+          "before": "2026-09-21",
+          "after": "2026-09-24",
+          "count": 2
+        },
+        {
+          "dates": [
+            "2026-10-19",
+            "2026-10-20",
+            "2026-10-21",
+            "2026-10-22",
+            "2026-10-23",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29",
+            "2026-10-30"
+          ],
+          "before": "2026-10-16",
+          "after": null,
+          "count": 10
+        }
+      ],
+      "date_present_count": 223,
+      "gap_type": "source date rows absent; not null or invalid fields on present dates"
+    },
+    "SP500": {
+      "source_path": "/Users/yongbiaoli/.lei_signal_lab/cache/sp500_ma_breadth_history.json",
+      "source_sha256": "49c970665df85161594fd63173a4ba9a5d6a01f35429b9547a77d0ba91b6fc83",
+      "endpoint": "http://127.0.0.1:8000/api/market-context/breadth-history?market_id=SP500&lookback_days=1825",
+      "api_equals_source_normalized": true,
+      "history_count": 11725,
+      "first": "1980-04-14",
+      "last": "2026-10-20",
+      "range_checked": [
+        "2025-10-30",
+        "2026-10-30"
+      ],
+      "range_rows": 244,
+      "range_null_or_invalid_fields": [],
+      "exact_price_axis_gap_count": "not_evaluated; US page price dates not supplied; no new price fetch performed"
+    }
+  },
+  "findings": [
+    {
+      "area": "chart",
+      "conclusion": "Missing breadth dates map to null on the price-date axis. connectNulls:false breaks both the breadth line and its rails. All present recent values are in 0..100; out-of-range y clipping does not explain these gaps.",
+      "references": [
+        "web/src/components/market-style/BreadthComparison.tsx:64-69",
+        "web/src/components/market-style/BreadthComparison.tsx:120",
+        "web/src/components/market-style/BreadthComparison.tsx:145-151"
+      ]
+    },
+    {
+      "area": "CN August",
+      "conclusion": "Seven live price-date rows absent. Six were present in the August 27 backup, so the gap cannot be described as seven never-collected days. Exact deletion/overwrite event and actor remain unknown. August 19 is also absent from that backup.",
+      "backup_path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_history.json.bak-20260827",
+      "backup_sha256": "516fde2f132e5530c4b11cdebf76b64e58075e67be756ff363b296c91e8fa4f2",
+      "backup_count": 1260,
+      "missing_live_dates_present_in_backup": [
+        "2026-08-20",
+        "2026-08-21",
+        "2026-08-24",
+        "2026-08-25",
+        "2026-08-26",
+        "2026-08-27"
+      ],
+      "common_dates": 1254,
+      "common_dates_exact_value_matches": 1254,
+      "references": [
+        "scripts/precompute_a_share_ma.log:35-87",
+        "logs/precompute_a_share_ma_task.log"
+      ],
+      "historical_writer_boundary": "Commit 407573b4 scripts/backfill_breadth_full.py:246 wrote directly to the live JSON; current line 246 writes a separate full-history research JSON. This establishes a historical overwrite-capable path, not proof of the event that removed these six rows."
+    },
+    {
+      "area": "CN September",
+      "conclusion": "Three source dates absent: September 9, 22, 23. Logs show a repeated represented date September 8 then skip, and two repeated September 21 calls then skip before the next September 24 result. This proves stale represented-date/skip behavior existed in the generator. Logs do not include independent execution timestamps, so they cannot strictly date those calls or prove a specific upstream network cause.",
+      "references": [
+        "scripts/precompute_a_share_ma.log:164-185",
+        "scripts/precompute_a_share_ma.log:253-283"
+      ]
+    },
+    {
+      "area": "CN October",
+      "conclusion": "All ten missing October 19-30 price dates have explicit qualification failures and preserve-old-history messages. The current writer returns before snapshot/history updates unless quality.status is verified. These rows were withheld by the data qualification gate.",
+      "references": [
+        "scripts/precompute_a_share_ma.py:123-128",
+        "scripts/precompute_a_share_ma.log:438-512"
+      ],
+      "daily_rejections": [
+        {
+          "target_day": "2026-10-19",
+          "lines": [
+            438,
+            440
+          ],
+          "qualification_message": "同日覆盖 0/2669；E20=0 E50=0 E200=0；资格=needs_check ['universe_sources_incomplete', 'same_day_bars_missing', 'no_eligible_20', 'no_eligible_50', 'no_eligible_200', 'qfq_cache_proof_missing']",
+          "result": "✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。"
+        },
+        {
+          "target_day": "2026-10-20",
+          "lines": [
+            446,
+            448
+          ],
+          "qualification_message": "同日覆盖 910/5575；E20=910 E50=910 E200=909；资格=needs_check ['same_day_bars_missing', 'incomplete_history_20', 'incomplete_history_50', 'incomplete_history_200']",
+          "result": "✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。"
+        },
+        {
+          "target_day": "2026-10-21",
+          "lines": [
+            454,
+            456
+          ],
+          "qualification_message": "同日覆盖 779/5575；E20=779 E50=779 E200=778；资格=needs_check ['same_day_bars_missing', 'adjustment_revision_unresolved', 'incomplete_history_20', 'incomplete_history_50', 'incomplete_history_200']",
+          "result": "✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。"
+        },
+        {
+          "target_day": "2026-10-22",
+          "lines": [
+            462,
+            464
+          ],
+          "qualification_message": "同日覆盖 973/5575；E20=973 E50=973 E200=972；资格=needs_check ['same_day_bars_missing', 'adjustment_revision_unresolved', 'incomplete_history_20', 'incomplete_history_50', 'incomplete_history_200']",
+          "result": "✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。"
+        },
+        {
+          "target_day": "2026-10-23",
+          "lines": [
+            470,
+            472
+          ],
+          "qualification_message": "同日覆盖 1014/5577；E20=1014 E50=1014 E200=1013；资格=needs_check ['same_day_bars_missing', 'adjustment_revision_unresolved', 'incomplete_history_20', 'incomplete_history_50', 'incomplete_history_200']",
+          "result": "✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。"
+        },
+        {
+          "target_day": "2026-10-26",
+          "lines": [
+            478,
+            480
+          ],
+          "qualification_message": "同日覆盖 756/5577；E20=756 E50=756 E200=749；资格=needs_check ['same_day_bars_missing', 'adjustment_revision_unresolved', 'incomplete_history_20', 'incomplete_history_50', 'incomplete_history_200']",
+          "result": "✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。"
+        },
+        {
+          "target_day": "2026-10-27",
+          "lines": [
+            486,
+            488
+          ],
+          "qualification_message": "同日覆盖 1421/5577；E20=1421 E50=1421 E200=1418；资格=needs_check ['same_day_bars_missing', 'adjustment_revision_unresolved', 'incomplete_history_20', 'incomplete_history_50', 'incomplete_history_200']",
+          "result": "✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。"
+        },
+        {
+          "target_day": "2026-10-28",
+          "lines": [
+            494,
+            496
+          ],
+          "qualification_message": "同日覆盖 540/5576；E20=540 E50=540 E200=540；资格=needs_check ['same_day_bars_missing', 'adjustment_revision_unresolved', 'incomplete_history_20', 'incomplete_history_50', 'incomplete_history_200']",
+          "result": "✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。"
+        },
+        {
+          "target_day": "2026-10-29",
+          "lines": [
+            502,
+            504
+          ],
+          "qualification_message": "同日覆盖 1343/5577；E20=1343 E50=1343 E200=1334；资格=needs_check ['same_day_bars_missing', 'adjustment_revision_unresolved', 'incomplete_history_20', 'incomplete_history_50', 'incomplete_history_200']",
+          "result": "✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。"
+        },
+        {
+          "target_day": "2026-10-30",
+          "lines": [
+            510,
+            512
+          ],
+          "qualification_message": "同日覆盖 1561/5577；E20=1561 E50=1561 E200=1560；资格=needs_check ['same_day_bars_missing', 'adjustment_revision_unresolved', 'incomplete_history_20', 'incomplete_history_50', 'incomplete_history_200']",
+          "result": "✗ 成员来源或同日行情未核齐；旧快照和历史保持不变。"
+        }
+      ]
+    },
+    {
+      "area": "US",
+      "conclusion": "Live history and API stop at October 20; recent present values have no null/invalid fields. Exact missing dates against the current US page price axis were not evaluated. No cause for the post-October-20 lack of updates is asserted."
+    }
+  ],
+  "qualification_sidecar": {
+    "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_qualification.json",
+    "sha256": "32210d459547c7b74ec96d057da1af01e71a120b5a9c9bf6e751d9e792294a19",
+    "checked_at": "2026-10-30T18:41:26.875687",
+    "target_day": "2026-10-30",
+    "status": "needs_check",
+    "same_day_available": 1561,
+    "universe_total": 5577,
+    "same_day_coverage": 0.27989958759189526,
+    "reasons": [
+      "same_day_bars_missing",
+      "adjustment_revision_unresolved",
+      "incomplete_history_20",
+      "incomplete_history_50",
+      "incomplete_history_200"
+    ],
+    "applied_to_snapshot": false,
+    "invalidates_legacy_dates": [
+      "2026-10-16"
+    ],
+    "price_cache_path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_qfq.parquet",
+    "recorded_price_cache_sha256": "207462af6bfa3240ddf41c5b5f50f18d10f9146feeb12d6a1403cba5d09fd0e9",
+    "current_price_cache_sha256": "207462af6bfa3240ddf41c5b5f50f18d10f9146feeb12d6a1403cba5d09fd0e9",
+    "current_price_cache_hash_matches": true,
+    "history_json_sha_binding": false,
+    "interpretation": "The October 30 sample receipt matches the current qfq parquet bytes. It does not bind or qualify the live breadth-history JSON or retroactively validate the October 16 legacy reading. Invalidated legacy dates are accumulated by the sidecar writer.",
+    "readers": {
+      "path_and_read": "src/lei_signal/market_context/a_share_breadth.py:574-606",
+      "invalidation_accumulation": "src/lei_signal/market_context/a_share_breadth.py:581-589",
+      "snapshot_check": "src/lei_signal/market_context/a_share_breadth.py:659-671",
+      "history_ignores_sidecar": "src/lei_signal/market_context/a_share_breadth.py:769-778",
+      "opportunity_reader_format_only_hash_check": "src/lei_signal/api/opportunity_market_watch.py:57-87"
+    },
+    "reader_hash_limit": "These readers do not rehash the price parquet; this audit independently checked the actual bytes."
+  },
+  "source_hashes_unchanged_after_audit": true
+}

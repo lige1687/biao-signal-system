@@ -1,0 +1,39 @@
+{
+  "mission": "Simplify breadth chart into long-history chart with right-hand useful reading",
+  "task_scope": [
+    "Only three named market-style files and a shared interpretation helper/test",
+    "No new financial thresholds or backend changes"
+  ],
+  "read_only_paths": [
+    "src/lei_signal/market_context/breadth_observation.py",
+    "web/src/components/market-style/breadthReadingTypes.ts",
+    "docs/ops/breadth-reading-aid-20261101/reading-priority-contract-v6.json"
+  ],
+  "write_paths": [
+    "web/src/components/market-style/BreadthComparison.tsx",
+    "web/src/components/market-style/BreadthReading.tsx",
+    "web/src/components/market-style/breadth-comparison.css",
+    "web/src/components/market-style/breadthInterpretation.ts",
+    "web/src/components/market-style/breadthInterpretation.test.mjs"
+  ],
+  "expected_outputs": [
+    "Working UI files",
+    "Same-date plain-language helper",
+    "TypeScript check"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "Missing scope authority",
+    "Need new financial experiment or protected input"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -1,0 +1,1177 @@
+--- before/web/src/components/market-observation-alerts/index.tsx
++++ after/web/src/components/market-observation-alerts/index.tsx
+@@ -25,10 +25,8 @@
+ import CrossMarketObservation from "../market-style/CrossMarketObservation";
+ import BreadthComparison from "../market-style/BreadthComparison";
+ import { MetricProjection } from "../observation-library/projectionView";
+-import { OBSERVATION_CATALOG, OBSERVATION_BY_ID } from "../observation-library/catalog";
+ import ExtraCandidateCard from "./ExtraCandidateCard";
+ import { useOverviewSelection } from "./useSelection";
+-import { EXTRA_IDS } from "./selection";
+ import { interpretMarketContext, type ContextSignal } from "../market-context/interpretMarketContext";
+ import { fundamentalsApi } from "../../api/client";
+ import { priorVolatilityPercentile, volatilityHistory, seriesPoints } from "../market-style/marketRiskMetrics";
+@@ -40,7 +38,11 @@
+ import { IndustryStructureSection } from "./IndustryStructure";
+ import IncrementObservationCards from "./IncrementObservationCards";
+ import RelativeObservationCards from "./RelativeObservationCards";
+-import CandidateShelf, { type CandidateSummary } from "./CandidateShelf";
++import type { CandidateSummary } from "./CandidateShelf";
++import IndicatorBrowser from "./IndicatorBrowser";
++import { INDICATOR_BY_ID, MICRO_INDICATORS } from "./indicatorCatalog";
++import MicrostructureObservations from "./MicrostructureObservations";
++import ObservationMetric from "../observation-library/ObservationMetric";
+ 
+ async function getJson(url: string, signal: AbortSignal): Promise<unknown> {
+   const response = await fetch(url, { signal });
+@@ -283,9 +285,13 @@
+   const titleId = useId();
+   const [stored, setStored] = useState(readSeen);
+   const [nowDate, setNowDate] = useState(today);
+-  const { selectedIds, collapsedIds, warning: selectionWarning, toggle, collapse, restore } = useOverviewSelection();
++  const { selectedIds, warning: selectionWarning, setPinned, resetCore } = useOverviewSelection();
++  const [view, setView] = useState<"home" | "categories">("home");
++  const [previewId, setPreviewId] = useState<string | null>(null);
++  const [contextOpen, setContextOpen] = useState(false);
++  const [notice, setNotice] = useState<{ text: string; removedId?: string } | null>(null);
++  const homeButton = useRef<HTMLButtonElement>(null);
+   const [liveSummaries, setLiveSummaries] = useState<Record<string, CandidateSummary>>({});
+-  const focusAfterChange = useRef<{ id: string; target: "shelf" | "card" } | null>(null);
+   const updateSummary = useCallback((id: string, summary: CandidateSummary) => setLiveSummaries((current) => {
+     const old = current[id];
+     return old?.value === summary.value && old.meaning === summary.meaning && old.date === summary.date ? current : { ...current, [id]: summary };
+@@ -305,18 +311,6 @@
+   const fetching = erp.isFetching || cn.isFetching || us.isFetching;
+   const sources = [erp, cn, us];
+   const participation = [null, cn.data?.observation?.latest, us.data?.observation?.latest];
+-  const handledIds = new Set(["erp-cn", "breadth-cn", "breadth-us", "focus-momentum", "erp-us", "hv-cn", "hv-us",
+-    "cn-financing", "dr007", "aaii", "vix", "hy-oas", "nfci", "finra-margin", "earnings-revisions", "cn-session", "cn-institution",
+-    "cn-style-relative", "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative"]);
+-  const selectedOther = selectedIds.filter((id) => !handledIds.has(id));
+-  const catalog = [
+-    ...EXTRA_IDS.filter((id) => !["earnings-cn", "earnings-us"].includes(id)).map((id) => ({ id,
+-      label: ({ "breadth-cn": "全A · 市场宽度", "breadth-us": "标普500 · 市场宽度", "hv-cn": "上证 · 20/60日波动率", "hv-us": "标普500 · 20/60日波动率", dr007: "A股 · DR007资金价格",
+-        "cn-session": "沪深300 · 隔夜与日内表现", "cn-institution": "龙虎榜 · 已披露机构席位",
+-        "cn-style-relative": "大小盘 · 中证1000 / 沪深300", "vix-term-structure": "VIX · 期限结构",
+-        "us-semiconductor-relative": "半导体 / 纳指100", "us-equal-weight-relative": "标普500 · 等权 / 市值加权" } as Record<string, string>)[id] })),
+-    ...OBSERVATION_CATALOG.map((item) => ({ id: item.id, label: item.label })),
+-  ];
+   const summaries: Record<string, CandidateSummary> = { ...liveSummaries };
+   snapshots.forEach((snapshot, index) => {
+     const id = ["erp-cn", "breadth-cn", "breadth-us"][index];
+@@ -327,17 +321,15 @@
+         : `${format(breadthValue)}%站上50日均线${snapshot.quality === "stale" || snapshot.quality === "historical" ? " · 历史" : ""}`;
+     summaries[id] = { value, meaning: index === 0 ? "股债收益差显示估值缓冲" : "看上涨参与面是否扩大", date: snapshot.latest?.date };
+   });
+-  useEffect(() => {
+-    const pendingFocus = focusAfterChange.current;
+-    if (!pendingFocus) return;
+-    const selector = pendingFocus.target === "shelf" ? `[data-shelf-restore="${pendingFocus.id}"]` : `[data-overview-card="${pendingFocus.id}"] button`;
+-    const target = document.querySelector<HTMLElement>(selector);
+-    target?.focus();
+-    focusAfterChange.current = null;
+-  }, [collapsedIds, selectedIds]);
+-  const collapseCard = (id: string) => { focusAfterChange.current = { id, target: "shelf" }; collapse(id); };
+-  const restoreCard = (id: string) => { focusAfterChange.current = { id, target: "card" }; restore(id); };
+-  const addCard = (id: string) => { focusAfterChange.current = { id, target: "card" }; restore(id); toggle(id); };
++  const changePinned = (id: string, pinned: boolean) => {
++    setPinned(id, pinned);
++    setNotice({ text: `${INDICATOR_BY_ID.get(id)?.label ?? id} · ${pinned ? "已加入首页" : "已移出首页"}`,
++      removedId: pinned ? undefined : id });
++  };
++  const removeFromHome = (id: string) => {
++    changePinned(id, false);
++    homeButton.current?.focus({ preventScroll: true });
++  };
+ 
+   useEffect(() => {
+     const sync = (event?: StorageEvent) => {
+@@ -359,6 +351,32 @@
+       window.dispatchEvent(new Event(SEEN_EVENT));
+     } catch { setStored(previous => ({ ...previous, failed: true })); }
+   };
++  const renderCard = (id: string, onDismiss: () => void) => {
++    const index = ["erp-cn", "breadth-cn", "breadth-us"].indexOf(id);
++    if (index >= 0) return <AlertRow snapshot={snapshots[index]} pending={sources[index].isPending}
++      participation={participation[index]} breadth={index === 1 ? cn.data : index === 2 ? us.data : undefined}
++      points={inputs[index].points} onRead={() => markRead([snapshots[index]])}
++      erpSource={index === 0 && erp.data ? { name: erp.data.sourceName, url: erp.data.sourceUrl } : undefined}
++      onOpen={() => setDetailId(id as "erp-cn" | "breadth-cn" | "breadth-us")} onCollapse={onDismiss} />;
++    if (id === "erp-us") return <UsErpCard collapsed={false} onCollapse={onDismiss} onSummary={summary => updateSummary(id, summary)} />;
++    if (id === "focus-momentum") return <FocusMomentumOverview collapsed={false} onCollapse={onDismiss} onSummary={summary => updateSummary(id, summary)} />;
++    const market = INDICATOR_BY_ID.get(id)?.market === "us" ? "us" : "cn";
++    if (["cn-style-relative", "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative"].includes(id))
++      return <RelativeObservationCards market={market} selectedIds={[id]} collapsedIds={[]} onCollapse={onDismiss} onSummary={updateSummary} />;
++    if (["cn-session", "cn-institution"].includes(id))
++      return <IncrementObservationCards selectedIds={[id]} collapsedIds={[]} onCollapse={onDismiss} onSummary={updateSummary} />;
++    if (["hv-cn", "hv-us", "cn-financing", "dr007", "aaii", "vix", "hy-oas", "nfci", "finra-margin", "earnings-revisions"].includes(id))
++      return <CrossMarketObservation market={market} selectedIds={[id]} collapsedIds={[]} onCollapse={onDismiss} onSummary={updateSummary} />;
++    if (["vxn", "smallcap-turnover"].includes(id)) return <article className="moa-item" data-overview-card={id} aria-label={INDICATOR_BY_ID.get(id)?.label}>
++      <div className="moa-item-head"><h3>{INDICATOR_BY_ID.get(id)?.label}</h3><button onClick={onDismiss}>收起</button></div>
++      <p>{INDICATOR_BY_ID.get(id)?.meaning}</p><ObservationMetric id={id} />
++      <p className="moa-card-limit">{INDICATOR_BY_ID.get(id)?.limitation}</p></article>;
++    if (id === "industry-structure-cn") return <div className="moa-standalone moa-wide-card" data-overview-card={id}>
++      <button className="moa-remove" onClick={onDismiss}>收起</button><IndustryStructureSection /></div>;
++    if (MICRO_INDICATORS.some(item => item.id === id)) return <div className="moa-standalone" data-overview-card={id}>
++      <button className="moa-remove" onClick={onDismiss}>收起</button><MicrostructureObservations market={market} selectedIds={[id]} /></div>;
++    return <ExtraCandidateCard id={id} collapsed={false} onCollapse={onDismiss} onSummary={summary => updateSummary(id, summary)} />;
++  };
+   return <section id="market-overview" className={`market-observation-alerts moa-placement-${placement}`} aria-labelledby={titleId}>
+     <header className="moa-header"><div><h2 id={titleId}>市场速览</h2>
+       <span aria-live="polite">{newCount ? `${newCount}条新变化` : readyCount === 0 ? "当前提醒待资料更新"
+@@ -368,33 +386,39 @@
+     </header>
+     {stored.failed && <p className="moa-storage-error" role="status">浏览器未能保存已读状态，刷新后可能再次显示提醒。</p>}
+     {selectionWarning && <p className="moa-storage-error" role="status">{selectionWarning}</p>}
+-    <ContextPanel snapshots={snapshots} cnBreadth={cn.isError ? undefined : cn.data} usBreadth={us.isError ? undefined : us.data} asOf={nowDate} />
+-    <div className="moa-market-columns">
+-      {(["cn", "us"] as const).map((market) => <section className="moa-market" key={market} aria-label={`${market === "cn" ? "A股" : "美股"}观察`}>
+-        <h3>{market === "cn" ? "A股" : "美股"}<small>{market === "cn" ? "参与 · 估值 · 融资" : "参与 · 估值 · 波动与信用"}</small></h3>
+-        <div className="moa-market-grid">
+-          {(market === "cn" ? [0, 1] : [2]).filter((index) => selectedIds.includes(["erp-cn", "breadth-cn", "breadth-us"][index]) && !collapsedIds.includes(["erp-cn", "breadth-cn", "breadth-us"][index])).map((index) => <AlertRow key={snapshots[index].id} snapshot={snapshots[index]}
+-            pending={sources[index].isPending} participation={participation[index]} breadth={index === 1 ? cn.data : index === 2 ? us.data : undefined}
+-            points={inputs[index].points} onRead={() => markRead([snapshots[index]])}
+-            erpSource={index === 0 && erp.data ? { name: erp.data.sourceName, url: erp.data.sourceUrl } : undefined}
+-            onOpen={() => setDetailId(["erp-cn", "breadth-cn", "breadth-us"][index] as "erp-cn" | "breadth-cn" | "breadth-us")}
+-            onCollapse={() => collapseCard(["erp-cn", "breadth-cn", "breadth-us"][index])} />)}
+-          {market === "cn" && selectedIds.includes("focus-momentum") && <FocusMomentumOverview collapsed={collapsedIds.includes("focus-momentum")} onCollapse={() => collapseCard("focus-momentum")} onSummary={(summary) => updateSummary("focus-momentum", summary)} />}
+-          {market === "us" && selectedIds.includes("erp-us") && <UsErpCard collapsed={collapsedIds.includes("erp-us")} onCollapse={() => collapseCard("erp-us")} onSummary={(summary) => updateSummary("erp-us", summary)} />}
+-          <CrossMarketObservation market={market} selectedIds={selectedIds.filter((id) => !["erp-cn", "erp-us", "breadth-cn", "breadth-us", "focus-momentum"].includes(id))}
+-            collapsedIds={collapsedIds} onCollapse={collapseCard} onSummary={updateSummary} />
+-          {market === "cn" && <IncrementObservationCards selectedIds={selectedIds} collapsedIds={collapsedIds}
+-            onCollapse={collapseCard} onSummary={updateSummary} />}
+-          <RelativeObservationCards market={market} selectedIds={selectedIds} collapsedIds={collapsedIds}
+-            onCollapse={collapseCard} onSummary={updateSummary} />
+-          {selectedOther.filter((id) => OBSERVATION_BY_ID.get(id)?.market === market || OBSERVATION_BY_ID.get(id)?.market === "global" && market === "cn")
+-            .map((id) => <ExtraCandidateCard key={id} id={id} collapsed={collapsedIds.includes(id)} onCollapse={() => collapseCard(id)} onSummary={(summary) => updateSummary(id, summary)} />)}
+-        </div>
+-        <CandidateShelf market={market} entries={catalog.map((entry) => ({ id: entry.id, label: entry.label ?? entry.id }))} selectedIds={selectedIds}
+-          collapsedIds={collapsedIds} summaries={summaries} onRestore={restoreCard} onAdd={addCard} />
+-        {market === "cn" && <IndustryStructureSection />}
+-      </section>)}
++    <div className="moa-viewbar">
++      <div role="group" aria-label="市场速览视图">
++        <button ref={homeButton} aria-pressed={view === "home"} onClick={() => { setView("home"); setPreviewId(null); }}>首页常看 · {selectedIds.length}</button>
++        <button aria-pressed={view === "categories"} onClick={() => setView("categories")}>指标分类</button>
++      </div>
++      <button onClick={() => { resetCore(); setView("home"); setPreviewId(null); setNotice({ text: "已恢复中美股债利差和市场宽度四项。" }); }}>恢复核心四项</button>
+     </div>
++    {notice && <div className="moa-selection-notice"><span role="status">{notice.text}</span>
++      {notice.removedId && <button onClick={() => { setPinned(notice.removedId!, true); setNotice(null); }}>撤销移除</button>}
++      {view === "categories" && <button onClick={() => { setView("home"); setPreviewId(null); }}>查看首页</button>}
++      <button aria-label="关闭提示" onClick={() => setNotice(null)}>×</button></div>}
++    {view === "home" ? <>
++      <p className="moa-home-guide">常看股债利差与市场宽度。更多指标可在「指标分类」中查看并加入首页，选择保存在当前浏览器。</p>
++      {selectedIds.length === 0 && <div className="moa-home-empty">首页还没有常看指标。<button onClick={() => setView("categories")}>去分类挑选</button></div>}
++      <div className="moa-market-columns">
++        {(["cn", "us", "global"] as const).map(market => {
++          const ids = selectedIds.filter(id => INDICATOR_BY_ID.get(id)?.market === market);
++          if (!ids.length) return null;
++          const label = market === "cn" ? "A股" : market === "us" ? "美股" : "跨市场";
++          return <section className={`moa-market${market === "global" ? " moa-global-market" : ""}`} key={market} aria-label={`${label}观察`}>
++            <h3>{label}<small>{ids.length} 项常看</small></h3>
++            <div className="moa-market-grid">{ids.map(id => <div key={id} className={`moa-card-slot${id === "industry-structure-cn" ? " moa-wide-card" : ""}`}>
++              {renderCard(id, () => removeFromHome(id))}</div>)}</div>
++          </section>;
++        })}
++      </div>
++      <details className="moa-context-disclosure" open={contextOpen} onToggle={event => setContextOpen(event.currentTarget.open)}>
++        <summary>组合观察 · 一起看估值、参与和风险</summary>
++        {contextOpen && <ContextPanel snapshots={snapshots} cnBreadth={cn.isError ? undefined : cn.data} usBreadth={us.isError ? undefined : us.data} asOf={nowDate} />}
++      </details>
++    </> : <IndicatorBrowser selectedIds={selectedIds} summaries={summaries} onSetPinned={changePinned}
++      previewId={previewId} onPreview={setPreviewId} onClosePreview={() => setPreviewId(null)}
++      preview={previewId ? <div className="moa-preview-card">{renderCard(previewId, () => setPreviewId(null))}</div> : null} />}
+     {detailId && <OverviewDetail id={detailId} onClose={() => setDetailId(null)} />}
+     <details className="moa-rules"><summary>这些信息怎样用</summary><div>
+       <p>穿出上下界、重新回到界内时提示；持续在界外不重复报新变化。这里常驻显示读数，已读仅清除新变化标记。</p>
+--- before/web/src/components/market-observation-alerts/style.css
++++ after/web/src/components/market-observation-alerts/style.css
+@@ -116,3 +116,25 @@
+ .moa-erp-rails { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px 10px; margin: 9px 0; padding: 9px 11px; border-radius: 6px; background: #f0f4f3; font-size: 13px; font-variant-numeric: tabular-nums; }
+ .moa-erp-rails > span:nth-child(3n + 2) { color: #986737; }
+ .moa-erp-rails > span:nth-child(3n) { color: #327c72; }
++
++.moa-viewbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:4px 0 12px; padding-bottom:12px; border-bottom:1px solid #e5e9df; }
++.moa-viewbar > div { display:flex; gap:6px; }
++.market-observation-alerts .moa-viewbar button { font-size:12px; min-height:32px; }
++.moa-viewbar button[aria-pressed=true] { background:#eaf2e6; border-color:#9eb495; color:#345b30; font-weight:650; }
++.moa-home-guide { color:#6d7763; margin:0 0 14px; line-height:1.6; }
++.moa-selection-notice { display:flex; gap:10px; align-items:center; padding:8px 10px; margin:0 0 12px; background:#f1f6ee; border-radius:5px; }
++.moa-selection-notice > span { flex:1; }
++.moa-home-empty { padding:24px; text-align:center; border:1px dashed #dce3d7; margin-bottom:12px; }
++.moa-home-empty button { margin-left:10px; }
++.moa-card-slot { min-width:0; display:grid; }
++.moa-card-slot > .cross-market-observation, .moa-preview-card > .cross-market-observation, .moa-preview-card .cmo-card-grid { display:contents; }
++.moa-wide-card { grid-column:1 / -1; }
++.moa-global-market { grid-column:1 / -1; }
++.moa-context-disclosure { margin:16px 0 8px; border-top:1px solid #e5e9df; padding-top:10px; }
++.moa-context-disclosure > summary { font-size:12px; padding:4px 0; }
++.moa-context-disclosure > .moa-context { margin-top:12px; }
++.moa-standalone { min-width:0; padding:12px; background:#fbfcf9; border:1px solid #e1e5dc; border-top:3px solid #8c9785; border-radius:7px; }
++.moa-remove { display:block; margin-left:auto; margin-bottom:6px; }
++.moa-preview-card { max-width:860px; margin:14px auto 0; min-width:0; }
++.moa-preview-card .cmo-card { padding:14px; border:1px solid #e1e5dc; border-radius:7px; background:#fbfcf9; }
++.moa-preview-card .micro-reading { min-width:0; }
+--- before/web/src/components/market-observation-alerts/selection.ts
++++ after/web/src/components/market-observation-alerts/selection.ts
+@@ -1,31 +1,51 @@
+-import { OBSERVATION_CATALOG } from "../observation-library/catalog";
++import { INDICATOR_CATALOG } from "./indicatorCatalog";
+ 
+-export const OVERVIEW_KEY = "ws.marketOverviewCards.v1";
++export const OVERVIEW_KEY = "ws.marketOverviewCards.v2";
++export const PREVIOUS_OVERVIEW_KEY = "ws.marketOverviewCards.v1";
+ export const COLLAPSED_KEY = "ws.marketOverviewCollapsed.v1";
+ export const LEGACY_PINS_KEY = "ws.marketPins.v1";
+ export const OVERVIEW_CHANGE_EVENT = "lei:market-overview-cards-changed";
+-export const CORE_IDS = ["erp-cn", "breadth-cn", "focus-momentum", "hv-cn", "cn-financing", "turnover-concentration", "dr007",
++export const CORE_IDS = ["erp-cn", "breadth-cn", "erp-us", "breadth-us"] as const;
++export const EXTRA_IDS = ["breadth-cn", "breadth-us", "hv-cn", "hv-us", "dr007", "cn-session", "cn-institution",
++  "cn-style-relative", "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative", "industry-structure-cn"] as const;
++export const CANDIDATE_IDS = new Set(INDICATOR_CATALOG.map((item) => item.id));
++
++// Known automatic defaults, before users were given a compact homepage.
++export const LEGACY_DEFAULT_IDS = ["erp-cn", "breadth-cn", "focus-momentum", "hv-cn", "cn-financing", "turnover-concentration", "dr007",
+   "cn-session", "cn-institution", "breadth-us", "erp-us", "hv-us", "vix", "hy-oas", "nfci",
+   "cn-style-relative", "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative"] as const;
+-export const EXTRA_IDS = ["breadth-cn", "breadth-us", "hv-cn", "hv-us", "dr007", "cn-session", "cn-institution",
+-  "cn-style-relative", "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative"] as const;
+-export const CANDIDATE_IDS = new Set([...OBSERVATION_CATALOG.map((item) => item.id), ...EXTRA_IDS]);
++const LEGACY_DEFAULTS: readonly (readonly string[])[] = [LEGACY_DEFAULT_IDS, LEGACY_DEFAULT_IDS.slice(0, 15),
++  LEGACY_DEFAULT_IDS.slice(0, 15).filter(id => id !== "cn-session" && id !== "cn-institution")];
+ 
+ export function normalizeSelection(value: unknown): string[] {
+   if (!Array.isArray(value)) return [];
+   return [...new Set(value.filter((id): id is string => typeof id === "string" && CANDIDATE_IDS.has(id)))];
+ }
+ 
+-export function parseCollapsed(current: string | null): string[] {
+-  if (current === null) return [];
+-  try { return normalizeSelection(JSON.parse(current)); } catch { return []; }
++function readArray(value: string | null): unknown[] | null {
++  if (value === null) return null;
++  try { const parsed: unknown = JSON.parse(value); return Array.isArray(parsed) ? parsed : null; }
++  catch { return null; }
+ }
+ 
+-export function parseSelection(current: string | null, legacy: string | null): string[] {
+-  if (current !== null) {
+-    try { return normalizeSelection(JSON.parse(current)); } catch { return [...CORE_IDS]; }
+-  }
+-  let old: unknown = [];
+-  try { old = legacy === null ? [] : JSON.parse(legacy); } catch { old = []; }
+-  return normalizeSelection([...CORE_IDS, ...normalizeSelection(old)]);
++export function parseCollapsed(current: string | null): string[] {
++  return normalizeSelection(readArray(current));
+ }
++
++export function parseSelection(current: string | null, legacyPins: string | null): string[] {
++  if (current !== null) return readArray(current) === null ? [...CORE_IDS] : normalizeSelection(readArray(current));
++  return normalizeSelection([...CORE_IDS, ...normalizeSelection(readArray(legacyPins))]);
++}
++
++/** v1 stays untouched. Only known automatic sets shrink; custom subsets remain personal. */
++export function migrateSelection(current: string | null, previous: string | null, legacyPins: string | null, collapsed: string | null): string[] {
++  if (current !== null) return parseSelection(current, null);
++  const old = readArray(previous);
++  const hidden = new Set(parseCollapsed(collapsed));
++  if (old === null) return parseSelection(null, legacyPins).filter(id => !hidden.has(id));
++  const selected = normalizeSelection(old);
++  const defaults = LEGACY_DEFAULTS.find(ids => ids.every(id => selected.includes(id)));
++  const explicitPins = new Set(normalizeSelection(readArray(legacyPins)));
++  const next = defaults ? normalizeSelection([...CORE_IDS, ...selected.filter(id => !defaults.includes(id) || explicitPins.has(id))]) : selected;
++  return next.filter(id => !hidden.has(id));
++}
+--- before/web/src/components/market-observation-alerts/useSelection.ts
++++ after/web/src/components/market-observation-alerts/useSelection.ts
+@@ -1,46 +1,48 @@
+-import { useCallback, useEffect, useState } from "react";
+-import { CANDIDATE_IDS, COLLAPSED_KEY, LEGACY_PINS_KEY, normalizeSelection, OVERVIEW_CHANGE_EVENT, OVERVIEW_KEY, parseCollapsed, parseSelection } from "./selection";
++import { useCallback, useEffect, useRef, useState } from "react";
++import { CANDIDATE_IDS, COLLAPSED_KEY, CORE_IDS, LEGACY_PINS_KEY, migrateSelection, normalizeSelection,
++  OVERVIEW_CHANGE_EVENT, OVERVIEW_KEY, PREVIOUS_OVERVIEW_KEY } from "./selection";
+ 
+ function readSelection() {
+-  try { return parseSelection(localStorage.getItem(OVERVIEW_KEY), localStorage.getItem(LEGACY_PINS_KEY)); }
+-  catch { return parseSelection(null, null); }
++  try { return { ids: migrateSelection(localStorage.getItem(OVERVIEW_KEY), localStorage.getItem(PREVIOUS_OVERVIEW_KEY),
++    localStorage.getItem(LEGACY_PINS_KEY), localStorage.getItem(COLLAPSED_KEY)), failed: false }; }
++  catch { return { ids: [...CORE_IDS] as string[], failed: true }; }
+ }
+-function readCollapsed() {
+-  try { return parseCollapsed(localStorage.getItem(COLLAPSED_KEY)); }
+-  catch { return []; }
+-}
++const WARNING = "浏览器未保存选择，本次调整仅在当前页面有效。";
+ 
+ export function useOverviewSelection() {
+-  const [selectedIds, setSelectedIds] = useState(readSelection);
+-  const [collapsedIds, setCollapsedIds] = useState(readCollapsed);
+-  const [warning, setWarning] = useState("");
++  const [initial] = useState(readSelection);
++  const [selectedIds, setSelectedIds] = useState(initial.ids);
++  const current = useRef(selectedIds);
++  const [warning, setWarning] = useState(initial.failed ? WARNING : "");
++
+   useEffect(() => {
+-    try { if (localStorage.getItem(OVERVIEW_KEY) === null) localStorage.setItem(OVERVIEW_KEY, JSON.stringify(selectedIds)); }
+-    catch { setWarning("浏览器未保存选择，本次调整仅在当前页面有效。"); }
+-    const sync = (event: StorageEvent) => {
+-      if (event.key === OVERVIEW_KEY || event.key === null) setSelectedIds(readSelection());
+-      if (event.key === COLLAPSED_KEY || event.key === null) setCollapsedIds(readCollapsed());
++    // Preserve all previous keys so a migration can be inspected or recovered.
++    const restored = readSelection();
++    current.current = restored.ids; setSelectedIds(restored.ids);
++    try { localStorage.setItem(OVERVIEW_KEY, JSON.stringify(restored.ids)); }
++    catch { setWarning(WARNING); }
++    const sync = () => {
++      const result = readSelection(); current.current = result.ids; setSelectedIds(result.ids);
++      setWarning(result.failed ? WARNING : "");
+     };
+-    window.addEventListener("storage", sync);
+-    return () => window.removeEventListener("storage", sync);
++    const storage = (event: StorageEvent) => { if (event.key === OVERVIEW_KEY || event.key === null) sync(); };
++    window.addEventListener("storage", storage);
++    window.addEventListener(OVERVIEW_CHANGE_EVENT, sync);
++    return () => { window.removeEventListener("storage", storage); window.removeEventListener(OVERVIEW_CHANGE_EVENT, sync); };
+   }, []);
+-  const setCollapsed = useCallback((id: string, collapsed: boolean) => {
++
++  const save = useCallback((ids: readonly string[]) => {
++    const next = normalizeSelection(ids);
++    current.current = next; setSelectedIds(next);
++    try { localStorage.setItem(OVERVIEW_KEY, JSON.stringify(next)); setWarning(""); window.dispatchEvent(new Event(OVERVIEW_CHANGE_EVENT)); }
++    catch { setWarning(WARNING); }
++  }, []);
++  const setPinned = useCallback((id: string, pinned: boolean) => {
+     if (!CANDIDATE_IDS.has(id)) return;
+-    setCollapsedIds((current) => {
+-      const next = normalizeSelection(collapsed ? [...current, id] : current.filter((entry) => entry !== id));
+-      try { localStorage.setItem(COLLAPSED_KEY, JSON.stringify(next)); setWarning(""); }
+-      catch { setWarning("浏览器未保存收起状态，本次调整仅在当前页面有效。"); }
+-      return next;
+-    });
+-  }, []);
+-  const toggle = useCallback((id: string) => {
+-    if (!CANDIDATE_IDS.has(id)) return;
+-    setSelectedIds((current) => {
+-      const next = normalizeSelection(current.includes(id) ? current.filter((entry) => entry !== id) : [...current, id]);
+-      try { localStorage.setItem(OVERVIEW_KEY, JSON.stringify(next)); window.dispatchEvent(new Event(OVERVIEW_CHANGE_EVENT)); setWarning(""); }
+-      catch { setWarning("浏览器未保存选择，本次调整仅在当前页面有效。"); }
+-      return next;
+-    });
+-  }, []);
+-  return { selectedIds, collapsedIds, warning, toggle, collapse: (id: string) => setCollapsed(id, true), restore: (id: string) => setCollapsed(id, false) };
++    save(pinned ? [...current.current, id] : current.current.filter(entry => entry !== id));
++  }, [save]);
++  const toggle = useCallback((id: string) => setPinned(id, !current.current.includes(id)), [setPinned]);
++  const resetCore = useCallback(() => save(CORE_IDS), [save]);
++  return { selectedIds, collapsedIds: [] as string[], warning, setPinned, resetCore, toggle,
++    collapse: (id: string) => setPinned(id, false), restore: (id: string) => setPinned(id, true) };
+ }
+--- before/web/src/components/market-observation-alerts/selection.test.mjs
++++ after/web/src/components/market-observation-alerts/selection.test.mjs
+@@ -1,43 +1,35 @@
+ import test from "node:test";
+ import assert from "node:assert/strict";
+ import { build } from "esbuild";
+-
+ const result = await build({ entryPoints: [new URL("./selection.ts", import.meta.url).pathname], bundle: true,
+   platform: "node", format: "esm", write: false });
+-const { CORE_IDS, parseSelection, normalizeSelection, parseCollapsed } = await import(`data:text/javascript;base64,${Buffer.from(result.outputFiles[0].contents).toString("base64")}`);
+-
+-test("first read keeps core cards and migrates old pins once without duplicates", () => {
+-  const selection = parseSelection(null, JSON.stringify(["vix", "aaii", "aaii", "turnover-concentration"]));
+-  assert.deepEqual(selection.slice(0, CORE_IDS.length), CORE_IDS);
+-  assert.equal(selection.filter(id => id === "vix").length, 1);
+-  assert.ok(selection.includes("aaii"));
++const { CORE_IDS, LEGACY_DEFAULT_IDS, parseSelection, normalizeSelection, migrateSelection } = await import(`data:text/javascript;base64,${Buffer.from(result.outputFiles[0].contents).toString("base64")}`);
++const json = JSON.stringify;
++test("fresh homepage contains exactly the four requested ERP and breadth cards", () => {
++  assert.deepEqual(parseSelection(null, null), ["erp-cn", "breadth-cn", "erp-us", "breadth-us"]);
+ });
+-
+-test("saved removal survives later reads and old pins cannot re-add it", () => {
+-  const saved = JSON.stringify(["breadth-cn", "hv-us"]);
+-  assert.deepEqual(parseSelection(saved, JSON.stringify(["vix"])), ["breadth-cn", "hv-us"]);
+-  assert.deepEqual(normalizeSelection(["hv-us", "hv-us", "unknown"]), ["hv-us"]);
++test("old complete automatic sets shrink and explicitly added cards survive", () => {
++  for (const defaults of [LEGACY_DEFAULT_IDS, LEGACY_DEFAULT_IDS.slice(0,15), LEGACY_DEFAULT_IDS.slice(0,15).filter(id => !["cn-session","cn-institution"].includes(id))]) {
++    assert.deepEqual(migrateSelection(null,json(defaults),null,null), CORE_IDS);
++    assert.deepEqual(migrateSelection(null,json([...defaults,"aaii"]),null,null), [...CORE_IDS,"aaii"]);
++  }
+ });
+-
+-test("collapsed card preference is separate, deduplicated and survives malformed storage", () => {
+-  assert.deepEqual(parseCollapsed(JSON.stringify(["erp-cn", "hv-us", "erp-cn", "invalid"])), ["erp-cn", "hv-us"]);
+-  assert.deepEqual(parseCollapsed("{bad"), []);
+-  assert.deepEqual(parseSelection(JSON.stringify(["erp-cn", "hv-us"]), null), ["erp-cn", "hv-us"]);
++test("explicit old pins inside defaults are retained only if still selected", () => {
++  assert.deepEqual(migrateSelection(null,json(LEGACY_DEFAULT_IDS),json(["vix","aaii"]),null), [...CORE_IDS,"vix"]);
+ });
+-
+-test("new observation cards can be added and collapsed without changing saved choices", () => {
+-  assert.ok(parseSelection(null, null).includes("cn-session"));
+-  assert.ok(parseSelection(null, null).includes("cn-institution"));
+-  assert.deepEqual(parseSelection('["erp-cn"]', null), ["erp-cn"]);
+-  assert.deepEqual(parseSelection('["cn-session","cn-institution"]', null), ["cn-session", "cn-institution"]);
+-  assert.deepEqual(parseCollapsed('["cn-institution","cn-institution"]'), ["cn-institution"]);
++test("custom subset and intentionally empty preferences are not reset", () => {
++  for (const ids of [["breadth-cn","hv-us"],[]]) assert.deepEqual(migrateSelection(null,json(ids),json(["vix"]),null),ids);
++  assert.deepEqual(migrateSelection(null,json(["erp-cn","cn-style-relative"]),null,null),["erp-cn","cn-style-relative"]);
+ });
+-
+-test("relative and term cards default on, while existing selections and collapsed choices stay intact", () => {
+-  const additions = ["cn-style-relative", "vix-term-structure", "us-semiconductor-relative", "us-equal-weight-relative"];
+-  for (const id of additions) assert.ok(parseSelection(null, null).includes(id));
+-  assert.deepEqual(parseSelection('["erp-cn","vix"]', null), ["erp-cn", "vix"]);
+-  assert.deepEqual(parseSelection('[]', null), []);
+-  assert.deepEqual(parseCollapsed(JSON.stringify([...additions, additions[0]])), additions);
+-  assert.deepEqual(parseSelection(JSON.stringify(additions), null), additions);
++test("hidden old cards stay off the homepage, including core and explicit pins", () => {
++  assert.deepEqual(migrateSelection(null,json(LEGACY_DEFAULT_IDS),json(["vix"]),json(["breadth-us","vix"])),["erp-cn","breadth-cn","erp-us"]);
+ });
++test("v2 is canonical and old keys cannot restore removed cards", () => {
++  for (const ids of [["breadth-cn"],[],["us-semiconductor-relative","cn-300etf-pcr-volume"]])
++    assert.deepEqual(migrateSelection(json(ids),json(LEGACY_DEFAULT_IDS),json(["vix"]),json(["breadth-cn"])),ids);
++});
++test("malformed preferences fall back safely; duplicates and unknown ids are rejected", () => {
++  for (const malformed of ["{bad", "null", "{}", '"erp-cn"']) assert.deepEqual(migrateSelection(malformed,null,null,null),CORE_IDS);
++  assert.deepEqual(normalizeSelection(["vix","vix","unknown",42,"industry-structure-cn","cn-300etf-pcr-volume"]),["vix","industry-structure-cn","cn-300etf-pcr-volume"]);
++  assert.deepEqual(migrateSelection(null,"{bad",json(["aaii"]),null),[...CORE_IDS,"aaii"]);
++});
+--- before/web/src/components/market-observation-alerts/IndicatorBrowser.tsx
++++ after/web/src/components/market-observation-alerts/IndicatorBrowser.tsx
+@@ -0,0 +1,157 @@
++import { useEffect, useId, useRef, useState, type ReactNode } from "react";
++import type { CandidateSummary } from "./CandidateShelf";
++import {
++  filterIndicators, INDICATOR_CATALOG, INDICATOR_CATEGORIES, type CategoryId, type IndicatorEntry,
++} from "./indicatorCatalog";
++import "./indicator-browser.css";
++
++interface IndicatorBrowserProps {
++  entries?: readonly IndicatorEntry[];
++  selectedIds: readonly string[];
++  summaries: Readonly<Record<string, CandidateSummary>>;
++  onSetPinned: (id: string, pinned: boolean) => void;
++  onPreview: (id: string) => void;
++  previewId: string | null;
++  preview: ReactNode;
++  onClosePreview: () => void;
++}
++
++const MARKET_LABELS: Record<IndicatorEntry["market"], string> = {
++  cn: "A股",
++  us: "美股",
++  global: "跨市场",
++};
++
++function PinButton({ item, pinned, onSetPinned }: {
++  item: IndicatorEntry;
++  pinned: boolean;
++  onSetPinned: IndicatorBrowserProps["onSetPinned"];
++}) {
++  return <button type="button" className="mib-button mib-pin" disabled={!item.readable && !pinned}
++    onClick={() => onSetPinned(item.id, !pinned)}>
++    {pinned ? "移出首页" : "加入首页"}
++  </button>;
++}
++
++export default function IndicatorBrowser({
++  entries = INDICATOR_CATALOG, selectedIds, summaries, onSetPinned, onPreview, previewId, preview, onClosePreview,
++}: IndicatorBrowserProps) {
++  const [category, setCategory] = useState<CategoryId | "all">("all");
++  const [market, setMarket] = useState<IndicatorEntry["market"] | "all">("all");
++  const [query, setQuery] = useState("");
++  const [includePending, setIncludePending] = useState(false);
++  const headingId = useId();
++  const previewRegionId = useId();
++  const previewHeading = useRef<HTMLHeadingElement>(null);
++  const searchInput = useRef<HTMLInputElement>(null);
++  const opener = useRef<HTMLButtonElement | null>(null);
++
++  const results = filterIndicators({ category, market, query, includePending }, entries);
++  const groups = INDICATOR_CATEGORIES.map((group) => ({
++    ...group,
++    items: results.filter((item) => item.category === group.id),
++  })).filter((group) => group.items.length > 0);
++  const pinned = new Set(selectedIds);
++  const previewItem = entries.find((item) => item.id === previewId);
++  const activePreviewId = previewItem?.id;
++
++  useEffect(() => {
++    const title = previewHeading.current;
++    if (activePreviewId && title) {
++      title.focus({ preventScroll: true });
++      title.scrollIntoView({ block: "nearest" });
++    } else if (opener.current) {
++      const target = opener.current.isConnected ? opener.current : searchInput.current;
++      target?.focus({ preventScroll: true });
++      target?.scrollIntoView({ block: "nearest" });
++      opener.current = null;
++    }
++  }, [activePreviewId]);
++
++  return <section className="mib-browser" aria-labelledby={headingId}>
++    <header className="mib-header">
++      <h2 id={headingId}>指标库</h2>
++    </header>
++    <div className="mib-categories" role="group" aria-label="指标分类">
++      <button type="button" className="mib-button" aria-pressed={category === "all"}
++        onClick={() => setCategory("all")}>全部</button>
++      {INDICATOR_CATEGORIES.map(({ id, label }) => <button key={id} type="button" className="mib-button"
++        aria-pressed={category === id} onClick={() => setCategory(id)}>{label}</button>)}
++    </div>
++    <div className="mib-filters">
++      <label className="mib-search">
++        <span>搜索指标</span>
++        <input ref={searchInput} type="search" value={query} placeholder="名称或 ETF 代码"
++          onChange={(event) => setQuery(event.currentTarget.value)} />
++      </label>
++      <label>
++        <span>市场</span>
++        <select value={market} onChange={(event) => setMarket(event.currentTarget.value as typeof market)}>
++          <option value="all">全部市场</option>
++          {Object.entries(MARKET_LABELS).map(([id, label]) => <option key={id} value={id}>{label}</option>)}
++        </select>
++      </label>
++      <label className="mib-status-filter">
++        <input type="checkbox" checked={includePending}
++          onChange={(event) => setIncludePending(event.currentTarget.checked)} />
++        显示待接入指标
++      </label>
++    </div>
++    {previewItem && <section className="mib-preview" id={previewRegionId} aria-label={`${previewItem.label}预览`}>
++      <div className="mib-preview-header">
++        <div>
++          <h3 ref={previewHeading} tabIndex={-1}>{previewItem.label}</h3>
++          <p>{previewItem.meaning}</p>
++        </div>
++        <div className="mib-actions">
++          <PinButton item={previewItem} pinned={pinned.has(previewItem.id)} onSetPinned={onSetPinned} />
++          <button type="button" className="mib-button" onClick={onClosePreview}>关闭预览</button>
++        </div>
++      </div>
++      {previewItem.readable ? preview : <p className="mib-limitation">{previewItem.limitation}</p>}
++    </section>}
++    <p className="mib-count" role="status">{results.length} 项指标</p>
++    {groups.length === 0 && <p className="mib-empty">没有符合当前筛选条件的指标。</p>}
++    {groups.map(({ id, label, items }) => <section key={id} className="mib-group"
++      aria-labelledby={`${headingId}-${id}`}>
++      <h3 id={`${headingId}-${id}`}>{label}</h3>
++      <ul className="mib-grid">
++        {items.map((item) => {
++          const isPinned = pinned.has(item.id);
++          const summary = summaries[`${item.market}:${item.id}`] ?? summaries[item.id];
++          const itemHeadingId = `${headingId}-${item.id}`;
++          return <li key={item.id}>
++            <article className="mib-item" aria-labelledby={itemHeadingId}>
++              <div className="mib-tags">
++                <span>{MARKET_LABELS[item.market]}</span>
++                {isPinned && <span className="mib-pinned">已在首页</span>}
++                {!item.readable && <span className="mib-pending">待接入</span>}
++              </div>
++              <h4 id={itemHeadingId}>{item.label}</h4>
++              <p>{item.meaning}</p>
++              {item.readable && summary && <p className="mib-reading">
++                <strong>{summary.value}</strong>{summary.date && <time>{summary.date}</time>}
++              </p>}
++              {!item.readable && <p className="mib-limitation">{item.limitation}</p>}
++              <div className="mib-actions">
++                <button type="button" className="mib-button mib-view" aria-label={`查看${item.label}`}
++                  aria-expanded={previewItem?.id === item.id}
++                  aria-controls={previewItem?.id === item.id ? previewRegionId : undefined}
++                  onClick={(event) => {
++                    opener.current = event.currentTarget;
++                    if (previewItem?.id === item.id) {
++                      previewHeading.current?.focus({ preventScroll: true });
++                      previewHeading.current?.scrollIntoView({ block: "nearest" });
++                    } else {
++                      onPreview(item.id);
++                    }
++                  }}>查看指标</button>
++                <PinButton item={item} pinned={isPinned} onSetPinned={onSetPinned} />
++              </div>
++            </article>
++          </li>;
++        })}
++      </ul>
++    </section>)}
++  </section>;
++}
+--- before/web/src/components/market-observation-alerts/indicator-browser.css
++++ after/web/src/components/market-observation-alerts/indicator-browser.css
+@@ -0,0 +1,218 @@
++.mib-browser {
++  color: #353c36;
++  font-size: 13px;
++}
++
++.mib-header h2 {
++  margin: 0 0 12px;
++  font-size: 17px;
++  font-weight: 650;
++}
++
++.mib-categories,
++.mib-filters,
++.mib-tags,
++.mib-actions {
++  display: flex;
++  align-items: center;
++  gap: 8px;
++}
++
++.mib-categories {
++  flex-wrap: wrap;
++}
++
++.mib-button,
++.mib-filters input[type="search"],
++.mib-filters select {
++  min-height: 32px;
++  padding: 4px 10px;
++  border: 1px solid #dce3d7;
++  border-radius: 5px;
++  background: #fff;
++  color: #3b5037;
++  font: inherit;
++}
++
++.mib-button {
++  cursor: pointer;
++  white-space: nowrap;
++}
++
++.mib-button:hover:not(:disabled),
++.mib-button[aria-pressed="true"],
++.mib-view[aria-expanded="true"] {
++  border-color: #9eb495;
++  background: #eaf2e6;
++}
++
++.mib-button[aria-pressed="true"] {
++  font-weight: 650;
++}
++
++.mib-button:disabled {
++  background: #f3f4f1;
++  color: #626b61;
++  cursor: default;
++}
++
++.mib-browser :is(button, input, select):focus-visible,
++.mib-preview-header h3:focus-visible {
++  outline: 2px solid #507a44;
++  outline-offset: 2px;
++}
++
++.mib-filters {
++  gap: 16px;
++  margin: 12px 0;
++  padding: 10px 12px;
++  border: 1px solid #e5e9df;
++  border-radius: 6px;
++  background: #f7f9f4;
++}
++
++.mib-filters label {
++  display: inline-flex;
++  align-items: center;
++  gap: 7px;
++  color: #4f5a4b;
++  white-space: nowrap;
++}
++
++.mib-search input {
++  width: 230px;
++}
++
++.mib-status-filter input {
++  margin: 0;
++  accent-color: #466b40;
++}
++
++.mib-preview {
++  margin: 14px 0;
++  padding: 14px;
++  border: 1px solid #afc2a5;
++  border-radius: 7px;
++  background: #fbfcf9;
++}
++
++.mib-preview-header {
++  display: flex;
++  align-items: flex-start;
++  justify-content: space-between;
++  gap: 12px;
++  margin-bottom: 10px;
++}
++
++.mib-preview-header h3,
++.mib-preview-header p {
++  margin: 0;
++}
++
++.mib-preview-header h3 {
++  font-size: 16px;
++  scroll-margin-block: 12px;
++}
++
++.mib-preview-header p {
++  margin-top: 4px;
++  color: #4f5a4b;
++}
++
++.mib-count {
++  margin: 14px 0 8px;
++  color: #4f5a4b;
++}
++
++.mib-empty {
++  padding: 16px 12px;
++  border: 1px dashed #dce3d7;
++  border-radius: 6px;
++  color: #4f5a4b;
++}
++
++.mib-group {
++  margin: 0 0 16px;
++}
++
++.mib-group > h3 {
++  margin: 0 0 8px;
++  font-size: 14px;
++  font-weight: 650;
++}
++
++.mib-grid {
++  display: grid;
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: 8px;
++  margin: 0;
++  padding: 0;
++  list-style: none;
++}
++
++.mib-item {
++  box-sizing: border-box;
++  display: flex;
++  flex-direction: column;
++  align-items: flex-start;
++  height: 100%;
++  padding: 10px 12px;
++  border: 1px solid #e1e6dc;
++  border-radius: 6px;
++  background: #fff;
++}
++
++.mib-tags {
++  margin-bottom: 5px;
++}
++
++.mib-tags span {
++  padding: 2px 6px;
++  border-radius: 4px;
++  background: #f0f3ee;
++  color: #4c594a;
++  font-size: 11px;
++}
++
++.mib-tags .mib-pinned {
++  background: #e6f2e2;
++  color: #345b30;
++}
++
++.mib-tags .mib-pending {
++  background: #f8f0e1;
++  color: #765421;
++}
++
++.mib-item h4 {
++  margin: 0;
++  font-size: 14px;
++  font-weight: 650;
++}
++
++.mib-item p,
++.mib-limitation {
++  margin: 4px 0 0;
++  color: #4f5a4b;
++  line-height: 1.5;
++}
++
++.mib-item .mib-reading {
++  display: flex;
++  flex-wrap: wrap;
++  align-items: baseline;
++  gap: 7px;
++}
++
++.mib-reading strong {
++  color: #353c36;
++}
++
++.mib-reading time {
++  font-size: 11px;
++}
++
++.mib-item .mib-actions {
++  margin-top: auto;
++  padding-top: 8px;
++}
+--- before/web/src/components/market-observation-alerts/indicatorCatalog.ts
++++ after/web/src/components/market-observation-alerts/indicatorCatalog.ts
+@@ -0,0 +1,244 @@
++import { OBSERVATION_CATALOG, type ObservationGroup, type ObservationMarket } from "../observation-library/catalog";
++
++export const INDICATOR_CATEGORIES = [
++  { id: "valuation", label: "估值与股债" },
++  { id: "participation", label: "市场参与" },
++  { id: "risk", label: "波动与信用" },
++  { id: "funding", label: "资金与情绪" },
++  { id: "style", label: "风格与行业" },
++  { id: "economy", label: "盈利与经济" },
++] as const;
++
++export type CategoryId = typeof INDICATOR_CATEGORIES[number]["id"];
++
++export interface IndicatorEntry {
++  id: string;
++  label: string;
++  market: ObservationMarket;
++  category: CategoryId;
++  meaning: string;
++  limitation: string;
++  readable: boolean;
++  keywords?: string;
++}
++
++const CATEGORY_BY_GROUP: Record<ObservationGroup, CategoryId> = {
++  valuation: "valuation",
++  participation: "participation",
++  credit: "risk",
++  positioning: "funding",
++  earnings: "economy",
++  cycle: "economy",
++};
++
++const CATEGORY_OVERRIDES = new Map<string, CategoryId>([
++  ["equal-weight-spread", "style"],
++  ["industry-diffusion", "style"],
++]);
++
++const SEARCH_ALIASES: Readonly<Record<string, string>> = {
++  "erp-cn": "ERP 风险溢价",
++  "erp-us": "ERP 风险溢价",
++};
++
++const EXTRA_INDICATORS: readonly IndicatorEntry[] = [
++  {
++    id: "breadth-cn", label: "全A · 市场宽度", market: "cn", category: "participation", readable: true,
++    meaning: "看全A有多少股票收在各自均线之上。",
++    limitation: "历史高低区间用于比较参与程度。",
++    keywords: "市场广度 宽度 广度 全A 沪深",
++  },
++  {
++    id: "breadth-us", label: "标普500 · 市场宽度", market: "us", category: "participation", readable: true,
++    meaning: "看标普500成分股中有多少收在各自均线之上。",
++    limitation: "覆盖范围为标普500成分股。",
++    keywords: "市场广度 宽度 广度 SP500 S&P500 SPY",
++  },
++  {
++    id: "hv-cn", label: "上证 · 20/60日波动率", market: "cn", category: "risk", readable: true,
++    meaning: "比较上证指数近20日与近60日的实际波动幅度。",
++    limitation: "以收盘价计算历史波动，反映幅度。",
++    keywords: "HV 上证指数",
++  },
++  {
++    id: "hv-us", label: "标普500 · 20/60日波动率", market: "us", category: "risk", readable: true,
++    meaning: "比较标普500近20日与近60日的实际波动幅度。",
++    limitation: "以收盘价计算历史波动，反映幅度。",
++    keywords: "HV SP500 S&P500 SPY",
++  },
++  {
++    id: "dr007", label: "DR007资金价格", market: "cn", category: "funding", readable: true,
++    meaning: "看存款类机构借用7天资金的成本变化。",
++    limitation: "反映银行间短期资金价格。",
++    keywords: "回购 银行间 流动性",
++  },
++  {
++    id: "cn-session", label: "沪深300 · 隔夜与日内表现", market: "cn", category: "participation", readable: true,
++    meaning: "分开看沪深300从前收盘到开盘、从开盘到收盘的表现。",
++    limitation: "观察对象为沪深300指数。",
++    keywords: "隔夜收益 日内收益",
++  },
++  {
++    id: "cn-institution", label: "龙虎榜 · 已披露机构席位", market: "cn", category: "funding", readable: true,
++    meaning: "看龙虎榜上已披露的机构席位买卖活动。",
++    limitation: "仅覆盖上榜且披露为机构的席位。",
++    keywords: "机构席位 机构净买入",
++  },
++  {
++    id: "cn-style-relative", label: "大小盘 · 中证1000 / 沪深300", market: "cn", category: "style", readable: true,
++    meaning: "用两只ETF的价格比观察小盘相对大盘的强弱。",
++    limitation: "以对应ETF的价格为比较口径。",
++    keywords: "大小盘 小盘 大盘 512100 510300 ETF",
++  },
++  {
++    id: "us-semiconductor-relative", label: "半导体 / 纳指100", market: "us", category: "style", readable: true,
++    meaning: "用两只ETF的价格比观察半导体相对纳指100的强弱。",
++    limitation: "以对应ETF的价格为比较口径。",
++    keywords: "SMH QQQ ETF 纳斯达克100",
++  },
++  {
++    id: "us-equal-weight-relative", label: "标普500 · 等权 / 市值加权", market: "us", category: "style", readable: true,
++    meaning: "用两只ETF的价格比比较标普500等权与市值加权的表现。",
++    limitation: "以对应ETF的价格为比较口径。",
++    keywords: "RSP SPY ETF 等权 市值权",
++  },
++  {
++    id: "vix-term-structure", label: "VIX · 期限结构", market: "us", category: "risk", readable: true,
++    meaning: "比较标普500期权市场近期与三个月的预期波动。",
++    limitation: "反映不同期限的预期波动幅度。",
++    keywords: "VIX VIX3M 期权",
++  },
++  {
++    id: "industry-structure-cn", label: "沪深300十行业 · 同步与分化", market: "cn", category: "style", readable: true,
++    meaning: "看沪深300十个行业的涨跌有多同步、表现相差多大。",
++    limitation: "行业分类中金融与地产合为一组，按历史快照展示。",
++    keywords: "板块 行业结构 相关性 离散",
++  },
++];
++
++export const MICRO_INDICATORS: readonly IndicatorEntry[] = [
++  {
++    "id": "cn-300etf-pcr-volume",
++    "label": "沪深300ETF 期权成交量 PCR",
++    "market": "cn",
++    "category": "funding",
++    "meaning": "认沽成交张数相对认购成交张数；看当日期权交易构成。",
++    "limitation": "历史快照，按卡片日期和口径阅读。",
++    "readable": true
++  },
++  {
++    "id": "cn-300etf-pcr-oi",
++    "label": "沪深300ETF 期权持仓量 PCR",
++    "market": "cn",
++    "category": "funding",
++    "meaning": "认沽未平仓张数相对认购未平仓张数；看日末存量构成。",
++    "limitation": "历史快照，按卡片日期和口径阅读。",
++    "readable": true
++  },
++  {
++    "id": "cn-300etf-atm-iv",
++    "label": "沪深300ETF 近月平值隐含波动代理",
++    "market": "cn",
++    "category": "risk",
++    "meaning": "近月接近平值的两侧隐含波动均值；看期权对波动幅度的定价。",
++    "limitation": "历史快照，按卡片日期和口径阅读。",
++    "readable": true
++  },
++  {
++    "id": "us-equity-pcr-volume",
++    "label": "美国股票期权成交量 PCR",
++    "market": "us",
++    "category": "funding",
++    "meaning": "当日认沽成交张数相对认购成交张数；看期权交易构成。",
++    "limitation": "历史快照，按卡片日期和口径阅读。",
++    "readable": true
++  },
++  {
++    "id": "us-total-pcr-volume",
++    "label": "美国总体期权成交量 PCR",
++    "market": "us",
++    "category": "funding",
++    "meaning": "当日认沽成交张数相对认购成交张数；看期权交易构成。",
++    "limitation": "历史快照，按卡片日期和口径阅读。",
++    "readable": true
++  },
++  {
++    "id": "us-cor3m",
++    "label": "标普500 三个月隐含相关 COR3M",
++    "market": "us",
++    "category": "risk",
++    "meaning": "观察期权市场定价的共同波动程度；升高表示预期分散收益减少。",
++    "limitation": "历史快照，按卡片日期和口径阅读。",
++    "readable": true
++  },
++  {
++    "id": "cn-if2611-annualized-basis",
++    "label": "沪深300股指期货 IF2611 收盘近似年化基差",
++    "market": "cn",
++    "category": "risk",
++    "meaning": "同日收盘期货相对现货的价差按剩余自然日年化；看期现价格关系。",
++    "limitation": "历史快照，按卡片日期和口径阅读。",
++    "readable": true
++  },
++  {
++    "id": "cn-ic2611-annualized-basis",
++    "label": "中证500股指期货 IC2611 收盘近似年化基差",
++    "market": "cn",
++    "category": "risk",
++    "meaning": "同日收盘期货相对现货的价差按剩余自然日年化；看期现价格关系。",
++    "limitation": "历史快照，按卡片日期和口径阅读。",
++    "readable": true
++  },
++  {
++    "id": "cn-ih2611-annualized-basis",
++    "label": "上证50股指期货 IH2611 收盘近似年化基差",
++    "market": "cn",
++    "category": "risk",
++    "meaning": "同日收盘期货相对现货的价差按剩余自然日年化；看期现价格关系。",
++    "limitation": "历史快照，按卡片日期和口径阅读。",
++    "readable": true
++  },
++  {
++    "id": "cn-im2611-annualized-basis",
++    "label": "中证1000股指期货 IM2611 收盘近似年化基差",
++    "market": "cn",
++    "category": "risk",
++    "meaning": "同日收盘期货相对现货的价差按剩余自然日年化；看期现价格关系。",
++    "limitation": "历史快照，按卡片日期和口径阅读。",
++    "readable": true
++  }
++];
++
++export const INDICATOR_CATALOG: readonly IndicatorEntry[] = [
++  ...OBSERVATION_CATALOG.map(({ group, id, label, market, meaning, limitation, readable }) => ({
++    id, label, market, meaning, limitation, readable,
++    category: CATEGORY_OVERRIDES.get(id) ?? CATEGORY_BY_GROUP[group],
++    keywords: SEARCH_ALIASES[id],
++  })),
++  ...EXTRA_INDICATORS,
++  ...MICRO_INDICATORS,
++];
++
++export const INDICATOR_BY_ID: ReadonlyMap<string, IndicatorEntry> =
++  new Map(INDICATOR_CATALOG.map((item) => [item.id, item]));
++
++interface IndicatorFilters {
++  category?: CategoryId | "all";
++  market?: ObservationMarket | "all";
++  query?: string;
++  includePending?: boolean;
++}
++
++export function filterIndicators(
++  { category = "all", market = "all", query = "", includePending = false }: IndicatorFilters = {},
++  entries: readonly IndicatorEntry[] = INDICATOR_CATALOG,
++) {
++  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
++  return entries.filter((item) => {
++    if (!includePending && !item.readable) return false;
++    if (category !== "all" && item.category !== category) return false;
++    if (market !== "all" && item.market !== market) return false;
++    const searchable = [item.label, item.meaning, item.keywords].join(" ").toLowerCase();
++    return terms.every((term) => searchable.includes(term));
++  });
++}
+--- before/web/src/components/market-observation-alerts/indicatorCatalog.test.mjs
++++ after/web/src/components/market-observation-alerts/indicatorCatalog.test.mjs
+@@ -0,0 +1,103 @@
++import test from "node:test";
++import assert from "node:assert/strict";
++import { build } from "esbuild";
++
++async function load(file) {
++  const result = await build({
++    entryPoints: [new URL(file, import.meta.url).pathname],
++    bundle: true,
++    platform: "node",
++    format: "esm",
++    write: false,
++  });
++  return import(`data:text/javascript;base64,${Buffer.from(result.outputFiles[0].text).toString("base64")}`);
++}
++
++const { OBSERVATION_CATALOG } = await load("../observation-library/catalog.ts");
++const { INDICATOR_CATALOG, INDICATOR_BY_ID, INDICATOR_CATEGORIES, filterIndicators } = await load("./indicatorCatalog.ts");
++
++const extras = [
++  ["breadth-cn", "cn", "participation"],
++  ["breadth-us", "us", "participation"],
++  ["hv-cn", "cn", "risk"],
++  ["hv-us", "us", "risk"],
++  ["dr007", "cn", "funding"],
++  ["cn-session", "cn", "participation"],
++  ["cn-institution", "cn", "funding"],
++  ["cn-style-relative", "cn", "style"],
++  ["us-semiconductor-relative", "us", "style"],
++  ["us-equal-weight-relative", "us", "style"],
++  ["vix-term-structure", "us", "risk"],
++  ["industry-structure-cn", "cn", "style"],
++];
++
++test("catalog has unique IDs, all legacy indicators and all six categories", () => {
++  assert.equal(new Set(INDICATOR_CATALOG.map(({ id }) => id)).size, INDICATOR_CATALOG.length);
++  assert.equal(INDICATOR_BY_ID.size, INDICATOR_CATALOG.length);
++  for (const { id } of OBSERVATION_CATALOG) assert.ok(INDICATOR_BY_ID.has(id), id);
++  assert.deepEqual(INDICATOR_CATEGORIES.map(({ id, label }) => [id, label]), [
++    ["valuation", "估值与股债"],
++    ["participation", "市场参与"],
++    ["risk", "波动与信用"],
++    ["funding", "资金与情绪"],
++    ["style", "风格与行业"],
++    ["economy", "盈利与经济"],
++  ]);
++});
++
++test("existing groups and additional cards use the agreed categories and markets", () => {
++  const byGroup = {
++    valuation: "valuation", participation: "participation", credit: "risk",
++    positioning: "funding", earnings: "economy", cycle: "economy",
++  };
++  for (const { id, group, market } of OBSERVATION_CATALOG) {
++    const item = INDICATOR_BY_ID.get(id);
++    const category = ["equal-weight-spread", "industry-diffusion"].includes(id) ? "style" : byGroup[group];
++    assert.equal(item.category, category, id);
++    assert.equal(item.market, market, id);
++  }
++  for (const [id, market, category] of extras) {
++    const item = INDICATOR_BY_ID.get(id);
++    assert.ok(item, id);
++    assert.equal(item.market, market, id);
++    assert.equal(item.category, category, id);
++    assert.equal(item.readable, true, id);
++  }
++});
++
++test("pending entries preserve the missing-data explanation and require opt-in", () => {
++  const pending = OBSERVATION_CATALOG.filter(({ readable }) => !readable);
++  assert.ok(pending.length);
++  const defaultIds = new Set(filterIndicators({}).map(({ id }) => id));
++  const allIds = new Set(filterIndicators({ includePending: true }).map(({ id }) => id));
++  for (const { id, limitation } of pending) {
++    assert.equal(INDICATOR_BY_ID.get(id).readable, false, id);
++    assert.equal(INDICATOR_BY_ID.get(id).limitation, limitation, id);
++    assert.ok(!defaultIds.has(id), id);
++    assert.ok(allIds.has(id), id);
++  }
++});
++
++test("search finds both market breadth cards by either Chinese name and matches ETF symbols", () => {
++  for (const query of ["广度", "宽度"]) {
++    assert.deepEqual(filterIndicators({ query, category: "participation" }).map(({ id }) => id).sort(),
++      ["breadth-cn", "breadth-us"]);
++  }
++  for (const [query, id] of [["512100", "cn-style-relative"], [" smh ", "us-semiconductor-relative"], ["RSP", "us-equal-weight-relative"]]) {
++    assert.ok(filterIndicators({ query }).some((item) => item.id === id));
++  }
++});
++
++test("cross-market filter selects only catalog entries scoped to cross-market observation", () => {
++  for (const market of ["cn", "us", "global"]) {
++    assert.deepEqual(filterIndicators({ market, includePending: true }), INDICATOR_CATALOG.filter((item) => item.market === market));
++  }
++  assert.ok(filterIndicators({ market: "global" }).some(({ id }) => id === "ofr-fsi"));
++});
++
++test("filter accepts a supplied indicator collection", () => {
++  const base = INDICATOR_BY_ID.get("breadth-cn");
++  const extra = { ...base, id: "fixture", label: "新增指标", keywords: "样例" };
++  assert.deepEqual(filterIndicators({ market: "cn", query: "样例" }, [extra]), [extra]);
++  assert.deepEqual(filterIndicators({}, []), []);
++});

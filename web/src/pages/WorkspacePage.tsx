@@ -1,13 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { api, sectorsApi } from "../api/client";
-import { sectorKeywordsForEtf } from "../data/sectorEtfMap";
+import { useSearchParams } from "react-router-dom";
+import { api } from "../api/client";
 import AddSymbolDialog from "../components/AddSymbolDialog";
 import AssessmentPanel from "../components/AssessmentPanel";
 import CollapsiblePanel, { type CollapsiblePanelHandle } from "../components/CollapsiblePanel";
 import ChartControls from "../components/ChartControls";
-import TrendChecklist from "../components/TrendChecklist";
 import ColorBacktestPanel from "../components/ColorBacktestPanel";
 import PullbackBacktestPanel from "../components/PullbackBacktestPanel";
 import PullbackOpportunityPanel from "../components/PullbackOpportunityPanel";
@@ -17,13 +15,16 @@ import ScenarioBacktestPanel from "../components/ScenarioBacktestPanel";
 import TradabilityPanel from "../components/TradabilityPanel";
 import ColorBadge from "../components/ColorBadge";
 import ExplanationPanel, { type Selection } from "../components/ExplanationPanel";
-import MarketBreadthBadge from "../components/MarketBreadthBadge";
-import TodayDigestBar from "../components/TodayDigestBar";
+import CrossSectionComparePanel from "../components/CrossSectionComparePanel";
+import HomeEnvironmentStrip from "../components/HomeEnvironmentStrip";
+import SymbolQuickReadCard from "../components/SymbolQuickReadCard";
+import SmartSymbolPromptCard from "../components/smart-prompts/SmartSymbolPromptCard";
 import KlineChart, {
   DEFAULT_DISPLAY,
   effectiveDisplay,
   type ChartDisplay,
   type MarkPick,
+  type RangePreset,
 } from "../components/KlineChart";
 import { scopeMarkCounts } from "../components/klineStructureMarks";
 import { loadTimeframe } from "../components/klineTimeframe";
@@ -35,7 +36,7 @@ import TradeOpportunityPanel from "../components/TradeOpportunityPanel";
 import { prefillFromOpportunity } from "../components/CreatePlanDialog";
 import PlanCreateFlow from "../components/PlanCreateFlow";
 import BuyPointDrawer, { annoToIndex } from "../components/BuyPointDrawer";
-import WatchlistSidebar from "../components/WatchlistSidebar";
+import WatchlistSidebar, { type SidebarSignalBadge } from "../components/WatchlistSidebar";
 import { useBuyPointCoord } from "../hooks/useBuyPointCoord";
 import type { Explanation, StructureBrief, SymbolDetail } from "../types";
 
@@ -57,20 +58,6 @@ const LINE_KINDS: ReadonlySet<MarkPick["kind"]> = new Set([
   "bottom_line",
   "top_line",
 ]);
-
-/** 板块阶段 chip 文案与色调（与 SectorsPage 的 STAGE_CN/STAGE_TONE 同口径）。 */
-const SECTOR_CHIP_CN: Record<string, string> = {
-  markup: "上升",
-  accumulation: "筑底",
-  distribution: "派发",
-  decline: "下降",
-};
-const SECTOR_CHIP_TONE: Record<string, string> = {
-  markup: "sector-up",
-  accumulation: "sector-base",
-  distribution: "sector-dist",
-  decline: "sector-down",
-};
 
 function resolveSelection(pick: MarkPick, detail: SymbolDetail): Selection {
   const source = MARK_SOURCE_CN[pick.kind];
@@ -124,24 +111,79 @@ function resolveSelection(pick: MarkPick, detail: SymbolDetail): Selection {
  */
 export default function WorkspacePage() {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
   const [selection, setSelection] = useState<Selection | null>(null);
+  const [viewMode, setViewMode] = useState<"chart" | "compare">(() =>
+    params.get("view") === "compare" ? "compare" : "chart",
+  );
+  const [detailsDrawerOpen, setDetailsDrawerOpen] = useState(false);
+  const [signalsOpen, setSignalsOpen] = useState(false);
+  // 与 TodaySignalBanner 共享同一 queryKey，零额外请求；用于顶条胶囊计数 + 左侧自选卡片异动小徽标
+  const signalsQuery = useQuery({
+    queryKey: ["signalsToday"],
+    queryFn: () => api.signalsToday(),
+    refetchInterval: 60_000,
+    staleTime: 30_000,
+  });
+  const signalSummary = useMemo(() => {
+    const s = signalsQuery.data;
+    const isSector = (sym: string) => sym.toUpperCase().endsWith(".SECTOR");
+    const buyA = s?.actionable ?? [];
+    const buyW = s?.waiting ?? [];
+    const sellH = (s?.sell_hard ?? []).filter((x) => !isSector(x.symbol));
+    const sellWarn = (s?.sell_warn ?? []).filter((x) => !isSector(x.symbol));
+    const badges = new Map<string, SidebarSignalBadge>();
+    for (const it of sellWarn) {
+      badges.set(it.symbol, { kind: "sell", label: "弱", title: `转弱预警：${it.reason_cn || it.title || it.kind_cn}` });
+    }
+    for (const it of sellH) {
+      badges.set(it.symbol, { kind: "sell", label: "退", title: `退出提醒：${it.reason_cn || it.title || it.kind_cn}` });
+    }
+    for (const it of buyW) {
+      if (!badges.has(it.symbol)) {
+        badges.set(it.symbol, { kind: "watch", label: "待", title: `等待买点：${it.missing_summary_cn || it.best_scenario_cn || it.verdict_cn}` });
+      }
+    }
+    for (const it of buyA) {
+      badges.set(it.symbol, { kind: "buy", label: "买", title: `可行动买点：${it.best_scenario_cn || it.verdict_cn}` });
+    }
+    return {
+      scanned: s?.as_of != null,
+      buyA: buyA.length,
+      buyW: buyW.length,
+      sellCount: sellH.length + sellWarn.length,
+      badges,
+    };
+  }, [signalsQuery.data]);
   // 周期默认日线，但沿用用户上次的选择（localStorage 持久化）。
   const [display, setDisplay] = useState<ChartDisplay>(() => ({
     ...DEFAULT_DISPLAY,
     timeframe: loadTimeframe(),
   }));
+  const [rangePreset, setRangePreset] = useState<RangePreset | null>("6M");
+  const [rangeRequest, setRangeRequest] = useState<{ preset: RangePreset; seq: number } | null>(null);
+  const handleRangePreset = useCallback((preset: RangePreset) => {
+    setRangePreset(preset);
+    setRangeRequest((prev) => ({ preset, seq: (prev?.seq ?? 0) + 1 }));
+  }, []);
+  const handleRangeCustom = useCallback(() => setRangePreset(null), []);
   // 图例只描述「图上真的画了什么」：周/月线下日线专属项已隐藏，故读生效开关。
   const legend = effectiveDisplay(display);
+  const anyMarkShown =
+    legend.bottomMarks ||
+    legend.topMarks ||
+    legend.invalidatedMarks ||
+    legend.keyVolatility ||
+    legend.levels;
   const [addDialogGroup, setAddDialogGroup] = useState<number | null | undefined>(undefined);
   const [showCreatePlan, setShowCreatePlan] = useState(false);
   const [showBuyPoint, setShowBuyPoint] = useState(false);
   // 右侧解释面板是否收起。默认收起以给 K 线主图留出更大空间；
   // 点图上标记时自动展开以便看解释。买点分析打开时面板自动隐藏。
   const [expCollapsed, setExpCollapsed] = useState(true);
-  const expVisible = !showBuyPoint && !expCollapsed;
+  const expVisible = !showBuyPoint && !expCollapsed && viewMode === "chart";
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const showSidebar = sidebarOpen && viewMode === "chart";
   // KlineChart 把「下载当前图为 PNG」的闭包回传到这里，按钮点的时候调它
   const downloadPngRef = useRef<(() => void) | null>(null);
   // 摘要条跳转：四个面板的命令式句柄（点击摘要段 → 展开并滚到对应面板）
@@ -160,18 +202,43 @@ export default function WorkspacePage() {
     window.localStorage.setItem("ws.sidebarWidth", String(sidebarWidth));
   }, [sidebarWidth]);
 
-  const { data: dashboard, isLoading: cardsLoading } = useQuery({
+  const { data: dashboard, isLoading: cardsLoading, isError: cardsError, error: cardsLoadError, refetch: refetchCards, isFetching: cardsFetching } = useQuery({
     queryKey: ["cards"],
     queryFn: () => api.dashboard(),
   });
 
   const cards = dashboard?.cards ?? [];
   const urlSymbol = params.get("symbol") ?? "";
+  const urlView = params.get("view");
   // 未指定标的时默认选第一张可用卡片（通常是上证指数）
   const selected = urlSymbol || cards.find((c) => !c.error)?.symbol || "";
 
+  useEffect(() => {
+    if (urlView === "compare" && viewMode !== "compare") setViewMode("compare");
+  }, [urlView, viewMode]);
+
+  const switchViewMode = useCallback(
+    (next: "chart" | "compare") => {
+      setViewMode(next);
+      const nextParams: Record<string, string> = {};
+      if (selected) nextParams.symbol = selected;
+      if (next === "compare") nextParams.view = "compare";
+      setParams(nextParams, { replace: true });
+    },
+    [selected, setParams],
+  );
+
+  useEffect(() => {
+    if (!urlSymbol && selected && !cardsError) {
+      const nextParams: Record<string, string> = { symbol: selected };
+      if (params.get("view") === "compare") nextParams.view = "compare";
+      setParams(nextParams, { replace: true });
+    }
+  }, [urlSymbol, selected, cardsError, params, setParams]);
+
   const selectSymbol = useCallback(
     (symbol: string) => {
+      setViewMode("chart");
       setParams({ symbol }, { replace: true });
       setSelection(null); // 换标的时清空右栏，避免张冠李戴
     },
@@ -321,29 +388,21 @@ export default function WorkspacePage() {
     };
   }, [data]);
 
-  // 反向联动：当前标的是映射内的行业 ETF 时，顶栏显示其所属板块的阶段。
-  // 只读板块趋势快照（已预计算、有缓存），点击跳板块页看完整判定。
-  const sectorKeywords = useMemo(
-    () => (selected ? sectorKeywordsForEtf(selected) : null),
-    [selected],
-  );
-  const { data: sectorTrend } = useQuery({
-    queryKey: ["sectorsTrend"],
-    queryFn: () => sectorsApi.trend(false, "all"),
-    staleTime: 5 * 60_000,
-    enabled: sectorKeywords != null,
-  });
-  const sectorChip = useMemo(() => {
-    if (!sectorKeywords || !sectorTrend?.boards) return null;
-    // 命中多级板块时取最宏观的（level 最小）；同 level 取第一个。
-    const hit = sectorTrend.boards
-      .filter((b) => sectorKeywords.some((k) => b.name.includes(k)))
-      .sort((a, b) => a.level - b.level)[0];
-    if (!hit) return null;
-    return { name: hit.name, stage: hit.stage as string | null };
-  }, [sectorKeywords, sectorTrend]);
+  const weeklyTrendText = useMemo(() => {
+    const m = data?.today?.technical?.find((item) => item.key === "weekly_long_trend");
+    return m?.text ?? null;
+  }, [data]);
 
-  // 摘要段点击 → 展开对应面板并平滑滚到其位置。
+  const backtestCount = useMemo(() => {
+    if (!data) return 0;
+    return (
+      (data.first_ma_pullback_backtest ? 1 : 0) +
+      data.scenario_backtests.length +
+      (data.color_backtest ? 1 : 0)
+    );
+  }, [data]);
+
+  // 摘要段点击 → 切回单标的视图、打开下方明细抽屉、展开对应面板并平滑滚到其位置。
   const jumpToPanel = useCallback(
     (key: "events" | "buys" | "exits" | "tradability") => {
       const map = {
@@ -353,9 +412,13 @@ export default function WorkspacePage() {
         tradability: ["ws-panel-tradability", tradabilityPanelRef],
       } as const;
       const [id, ref] = map[key];
-      ref.current?.expand();
+      setViewMode("chart");
+      setDetailsDrawerOpen(true);
       requestAnimationFrame(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
+        ref.current?.expand();
+        requestAnimationFrame(() => {
+          document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
       });
     },
     [],
@@ -382,80 +445,121 @@ export default function WorkspacePage() {
   return (
     <div className="workspace">
       <header className="ws-top">
-        <div className="ws-context-row">
-          <div className="ws-context-title">
-            <button className="btn small ws-sidebar-toggle"
+        <div className="ws-quote-row ws-top-single">
+          <div className="ws-entry-group ws-entry-primary">
+            <button
+              className="btn small ws-sidebar-toggle"
               onClick={() => setSidebarOpen(!sidebarOpen)}
               aria-expanded={sidebarOpen}
-              title={sidebarOpen ? "收起自选栏" : "展开自选栏"}>
+              title={sidebarOpen ? "收起自选栏" : "展开自选栏"}
+            >
               {sidebarOpen ? "◀" : "▶"}
             </button>
-            <h1>看盘</h1>
-            <span className="ws-context-caption">趋势 · 结构 · 触发条件</span>
+            {data ? (
+              <>
+                <div className="ws-instrument ws-instrument-inline">
+                  <span className="ws-symbol">{data.display_name}</span>
+                  <span className="ws-instrument-meta">
+                    {data.symbol}{data.market_cn ? ` · ${data.market_cn}` : ""}
+                  </span>
+                </div>
+                <div className="ws-quote" aria-label="最新价格与涨跌幅">
+                  <span className={`price ${changeCls}`}>{lastClose != null ? lastClose.toFixed(2) : "--"}</span>
+                  <span className={`change ${changeCls}`}>
+                    {changePct != null ? `${changePct > 0 ? "+" : ""}${changePct.toFixed(2)}%` : "--"}
+                  </span>
+                </div>
+                <button
+                  className="ws-state ws-state-inline"
+                  onClick={() => pickConcept("signal_color", "顶栏 · BIAO 颜色")}
+                  title="查看道路状态的解释"
+                >
+                  <ColorBadge color={data.assessment.color} colorCn={data.assessment.color_cn} descriptive />
+                </button>
+              </>
+            ) : (
+              <h1 className="ws-fallback-title">看盘</h1>
+            )}
           </div>
-          <div className="ws-context-tools">
-            <MarketBreadthBadge />
-            {dashboard && <span className="ws-data-time" title="行情数据时间（盘中为实时快照，只代表行情刷新时刻）">
-              行情 {data?.meta.data_time
-                ? new Date(data.meta.data_time).toLocaleTimeString("zh-CN", { hour12: false })
-                : "--"} · {data?.meta.is_intraday_forming ? "盘中" : "已收盘"}
-            </span>}
-            {data && <span className="ws-data-time" title="系统信号按该日收盘数据判定；与行情时间、信号扫描时间不是同一个时间">
-              信号判定日 {data.assessment.as_of}
-            </span>}
-            <button className="btn small" disabled={refreshAll.isPending}
-              onClick={() => refreshAll.mutate()}>
+          {data && (
+            <div className="ws-entry-group ws-entry-context">
+              {weeklyTrendText && weeklyTrendText !== "数据不足" && (
+                <span className="ws-entry-item" title="基于已完成周线的长期趋势方向">
+                  <span className="ws-entry-k">周线</span>
+                  <b>{weeklyTrendText}</b>
+                </span>
+              )}
+              <span
+                className="ws-entry-item"
+                title={
+                  data.assessment.stage_change_reason_cn
+                    ? `当前阶段：${data.assessment.stage_change_reason_cn}`
+                    : "当前阶段，详细依据见下方速读卡"
+                }
+              >
+                <span className="ws-entry-k">阶段</span>
+                <b>{data.assessment.stage_cn}</b>
+              </span>
+              {data.market_badge && data.market_badge.summary_cn && !data.market_badge.summary_cn.includes("未知") && (
+                <span className="ws-entry-item" title={data.market_badge.reasons_cn.join("\n") || undefined}>
+                  <span className="ws-entry-k">环境</span>
+                  <b>{data.market_badge.summary_cn}</b>
+                </span>
+              )}
+            </div>
+          )}
+          <div className="ws-quote-actions">
+            {dashboard && (
+              <span
+                className="ws-data-time"
+                title={`行情时间：${data?.meta.data_time ? new Date(data.meta.data_time).toLocaleString("zh-CN", { hour12: false }) : "--"}（${data?.meta.is_intraday_forming ? "盘中" : "已收盘"}）\n信号判定日：${data?.assessment.as_of ?? "--"}`}
+              >
+                {data?.meta.is_intraday_forming ? "盘中" : "收盘"}{" "}
+                {data?.meta.data_time
+                  ? new Date(data.meta.data_time).toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", hour12: false })
+                  : "--"}
+                {data ? ` · 判定 ${data.assessment.as_of.slice(5)}` : ""}
+              </span>
+            )}
+            <button
+              className="btn small"
+              disabled={refreshAll.isPending}
+              onClick={() => refreshAll.mutate()}
+              title="刷新自选行情与分析"
+            >
               {refreshAll.isPending ? "刷新中…" : "刷新"}
             </button>
+            {data && (
+              <>
+                <span className="ws-action-sep" aria-hidden="true" />
+                <button
+                  className="btn small"
+                  onClick={() => setShowCreatePlan(true)}
+                  title="基于当前信号建立执行计划"
+                >
+                  建计划
+                </button>
+                <button
+                  className="btn small primary"
+                  onClick={() => setShowBuyPoint(true)}
+                  title="买点分析"
+                >
+                  买点分析
+                </button>
+                {!showBuyPoint && (
+                  <button
+                    className="btn small"
+                    onClick={() => setExpCollapsed((c) => !c)}
+                    aria-expanded={!expCollapsed}
+                    title={expCollapsed ? "展开右侧解释面板" : "收起右侧解释面板"}
+                  >
+                    {expCollapsed ? "解释" : "收起解释"}
+                  </button>
+                )}
+              </>
+            )}
           </div>
         </div>
-        {data && <div className="ws-quote-row">
-          <div className="ws-instrument">
-            <span className="ws-symbol">{data.display_name}</span>
-            <span className="ws-instrument-meta">{data.symbol}{data.market_cn ? ` · ${data.market_cn}` : ""}</span>
-          </div>
-          <div className="ws-quote" aria-label="最新价格与涨跌幅">
-            <span className={`price ${changeCls}`}>{lastClose != null ? lastClose.toFixed(2) : "--"}</span>
-            <span className={`change ${changeCls}`}>
-              {changePct != null ? `${changePct > 0 ? "+" : ""}${changePct.toFixed(2)}%` : "--"}
-            </span>
-          </div>
-          <button className="ws-state" onClick={() => pickConcept("signal_color", "顶栏 · BIAO 颜色")}
-            title="查看道路状态的解释">
-            <span className="ws-state-label">道路状态</span>
-            <ColorBadge color={data.assessment.color} colorCn={data.assessment.color_cn} descriptive />
-          </button>
-          <span className="badge-chip ws-stage-chip"
-            title={data.assessment.stage_change_reason_cn
-              ? `当前阶段 · 系统判定：${data.assessment.stage_change_reason_cn}`
-              : "当前阶段 · 系统判定，详细依据见下方「当前观察」"}>
-            阶段 {data.assessment.stage_cn}
-          </span>
-          <div className="ws-quote-context">
-            {data.market_badge && <span className={`badge-chip ${data.market_badge.summary}`}
-              title={data.market_badge.reasons_cn.join("\n") || undefined}>
-              市场环境：{data.market_badge.summary_cn}
-            </span>}
-            {sectorChip && <button type="button"
-              className={`badge-chip sector-link-chip ${SECTOR_CHIP_TONE[sectorChip.stage ?? ""] ?? ""}`}
-              onClick={() => navigate("/sectors")}
-              title={`「${sectorChip.name}」板块阶段 · 点击打开板块趋势工作台（研究代理）`}>
-              {sectorChip.name} · {SECTOR_CHIP_CN[sectorChip.stage ?? ""] ?? "样本不足"}
-            </button>}
-          </div>
-          <div className="ws-quote-actions">
-            {!showBuyPoint && <button className="btn small"
-              onClick={() => setExpCollapsed((c) => !c)}
-              aria-expanded={!expCollapsed}
-              title={expCollapsed ? "展开右侧解释面板" : "收起右侧解释面板"}>
-              {expCollapsed ? "解释" : "收起解释"}
-            </button>}
-            <button className="btn small" onClick={() => setShowCreatePlan(true)}
-              title="基于当前信号建立执行计划">建立执行计划</button>
-            <button className="btn small primary" onClick={() => setShowBuyPoint(true)}
-              title="买点分析">买点分析</button>
-          </div>
-        </div>}
       </header>
 
       {refreshError && (
@@ -467,13 +571,14 @@ export default function WorkspacePage() {
         </div>
       )}
 
-      {/* 危机管理状态机（V4 刚崩警示/V3 出清企稳，研究代理，零触发不渲染） */}
-      <CrisisBanner />
+      <HomeEnvironmentStrip />
+      {/* 危机管理状态机（V4 刚崩警示/V3 出清企稳，研究代理，首页仅激活时渲染，隐藏未知噪音） */}
+      <CrisisBanner hideUnknown />
 
       <div
-        className={`ws-body ${sidebarOpen ? "" : "no-sidebar"}${expVisible ? "" : " exp-collapsed"}`}
+        className={`ws-body ${showSidebar ? "" : "no-sidebar"}${expVisible ? "" : " exp-collapsed"}`}
         style={
-          sidebarOpen
+          showSidebar
             ? ({
                 ["--sidebar-w" as string]: `${sidebarWidth}px`,
               } as React.CSSProperties)
@@ -482,15 +587,16 @@ export default function WorkspacePage() {
               } as React.CSSProperties)
         }
       >
-        {sidebarOpen && (
+        {showSidebar && (
           <WatchlistSidebar
             cards={cards}
             selected={selected}
             onSelect={selectSymbol}
             onAddClick={(gid) => setAddDialogGroup(gid)}
+            signalBadges={signalSummary.badges}
           />
         )}
-        {sidebarOpen && (
+        {showSidebar && (
           <ResizeHandle
             width={sidebarWidth}
             min={200}
@@ -502,13 +608,20 @@ export default function WorkspacePage() {
 
         <main className="ws-center">
           {cardsLoading && <div className="loading">正在加载自选与大盘…</div>}
-          {!cardsLoading && cards.length === 0 && (
+          {cardsError && (
+            <div className="error-banner" role="alert">
+              自选与大盘读取失败：{cardsLoadError instanceof Error ? cardsLoadError.message : String(cardsLoadError)}。
+              {dashboard && "下方显示上次成功读取的资料，当前结果尚未更新。"}
+              <button className="btn small" disabled={cardsFetching} onClick={() => void refetchCards()}>重新读取</button>
+            </div>
+          )}
+          {!cardsLoading && !cardsError && cards.length === 0 && (
             <div className="panel" style={{ padding: 32, textAlign: "center" }}>
-              <div style={{ fontSize: 15, marginBottom: 8 }}>自选列表还是空的</div>
+              <div style={{ fontSize: 16, marginBottom: 8 }}>自选列表还是空的</div>
               <div className="muted" style={{ marginBottom: 16 }}>
                 添加第一个标的后，这里会显示 K 线图、今日信号与解释面板。
               </div>
-              <button className="btn primary" onClick={() => setAddDialogGroup(undefined)}>
+              <button className="btn primary" onClick={() => setAddDialogGroup(null)}>
                 添加自选标的
               </button>
             </div>
@@ -526,20 +639,100 @@ export default function WorkspacePage() {
               {error instanceof Error ? error.message : String(error)}
             </div>
           )}
-          {isLoading && <div className="loading">正在分析 {selected} …</div>}
+          {isLoading && viewMode === "chart" && <div className="loading">正在分析 {selected} …</div>}
 
-          <TodaySignalBanner onPick={handleSignalPick} />
+          {cards.length > 0 && (
+            <div className="ws-view-switch">
+              <div className="ws-view-tabs" role="tablist" aria-label="看盘主区视图切换">
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={viewMode === "chart"}
+                  className={`ws-view-tab${viewMode === "chart" ? " active" : ""}`}
+                  onClick={() => switchViewMode("chart")}
+                >
+                  单标的 K 线与速览
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={viewMode === "compare"}
+                  className={`ws-view-tab${viewMode === "compare" ? " active" : ""}`}
+                  onClick={() => switchViewMode("compare")}
+                >
+                  横向比强弱 ({cards.filter((c) => !c.error && !c.symbol.endsWith(".SECTOR")).length})
+                </button>
+              </div>
+              <div className="ws-inline-digest" aria-label="自选异动与当前标的摘要">
+                <button
+                  type="button"
+                  className={`ws-digest-pill${signalSummary.buyA > 0 ? " buy" : ""}${signalsOpen ? " is-open" : ""}`}
+                  aria-expanded={signalsOpen}
+                  onClick={() => setSignalsOpen((v) => !v)}
+                  title="展开全自选买卖异动扫描列表（含历史回放与刷新）"
+                >
+                  自选异动：买 <b>{signalSummary.buyA}</b> · 待 <b>{signalSummary.buyW}</b> · 弱 <b>{signalSummary.sellCount}</b> {signalsOpen ? "▴" : "▾"}
+                </button>
+                {viewMode === "chart" && data && (
+                  <>
+                    {digest.activeBuys > 0 && (
+                      <button
+                        type="button"
+                        className="ws-digest-pill buy"
+                        onClick={() => jumpToPanel("buys")}
+                      >
+                        活跃买点 <b>{digest.activeBuys}</b> ▾
+                      </button>
+                    )}
+                    {digest.exitSignals > 0 && (
+                      <button
+                        type="button"
+                        className="ws-digest-pill warn"
+                        onClick={() => jumpToPanel("exits")}
+                      >
+                        退出提醒 <b>{digest.exitSignals}</b> ▾
+                      </button>
+                    )}
+                    {digest.tradability && !digest.tradability.tradable && (
+                      <button
+                        type="button"
+                        className="ws-digest-pill warn"
+                        onClick={() => jumpToPanel("tradability")}
+                        title={digest.tradability.blocking_reasons[0]}
+                      >
+                        暂不宜追 ▾
+                      </button>
+                    )}
+                    {digest.events > 0 && (
+                      <button
+                        type="button"
+                        className="ws-digest-pill"
+                        onClick={() => jumpToPanel("events")}
+                      >
+                        当期事件 {digest.events} ▾
+                      </button>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          )}
 
-          {data && (
+          {signalsOpen && (
+            <div className="ws-firstlook-group">
+              <TodaySignalBanner onPick={handleSignalPick} defaultOpen />
+            </div>
+          )}
+
+          {viewMode === "compare" ? (
+            <CrossSectionComparePanel
+              cards={cards}
+              selected={selected}
+              onSelectSymbol={selectSymbol}
+            />
+          ) : (
+            data && (
             <>
-              <TodayDigestBar
-                events={digest.events}
-                activeBuys={digest.activeBuys}
-                exitSignals={digest.exitSignals}
-                tradability={digest.tradability}
-                onJump={jumpToPanel}
-              />
-
               {data.meta.persist_warning && (
                 <div className="panel warn-panel">
                   <span className="stale-chip">未写入研究库</span>{" "}
@@ -557,6 +750,8 @@ export default function WorkspacePage() {
                   counts={counts}
                   markTotals={markTotals}
                   onDownloadPng={() => downloadPngRef.current?.()}
+                  rangePreset={rangePreset}
+                  onRangePreset={handleRangePreset}
                 />
                 <KlineChart
                   payload={data.chart}
@@ -564,80 +759,65 @@ export default function WorkspacePage() {
                   onPick={onPick}
                   highlight={highlightSpec}
                   onDownload={(fn) => (downloadPngRef.current = fn)}
+                  rangeRequest={rangeRequest}
+                  defaultRangePreset={rangePreset ?? "6M"}
+                  onRangeCustom={handleRangeCustom}
                 />
-                <CollapsiblePanel
-                  title="趋势转折 5 条件"
-                  defaultCollapsed={true}
-                  storageKey="ws.card.trendcheck"
-                >
-                  <TrendChecklist payload={data.chart} assessment={data.assessment} />
-                </CollapsiblePanel>
                 <div className="chart-legend">
-                  {legend.bottomMarks && (
-                    <span>
-                      <span className="mk mk-bottom">◆</span> 底部确认
-                    </span>
+                  {anyMarkShown && (
+                    <div className="cl-group">
+                      <span className="cl-group-k">标记</span>
+                      {legend.bottomMarks && (
+                        <span>
+                          <span className="mk mk-bottom">◆</span> 底部确认
+                        </span>
+                      )}
+                      {legend.topMarks && (
+                        <span>
+                          <span className="mk mk-top">◆</span> 顶部确认
+                        </span>
+                      )}
+                      {legend.invalidatedMarks && (
+                        <span>
+                          <span className="mk mk-dead">✕</span> 结构失效
+                        </span>
+                      )}
+                      {legend.keyVolatility && (
+                        <span>
+                          <span className="mk mk-kv">▲</span> 关键性波动
+                        </span>
+                      )}
+                      {legend.levels && (
+                        <>
+                          <span>
+                            <span className="mk mk-b1">●</span> 前高阻力(B1)
+                          </span>
+                          <span>
+                            <span className="mk mk-cline">●</span> 前低支撑(C)
+                          </span>
+                          <span>
+                            <span className="mk mk-neck">●</span> 顶部颈线
+                          </span>
+                        </>
+                      )}
+                    </div>
                   )}
-                  {legend.topMarks && (
-                    <span>
-                      <span className="mk mk-top">◆</span> 顶部确认
-                    </span>
-                  )}
-                  {legend.invalidatedMarks && (
-                    <span>
-                      <span className="mk mk-dead">✕</span> 结构失效
-                    </span>
-                  )}
-                  {legend.keyVolatility && (
-                    <span>
-                      <span className="mk mk-kv">▲</span> 关键性波动
-                    </span>
-                  )}
-                  {legend.levels && (
-                    <>
-                      <span>
-                        <span className="mk mk-b1">●</span> B1 第一阻力
-                      </span>
-                      <span>
-                        <span className="mk mk-cline">●</span> C 点失效线
-                      </span>
-                      <span>
-                        <span className="mk mk-neck">●</span> 顶部颈线
-                      </span>
-                    </>
-                  )}
-                  {legend.colorMode === "biao_state" && (
-                    <span className="muted">
-                      BIAO 着色：颜色=当日状态（绿/灰/黑）；涨跌方向看「今日概述」开高低收
-                    </span>
-                  )}
-                  {/* 量能颜色图例：与下方柱状图一一对应 */}
-                  <span className="vol-legend">
-                    <span className="muted">量能</span>
+                  <div className="cl-group vol-legend">
+                    <span className="cl-group-k">量能</span>
                     <span className="vol-sw vol-surged" />
-                    <span>≥2× 放量</span>
+                    <span>≥2×放量</span>
                     <span className="vol-sw vol-warm" />
                     <span>温和</span>
                     <span className="vol-sw vol-normal" />
                     <span>正常</span>
                     <span className="vol-sw vol-shrunk" />
-                    <span>&lt;0.8× 缩量</span>
-                  </span>
-                  <span className="muted">
-                    {counts.bottomMarks ||
-                    counts.topMarks ||
-                    counts.invalidatedMarks ||
-                    counts.keyVolatility ||
-                    counts.levels
-                      ? legend.bottomMarks ||
-                        legend.topMarks ||
-                        legend.invalidatedMarks ||
-                        legend.keyVolatility ||
-                        legend.levels
-                        ? "点标记/线右端圆点 → 右栏看解释"
-                        : "信号标记默认隐藏，按上方开关显示"
-                      : ""}
-                  </span>
+                    <span>&lt;0.8×缩量</span>
+                    <span className="vol-ma-line" />
+                    <span>20日均量</span>
+                  </div>
+                  {anyMarkShown && (
+                    <span className="muted cl-hint">点图上标记或参考线圆点 → 右栏看解释</span>
+                  )}
                 </div>
               </div>
               {showBuyPoint && (
@@ -652,96 +832,144 @@ export default function WorkspacePage() {
               )}
               </div>
 
-              {data.today && (
-                <CollapsiblePanel title="今日概述" storageKey="ws.card.today" defaultCollapsed={true}>
-                  <TodayOverviewPanel today={data.today} onPickConcept={pickConcept} />
-                </CollapsiblePanel>
-              )}
+              {/* 第 3 步：单标的 30 秒速读卡（整合趋势方向、均线/C点位置与动作条件） */}
+              <SymbolQuickReadCard
+                assessment={data.assessment}
+                today={data.today ?? null}
+                chart={data.chart}
+                onPickConcept={pickConcept}
+                onSelect={(sel) => {
+                  setExpCollapsed(false);
+                  setSelection(sel);
+                }}
+              />
 
-              {data.assessment.trade_opportunities.length > 0 && (
-                <CollapsiblePanel id="ws-panel-trade" ref={tradePanelRef} title="潜在买点" storageKey="ws.card.trade" defaultCollapsed={true}>
-                  <TradeOpportunityPanel
-                    opportunities={data.assessment.trade_opportunities}
-                    onSelect={setSelection}
-                  />
-                </CollapsiblePanel>
-              )}
+              {/* 通用实战大白话提示卡（排雷底色 + 买点补仓判断 + 填入买进价自动切换两步拿牛保护线） */}
+              <SmartSymbolPromptCard symbol={data.symbol} />
 
-              {data.assessment.pullback_opportunities.length > 0 && (
-                <CollapsiblePanel title="首次回撤机会" storageKey="ws.card.pullback" defaultCollapsed={true}>
-                  <PullbackOpportunityPanel
-                    opportunities={data.assessment.pullback_opportunities}
-                    onSelect={setSelection}
-                  />
-                </CollapsiblePanel>
-              )}
+              {/* 二级抽屉 1：当期规则拆解与盘口完整表（默认收起，点上方摘要条可自动定位展开） */}
+              <details
+                className="ws-deep-drawer"
+                open={detailsDrawerOpen}
+                onToggle={(e) => setDetailsDrawerOpen(e.currentTarget.open)}
+              >
+                <summary>
+                  <span>当期规则拆解与盘口明细（支持/冲突因素 · 盘口四价与市值 · 完整门禁表）</span>
+                </summary>
+                <div className="ws-deep-drawer-body">
+                  {data.assessment.trade_opportunities.length > 0 && (
+                    <CollapsiblePanel id="ws-panel-trade" ref={tradePanelRef} title="潜在买点明细" storageKey="ws.card.trade" defaultCollapsed={false}>
+                      <TradeOpportunityPanel
+                        opportunities={data.assessment.trade_opportunities}
+                        onSelect={(sel) => {
+                          setExpCollapsed(false);
+                          setSelection(sel);
+                        }}
+                      />
+                    </CollapsiblePanel>
+                  )}
 
-              {data.assessment.conditional_scenarios.length > 0 && (
-                <CollapsiblePanel title="条件化场景" storageKey="ws.card.conditional" defaultCollapsed={true}>
-                  <ConditionalScenarioPanel
-                    scenarios={data.assessment.conditional_scenarios}
-                    onSelect={setSelection}
-                  />
-                </CollapsiblePanel>
-              )}
+                  {data.assessment.pullback_opportunities.length > 0 && (
+                    <CollapsiblePanel title="首次回撤机会明细" storageKey="ws.card.pullback" defaultCollapsed={false}>
+                      <PullbackOpportunityPanel
+                        opportunities={data.assessment.pullback_opportunities}
+                        onSelect={(sel) => {
+                          setExpCollapsed(false);
+                          setSelection(sel);
+                        }}
+                      />
+                    </CollapsiblePanel>
+                  )}
 
-              {data.assessment.exit_signals.length > 0 && (
-                <CollapsiblePanel id="ws-panel-exit" ref={exitPanelRef} title="持仓退出" storageKey="ws.card.exit" defaultCollapsed={true}>
-                  <ExitSignalPanel
-                    exitSignals={data.assessment.exit_signals}
-                    onSelect={setSelection}
-                  />
-                </CollapsiblePanel>
-              )}
+                  {data.assessment.conditional_scenarios.length > 0 && (
+                    <CollapsiblePanel title="条件化场景明细" storageKey="ws.card.conditional" defaultCollapsed={true}>
+                      <ConditionalScenarioPanel
+                        scenarios={data.assessment.conditional_scenarios}
+                        onSelect={(sel) => {
+                          setExpCollapsed(false);
+                          setSelection(sel);
+                        }}
+                      />
+                    </CollapsiblePanel>
+                  )}
 
-              {data.assessment.tradability && (
-                <CollapsiblePanel id="ws-panel-tradability" ref={tradabilityPanelRef} title="可交易性门禁" storageKey="ws.card.tradability" defaultCollapsed={true}>
-                  <TradabilityPanel tradability={data.assessment.tradability} />
-                </CollapsiblePanel>
-              )}
+                  {data.assessment.exit_signals.length > 0 && (
+                    <CollapsiblePanel id="ws-panel-exit" ref={exitPanelRef} title="持仓退出条件明细" storageKey="ws.card.exit" defaultCollapsed={false}>
+                      <ExitSignalPanel
+                        exitSignals={data.assessment.exit_signals}
+                        onSelect={(sel) => {
+                          setExpCollapsed(false);
+                          setSelection(sel);
+                        }}
+                      />
+                    </CollapsiblePanel>
+                  )}
 
-              <CollapsiblePanel title="当前观察" storageKey="ws.card.assessment" defaultCollapsed={true}>
-                <AssessmentPanel assessment={data.assessment} onPickConcept={pickConcept} />
-              </CollapsiblePanel>
+                  {data.assessment.tradability && (
+                    <CollapsiblePanel id="ws-panel-tradability" ref={tradabilityPanelRef} title="可交易性 9 项门禁明细" storageKey="ws.card.tradability" defaultCollapsed={true}>
+                      <TradabilityPanel tradability={data.assessment.tradability} />
+                    </CollapsiblePanel>
+                  )}
 
-              {data.first_ma_pullback_backtest && (
-                <PullbackBacktestPanel report={data.first_ma_pullback_backtest} />
-              )}
+                  <CollapsiblePanel title="支持与冲突因素拆解" storageKey="ws.card.assessment" defaultCollapsed={true}>
+                    <AssessmentPanel assessment={data.assessment} onPickConcept={pickConcept} />
+                  </CollapsiblePanel>
 
-              {data.scenario_backtests.map((report) => (
-                <ScenarioBacktestPanel key={report.scenario_id} report={report} />
-              ))}
+                  {data.today && (
+                    <CollapsiblePanel title="盘口四价、换手与市值明细" storageKey="ws.card.today" defaultCollapsed={true}>
+                      <TodayOverviewPanel today={data.today} onPickConcept={pickConcept} />
+                    </CollapsiblePanel>
+                  )}
 
-              {data.color_backtest && <ColorBacktestPanel report={data.color_backtest} />}
-
-              {data.new_events.length > 0 && (
-                <CollapsiblePanel id="ws-panel-events" ref={eventsPanelRef} title={`今日新事件（${data.new_events.length}）`} storageKey="ws.card.newevents" defaultCollapsed={true}>
-                  <div className="panel">
-                    {data.new_events.map((e) => (
-                      <div
-                        key={e.event_id}
-                        className="new-event-row"
-                        onClick={() =>
-                          setSelection({
-                            source: "今日新事件",
-                            date: e.available_date,
-                            explanation: e.explanation,
-                            events: [e],
-                            eventsLoading: false,
-                          })
-                        }
-                        title="点击查看解释"
-                      >
-                        <span className={`sev-chip ${e.severity}`}>{e.severity_cn}</span>
-                        <b>
-                          {e.rule_cn}
-                          {e.sub_rule_cn ? ` · ${e.sub_rule_cn}` : ""}
-                        </b>
-                        <span className="muted">{e.reason_cn}</span>
+                  {data.new_events.length > 0 && (
+                    <CollapsiblePanel id="ws-panel-events" ref={eventsPanelRef} title={`今日新事件（${data.new_events.length}）`} storageKey="ws.card.newevents" defaultCollapsed={false}>
+                      <div className="panel">
+                        {data.new_events.map((e) => (
+                          <div
+                            key={e.event_id}
+                            className="new-event-row"
+                            onClick={() => {
+                              setExpCollapsed(false);
+                              setSelection({
+                                source: "今日新事件",
+                                date: e.available_date,
+                                explanation: e.explanation,
+                                events: [e],
+                                eventsLoading: false,
+                              });
+                            }}
+                            title="点击查看解释"
+                          >
+                            <span className={`sev-chip ${e.severity}`}>{e.severity_cn}</span>
+                            <b>
+                              {e.rule_cn}
+                              {e.sub_rule_cn ? ` · ${e.sub_rule_cn}` : ""}
+                            </b>
+                            <span className="muted">{e.reason_cn}</span>
+                          </div>
+                        ))}
                       </div>
+                    </CollapsiblePanel>
+                  )}
+                </div>
+              </details>
+
+              {/* 二级抽屉 2：单标的历史回测统计（与日常看盘物理隔离，避免15个折叠条刷屏） */}
+              {backtestCount > 0 && (
+                <details className="ws-deep-drawer">
+                  <summary>
+                    <span>单标的历史回测统计（研究参考，非买卖建议 · 共 {backtestCount} 项）</span>
+                  </summary>
+                  <div className="ws-deep-drawer-body">
+                    {data.first_ma_pullback_backtest && (
+                      <PullbackBacktestPanel report={data.first_ma_pullback_backtest} />
+                    )}
+                    {data.scenario_backtests.map((report) => (
+                      <ScenarioBacktestPanel key={report.scenario_id} report={report} />
                     ))}
+                    {data.color_backtest && <ColorBacktestPanel report={data.color_backtest} />}
                   </div>
-                </CollapsiblePanel>
+                </details>
               )}
 
               <div className="disclaimer">
@@ -749,6 +977,7 @@ export default function WorkspacePage() {
                 {isFetching && " · 正在刷新…"}
               </div>
             </>
+            )
           )}
         </main>
 

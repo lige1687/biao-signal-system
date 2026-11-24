@@ -1,0 +1,49 @@
+{
+  "status": "completed_local_observation_alert_mechanism",
+  "at": "2026-11-02T00:34:04.655336+08:00",
+  "financial_live_readiness": "not_ready",
+  "current_sources": {
+    "ERP": "historicalOnly; through 2026-10-30; weekly",
+    "CN_ALL_A": "stale through 2026-10-16",
+    "SP500": "stale through 2026-10-20"
+  },
+  "engineering_checks": {
+    "unit_tests": 14,
+    "unit_tests_pass": 14,
+    "build": "TypeScript and Vite passed; existing chunk-size warning",
+    "hygiene": "pass",
+    "diff_check": "pass",
+    "desktop": "1710px width no overflow; persistent above CrisisBanner and library",
+    "mobile": "390px width no horizontal overflow; workspace scroll repaired, all 3 rows reachable; existing body remains accessible",
+    "links": "all three clicked and matched actual expected chart + market + default 50d",
+    "refresh": "clicked, same source dates and zero fabricated alerts",
+    "browser_js_errors": 0,
+    "local_storage": "seen key and pinned observations both stayed original null; no synthetic production signals inserted",
+    "ack_behavior": "unit-tested persistence/reload/older cursor protection; storage event wiring independently reviewed; live fresh-event click not exercised due stale real sources"
+  },
+  "independent_review": {
+    "must_fix": [
+      "invalid historical packets precedence",
+      "inconsistent phase events",
+      "historical ERP excluded from readiness denominator"
+    ],
+    "resolved": true,
+    "known_low_impact_limit": "simultaneous non-atomic localStorage writes across tabs can lose an acknowledgement; no trading consequence"
+  },
+  "failures_and_fixes": [
+    "bb-browser open --tab fullid rejected; used documented goto instead",
+    "initial mobile fixed-height workspace clipped bottom section; scoped scroll/min-height CSS added and read back"
+  ],
+  "scope": [
+    "new market-observation-alerts directory",
+    "WorkspacePage only replaces old breadth badge and inserts new module",
+    "projectionView only accepts breadth market deep link",
+    "ops artifacts, own progress, parent state new engineering key"
+  ],
+  "new_financial_experiments": 0,
+  "market_data_downloads": 0,
+  "cache_writes": 0,
+  "external_push": false,
+  "production_deployment": false,
+  "source_commit": "not committed; shared dirty checkout preserved"
+}

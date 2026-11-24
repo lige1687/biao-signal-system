@@ -1,0 +1,19 @@
+{
+  "question": "What reference lines are useful for the existing concentration reading?",
+  "mode": "report_only + observation UI",
+  "scope": "3 existing concentration variants, no financial outcomes or alerts",
+  "input": "web/public/research/microstructure-observations-20261108/equity.json",
+  "sha256": "8dd8f8d6132e719cbc1cb15313bbc27fb0abbf7c5ee31dda6a5339f770e11694",
+  "comparison": "raw-only baseline versus same-pool 10y/5y prior-month context; daily raw/MA20 and source-cited 46%",
+  "rules": "Prior 120/60 calendar months; require full date span and >=90% valid months; skip missing, exclude current; Type 7 quantiles and fraction strictly lower. Latest-month horizontal reference only, no historical breach labels. MA20 uses 20 expected sessions, no filling. Day10 long-history reference deferred, no cross-use of day5 thresholds.",
+  "budget": "Four cited source documents, existing packet only, no return runs or paid sources; complete by arithmetic+UI qualification",
+  "rootPaths": [
+    "web/src/components/market-observation-alerts/MicrostructureObservations.tsx",
+    "web/src/components/market-observation-alerts/indicatorThumbnailData.ts",
+    "web/src/components/market-observation-alerts/concentrationDisplay.ts"
+  ],
+  "workerPaths": [
+    "web/src/components/market-observation-alerts/concentrationReferenceMath.ts",
+    "web/src/components/market-observation-alerts/concentrationReferenceMath.test.mjs"
+  ]
+}

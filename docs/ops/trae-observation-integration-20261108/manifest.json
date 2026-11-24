@@ -1,0 +1,86 @@
+{
+  "output": "/Users/yongbiaoli/Desktop/lei-signal-lab/web/public/research/relative-market-observations-20261108/data.json",
+  "output_sha256": "1da2f06102a43eb8721ea376cefa724960b0786561f6f94b2daf1b80b85e9c64",
+  "checks": [
+    {
+      "id": "cn-style-relative",
+      "count": 688,
+      "start": "2024-01-02",
+      "end": "2026-11-06",
+      "value": 0.6425800193986422,
+      "prior_date": "2026-10-09",
+      "change20_pct": -3.138075453315703,
+      "dropped_num_dates": 0,
+      "dropped_den_dates": 0
+    },
+    {
+      "id": "vix-term-structure",
+      "count": 716,
+      "start": "2024-01-02",
+      "end": "2026-11-06",
+      "value": 1.0422764227642276,
+      "prior_date": "2026-10-09",
+      "change20_pct": 24.806280542589775,
+      "dropped_num_dates": 21,
+      "dropped_den_dates": 0
+    },
+    {
+      "id": "us-semiconductor-relative",
+      "count": 716,
+      "start": "2024-01-02",
+      "end": "2026-11-06",
+      "value": 0.7071483005639384,
+      "prior_date": "2026-10-09",
+      "change20_pct": -11.945485262680467,
+      "dropped_num_dates": 0,
+      "dropped_den_dates": 0
+    },
+    {
+      "id": "us-equal-weight-relative",
+      "count": 716,
+      "start": "2024-01-02",
+      "end": "2026-11-06",
+      "value": 0.29382964544601453,
+      "prior_date": "2026-10-09",
+      "change20_pct": 7.382156897720393,
+      "dropped_num_dates": 0,
+      "dropped_den_dates": 0
+    }
+  ],
+  "inputs": {
+    "512100": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/trae-observation-integration-20261108/512100-sina-raw.json",
+      "sha256": "1885c9f09d3f4a2fe629c096748a1aabe6695df2d097535ae117046876258f9b"
+    },
+    "510300": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/trae-observation-integration-20261108/510300-sina-raw-v2.json",
+      "sha256": "cc93fecc270acc66e93e6fb49f7874d9a66eab4abbbabb65b4a6a3069861d2b8"
+    },
+    "SMH": {
+      "path": "/Users/yongbiaoli/Documents/Trae-CN/default/.sentiment_cache/us/SMH.csv",
+      "sha256": "c27f7e50956adfdefb696e545ccdc3b0199ed447017abb6e402dcae9bc009815"
+    },
+    "QQQ": {
+      "path": "/Users/yongbiaoli/Documents/Trae-CN/default/.sentiment_cache/us/QQQ.csv",
+      "sha256": "60653af58536339d2ff5887287721f20ad9f726ce51e893e080623de7bab6d91"
+    },
+    "RSP": {
+      "path": "/Users/yongbiaoli/Documents/Trae-CN/default/.sentiment_cache/us/RSP.csv",
+      "sha256": "b6ca4a2b0d897c7f33a96bf13fe330e6b89deb673896a2c61be0fe301bf0459e"
+    },
+    "SPY": {
+      "path": "/Users/yongbiaoli/Documents/Trae-CN/default/.sentiment_cache/us/SPY.csv",
+      "sha256": "10e8d54d82ed770bfb2de1c7767a21a8eb4bcd973047cf5acdf95a695c5c76d8"
+    },
+    "VIX": {
+      "path": "/Users/yongbiaoli/Documents/Trae-CN/default/.sentiment_cache/cboe/VIX.csv",
+      "sha256": "aff249d6135ac574151b66dae23642fcee84f3c4bc347b4e89d68843c0098f2c"
+    },
+    "VIX3M": {
+      "path": "/Users/yongbiaoli/Documents/Trae-CN/default/.sentiment_cache/cboe/VIX3M.csv",
+      "sha256": "943379d921842d581b09aa8e0c5183f169fa272bc9ae7b62388eb6c655fcfb0f"
+    }
+  },
+  "qualification": "Current-vintage display snapshot, no historical point-in-time or total-return claim.",
+  "acquisition": "CN prices fetched from Sina CN_MarketData.getKLineData, scale=240, datalen=1023. US and Cboe reused Trae caches; no Trae cleanup functions executed."
+}

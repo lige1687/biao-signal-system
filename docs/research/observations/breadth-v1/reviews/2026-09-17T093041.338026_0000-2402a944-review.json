@@ -1,0 +1,48 @@
+{
+  "observed_at": "2026-09-17T09:30:41.338026+00:00",
+  "reviewed_at": "2026-09-17T09:31:01Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-09-17T093041.338026_0000-2402a944.json",
+  "changed_sources": [
+    "source-01",
+    "source-02",
+    "source-03",
+    "source-09"
+  ],
+  "facts": {
+    "a_share_rows": 4066303,
+    "a_share_latest_date": "2026-09-17",
+    "member_latest_date_counts": {
+      "2026-08-28": 1,
+      "2026-08-31": 1,
+      "2026-09-03": 1,
+      "2026-09-04": 1,
+      "2026-09-10": 1,
+      "2026-09-11": 3,
+      "2026-09-14": 4,
+      "2026-09-15": 3,
+      "2026-09-16": 1,
+      "2026-09-17": 5203
+    },
+    "current_code_date": "2026-09-17",
+    "current_code_count": 5565,
+    "daily_snapshot_date": "2026-09-17",
+    "daily_snapshot_eligible": 5211,
+    "daily_snapshot_ma200_pct": 22.999222999222997,
+    "source_09_rows": 120,
+    "source_09_latest_date": "2022-06-17",
+    "source_09_hash_unchanged": true,
+    "source_09_metadata_fetched_at": "2026-09-16T12:07:44.082844+00:00"
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "日常快照仍未提供冻结研究所需的共同200日分母、覆盖率和逐成员同日证明。",
+    "historical_membership": "当前代码列表更新不等于历史成员、生效时间和真实取得时间链齐备。",
+    "etf_nominal_prices_and_actions": "159915文件只有修改时间变化，内容哈希不变且仍止于2022-06-17；ETF名义价格、公司行动和交易限制链仍不合格。",
+    "availability": "本次实际读取时间已保存；来源日期和修改时间不倒填为过去已观察。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "常规输入刷新，没有匹配输入齐备或需要用户处理的新证据；继续仅输入观察。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

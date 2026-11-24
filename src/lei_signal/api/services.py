@@ -11,7 +11,10 @@
 """
 from __future__ import annotations
 
+import heapq
 import threading
+import time
+from collections import Counter
 from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -22,7 +25,7 @@ from lei_signal.api.realtime import CacheFirstProvider, IntradayOverlayProvider
 from lei_signal.compose.pipeline import AnalysisResult, analyze
 from lei_signal.data.calendar import DEFAULT_TRADING_CALENDAR, TradingCalendar
 from lei_signal.data.providers import PriceProvider, _classify_error, default_provider
-from lei_signal.data.symbols import is_a_share, resolve_symbol
+from lei_signal.data.symbols import is_cn_session_symbol, resolve_symbol
 from lei_signal.data.validation import DataUnavailableError
 from lei_signal.storage.sqlite_store import EventIdentityConflictError
 
@@ -66,6 +69,15 @@ class AnalysisService:
         self._error_ttl_seconds = error_ttl_seconds
         self._calendar = calendar or DEFAULT_TRADING_CALENDAR
         self._max_workers = max_workers
+        # 页面与预热可同时发起多个批次；持续CPU争用会放大SQLite持锁时间。
+        # 只限制实际重算，缓存命中保持直接返回。
+        self._analysis_condition = threading.Condition()
+        self._analysis_pending: list[tuple[int, int]] = []
+        self._pending_symbols: Counter[str] = Counter()
+        self._analysis_active = False
+        self._active_symbol: str | None = None
+        self._next_ticket = 0
+        self._foreground_refresh: dict[str, tuple[AnalysisEntry, float]] = {}
         # 海外指数路径：缓存优先（30min 避免 Yahoo 限流）→ 实时 bar 叠加。
         # A 股不包缓存优先：日线本就是当前 bar。
         # Streamlit 研究页仍走 analyze() 默认链路，不动。
@@ -94,9 +106,9 @@ class AnalysisService:
         if entry.error is not None:
             age = (now - entry.fetched_at).total_seconds()
             return age < self._error_ttl_seconds
-        # A 股标的：收盘后数据不变，缓存到下一开盘；盘中沿用短 TTL。
-        # 海外指数：保留原扁平短 TTL（它们有各自的缓存优先链路）。
-        if self._is_a_share_symbol(symbol):
+        # A 股及国内板块指数：收盘后数据不变，缓存到下一开盘；盘中沿用短 TTL。
+        # 海外指数/美股 ETF：保留原扁平短 TTL（它们有各自的缓存优先链路）。
+        if self._is_cn_session_symbol(symbol):
             return market_session.is_cache_fresh(
                 self._calendar,
                 entry.fetched_at,
@@ -106,34 +118,92 @@ class AnalysisService:
         age = (now - entry.fetched_at).total_seconds()
         return age < self._ttl_seconds
 
-    def _is_a_share_symbol(self, symbol: str) -> bool:
+    def _is_cn_session_symbol(self, symbol: str) -> bool:
         try:
-            return is_a_share(resolve_symbol(symbol))
+            return is_cn_session_symbol(resolve_symbol(symbol))
         except ValueError:
             return False
 
     def get(self, symbol: str, *, refresh: bool = False) -> AnalysisEntry:
-        """取单标的分析（缓存新鲜则直接返回）。per-symbol 锁防并发重入。
+        """取单标的分析；冷缓存排在批量和预热前面。
 
-        读请求（refresh=False）在锁被占时**不排队**：后台预热或他人请求正在
-        刷新该标的时，已有条目（哪怕已过期）先返回——预热间隔 12 分钟 < TTL，
-        「旧数据秒开」优于让页面卡在锁上等一轮抓取。无条目时照常阻塞等待
-        （冷缓存的首次数据必须等出来）。
+        同标的正在执行或排队刷新时，读请求直接返回已有条目（即使过期）；
+        冷缓存必须等待分析完成。手动 refresh=True 始终重新分析。
         """
-        lock = self._lock_for(symbol)
-        if refresh:
-            with lock:
-                return self._get_locked(symbol, refresh=True)
-        if lock.acquire(blocking=False):
+        return self._get_scheduled(symbol, refresh=refresh, priority=0)
+
+    def _get_scheduled(
+        self,
+        symbol: str,
+        *,
+        refresh: bool,
+        priority: int,
+        batch_started_at: float | None = None,
+    ) -> AnalysisEntry:
+        with self._analysis_condition:
+            original = self._entries.get(symbol)
+            if not refresh and original is not None:
+                if (
+                    self._active_symbol == symbol
+                    or self._pending_symbols[symbol]
+                    or self._is_fresh(original, symbol)
+                ):
+                    return original
+            if priority == 2 and batch_started_at is not None and original is not None:
+                foreground = self._foreground_refresh.get(symbol)
+                if (foreground is not None and foreground[0] is original
+                        and foreground[1] > batch_started_at
+                        and self._is_fresh(original, symbol)):
+                    return original
+            ticket = (priority, self._next_ticket)
+            self._next_ticket += 1
+            heapq.heappush(self._analysis_pending, ticket)
+            self._pending_symbols[symbol] += 1
             try:
-                return self._get_locked(symbol, refresh=False)
-            finally:
-                lock.release()
-        entry = self._entries.get(symbol)
-        if entry is not None:
-            return entry
-        with lock:
-            return self._get_locked(symbol, refresh=False)
+                while self._analysis_active or self._analysis_pending[0] != ticket:
+                    self._analysis_condition.wait()
+                heapq.heappop(self._analysis_pending)
+                self._pending_symbols[symbol] -= 1
+                if not self._pending_symbols[symbol]:
+                    del self._pending_symbols[symbol]
+                self._analysis_active = True
+                self._active_symbol = symbol
+            except BaseException:
+                if ticket in self._analysis_pending:
+                    self._analysis_pending.remove(ticket)
+                    heapq.heapify(self._analysis_pending)
+                    self._pending_symbols[symbol] -= 1
+                    if not self._pending_symbols[symbol]:
+                        del self._pending_symbols[symbol]
+                    self._analysis_condition.notify_all()
+                raise
+
+        try:
+            # Take the symbol lock only after the global execution slot. A queued
+            # background request cannot hold it ahead of a new detail request.
+            with self._lock_for(symbol):
+                current = self._entries.get(symbol)
+                if priority == 2 and batch_started_at is not None and current is not None:
+                    foreground = self._foreground_refresh.get(symbol)
+                    if (foreground is not None and foreground[0] is current
+                            and foreground[1] > batch_started_at
+                            and self._is_fresh(current, symbol)):
+                        return current
+                if not refresh and current is not None:
+                    if self._is_fresh(current, symbol):
+                        return current
+                analysis_started_at = time.monotonic()
+                result = self._get_locked(symbol, refresh=True)
+                if priority != 2 and result.error is None:
+                    with self._analysis_condition:
+                        if self._entries.get(symbol) is result:
+                            self._foreground_refresh[symbol] = (result, analysis_started_at)
+                return result
+        finally:
+            with self._analysis_condition:
+                self._analysis_active = False
+                self._active_symbol = None
+                self._analysis_condition.notify_all()
 
     def _get_locked(self, symbol: str, *, refresh: bool) -> AnalysisEntry:
         """在持有 per-symbol 锁的前提下取数（调用方负责加锁）。"""
@@ -141,18 +211,30 @@ class AnalysisService:
         if entry is not None and not refresh and self._is_fresh(entry, symbol):
             return entry
         entry = self._run(symbol)
-        self._entries[symbol] = entry
+        with self._analysis_condition:
+            self._foreground_refresh.pop(symbol, None)
+            self._entries[symbol] = entry
         return entry
 
     def get_many(
-        self, symbols: list[str], *, refresh: bool = False
+        self, symbols: list[str], *, refresh: bool = False, background: bool = False
     ) -> dict[str, AnalysisEntry]:
         """并发批量取数。返回顺序无关；调用方按自己的符号顺序组装。"""
         if not symbols:
             return {}
+        batch_started_at = time.monotonic() if background else None
         results: dict[str, AnalysisEntry] = {}
         with ThreadPoolExecutor(max_workers=min(self._max_workers, len(symbols))) as pool:
-            futures = {pool.submit(self.get, s, refresh=refresh): s for s in symbols}
+            futures = {
+                pool.submit(
+                    self._get_scheduled,
+                    s,
+                    refresh=refresh,
+                    priority=2 if background else 1,
+                    batch_started_at=batch_started_at,
+                ): s
+                for s in symbols
+            }
             for future, symbol in futures.items():
                 try:
                     results[symbol] = future.result()
@@ -165,21 +247,28 @@ class AnalysisService:
     def evict(self, symbols: list[str] | None = None) -> None:
         """驱逐缓存条目（refresh 按钮）。None = 全部。"""
         with self._guard:
-            if symbols is None:
-                self._entries.clear()
-                return
-            for symbol in symbols:
-                self._entries.pop(symbol, None)
+            with self._analysis_condition:
+                if symbols is None:
+                    self._entries.clear()
+                    self._foreground_refresh.clear()
+                    return
+                for symbol in symbols:
+                    self._entries.pop(symbol, None)
+                    self._foreground_refresh.pop(symbol, None)
 
     def _provider_for(self, symbol: str) -> PriceProvider:
-        """海外指数走「缓存优先 + 实时叠加」；其他走默认链。"""
+        """海外指数/美股 ETF 走「缓存优先 + 实时叠加」；沪深及国内板块走默认链。"""
         try:
-            is_overseas = not is_a_share(resolve_symbol(symbol))
+            is_overseas = not is_cn_session_symbol(resolve_symbol(symbol))
         except ValueError:
             return self._default_provider
         return self._overseas_provider if is_overseas else self._default_provider
 
     def _run(self, symbol: str) -> AnalysisEntry:
+        """Called only after the service-wide execution slot has been acquired."""
+        return self._run_unlimited(symbol)
+
+    def _run_unlimited(self, symbol: str) -> AnalysisEntry:
         fetched_at = datetime.now(UTC)
         try:
             result = self._analyze_fn(
@@ -187,7 +276,7 @@ class AnalysisService:
                 provider=self._provider_for(symbol),
                 cache_root=self._cache_root,
                 sqlite_path=self._sqlite_path,
-                run_id=f"api-{date.today().isoformat()}",
+                run_id="api-live",
                 calendar=self._calendar,
             )
             return AnalysisEntry(result=result, error=None, fetched_at=fetched_at)

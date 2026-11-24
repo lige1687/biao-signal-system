@@ -1,0 +1,42 @@
+{
+  "status": "completed_historical_question",
+  "evidence": "inconclusive_for_trading",
+  "helper_runs": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "reason": "missing priceIndex",
+      "session_line": 90
+    },
+    {
+      "attempt": 2,
+      "status": "failed",
+      "reason": "nonmature63 outcome in standalone controls",
+      "session_line": 102
+    },
+    {
+      "attempt": 3,
+      "status": "completed_partial",
+      "session_line": 114
+    }
+  ],
+  "controller_runs": [
+    {
+      "attempt": 4,
+      "kind": "three_multiplier_reconciliation",
+      "status": "completed",
+      "reason": "reuse exact frozen runner and match2sigma byte-for-byte"
+    },
+    {
+      "attempt": 5,
+      "kind": "exploratory_inside2sigma_increment_followup",
+      "status": "completed",
+      "preregistered_before_run_after_core_outcomes": true
+    }
+  ],
+  "repair_ceiling_exceeded": true,
+  "details": "provenance-repair.json",
+  "source_requests": 6,
+  "source_evidence": "source-ledger.json",
+  "no_further_experiments": true
+}

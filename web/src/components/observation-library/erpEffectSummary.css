@@ -1,0 +1,23 @@
+.erp-effect { margin-top: 18px; padding-top: 16px; border-top: 1px solid #dce3ea; color: #34465a; font-size: 13px; line-height: 1.65; }
+.erp-effect-title { display: flex; gap: 14px; align-items: baseline; }
+.erp-effect-title strong { font-size: 15px; color: #243d61; }
+.erp-effect-title span, .erp-effect-note { color: #68798b; font-size: 12px; }
+.erp-effect > p { margin: 6px 0 10px; max-width: 76ch; }
+.erp-effect table { border-collapse: collapse; width: 100%; max-width: 680px; font-variant-numeric: tabular-nums; font-size: 13px; }
+.erp-effect th, .erp-effect td { padding: 8px 10px; border-bottom: 1px solid #e5eaf0; text-align: right; }
+.erp-effect th:first-child { text-align: left; padding-left: 0; }
+.erp-effect thead th { font-size: 12px; font-weight: 500; color: #68798b; }
+.erp-effect th small { margin-left: 7px; font-weight: 400; color: #68798b; }
+.erp-effect details { margin-top: 10px; }
+.erp-effect summary { cursor: pointer; color: #355f85; }
+.erp-effect details p { margin: 8px 0; max-width: 76ch; }
+.erp-effect a { color: #355f85; text-decoration: underline; }
+.erp-effect-event { border-left: 3px solid #9e793d; padding: 6px 12px; margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 4px 16px; background: #fafbfc; font-variant-numeric: tabular-nums; }
+.erp-effect-event strong { color: #243d61; }
+.erp-effect-event b { font-weight: 600; }
+.erp-effect-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (max-width: 480px) {
+  .erp-effect th, .erp-effect td { padding: 8px 4px; font-size: 12px; }
+  .erp-effect th small { display: block; margin-left: 0; }
+  .erp-effect-event { font-size: 12px; }
+}

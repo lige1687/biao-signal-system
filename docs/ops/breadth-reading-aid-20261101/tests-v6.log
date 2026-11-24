@@ -1,0 +1,48 @@
+✔ breadth preserves its own universe, supplier event and same-date rails (1.768791ms)
+✔ unknown method, different quantiles/windows, dates and error packets fail closed (0.186291ms)
+✔ raw missing values, insufficient samples and position conflicts cannot create an event (0.281625ms)
+✔ ERP actual reference retains 17 first crossings, reentries and historical-only boundary (14.068375ms)
+✔ seen survives reload, preserves other objects and an older tab cannot roll back (8.579833ms)
+✔ each alert targets its matching existing price-and-indicator view (0.072625ms)
+✔ first visit reports only a fresh latest trigger; stay never repeats (2.591167ms)
+✔ same-date read cursor deduplicates and same-date revision is informational only (0.265167ms)
+✔ later dates can carry two fresh entry or exit events, never old history or stays (0.156ms)
+✔ missing values, rails, invalid calendar dates, future and unordered data cannot alert (0.140041ms)
+✔ historical, stale, rollback and failed fetch suppress alerts even with cached points (0.347625ms)
+✔ flat is displayable, and names describe supplier events without financial recomputation (0.138834ms)
+✔ contradictory phase and event pairs are missing rather than fresh crossings (0.133416ms)
+✔ storage format filters corrupt versions, dates, types and individual cursors (0.426834ms)
+✔ a single missing observation remains a one-day run with background disabled (0.946334ms)
+✔ nonfinite and absent values stay missing even when the backend supplies a state (0.116ms)
+✔ date keys align states independently of map order and a valid zero is not a gap (0.094958ms)
+✔ only supplied directional states receive color; mixed, flat and unknown remain unshaded (0.221417ms)
+✔ equal colors cannot bridge neutral, missing or unclassified observations (0.08775ms)
+✔ an empty date cannot extend color across its position (0.068125ms)
+✔ gap text describes a single internal missing observation without inventing a range (0.121375ms)
+✔ gap text counts observations, distinguishes trailing gaps and ignores colored runs (0.070166ms)
+✔ a one-day trailing gap says not updated and complete input has no gap notice (0.075584ms)
+✔ background legend distinguishes participation states and makes repair/retreat more visible (0.231584ms)
+✔ historical background follows the selected supplied horizon without future filtering (0.139334ms)
+✔ background run identifiers must never change the price axis range (145.717ms)
+✔ phase background changes retain the current linked zoom and price axis (28.428583ms)
+✔ horizon changes retain the current linked zoom and price axis (24.173917ms)
+✔ reference track changes retain the current linked zoom and price axis (19.439ms)
+✔ three-line comparison changes retain the current linked zoom and price axis (20.455167ms)
+✔ changing the chart scope to us:sp500:365 resets the linked zoom (17.524792ms)
+✔ changing the chart scope to cn:hs300:365 resets the linked zoom (18.575292ms)
+✔ changing the chart scope to cn:sse:1095 resets the linked zoom (13.770417ms)
+✔ hover marker updates retain the linked zoom (15.716875ms)
+✔ only known backend codes receive a specific reading (1.468416ms)
+✔ missing and new codes stay unknown (0.11375ms)
+✔ a historical change mark does not depend on the length of its later run (0.998875ms)
+✔ missing current date cannot inherit a prior state or render a zero reading (3.128667ms)
+✔ valid zeros remain visible and state is exactly the supplied backend description (0.483334ms)
+✔ a warmup reading does not render invented bands (0.436416ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 805.966

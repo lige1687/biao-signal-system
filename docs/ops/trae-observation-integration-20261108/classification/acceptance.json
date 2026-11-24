@@ -1,0 +1,72 @@
+{
+  "status": "passed_local",
+  "completed_at": "2026-11-08T19:18:42.655739+08:00",
+  "entry": "http://localhost:5173/#market-overview",
+  "default_ids": [
+    "erp-cn",
+    "breadth-cn",
+    "erp-us",
+    "breadth-us"
+  ],
+  "categories": [
+    "估值与股债",
+    "市场参与",
+    "波动与信用",
+    "资金与情绪",
+    "风格与行业",
+    "盈利与经济"
+  ],
+  "verification": {
+    "focused_tests": 13,
+    "typescript": "passed",
+    "vite_build": "passed, write:false, 923 modules",
+    "repo_hygiene": "passed",
+    "desktop": {
+      "viewport_width": 1710,
+      "core_cards": 4,
+      "core_card_width": 400,
+      "horizontal_overflow": false,
+      "smh_preview_detail_add_reload_remove": "passed",
+      "undo_empty_reset": "passed",
+      "cross_tab_sync": "passed",
+      "breadth_alias_search_market_filter": "passed",
+      "pending_add_disabled": true,
+      "pcr_preview_add": "passed",
+      "industry_preview": "passed",
+      "vxn_and_smallcap_existing_adapters": "passed",
+      "preview_focus_return": "passed",
+      "console_errors": []
+    }
+  },
+  "accepted_microstructure_packets": [
+    "derivatives"
+  ],
+  "accepted_microstructure_count": 10,
+  "source_hashes": {
+    "web/src/components/market-observation-alerts/index.tsx": "f98c7d1a2b57ee5f2a1d4a41facec06d810472bb8d35696dc27f939f521da5d6",
+    "web/src/components/market-observation-alerts/style.css": "5214f37aff3f1e72fe739162a90ed44944b1a3f62767a45075d52fb30f88a97c",
+    "web/src/components/market-observation-alerts/selection.ts": "2d546a6c5666a5a0d4a1ab8f4b04a4011b321f38b643fadc2089eb0531ef5f33",
+    "web/src/components/market-observation-alerts/useSelection.ts": "19d6b024d7530d22203679c0f38a2836cba927374452b45a8e127f8a00a96665",
+    "web/src/components/market-observation-alerts/selection.test.mjs": "abf1fb8ecb15658b998166525256840d7e498e96a2cb5ac7e86c20accd8d3e2f",
+    "web/src/components/market-observation-alerts/IndicatorBrowser.tsx": "6c7aa88bcfcf4d452330d9a5796972047436c3b99a8a9fe8a74f07533e2696eb",
+    "web/src/components/market-observation-alerts/indicator-browser.css": "1902b5f069c6142f58a07afa298601383ff41f5e8ae4c353f64cc753cb2df4fd",
+    "web/src/components/market-observation-alerts/indicatorCatalog.ts": "f2bc164c66d34ad2f6e5824e1d0a9d2921d80b23cc6d12528a4379a1eb9f279c",
+    "web/src/components/market-observation-alerts/indicatorCatalog.test.mjs": "cf4a2661c5fd70cd5ad20b57d38762950a63c9deb1eaa1ce755721e731662018"
+  },
+  "boundaries": [
+    "No financial signal validation or formula changes",
+    "Old v1 preferences retained untouched; ambiguous personal lists preserved",
+    "Local source only; no source commit/remote deployment/8000 dist replacement",
+    "Equity and funding are owned and independently qualified by the concurrent data chat"
+  ],
+  "review": {
+    "agent": "/root/indicator_browser",
+    "read_only_final_review": "No blocking issue; root independently verified browser and source"
+  },
+  "artifacts": [
+    "homepage-core.png",
+    "category-style.png",
+    "scoped-changes.patch",
+    "accepted-microstructure.json"
+  ]
+}

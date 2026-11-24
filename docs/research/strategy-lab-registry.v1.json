@@ -1,0 +1,106 @@
+{
+  "schema": "strategy-lab-lifecycle/1.0",
+  "updated_at": "2026-11-24",
+  "states": ["EXPLORE", "CANDIDATE", "SHADOW", "LIVE", "DEGRADED", "RETIRED"],
+  "entries": [
+    {
+      "id": "strat.idle_cash_gold_dividend_harbor",
+      "name": "空仓闲钱黄金+红利低波稳态避风港",
+      "kind": "cash_management",
+      "state": "LIVE",
+      "financial_hypothesis": "进攻策略约40%+时间空仓，将闲钱在黄金与红利低波站稳60日均线时做低相关防御过渡，跌破退回货币理财",
+      "simple_baseline": "闲置现金存货币理财(2%/年)",
+      "code_fingerprint": "976b919c1efa3ece",
+      "explore_evidence": {"verified": true, "no_lookahead": true, "plateau_pass_rate": 0.85},
+      "shadow_evidence": {"matured_obs": 60, "drift_status": "normal"},
+      "history": [
+        {"at": "2026-11-21", "from": "SHADOW", "to": "LIVE", "reason": "第3轮跨年实测通过并上线顶部空仓指示灯"}
+      ]
+    },
+    {
+      "id": "strat.sector_etf_right_v1",
+      "name": "18只行业基金右侧起势(v1原打分)",
+      "kind": "sector_etf",
+      "state": "DEGRADED",
+      "financial_hypothesis": "板块内部共振+离60日线<12%+未拥挤筛选右侧起势行业",
+      "simple_baseline": "18只行业等权死拿 / 简单20日均线",
+      "code_fingerprint": "976b919c1efa3ece",
+      "explore_evidence": {"verified": false, "no_lookahead": true, "l1_ic_20d": -0.0433, "plateau_pass_rate": 0.4},
+      "shadow_evidence": {"matured_obs": 0, "drift_status": "pending"},
+      "history": [
+        {"at": "2026-11-24", "from": "LIVE", "to": "DEGRADED", "reason": "真实4持仓单账户+L1检验暴露20/60日负Rank IC(-0.043)，被战役一v2方案替代评估"}
+      ]
+    },
+    {
+      "id": "strat.sector_etf_v2_monthly_g4",
+      "name": "18只行业基金每月低频轮动 + 大盘跌破半年线降仓 + 闲钱避风港",
+      "kind": "sector_etf",
+      "state": "CANDIDATE",
+      "financial_hypothesis": "中期强趋势跳过最近一个月暴涨 + 板块内部加速扩散 + 成交未拥挤 + 白天承接强，每月换仓一次，大盘跌破半年线时缩仓转去黄金和红利基金",
+      "simple_baseline": "18只行业基金一直死拿(+2.23%) / 老办法(+1.11%) / 永远半仓(+2.97%)",
+      "code_fingerprint": "pending_shadow_freeze",
+      "explore_evidence": {
+        "split": "explore_le_2023",
+        "no_lookahead": true,
+        "l1_5d_ic": 0.0418,
+        "l1_20d_mono": 1.0,
+        "explore_cagr": 0.0848,
+        "explore_excess_vs_hs300": 0.0566,
+        "explore_mdd": -0.2478,
+        "explore_calmar": 0.34,
+        "holdout_status": "untouched_sealed"
+      },
+      "shadow_evidence": {"matured_obs": 0, "drift_status": "not_started"},
+      "history": [
+        {"at": "2026-11-24", "from": "EXPLORE", "to": "CANDIDATE", "reason": "战役一+二开发期全面胜出全部简单基准且通过参数高原检验，待一次性闭卷考或直接冻结进入SHADOW观察"}
+      ]
+    },
+    {
+      "id": "strat.cross_asset_rp_trend_core",
+      "name": "全球宽基+红利+黄金按波动配比 + 半年线保护（搭配国内行业轮动）",
+      "kind": "asset_allocation",
+      "state": "CANDIDATE",
+      "financial_hypothesis": "美股宽基、欧洲、国内红利低波与黄金涨跌不同步，波动大的少买、稳的多买，跌破半年线减仓转货币理财，再用每月新工资零卖出补低位",
+      "simple_baseline": "沪深300死拿(+2.57%/最惨回撤-42.7%) / 5只跨市场平均分配(+11.63%/最惨回撤-26.2%)",
+      "code_fingerprint": "pending_shadow_freeze",
+      "explore_evidence": {
+        "split": "explore_le_2023",
+        "no_lookahead": true,
+        "core_cagr": 0.0975,
+        "core_mdd": -0.1664,
+        "core_sharpe": 0.92,
+        "core_calmar": 0.59,
+        "with_sat_cagr": 0.0992,
+        "with_sat_mdd": -0.1705,
+        "data_gap": "缺长久期国债/美债ETF",
+        "holdout_status": "untouched_sealed"
+      },
+      "shadow_evidence": {"matured_obs": 0, "drift_status": "not_started"},
+      "history": [
+        {"at": "2026-11-24", "from": "EXPLORE", "to": "CANDIDATE", "reason": "战役四开发期 2016-2023 风险收益比大幅领跑全部单市场策略，2018/2022两轮熊市仅回撤-5%/-4%"}
+      ]
+    },
+    {
+      "id": "strat.stock_partial_replace_div_v2",
+      "name": "A股好生意+高股息+满15%分批卖一半+横盘换强票（试探版）",
+      "kind": "cn_stock",
+      "state": "EXPLORE",
+      "financial_hypothesis": "按真实财报公告日挑好生意和高股息，赚满15%先卖一半落袋，长期横盘滞涨就换成更强新票",
+      "simple_baseline": "破20日线即卖(-0.14%) / 老版两步拿牛法(-2.16%)",
+      "code_fingerprint": "explore_draft",
+      "explore_evidence": {
+        "split": "explore_2018_2023",
+        "no_lookahead": true,
+        "explore_cagr": 0.034,
+        "explore_mdd": -0.4419,
+        "ex_top3_cagr": -0.009,
+        "annual_turnover": 10.9,
+        "blocker": "本地长历史池仅77股存在幸存者偏差，且换手与绝对回撤仍偏高，暂不晋级CANDIDATE"
+      },
+      "shadow_evidence": {"matured_obs": 0, "drift_status": "not_started"},
+      "history": [
+        {"at": "2026-11-24", "from": null, "to": "EXPLORE", "reason": "相对旧版显著改善(+5.56%/年、去Top3大幅收敛)，但受限于77股幸存者偏差与高换手，诚实留在EXPLORE待补齐无幸存者全A历史池后复验"}
+      ]
+    }
+  ]
+}

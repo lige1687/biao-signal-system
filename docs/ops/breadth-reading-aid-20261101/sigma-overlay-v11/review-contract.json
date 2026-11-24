@@ -1,0 +1,51 @@
+{
+  "mission": "只读复核ERP双轨代码和当前证据；不改源码",
+  "task_scope": [
+    "Read the four ERP source files and original baseline. Check same-date event identities, missing price, toggles, stale result wording. Local review only."
+  ],
+  "read_only_paths": [
+    "web/src/components/observation-library/ErpCrossChart.tsx",
+    "web/src/components/observation-library/erpCrossChart.css",
+    "web/src/components/observation-library/erpComparisonDisplay.ts",
+    "web/src/components/observation-library/erpComparisonDisplay.test.mjs",
+    "web/src/components/observation-library/erpSensitivity.ts",
+    "web/src/components/observation-library/erpCrossings.ts",
+    "docs/ops/breadth-reading-aid-20261101/sigma-overlay-v11/before"
+  ],
+  "write_paths": [
+    "docs/ops/breadth-reading-aid-20261101/sigma-overlay-v11/code-review.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "code-review.md with concrete findings and severity or no actionable findings"
+  ],
+  "stop_conditions": [
+    "No new agents, no edits outside review, no source network calls"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true,
+    "checks": [
+      "Read cited primary evidence",
+      "Verify numeric comparison against frozen results",
+      "Desktop-only UI validation"
+    ]
+  },
+  "research_mode": "report_only",
+  "budget": {
+    "helper_source_calls": 4,
+    "root_source_calls": 2,
+    "new_financial_experiments": 0,
+    "max_new_artifact_bytes": 5000000,
+    "minimum_internal_free_bytes": 5368709120
+  },
+  "baseline": "existing 2-sigma plus frozen matched-price comparison; no refit",
+  "decision": "display sensitivity, not new trade rule",
+  "mechanism": "ERP valuation compensation may mean-revert; narrower rails flag earlier but also more failures. Breadth bounded and price volatility are distinct objects."
+}

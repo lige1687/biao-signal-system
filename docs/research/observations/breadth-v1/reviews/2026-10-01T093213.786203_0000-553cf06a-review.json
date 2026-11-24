@@ -1,0 +1,28 @@
+{
+  "observed_at": "2026-10-01T09:32:13.786203+00:00",
+  "reviewed_at": "2026-10-01T09:32:36Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-10-01T093213.786203_0000-553cf06a.json",
+  "changed_sources": ["source-01", "source-02"],
+  "facts": {
+    "a_share_rows": 4064308,
+    "a_share_latest_date": "2026-09-30",
+    "members_at_latest_market_date": 5207,
+    "current_code_date": "2026-10-01",
+    "current_code_count": 5572,
+    "daily_snapshot_date": "2026-09-30",
+    "daily_snapshot_total": 5572,
+    "daily_snapshot_eligible": 5212
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "逐股原料已补齐到最近交易日9月30日的大多数股票，但日常快照的eligible仍是MA20口径，不是冻结研究要求的共同200日分母和覆盖率。",
+    "historical_membership": "当前名单日期更新不补足历史成员、生效时间和真实取得时间链。",
+    "etf_nominal_prices_and_actions": "ETF名义价格、公司行动和交易限制链的原资格缺口仍在。",
+    "availability": "10月1日没有新交易日行情；仅记录实际取得时间，不补造当日市场记录。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "最近交易日行情延迟已补齐，但结构性口径仍不合格；继续仅输入观察，不生成信号。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

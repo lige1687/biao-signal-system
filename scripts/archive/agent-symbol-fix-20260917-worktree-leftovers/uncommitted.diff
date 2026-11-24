@@ -1,0 +1,59 @@
+diff --git a/src/lei_signal/api/routes/agent.py b/src/lei_signal/api/routes/agent.py
+index 7652a17a..05f6314f 100644
+--- a/src/lei_signal/api/routes/agent.py
++++ b/src/lei_signal/api/routes/agent.py
+@@ -421,7 +421,11 @@ def _resolve_symbol_by_catalog(message: str) -> str | None:
+     唯一可核实对象 → None（由 resolve 层澄清，不用指数/ETF 顶替板块）。
+     """
+     from lei_signal.api import catalog as catalog_mod  # noqa: PLC0415
+-    from lei_signal.api.config import STRATEGY_INDICES, US_ETFS  # noqa: PLC0415
++    from lei_signal.api.config import (  # noqa: PLC0415
++        DASHBOARD_INDICES,
++        STRATEGY_INDICES,
++        US_ETFS,
++    )
+     from lei_signal.api.labels import THS_INDUSTRY_NAMES  # noqa: PLC0415
+ 
+     from lei_signal.copilot.subjects import named_subject
+@@ -436,10 +440,13 @@ def _resolve_symbol_by_catalog(message: str) -> str | None:
+         if alias in message:
+             return _CATALOG_ALIAS[alias]
+ 
+-    # 3) 目录名完整出现在话里（行业/指数/美股ETF/概念）
++    # 3) 目录名完整出现在话里（行业/大盘指数/策略指数/美股ETF/概念）
+     entries: list[tuple[str, str]] = []  # (symbol, name)
+     entries += [(f"TH{code}", name) for code, name in THS_INDUSTRY_NAMES.items()]
+-    entries += [(idx.symbol, idx.display_name) for idx in STRATEGY_INDICES]
++    # 大盘指数（沪深300/上证指数…）与策略指数同源进扫描（2026-09-18）：
++    # 此前漏 DASHBOARD_INDICES，名称落空后沿用旧选中 ETF。
++    entries += [(idx.symbol, idx.display_name)
++                for idx in (*DASHBOARD_INDICES, *STRATEGY_INDICES)]
+     entries += [(etf.symbol, etf.display_name) for etf in US_ETFS]
+     with contextlib.suppress(Exception):  # 概念目录缺席不影响其余三组
+         entries += [
+diff --git a/src/lei_signal/copilot/subjects.py b/src/lei_signal/copilot/subjects.py
+index a95592ca..3a85f804 100644
+--- a/src/lei_signal/copilot/subjects.py
++++ b/src/lei_signal/copilot/subjects.py
+@@ -6,7 +6,7 @@ import json
+ import re
+ from pathlib import Path
+ 
+-from lei_signal.api.config import STRATEGY_INDICES, US_ETFS, cache_root
++from lei_signal.api.config import DASHBOARD_INDICES, STRATEGY_INDICES, US_ETFS, cache_root
+ from lei_signal.api.labels import THS_INDUSTRY_NAMES
+ 
+ PRODUCT_NAMES = {
+@@ -33,7 +33,11 @@ def sector_rows() -> list[dict]:
+ 
+ 
+ def catalog_names() -> dict[str, str]:
+-    names = {x.symbol: x.display_name for x in (*STRATEGY_INDICES, *US_ETFS)}
++    # 大盘指数（沪深300/上证指数…）与策略指数同源进表，显示名不再落空
++    names = {
++        x.symbol: x.display_name
++        for x in (*DASHBOARD_INDICES, *STRATEGY_INDICES, *US_ETFS)
++    }
+     names.update(PRODUCT_NAMES)
+     names.update({f"TH{k}.SECTOR": v for k, v in THS_INDUSTRY_NAMES.items()})
+     names.update(SECTOR_NAMES)

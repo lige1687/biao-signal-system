@@ -98,6 +98,7 @@ export function TradeConfirmCard({ preview }: { preview: TradePreview }) {
     preview.amount != null ? String(preview.amount) : "",
   );
   const [date, setDate] = useState(preview.trade_date);
+  const [planId, setPlanId] = useState("");
   const submittingRef = useRef(false);
   const attemptedKeyRef = useRef<string | null>(null);
   const [editBlocked, setEditBlocked] = useState(false);
@@ -110,10 +111,11 @@ export function TradeConfirmCard({ preview }: { preview: TradePreview }) {
     amount: Number(amount),
     trade_date: date,
     request_id: requestId,
+    ...(planId ? { plan_id: planId } : {}),
   });
   // 影响落库结果的字段都进指纹；request_id 由卡片身份单独保证。
   const payloadKey = (p: ReturnType<typeof buildPayload>) =>
-    JSON.stringify([p.fund_code, p.fund_name, p.side, p.amount, p.trade_date]);
+    JSON.stringify([p.fund_code, p.fund_name, p.side, p.amount, p.trade_date, p.plan_id ?? null]);
 
   const create = useMutation({
     mutationFn: (payload: ReturnType<typeof buildPayload>) =>
@@ -126,6 +128,15 @@ export function TradeConfirmCard({ preview }: { preview: TradePreview }) {
       submittingRef.current = false;
     },
   });
+  const planCandidates = useQuery({
+    queryKey: ["copilotTradePlans", code.trim()],
+    queryFn: () => api.copilotTradePlans(code.trim()),
+    enabled: !readOnly && !create.isSuccess && /^\d{6}$/.test(code.trim()),
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+  const plans = planCandidates.data?.plans ?? [];
+  const planStateLabel = { armed: "待执行", entered: "已进入", exited: "已退出" };
   const missingHint = preview.missing.length
     ? `待补：${preview.missing.join("、")}`
     : "信息已抽全，请核对";
@@ -160,11 +171,45 @@ export function TradeConfirmCard({ preview }: { preview: TradePreview }) {
         {missingHint}。金额单位为元；定价按报单日基金净值（ETF按单位净值）。
       </div>
       <div className="cp-form">
-        <label>基金代码<input value={code} onChange={(e) => setCode(e.target.value)} placeholder="6位代码" inputMode="numeric" disabled={create.isPending || create.isSuccess || readOnly} /></label>
+        <label>基金代码<input value={code} onChange={(e) => { setCode(e.target.value); setPlanId(""); }} placeholder="6位代码" inputMode="numeric" disabled={create.isPending || create.isSuccess || readOnly} /></label>
         <label>基金名称<input value={name} onChange={(e) => setName(e.target.value)} placeholder="基金名称" disabled={create.isPending || create.isSuccess || readOnly} /></label>
         <label>成交金额（元）<input value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="实际成交金额" inputMode="decimal" disabled={create.isPending || create.isSuccess || readOnly} /></label>
         <label>成交日期<input type="date" value={date} onChange={(e) => setDate(e.target.value)} disabled={create.isPending || create.isSuccess || readOnly} /></label>
       </div>
+      {!readOnly && (
+        <div style={{ marginBottom: 8 }}>
+          <label>关联计划（可选）
+            <select
+              aria-label="关联计划（可选）"
+              value={planId}
+              onChange={(e) => setPlanId(e.target.value)}
+              disabled={create.isPending || create.isSuccess || !/^\d{6}$/.test(code.trim())}
+            >
+              <option value="">不关联（未记录计划关联）</option>
+              {plans.map((plan) => (
+                <option key={plan.plan_id} value={plan.plan_id}>
+                  {plan.symbol} · {planStateLabel[plan.state]} · {plan.reason || `创建于 ${plan.created_at.slice(0, 10)}`}
+                </option>
+              ))}
+              {planId && !plans.some((plan) => plan.plan_id === planId) && (
+                <option value={planId}>已选择计划（列表暂不可用）</option>
+              )}
+            </select>
+          </label>
+          <div className="muted" style={{ fontSize: 11 }}>
+            关联当前计划，不代表交易前已确认该计划。
+            {!planId && "未关联只表示没有记录关联，不判断是否计划外。"}
+          </div>
+          {!create.isSuccess && /^\d{6}$/.test(code.trim()) && (
+            <div className="muted" style={{ fontSize: 11 }} role="status">
+              {planCandidates.isFetching ? "正在读取可关联计划…" :
+                planCandidates.isError ? "计划读取失败，可选择不关联记账；不关联时不会记录计划关联。" :
+                plans.length === 0 ? "暂无可关联计划，可不关联记账；不会记录计划关联。" :
+                "请选择需要关联的计划，默认不关联。"}
+            </div>
+          )}
+        </div>
+      )}
       <button
         className="btn small primary"
         disabled={confirmLocked}
@@ -172,10 +217,19 @@ export function TradeConfirmCard({ preview }: { preview: TradePreview }) {
       >
         {create.isPending ? "记账中…" : create.isSuccess ? "已记账" : "确认记账"}
       </button>
-      {create.isSuccess && <p role="status">已记入基金台账。<Link to="/portfolio">查看成交记录</Link></p>}
+      {create.isSuccess && <p role="status">
+        已记入基金台账。
+        {create.data.plan_id
+          ? `已记录计划关联${plans.find((plan) => plan.plan_id === create.data.plan_id)?.reason ? `：${plans.find((plan) => plan.plan_id === create.data.plan_id)?.reason}` : ""}；关联不代表交易前已确认。`
+          : "未记录计划关联，不判断是否计划外。"}
+        {create.data.plan_id && (create.data.plan_version_id
+          ? "已留存当时最新的已记录计划版本；是否早于交易请看复盘。"
+          : "计划版本留存未知；是否早于交易请看复盘。")}
+        <Link to="/portfolio">查看成交记录</Link>
+      </p>}
       {editBlocked && !create.isSuccess && (
         <div className="cp-error" role="alert">
-          上一次提交没有成功，你又修改了报单内容。系统无法确定上一笔有没有记上账，所以先不放行：
+          上一次提交结果未确认，你又修改了报单内容。系统无法确定上一笔有没有记上账，所以先不放行：
           请到「我的持仓」页核对成交记录；如果那里没有这一笔，请重新发起一次报单（对助手再说一遍），
           新确认卡会按新内容生成。
         </div>
@@ -258,7 +312,7 @@ export function ReviewCardView({ review }: { review: ReviewCard }) {
       ))}
       {review.r_multiple != null && (
         <div style={{ fontSize: 12 }}>
-          R 倍数：{review.r_multiple.toFixed(2)}（当初准备亏的钱为1份，结果赚了几个1份）
+          按当前计划参考价算，实际结果相当于参考风险金额的 {review.r_multiple.toFixed(2)} 倍；不能代替当时的风险记录。
         </div>
       )}
       {review.narrative && (
@@ -308,6 +362,12 @@ export function CopilotCardDispatcher({
     return <ReviewCardView review={card.data as ReviewCard} />;
   if (card.card_type === "scout")
     return <ScoutCardView data={card.data as ScoutCard} />;
+  if (card.card_type === "dca")
+    return <DcaCardView data={card.data as DcaCard} />;
+  if (card.card_type === "sentiment")
+    return <SentimentCardView data={card.data as SentimentCardData} />;
+  if (card.card_type === "mindset")
+    return <MindsetCardView data={card.data as MindsetCard} />;
   return <p className="cp-error" role="status">已收到功能结果，当前界面暂不支持此类型的展示。</p>;
 }
 
@@ -363,6 +423,242 @@ export function ScoutCardView({ data }: { data: ScoutCard }) {
   );
 }
 
+// ---- B 阶段三类新卡（dca / sentiment / mindset，GPT ITERATION:6 冻结契约）----
+// 只读叙事/状态展示：缺字段一律显示「数据不可用」类降级文案（不补猜、
+// null=无法判定 ≠ 未触发）；不生成趋势判断、交易建议或过滤语；数值/枚举
+// 的中文说法只做展示层映射，不改变后端判定。
+
+type DcaStateRow = {
+  symbol: string; name: string; as_of: string;
+  close: number | null; color: string | null;
+  ma200_gap: number | null; dd2y: number | null;
+  tier: string | null; deep20: boolean | null; bottom_zone: boolean | null;
+  state_status: string; window_note: string;
+};
+type DcaBreadthMeta = { value?: unknown; health?: unknown; last_valid_at?: unknown };
+type DcaCard = {
+  evidence_available?: boolean;
+  evidence_version?: string | number | null;
+  error_cn?: string | null;
+  states?: DcaStateRow[] | null;
+  breadth?: { cn?: DcaBreadthMeta | null; us?: DcaBreadthMeta | null } | null;
+  hint_cn?: string;
+};
+
+/** 比率（小数）→ 百分比文案；缺值/非数一律「—」，不猜。 */
+const pctFromRatio = (v: unknown): string =>
+  typeof v === "number" && Number.isFinite(v) ? `${(v * 100).toFixed(1)}%` : "—";
+
+const DCA_COLOR_CN: Record<string, string> = {
+  green: "绿灯（价在20日均线上方且向上）",
+  gray: "灰灯（方向中性）",
+  black: "黑灯（价在20日均线下方且向下）",
+};
+const DCA_TIER_CN: Record<string, string> = { low: "低位", mid: "中位", high: "高位" };
+const HEALTH_CN: Record<string, string> = {
+  fresh: "新鲜", stale: "偏旧", incomplete: "不完整", missing: "缺失", unknown: "未核实",
+};
+/** 三态枚举的兜底读法：true/false/null 之外（含缺字段）都按不可判处理。 */
+const triStateCn = (v: unknown): string =>
+  v === true ? "触发" : v === false ? "未触发" : "数据不可判";
+const healthCn = (v: unknown): string =>
+  typeof v === "string" ? (HEALTH_CN[v] ?? v) : "未核实";
+
+/** 定投状态板卡：证据账本摘要 + 中美宽度读数 + 可选标的逐状态（只读）。 */
+export function DcaCardView({ data }: { data: DcaCard }) {
+  const states = Array.isArray(data.states) ? data.states : [];
+  const breadths: [string, DcaBreadthMeta | null][] = [
+    ["A股", (data.breadth?.cn ?? null) as DcaBreadthMeta | null],
+    ["美股", (data.breadth?.us ?? null) as DcaBreadthMeta | null],
+  ];
+  return (
+    <div className="cp-card">
+      <div className="cp-label">定投状态板（只读提示，不构成买卖判断）</div>
+      {data.evidence_available !== true && (
+        <div className="ops-empty">
+          证据账本数据不可用{data.error_cn ? `：${data.error_cn}` : ""}，状态无法计算。
+        </div>
+      )}
+      {data.evidence_available === true && (
+        <div className="muted" style={{ fontSize: 12 }}>
+          证据账本可用{data.evidence_version ? `（版本 ${String(data.evidence_version)}）` : ""}。
+        </div>
+      )}
+      {breadths.map(([label, m]) => {
+        const meta = m && typeof m === "object" ? m : null;
+        const value = meta && typeof meta.value === "number"
+          && Number.isFinite(meta.value) ? meta.value : null;
+        const at = meta && typeof meta.last_valid_at === "string"
+          && meta.last_valid_at ? `，截至 ${meta.last_valid_at}` : "";
+        return (
+          <div key={label} className="cp-row">
+            <span>{label}宽度</span>
+            <span className="muted">
+              {value == null
+                ? `数据不可用（健康度：${healthCn(meta?.health)}）`
+                : `约 ${value.toFixed(1)}% 的个股在 200 日均线上方（健康度：${healthCn(meta?.health)}${at}）`}
+            </span>
+          </div>
+        );
+      })}
+      {states.length > 0 && (
+        <details className="ar-card-group" open={states.length <= 3}>
+          <summary>标的逐状态<small>{states.length} 个</small></summary>
+          {states.map((s, i) => (
+            <div key={`${s.symbol}-${i}`} className="cp-row" style={{ alignItems: "baseline" }}>
+              <span className="cp-sym">{s.name || s.symbol}</span>
+              <span style={{ flex: 1 }}>
+                {s.state_status === "insufficient_data" ? (
+                  <span className="muted">数据不可用（该标的行情数据不足，状态无法计算）</span>
+                ) : (
+                  <>
+                    <span>三色：{s.color && DCA_COLOR_CN[s.color] ? DCA_COLOR_CN[s.color] : "数据不可判"}</span>
+                    <span className="muted">
+                      {" "}· 距年线 {pctFromRatio(s.ma200_gap)} · 两年回撤 {pctFromRatio(s.dd2y)}
+                      {" "}· 宽度档位 {s.tier && DCA_TIER_CN[s.tier] ? DCA_TIER_CN[s.tier] : "不可判"}
+                    </span>
+                    <div className="muted" style={{ fontSize: 11, marginTop: 2 }}>
+                      深超跌：{triStateCn(s.deep20)}；底部区域：{triStateCn(s.bottom_zone)}
+                      {s.state_status === "degraded" && "（部分数据降级）"}
+                      {s.window_note ? `；${s.window_note}` : ""}
+                    </div>
+                  </>
+                )}
+              </span>
+            </div>
+          ))}
+        </details>
+      )}
+      {data.evidence_available === true && data.error_cn && (
+        <div className="muted" style={{ fontSize: 11 }}>部分数据读取失败：{data.error_cn}</div>
+      )}
+      {data.hint_cn && <div className="muted" style={{ fontSize: 11, marginTop: 8 }}>{data.hint_cn}</div>}
+    </div>
+  );
+}
+
+type SentimentBoard = {
+  name?: string | null; state_cn?: string | null;
+};
+type SentimentMargin = {
+  regime_cn?: string | null; chg_20d_pct?: number | null;
+};
+type SentimentCardData = {
+  available?: boolean;
+  reason_cn?: string | null;
+  as_of?: string | null;
+  hot_boards?: SentimentBoard[] | null;
+  cold_boards?: SentimentBoard[] | null;
+  margin?: SentimentMargin | null;
+  symbol_note?: string | null;
+  note_cn?: string | null;
+};
+
+/** 情绪面卡：板块过热/冰点叙事 + 融资环境 + 可选标的标注（只叙事，不判断）。 */
+export function SentimentCardView({ data }: { data: SentimentCardData }) {
+  const hot = Array.isArray(data.hot_boards) ? data.hot_boards : [];
+  const cold = Array.isArray(data.cold_boards) ? data.cold_boards : [];
+  const boardChip = (b: SentimentBoard, i: number) => (
+    <span key={i} className="cp-chip">
+      {b.name || "未知板块"}{b.state_cn ? ` · ${b.state_cn}` : " · 状态未提供"}
+    </span>
+  );
+  return (
+    <div className="cp-card">
+      <div className="cp-label">市场情绪速览（叙事标注，不参与技术判定）</div>
+      {data.available !== true ? (
+        <div className="ops-empty">
+          情绪面数据不可用{data.reason_cn ? `：${data.reason_cn}` : ""}。
+        </div>
+      ) : (
+        <>
+          {hot.length === 0 && cold.length === 0 && (
+            <div className="muted">当前没有处于过热或冰点状态的板块。</div>
+          )}
+          {hot.length > 0 && (
+            <div className="cp-row">过热板块：{hot.map(boardChip)}</div>
+          )}
+          {cold.length > 0 && (
+            <div className="cp-row">冰点板块：{cold.map(boardChip)}</div>
+          )}
+          <div className="cp-row">
+            <span>融资环境</span>
+            <span className="muted">
+              {data.margin && typeof data.margin.regime_cn === "string"
+                && data.margin.regime_cn
+                ? `${data.margin.regime_cn}${
+                  typeof data.margin.chg_20d_pct === "number"
+                    && Number.isFinite(data.margin.chg_20d_pct)
+                    ? `（近20日融资余额变化 ${data.margin.chg_20d_pct > 0 ? "+" : ""}${data.margin.chg_20d_pct.toFixed(1)}%）`
+                    : ""}`
+                : "数据不可用"}
+            </span>
+          </div>
+          {typeof data.as_of === "string" && data.as_of && (
+            <div className="muted" style={{ fontSize: 11 }}>数据时点：{data.as_of}</div>
+          )}
+        </>
+      )}
+      {typeof data.symbol_note === "string" && data.symbol_note && (
+        <div className="cp-row">
+          <span>标的情绪标注</span>
+          <span className="muted">{data.symbol_note}</span>
+        </div>
+      )}
+      {data.note_cn && <div className="muted" style={{ fontSize: 11, marginTop: 8 }}>{data.note_cn}</div>}
+    </div>
+  );
+}
+
+type MindsetItem = {
+  category?: string | null; text?: string | null;
+  quote?: string | null; source?: string | null;
+};
+type MindsetCard = {
+  available?: boolean;
+  count?: number | null;
+  sha256?: string | null;
+  items?: MindsetItem[] | null;
+  note_cn?: string | null;
+};
+
+/** 认知/心态卡：text 必展示、quote 有才展示、source 标出处（叙事/教育用途）。 */
+export function MindsetCardView({ data }: { data: MindsetCard }) {
+  const items = Array.isArray(data.items) ? data.items : [];
+  return (
+    <div className="cp-card">
+      <div className="cp-label">认知/心态卡片（只作叙事与教育用途，不参与判断）</div>
+      {data.available !== true ? (
+        <div className="ops-empty">心态内容库不可用，本轮没有可展示的内容。</div>
+      ) : items.length === 0 ? (
+        <div className="muted">心态内容库暂时没有可用条目。</div>
+      ) : (
+        <details className="ar-card-group" open>
+          <summary>认知识见<small>{items.length} 条</small></summary>
+          {items.map((it, i) => (
+            <div key={i} className="cp-section">
+              {typeof it.category === "string" && it.category && (
+                <div className="cp-sub">{it.category}</div>
+              )}
+              {typeof it.text === "string" && it.text ? (
+                <div style={{ fontSize: 12 }}>{it.text}</div>
+              ) : (
+                <div className="muted">这条内容缺少正文，无法展示。</div>
+              )}
+              {typeof it.quote === "string" && it.quote && (
+                <div className="cp-narrative">「{it.quote}」</div>
+              )}
+              {typeof it.source === "string" && it.source && (
+                <div className="muted" style={{ fontSize: 11 }}>出处：{it.source}</div>
+              )}
+            </div>
+          ))}
+        </details>
+      )}
+      {data.note_cn && <div className="muted" style={{ fontSize: 11, marginTop: 8 }}>{data.note_cn}</div>}
+    </div>
+  );
+}
 /** 基金台账区（持仓页挂载）：真实成交 + 持仓盈亏速览。 */
 export function TradesLedgerView() {
   const q = useQuery({

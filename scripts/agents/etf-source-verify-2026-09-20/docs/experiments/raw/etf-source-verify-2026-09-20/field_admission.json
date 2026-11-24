@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {"field": "基金身份（代码/全名/管理人）", "source": "上交所清单+详情接口", "admission": "准入", "reason": "权威口径、三只全绑定、有正式 XML 文件（sha256 见 identity_binding.json）；天天基金 fS_name 仅作交叉校验"},
+    {"field": "跟踪指数标识", "source": "上交所详情接口", "admission": "有条件准入", "reason": "指数名称（沪深300指数/纳斯达克100指数）准入；指数代码上交所未提供，待权威源补（缺口）"},
+    {"field": "单位净值（日频序列）", "source": "天天基金 pingzhongdata Data_netWorthTrend", "admission": "有条件准入", "reason": "与上交所清单 NAV 交叉一致；但披露时间未知（无时间戳字段，不得用抓取时间冒充），且服务方声明不保证及时性、数据来自 Choice——只能做二级源，关键数值须与上交所核对"},
+    {"field": "单位净值（单日权威值）", "source": "上交所清单/XML 的 NAV", "admission": "准入", "reason": "正式文件口径；注意清单内 NAV 归属 T-1 交易日（已用天天基金序列验证该归属关系）"},
+    {"field": "累计净值", "source": "天天基金 Data_ACWorthTrend", "admission": "有条件准入（独立字段，禁止与单位净值混用）", "reason": "反例 CE2 证明两列差异可达 55%+；上交所清单不含累计净值"},
+    {"field": "管理费/托管费", "source": "上交所详情接口 MANAGEMENT_RATE/TRUSTEESHIP_RATE", "admission": "准入", "reason": "显式字段、三只齐备；天天基金侧费率在白名单外子域，记 unknown 不记零（CE3）"},
+    {"field": "币种", "source": "上交所清单/详情", "admission": "有条件准入", "reason": "清单金额以人民币计价可推定 CNY；513870 为 QDII（标的美元资产、净值人民币计价）已在身份表注明"},
+    {"field": "份额类型/申赎单位", "source": "上交所清单 CREATION_REDEMPTION_UNIT 等", "admission": "准入", "reason": "三只均有明确申赎单位与现金替代上限"},
+    {"field": "有效日期", "source": "上交所清单 TRADING_DAY / 详情 ESTABLISH_DATE / LISTING_DATE", "admission": "准入", "reason": "成立、上市、清单交易日三层日期齐备"},
+    {"field": "净值披露时间（区别于归属日与抓取时间）", "source": "两源均无", "admission": "不足", "reason": "两个源的接口都只给归属日，无披露时间戳；缺口，接入层必须显式记 unknown"},
+    {"field": "跟踪误差/绩效类字段", "source": "天天基金产品页", "admission": "不足（本作业不采）", "reason": "跟踪差异核验待口径齐备后另立作业；页面字段在白名单内但未纳入本次字段集"},
+    {"field": "管理人官网域名", "source": "—", "admission": "不足（待核）", "reason": "上交所已采页面未给出管理人官网链接，按冻结口径不猜测、不访问"}
+  ]
+}

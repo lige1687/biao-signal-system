@@ -1,0 +1,44 @@
+.star-breadth-card, .star-weighted-card { min-width: 0; }
+.star-breadth-view, .star-weighted { color: #4e6054; font-size: 12px; line-height: 1.45; }
+.star-breadth-date { margin: 8px 0 5px; color: #53665b; font-variant-numeric: tabular-nums; }
+.star-breadth-legend { display: flex; gap: 12px; font-size: 11px; }
+.star-breadth-grid, .star-weighted-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.star-breadth-index, .star-weighted-grid > section { min-width: 0; }
+.star-breadth-index h4, .star-weighted h4 { margin: 8px 0 2px; color: #35493d; font-size: 13px; }
+.star-breadth-index .moa-mini { max-width: none; }
+.star-breadth-index .moa-mini svg { display: block; width: 100%; height: 106px; }
+.star-breadth-index .moa-mini-dates { display: flex; justify-content: space-between; color: #69786e; font-size: 10px; }
+.star-breadth-readings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 5px 0 7px; }
+.star-breadth-reading { min-width: 0; border-left: 2px solid; padding-left: 5px; font-variant-numeric: tabular-nums; }
+.star-breadth-reading span, .star-breadth-reading strong, .star-breadth-reading small { display: block; }
+.star-breadth-reading strong { color: #263e32; font-size: 17px; }
+.star-breadth-reading small { color: #637367; font-size: 10px; }
+.star-breadth-note { margin: 8px 0 0; color: #657468; font-size: 11px; }
+.star-weighted-row { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 6px; padding: 5px 0; border-bottom: 1px solid #e8eee8; }
+.star-weighted-row > strong { padding-top: 2px; color: #425b4a; }
+.star-weighted-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.star-weighted-pair > div { min-width: 0; font-variant-numeric: tabular-nums; }
+.star-weighted-pair span { display: flex; justify-content: space-between; gap: 4px; }
+.star-weighted-pair b { color: #263e32; }
+.star-weighted-pair small { display: block; color: #6a796d; font-size: 10px; overflow-wrap: anywhere; }
+.star-weighted-bar { display: block; width: 100%; height: 10px; margin: 2px 0; }
+.star-weighted-scale { display: grid; grid-template-columns: 32px repeat(2, minmax(0, 1fr)); gap: 6px; color: #77857a; font-size: 9px; }
+.star-weighted-scale > div { display: flex; justify-content: space-between; }
+.star-weighted-pair i { display: inline-block; width: 6px; height: 6px; margin-right: 3px; border-radius: 1px; }
+.star-count-key { background: #2563eb; }
+.star-weight-key { background: #28806e; }
+.star-weighted a { color: #326c71; }
+.star-weighted-periods { display: flex; gap: 5px; margin: 6px 0; }
+.star-weighted-periods button { padding: 3px 10px; border: 1px solid #d2dcd3; border-radius: 4px; background: #f6f8f5; color: #526557; cursor: pointer; }
+.star-weighted-periods button[aria-pressed="true"] { border-color: #547965; background: #eaf2eb; color: #294d37; font-weight: 700; }
+
+.star-breadth-range { display: flex; flex-wrap: wrap; gap: 3px 8px; margin: 2px 0 5px; font-size: 10px; }
+
+/* Home slots are roughly 330px wide; stack indices and give each bar a full track. */
+.star-breadth-card .star-breadth-grid, .star-weighted-card .star-weighted-grid { grid-template-columns: minmax(0, 1fr); }
+.star-weighted-card .star-weighted-pair { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+.star-weighted-card .star-weighted-scale { grid-template-columns: 32px minmax(0, 1fr); }
+.star-weighted-card .star-weighted-scale > div:last-child { display: none; }
+.star-weighted-card .star-weighted-pair > div { width: 100%; }
+.star-weighted-card .star-weighted-pair span { justify-content: flex-start; }
+.star-weighted-card .star-weighted-pair b { margin-left: auto; }

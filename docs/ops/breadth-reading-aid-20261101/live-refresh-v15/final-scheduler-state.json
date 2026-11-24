@@ -1,0 +1,30 @@
+{
+  "job": "gui/501/com.lei.market.observations = {\n\tactive count = 0\n\tpath = /Users/yongbiaoli/Library/LaunchAgents/com.lei.market.observations.plist\n\ttype = LaunchAgent\n\tstate = not running\n\n\tprogram = /opt/homebrew/opt/python@3.11/bin/python3.11\n\targuments = {\n\t\t/opt/homebrew/opt/python@3.11/bin/python3.11\n\t\t/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/launchd/refresh_market_observations.py\n\t}\n\n\tworking directory = /Users/yongbiaoli/Desktop/lei-signal-lab\n\n\tstdout path = /Users/yongbiaoli/Desktop/lei-signal-lab/logs/market-observations.out.log\n\tstderr path = /Users/yongbiaoli/Desktop/lei-signal-lab/logs/market-observations.err.log\n\tinherited environment = {\n\t\tSSH_AUTH_SOCK => /private/tmp/com.apple.launchd.klVHvPsNyQ/Listeners\n\t}\n\n\tdefault environment = {\n\t\tPATH => /usr/bin:/bin:/usr/sbin:/sbin\n\t}\n\n\tenvironment = {\n\t\tPATH => /opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/usr/local/lib:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/yongbiaoli/.codex/tmp/arg0/codex-arg0dXFzT2:/Users/yongbiaoli/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/yongbiaoli/.bun/bin:/Users/yongbiaoli/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/Users/yongbiaoli/Library/Application Support/JetBrains/Toolbox/scripts:/Users/yongbiaoli/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/yongbiaoli/Library/Application Support/JetBrains/Toolbox/scripts\n\t\tPYTHONPATH => /Users/yongbiaoli/Desktop/lei-signal-lab/src\n\t\tXPC_SERVICE_NAME => com.lei.market.observations\n\t}\n\n\tdomain = gui/501 [100002]\n\tasid = 100002\n\tminimum runtime = 10\n\texit timeout = 5\n\truns = 2\n\tlast exit code = 0\n\n\tspawn type = daemon (3)\n\tjetsam priority = 40\n\tjetsam memory limit (active) = (unlimited)\n\tjetsam memory limit (inactive) = (unlimited)\n\tjetsamproperties category = daemon\n\tjetsam thread limit = 32\n\tcpumon = default\n\trun interval = 1800 seconds\n\tprobabilistic guard malloc policy = {\n\t\tactivation rate = 1/1000\n\t\tsample rate = 1/0\n\t}\n\n\tproperties = runatload | inferred program\n}\n",
+  "state": {
+    "erp-cn": {
+      "cutoff": "2026-11-05",
+      "checked_at": "2026-11-05T10:59:03.969643+00:00",
+      "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/breadth-reading-aid-20261101/breadth-reading-aid-20261101-20261105T185903-d3a5b0c36ab0/result/erp-cn",
+      "as_of": "2026-11-04",
+      "target": "/Users/yongbiaoli/.lei_signal_lab/cache/erp_cn_reference_live.json",
+      "overlap_anchors": 51,
+      "sha256": "fe7c0b21dd9fe1a43d3a8ff6a57c513e4e8a10c44241afb5cb4589f30c182b45",
+      "status": "updated"
+    },
+    "erp-us": {
+      "cutoff": "2026-11-04",
+      "checked_at": "2026-11-05T10:59:05.548991+00:00",
+      "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/breadth-reading-aid-20261101/breadth-reading-aid-20261101-20261105T185903-d3a5b0c36ab0/result/erp-us",
+      "as_of": "2026-11-04",
+      "target": "/Users/yongbiaoli/.lei_signal_lab/cache/erp_us_history_live.json",
+      "sha256": "8c8b6f02f36cd7239272fd8ab1494d3b1d454eedda68c3257cc39c5c1b81922b",
+      "status": "updated"
+    },
+    "breadth-cn": {
+      "as_of": "2026-11-05"
+    },
+    "breadth-us": {
+      "as_of": "2026-11-04"
+    }
+  }
+}

@@ -363,6 +363,25 @@ def test_verified_without_fact_binding_rejected(tmp_path):
                for r in result["rejected"][0]["reasons"])
 
 
+@pytest.mark.parametrize("verified", [True, False])
+def test_halt_verified_contract_unsupported_placeholder_retained(tmp_path, verified):
+    rec = _record(fact_type="trading_halt", facts={}, facts_verified=verified,
+                  fact_binding=None, source_fragments=None,
+                  time_evidence={"kind": "unknown", "available_at": None},
+                  allowed_for=["research_signal"] if verified else [])
+    bundle = _bundle(tmp_path, [rec], synthetic=True)
+    result = validate_evidence_bundle(bundle, root=tmp_path, universe=UNIVERSE)
+    assert result["validated"] == []
+    if verified:
+        assert result["unresolved"] == []
+        assert result["rejected"][0]["record_id"] == rec["record_id"]
+        assert any("当前证据包尚未建立停牌事实必需绑定合同" in reason
+                   for reason in result["rejected"][0]["reasons"])
+    else:
+        assert result["rejected"] == []
+        assert result["unresolved"][0]["record_id"] == rec["record_id"]
+
+
 def test_tampered_extraction_output_rejected(tmp_path):
     """抽取输出文件被改（哈希对不上登记）→ 拒绝。"""
     rec = _record()

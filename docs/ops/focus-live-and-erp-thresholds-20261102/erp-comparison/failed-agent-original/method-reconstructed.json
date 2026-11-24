@@ -1,0 +1,25 @@
+{
+  "time": "UNRECOVERED_RUNTIME_TIMESTAMP",
+  "question": "Are first weekly CSI300 ERP crossings at 1/1.5 sigma more frequent and incrementally informative relative to 2 sigma for 63-day stage reversal observation?",
+  "data": {
+    "frozenEligibleWeeks": "docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-effect-display-20261101/compute/eligible-weeks.json",
+    "sha256": "9d86702fb4caf0b4272e9fe6775309c3d01b5d2c8e4ae197a52e41f3294c5a18",
+    "oldResults": "docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-effect-display-20261101/compute/results.json"
+  },
+  "multipliers": [
+    1,
+    1.5,
+    2
+  ],
+  "formula": "Use existing original weekly 3-calendar-year rolling mean and population SD (ddof=0), fully warmed from 2008-11-14, exact strict ERP>mean+k*SD or ERP<mean-k*SD; first crossing if prior adjacent qualified week <=10 calendar days gap had a valid band and was not outside same side.",
+  "outcome": "Next trading day close to +63 trading days, also 21/126; CSI300 price-only change and min/max path from entry close. All mature band weeks are baseline.",
+  "baseline": "Same prior63day price-return bin, close>SMA200 state, pre2017/post2016 calendar cell; non-event eligible weeks with >=5 controls per cell; event-weighted controls.",
+  "increment": "Compare 1/1.5 first-crossing events to 2; identify earlier same-side episodes within 126 trading days and standalone events. Compare matched event effects and timing/coverage, not raw set subtraction, as crossing dates shift.",
+  "uncertainty": "Resample nonoverlapping 2-calendar-year blocks 2000 times, seed 20261101, replicate event-weighted matched contrast; also pre/post2017, same-side 63-day cooldown, leave-one-block-out.",
+  "budget": {
+    "core_batches": 1,
+    "repair_reruns": 2,
+    "source_requests": 6
+  },
+  "evidenceStage": "reused selected historical data, exploratory threshold comparison; no new source/market data"
+}

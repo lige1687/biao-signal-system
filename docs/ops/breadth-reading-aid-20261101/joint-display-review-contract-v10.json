@@ -1,0 +1,37 @@
+{
+  "mission": "Audit existing joint breadth display predicates and evidence provenance from saved local files",
+  "task_scope": [
+    "Read exact existing AND semantics, treatment of missing and equality, matching price-date highlight path",
+    "Distinguish source-supported thresholds from legacy local query settings and propose minimal large-chart acceptance"
+  ],
+  "read_only_paths": [
+    "web/src/components/trend/zones.ts",
+    "web/src/components/market-style/BreadthComparison.tsx",
+    "web/src/components/market-style/breadth-comparison.css",
+    "docs/ops/breadth-reading-aid-20261101/institutional-source-facts-v8.json",
+    "docs/ops/breadth-reading-aid-20261101/evidence-review-v6.md",
+    "docs/experiments/breadth-erp-ma200-increment-review-2026-11-02.md",
+    "docs/ops/breadth-reading-aid-20261101/joint-source-facts-v10.json"
+  ],
+  "write_paths": [
+    "docs/ops/breadth-reading-aid-20261101/joint-display-review-v10.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Concise audit with exact lines, qualifications, defects or acceptance criteria"
+  ],
+  "stop_conditions": [
+    "Need other write scope",
+    "Need new financial calculation or outside-source access"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

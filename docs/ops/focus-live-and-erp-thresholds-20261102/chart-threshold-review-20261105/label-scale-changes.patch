@@ -1,0 +1,225 @@
+--- price-projection.tsx.before-followup
++++ price-projection.tsx
+@@ -3,7 +3,7 @@
+ import * as echarts from "echarts";
+ import { fundamentalsApi } from "../../api/client";
+ import type { FocusMomentumObservation } from "./data";
+-import { adjacentEventIndices, normalizeWindow, panWindow, visibleDateRange, windowAroundDate, zoomWindow, type ChartWindow } from "./chart-navigation";
++import { adjacentEventIndices, normalizeWindow, panWindow, recentMonthWindow, visibleDateRange, visibleYBounds, windowAroundDate, zoomWindow, type ChartWindow } from "./chart-navigation";
+ import { buildFocusPriceView, type FocusPriceView, type ProjectionRange } from "./price-projection-data";
+ import { crossingMarkerSeries, filterCrossings, type CrossingFilter } from "./crossing-markers";
+ import "./price-projection.css";
+@@ -60,11 +60,10 @@
+     if (!chart.current) return;
+     const crossings = markNegative ? new Map(view.zeroCrossings.map(item => [item.date, item])) : new Map();
+     const selectedLine = selected && markNegative ? [{ xAxis: selected.date, lineStyle: { color: eventColor, width: 1.5, type: "dashed" as const }, label: { show: false } }] : [];
+-    const pointLabelPosition = selected && view.dates.indexOf(selected.date) > view.dates.length * (windowRef.current.start + (windowRef.current.end - windowRef.current.start) * 0.65) / 100 ? "left" : "right";
+-    const selectedPoint = (value: number, label: string) => ({
++    const selectedPoint = (value: number) => ({
+       symbol: "circle", symbolSize: 10, silent: true,
+       itemStyle: { color: "#fff", borderColor: eventColor, borderWidth: 2.5 },
+-      label: { show: true, position: pointLabelPosition, distance: 9, color: eventColor, fontWeight: 600, backgroundColor: "#fffffff2", padding: [5, 7], borderRadius: 4, formatter: label },
++      label: { show: false },
+       data: selected && markNegative ? [{ coord: [selected.date, value] }] : [],
+     });
+     const option = {
+@@ -72,11 +71,11 @@
+       textStyle: { color: COLORS.text, fontFamily: "inherit" },
+       title: [
+         { text: `${priceName}价格（点）`, left: 4, top: 4, textStyle: { fontSize: 13, fontWeight: 600, color: COLORS.price } },
+-        { text: "焦点动量 · 过去20日平均涨跌", left: 4, top: "50%", textStyle: { fontSize: 13, fontWeight: 600, color: COLORS.focus } },
++        { text: "焦点动量 · 过去20日平均涨跌", left: 4, top: "48%", textStyle: { fontSize: 13, fontWeight: 600, color: COLORS.focus } },
+       ],
+       grid: [
+-        { left: 62, right: 30, top: 38, height: "31%" },
+-        { left: 62, right: 30, top: "58%", height: "27%" },
++        { left: 62, right: 30, top: 38, height: "35%" },
++        { left: 62, right: 30, top: "54%", height: "32%" },
+       ],
+       tooltip: {
+         trigger: "axis", confine: true, backgroundColor: "#fffffff5", borderColor: "#d8dcd4", textStyle: { color: "#373d38" },
+@@ -94,11 +93,11 @@
+       },
+       axisPointer: { link: [{ xAxisIndex: [0, 1] }], lineStyle: { color: "#8d948a", type: "dashed" }, label: { backgroundColor: "#5e675e" } },
+       xAxis: [0, 1].map(gridIndex => ({ type: "category", gridIndex, data: view.dates, boundaryGap: false,
+-        axisLabel: { color: COLORS.text, hideOverlap: true, showMinLabel: true, showMaxLabel: true, alignMinLabel: "left", alignMaxLabel: "right", margin: 12, formatter: (date: string) => date },
++        axisLabel: { color: COLORS.text, hideOverlap: true, showMinLabel: true, showMaxLabel: false, alignMinLabel: "left", margin: 12, formatter: (date: string) => date },
+         axisLine: { lineStyle: { color: "#b8bdb4" } }, axisTick: { show: false } })),
+       yAxis: [
+-        { type: "value", gridIndex: 0, scale: true, axisLabel: { color: COLORS.text }, splitLine: { lineStyle: { color: COLORS.grid } } },
+-        { type: "value", gridIndex: 1, scale: true, min: ({ min }: { min: number }) => Math.min(0, Math.floor(min / 5) * 5), max: ({ max }: { max: number }) => Math.max(0, Math.ceil(max / 5) * 5), axisLabel: { color: COLORS.text, formatter: "{value}%" }, splitLine: { lineStyle: { color: COLORS.grid } } },
++        { type: "value", gridIndex: 0, scale: true, ...visibleYBounds(view.prices, windowRef.current), axisLabel: { color: COLORS.text, formatter: (value: number) => value.toLocaleString("zh-CN", { maximumFractionDigits: 0 }) }, splitLine: { lineStyle: { color: COLORS.grid } } },
++        { type: "value", gridIndex: 1, scale: true, ...visibleYBounds(view.focusPercent, windowRef.current, true), axisLabel: { color: COLORS.text, formatter: (value: number) => `${Number(value.toFixed(1))}%` }, splitLine: { lineStyle: { color: COLORS.grid } } },
+       ],
+       dataZoom: [
+         { type: "inside", xAxisIndex: [0, 1], ...windowRef.current, zoomOnMouseWheel: true, moveOnMouseWheel: "shift", moveOnMouseMove: true },
+@@ -108,10 +107,10 @@
+       ],
+       series: [
+         { id: "price", name: priceName, type: "line", xAxisIndex: 0, yAxisIndex: 0, data: view.prices, showSymbol: false, connectNulls: false, lineStyle: { width: 2, color: COLORS.price }, itemStyle: { color: COLORS.price },
+-          markLine: { silent: true, symbol: "none", data: selectedLine }, markPoint: selectedPoint(selected?.price ?? 0, `${selected?.date ?? ""} ${selected?.direction === "up" ? "转正 ↑" : "转负 ↓"}\n${priceName} ${selected?.price.toFixed(2) ?? ""} 点`) },
++          markLine: { silent: true, symbol: "none", data: selectedLine }, markPoint: selectedPoint(selected?.price ?? 0) },
+         { id: "focus", name: "焦点动量", type: "line", xAxisIndex: 1, yAxisIndex: 1, data: view.focusPercent, showSymbol: false, connectNulls: false, lineStyle: { width: 2, color: COLORS.focus }, itemStyle: { color: COLORS.focus },
+-          markLine: { silent: true, symbol: "none", data: [{ yAxis: 0, label: { show: true, formatter: "0% · 涨跌分界", position: "insideEndTop", color: COLORS.text }, lineStyle: { color: COLORS.zero, type: "dashed", width: 1 } }, ...selectedLine] },
+-          markPoint: selectedPoint(selected?.focusPercent ?? 0, `${selected?.date ?? ""}\n动量 ${selected?.focusPercent.toFixed(2) ?? ""}%`) },
++          markLine: { silent: true, symbol: "none", data: [{ yAxis: 0, label: { show: false }, lineStyle: { color: COLORS.zero, type: "dashed", width: 1 } }, ...selectedLine] },
++          markPoint: selectedPoint(selected?.focusPercent ?? 0) },
+         ...crossingMarkerSeries(markNegative ? visibleEvents : [], visible.count),
+         { id: "negative-focus", name: "__negative_focus", type: "line", xAxisIndex: 1, yAxisIndex: 1, data: markNegative ? view.focusPercent.map(value => value === null ? null : Math.min(0, value)) : [], silent: true, showSymbol: false, connectNulls: false, tooltip: { show: false }, lineStyle: { opacity: 0 }, areaStyle: { color: "#c69b72", opacity: 0.13, origin: 0 }, emphasis: { disabled: true }, z: 0 },
+       ],
+@@ -122,7 +121,7 @@
+       previousChartData.current = { view, priceName, markNegative };
+     } else {
+       // Keep the active dataZoom gesture intact while the selected date follows the viewport.
+-      chart.current.setOption({ series: option.series.filter(series => ["price", "focus", "price-crossings", "focus-crossings"].includes(series.id)).map(series => series.id.endsWith("-crossings") ? series : {
++      chart.current.setOption({ yAxis: option.yAxis, series: option.series.filter(series => ["price", "focus", "price-crossings", "focus-crossings"].includes(series.id)).map(series => series.id.endsWith("-crossings") ? series : {
+         id: series.id, markLine: "markLine" in series ? series.markLine : undefined, markPoint: "markPoint" in series ? series.markPoint : undefined,
+       }) });
+     }
+@@ -133,6 +132,10 @@
+     chart.current?.dispatchAction({ type: "dataZoom", ...bounded }); setWindow(bounded);
+   };
+   const selectEvent = (date: string) => { setSelectedDate(date); navigate(windowAroundDate(view.dates, date, windowRef.current)); };
++  const recentWindowSelected = (months: number) => {
++    const target = recentMonthWindow(view.dates, months);
++    return Math.abs(window.start - target.start) < 0.01 && Math.abs(window.end - target.end) < 0.01;
++  };
+   return <>
+     {markNegative && <div className="fmp-event-filter">
+       <div className="fmp-controls" role="group" aria-label="穿零标记方向">
+@@ -154,17 +157,19 @@
+           <button type="button" aria-label="下一次穿零" disabled={adjacent.next < 0} onClick={() => selectEvent(filteredEvents[adjacent.next].date)}>›</button>
+         </div>
+       </div>
+-      {selected && <><div className="fmp-event-values" aria-live="polite"><strong style={{ color: eventColor }}>{selected.direction === "up" ? "↑ 由负转正" : "↓ 由正转负"}</strong><span>{priceName} <b>{selected.price.toFixed(2)}</b> 点</span><span>动量 <b>{selected.focusPercent.toFixed(2)}%</b></span></div><button type="button" className="fmp-nearby" onClick={() => navigate(windowAroundDate(view.dates, selected.date, windowRef.current, true))}>看这一天附近 ↗</button></>}
++      {selected && <><div className="fmp-event-values" aria-live="polite"><strong style={{ color: eventColor }}>{selected.direction === "up" ? "↑ 由负转正" : "↓ 由正转负"}</strong><span>{priceName} <b>{selected.price.toFixed(2)}</b> 点</span><span>动量 <b>{selected.focusPercent.toFixed(2)}%</b></span></div><button type="button" className="fmp-nearby" onClick={() => navigate(windowAroundDate(view.dates, selected.date, windowRef.current, true))}>放大这次穿零 ↗</button></>}
+     </div>}
+     <div className="fmp-navigation">
+       <div className="fmp-controls" role="group" aria-label="图表缩放和平移">
++        <button type="button" aria-pressed={recentWindowSelected(3)} onClick={() => navigate(recentMonthWindow(view.dates, 3))}>最近3个月</button>
++        <button type="button" aria-pressed={recentWindowSelected(6)} onClick={() => navigate(recentMonthWindow(view.dates, 6))}>最近6个月</button>
+         <button type="button" onClick={() => navigate(zoomWindow(window, 0.6))} disabled={window.end - window.start <= 0.51}>＋ 放大</button>
+         <button type="button" onClick={() => navigate(zoomWindow(window, 1.6))} disabled={window.start === 0 && window.end === 100}>－ 缩小</button>
+         <button type="button" onClick={() => navigate(panWindow(window, -0.5))} disabled={window.start <= 0}>← 左移</button>
+         <button type="button" onClick={() => navigate(panWindow(window, 0.5))} disabled={window.end >= 100}>右移 →</button>
+-        <button type="button" onClick={() => navigate({ start: 0, end: 100 })} disabled={window.start === 0 && window.end === 100}>还原</button>
+-      </div>
+-      <span>{visible.start ?? "—"} — {visible.end ?? "—"}</span>
++        <button type="button" onClick={() => navigate({ start: 0, end: 100 })} disabled={window.start === 0 && window.end === 100}>返回总览</button>
++      </div>
++      <span>{visible.start ?? "—"} — {visible.end ?? "—"} · 纵轴随当前区间缩放</span>
+     </div>
+     <div ref={node} className="fmp-chart" role="img" aria-label={`${priceName}价格与焦点动量。石墨色价格线，灰紫色动量线；${markNegative ? `上下两图各显示${visibleEvents.length}个穿零标记，绿色向上三角为转正，橙色向下三角为转负。` : "穿零标记已隐藏。"}圆环只定位选中日期。${selected && markNegative ? `已定位${selected.date}，动量${selected.direction === "up" ? "转正" : "转负"}，指数${selected.price.toFixed(2)}点，动量${selected.focusPercent.toFixed(2)}%。` : ""}可用按钮、滚轮或底部手柄缩放。`} />
+   </>;
+@@ -173,7 +178,7 @@
+ export function FocusMomentumPriceProjection({ data }: { data: FocusMomentumObservation }) {
+   const [market, setMarket] = useState<"cn" | "us">("cn");
+   const [priceKey, setPriceKey] = useState<PriceKey>("hs300");
+-  const [range, setRange] = useState<ProjectionRange>(1);
++  const [range, setRange] = useState<ProjectionRange>(3);
+   const [markNegative, setMarkNegative] = useState(true);
+   const overlay = useQuery({
+     queryKey: ["fundOverlay", 20],
+@@ -186,7 +191,7 @@
+     [priceSeries, data.series, data.asOf, range]);
+ 
+   return <section className="fmp-projection" aria-labelledby="fmp-title">
+-    <header className="fmp-heading"><div><h3 id="fmp-title">价格与焦点动量</h3><p>上图看指数，下图看活跃股表现。</p></div>
++    <header className="fmp-heading"><div><h3 id="fmp-title">价格与焦点动量</h3><p>总览看阶段；放大穿零附近，看价格与动量的对应变化。</p></div>
+       <div className="fmp-controls" role="group" aria-label="历史范围">
+         {RANGES.map((option) => <button key={option.value} type="button" aria-pressed={range === option.value} onClick={() => setRange(option.value)}>{option.label}</button>)}
+       </div>
+--- price-projection.css.before-followup
++++ price-projection.css
+@@ -28,7 +28,7 @@
+ .fmp-navigation { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 5px 14px; margin-top: 10px; }
+ .fmp-navigation > span { color: var(--text-secondary); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
+ .fmp-navigation .fmp-controls button { border: 1px solid var(--border-subtle); background: var(--bg-card-hover); }
+-.fmp-chart { width: 100%; min-width: 0; height: 470px; margin-top: 4px; }
++.fmp-chart { width: 100%; min-width: 0; height: clamp(600px, 44vw, 780px); margin-top: 4px; }
+ .fmp-error { color: var(--error); }
+ .fmp-error button { margin-left: 7px; border: 1px solid currentColor; border-radius: var(--radius-sm); background: transparent; color: inherit; cursor: pointer; padding: 2px 8px; }
+ .fmp-mark { margin-top: 8px; }
+--- chart-navigation.ts.before-followup
++++ chart-navigation.ts
+@@ -32,6 +32,34 @@
+   return { start: dates[first], end: dates[last], count: last - first + 1 };
+ }
+ 
++/** Calendar-month shortcuts stay within the selected overview's available history. */
++export function recentMonthWindow(dates: string[], months: number): ChartWindow {
++  if (dates.length < 2) return { start: 0, end: 100 };
++  const end = new Date(`${dates[dates.length - 1]}T00:00:00Z`);
++  if (!Number.isFinite(end.getTime())) return { start: 0, end: 100 };
++  const day = end.getUTCDate();
++  end.setUTCDate(1);
++  end.setUTCMonth(end.getUTCMonth() - months);
++  const monthEnd = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth() + 1, 0)).getUTCDate();
++  end.setUTCDate(Math.min(day, monthEnd));
++  const cutoff = end.toISOString().slice(0, 10);
++  const first = dates.findIndex(date => date >= cutoff);
++  return { start: Math.max(0, first) / (dates.length - 1) * 100, end: 100 };
++}
++
++/** Scale each panel from the visible dates only; momentum retains the zero anchor. */
++export function visibleYBounds(values: (number | null)[], window: ChartWindow, includeZero = false): { min: number | undefined; max: number | undefined } {
++  const current = normalizeWindow(window);
++  const first = Math.round((values.length - 1) * current.start / 100);
++  const last = Math.round((values.length - 1) * current.end / 100);
++  const valid = values.slice(first, last + 1).filter((value): value is number => typeof value === "number" && Number.isFinite(value));
++  if (!valid.length) return { min: undefined, max: undefined };
++  const low = includeZero ? Math.min(0, ...valid) : Math.min(...valid);
++  const high = includeZero ? Math.max(0, ...valid) : Math.max(...valid);
++  const padding = (high - low || Math.abs(low) * 0.02 || 1) * 0.08;
++  return { min: low - padding, max: high + padding };
++}
++
+ /** Keep a chosen date on screen; optionally inspect its surrounding trading days. */
+ export function windowAroundDate(dates: string[], date: string, window: ChartWindow, nearby = false): ChartWindow {
+   const current = normalizeWindow(window);
+--- chart-navigation.test.mjs.before-followup
++++ chart-navigation.test.mjs
+@@ -1,6 +1,6 @@
+ import assert from "node:assert/strict";
+ import test from "node:test";
+-import { adjacentEventIndices, normalizeWindow, panWindow, visibleDateRange, windowAroundDate, zoomWindow } from "./chart-navigation.ts";
++import { adjacentEventIndices, normalizeWindow, panWindow, recentMonthWindow, visibleDateRange, visibleYBounds, windowAroundDate, zoomWindow } from "./chart-navigation.ts";
+ 
+ test("zoom stays bounded and reset can restore the full window", () => {
+   assert.deepEqual(zoomWindow({ start: 0, end: 100 }, 0.5), { start: 25, end: 75 });
+@@ -36,3 +36,24 @@
+   assert.deepEqual(adjacentEventIndices(dates, dates[2], dates[0], dates[2]), { previous: 1, next: -1 });
+   assert.deepEqual(adjacentEventIndices([], undefined, null, null), { previous: -1, next: -1 });
+ });
++
++test("month shortcuts clamp leap-year month ends and short histories", () => {
++  const dates = ["2024-02-28", "2024-02-29", "2024-03-01", "2024-05-31"];
++  assert.deepEqual(visibleDateRange(dates, recentMonthWindow(dates, 3)), { start: "2024-02-29", end: "2024-05-31", count: 3 });
++  assert.deepEqual(recentMonthWindow(dates, 6), { start: 0, end: 100 });
++  assert.deepEqual(recentMonthWindow([], 3), { start: 0, end: 100 });
++});
++
++test("local price bounds exclude off-screen extremes and ignore missing quotes", () => {
++  assert.deepEqual(visibleYBounds([1000, 110, null, 120, 10], { start: 25, end: 75 }), { min: 109.2, max: 120.8 });
++  assert.deepEqual(visibleYBounds([null, null], { start: 0, end: 100 }), { min: undefined, max: undefined });
++  const flat = visibleYBounds([100, 100], { start: 0, end: 100 });
++  assert.ok(flat.min < 100 && flat.max > 100);
++});
++
++test("momentum bounds keep zero visible in both positive and negative windows", () => {
++  const positive = visibleYBounds([5, 10], { start: 0, end: 100 }, true);
++  const negative = visibleYBounds([-10, -5], { start: 0, end: 100 }, true);
++  assert.ok(positive.min <= 0 && positive.max > 10);
++  assert.ok(negative.min < -10 && negative.max >= 0);
++});
+--- crossing-markers.ts.before-followup
++++ crossing-markers.ts
+@@ -5,7 +5,7 @@
+ 
+ /** Keep every contemporaneously known event; density only changes symbol size. */
+ export function crossingMarkerSeries(events: ZeroCrossing[], visibleCount: number) {
+-  const size = visibleCount > 750 ? 7 : visibleCount > 250 ? 8 : 10;
++  const size = visibleCount > 750 && events.length > 120 ? 7 : visibleCount > 250 && events.length > 60 ? 9 : 11;
+   return (["price", "focus"] as const).map((panel, axisIndex) => ({
+     id: `${panel}-crossings`, name: "动量转正或转负", type: "scatter" as const,
+     xAxisIndex: axisIndex, yAxisIndex: axisIndex, z: 6,

@@ -1,0 +1,39 @@
+{
+  "recordedAt": "2026-11-08T13:01:14.716782+00:00",
+  "approved": {
+    "sourceOperations": 5600,
+    "responseBytes": 52428800,
+    "networkWallMinutes": 30,
+    "connections": 4
+  },
+  "actual": {
+    "sourceOperations": 5360,
+    "collectorOperations": 5319,
+    "initialProbeOperations": 25,
+    "anomalyOperations": 8,
+    "rootWebOperations": 8,
+    "knownResponseBytes": 19243807,
+    "rootWebTransportBytes": null,
+    "rootWebBytesExplanation": "Web tool does not expose wire bytes. Client returned source text is retained; root reserved 2 MiB within response budget, not claimed as measured transport.",
+    "rootToolReturnFileBytes": 119867,
+    "networkStarted": "2026-11-08T20:30:46.537129+08:00",
+    "networkStopConfirmedBy": "2026-11-08T20:55:41+08:00",
+    "networkDeadline": "2026-11-08T21:00:46.537129+08:00",
+    "noNewNetworkAfterStop": true
+  },
+  "rootSources": {
+    "lifecycle-search-results.json": 2,
+    "lifecycle-search-results-2.json": 2,
+    "legacy-exception-source-search.json": 2,
+    "zero-amount-status-search.json": 2
+  },
+  "ledger": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-refresh-20261108/collection-requests.jsonl",
+    "sha256": "888897e87437b9fb594f3fd28b27154c0a160eead2ab2c41c42e23cc7f410dce"
+  },
+  "localStorage": {
+    "stageFilesBytes": 22026809,
+    "initial5MiBEstimateExceeded": true,
+    "explanation": "Preserved 8.5 MB before snapshot plus 9.17 MB failed diagnostic. Actual stage is about 20 MiB; controller notified. No deletion; raw and derived market data are external."
+  }
+}

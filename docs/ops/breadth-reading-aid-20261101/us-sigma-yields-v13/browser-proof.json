@@ -1,0 +1,34 @@
+{
+  "testedAt": "2026-11-03T15:49:23.309Z",
+  "viewport": "desktop 1280x900; reset after verification",
+  "homepageCard": "标普500 · 股债利差\n收起\n利差偏低，尚未触及下轨\n-0.95\n个百分点\n○ 1.5σ · 内轨\n下 -1.02\n上 -0.15\n◆ 2σ · 外轨\n下 -1.16\n上 -0.01\n股债利差\n上轨 · 相对便宜\n下轨 · 相对偏贵\n2021-10-18\n2026-11-02\n\n此前3年滚动参考 · 内轨较早观察，外轨更极端\n\n较 2026-10-02 上升 0.37 个百分点\n\n上轨看相对估值改善，下轨看估值压力；点大图对照价格是否修复或转弱。\n\n截至 2026-11-02 · 盈利端月度更新 · 触轨收益未验证\n\n看大图 · 轨道与价格 ↗\n参考依据",
+  "checks": [
+    "1.5/2 mini toggle and last-selected disabled",
+    "detail 1.5-only removes ±2 labels",
+    "same-date 2020-03-02 2σ event selection zoom",
+    "price-marker click selects 2026-10-23 1.5σ lower event",
+    "5Y 4.70%, 10Y 4.91%, +21bp as of 2026-11-02 visible",
+    "CN 6.12, 1.5 bounds5.06/6.74, 2 bounds4.78/7.02 unchanged",
+    "Escape closes dialog",
+    "reload restores default two rails"
+  ],
+  "logsAfterReload": [
+    {
+      "level": "warn",
+      "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.",
+      "timestamp": "2026-11-03T15:48:24.658Z",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=00486895"
+    },
+    {
+      "level": "warn",
+      "message": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.",
+      "timestamp": "2026-11-03T15:48:24.658Z",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=00486895"
+    }
+  ],
+  "locatorAttempts": [
+    "回看穿轨 was visible text, actual accessible label 查看穿轨日期; corrected from snapshot",
+    "generic img matched wrapper and SVG; corrected to named wrapper",
+    "CN exact button text mismatch; scoped regex matched confirmed visible button"
+  ]
+}

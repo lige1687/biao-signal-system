@@ -1,0 +1,275 @@
+{
+  "document_type": "non_executable_gap_inventory",
+  "not_a_workflow_contract": true,
+  "scope": {
+    "assets": [
+      "510300.SS",
+      "510050.SS",
+      "510500.SS",
+      "588000.SS",
+      "512400.SS",
+      "512800.SS"
+    ],
+    "input_cutoff": "2026-06-26",
+    "basis": "most recent accepted six-ETF input handoff; no current opportunity contract found",
+    "research_execution_authorized": false
+  },
+  "definitions_registry_version": "1.6.13",
+  "common_missing": [
+    {
+      "item": "Accepted native 510300 X adapter and event-to-deduplicated-case mapping",
+      "value": null,
+      "next": "obtain existing accepted original; do not reconstruct from the reported event count"
+    },
+    {
+      "item": "Current opportunity-quality full definition/draft",
+      "value": null,
+      "next": "obtain existing original or explicitly confirm semantic choices; no runnable defaults"
+    },
+    {
+      "item": "Six-ETF native opportunity qualification counts and complete time/calendar/price bindings",
+      "value": null,
+      "next": "freeze source/semantic scope before separately authorized qualification; no X/Y calculated here"
+    },
+    {
+      "item": "Price unit, currency, historical availability and SSE calendar equivalence",
+      "value": null,
+      "next": "retain previous six-ETF handoff limitations; raw price domain is economic_price, not executable currency quotes"
+    }
+  ],
+  "candidates": [
+    {
+      "name": "风险距离",
+      "priority": 1,
+      "financial_use": "描述当前事件收盘到原失效位的距离",
+      "definition_ref": null,
+      "fixed_components": {
+        "A": "entry_event.evidence.close at entry_event.available_date",
+        "C": "native A3 touch-through-trigger inclusive minimum, entry_event.evidence.stop_price",
+        "raw_distance": "A-C",
+        "ATR": "20-TR simple moving average, first TR unknown",
+        "missing": "C unavailable or C>=A => unavailable; never promote production entry_price=0 missing placeholder"
+      },
+      "unknown_expression_unit": null,
+      "native_feature_kind": null,
+      "mapping": "No equivalent native kind. mixed.swing_rr_distance@1.0.0 uses different pivot stop/target definitions.",
+      "current_contract_fields": {
+        "target": null,
+        "baseline": null,
+        "split": null,
+        "qualification": null
+      },
+      "stage_available": "definition and existing-field mapping review",
+      "next_minimal_action": "Confirm raw/percentage/ATR expression and definition identity; then propose a minimal native event-field adapter with artificial boundary cases.",
+      "sources": [
+        "src/lei_signal/rules/reward_risk_filter.py:158",
+        "src/lei_signal/rules/reward_risk_filter.py:172",
+        "src/lei_signal/rules/reward_risk_filter.py:211",
+        "docs/research/definitions.v1.json:6740",
+        "docs/experiments/raw/native-opportunity-eight-etf-input-inventory-2026-10-06/README.md:51"
+      ]
+    },
+    {
+      "name": "B1空间",
+      "priority": 2,
+      "financial_use": "识别当时已有上方目标及距离，不承诺目标会实现",
+      "prior_definition_ref": "research.space.prior_upper_pivot@1.0.0",
+      "fixed_components": {
+        "B1": "most recent pivot_date among confirmed strict 3-left/3-right highs within 730 calendar days, available_date<=t and price>close(t)",
+        "none": "null, retained as no computable upper target, not zero or infinity",
+        "prior_added": "(B1-close)/ATR20 using prior A01 seeded recursive ATR",
+        "opportunity_ATR": "ATR20_SMA; not the old recursive ATR"
+      },
+      "existing_native_kind": "space_prior_target",
+      "equivalent_for_current_opportunity": false,
+      "mapping_difference": [
+        "old contract completed weekly observations versus native A3 events",
+        "old continuous OHLC252/trend conditions versus new event eligibility",
+        "old recursive ATR versus current simple ATR",
+        "old two provider-index series versus current six ETF economic-price inputs"
+      ],
+      "current_contract_fields": {
+        "target": null,
+        "baseline": null,
+        "split": null,
+        "qualification": null
+      },
+      "prior_fixed_contract": {
+        "path": "docs/experiments/raw/space-prior-target-2026-09-30/return-freeze/contract.json",
+        "sha256": "68df8f1c90c767d4ba9a938e87e22f525e3482a15d842ec35a688b8d7afb94b3",
+        "target": {
+          "kind": "forward_return",
+          "start_offset": 1,
+          "end_offset": 21,
+          "entry_field": "close",
+          "unit": "percentage_point",
+          "price_measure": "provider_index_price"
+        },
+        "baseline": [
+          "prior_high60_atr",
+          "ret20",
+          "vol20",
+          "distance60_atr"
+        ],
+        "split": {
+          "label_policy": "purge",
+          "evaluation_label_policy": "contained",
+          "folds": [
+            {
+              "train_end": "2024-12-31",
+              "eval_start": "2025-01-01",
+              "eval_end": "2025-12-31"
+            },
+            {
+              "train_end": "2025-12-31",
+              "eval_start": "2026-01-01",
+              "eval_end": "2026-06-30"
+            }
+          ]
+        },
+        "qualification_declarations": {
+          "qualification_artifact": "docs/experiments/raw/space-prior-target-2026-09-30/qualification.json",
+          "qualification_sha256": "0ed552ceadadaa499ae8fd21b3eb0ece04d11a285b8f58b487547709800259ac",
+          "outcome_values_used_for_design": false,
+          "unit": "已安排资产周末；全部356，含不合格/反例，非独立事件数",
+          "assets": 2,
+          "observations": 356,
+          "dates": 178,
+          "episodes": null,
+          "paired_support": "有目标且同期结果成熟；2025训练66评价39，2026H1训练113评价27；共同支持逐行留档",
+          "dependence": "两相关指数、16个出现周观察的上行段、重叠20日窗口，同日共同日期分块",
+          "model_feature_count": 5,
+          "rationale": "固定有限比较可以估计，但区间和跨期缺组限制结论；不运行大模型或参数搜索，详见method-decision.md",
+          "decision": "estimate"
+        },
+        "qualification_recomputed_here": false
+      },
+      "declaration_review": "unchanged prior S01 return contract passed, exit0; current opportunity contract not created",
+      "stage_available": "existing S01 declaration review; current opportunity semantic/field mapping only",
+      "next_minimal_action": "Document the current event clock and ATR difference, preserve absent targets, then propose artificial boundary checks after definitions are confirmed.",
+      "sources": [
+        "src/lei_signal/research/question_contract.py:378",
+        "docs/research/definitions.v1.json:9305",
+        "docs/experiments/raw/space-prior-target-2026-09-30/protocol.md:8"
+      ]
+    },
+    {
+      "name": "趋势PPO",
+      "priority": 3,
+      "financial_use": "比较同类标的的趋势强度，不能单独表达趋势转折或买卖点",
+      "external_definition_ref": "research.selection.ema12_26_normalized_spread@0.1.0",
+      "registered_in_current_global_objects": false,
+      "fixed_formula": "100*(EMA12-EMA26)/EMA26; signed daily line",
+      "native_feature_kind": null,
+      "precise_implementation_available_locally": false,
+      "unknown_implementation": [
+        "EMA initialization from the original implementation",
+        "gap/recovery and denominator handling",
+        "joint 252-real-quote eligibility for current opportunities"
+      ],
+      "current_contract_fields": {
+        "target": null,
+        "baseline": null,
+        "split": null,
+        "qualification": null
+      },
+      "prior_fixed_summary": {
+        "target": "next trading close to the 21st trading close, 20 close intervals",
+        "baseline": "fixed 40 controls; complete names and transformations not locally available",
+        "split": {
+          "broad_etf": [
+            {
+              "fold": "2025",
+              "train_start": "2022-01-04",
+              "train_end": "2024-12-31",
+              "training_labels_end": "2024-12-09",
+              "evaluation_start": "2025-01-02",
+              "evaluation_end": "2025-12-31"
+            },
+            {
+              "fold": "2026H1",
+              "train_start": "2022-01-04",
+              "train_end": "2025-12-31",
+              "training_labels_end": "2025-12-08",
+              "evaluation_start": "2026-01-05",
+              "evaluation_end": "2026-06-30"
+            }
+          ],
+          "sector_etf": [
+            {
+              "fold": "2025",
+              "train_start": "2022-01-04",
+              "train_end": "2024-12-31",
+              "training_labels_end": "2024-12-30",
+              "evaluation_start": "2025-01-02",
+              "evaluation_end": "2025-12-31"
+            },
+            {
+              "fold": "2026H1",
+              "train_start": "2022-01-04",
+              "train_end": "2025-12-31",
+              "training_labels_end": "2025-12-15",
+              "evaluation_start": "2026-01-05",
+              "evaluation_end": "2026-06-30"
+            }
+          ]
+        },
+        "qualification": "old weekly same-class green/common-support/mature-label eligibility; does not qualify six-ETF A3 events",
+        "existing_result": "no robust conditional increment established for the old fixed purpose; no threshold change here"
+      },
+      "local_addendum_contract": {
+        "path": "data/local-integration/weekly-ppo-rankic-register-20261005/package/payload/weekly_ppo_rank_ic_addendum/contract.json",
+        "schema": "weekly-PPO-posthoc-RankIC-addendum/1",
+        "is_native_workflow_contract": false,
+        "review_invoked": false
+      },
+      "needed_originals": {
+        "contract.json": {
+          "sha256": "5a0444d8e7ee4df62ba4d5b8ea1f3913f03461b4fb65f434e2cd4f05f5a60ede",
+          "bytes": 40157
+        },
+        "model-metadata.json": {
+          "sha256": "f7a992e9e44ba383180341cf45d3064621433751e106d8b29fe51954e31305c4",
+          "bytes": 243662
+        },
+        "research-feature-catalog.json": {
+          "sha256": "6bf3505bb4fa082e1b6a355f5b9bcc5c946d7ecd30576bc3d04dc8b3878ea4e7",
+          "bytes": 1299
+        },
+        "weekly_ppo.py": {
+          "sha256": "5eaf7d038c9806621c3a66c99c7670a4fd07710af988b285e68dab2c74739dda",
+          "bytes": 48064
+        }
+      },
+      "original_library_file_id": "libfile_1fb69a0404c88191964b1e0b48421a87",
+      "source_zip_sha256": "ae0b072081c2d2692b0e0f22a1b03d8c9214517d8c5c9042020b5352718cca7e",
+      "stage_available": "existing definition/result inventory only; not native declaration review",
+      "next_minimal_action": "Obtain only missing original metadata/code, verify exact formula/eligibility, then propose a native-kind mapping; do not substitute feature_id as kind.",
+      "sources": [
+        "docs/experiments/weekly-ppo-information-2026-10-05.md:9",
+        "docs/experiments/weekly-ppo-information-2026-10-05.md:15",
+        "src/lei_signal/research/question_contract.py:302"
+      ]
+    }
+  ],
+  "checks": {
+    "native_calls": [
+      {
+        "mode": "--review-workflow-contract",
+        "contract": "docs/experiments/raw/space-prior-target-2026-09-30/return-freeze/contract.json",
+        "exit_code": 0,
+        "execution_authorized": false
+      }
+    ],
+    "ordinary_workflow_preflight_evaluate_called": false,
+    "new_X_Y_calculated": false,
+    "family_ledger_write_requested": false,
+    "threshold_changes": false,
+    "zero_used_for_unknown_fields": false
+  },
+  "next_order": [
+    "confirm current opportunity contract and risk-distance unit",
+    "propose shared native event/C/ATR/B1 adapter boundaries",
+    "resolve PPO original implementation and map only after exact equivalence review"
+  ]
+}

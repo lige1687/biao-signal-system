@@ -1,0 +1,43 @@
+{
+  "mission": "诊断日成交额集中度9月1日至11月6日覆盖缺口并给出最小补齐取数方案，不取数不改源",
+  "task_scope": [
+    "复用旧集中度原件和覆盖门禁",
+    "定位10月19日与23日缺股及10月26日起数据可得性",
+    "识别已登记本地来源与最小公共取数API，估计请求数与输出体积",
+    "只处理top5/top10，不扩股票相关性或其他指标"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/market_context/microstructure_equity.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/market_context/turnover_concentration.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/web/public/research/microstructure-observations-20261108/equity.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/douyin-observation-models-overlap-2026-10-31",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/diagnosis.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/diagnosis.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "准确缺日期及股票代码列表",
+    "最小已登记来源方案与估计请求/字节",
+    "可复用本地原件路径和资格边界"
+  ],
+  "stop_conditions": [
+    "需联网",
+    "需修改原始资料或生产",
+    "来源所有权冲突"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "preflightNote": "v1 absolute read-only external paths rejected by relative-root validator; v2 explicit absolute allowlist checked with root /, does not broaden write paths."
+}

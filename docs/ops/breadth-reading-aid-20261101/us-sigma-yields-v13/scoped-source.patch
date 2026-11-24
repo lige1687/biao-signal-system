@@ -1,0 +1,484 @@
+--- before/web/src/components/observation-library/ErpCrossChart.tsx
++++ web/src/components/observation-library/ErpCrossChart.tsx
+@@ -9,35 +9,51 @@
+ import { withErpSigma, type ErpSigma } from "./erpSensitivity";
+ import { comparedErpEvents, erpEventMarkers, hasErpPriceHistory, DEFAULT_ERP_SIGMAS } from "./erpComparisonDisplay";
+ import ErpSensitivitySummary from "./ErpSensitivitySummary";
++import { usErpBands, usErpEvents } from "./usErpBands";
+ import "./erpCrossChart.css";
+ 
+-type PriceKey = "hs300" | "sse";
+-const names: Record<PriceKey, string> = { hs300: "沪深300", sse: "上证指数" };
++type PriceKey = "hs300" | "sse" | "sp500";
++const names: Record<PriceKey, string> = { hs300: "沪深300", sse: "上证指数", sp500: "标普500" };
+ const windows = [{ label: "1年", years: 1 }, { label: "3年", years: 3 }, { label: "5年", years: 5 }, { label: "10年", years: 10 }, { label: "全部", years: null }];
+ const colors = { upper: "#327c72", lower: "#986737", middle: "#8a9aa9" };
+ const fmt = (value: number | null | undefined, digits = 2) => value == null ? "—" : value.toFixed(digits);
+ const shiftMonths = (date: string, months: number) => {
+-  const day = new Date(`${date}T00:00:00Z`); day.setUTCMonth(day.getUTCMonth() + months); return day.toISOString().slice(0, 10);
++  const day = new Date(`${date}T00:00:00Z`), originalDay = day.getUTCDate();
++  day.setUTCDate(1); day.setUTCMonth(day.getUTCMonth() + months);
++  const monthEnd = new Date(Date.UTC(day.getUTCFullYear(), day.getUTCMonth() + 1, 0)).getUTCDate();
++  day.setUTCDate(Math.min(originalDay, monthEnd)); return day.toISOString().slice(0, 10);
+ };
+ 
+-export default function ErpCrossChart() {
+-  const source = useProjectionSource("erp-cn");
+-  const [priceKey, setPriceKey] = useState<PriceKey>("hs300");
+-  const [years, setYears] = useState<number | null>(null);
++export default function ErpCrossChart({ market = "cn" }: { market?: "cn" | "us" }) {
++  const isUs = market === "us";
++  const source = useProjectionSource(isUs ? "erp-us" : "erp-cn");
++  const [priceChoice, setPriceKey] = useState<PriceKey>("hs300");
++  const priceKey = isUs ? "sp500" : priceChoice === "sp500" ? "hs300" : priceChoice;
++  const [years, setYears] = useState<number | null>(isUs ? 5 : null);
++  const bands = useMemo(() => isUs ? usErpBands(source.points) : source.bands ?? [], [isUs, source.points, source.bands]);
+   const [selectedId, setSelectedId] = useState("");
+   const [showHistory, setShowHistory] = useState(false);
+   const [sigmas, setSigmas] = useState<readonly ErpSigma[]>(DEFAULT_ERP_SIGMAS);
+-  const otherPrice = useQuery({ queryKey: ["fundOverlay", 20], queryFn: () => fundamentalsApi.overlayHistory(20), enabled: priceKey === "sse", staleTime: 5 * 60_000, retry: false });
+-  const price = priceKey === "hs300" ? source.referencePrice : otherPrice.data?.series.sse;
+-  const aligned = useMemo(() => alignProjection(price ?? { dates: [], values: [] }, source.points, "weekly", years), [price, source.points, years]);
++  const currentRates = useQuery({ queryKey: ["fundamentalsRates"], queryFn: () => fundamentalsApi.rates(), enabled: isUs, staleTime: 30 * 60_000, retry: false });
++  const treasury = currentRates.data?.treasury;
++  const y5 = treasury?.us?.us_5y;
++  const y10 = treasury?.us?.us_10y;
++  const curve = typeof y5 === "number" && Number.isFinite(y5) && typeof y10 === "number" && Number.isFinite(y10) ? y10 - y5 : null;
++  const otherPrice = useQuery({ queryKey: ["fundOverlay", 20], queryFn: () => fundamentalsApi.overlayHistory(20), enabled: priceKey !== "hs300", staleTime: 5 * 60_000, retry: false });
++  const price = priceKey === "hs300" ? source.referencePrice : otherPrice.data?.series[priceKey];
++  const aligned = useMemo(() => alignProjection(price ?? { dates: [], values: [] }, source.points, isUs ? "daily" : "weekly", years), [price, source.points, years, isUs]);
+   const comparisons = useMemo(() => sigmas.map(sigma => {
+-    const bands = withErpSigma(source.bands ?? [], sigma);
+-    const byDate = new Map(bands.map(row => [row.date, row]));
++    const rails = withErpSigma(bands, sigma);
++    const byDate = new Map(rails.map(row => [row.date, row]));
+     return { sigma, byDate, visible: aligned.dates.map(date => byDate.get(date)) };
+-  }), [source.bands, sigmas, aligned.dates]);
+-  const events = useMemo(() => comparedErpEvents(source.bands ?? [], sigmas), [source.bands, sigmas]);
++  }), [bands, sigmas, aligned.dates]);
++  const events = useMemo(() => {
++    if (!isUs) return comparedErpEvents(bands, sigmas);
++    const priceDates = new Set(price?.dates.filter((_, i) => typeof price.values[i] === "number" && Number.isFinite(price.values[i])));
++    return usErpEvents(bands, sigmas).filter(event => priceDates.has(event.date));
++  }, [bands, sigmas, isUs, price]);
+   const selected = events.find(event => event.id === selectedId);
+-  const latest = source.bands?.[source.bands.length - 1];
++  const latest = bands[bands.length - 1];
+   const readout = selected ?? latest;
+   const chartNode = useRef<HTMLDivElement>(null);
+   const enough = hasErpPriceHistory(aligned.values, aligned.price);
+@@ -63,16 +79,16 @@
+       const endValue = selectedIndex === undefined ? aligned.dates[aligned.dates.length - 1] : aligned.dates[endIndex];
+       const selectedLine = selectedIndex === undefined ? undefined : { silent: true, symbol: "none", label: { show: false },
+         lineStyle: { color: colors[selected!.kind], opacity: .2, width: 7, type: "solid" }, data: [{ xAxis: selected!.date }] };
+-      const labelInterval = selected || years === 1 ? 1 : years === 3 || years === 5 ? 3 : 12;
++      const labelInterval = selected || years === 1 ? 1 : years === 3 || years === 5 ? isUs ? 6 : 3 : 12;
+       const showDateLabel = (index: number, date: string) => {
+         if (aligned.dates[index - 1]?.slice(0, 7) === date.slice(0, 7)) return false;
+-        return labelInterval === 1 || (labelInterval === 3 ? (Number(date.slice(5, 7)) - 1) % 3 === 0 : date.slice(5, 7) === "01");
++        return labelInterval === 1 || (Number(date.slice(5, 7)) - 1) % labelInterval === 0;
+       };
+       const axisLabel = { color: "#64748b", fontSize: 12 };
+       chart.setOption({
+         animation: false, textStyle: { fontFamily: 'system-ui, -apple-system, "PingFang SC", sans-serif' },
+         title: [{ text: "股债利差（百分点）", left: 0, top: 4, textStyle: { fontSize: 13, fontWeight: 600, color: "#173d68" } },
+-          { text: `${names[priceKey]}价格（点） · 对应周的穿轨位置`, left: 0, top: "54%", textStyle: { fontSize: 13, fontWeight: 600, color: "#a47736" } }],
++          { text: `${names[priceKey]}价格（点） · ${isUs ? "同日" : "对应周"}穿轨位置`, left: 0, top: "54%", textStyle: { fontSize: 13, fontWeight: 600, color: "#a47736" } }],
+         grid: [{ left: 58, right: 94, top: 34, height: "43%" }, { left: 58, right: 94, top: "61%", height: "25%" }],
+         axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
+         tooltip: { trigger: "axis", confine: true, axisPointer: { type: "cross" }, formatter: (raw: unknown) => {
+@@ -92,7 +108,7 @@
+         dataZoom: [{ type: "inside", xAxisIndex: [0, 1], startValue, endValue }, { type: "slider", xAxisIndex: [0, 1], startValue, endValue, bottom: 4, height: 20, showDetail: false }],
+         series: [
+           { name: "股债利差", type: "line", data: aligned.values, showSymbol: false, connectNulls: false, lineStyle: { color: "#173d68", width: 2.3 }, markLine: selectedLine },
+-          { name: "3年均值", type: "line", data: comparisons[0]?.visible.map(row => row?.middle ?? null), showSymbol: false, connectNulls: false, lineStyle: { color: colors.middle, width: 1, type: "dotted" } },
++          { name: isUs ? "此前3年均值" : "3年均值", type: "line", data: comparisons[0]?.visible.map(row => row?.middle ?? null), showSymbol: false, connectNulls: false, lineStyle: { color: colors.middle, width: 1, type: "dotted" } },
+           ...comparisons.flatMap(({ sigma, visible }) => (["upper", "lower"] as const).map(key => ({
+             name: `${key === "upper" ? "上轨" : "下轨"} ${sigma}σ`, type: "line", data: visible.map(row => row?.[key] ?? null), connectNulls: false, showSymbol: false,
+             endLabel: { show: true, formatter: `${key === "upper" ? "+" : "−"}${sigma}σ`, color: colors[key], fontSize: 12, distance: 7 }, labelLayout: { moveOverlap: "shiftY" },
+@@ -114,20 +130,35 @@
+     };
+     const resize = new ResizeObserver(renderWhenVisible); resize.observe(node); renderWhenVisible();
+     return () => { resize.disconnect(); chart?.dispose(); };
+-  }, [aligned, comparisons, events, selected, priceKey, years, enough]);
++  }, [aligned, comparisons, events, selected, priceKey, years, enough, isUs]);
+ 
+   return <div className="erp-cross">
+-    <div className="erp-cross-controls"><label>对照股指 <select aria-label="对照股指" value={priceKey} onChange={event => setPriceKey(event.target.value as PriceKey)}><option value="hs300">沪深300</option><option value="sse">上证指数</option></select></label>
++    <div className="erp-cross-controls"><label>对照股指 <select aria-label="对照股指" value={priceKey} onChange={event => setPriceKey(event.target.value as PriceKey)}>{isUs ? <option value="sp500">标普500</option> : <><option value="hs300">沪深300</option><option value="sse">上证指数</option></>}</select></label>
+       <span className="op-windows" role="group" aria-label="对照期间">{windows.map(window => <button type="button" key={window.label} aria-pressed={years === window.years && !selected} onClick={() => { setSelectedId(""); setYears(window.years); }}>{window.label}</button>)}</span></div>
+-    <div className="erp-cross-sigmas" role="group" aria-label="同时显示轨道">{([1, 1.5, 2] as const).map(sigma => <button type="button" key={sigma} aria-pressed={sigmas.includes(sigma)} disabled={sigmas.length === 1 && sigmas.includes(sigma)} onClick={() => toggleSigma(sigma)}>{sigma === 2 ? "◆ 2σ · 极端位置" : sigma === 1.5 ? "○ 1.5σ · 较早观察" : "□ 1σ · 更敏感"}</button>)}<span>可同时选；点图中标记对照价格</span></div>
+-    <p className="erp-cross-meaning"><span className="erp-cross-up">上轨：相对便宜，观察反弹线索</span><span className="erp-cross-down">下轨：相对偏贵，观察估值压力</span></p>
++    <div className="erp-cross-sigmas" role="group" aria-label="同时显示轨道">{(isUs ? [1.5, 2] as const : [1, 1.5, 2] as const).map(sigma => <button type="button" key={sigma} aria-pressed={sigmas.includes(sigma)} disabled={sigmas.length === 1 && sigmas.includes(sigma)} onClick={() => toggleSigma(sigma)}>{sigma === 2 ? "◆ 2σ · 极端位置" : sigma === 1.5 ? "○ 1.5σ · 较早观察" : "□ 1σ · 更敏感"}</button>)}<span>可同时选；点图中标记对照价格</span></div>
++    <p className="erp-cross-meaning"><span className="erp-cross-up">{isUs ? "上轨：相对估值改善，结合价格看修复" : "上轨：相对便宜，观察反弹线索"}</span><span className="erp-cross-down">下轨：相对偏贵，观察估值压力</span></p>
+     <div className="erp-cross-reading"><strong>{selected ? `${selected.date} · ${selected.sigma}σ ${selected.kind === "upper" ? "上穿上轨" : "下穿下轨"}` : `最新 ${latest?.date ?? "—"}`}<br/>股债利差 {fmt(readout?.value)} <small>个百分点</small></strong>
+       {comparisons.map(({ sigma, byDate }) => { const row = readout ? byDate.get(readout.date) : undefined; return <span key={sigma}><b>{sigma}σ</b> 下轨 <b className="erp-cross-down">{fmt(row?.lower)}</b> ／ 上轨 <b className="erp-cross-up">{fmt(row?.upper)}</b></span>; })}</div>
+     <div className="erp-cross-event"><label>回看穿轨 <select aria-label="查看穿轨日期" value={selectedId} onChange={event => { setSelectedId(event.target.value); setYears(null); }}><option value="">完整历史 · 最新读数</option>{[...events].reverse().map(event => <option key={event.id} value={event.id}>{event.date} · {event.sigma}σ {event.kind === "upper" ? "上穿上轨" : "下穿下轨"}</option>)}</select></label>
+       {selected && <button type="button" onClick={() => { setSelectedId(""); setYears(null); }}>返回完整历史</button>}<span className="erp-cross-legend"><i className="erp-cross-swatch erp-cross-erp"/>股债利差 <i className="erp-cross-swatch erp-cross-price"/>{names[priceKey]}</span></div>
+-    {source.isPending || (priceKey === "sse" && otherPrice.isPending) ? <p role="status">历史资料读取中…</p> : source.error || (priceKey === "sse" && otherPrice.isError) ? <p role="alert">对照资料暂时不可用。<button type="button" onClick={() => { source.retry(); if (priceKey === "sse") void otherPrice.refetch(); }}>重试</button></p>
+-      : enough ? <div ref={chartNode} className="erp-cross-chart" role="img" aria-label="上方股债利差与所选标准差轨道，下方股指价格；共用日期、光标和缩放；空心圆为1.5倍，实心菱形为2倍穿轨事件，两图按观测周对齐" /> : <p className="op-empty">股债利差与价格缺少足够的共同历史。</p>}
+-    <p className="erp-cross-note">2008—2026年10月的历史检验：1.5σ上穿后63个交易日10次涨、5次跌；2σ为7次涨、0次跌。样本少且可重叠；下轨的顶部提示效果不稳定。<br/>周频资料 {source.points[0]?.date ?? "—"}—{source.points[source.points.length - 1]?.date ?? "—"}；轨道自 {source.bands?.find(row => row.upper !== null)?.date ?? "—"} 起。</p>
++    {source.isPending || (priceKey !== "hs300" && otherPrice.isPending) ? <p role="status">历史资料读取中…</p> : source.error || (priceKey !== "hs300" && otherPrice.isError) ? <p role="alert">对照资料暂时不可用。<button type="button" onClick={() => { source.retry(); if (priceKey !== "hs300") void otherPrice.refetch(); }}>重试</button></p>
++      : enough ? <div ref={chartNode} className="erp-cross-chart" role="img" aria-label={`上方股债利差与所选标准差轨道，下方${names[priceKey]}价格；共用日期、光标和缩放；空心圆为1.5倍，实心菱形为2倍穿轨事件，两图按${isUs ? "同日" : "观测周"}对齐`} /> : <p className="op-empty">股债利差与价格缺少足够的共同历史。</p>}
++    {isUs ? <>
++      <p className="erp-cross-note">1.5σ观察较早偏离，2σ观察更极端的位置。两档是本地历史参照；盈利端月度更新，尚未验证触轨后的收益。<br/>利差 {source.points[0]?.date ?? "—"}—{latest?.date ?? "—"}；价格至 {price?.dates[price.dates.length - 1] ?? "—"}。仅标同日有价格的穿轨点。</p>
++      <details className="op-source"><summary>5年与10年国债：多提供什么信息</summary>
++        {curve !== null ? <p><b>{treasury?.as_of_us}</b> · 5年 <b>{fmt(y5)}%</b> ／ 10年 <b>{fmt(y10)}%</b> ／ 10年−5年 <b>{curve >= 0 ? "+" : ""}{(curve * 100).toFixed(0)} 基点</b>。来源：<a href="https://data.eastmoney.com/cjsj/zmgzsyl.html" target="_blank" rel="noreferrer">东方财富国债收益率</a>。</p> : <p>5年与10年的同日收益率暂未齐备，期限差留空。</p>}
++        <p>使用同一盈利收益率时，“盈利收益率−5年国债”比当前10年版本多出的部分，恰好是“10年−5年”的期限差。因此这里直接看两期限及其差值，避免把重复信息当成两份估值支持。</p>
++        <p><a href="https://pages.stern.nyu.edu/adamodar/New_Home_Page/valquestions/riskfreerates.htm" target="_blank" rel="noreferrer">Damodaran的期限匹配原则</a>强调利率要与现金流期限匹配。股票长期估值保留10年主参照；5年可用于中期比较，单独换期限没有验证过择时改善。</p>
++        <p>进一步解释利率变化，可看同期限的实际利率与通胀补偿。<a href="https://www.federalreserve.gov/data/tips-yield-curve-and-inflation-compensation.htm" target="_blank" rel="noreferrer">美联储研究</a>把名义国债与TIPS之差解释为通胀补偿，其中也含风险溢价；两者反向变动时，名义利率可能几乎不变。</p>
++      </details>
++      <details className="op-source"><summary>读法、计算与来源</summary>
++        <p>股债收益差＝标普500滚动盈利收益率－美国10年国债收益率。上轨看股票相对债券的估值改善，下轨看估值压力；零只表示两种收益率相等。</p>
++        <p>每日用此前3个自然年的观测计算均值与总体标准差，不含当日；1.5σ与2σ用同一窗口。完整三年有效历史后显示；窗口内缺值则留空。历史盈利数据按月沿用，修订资料不等于当时已知值。</p>
++        <p>图中标记是首次越过统计边界的日期；缺少同日价格时不挪到其他日期。价格停更后的利差仍在小图保留，大图只对照共同期间。</p>
++        <p><a href="https://www.ssga.com/nz/en_gb/institutional/insights/mind-on-the-market-01-june-2026" target="_blank" rel="noreferrer">道富：股债相对估值</a>支持这种观察用途；1.5σ/2σ是本地统计参考，机构文献没有为这里的买卖效果背书。<a href="https://www.aqr.com/Insights/Research/Journal-Article/Fight-the-Fed-Model" target="_blank" rel="noreferrer">AQR：择时局限</a>。</p>
++        <p>旧30/70分档检验中，高利差组在原加仓信号后60日的平均涨幅比低利差组低0.92个百分点，区间跨零；该结果不等于检验过当前两档标准差。</p>
++      </details>
++    </> : <>    <p className="erp-cross-note">2008—2026年10月的历史检验：1.5σ上穿后63个交易日10次涨、5次跌；2σ为7次涨、0次跌。样本少且可重叠；下轨的顶部提示效果不稳定。<br/>周频资料 {source.points[0]?.date ?? "—"}—{source.points[source.points.length - 1]?.date ?? "—"}；轨道自 {bands.find(row => row.upper !== null)?.date ?? "—"} 起。</p>
+     <details className="op-source" onToggle={event => setShowHistory(event.currentTarget.open)}><summary>历史检验与反例</summary>{showHistory && <><ErpSensitivitySummary sigma={selected?.sigma ?? (sigmas.includes(1.5) ? 1.5 : sigmas[0])} />{selected?.sigma === 2 && <ErpEffectSummary selectedDate={selected.date} />}</>}</details>
+     <details className="op-source"><summary>轨道怎么算、依据是什么</summary>
+       <p>股债利差＝沪深300盈利收益率－中国10年国债收益率。三年均值加减所选倍数的标准差：1.5σ更靠近均值，2σ更极端；轨道随历史滚动变化。</p>
+@@ -135,6 +166,7 @@
+       <p>{ERP_BAND_METHOD.definition}公开盈利数据与报告的调仓盈利对齐存在差异，因此用于方法参照。穿轨取相邻有效周首次越界；选择事件回看前约3个月、后约6个月。</p>
+       <p>数据：{source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{source.sourceName}</a> : source.sourceName}；方法：<a href={ERP_BAND_METHOD.url} target="_blank" rel="noreferrer">{ERP_BAND_METHOD.source}</a>。</p>
+       <p>{source.note}；价格为{priceKey === "hs300" ? "沪深300" : "上证指数"}，按观测周对齐，悬停可查实际价格日。历史修订值与当时可知值可能不同。</p>
+-    </details>
++    </details></>}
++
+   </div>;
+ }
+--- before/web/src/components/observation-library/projectionView.tsx
++++ web/src/components/observation-library/projectionView.tsx
+@@ -23,7 +23,7 @@
+ const fmt = (v: number | null, digits = 2) => v === null ? "缺值" : v.toLocaleString("zh-CN", { maximumFractionDigits: digits, minimumFractionDigits: digits });
+ 
+ export function MetricProjection({ id, market }: { id: string; market: Market }) {
+-  return id === "focus-momentum" ? <RecentFocusProjection /> : id === "erp-cn" ? <ErpCrossChart /> : <GenericMetricProjection id={id} market={market} />;
++  return id === "focus-momentum" ? <RecentFocusProjection /> : id === "erp-cn" || id === "erp-us" ? <ErpCrossChart key={id} market={id === "erp-us" ? "us" : "cn"} /> : <GenericMetricProjection id={id} market={market} />;
+ }
+ 
+ function GenericMetricProjection({ id, market }: { id: string; market: Market }) {
+@@ -207,7 +207,7 @@
+     <div className="op-quick" role="group" aria-label={`${market === "cn" ? "A股" : "美股"}常用对照`}>
+       <span>快速查看</span>
+       <button type="button" aria-pressed={id === "breadth"} onClick={() => selectObservation("breadth")}>市场宽度 · {market === "cn" ? "全A" : "标普500"}</button>
+-      <button type="button" aria-pressed={id === (market === "cn" ? "erp-cn" : "erp-us")} onClick={() => selectObservation(market === "cn" ? "erp-cn" : "erp-us")}>{market === "cn" ? "沪深300股债利差 · 上下轨" : "标普500股债利差 · 原值"}</button>
++      <button type="button" aria-pressed={id === (market === "cn" ? "erp-cn" : "erp-us")} onClick={() => selectObservation(market === "cn" ? "erp-cn" : "erp-us")}>{market === "cn" ? "沪深300股债利差 · 上下轨" : "标普500股债利差 · 上下轨"}</button>
+       {market === "us" && <>
+         <button type="button" aria-pressed={id === "vix"} onClick={() => selectObservation("vix")}>VIX</button>
+         <button type="button" aria-pressed={id === "hy-oas"} onClick={() => selectObservation("hy-oas")}>高收益债利差</button>
+--- before/web/src/components/observation-library/metricData.ts
++++ web/src/components/observation-library/metricData.ts
+@@ -80,7 +80,7 @@
+     sourceName: cn ? "现有沪深300 PE_TTM 与中国10年国债序列" : "现有标普500盈利收益率与美国10年国债序列",
+     sourceVersion: `fundamentals.ratesHistory · ${cn ? "erp_cn" : "erp_us"}`,
+     status: "观察股票相对债券的估值；未验证为阶段顶底信号。",
+-    note: `${cn ? "100÷沪深300 PE_TTM" : "标普500盈利收益率"} − ${cn ? "中国" : "美国"}10年国债收益率。两端用百分比，差值用百分点；扩大可能来自股价、盈利或利率变化，不是预期投资回报。${cn ? "此旧接口的沪深300估值实际为月末记录，不是日频输入；三年轨道另用已核资料。" : "盈利端月度历史按已观测日期向后使用，日线不代表每日新增盈利资料。美股尚未核验对应轨道方法，不直接借用A股轨道。"}`,
++    note: `${cn ? "100÷沪深300 PE_TTM" : "标普500盈利收益率"} − ${cn ? "中国" : "美国"}10年国债收益率。两端用百分比，差值用百分点；扩大可能来自股价、盈利或利率变化，不是预期投资回报。${cn ? "此旧接口的沪深300估值实际为月末记录，不是日频输入；三年轨道另用已核资料。" : "盈利端月度历史按已观测日期向后使用，日线不代表每日新增盈利资料。美股轨道采用此前三年均值及1.5/2倍标准差，作为本地相对估值观察；触轨后的收益尚未验证。"}`,
+     points,
+   };
+ }
+--- before/web/src/components/observation-library/catalog.ts
++++ web/src/components/observation-library/catalog.ts
+@@ -56,7 +56,7 @@
+   entry("earnings-concentration", "C20", "指数盈利贡献集中度", "global", "earnings", 24, "看利润主要由少数公司或行业贡献吗。", "历史权重和可比盈利缺失，总利润接近零时比例会失真。"),
+   entry("hs300-pe", "C21", "沪深300 PE_TTM", "cn", "valuation", 30, "看沪深300估值在自身历史中的位置。", "只对应沪深300；历史分位和亏损公司处理需按来源读。", true),
+   entry("erp-cn", "C21", "沪深300股债利差 · 三年上下轨", "cn", "valuation", 30, "比较沪深300盈利收益率与中国10年国债利率。", "三年均值±2σ，上轨相对便宜、下轨相对偏贵；有据参照版，尚非原视频逐点复刻或已验证买卖信号。", true),
+-  entry("erp-us", "C21", "标普500股债利差 · 原值", "us", "valuation", 31, "比较标普500盈利收益率与美国10年国债利率。", "复用基本面股债收益差；盈利端历史为月频，无合格上下轨，不代表纳指100、每日新增盈利信息或已验证买卖信号。", true),
++  entry("erp-us", "C21", "标普500股债利差 · 上下轨", "us", "valuation", 31, "比较标普500盈利收益率与美国10年国债利率。", "复用基本面股债收益差；盈利端历史为月频；此前三年1.5/2倍标准差为本地观察参考，触轨收益未验证；仅适用于标普500盈利口径。", true),
+   entry("sp500-cape", "C21", "美国 Shiller CAPE", "us", "valuation", 31, "看美国长期平滑盈利估值的位置。", "对应Shiller美国市场估值口径，不等于纳指或某只ETF。", true),
+   entry("chinext-pe", "C21", "创业板指估值", "cn", "valuation", 32, "看创业板指自身估值和历史位置。", "该指数独立估值原件、分位窗口及亏损处理尚未接通。"),
+   entry("star50-pe", "C21", "科创50估值", "cn", "valuation", 33, "看科创50自身估值和历史位置。", "科创50不是科创板全体；独立估值序列尚未接通。"),
+--- before/web/src/components/market-style/CrossMarketObservation.tsx
++++ web/src/components/market-style/CrossMarketObservation.tsx
+@@ -7,6 +7,7 @@
+ import BreadthComparison from "./BreadthComparison";
+ import MarketTrendChart from "./MarketTrendChart";
+ import MiniTrend from "../market-observation-alerts/MiniTrend";
++import UsErpCard from "../market-observation-alerts/UsErpCard";
+ import ChartLegend, { CHART_COLORS } from "../market-observation-alerts/ChartLegend";
+ import { priorReferenceBands } from "../market-observation-alerts/referenceBands";
+ import type { CandidateSummary } from "../market-observation-alerts/CandidateShelf";
+@@ -151,6 +152,7 @@
+   });
+   useEffect(() => {
+     for (const card of displayCards) {
++      if (market === "us" && card.id === "erp-us") continue;
+       const value = card.state ?? (card.value.includes("未知") ? "读数待补" : card.value);
+       const meaning = card.state || value === "读数待补" ? "读数待补齐，可先查看已有指标"
+         : card.topic === "breadth" ? "看上涨参与面是否扩大"
+@@ -170,6 +172,9 @@
+     {card.title.includes("NFCI") && <> · <a href={NFCI_EXPLAINER} target="_blank" rel="noreferrer">芝加哥联储定义</a></>}</>;
+   return <div className="cmo-card-grid" aria-label={`${market === "cn" ? "A股" : "美股"}补充观察`}>
+     {displayCards.map((card, index) => {
++      if (market === "us" && card.id === "erp-us") return <UsErpCard key={card.id}
++        collapsed={collapsedIds.includes(card.id)} onCollapse={() => onCollapse(card.id)}
++        onSummary={summary => onSummary(`${market}:${card.id}`, summary)} />;
+       if (collapsedIds.includes(card.id)) return null;
+       const hasHistory = card.points.length > 1 && !card.state;
+       const lookback = card.frequency === "月频" ? 36 : card.frequency === "周频" ? 156 : 756;
+--- before/web/src/components/market-observation-alerts/index.tsx
++++ web/src/components/market-observation-alerts/index.tsx
+@@ -20,6 +20,8 @@
+ import BreadthInstitutionalReference from "../market-style/BreadthInstitutionalReference";
+ import { BREADTH_EXTERNAL_REFERENCES } from "../market-style/breadthInstitutionalReferences";
+ import "./style.css";
++import UsErpCard from "./UsErpCard";
++import { usErpBands } from "../observation-library/usErpBands";
+ import CrossMarketObservation from "../market-style/CrossMarketObservation";
+ import BreadthComparison from "../market-style/BreadthComparison";
+ import { MetricProjection } from "../observation-library/projectionView";
+@@ -234,7 +236,7 @@
+         unit: nfci?.unit ?? "指数", frequency: "weekly", quality: "provisional", note: "当前历史版本，可能修订" };
+     }
+     const erpBands = market === "cn" ? { low: snapshots[0].latest?.lower, high: snapshots[0].latest?.upper }
+-      : priorReferenceBands(erpUs.points).latest;
++      : (() => { const rows = usErpBands(erpUs.points); const latest = rows[rows.length - 1]; return { low: latest?.lower, high: latest?.upper }; })();
+     const marginRatio = ratios.isError ? [] : seriesPoints(ratios.data?.series.margin_rzyezb);
+     const ratioDelta = recentDelta(marginRatio, 20);
+     const ratioPosition = historicalPosition(marginRatio);
+@@ -365,7 +367,8 @@
+             onOpen={() => setDetailId(["erp-cn", "breadth-cn", "breadth-us"][index] as "erp-cn" | "breadth-cn" | "breadth-us")}
+             onCollapse={() => collapseCard(["erp-cn", "breadth-cn", "breadth-us"][index])} />)}
+           {market === "cn" && selectedIds.includes("focus-momentum") && <FocusMomentumOverview collapsed={collapsedIds.includes("focus-momentum")} onCollapse={() => collapseCard("focus-momentum")} onSummary={(summary) => updateSummary("focus-momentum", summary)} />}
+-          <CrossMarketObservation market={market} selectedIds={selectedIds.filter((id) => !["erp-cn", "breadth-cn", "breadth-us", "focus-momentum"].includes(id))}
++          {market === "us" && selectedIds.includes("erp-us") && <UsErpCard collapsed={collapsedIds.includes("erp-us")} onCollapse={() => collapseCard("erp-us")} onSummary={(summary) => updateSummary("erp-us", summary)} />}
++          <CrossMarketObservation market={market} selectedIds={selectedIds.filter((id) => !["erp-cn", "erp-us", "breadth-cn", "breadth-us", "focus-momentum"].includes(id))}
+             collapsedIds={collapsedIds} onCollapse={collapseCard} onSummary={updateSummary} />
+           {market === "cn" && <IncrementObservationCards selectedIds={selectedIds} collapsedIds={collapsedIds}
+             onCollapse={collapseCard} onSummary={updateSummary} />}
+--- /dev/null
++++ web/src/components/market-observation-alerts/UsErpCard.tsx
+@@ -0,0 +1,70 @@
++import { useEffect, useMemo, useState } from "react";
++import { useProjectionSource } from "../observation-library/projectionSources";
++import { usErpBands } from "../observation-library/usErpBands";
++import { withErpSigma, type ErpSigma } from "../observation-library/erpSensitivity";
++import ObservationDetailDialog from "../observation-library/ObservationDetailDialog";
++import { OBSERVATION_BY_ID } from "../observation-library/catalog";
++import MiniTrend from "./MiniTrend";
++import ChartLegend, { CHART_COLORS } from "./ChartLegend";
++import type { CandidateSummary } from "./CandidateShelf";
++import "./us-erp-card.css";
++
++const fmt = (value: number | null | undefined) => value == null ? "—" : value.toFixed(2);
++const lowerColor = "#986737", upperColor = "#327c72";
++
++export default function UsErpCard({ collapsed, onCollapse, onSummary }: {
++  collapsed?: boolean; onCollapse: () => void; onSummary: (summary: CandidateSummary) => void;
++}) {
++  const source = useProjectionSource("erp-us");
++  const rows = useMemo(() => usErpBands(source.points), [source.points]);
++  const [sigmas, setSigmas] = useState<readonly ErpSigma[]>([1.5, 2]);
++  const [expanded, setExpanded] = useState(false);
++  const latest = rows[rows.length - 1];
++  const ready = !source.error && !source.isPending && latest?.value != null;
++  const z = latest?.z;
++  const historical = !!latest && Date.now() - Date.parse(`${latest.date}T00:00:00Z`) > 7 * 86_400_000;
++  const crossed = ready && z != null ? [...sigmas].sort((a, b) => b - a).find(sigma => Math.abs(z) > sigma) : undefined;
++  const position = z == null ? "参考历史不足" : crossed !== undefined
++    ? `利差${z > 0 ? "高于上" : "低于下"}轨 ${crossed}σ · 相对${z > 0 ? "便宜" : "偏贵"}`
++    : z < 0 ? "利差偏低，尚未触及下轨" : z > 0 ? "利差偏高，尚未触及上轨" : "利差位于三年均值";
++  const dataState = source.error ? "历史资料暂不可用" : source.isPending ? "读取历史资料…" : "最新股债读数缺失";
++  const conclusion = !ready ? dataState : `${historical ? "历史读数 · " : ""}${position}`;
++  const allRails = useMemo(() => ([1.5, 2] as const).map(sigma => ({ sigma, rows: withErpSigma(rows, sigma) })), [rows]);
++  const visible = rows.slice(-1260);
++  const prior = rows.length > 20 ? rows[rows.length - 21] : undefined;
++  const change = ready && prior?.value != null ? latest!.value! - prior.value : null;
++  useEffect(() => { onSummary({ value: ready ? `${fmt(latest?.value)} 个百分点` : "读数待补", meaning: conclusion, date: latest?.date }); },
++    [ready, latest?.value, latest?.date, conclusion, onSummary]);
++  if (collapsed) return null;
++  const toggle = (sigma: ErpSigma) => {
++    if (sigmas.length === 1 && sigmas.includes(sigma)) return;
++    setSigmas(sigmas.includes(sigma) ? sigmas.filter(value => value !== sigma) : [...sigmas, sigma].sort());
++  };
++  return <article className="moa-item us-erp-card" data-tone={!historical && crossed !== undefined ? z! < 0 ? "caution" : "supportive" : "neutral"} aria-label="标普500 · 股债利差" data-overview-card="erp-us">
++    <div className="moa-item-head"><h3>标普500 · 股债利差</h3><button type="button" onClick={onCollapse}>收起</button></div>
++    <h4 className="moa-conclusion">{conclusion}</h4>
++    <div className="moa-erp-value"><strong>{ready ? fmt(latest?.value) : "—"}</strong><span>个百分点</span></div>
++    <div className="us-erp-thresholds" role="group" aria-label="美股股债小图标准差阈值">
++      {allRails.map(({ sigma, rows: values }) => { const last = values[values.length - 1]; return <button type="button" key={sigma}
++        aria-pressed={sigmas.includes(sigma)} disabled={sigmas.length === 1 && sigmas.includes(sigma)} onClick={() => toggle(sigma)}>
++        <span>{sigma === 1.5 ? "○ 1.5σ · 内轨" : "◆ 2σ · 外轨"}</span>
++        <span><b style={{ color: lowerColor }}>下 {fmt(last?.lower)}</b><b style={{ color: upperColor }}>上 {fmt(last?.upper)}</b></span>
++      </button>; })}
++    </div>
++    <ChartLegend items={[{ label: "股债利差", color: CHART_COLORS.primary }, { label: "上轨 · 相对便宜", color: upperColor, dashed: true }, { label: "下轨 · 相对偏贵", color: lowerColor, dashed: true }]} />
++    {ready ? <MiniTrend dates={visible.map(row => row.date)} lines={[{ name: "美股股债利差", color: CHART_COLORS.primary, values: visible.map(row => row.value) }]}
++      references={allRails.filter(({ sigma }) => sigmas.includes(sigma)).flatMap(({ sigma, rows: values }) => [
++        { name: `${sigma}σ上轨`, color: sigma === 2 ? upperColor : "#73a89f", values: values.slice(-1260).map(row => row.upper) },
++        { name: `${sigma}σ下轨`, color: sigma === 2 ? lowerColor : "#bc9974", values: values.slice(-1260).map(row => row.lower) },
++      ])} label={`标普500股债利差近五年，显示${sigmas.join("及")}倍标准差；青绿上轨看相对便宜，棕色下轨看相对偏贵`} />
++      : <p role="status">{dataState}<button type="button" onClick={source.retry}>重试</button></p>}
++    <p className="moa-card-meta">此前3年滚动参考 · 内轨较早观察，外轨更极端</p>
++    {change !== null && <p className="moa-card-reading">较 {prior!.date} {change >= 0 ? "上升" : "下降"} {Math.abs(change).toFixed(2)} 个百分点</p>}
++    <p className="moa-card-reading">上轨看相对估值改善，下轨看估值压力；点大图对照价格是否修复或转弱。</p>
++    <p className="moa-card-meta">截至 {latest?.date ?? "—"}{historical ? " · 更新待补" : ""} · 盈利端月度更新 · 触轨收益未验证</p>
++    <footer><button type="button" onClick={() => setExpanded(true)}>看大图 · 轨道与价格 ↗</button><details><summary>参考依据</summary>
++      <p><a href="https://www.ssga.com/nz/en_gb/institutional/insights/mind-on-the-market-01-june-2026" target="_blank" rel="noreferrer">道富：股债相对估值</a>。三年1.5σ/2σ为本地观察参考，使用此前数据计算；负值表示盈利收益率低于国债收益率。</p>
++    </details></footer>
++    {expanded && <ObservationDetailDialog item={OBSERVATION_BY_ID.get("erp-us")!} onClose={() => setExpanded(false)} />}
++  </article>;
++}
+--- /dev/null
++++ web/src/components/market-observation-alerts/us-erp-card.css
+@@ -0,0 +1,7 @@
++.us-erp-card { border-top-color: #72889d; }
++.us-erp-thresholds { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0 12px; }
++.us-erp-thresholds button { display: grid; gap: 8px; padding: 10px 9px; border: 1px solid #d5dfe8; border-radius: 7px; background: #fff; text-align: left; color: #57687b; font-size: 13px; cursor: pointer; }
++.us-erp-thresholds button[aria-pressed="true"] { background: #f0f5f8; border-color: #8197ad; }
++.us-erp-thresholds button > span:last-child { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; font-variant-numeric: tabular-nums; }
++.us-erp-thresholds button:disabled { cursor: default; }
++.us-erp-thresholds button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+--- /dev/null
++++ web/src/components/observation-library/usErpBands.ts
+@@ -0,0 +1,70 @@
++import type { MetricPoint } from "./metricData";
++import type { ErpBandPoint } from "./erpBands";
++import type { ComparedErpEvent } from "./erpComparisonDisplay";
++import { withErpSigma, type ErpSigma } from "./erpSensitivity";
++
++const finite = (value: unknown): value is number => typeof value === "number" && Number.isFinite(value);
++
++function validDate(date: string): boolean {
++  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
++  const time = Date.parse(`${date}T00:00:00Z`);
++  return Number.isFinite(time) && new Date(time).toISOString().slice(0, 10) === date;
++}
++
++function threeYearsBefore(date: string): string {
++  const year = Number(date.slice(0, 4)) - 3;
++  const candidate = `${year}${date.slice(4)}`;
++  return validDate(candidate) ? candidate : `${year}-02-28`;
++}
++
++/** US display reference: [date minus 3 calendar years, date), population sigma.
++ * 500 complete prior daily records are an engineering coverage guard, not a claim of statistical power.
++ */
++export function usErpBands(points: readonly MetricPoint[]): ErpBandPoint[] {
++  if (points.some((point, index) => !validDate(point.date)
++    || (index > 0 && point.date <= points[index - 1].date)
++    || (point.value !== null && !finite(point.value)))) {
++    throw new Error("美股股债轨道输入日期或数值无效");
++  }
++
++  let start = 0;
++  return points.map((point, index) => {
++    const cutoff = threeYearsBefore(point.date);
++    while (start < index && points[start].date < cutoff) start++;
++    const window = points.slice(start, index);
++    const n = window.filter(row => finite(row.value)).length;
++    const blank = { ...point, middle: null, upper: null, lower: null, sigma: null, z: null, n };
++    if (points[0].date > cutoff || window.length !== n || n < 500 || point.value === null) return blank;
++
++    const middle = window.reduce((sum, row) => sum + row.value!, 0) / n;
++    const sigma = Math.sqrt(window.reduce((sum, row) => sum + (row.value! - middle) ** 2, 0) / n);
++    return { ...point, middle, sigma, upper: middle + 2 * sigma, lower: middle - 2 * sigma,
++      z: sigma > 0 ? (point.value - middle) / sigma : null, n };
++  });
++}
++
++/** Distinct 1.5/2-sigma display crossings need adjacent supplied observations at most seven days apart. */
++export function usErpEvents(rows: readonly ErpBandPoint[], sigmas: readonly ErpSigma[]): ComparedErpEvent[] {
++  return [...new Set(sigmas)].flatMap(sigma => {
++    const adjusted = withErpSigma(rows, sigma);
++    const events: ComparedErpEvent[] = [];
++    let previous: ErpBandPoint | null = null;
++    for (const row of adjusted) {
++      const valid = row.value !== null && row.middle !== null && row.upper !== null && row.lower !== null
++        && finite(row.sigma) && row.sigma > 0
++        && [row.value, row.middle, row.upper, row.lower].every(finite);
++      if (!valid) { previous = null; continue; }
++      const gapDays = previous
++        ? (Date.parse(`${row.date}T00:00:00Z`) - Date.parse(`${previous.date}T00:00:00Z`)) / 86_400_000
++        : Infinity;
++      if (previous && gapDays > 0 && gapDays <= 7) {
++        const kind = previous.value! <= previous.upper! && row.value! > row.upper! ? "upper"
++          : previous.value! >= previous.lower! && row.value! < row.lower! ? "lower" : null;
++        if (kind) events.push({ date: row.date, kind, value: row.value!, upper: row.upper!, middle: row.middle!,
++          lower: row.lower!, sigma, id: `${sigma}:${row.date}:${kind}` });
++      }
++      previous = row;
++    }
++    return events;
++  }).sort((a, b) => a.date.localeCompare(b.date) || a.sigma - b.sigma);
++}
+--- /dev/null
++++ web/src/components/observation-library/usErpBands.test.mjs
+@@ -0,0 +1,75 @@
++import test from "node:test";
++import assert from "node:assert/strict";
++import { build } from "esbuild";
++
++const bundle = await build({ entryPoints: [new URL("./usErpBands.ts", import.meta.url).pathname],
++  bundle: true, platform: "node", format: "esm", write: false });
++const { usErpBands, usErpEvents } = await import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text).toString("base64")}`);
++
++const day = (date, offset) => new Date(Date.parse(`${date}T00:00:00Z`) + offset * 86_400_000).toISOString().slice(0, 10);
++const history = (start, count, value = index => index % 2 === 0 ? 0 : 2) =>
++  Array.from({ length: count }, (_, index) => ({ date: day(start, index), value: value(index) }));
++const row = (date, value, sigma = 1) => ({ date, value, middle: 5, sigma,
++  upper: 5 + 2 * sigma, lower: 5 - 2 * sigma, z: sigma ? (value - 5) / sigma : null, n: 500 });
++
++test("prior three-calendar-year window includes cutoff, excludes current, and uses population sigma", () => {
++  const points = [...history("2023-01-01", 500), { date: "2026-01-01", value: 3 }];
++  const result = usErpBands(points);
++  const last = result.at(-1);
++  assert.equal(last.n, 500);
++  assert.equal(last.middle, 1);
++  assert.equal(last.sigma, 1);
++  assert.equal(last.upper, 3);
++  assert.equal(last.lower, -1);
++  assert.equal(last.z, 2);
++  assert.equal(result[499].middle, null);
++  assert.deepEqual(usErpBands([...points, { date: "2026-01-02", value: 100 }]).slice(0, -1), result);
++  assert.equal(usErpBands([...points.slice(0, -1), { date: "2026-01-01", value: 100 }]).at(-1).middle, 1);
++  assert.equal(usErpBands(points).at(-1).n, 500);
++});
++
++test("January cutoff and leap-day February 28 mapping keep calendar boundaries", () => {
++  const jan = [...history("2023-01-01", 500), { date: "2026-01-02", value: 3 }];
++  assert.equal(usErpBands(jan).at(-1).middle, null); // Jan 1 is outside; only 499 prior records.
++  const leap = [...history("2021-02-28", 500), { date: "2024-02-29", value: 3 }];
++  assert.equal(usErpBands(leap).at(-1).n, 500);
++  assert.equal(usErpBands(leap).at(-1).middle, 1);
++  assert.equal(usErpBands(leap.slice(1)).at(-1).middle, null);
++});
++
++test("missing, duplicate, unsorted, and nonfinite inputs fail or blank explicitly", () => {
++  const prior = history("2023-01-01", 500);
++  const target = { date: "2026-01-01", value: 3 };
++  assert.equal(usErpBands([...prior.slice(0, 20), { ...prior[20], value: null }, ...prior.slice(21), target]).at(-1).upper, null);
++  assert.equal(usErpBands([...prior, { ...target, value: null }]).at(-1).upper, null);
++  assert.throws(() => usErpBands([...prior, prior.at(-1)]));
++  assert.throws(() => usErpBands([prior[1], prior[0]]));
++  assert.throws(() => usErpBands([{ date: "2026-02-30", value: 1 }]));
++  assert.throws(() => usErpBands([{ date: "2026-01-01", value: Infinity }]));
++});
++
++test("500 records guard and zero variance leave no fabricated extreme", () => {
++  const short = [...history("2023-01-01", 499), { date: "2026-01-01", value: 3 }];
++  assert.equal(usErpBands(short).at(-1).upper, null);
++  const flat = usErpBands([...history("2023-01-01", 500, () => 1), { date: "2026-01-01", value: 3 }]).at(-1);
++  assert.equal(flat.upper, 1);
++  assert.equal(flat.lower, 1);
++  assert.equal(flat.z, null);
++  assert.deepEqual(usErpEvents([row("2026-01-01", 1, 0), { ...flat, date: "2026-01-02" }], [1.5, 2]), []);
++});
++
++test("same-day crossings retain each sigma; equality alone and first valid row do not cross", () => {
++  const events = usErpEvents([row("2026-10-09", 5), row("2026-10-16", 7.5)], [1.5, 2, 2]);
++  assert.deepEqual(events.map(event => event.id), ["1.5:2026-10-16:upper", "2:2026-10-16:upper"]);
++  assert.deepEqual(events.map(event => event.upper), [6.5, 7]);
++  assert.deepEqual(usErpEvents([row("2026-10-16", 7.5)], [2]), []);
++  assert.deepEqual(usErpEvents([row("2026-10-09", 7), row("2026-10-16", 7)], [2]), []);
++  assert.deepEqual(usErpEvents([row("2026-10-09", 4), row("2026-10-16", 2.5)], [1.5, 2]).map(event => event.kind), ["lower", "lower"]);
++});
++
++test("missing values, unresolved bands, and gaps over seven days reset crossing state", () => {
++  assert.deepEqual(usErpEvents([row("2026-10-02", 5), { ...row("2026-10-09", 5), value: null }, row("2026-10-16", 8)], [2]), []);
++  assert.deepEqual(usErpEvents([row("2026-10-02", 5), { ...row("2026-10-09", 5), middle: null }, row("2026-10-16", 8)], [2]), []);
++  assert.deepEqual(usErpEvents([row("2026-10-02", 5), row("2026-10-10", 8)], [2]), []);
++  assert.equal(usErpEvents([row("2026-10-09", 5), row("2026-10-16", 8)], [2]).length, 1);
++});

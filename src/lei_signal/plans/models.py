@@ -167,6 +167,9 @@ class ActionItem:
     closed_on: str | None = None
     close_kind: str | None = None
     created_at: str = ""
+    actual_action_date: str | None = None
+    done_recorded_at: str | None = None
+    done_source: str | None = None
 
 
 @dataclass(frozen=True, slots=True)

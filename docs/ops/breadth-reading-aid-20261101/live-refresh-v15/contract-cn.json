@@ -1,0 +1,39 @@
+{
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "mission": "Qualified append-only A-share breadth updater reusable by daily job",
+  "task_scope": [
+    "Implement new cn_breadth_refresh.py with callable refresh(output: Path, cache: Path|None=None, cutoff: str|None=None) -> dict that prepares candidate/history and receipt without touching live history. Reuse WeStock CLI qfq full300 windows, current official universe/listing evidence, exclude confirmed IPO insufficient history and explicit nontrading quote states; unresolved symbols fail candidate. Preserve all old history. Network public market quotes allowed; do not run full collection yet; one small live probe permitted. Pure qualification and parsing tests."
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "src/lei_signal/market_context/a_share_breadth.py",
+    "src/lei_signal/market_context/breadth_qualification.py",
+    "docs/ops/breadth-reading-aid-20261101/prepare-cn-westock-v4.py",
+    "docs/ops/breadth-reading-aid-20261101/qualify-cn-westock-v4.py",
+    ".codex/breadth-reading-coordination-20261101/cn-repair-candidate-20261102/listing-evidence",
+    ".codex/breadth-reading-coordination-20261101/cn-provider-probe-v4/npm-cache"
+  ],
+  "write_paths": [
+    "src/lei_signal/market_context/cn_breadth_refresh.py",
+    "tests/unit/test_cn_breadth_refresh.py"
+  ],
+  "network_allowed": true,
+  "expected_outputs": [
+    "Callable candidate prep with configurable output and no live writes; bounded raw gzip responses and failures; exact previous history retention; reasonable retries and coverage receipts",
+    "Tests, actual small probe outcome, limitations"
+  ],
+  "stop_conditions": [
+    "No child agent, dependencies install, legacy raw modification, cache live writes, scheduler, strategy or full universe execution",
+    "If unresolved status cannot qualify day return explicit failure rather than lower threshold",
+    "Output candidate/raw must target root supplied fixed UUID external path; small probe at most 2MiB local sibling new scratch under /tmp is allowed and preserved"
+  ]
+}

@@ -1,0 +1,45 @@
+.sp-section-tabs { display: flex; gap: 17px; border-bottom: 1px solid var(--border); margin: 3px 0 10px; min-width: 0; overflow-x: auto; }
+.sp-section-tabs button { flex: 0 0 auto; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--text-dim); font: inherit; font-size: 14px; padding: 9px 2px; cursor: pointer; }
+.sp-section-tabs button[aria-selected="true"] { border-bottom-color: var(--accent); color: var(--accent); font-weight: 650; }
+.sp-section-tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.srr-root { min-width: 0; color: var(--text); }
+.srr-head { padding: 17px 0 5px; }
+.srr-eyebrow { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+.srr-head h2 { font-size: clamp(20px, 3vw, 25px); line-height: 1.3; margin: 8px 0; }
+.srr-head p, .srr-root p, .srr-root dd { line-height: 1.65; }
+.srr-head p { color: var(--text-dim); max-width: 820px; margin: 0 0 12px; }
+.srr-panel, .srr-card, .srr-sources { border: 1px solid var(--border); background: var(--bg-panel, var(--panel, var(--bg))); border-radius: 10px; }
+.srr-panel { padding: 17px; margin: 13px 0 20px; }
+.srr-panel h3, .srr-section-head h3 { font-size: 16px; margin: 0 0 9px; }
+.srr-market-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.srr-market-grid > div { min-width: 0; background: var(--bg, transparent); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+.srr-market-grid strong { color: var(--accent); }
+.srr-market-grid p { margin: 7px 0; font-size: 13px; }
+.srr-market-grid b { font-variant-numeric: tabular-nums; }
+.srr-market-grid small, .srr-note, .srr-section-head p, .srr-card-title small { color: var(--text-dim); font-size: 12px; line-height: 1.5; }
+.srr-note { margin: 12px 0 0; }
+.srr-section-head { margin: 0 0 11px; }
+.srr-section-head p { margin: 0; }
+.srr-candidates { display: grid; gap: 10px; }
+.srr-card { min-width: 0; }
+.srr-card summary { display: flex; align-items: start; gap: 13px; padding: 14px; cursor: pointer; list-style: none; }
+.srr-card summary::-webkit-details-marker { display: none; }
+.srr-card summary:focus-visible, .srr-sources summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.srr-number { color: var(--accent); font-weight: 700; font-size: 14px; padding-top: 1px; flex: 0 0 24px; }
+.srr-card-title { display: grid; gap: 3px; min-width: 0; flex: 1; }
+.srr-card-title strong { font-size: 15px; }
+.srr-card-title > span { font-size: 13px; line-height: 1.55; }
+.srr-open { color: var(--accent); font-size: 12px; white-space: nowrap; margin-top: 2px; }
+.srr-card[open] .srr-open { font-size: 0; }
+.srr-card[open] .srr-open::after { content: "收起"; font-size: 12px; }
+.srr-card-body { border-top: 1px solid var(--border); padding: 5px 15px 16px 51px; }
+.srr-card-body dl { margin: 0 0 11px; }
+.srr-card-body dl > div { margin: 12px 0; }
+.srr-card-body dt { font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
+.srr-card-body dd { margin: 0; font-size: 13px; }
+.srr-card-body a, .srr-sources a { color: var(--accent); overflow-wrap: anywhere; }
+.srr-choices p { margin: 9px 0 0; font-size: 13px; }
+.srr-sources { padding: 12px 15px; margin: 12px 0 0; font-size: 13px; }
+.srr-sources summary { cursor: pointer; font-weight: 600; }
+.srr-sources ul { padding-left: 21px; line-height: 1.7; }
+@media (max-width: 600px) { .srr-market-grid { grid-template-columns: 1fr; } .srr-card summary { gap: 8px; padding: 12px; flex-wrap: wrap; } .srr-number { flex-basis: 19px; } .srr-card-title { flex-basis: calc(100% - 35px); } .srr-open { margin-left: 27px; } .srr-card-body { padding: 4px 12px 14px; } .srr-panel { padding: 13px; } }

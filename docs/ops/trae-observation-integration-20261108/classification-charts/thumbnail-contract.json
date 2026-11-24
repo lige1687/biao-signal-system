@@ -1,0 +1,88 @@
+{
+  "mission": "Build reusable source-backed indicator thumbnails for category browse without pinning",
+  "task_scope": [
+    "Thumbnail rendering only; root owns browser layout, pinning and concentration dedup. Reuse existing hooks/parsers/formulas. No independent data acquisition."
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "web/AGENTS.md",
+    "web/src/components/observation-library",
+    "web/src/components/market-style",
+    "web/src/components/focus-momentum",
+    "web/src/api",
+    "web/src/types.ts",
+    "web/public/research",
+    "web/src/components/market-observation-alerts/adapters.ts",
+    "web/src/components/market-observation-alerts/index.tsx",
+    "web/src/components/market-observation-alerts/conditionalReading.ts",
+    "web/src/components/market-observation-alerts/candidate-shelf.css",
+    "web/src/components/market-observation-alerts/microstructureData.test.mjs",
+    "web/src/components/market-observation-alerts/indicator-browser.css",
+    "web/src/components/market-observation-alerts/ChartLegend.tsx",
+    "web/src/components/market-observation-alerts/IndustryStructure.tsx",
+    "web/src/components/market-observation-alerts/industryTimeline.test.mjs",
+    "web/src/components/market-observation-alerts/selection.ts",
+    "web/src/components/market-observation-alerts/adapters.test.mjs",
+    "web/src/components/market-observation-alerts/microstructureData.ts",
+    "web/src/components/market-observation-alerts/model.test.mjs",
+    "web/src/components/market-observation-alerts/microstructure.css",
+    "web/src/components/market-observation-alerts/ExtraCandidateCard.tsx",
+    "web/src/components/market-observation-alerts/selection.test.mjs",
+    "web/src/components/market-observation-alerts/storage.ts",
+    "web/src/components/market-observation-alerts/industryTimelineOptions.ts",
+    "web/src/components/market-observation-alerts/referenceBands.ts",
+    "web/src/components/market-observation-alerts/IndicatorBrowser.tsx",
+    "web/src/components/market-observation-alerts/CombinationReading.tsx",
+    "web/src/components/market-observation-alerts/referenceBands.test.mjs",
+    "web/src/components/market-observation-alerts/industry-structure.css",
+    "web/src/components/market-observation-alerts/model.ts",
+    "web/src/components/market-observation-alerts/relativeObservationData.ts",
+    "web/src/components/market-observation-alerts/us-erp-card.css",
+    "web/src/components/market-observation-alerts/incrementObservationData.test.mjs",
+    "web/src/components/market-observation-alerts/MicrostructureObservations.tsx",
+    "web/src/components/market-observation-alerts/conditionalReading.test.mjs",
+    "web/src/components/market-observation-alerts/combination-reading.css",
+    "web/src/components/market-observation-alerts/IncrementObservationCards.tsx",
+    "web/src/components/market-observation-alerts/relative-observation.css",
+    "web/src/components/market-observation-alerts/style.css",
+    "web/src/components/market-observation-alerts/industryStructureData.test.mjs",
+    "web/src/components/market-observation-alerts/increment-observation.css",
+    "web/src/components/market-observation-alerts/IndustryTimeline.tsx",
+    "web/src/components/market-observation-alerts/incrementObservationData.ts",
+    "web/src/components/market-observation-alerts/CandidateShelf.tsx",
+    "web/src/components/market-observation-alerts/UsErpCard.tsx",
+    "web/src/components/market-observation-alerts/RelativeObservationCards.tsx",
+    "web/src/components/market-observation-alerts/MiniTrend.tsx",
+    "web/src/components/market-observation-alerts/indicatorCatalog.test.mjs",
+    "web/src/components/market-observation-alerts/industryStructureData.ts",
+    "web/src/components/market-observation-alerts/useSelection.ts",
+    "web/src/components/market-observation-alerts/indicatorCatalog.ts"
+  ],
+  "write_paths": [
+    "web/src/components/market-observation-alerts/IndicatorThumbnail.tsx",
+    "web/src/components/market-observation-alerts/indicatorThumbnailData.ts",
+    "web/src/components/market-observation-alerts/indicatorThumbnailData.test.mjs"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Compact source-backed thumbnail component for readable catalog types",
+    "Coverage list and unsupported cases",
+    "Focused parser checks and TypeScript"
+  ],
+  "stop_conditions": [
+    "missing permission",
+    "scope ambiguity",
+    "unsafe action"
+  ],
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "dirty_worktree_action": "preserve"
+}

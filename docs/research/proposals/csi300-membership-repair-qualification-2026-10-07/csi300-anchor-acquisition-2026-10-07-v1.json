@@ -1,0 +1,1712 @@
+{
+  "schema_version": "csi300-anchor-acquisition-handoff/1.0",
+  "title": "沪深300历史起点公开资料取得结果与正式28对代码（2026-10-07）",
+  "report_markdown": "# 沪深300历史起点名单：公开资料取得结果\n\n2026-10-07，资料取得阶段1.0。承接本目录的最小修正方案；旧方案和Library版本0保留为取得新原件之前的记录。本文件只更新资料证据，不修改历史成员表，不产生研究收益结论。\n\n## 一句话结论（大白话）\n\n已从中证官网取得2021年12月调整的正式28对代码，证实旧起点保留了28只应移出的股票、缺了28只应纳入的股票。**仍未取得2022-01-04或2021-12-13当时完整的官方300股名单，因此不能宣布起点修好了。** 已检查的公开入口给出的是2026-09-30名单；下一可靠动作是向中证数据服务索取一份指定历史日期的完整名单，精确请求稿已备好，尚未发送或购买。\n\n## 新取得并核实的资料\n\n1. **正式调整公告及附件。** [中证公告13888](https://www.csindex.com.cn/#/about/newsDetail?id=13888)发布于2021-11-26，正文明确调整自2021-12-10收市后生效。直接读取官网公开正文，保存为`announcement-13888.json`；其第一个明确标为沪深300的表含28增、28删。正文链接的[正式Excel附件](https://oss-ch.csindex.com.cn/notice/20211130195824-%E4%B8%AD%E8%AF%81%E6%8C%87%E6%95%B0%E8%B0%83%E5%85%A5%E8%B0%83%E5%87%BA%E5%90%8D%E5%8D%95.xlsx)中，只筛指数代码`000300`、简称“沪深300”，增删与正文及本地`change-2022-01-17`完全一致。另有15只备选，未混入成员。附件没有完整300股名单。\n2. **起点衔接窗口的官方目录。** 官网日期筛选2021-11-26至2022-01-04，不加标题或指数关键词，返回29条、总数29、第一页容量40，已取得全部返回项。15条属于调样或规则变更，均读了正文；另14条按目录主题为新指数发布或其他消息。名称含“等指数”且正文未逐一列全的14009、14011、14015、14068四份附件，已按指数代码/名称列排查，均没有000300。2021-12-10至2022-01-04的独立窄窗口目录有12条，与宽窗口对应部分相符。**当前官网这一目录及所核相关正文/附件，未发现另一次沪深300调整；不把当前目录快照提升为所有历史渠道绝无遗漏的证明。**\n3. **当前完整名单，明确排除。** [官网样本列表](https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/file/autofile/cons/000300cons.xls)共300条，内部日期全部为`20260930`，代码和名称明确为000300/沪深300。它只能证明这一文件日期的成员状态，不能充当2022年名单；未用于倒推或填表。该文件不含价格。\n4. **正规数据服务对象。** 从官网“技术文档”实际链接取得《中证指数数据文件服务规范V4.5.4》，页面目录日期为2026-01-12。PDF物理第15—17页列出数据服务平台的`data\\constituentslist`样本目录和`data\\asharedata\\000300`沪深300目录；第20页说明按日期提供的收盘/次日权重文件；第28—29页分别解释交易日期、成员代码、交易所等字段。规范证明服务类型和字段，不证明2022文件现存、可免费下载或本账户已有权利。没有登录或连接其文件服务器。当前版规范也不替代2021年的历史规则。\n\n附件页面的创建记录为2021-11-30，工作簿修改属性也是11-30；工作簿创建属性为2006年旧模板时间。三者不能替代11-26公告日或12-10生效时点。取得日期2026-10-07也不是历史公布日期。\n\n## 精确指纹与可复用文件\n\n原始文件保存在`docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/`，完整路径、URL、抓取参数、字节数、SHA-256及检查状态见同目录`acquisition-manifest.json`。\n\n| 文件 | 字节 | SHA-256 |\n|---|---:|---|\n| `announcement-13888.json` | 40501 | `f04250fc675f42e487a6091df32971ed4aa2b9b5a4ac7c5f6cc849ecca10a7a9` |\n| `official-20211126-adjustments.xlsx` | 872904 | `f6b9d596f3fa6072258aa1eb2c036517bf20cc74c7879eaad1069cb8e1747909` |\n| `anchor-chain-catalog-page1.json` | 5949 | `65a5a9eb213ef149cda80e2b657ccfce066706c5cb78e9b058baf12b8c73070f` |\n| `current-000300cons.xls` | 67072 | `0f9fde0e470ba81bddd0d3e6db05269e1b5077aca778879f3833d04e027fa25d` |\n| `official-data-service-spec-v4.5.4.pdf` | 490050 | `5eed1d83aef3a3158f86bce9c454a4db2728f89a228f375ea451f6465c5d3f7e` |\n\n`official-20211210-csi300-event.json`只保存这次官方000300增删、15只备选和对应字段含义，三类分开。它是原件的可核对提取，不是完整成员表，也未应用到主表。`2021-12-13`仅保留为下一成员交易日候选标记；本轮未另行认证交易所日历。\n\n## 已走完的具体公开入口与限制\n\n| 入口 | 实际结果 | 为什么不能提供目标完整名单 |\n|---|---|---|\n| 中证[000300详情页](https://www.csindex.com.cn/#/indices/family/detail?indexCode=000300)的相关资料 | 实际返回`000300cons.xls`；文件内部日期2026-09-30 | 是当前文件；没有返回指定历史日期的文件入口 |\n| 详情页“拟生效/历史生效样本” | 000300请求返回两项均为null | 本次没有可下载对象，不能用界面名称推定历史列表存在 |\n| 中证[公告目录](https://www.csindex.com.cn/#/about/newsCenter)的日期筛选 | 29条完整返回目录、15正文及4宽范围附件已核，另取得正式28对附件 | 差异事件不等于完整300股；没有此前完整起点，不能据增删拼出其余272个成员 |\n| 中证[证券所属指数检索](https://www.csindex.com.cn/#/dataService/indexConstituent) | 页面按证券查询，显示统一更新日期；所核公开请求没有历史日期选择字段 | 不发送不存在于页面的臆测历史参数；未据当前查询构建历史池 |\n| 上交所[指数信息披露目录](https://www.sse.com.cn/market/sseindex/diclosure/) | 网页读取工具只能沿导航读到当前首页；已知2020公告没有完整名单链接 | 工具未取得历史分页；不声称整个上交所档案已查尽 |\n| 中证[数据服务技术文档](https://www.csindex.com.cn/#/dataService/manual) | 取得正式服务目录、字段和命名规范 | 文件服务的历史保留、权限和费用仍需确认；未猜测账号、连接FTP或购买 |\n\n外部搜索多次把查询泛化为末尾单词/日期数字，返回无关结果，已作为工具限制保留，不能当作目标资料不存在的证据。后来改为读取中证首页真实脚本链接，仅检查文本、不执行网页脚本，按其中实际导航和参数调用公开只读资料查询，成功取得原件。首次受限环境DNS解析失败；获自动审批后普通公开HTTPS读取成功，未使用登录、验证码绕过或伪造访问身份，未遇401/403/429。\n\n因此，“未取得”针对上述具体公开路径。没有遍历所有网站、扫描历史文件名或宣称世界上不存在该历史名单。\n\n## 已备好的下一项具体请求（未发送）\n\n收件渠道：[中证数据商务支持](https://www.csindex.com.cn/#/company/contactUs?anchor=support&curTabIdx=4)，官网该栏目邮箱为`csicslt@csindex.com.cn`。不用另找不明来源的付费个人文件。\n\n> 主题：索取沪深300（000300）2022-01-04有效完整样本名单及来源说明\n>\n> 用途为内部个股研究的历史成员资格核验。请提供2022-01-04开市时有效的完整300股名单，字段只需指数代码及名称、证券代码、证券名称、交易所、成员有效日期；不需要价格或收益数据。\n>\n> 若只有2021-12-13有效的完整名单，请同时提供从该日起至2022-01-04开市前涉及000300的全部常规、临时调整和证券代码变更，或确认期间无变更，并说明依据。我们已有2021-11-26公告及12月10日收市后生效的28对增删附件；需要的是完整名单，不是仅调入名单、备选名单、ETF持仓或今天名单回填。\n>\n> 请附原始文件名、文件内日期含义及发布日期说明；若只能从归档权重文件提取，请仅交上述成员字段并保留官方原件的可追溯标识。请先确认2022历史资料是否保留、取得权限、费用，以及可否在私人研究环境与云端协作空间保存最小副本。本请求不构成订购或收费授权。\n\n该请求所需的是一份小型历史成员文件，不是全套行情。官网没有公布这份历史快照的价格与现成公开下载URL；费用和权限均记为未知。未经进一步明确授权，不发送邮件、不购买、不配置账号。若用户已经持有合法取得的该历史文件，可直接提供原件及来源说明，按上述字段和有效日期验收。\n\n另一个技术上可行的路线，是从已取得的2026-09-30官方完整名单沿**全部**正式历史变更逐条逆推，包含已退出证券和代码变更，并另找独立历史名单对账。本轮没有启动这条多年重建路线；仅靠当前名单和本地12处候选差异不能代替它，也不能将其偷偷当作用户指定的历史原件。\n\n## 执行与验收状态\n\n- 取得并核实正式28对代码：通过；官方完整历史起点：未取得，资格仍未通过。\n- 中证公开资料读取36次成功，实际下载3,996,739字节，约3.81MiB，低于10MiB；首次本机空间3,966,742,528字节，后续写入前均核≥512MiB。仅下载文档、成员文件和公开页面代码文本，无行情文件。\n- Luna独立核官方正文/Excel与候选的精确集合；Sol只核交易所公开路径，遇搜索异常后补查了实际目录。未让两个agent重复下载；实际调用费用未知。\n- 主成员表、主价格表、策略定义和旧负结果保持；B05关闭，没有新因子、标签、模型、收益计算或提交推送。\n- 本阶段的公开资料取得结果已可交接；完整历史起点等待上述精确原件，不把等待写成资格完成。\n",
+  "report_sha256": "3274bb2565f510ae826f600855a056a08998f6556668fff451f84ad39dbadaec",
+  "manifest": {
+    "schema_version": "csi300-anchor-public-acquisition/1.0",
+    "created_at_utc": "2026-10-07T07:31:09.550688+00:00",
+    "status": "official_delta_acquired_historical_anchor_missing",
+    "official_complete_historical_anchor_acquired": false,
+    "source_thread_id": "01a10228-d8a4-73ac-afb1-72b1c8b7003a",
+    "authorization": "公开资料只读检索和少量小附件总计<=10MiB；写前空间>=512MiB；无行情/B05/实验/成员修改",
+    "budget": {
+      "limit_bytes": 10485760,
+      "successful_http_requests": 36,
+      "successful_http_response_bytes": 3996739,
+      "initial_free_bytes": 3966742528,
+      "free_bytes_before_manifest": 4615852032,
+      "quotes_or_price_files_downloaded": 0,
+      "provider_b05_calls": 0
+    },
+    "official_event": {
+      "schema_version": "csi300-official-event-extract/1.0",
+      "index_code": "000300",
+      "index_name": "沪深300",
+      "official_original_obtained": true,
+      "source_url": "https://www.csindex.com.cn/#/about/newsDetail?id=13888",
+      "announcement_publish_date": "2021-11-26",
+      "effective_at_raw": "2021年12月10日收市后生效",
+      "effective_timezone": "Asia/Shanghai",
+      "first_membership_session_candidate": "2021-12-13",
+      "independent_exchange_calendar_verified": false,
+      "attachment_page_created_at": "2021-11-30",
+      "attachment_workbook_created_metadata": "2006-09-13 11:21:51",
+      "attachment_workbook_modified_metadata": "2021-11-30 11:10:03",
+      "added": [
+        {
+          "code": "000301",
+          "name": "东方盛虹"
+        },
+        {
+          "code": "002064",
+          "name": "华峰化学"
+        },
+        {
+          "code": "002459",
+          "name": "晶澳科技"
+        },
+        {
+          "code": "002466",
+          "name": "天齐锂业"
+        },
+        {
+          "code": "002568",
+          "name": "百润股份"
+        },
+        {
+          "code": "002709",
+          "name": "天赐材料"
+        },
+        {
+          "code": "002791",
+          "name": "坚朗五金"
+        },
+        {
+          "code": "300316",
+          "name": "晶盛机电"
+        },
+        {
+          "code": "300750",
+          "name": "宁德时代"
+        },
+        {
+          "code": "300759",
+          "name": "康龙化成"
+        },
+        {
+          "code": "300760",
+          "name": "迈瑞医疗"
+        },
+        {
+          "code": "300782",
+          "name": "卓胜微"
+        },
+        {
+          "code": "300866",
+          "name": "安克创新"
+        },
+        {
+          "code": "300888",
+          "name": "稳健医疗"
+        },
+        {
+          "code": "300896",
+          "name": "爱美客"
+        },
+        {
+          "code": "300999",
+          "name": "金龙鱼"
+        },
+        {
+          "code": "600905",
+          "name": "三峡能源"
+        },
+        {
+          "code": "601728",
+          "name": "中国电信"
+        },
+        {
+          "code": "601865",
+          "name": "福莱特"
+        },
+        {
+          "code": "601868",
+          "name": "中国能建"
+        },
+        {
+          "code": "601898",
+          "name": "中煤能源"
+        },
+        {
+          "code": "601966",
+          "name": "玲珑轮胎"
+        },
+        {
+          "code": "603260",
+          "name": "合盛硅业"
+        },
+        {
+          "code": "603486",
+          "name": "科沃斯"
+        },
+        {
+          "code": "605499",
+          "name": "东鹏饮料"
+        },
+        {
+          "code": "688561",
+          "name": "奇安信-U"
+        },
+        {
+          "code": "688599",
+          "name": "天合光能"
+        },
+        {
+          "code": "688981",
+          "name": "中芯国际"
+        }
+      ],
+      "removed": [
+        {
+          "code": "000656",
+          "name": "金科股份"
+        },
+        {
+          "code": "000728",
+          "name": "国元证券"
+        },
+        {
+          "code": "000860",
+          "name": "顺鑫农业"
+        },
+        {
+          "code": "002153",
+          "name": "石基信息"
+        },
+        {
+          "code": "002384",
+          "name": "东山精密"
+        },
+        {
+          "code": "002456",
+          "name": "欧菲光"
+        },
+        {
+          "code": "002463",
+          "name": "沪电股份"
+        },
+        {
+          "code": "002508",
+          "name": "老板电器"
+        },
+        {
+          "code": "002558",
+          "name": "巨人网络"
+        },
+        {
+          "code": "002673",
+          "name": "西部证券"
+        },
+        {
+          "code": "002739",
+          "name": "万达电影"
+        },
+        {
+          "code": "002773",
+          "name": "康弘药业"
+        },
+        {
+          "code": "002939",
+          "name": "长城证券"
+        },
+        {
+          "code": "002945",
+          "name": "华林证券"
+        },
+        {
+          "code": "300136",
+          "name": "信维通信"
+        },
+        {
+          "code": "600118",
+          "name": "中国卫星"
+        },
+        {
+          "code": "600233",
+          "name": "圆通速递"
+        },
+        {
+          "code": "600299",
+          "name": "安迪苏"
+        },
+        {
+          "code": "600340",
+          "name": "华夏幸福"
+        },
+        {
+          "code": "600482",
+          "name": "中国动力"
+        },
+        {
+          "code": "600521",
+          "name": "华海药业"
+        },
+        {
+          "code": "600522",
+          "name": "中天科技"
+        },
+        {
+          "code": "600703",
+          "name": "三安光电"
+        },
+        {
+          "code": "600705",
+          "name": "中航产融"
+        },
+        {
+          "code": "601077",
+          "name": "渝农商行"
+        },
+        {
+          "code": "601555",
+          "name": "东吴证券"
+        },
+        {
+          "code": "601727",
+          "name": "上海电气"
+        },
+        {
+          "code": "601872",
+          "name": "招商轮船"
+        }
+      ],
+      "reserve_candidates": [
+        {
+          "rank": 1,
+          "code": "300496",
+          "name": "中科创达"
+        },
+        {
+          "rank": 2,
+          "code": "300661",
+          "name": "圣邦股份"
+        },
+        {
+          "rank": 3,
+          "code": "002074",
+          "name": "国轩高科"
+        },
+        {
+          "rank": 4,
+          "code": "002648",
+          "name": "卫星化学"
+        },
+        {
+          "rank": 5,
+          "code": "689009",
+          "name": "九号公司-WD"
+        },
+        {
+          "rank": 6,
+          "code": "688180",
+          "name": "君实生物-U"
+        },
+        {
+          "rank": 7,
+          "code": "688185",
+          "name": "康希诺-U"
+        },
+        {
+          "rank": 8,
+          "code": "002920",
+          "name": "德赛西威"
+        },
+        {
+          "rank": 9,
+          "code": "600089",
+          "name": "特变电工"
+        },
+        {
+          "rank": 10,
+          "code": "688256",
+          "name": "寒武纪-U"
+        },
+        {
+          "rank": 11,
+          "code": "600460",
+          "name": "士兰微"
+        },
+        {
+          "rank": 12,
+          "code": "601233",
+          "name": "桐昆股份"
+        },
+        {
+          "rank": 13,
+          "code": "600674",
+          "name": "川投能源"
+        },
+        {
+          "rank": 14,
+          "code": "603737",
+          "name": "三棵树"
+        },
+        {
+          "rank": 15,
+          "code": "600023",
+          "name": "浙能电力"
+        }
+      ],
+      "source_files": [
+        {
+          "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13888.json",
+          "bytes": 40501,
+          "sha256": "f04250fc675f42e487a6091df32971ed4aa2b9b5a4ac7c5f6cc849ecca10a7a9"
+        },
+        {
+          "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/official-20211126-adjustments.xlsx",
+          "bytes": 872904,
+          "sha256": "f6b9d596f3fa6072258aa1eb2c036517bf20cc74c7879eaad1069cb8e1747909"
+        }
+      ],
+      "candidate_comparison": {
+        "mapping_source": {
+          "path": "docs/research/proposals/csi300-official-member-binding-2026-10-06/object-mapping.json",
+          "bytes": 43531,
+          "sha256": "9e8c6fab10e8e0485e9f727bc8a071a8868f9cf52744c6d4f48b06e3aadfc261"
+        },
+        "candidate_observed_date": "2022-01-17",
+        "added_set_equal": true,
+        "removed_set_equal": true,
+        "anchor_date": "2022-01-04",
+        "official_added_missing_count": 28,
+        "official_removed_still_present_count": 28,
+        "full_anchor_verified": false,
+        "other_272_verified": false
+      },
+      "field_meanings": {
+        "code": "原件证券代码，保留前导零；此增删表未单列交易所，不自动推断历史身份",
+        "added": "生效时调入成员",
+        "removed": "生效时调出成员",
+        "reserve_candidates": "备选，不是有效成员",
+        "announcement_publish_date": "公告页面公布日期",
+        "effective_at_raw": "正文生效表述；不是页面取得时间或附件修改时间"
+      },
+      "applied_to_membership": false
+    },
+    "catalog": {
+      "public_endpoint": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementByVo",
+      "method": "POST_READ_QUERY",
+      "window": [
+        "2021-11-26",
+        "2022-01-04"
+      ],
+      "keyword_filter": null,
+      "returned_items": 29,
+      "total": 29,
+      "page": 1,
+      "page_size": 40,
+      "narrow_window": [
+        "2021-12-10",
+        "2022-01-04"
+      ],
+      "narrow_items": 12,
+      "narrow_is_exact_subsequence_by_date": true,
+      "body_reviews": [
+        {
+          "id": 14066,
+          "title": "关于调整上证企债30指数与上证信用债100指数样本的公告",
+          "publishDate": "2021-12-31",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14066.json",
+            "bytes": 1278,
+            "sha256": "54fa62140e5e14ed9a75d687033813b84cd8283d4151d7b349b1beb61e6f4393"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 14068,
+          "title": "关于调整中证中票50指数等30条指数样本的公告",
+          "publishDate": "2021-12-31",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14068.json",
+            "bytes": 1503,
+            "sha256": "6b7045c4bcfae1ac202f2f233be9865fda69f815d665c16036026e1a0aa732b8"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 14063,
+          "title": "关于发布上证ESG指数系列等7条指数的公告",
+          "publishDate": "2021-12-30",
+          "theme": "新指数发布",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14061,
+          "title": "关于修订中证细分农业产业主题指数等4条指数的公告",
+          "publishDate": "2021-12-30",
+          "theme": "规则变更",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14061.json",
+            "bytes": 8963,
+            "sha256": "c3c10d78cab76d39fb0fe7723059e425a11b39969732c35b550aabb9b5f2530f"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 14059,
+          "title": "关于发布中证高股息ESG指数等3条指数的公告",
+          "publishDate": "2021-12-28",
+          "theme": "新指数发布",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14057,
+          "title": "中证指数有限公司迁址公告",
+          "publishDate": "2021-12-27",
+          "theme": "其他",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14024,
+          "title": "《中国上市公司 ESG 发展白皮书》",
+          "publishDate": "2021-12-22",
+          "theme": "其他",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14023,
+          "title": "中证指数公司荣膺“2021第一财经中国企业社会责任榜·责任典范奖”",
+          "publishDate": "2021-12-22",
+          "theme": "其他",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14022,
+          "title": "中国上市公司协会、中证指数有限公司联合发布《中国上市公司ESG发展白皮书》",
+          "publishDate": "2021-12-18",
+          "theme": "其他",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14020,
+          "title": "关于发布中证广银理财沪港深健康龙头指数等4条指数的公告",
+          "publishDate": "2021-12-17",
+          "theme": "新指数发布",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14018,
+          "title": "关于发布中证华夏银行ESG优选债券指数等3条指数的公告",
+          "publishDate": "2021-12-15",
+          "theme": "新指数发布",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14017,
+          "title": "华夏银行与中证指数公司签署战略合作协议　联合发布中证华夏银行新经济财富指数",
+          "publishDate": "2021-12-13",
+          "theme": "其他",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14015,
+          "title": "关于调整中证100AH价格优选指数等指数样本的公告",
+          "publishDate": "2021-12-09",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14015.json",
+            "bytes": 1432,
+            "sha256": "b5a7d1c3560d25fbf949dde80f3a96de06de7e9d8e59e574b13c1e3a0e70ad7f"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 14013,
+          "title": "调整中华交易服务互联互通指数系列样本股的公告",
+          "publishDate": "2021-12-07",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14013.json",
+            "bytes": 4693,
+            "sha256": "cf6e4451870e735c6557f23e61e5e4c5d63d1ee90b08ad268a25669293d183ad"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 14011,
+          "title": "关于调整中证中国内地企业500指数等指数样本的公告",
+          "publishDate": "2021-12-07",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14011.json",
+            "bytes": 1738,
+            "sha256": "91bf008938248b37b8babeb2d1e8fe0823aebd154f88d3b9c4d49489a994f935"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 14008,
+          "title": "关于三板指数样本股定期调整的公告",
+          "publishDate": "2021-12-06",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14008.json",
+            "bytes": 1958,
+            "sha256": "1508c83ae0d2145d75c84da98a40cd1787b4fa0335c414e06726f6d0b533c7b9"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 14009,
+          "title": "关于调整中证消费低波动等指数样本的公告",
+          "publishDate": "2021-12-06",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14009.json",
+            "bytes": 1544,
+            "sha256": "7b8fba30838ea2a5c91bae636949abf2d0f71e594663463439974512aa5c0145"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 14006,
+          "title": "中证韩交所中韩50指数等3条指数即将发布",
+          "publishDate": "2021-12-06",
+          "theme": "新指数发布",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14004,
+          "title": "关于发布中证韩交所中韩50指数等3条指数的公告",
+          "publishDate": "2021-12-06",
+          "theme": "新指数发布",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 14002,
+          "title": "关于调整中证定向增发事件指数样本的公告",
+          "publishDate": "2021-12-03",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14002.json",
+            "bytes": 1394,
+            "sha256": "22954ebee46c84754ef2df46b37a62185da058f4fcea8873f2c898d0b3bb4a21"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 14001,
+          "title": "中证恒生沪港通AH股精明指数每月股份类别转换结果",
+          "publishDate": "2021-12-02",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14001.json",
+            "bytes": 3589,
+            "sha256": "b5a4dcb99b27c0b1421f96a86991c1f00463afd701d6cdbbdc7a9d16d909152d"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 13898,
+          "title": "关于提供全国股转公司相关品种估值数据的公告",
+          "publishDate": "2021-12-01",
+          "theme": "其他",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 13896,
+          "title": "关于发布中证绿色金融债指数等5条指数的公告",
+          "publishDate": "2021-11-29",
+          "theme": "新指数发布",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        },
+        {
+          "id": 13883,
+          "title": "关于修订中华交易服务中国跨境指数样本空间规则的公告",
+          "publishDate": "2021-11-26",
+          "theme": "规则变更",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13883.json",
+            "bytes": 3960,
+            "sha256": "c8c35919ac33edb883d5d08e850f12363929fee182bff17080c86040b549e2c3"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 13895,
+          "title": "关于调整上证50、上证180、上证380等指数样本的公告",
+          "publishDate": "2021-11-26",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13895.json",
+            "bytes": 10382,
+            "sha256": "b33ae49343c7959721c8c8854e11d68c2e154b2fd84ba69bcafbd854fef219ba"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 13888,
+          "title": "关于调整沪深300和中证香港100等指数样本的公告",
+          "publishDate": "2021-11-26",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": true,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13888.json",
+            "bytes": 40501,
+            "sha256": "f04250fc675f42e487a6091df32971ed4aa2b9b5a4ac7c5f6cc849ecca10a7a9"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 13893,
+          "title": " 调整中华交易服务中国跨境指数系列、中国海外民企指数、香港生物科技指数及半导体芯片行业指数样本股的公告",
+          "publishDate": "2021-11-26",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13893.json",
+            "bytes": 5485,
+            "sha256": "7605491d87726a513d36037a5f1cbb0e38228c6ea139f9f5cf579414bf26f932"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 13890,
+          "title": "关于调整深证产业链指数系列样本的公告",
+          "publishDate": "2021-11-26",
+          "theme": "指数调样",
+          "full_body_read": true,
+          "mentions_csi300": false,
+          "raw_file": {
+            "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13890.json",
+            "bytes": 1468,
+            "sha256": "395bec6dba80a8da48ffbe1eb412eef92cad017e6077c599bcd70027f5ea9fc4"
+          },
+          "official_complete_2022_anchor": false
+        },
+        {
+          "id": 13885,
+          "title": "关于优化中证债券预期信用损失（ECL）计算方法及 发布存款ECL数据的公告",
+          "publishDate": "2021-11-26",
+          "theme": "其他",
+          "full_body_read": false,
+          "qualification": "目录主题为新指数发布或其他；不作为成员变更证据"
+        }
+      ],
+      "wide_attachment_checks": [
+        {
+          "file": "other-scope-attachment-14009.xlsx",
+          "sheets": [
+            {
+              "name": "调入",
+              "rows": 643,
+              "index_column_headers": [
+                [
+                  "指数代码",
+                  "指数简称",
+                  "证券代码",
+                  "证券简称"
+                ],
+                [
+                  "931013",
+                  "消费低波",
+                  "000501",
+                  "鄂武商A"
+                ]
+              ],
+              "distinct_first_column_count": 25,
+              "matched_000300_rows": []
+            },
+            {
+              "name": "调出",
+              "rows": 625,
+              "index_column_headers": [
+                [
+                  "指数代码",
+                  "指数简称",
+                  "证券代码",
+                  "证券简称"
+                ],
+                [
+                  "931013",
+                  "消费低波",
+                  "000156",
+                  "华数传媒"
+                ]
+              ],
+              "distinct_first_column_count": 25,
+              "matched_000300_rows": []
+            }
+          ],
+          "has_000300": false
+        },
+        {
+          "file": "other-scope-attachment-14011.xlsx",
+          "sheets": [
+            {
+              "name": "调入",
+              "rows": 4147,
+              "index_column_headers": [
+                [
+                  "指数代码",
+                  "指数简称",
+                  "证券代码",
+                  "证券简称"
+                ],
+                [
+                  "931378",
+                  "AH经济成长",
+                  "000019",
+                  "深粮控股"
+                ]
+              ],
+              "distinct_first_column_count": 174,
+              "matched_000300_rows": []
+            },
+            {
+              "name": "调出",
+              "rows": 3957,
+              "index_column_headers": [
+                [
+                  "指数代码",
+                  "指数简称",
+                  "证券代码",
+                  "证券简称"
+                ],
+                [
+                  "931378",
+                  "AH经济成长",
+                  "000002",
+                  "万科A"
+                ]
+              ],
+              "distinct_first_column_count": 166,
+              "matched_000300_rows": []
+            },
+            {
+              "name": "备选名单",
+              "rows": 260,
+              "index_column_headers": [
+                [
+                  "指数代码",
+                  "指数简称",
+                  "排序",
+                  "证券代码"
+                ],
+                [
+                  "000500",
+                  "内地企业",
+                  1,
+                  "688396"
+                ]
+              ],
+              "distinct_first_column_count": 4,
+              "matched_000300_rows": []
+            }
+          ],
+          "has_000300": false
+        },
+        {
+          "file": "other-scope-attachment-14015.xlsx",
+          "sheets": [
+            {
+              "name": "调入(Addition)",
+              "rows": 126,
+              "index_column_headers": [
+                [
+                  "指数代码\nIndex Code",
+                  "指数简称\nIndex Name",
+                  "证券代码\nSecurities Code",
+                  "证券名称\nSecurities Name"
+                ],
+                [
+                  "930945",
+                  "香港新股",
+                  "2265.HK",
+                  "鸿承环保科技"
+                ]
+              ],
+              "distinct_first_column_count": 12,
+              "matched_000300_rows": []
+            },
+            {
+              "name": "调出(Deletion)",
+              "rows": 132,
+              "index_column_headers": [
+                [
+                  "指数代码\nIndex Code",
+                  "指数简称\nIndex Name",
+                  "证券代码\nSecurities Code",
+                  "证券名称\nSecurities Name"
+                ],
+                [
+                  "930945",
+                  "香港新股",
+                  "0780.HK",
+                  "同程艺龙"
+                ]
+              ],
+              "distinct_first_column_count": 10,
+              "matched_000300_rows": []
+            }
+          ],
+          "has_000300": false
+        },
+        {
+          "file": "other-scope-attachment-14068.xls",
+          "sheets": [
+            {
+              "name": "Sheet1",
+              "rows": 8536,
+              "index_column_headers": [
+                [
+                  "指数代码",
+                  "指数简称",
+                  "英文简称",
+                  "债券代码"
+                ],
+                [
+                  "H11072",
+                  "中证中票50",
+                  "CSI Medium Term Note 50",
+                  "102100028"
+                ]
+              ],
+              "matched_000300_rows": []
+            }
+          ],
+          "has_000300": false
+        }
+      ],
+      "conclusion": "所核当前官网目录中仅13888是000300变更；并非所有历史渠道绝无遗漏证明"
+    },
+    "current_list_exclusion": {
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/file/autofile/cons/000300cons.xls",
+      "file": {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/current-000300cons.xls",
+        "bytes": 67072,
+        "sha256": "0f9fde0e470ba81bddd0d3e6db05269e1b5077aca778879f3833d04e027fa25d"
+      },
+      "index_code": "000300",
+      "name": "沪深300",
+      "file_date": "20260930",
+      "unique_constituents": 300,
+      "used_for_historical_backfill": false,
+      "qualifies_for_2022_anchor": false
+    },
+    "public_routes_checked": [
+      {
+        "route": "000300详情相关资料",
+        "outcome": "样本文件只有当前20260930，未返回历史日期入口"
+      },
+      {
+        "route": "000300 index-nicons",
+        "outcome": "拟生效文件及拟生效历史文件均null"
+      },
+      {
+        "route": "中证公告目录2021-11-26..2022-01-04",
+        "outcome": "29目录、15正文、4广范围附件和13888附件；无完整300历史名单"
+      },
+      {
+        "route": "证券所属指数检索",
+        "outcome": "已读实际页面脚本，仅证券查询和统一更新日；未找到历史日期字段，未猜参数"
+      },
+      {
+        "route": "上交所信息披露目录",
+        "url": "https://www.sse.com.cn/market/sseindex/diclosure/",
+        "outcome": "web读取只有当前首页，历史分页未能读取；不声称全部档案已穷尽"
+      },
+      {
+        "route": "中证技术文档/数据商务支持",
+        "outcome": "取得正式服务目录与字段规范及联系渠道，历史快照保留/权限/费用未知"
+      }
+    ],
+    "official_service_alternative": {
+      "page": "https://www.csindex.com.cn/#/company/contactUs?anchor=support&curTabIdx=4",
+      "email": "csicslt@csindex.com.cn",
+      "email_evidence": {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/contact-route.js",
+        "bytes": 22257,
+        "sha256": "45e8b58b1d1e68f5881f7a04f082f249d1f67e441aa3f9d1ebc2b19c19767749"
+      },
+      "purpose": "官网数据商务支持",
+      "request_target": "2022-01-04开市有效000300完整300证券代码/名称/交易所/有效日期；或2021-12-13完整名单加全部衔接变动",
+      "historical_file_available": null,
+      "fee": null,
+      "account_entitlement": null,
+      "cloud_copy_permission": null,
+      "email_sent": false,
+      "purchase_made": false,
+      "ftp_or_login_attempt": false,
+      "specification": {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/official-data-service-spec-v4.5.4.pdf",
+        "bytes": 490050,
+        "sha256": "5eed1d83aef3a3158f86bce9c454a4db2728f89a228f375ea451f6465c5d3f7e"
+      },
+      "specification_pages": [
+        15,
+        16,
+        17,
+        20,
+        28,
+        29
+      ],
+      "specification_version": "4.5.4",
+      "specification_is_not_historical_membership_proof": true
+    },
+    "unchanged_preexisting_sources": [
+      {
+        "path": "docs/research/proposals/csi300-official-member-binding-2026-10-06/object-mapping.json",
+        "bytes": 43531,
+        "sha256": "9e8c6fab10e8e0485e9f727bc8a071a8868f9cf52744c6d4f48b06e3aadfc261"
+      },
+      {
+        "path": "docs/research/proposals/csi300-official-member-binding-2026-10-06/binding-result.md",
+        "bytes": 6974,
+        "sha256": "a405d0d17a006b7418a057e19e87366d52fbb87a8047ae7057c9b18d6829fe18"
+      },
+      {
+        "path": "docs/research/proposals/csi300-official-member-binding-2026-10-06/local-originals-audit.json",
+        "bytes": 59712,
+        "sha256": "cfd36911160570a1c63b12c3305a4d2dba3412111b33f42ef0ab34ed966e383b"
+      },
+      {
+        "path": "docs/research/proposals/csi300-official-member-binding-2026-10-06/inspection-scope.json",
+        "bytes": 2437,
+        "sha256": "1116529a12220d86d97fb1810adba1b6a5bfc80fac96018b71db79cf529f8239"
+      },
+      {
+        "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+        "bytes": 136179,
+        "sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30"
+      },
+      {
+        "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepare_data.py",
+        "bytes": 17731,
+        "sha256": "16e0f937a68c09a70eb672ee76c766a26793aced5a77ba34f0433753a5e12f7b"
+      },
+      {
+        "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_probe_audit.json",
+        "bytes": 3351,
+        "sha256": "163424317ba3b0b27dd13e37b5c178999c87d8e81b9bc5c3d1f388ae3c854f22"
+      }
+    ],
+    "delegation": [
+      {
+        "agent": "membership_local_delta",
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "task": "正式000300正文/Excel/候选集合只读独立核对",
+        "fallback": false
+      },
+      {
+        "agent": "anchor_exchange_sources",
+        "model": "gpt-6-sol",
+        "effort": "medium",
+        "task": "交易所公开导航只读查找，搜索异常后补查实际目录",
+        "fallback": false
+      }
+    ],
+    "actual_agent_cost": "unknown",
+    "failures_and_limits": [
+      {
+        "kind": "web_search_relevance",
+        "result": "多组查询泛化为末词/日期数字；不作为不存在证据，转官方真实导航"
+      },
+      {
+        "kind": "sandbox_DNS",
+        "result": "首次默认环境DNS失败，无HTTP回应；已授权公开HTTPS自动审批后成功，无权限绕过",
+        "receipt": {
+          "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/home-fetch-receipt.json",
+          "bytes": 191,
+          "sha256": "efe63686974792da89b21fd86c0fd1c263fc452339e731009624aa88b350791e"
+        }
+      },
+      {
+        "kind": "local_extraction_glob",
+        "result": "announcement-*.json误含receipt导致KeyError data；未改原件，后续按目录整数ID选择正文；PDF提取独立完成"
+      }
+    ],
+    "http_401_403_429": false,
+    "main_membership_changed": false,
+    "performance_or_factor_experiments": false,
+    "b05_remains_closed": true,
+    "source_files": [
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/anchor-chain-catalog-page1.json",
+        "bytes": 5949,
+        "sha256": "65a5a9eb213ef149cda80e2b657ccfce066706c5cb78e9b058baf12b8c73070f"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/anchor-window-announcements.json",
+        "bytes": 313,
+        "sha256": "1947ac16803a9970384ef5a545097a5afa923f80746768f348ecd7c314531e33"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13883.json",
+        "bytes": 3960,
+        "sha256": "c8c35919ac33edb883d5d08e850f12363929fee182bff17080c86040b549e2c3"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13888.json",
+        "bytes": 40501,
+        "sha256": "f04250fc675f42e487a6091df32971ed4aa2b9b5a4ac7c5f6cc849ecca10a7a9"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13890.json",
+        "bytes": 1468,
+        "sha256": "395bec6dba80a8da48ffbe1eb412eef92cad017e6077c599bcd70027f5ea9fc4"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13893.json",
+        "bytes": 5485,
+        "sha256": "7605491d87726a513d36037a5f1cbb0e38228c6ea139f9f5cf579414bf26f932"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13895.json",
+        "bytes": 10382,
+        "sha256": "b33ae49343c7959721c8c8854e11d68c2e154b2fd84ba69bcafbd854fef219ba"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14001.json",
+        "bytes": 3589,
+        "sha256": "b5a4dcb99b27c0b1421f96a86991c1f00463afd701d6cdbbdc7a9d16d909152d"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14002.json",
+        "bytes": 1394,
+        "sha256": "22954ebee46c84754ef2df46b37a62185da058f4fcea8873f2c898d0b3bb4a21"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14008.json",
+        "bytes": 1958,
+        "sha256": "1508c83ae0d2145d75c84da98a40cd1787b4fa0335c414e06726f6d0b533c7b9"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14009.json",
+        "bytes": 1544,
+        "sha256": "7b8fba30838ea2a5c91bae636949abf2d0f71e594663463439974512aa5c0145"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14011.json",
+        "bytes": 1738,
+        "sha256": "91bf008938248b37b8babeb2d1e8fe0823aebd154f88d3b9c4d49489a994f935"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14013.json",
+        "bytes": 4693,
+        "sha256": "cf6e4451870e735c6557f23e61e5e4c5d63d1ee90b08ad268a25669293d183ad"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14015.json",
+        "bytes": 1432,
+        "sha256": "b5a7d1c3560d25fbf949dde80f3a96de06de7e9d8e59e574b13c1e3a0e70ad7f"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14061.json",
+        "bytes": 8963,
+        "sha256": "c3c10d78cab76d39fb0fe7723059e425a11b39969732c35b550aabb9b5f2530f"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14066.json",
+        "bytes": 1278,
+        "sha256": "54fa62140e5e14ed9a75d687033813b84cd8283d4151d7b349b1beb61e6f4393"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-14068.json",
+        "bytes": 1503,
+        "sha256": "6b7045c4bcfae1ac202f2f233be9865fda69f815d665c16036026e1a0aa732b8"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-detail-receipt.json",
+        "bytes": 340,
+        "sha256": "6f9d7ee1ae911436c6c18bbf2e5dfe4c26c7a2b74f9412518208c94bda87a900"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/api-fetch-receipts.json",
+        "bytes": 1554,
+        "sha256": "92bf8ccbd8d1c03faa64d410a657f52dca35657194ca5731686eb28a970d3a2c"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/app-fetch-receipt.json",
+        "bytes": 338,
+        "sha256": "644c73d386a5ec20ce13b9a6397c99e7324977fe550227f4e3951c5a666921b7"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/attachment-and-catalog-receipts.json",
+        "bytes": 1406,
+        "sha256": "b1747a55a598424de2f89794c70b79d730defc25280b844f36b250d280b8433e"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/catalog-details-and-spec-receipts.json",
+        "bytes": 5293,
+        "sha256": "11d264259d5a3dce97bf0bd5b5e0cb489b053d88de564c9060f006d85b5397d0"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/constituent-search-route.js",
+        "bytes": 16208,
+        "sha256": "102121a3f8726caa4f00d7fab6434ff8072b367ba878a03fc1e88bf94f8098dc"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/contact-route.js",
+        "bytes": 22257,
+        "sha256": "45e8b58b1d1e68f5881f7a04f082f249d1f67e441aa3f9d1ebc2b19c19767749"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/csindex-app.js",
+        "bytes": 978869,
+        "sha256": "b9137d56b66ae34b1ae0410157deee44ba0658e4b8ed89d0decb5856eae92aad"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/csindex-home.html",
+        "bytes": 19563,
+        "sha256": "d65b5e33ef4659694ecea86585a5cc48ddd24c5327efce4442b6a9f2e9e5f6a9"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/current-000300cons.xls",
+        "bytes": 67072,
+        "sha256": "0f9fde0e470ba81bddd0d3e6db05269e1b5077aca778879f3833d04e027fa25d"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/data-manual-route.js",
+        "bytes": 4875,
+        "sha256": "10938b742c60dbd1e888918cb877b968860cc492874b559c584b8c0127073816"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/data-service-route.js",
+        "bytes": 6113,
+        "sha256": "3ba2e9a067948bf26ec3c23e2765986e3798c631159e1921c8cff2b2c8bf2a3b"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/history-access-route-receipts.json",
+        "bytes": 1157,
+        "sha256": "100607fbddd12244fc226c97c0af00ad6e296334e5c422c2cb746af04e7c28eb"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/history-availability-receipts.json",
+        "bytes": 1386,
+        "sha256": "7f6bb0f4e8d84471950ab6b3e5c14b1b17d9962d03de024c92d38fabe18e4566"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/home-fetch-receipt.json",
+        "bytes": 191,
+        "sha256": "efe63686974792da89b21fd86c0fd1c263fc452339e731009624aa88b350791e"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/home-network-receipt.json",
+        "bytes": 458,
+        "sha256": "c61a6dcebc0c01308670299f8e97950c0df2e82b135f414fdfe8feba0c1e77e0"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/index-materials.json",
+        "bytes": 7087,
+        "sha256": "83a31d8be25f17b562fe14e8224f784cbf14703e6efb540a8c81216cd05aab87"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/index-nicons-materials.json",
+        "bytes": 106,
+        "sha256": "8c06b36cc45255125703a5611c8f25345554c240cf27b6898f872ac5102b8c32"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/index-route.js",
+        "bytes": 160689,
+        "sha256": "20980bec46a780ad4135156ad931174f51d622803465ac9cbd4399df853c92d8"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/news-route.js",
+        "bytes": 11341,
+        "sha256": "b9305081914e2a6221483d9c382066b071d191445e4d9f3fdbd021feefe427a2"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/official-20211126-adjustments.xlsx",
+        "bytes": 872904,
+        "sha256": "f6b9d596f3fa6072258aa1eb2c036517bf20cc74c7879eaad1069cb8e1747909"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/official-20211210-csi300-event.json",
+        "bytes": 7141,
+        "sha256": "cd3d8af1bd1e20f5917580ad97283692e411910e5feb8ecc26fcbca9b3de81d8"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/official-data-service-spec-v4.5.4.pdf",
+        "bytes": 490050,
+        "sha256": "5eed1d83aef3a3158f86bce9c454a4db2728f89a228f375ea451f6465c5d3f7e"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/other-scope-attachment-14009.xlsx",
+        "bytes": 50543,
+        "sha256": "45d5f75eecf280c7d185a087a1e1ec54fb68e690ed0b0c673794a192e7ffb6e7"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/other-scope-attachment-14011.xlsx",
+        "bytes": 228882,
+        "sha256": "ad8bab989528a9de32c8af87bbb79a96f0f5e29c781195a389f34bbb1052f2b7"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/other-scope-attachment-14015.xlsx",
+        "bytes": 22213,
+        "sha256": "26aa29829563c7bda25d52eafab280e48b24e7da9f14e39bdca1e07db4515744"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/other-scope-attachment-14068.xls",
+        "bytes": 937472,
+        "sha256": "f4b30c289c2c527195d81a3340b7fa4a3f01619c8ba20e76db023bcfdcdfd9b6"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/other-scope-attachment-check.json",
+        "bytes": 4083,
+        "sha256": "a44516eac8cf3b7ff28cb04ebb37daf85613be52484f9f20feb36e25c9289c1b"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/other-scope-attachment-receipts.json",
+        "bytes": 1957,
+        "sha256": "ee0eeebcd548cc3f89d4fd53d99ddd6f37180919639f17d07afb13468edeff33"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/routes-fetch-receipt.json",
+        "bytes": 722,
+        "sha256": "64552cc100aca81c3133af5c6cc89e3763cbed80c265b7c451e2ec960a2f0461"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/technical-documents.json",
+        "bytes": 1825,
+        "sha256": "23a53a29f6dbac00ff09fce89ce94d15d1c45fd6cd1c2e354f6b49dccd26bfb1"
+      },
+      {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/transition-catalog-page1.json",
+        "bytes": 2520,
+        "sha256": "cb211fa6eeb9b76e337e2b20c5403da0f5e45a37fe2ddc86554923e111d6d741"
+      }
+    ],
+    "http_receipts": [
+      {
+        "url": "https://www.csindex.com.cn/",
+        "started_at_utc": "2026-10-07T07:12:54.571963+00:00",
+        "max_bytes": 1048576,
+        "default_environment_attempt": "DNS resolution failed; no HTTP status received",
+        "status": 200,
+        "bytes": 19563,
+        "sha256": "d65b5e33ef4659694ecea86585a5cc48ddd24c5327efce4442b6a9f2e9e5f6a9",
+        "headers": {
+          "Content-Type": "text/html",
+          "Content-Length": "19563",
+          "Last-Modified": "Mon, 14 Sep 2026 01:36:07 GMT"
+        }
+      },
+      {
+        "url": "https://www.csindex.com.cn/static/js/app.3d50b32e.js",
+        "source": "script src in saved csindex-home.html",
+        "started_at_utc": "2026-10-07T07:13:33.174038+00:00",
+        "max_bytes": 3145728,
+        "executed": false,
+        "status": 200,
+        "bytes": 978869,
+        "sha256": "b9137d56b66ae34b1ae0410157deee44ba0658e4b8ed89d0decb5856eae92aad"
+      },
+      {
+        "url": "https://www.csindex.com.cn/static/js/chunk-d0c6b5c6.d83f7a1d.js",
+        "source": "csindex-app.js chunk route and hash",
+        "at_utc": "2026-10-07T07:15:04.653317+00:00",
+        "max_bytes": 1048576,
+        "executed": false,
+        "status": 200,
+        "bytes": 11341,
+        "sha256": "b9305081914e2a6221483d9c382066b071d191445e4d9f3fdbd021feefe427a2"
+      },
+      {
+        "url": "https://www.csindex.com.cn/static/js/chunk-11a97808.d4db8a3b.js",
+        "source": "csindex-app.js chunk route and hash",
+        "at_utc": "2026-10-07T07:15:04.729546+00:00",
+        "max_bytes": 1048576,
+        "executed": false,
+        "status": 200,
+        "bytes": 160689,
+        "sha256": "20980bec46a780ad4135156ad931174f51d622803465ac9cbd4399df853c92d8"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/indexInfo/index-details-data?fileLang=2&indexCode=000300",
+        "method": "GET",
+        "body": null,
+        "at_utc": "2026-10-07T07:16:17.084066+00:00",
+        "source": "saved official public app + news/index route scripts",
+        "max_bytes": 1048576,
+        "status": 200,
+        "bytes": 7087,
+        "sha256": "83a31d8be25f17b562fe14e8224f784cbf14703e6efb540a8c81216cd05aab87"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementByVo",
+        "method": "POST_READ_QUERY",
+        "body": {
+          "lang": "cn",
+          "searchInput": "沪深300",
+          "startDate": "2021-11-26",
+          "endDate": "2022-01-04",
+          "page": {
+            "key": "",
+            "page": 1,
+            "rows": 40
+          },
+          "classList": [],
+          "indexList": [],
+          "relatedTopics": [],
+          "typeList": []
+        },
+        "at_utc": "2026-10-07T07:16:17.154042+00:00",
+        "source": "saved official public app + news/index route scripts",
+        "max_bytes": 1048576,
+        "status": 200,
+        "bytes": 313,
+        "sha256": "1947ac16803a9970384ef5a545097a5afa923f80746768f348ecd7c314531e33"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/indexInfo/index-nicons?fileLang=1&indexCode=000300",
+        "method": "GET",
+        "body": null,
+        "at_utc": "2026-10-07T07:16:17.496092+00:00",
+        "source": "saved official public app + news/index route scripts",
+        "max_bytes": 1048576,
+        "status": 200,
+        "bytes": 106,
+        "sha256": "8c06b36cc45255125703a5611c8f25345554c240cf27b6898f872ac5102b8c32"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=13888",
+        "source": "official filtered announcement id13888",
+        "max_bytes": 1048576,
+        "at_utc": "2026-10-07T07:16:58.285365+00:00",
+        "status": 200,
+        "bytes": 40501,
+        "sha256": "f04250fc675f42e487a6091df32971ed4aa2b9b5a4ac7c5f6cc849ecca10a7a9"
+      },
+      {
+        "url": "https://oss-ch.csindex.com.cn/notice/20211130195824-%E4%B8%AD%E8%AF%81%E6%8C%87%E6%95%B0%E8%B0%83%E5%85%A5%E8%B0%83%E5%87%BA%E5%90%8D%E5%8D%95.xlsx",
+        "body": null,
+        "filename": "official-20211126-adjustments.xlsx",
+        "max_bytes": 2097152,
+        "at_utc": "2026-10-07T07:17:47.267876+00:00",
+        "status": 200,
+        "bytes": 872904,
+        "sha256": "f6b9d596f3fa6072258aa1eb2c036517bf20cc74c7879eaad1069cb8e1747909"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementByVo",
+        "body": {
+          "lang": "cn",
+          "startDate": "2021-12-10",
+          "endDate": "2022-01-04",
+          "page": {
+            "key": "",
+            "page": 1,
+            "rows": 40
+          },
+          "classList": [],
+          "indexList": [],
+          "relatedTopics": [],
+          "typeList": []
+        },
+        "filename": "transition-catalog-page1.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:17:48.022688+00:00",
+        "status": 200,
+        "bytes": 2520,
+        "sha256": "cb211fa6eeb9b76e337e2b20c5403da0f5e45a37fe2ddc86554923e111d6d741"
+      },
+      {
+        "url": "https://www.csindex.com.cn/static/js/chunk-5f1d8aa6.c1288ea4.js",
+        "body": null,
+        "filename": "data-service-route.js",
+        "max_bytes": 1048576,
+        "at_utc": "2026-10-07T07:17:48.106588+00:00",
+        "status": 200,
+        "bytes": 6113,
+        "sha256": "3ba2e9a067948bf26ec3c23e2765986e3798c631159e1921c8cff2b2c8bf2a3b"
+      },
+      {
+        "url": "https://www.csindex.com.cn/static/js/chunk-6af41558.b383b8cb.js",
+        "source": "csindex-app.js public navigation chunk/hash",
+        "filename": "constituent-search-route.js",
+        "max_bytes": 1048576,
+        "at_utc": "2026-10-07T07:19:08.088320+00:00",
+        "status": 200,
+        "bytes": 16208,
+        "sha256": "102121a3f8726caa4f00d7fab6434ff8072b367ba878a03fc1e88bf94f8098dc"
+      },
+      {
+        "url": "https://www.csindex.com.cn/static/js/chunk-3ead80c8.a18d8b1b.js",
+        "source": "csindex-app.js public navigation chunk/hash",
+        "filename": "data-manual-route.js",
+        "max_bytes": 1048576,
+        "at_utc": "2026-10-07T07:19:08.166447+00:00",
+        "status": 200,
+        "bytes": 4875,
+        "sha256": "10938b742c60dbd1e888918cb877b968860cc492874b559c584b8c0127073816"
+      },
+      {
+        "url": "https://www.csindex.com.cn/static/js/chunk-59ec532a.8fe34754.js",
+        "source": "csindex-app.js public navigation chunk/hash",
+        "filename": "contact-route.js",
+        "max_bytes": 1048576,
+        "at_utc": "2026-10-07T07:19:08.243426+00:00",
+        "status": 200,
+        "bytes": 22257,
+        "sha256": "45e8b58b1d1e68f5881f7a04f082f249d1f67e441aa3f9d1ebc2b19c19767749"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementByVo",
+        "body": {
+          "lang": "cn",
+          "startDate": "2021-11-26",
+          "endDate": "2022-01-04",
+          "page": {
+            "key": "",
+            "page": 1,
+            "rows": 40
+          },
+          "classList": [],
+          "indexList": [],
+          "relatedTopics": [],
+          "typeList": []
+        },
+        "filename": "anchor-chain-catalog-page1.json",
+        "max_bytes": 524288,
+        "at_utc": "2026-10-07T07:20:43.552623+00:00",
+        "status": 200,
+        "bytes": 5949,
+        "sha256": "65a5a9eb213ef149cda80e2b657ccfce066706c5cb78e9b058baf12b8c73070f"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/webStatic/selectByPage?language=zh&page=technicalDocumentation",
+        "body": null,
+        "filename": "technical-documents.json",
+        "max_bytes": 524288,
+        "at_utc": "2026-10-07T07:20:43.642662+00:00",
+        "status": 200,
+        "bytes": 1825,
+        "sha256": "23a53a29f6dbac00ff09fce89ce94d15d1c45fd6cd1c2e354f6b49dccd26bfb1"
+      },
+      {
+        "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/file/autofile/cons/000300cons.xls",
+        "body": null,
+        "filename": "current-000300cons.xls",
+        "max_bytes": 524288,
+        "at_utc": "2026-10-07T07:20:43.702045+00:00",
+        "status": 200,
+        "bytes": 67072,
+        "sha256": "0f9fde0e470ba81bddd0d3e6db05269e1b5077aca778879f3833d04e027fa25d"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=14066",
+        "filename": "announcement-14066.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:35.305853+00:00",
+        "status": 200,
+        "bytes": 1278,
+        "sha256": "54fa62140e5e14ed9a75d687033813b84cd8283d4151d7b349b1beb61e6f4393"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=14068",
+        "filename": "announcement-14068.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:35.615825+00:00",
+        "status": 200,
+        "bytes": 1503,
+        "sha256": "6b7045c4bcfae1ac202f2f233be9865fda69f815d665c16036026e1a0aa732b8"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=14061",
+        "filename": "announcement-14061.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:35.901958+00:00",
+        "status": 200,
+        "bytes": 8963,
+        "sha256": "c3c10d78cab76d39fb0fe7723059e425a11b39969732c35b550aabb9b5f2530f"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=14015",
+        "filename": "announcement-14015.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:36.203845+00:00",
+        "status": 200,
+        "bytes": 1432,
+        "sha256": "b5a7d1c3560d25fbf949dde80f3a96de06de7e9d8e59e574b13c1e3a0e70ad7f"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=14013",
+        "filename": "announcement-14013.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:36.505998+00:00",
+        "status": 200,
+        "bytes": 4693,
+        "sha256": "cf6e4451870e735c6557f23e61e5e4c5d63d1ee90b08ad268a25669293d183ad"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=14011",
+        "filename": "announcement-14011.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:36.805705+00:00",
+        "status": 200,
+        "bytes": 1738,
+        "sha256": "91bf008938248b37b8babeb2d1e8fe0823aebd154f88d3b9c4d49489a994f935"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=14008",
+        "filename": "announcement-14008.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:37.093148+00:00",
+        "status": 200,
+        "bytes": 1958,
+        "sha256": "1508c83ae0d2145d75c84da98a40cd1787b4fa0335c414e06726f6d0b533c7b9"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=14009",
+        "filename": "announcement-14009.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:37.389546+00:00",
+        "status": 200,
+        "bytes": 1544,
+        "sha256": "7b8fba30838ea2a5c91bae636949abf2d0f71e594663463439974512aa5c0145"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=14002",
+        "filename": "announcement-14002.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:37.669563+00:00",
+        "status": 200,
+        "bytes": 1394,
+        "sha256": "22954ebee46c84754ef2df46b37a62185da058f4fcea8873f2c898d0b3bb4a21"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=14001",
+        "filename": "announcement-14001.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:37.943692+00:00",
+        "status": 200,
+        "bytes": 3589,
+        "sha256": "b5a4dcb99b27c0b1421f96a86991c1f00463afd701d6cdbbdc7a9d16d909152d"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=13883",
+        "filename": "announcement-13883.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:38.286353+00:00",
+        "status": 200,
+        "bytes": 3960,
+        "sha256": "c8c35919ac33edb883d5d08e850f12363929fee182bff17080c86040b549e2c3"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=13895",
+        "filename": "announcement-13895.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:38.581179+00:00",
+        "status": 200,
+        "bytes": 10382,
+        "sha256": "b33ae49343c7959721c8c8854e11d68c2e154b2fd84ba69bcafbd854fef219ba"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=13893",
+        "filename": "announcement-13893.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:38.869687+00:00",
+        "status": 200,
+        "bytes": 5485,
+        "sha256": "7605491d87726a513d36037a5f1cbb0e38228c6ea139f9f5cf579414bf26f932"
+      },
+      {
+        "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=13890",
+        "filename": "announcement-13890.json",
+        "max_bytes": 262144,
+        "at_utc": "2026-10-07T07:21:39.150350+00:00",
+        "status": 200,
+        "bytes": 1468,
+        "sha256": "395bec6dba80a8da48ffbe1eb412eef92cad017e6077c599bcd70027f5ea9fc4"
+      },
+      {
+        "url": "https://oss-ch.csindex.com.cn/technical-documentation/cms_add/20260112160427-%E4%B8%AD%E8%AF%81%E6%8C%87%E6%95%B0%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E8%A7%84%E8%8C%83V4.5.4.pdf",
+        "filename": "official-data-service-spec-v4.5.4.pdf",
+        "max_bytes": 2097152,
+        "at_utc": "2026-10-07T07:21:39.433955+00:00",
+        "status": 200,
+        "bytes": 490050,
+        "sha256": "5eed1d83aef3a3158f86bce9c454a4db2728f89a228f375ea451f6465c5d3f7e"
+      },
+      {
+        "url": "https://oss-ch.csindex.com.cn/notice/20211206175522-%E8%B0%83%E6%95%B4%E5%90%8D%E5%8D%95.xlsx",
+        "source_announcement_id": 14009,
+        "filename": "other-scope-attachment-14009.xlsx",
+        "max_bytes": 1048576,
+        "at_utc": "2026-10-07T07:24:16.303387+00:00",
+        "purpose": "排查等指数附件中是否另含000300；不作为起点名单",
+        "status": 200,
+        "bytes": 50543,
+        "sha256": "45d5f75eecf280c7d185a087a1e1ec54fb68e690ed0b0c673794a192e7ffb6e7"
+      },
+      {
+        "url": "https://oss-ch.csindex.com.cn/notice/20211207182544-%E8%B0%83%E6%95%B4%E5%90%8D%E5%8D%95.xlsx",
+        "source_announcement_id": 14011,
+        "filename": "other-scope-attachment-14011.xlsx",
+        "max_bytes": 1048576,
+        "at_utc": "2026-10-07T07:24:16.691978+00:00",
+        "purpose": "排查等指数附件中是否另含000300；不作为起点名单",
+        "status": 200,
+        "bytes": 228882,
+        "sha256": "ad8bab989528a9de32c8af87bbb79a96f0f5e29c781195a389f34bbb1052f2b7"
+      },
+      {
+        "url": "https://oss-ch.csindex.com.cn/notice/20211209154638-%E8%B0%83%E6%95%B4%E5%90%8D%E5%8D%95.xlsx",
+        "source_announcement_id": 14015,
+        "filename": "other-scope-attachment-14015.xlsx",
+        "max_bytes": 1048576,
+        "at_utc": "2026-10-07T07:24:17.092201+00:00",
+        "purpose": "排查等指数附件中是否另含000300；不作为起点名单",
+        "status": 200,
+        "bytes": 22213,
+        "sha256": "26aa29829563c7bda25d52eafab280e48b24e7da9f14e39bdca1e07db4515744"
+      },
+      {
+        "url": "https://oss-ch.csindex.com.cn/notice%2F20211231171330-%E6%A0%B7%E6%9C%AC%E5%90%8D%E5%8D%95.xls",
+        "source_announcement_id": 14068,
+        "filename": "other-scope-attachment-14068.xls",
+        "max_bytes": 1048576,
+        "at_utc": "2026-10-07T07:24:17.415657+00:00",
+        "purpose": "排查等指数附件中是否另含000300；不作为起点名单",
+        "status": 200,
+        "bytes": 937472,
+        "sha256": "f4b30c289c2c527195d81a3340b7fa4a3f01619c8ba20e76db023bcfdcdfd9b6"
+      }
+    ],
+    "report": {
+      "path": "docs/research/proposals/csi300-membership-repair-qualification-2026-10-07/acquisition-result.md",
+      "bytes": 9854,
+      "sha256": "3274bb2565f510ae826f600855a056a08998f6556668fff451f84ad39dbadaec"
+    }
+  },
+  "manifest_sha256": "7e6038a6d9d79d0fb3417ee7a5926643353bb27e4b1ff4fa33d177f3625887b2",
+  "full_raw_attachments_copied_to_library": false,
+  "raw_sources": "原件留本机精确路径；本交接含来源URL、逐文件字节/hash及000300规范提取，未复制其他指数的大表",
+  "official_complete_historical_anchor_acquired": false
+}

@@ -1,0 +1,30 @@
+{
+  "mission": "美股股债价格图密集标记显示修复",
+  "task_scope": [
+    "Read-only review of local US chart display integration: grouping preserves raw dates and thresholds; default/checkbox/focus click/return behavior; US axes/labels and price enlargement; CN regression risk. Identify concrete defects only."
+  ],
+  "read_only_paths": [
+    "web/src/components/observation-library/ErpCrossChart.tsx",
+    "web/src/components/observation-library/erpCrossChart.css",
+    "web/src/components/observation-library/usErpMarkerGroups.ts"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Prioritized concrete findings, or no findings; no tests/live data unless necessary pure local reasoning"
+  ],
+  "stop_conditions": [
+    "No extra files, sources, data requests, research runs or child agents",
+    "If ambiguous stop report; preserve other changes"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

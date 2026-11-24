@@ -1,0 +1,25 @@
+import type { ZeroCrossing } from "./price-projection-data";
+
+export type CrossingFilter = "all" | "up" | "down";
+export const CROSSING_COLORS = { up: "#287e71", down: "#ad6735" };
+
+/** Keep every contemporaneously known event; density only changes symbol size. */
+export function crossingMarkerSeries(events: ZeroCrossing[], visibleCount: number) {
+  const size = visibleCount > 750 ? 7 : visibleCount > 250 ? 8 : 10;
+  return (["price", "focus"] as const).map((panel, axisIndex) => ({
+    id: `${panel}-crossings`, name: "动量转正或转负", type: "scatter" as const,
+    xAxisIndex: axisIndex, yAxisIndex: axisIndex, z: 6,
+    emphasis: { scale: 1.6 },
+    data: events.map(event => ({
+      date: event.date,
+      value: [event.date, panel === "price" ? event.price : event.focusPercent],
+      symbol: "triangle", symbolRotate: event.direction === "down" ? 180 : 0,
+      symbolSize: size,
+      itemStyle: { color: CROSSING_COLORS[event.direction], borderColor: "#fff", borderWidth: 0.8, opacity: 1 },
+    })),
+  }));
+}
+
+export function filterCrossings(events: ZeroCrossing[], filter: CrossingFilter) {
+  return filter === "all" ? events : events.filter(event => event.direction === filter);
+}

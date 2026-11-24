@@ -1,0 +1,75 @@
+{
+  "verifiedAt": "2026-10-24T09:23:33.438450+08:00",
+  "datasetId": "fixed2014_300_extension",
+  "question": "同一预先合格股票池内，既有趋势/残差/风险信息的五组连续报价资金路径与代价怎样，是否支持排序或风险用途？",
+  "frozenAt": "2026-10-22T00:41:04.112907+08:00",
+  "report": "docs/experiments/factor-curve-library-2026-10-22.md",
+  "bindings": [
+    {
+      "path": "docs/experiments/raw/factor-curve-library-2026-10-22/design.json",
+      "sha256": "19d2cdb2eed2d106ea08f26e33e729c5b5dc5b5c3679f63b3a8d15f69b222ec9"
+    },
+    {
+      "path": "docs/experiments/raw/factor-curve-library-2026-10-22/resolved-definition-cards.json",
+      "sha256": "4b3f9bea5bbbee8273764724c990a21cb7eb17104712125648e264d9d3ec3b44"
+    },
+    {
+      "path": "docs/experiments/raw/factor-curve-library-2026-10-22/execution-contract.json",
+      "sha256": "dc0525287e8f39137b78cc911b35e7be14b8b328e88f4495df2fe9ab5da38a26"
+    },
+    {
+      "path": "docs/experiments/raw/factor-curve-library-2026-10-22/run.py",
+      "sha256": "0eb6524fb0b01b5199cb8b542e62453eee3c0ea807db42d526df1bb3929394bc"
+    },
+    {
+      "path": "docs/experiments/raw/factor-curve-library-2026-10-22/preparation-independent-review.json",
+      "sha256": "c73d299d1f63ef7f65826bc022ec7516c9622538f14b62c3677dc2eb66673f8f"
+    },
+    {
+      "path": "docs/experiments/raw/factor-curve-library-2026-10-22/result-independent-review.json",
+      "sha256": "75c5c4d9342cc0a089cf50812ed492c3163dd4cbb1fa060c83458a353119a810"
+    },
+    {
+      "path": "docs/experiments/raw/factor-curve-library-2026-10-22/diagnostics-independent-review.json",
+      "sha256": "6a0a6b3106ea0276dc3495ff8be19d5311eaefdf362d52914d7e2ff360a7fce7"
+    }
+  ],
+  "factors": [
+    {
+      "factorId": "momentum20",
+      "reference": "research.curves.momentum20@1.0.0",
+      "formula": "C_t/C_(t-20 scheduled sessions)-1",
+      "stage": "公式与实现已核；有效性仍须按原报告判断"
+    },
+    {
+      "factorId": "momentum60",
+      "reference": "research.curves.momentum60@1.0.0",
+      "formula": "C_t/C_(t-60 scheduled sessions)-1",
+      "stage": "公式与实现已核；有效性仍须按原报告判断"
+    },
+    {
+      "factorId": "momentum120",
+      "reference": "research.curves.momentum120@1.0.0",
+      "formula": "C_t/C_(t-120 scheduled sessions)-1",
+      "stage": "公式与实现已核；有效性仍须按原报告判断"
+    },
+    {
+      "factorId": "ma_distance",
+      "reference": "research.curves.ma_distance@1.0.0",
+      "formula": "min(abs(C_t-M)/M), M seededEMA/SMA 20,60,120; research extension with gap/break reset, not mixed.pullback_ma_distance@2.0.0; ascending distance G5=farthest, no preferred group assumed",
+      "stage": "公式与实现已核；有效性仍须按原报告判断"
+    },
+    {
+      "factorId": "ppo",
+      "reference": "research.curves.ppo@1.0.0",
+      "formula": "100*(seededEMA12-seededEMA26)/seededEMA26; strength research proxy, not buy/sell",
+      "stage": "公式与实现已核；有效性仍须按原报告判断"
+    },
+    {
+      "factorId": "downside",
+      "reference": "research.curves.downside@1.0.0",
+      "formula": "-sqrt(mean(min(log(Cd/Cd-1),0)^2)),61 consecutive scheduled closes,60 returns; G5=smaller downside magnitude",
+      "stage": "公式与实现已核；有效性仍须按原报告判断"
+    }
+  ]
+}

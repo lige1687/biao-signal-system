@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "version": "forward-observation-20261020-v1",
+  "mode": "virtual_cash_only",
+  "initial_cash": 100000,
+  "initial_holdings": [],
+  "external_cashflows": "none",
+  "assets": [
+    {
+      "symbol": "510300.SS",
+      "name": "沪深300ETF华泰柏瑞",
+      "currency": "CNY"
+    }
+  ],
+  "lot_size": 100,
+  "fee_bps": 10,
+  "slippage_bps": 5,
+  "max_quote_age_seconds": 120,
+  "execution_note": "独立虚拟账户；每次模拟成交收取0.10%费用，无最低费用；买价为收到的卖一价加0.05%，按已报卖一数量限制成交。属于研究假设，不代表券商真实费率、排队或成交。",
+  "valuation_note": "只用启用后收到的已完成日线收盘价估值；分红除权记应收，到账日未获核对不转可用现金；资料缺失不补零。",
+  "accounts": [
+    {
+      "id": "csi300-buy-hold-v1",
+      "name": "沪深300ETF · 买入持有对照",
+      "kind": "buy_hold",
+      "role": "passive_baseline",
+      "rules": {
+        "universe": "仅沪深300ETF华泰柏瑞（510300），不排名。",
+        "entry": "实际启用时排队一张买单，等待此后交易时段内收到的合格报价；不追溯买入。",
+        "ranking": "单一标的，无排序；待完整策略接入后作为简单对手。",
+        "sizing": "独立虚拟本金10万元；按100份整手买入，费用计入预算，无追加资金。",
+        "holding": "持有已成交份额，不定期换仓；已确认分红先列应收。",
+        "exit": "作为被动对照不主动退出；报价、公司行为资料或代码不合格时暂停新增动作。",
+        "reentry": "无卖出后重新进入；初始订单未全部成交时按后续不同报价继续处理。",
+        "cash_conflict": "费用0.10%，买价加0.05%；按卖一数量上限模拟部分成交，资金不足不借款；账户之间不共享本金。"
+      }
+    },
+    {
+      "id": "cash-reference-v1",
+      "name": "现金参照",
+      "kind": "cash",
+      "role": "cash_reference",
+      "rules": {
+        "universe": "持有人民币虚拟现金。",
+        "entry": "实际启用时建立独立10万元现金账户。",
+        "ranking": "不选择证券。",
+        "sizing": "现金100%，无追加或取出。",
+        "holding": "保持现金，利息按0计算。",
+        "exit": "无证券交易。",
+        "reentry": "无证券交易。",
+        "cash_conflict": "独立参照，不占用其他账户资金。"
+      }
+    },
+    {
+      "id": "lei-original-a",
+      "name": "完整原 A · 待规则闭合",
+      "kind": "blocked",
+      "role": "candidate",
+      "owner": "research-utility-review-20261012",
+      "reasons": [
+        "目标区域、目标用价与对应失效条件尚未完整确定；原负责人已补小时资料，继续复用其成果。"
+      ],
+      "evidence_path": "docs/experiments/original-a-increment-continuation-2026-10-19.md",
+      "rules": {
+        "universe": "沿原负责人冻结范围；未启用。",
+        "entry": "保留原 A 完整条件，禁止以转绿或排序代理冒充。",
+        "ranking": "待原规则与执行合同确认。",
+        "sizing": "待原负责人账户合同；未分配可执行资金。",
+        "holding": "待完整策略合同。",
+        "exit": "目标区域、目标用价与对应失效条件待闭合。",
+        "reentry": "待完整策略合同。",
+        "cash_conflict": "未启用，无订单、成交或收益曲线。"
+      }
+    },
+    {
+      "id": "lowturnover-green",
+      "name": "低换手趋势账户 · 等待已有研究",
+      "kind": "external_pending",
+      "role": "candidate",
+      "owner": "research-utility-review-20261012",
+      "reasons": [
+        "原负责人正在建设完整账户；此处只登记接入位置，不重复实验或启动未冻结版本。"
+      ],
+      "rules": {
+        "universe": "等待原任务已冻结的资产范围。",
+        "entry": "等待原任务明确决策时点和合法成交时点。",
+        "ranking": "等待原任务排序与缺候选规则。",
+        "sizing": "等待原任务仓位和闲置现金规则。",
+        "holding": "等待原任务持有与换仓规则。",
+        "exit": "等待原任务退出与失效规则。",
+        "reentry": "等待原任务重新进入规则。",
+        "cash_conflict": "尚未接入，不复制历史收益作为前向结果。"
+      }
+    }
+  ],
+  "source_fingerprints": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "code_hashes": {
+    "src/lei_signal/forward_observation/__init__.py": "0d958c66704aeb68fe8914266b95177c9a3c766355183985274445f7741913b7",
+    "src/lei_signal/forward_observation/collector.py": "a4152bf636ed70235224ae85a32b3fbc95557285c8535bd3e8fac80f562ac334",
+    "src/lei_signal/forward_observation/models.py": "7d00a3bf3e5f33a45ebcc243f278e8bbd1542aadb61741a1fa9a766ff4dc8506",
+    "src/lei_signal/forward_observation/reconcile.py": "57d8d3f033e3e3b81ece81e350fa05b6fa0183739c41c7324ed41eb02dbe63c8",
+    "src/lei_signal/forward_observation/replay.py": "c0f4b58370b5962ba2d98e9514609faf517a28b866016b5043b0dd18b1827e86",
+    "src/lei_signal/forward_observation/runner.py": "0cac155558bbcae905e0c7b04237f4286f95ba7be8c9f9d2c0887885232c2c9a",
+    "src/lei_signal/forward_observation/server.py": "e400e78578813d2aa345bf8d661a9e0d2054af7f7bd2b81385cf9d8073440e00",
+    "src/lei_signal/forward_observation/service.py": "e851f2f408b4c875f3e3d4945039153bb04e85d046485f38b4c59db98bd38306",
+    "src/lei_signal/forward_observation/store.py": "37e81efb4c20c0d3c9cb857eb995c5bb039690b724c20c68e8a922e11cd2f585"
+  }
+}

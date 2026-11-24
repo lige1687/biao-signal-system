@@ -1,0 +1,34 @@
+{
+  "mission": "Independent read-only acceptance of extended daily concentration candidate",
+  "task_scope": [
+    "Review exact run binding and test the candidate against prior accepted overlap, missing-row behavior, monthly cards and top5/top10 invariants. Existing archive only; do not launch recomputation."
+  ],
+  "path_base": "/",
+  "execution_cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/AGENTS.md",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/web/AGENTS.md",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/trae-observation-integration-20261108/concentration-daily-history",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/concentration-derived-20261108-run2",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/microstructure-observations-20261108-20261109T004903-e39e6e7cca17",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Counts, oldest valid, gaps, August 31 and latest values, no other card changes, risks observed; report in tool result only."
+  ],
+  "stop_conditions": [
+    "missing source, cannot validate candidate without extra computation, raw/archive change"
+  ],
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -427,6 +427,9 @@ def validate_evidence_bundle(bundle: dict, *, root: Path,
 
         facts = rec.get("facts") or {}
         verified = rec.get("facts_verified") is True
+        if rec.get("fact_type") == "trading_halt" and verified:
+            reasons.append("当前证据包尚未建立停牌事实必需绑定合同；"
+                           "该类型暂不支持已核事实消费")
         if rec.get("fact_type") == "listing":
             if not _iso_date(facts.get("listing_trade_date")):
                 reasons.append("listing 记录缺少合法 listing_trade_date")

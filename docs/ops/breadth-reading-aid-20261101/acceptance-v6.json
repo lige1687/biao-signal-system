@@ -1,0 +1,81 @@
+{
+  "updated_at": "2026-11-02T16:55:41.244795+08:00",
+  "status": "completed_local",
+  "files": [
+    "web/src/components/market-observation-alerts/index.tsx",
+    "web/src/components/market-observation-alerts/style.css",
+    "web/src/components/market-style/BreadthComparison.tsx",
+    "web/src/components/market-style/BreadthReading.tsx",
+    "web/src/components/market-style/breadth-comparison.css",
+    "web/src/components/market-observation-alerts/MiniTrend.tsx",
+    "web/src/components/market-style/breadthInterpretation.ts",
+    "web/src/components/market-style/breadthInterpretation.test.mjs"
+  ],
+  "financial_experiments": 0,
+  "new_market_data_writes": 0,
+  "source_requests_this_phase": 1,
+  "source_requests_cumulative": 6,
+  "checks": {
+    "typescript_vite": "pass; existing large chunk warning",
+    "targeted_tests": {
+      "pass": 40,
+      "fail": 0
+    },
+    "desktop": {
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "chart_width": 876,
+      "reading_width": 320,
+      "layout": "side by side"
+    },
+    "mobile": {
+      "viewport": 390,
+      "scrollWidth": 390,
+      "chart_width": 336,
+      "reading_width": 336,
+      "layout": "reading below chart"
+    },
+    "historical_selection": "2026-09-24: improving, B20 39.7 / B50 54.5 / B200 25.5",
+    "missing_date": "2026-11-02: unknown, all three values absent; no prior state reused",
+    "chart_pointer": "2025-02-07 linked reading, B20 85.7 / B50 40.1 / B200 78.7",
+    "default_range": "5 years, 2021-11-03 to 2026-11-02 CN price axis",
+    "cn_all": "2021-06-17 to 2026-11-02",
+    "us_all": "2016-10-31 to 2026-10-29, constrained by available price",
+    "browser_console_errors": [],
+    "viewport_reset": true,
+    "registry_other_entries_unchanged": true
+  },
+  "api_readback": {
+    "CN_ALL_A": {
+      "raw_and_observation_rows": 1302,
+      "range": [
+        "2021-06-17",
+        "2026-10-30"
+      ]
+    },
+    "SP500": {
+      "raw_and_observation_rows": 11733,
+      "range": [
+        "1980-04-14",
+        "2026-10-30"
+      ]
+    }
+  },
+  "screenshots": [
+    "desktop-layout-v6.jpg",
+    "overview-v6.jpg",
+    "mobile-v6.jpg"
+  ],
+  "evidence_review": "evidence-review-v6.md",
+  "limits": [
+    "P10/P90 descriptive only, rails off by default; optional historic location shading retained",
+    "ERP historical reference not automatic current alert",
+    "new combined predictive increment not established"
+  ],
+  "review_fixes": [
+    "missing B200 interpretation avoids claiming confirmed below half",
+    "chart date label uses true price axis; leading dates before breadth availability excluded",
+    "same horizon colors in mini and full chart",
+    "single valid mini trend cannot imply a curve"
+  ]
+}

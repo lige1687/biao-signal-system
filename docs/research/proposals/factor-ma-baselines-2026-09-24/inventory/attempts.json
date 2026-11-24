@@ -1,0 +1,90 @@
+{
+  "inventory_version": "1.1.0",
+  "as_of": "2026-09-24",
+  "coverage": {
+    "status": "partial_lower_bound",
+    "verified_records": 4,
+    "known_total_attempts": null,
+    "meaning": "本清单为4项近期交付的已核下限，不宣称覆盖完整研究史；旧宽度与双均线工作另有2019-10-08至2025-12-31及2022-01-01至2026-06-30的已见结果，见各条及来源报告。"
+  },
+  "records": [
+    {
+      "experiment_id": "dual-ma-resonance-d1-2026-09-23",
+      "question": "在20日双均线刚共同确认时，考察当日60日与120日两组是否也共同确认，以及之后固定21段价格的端点收益变化；不是道路时长或账户收益测试。",
+      "universe": ["510300.SS", "510050.SS", "510500.SS", "512100.SS", "159915.SZ", "588000.SS"],
+      "period": {"start": "2022-01-01", "end": "2026-06-30", "basis": "D1已见历史范围；按固定年度汇总"},
+      "parameters": {"Q20": "沿用既有20日共同确认规则，研究事件为Q20已知假转真", "Q60_Q120": "60日与120日各自独立按本组EMA/SMA共同确认研究定义计算；不得额外要求该组满足20日颜色条件", "groups": "事件收盘时H=Q60 AND Q120已知且为真 vs 已知且为假", "target": "e=t+1共同交易日收盘，x=t+22共同交易日收盘；端点收益C(x)/C(e)-1，不是区间最大跌幅", "nonoverlap": "全体合格机会按日期排序后先选不重叠事件，再按H分组；辅助报告每组最低3例"},
+      "historical_attempts": [
+        {"stage": "首次连接器人工检查", "result": "4项通过"},
+        {"stage": "扩展连接器与缺失边界人工检查", "result": "5项通过、1项失败；浮点数精确相等断言错误，改为容差断言后当时未复测；当时D1交接称真实正式/独立为0/1"},
+        {"stage": "后续正式历史描述交付", "result": "复用既有D1正式数据；后续独立修正1次、对照1次，见正式结果报告"}
+      ],
+      "executor_delivery_status": "较早交接记录的是修正后尚未复测；后续2026-09-24主控报告确认独立修正与对照完成，限定接受历史算术和描述。保留旧失败，不把旧交接状态当当前状态。",
+      "current_controller_status": {"status": "accepted_restricted", "basis": "docs/experiments/factor-breadth-dual-ma-findings-2026-09-24.md §4；只接受限定历史描述和算术，不接受市场有效性、独立市场复现或生产资格。"},
+      "observed": "主问题是20日确认事件后端点收益变化，不是最大不利跌幅：共同确认减未共同确认的差值依次为510300 −3.81、510050 −0.32、510500 −5.34、512100 −5.26、159915 +2.10个百分点；588000为8对32，正向组不足预定10例故不报告主要差值。六产品合并主要结果为空，不能用五产品均值代替。预先隔开的辅助表为−2.99个百分点（五负一正），最低每组3例，仅作辅助，不能替代主要比较。",
+      "conclusion_nature": "受限历史价格描述；不是账户收益、可执行损失或策略有效性结论。",
+      "funding_basis": "事后重建经济收盘路径；没有成交、仓位、现金、分红到账或费用核算。",
+      "sources": [
+        {"path": "docs/experiments/raw/dual-ma-resonance-d1-2026-09-23/delivery.md", "sha256": "3f578547f65aa589be3e5c540c26f17d4b583b87ca12de08d430ac9141230863"},
+        {"path": "docs/experiments/raw/dual-ma-resonance-d1-2026-09-23/protocol.json", "sha256": "50be107a7df3aa5e6e8fdf29e66dbacdb12acec356ab01684714cbd4d5e44541"},
+        {"path": "docs/experiments/raw/dual-ma-resonance-design-2026-09-23/definition-map.md", "sha256": "0388e9170f66ddb52ac46d9a082192fb5b4f2c594af93891b5d61217a518d13c"},
+        {"path": "docs/experiments/factor-breadth-road-risk-findings-2026-09-24.md", "sha256": "90782c1c2cf1292dd98016d122f082d8ebbe81b01d22878712f67c20e7d19845"},
+        {"path": "docs/experiments/factor-breadth-dual-ma-findings-2026-09-24.md", "sha256": "22f0cfc5a43ecffb0c780fa615859e46c4584e931283020ef77b80eee60ec862"}
+      ]
+    },
+    {
+      "experiment_id": "breadth-risk-purpose-2026-09-24",
+      "question": "描述沪深300宽度高低分组与510300后续价格路径跌幅的关系。",
+      "universe": ["510300.SS"],
+      "period": {"start": "2019-10-08", "end": "2025-12-31", "observations": 1516},
+      "parameters": {"breadth_definition": "合格沪深300成分股中站上各自200日均线的比例；旧数据为0至100百分数", "groups_percent": {"low": "<43.3", "middle": "43.3至<56.7", "high": ">=56.7"}, "price_path": "信号后共同交易日收盘点1至22；固定起点分母，取期间最深跌幅；另列峰谷跌幅与末端变化"},
+      "historical_attempts": [{"stage": "人工检查", "result": "首轮因5/110精确浮点相等失败并修正；第二轮3个人工边界检查通过"}, {"stage": "正式历史描述", "result": "1次；1516日期全部纳入"}],
+      "executor_delivery_status": "正式交付曾标记主控复核待定。",
+      "current_controller_status": {"status": "accepted_restricted", "basis": "docs/experiments/factor-breadth-road-risk-findings-2026-09-24.md §8-9；主控与独立审阅核对本批数字，限定接受历史价格描述。"},
+      "observed": "低/中/高组平均最深跌幅为3.446%/3.158%/3.537%，高减低+0.091个百分点；日期先选的69个互不重叠区间为+0.330个百分点。次要高位转弱对照方向相反：高位下跌组2.716%，高位持平或上升组3.910%。",
+      "conclusion_nature": "探索性描述，结果差异小并有反向例子；接受的是有限历史描述，不是风险保护或仓位效果。",
+      "funding_basis": "冻结供应商调整收盘价路径；无账户资金、成交、分红现金或费用。",
+      "sources": [
+        {"path": "docs/archive/handoffs-plans/factor-core-breadth-trend-2026-09-23/breadth-risk-purpose-execution-contract-2026-09-24.json", "sha256": "7cb64d5d71f96a23b298c0bd255bbb2f07a7906e908be5fa080e1420b7997a5c"},
+        {"path": "docs/experiments/raw/breadth-risk-purpose-2026-09-24/delivery.json", "sha256": "41d9ffdbce046ceeed5f3a040271a0645272fa3ba3a3a88f3d7b179d9d03ad85"},
+        {"path": "docs/experiments/factor-breadth-road-risk-findings-2026-09-24.md", "sha256": "90782c1c2cf1292dd98016d122f082d8ebbe81b01d22878712f67c20e7d19845"}
+      ]
+    },
+    {
+      "experiment_id": "dual-ma-road-black-path-2026-09-24",
+      "question": "描述20日共同确认后道路区间延续至黑色提示的情况，并比较起点时长均线共同确认组与未共同确认组的固定风险路径。",
+      "universe": ["510300.SS", "510050.SS", "510500.SS", "512100.SS", "159915.SZ", "588000.SS"],
+      "period": {"start": "2022-01-01", "end": "2026-06-30", "basis": "D1冻结范围；按起点年份固定汇总"},
+      "parameters": {"entry": "20日双均线共同确认起点；已有Q20/Q60/Q120/H复用不重算", "longer_period_group": "起点当日Q60和Q120都为真才算同时确认；后来加入不倒填", "black_exit": "收盘同时严格低于EMA20与原报价序列20行前收盘价；固定21段风险路径不因早到黑色而缩短", "minimum_observations": "双方各至少10个完整风险观察才报告组差"},
+      "historical_attempts": [{"stage": "人工边界检查", "result": "第一轮人工预期错误，修正预期后第二轮3项通过"}, {"stage": "正式历史描述", "result": "1次；171区间、169明确完整起点、108条汇总"}],
+      "executor_delivery_status": "执行交付曾标记主控复核待定。",
+      "current_controller_status": {"status": "accepted_restricted", "basis": "docs/experiments/factor-breadth-road-risk-findings-2026-09-24.md §8-9；限定接受历史价格描述，证据不足，不代表因子有效。"},
+      "observed": "163段后来见黑色，6段截至数据末尾未见黑色。仅159915.SZ满足长周期组差报告条件：同时确认10次、未同时确认20次，平均最深跌幅6.165%对4.105%，同时确认组更差2.061个百分点；其他五只及六产品合并差值为空。",
+      "conclusion_nature": "受限历史价格描述；其余产品数量不足，不能推广为共同结论。",
+      "funding_basis": "经济收盘不是成交价；未计算账户、现金、分红、仓位或成本。",
+      "sources": [
+        {"path": "docs/archive/handoffs-plans/factor-core-breadth-trend-2026-09-23/dual-ma-road-black-path-execution-contract-2026-09-24.json", "sha256": "dee3595616de65a0ba340ab3ced93607ab6e69543820fb238ddbed4f139617f7"},
+        {"path": "docs/experiments/raw/dual-ma-road-black-path-2026-09-24/delivery.json", "sha256": "bf600076401060dbfbbfb266b5b57b8d113c48e2267fe5a36a97e7b32629ff97"},
+        {"path": "docs/experiments/factor-breadth-road-risk-findings-2026-09-24.md", "sha256": "90782c1c2cf1292dd98016d122f082d8ebbe81b01d22878712f67c20e7d19845"}
+      ]
+    },
+    {
+      "experiment_id": "breadth-road-context-2026-09-24",
+      "question": "在同一20日确认状态内，宽度分组能否描述510300之后约一个月的价格路径跌幅差异。",
+      "universe": ["510300.SS"],
+      "period": {"start": "2022-01-01", "end": "2025-12-31", "observations": 969, "price_horizon_may_end": "2026年"},
+      "parameters": {"Q20": "复用D1同日20日双均线共同确认状态", "breadth_groups_percent": {"low": "<43.3", "middle": "43.3至<56.7", "high": ">=56.7"}, "price_path": "t后第1至第22个共同交易日收盘，共22个点，固定起点分母的最深跌幅", "nonoverlap": "先按全体日历选择45段，不根据未来数据替补"},
+      "historical_attempts": [{"stage": "人工边界检查", "result": "1轮，4个人工边界案例通过"}, {"stage": "正式历史描述", "result": "1次；969日全部纳入"}],
+      "executor_delivery_status": "执行交付曾标记独立复核待定。",
+      "current_controller_status": {"status": "accepted_restricted", "accepted_on": "2026-09-24", "basis": "docs/experiments/factor-breadth-road-risk-findings-2026-09-24.md §11；主控独立重算969行关键字段和六格汇总，在1e-12误差内一致。此状态不倒改原delivery。"},
+      "observed": "Q20为真时高减低+0.811个百分点；Q20为假时−1.055个百分点，方向相反。全期45个互不重叠观察中两个背景的组数都不足辅助比较要求。",
+      "conclusion_nature": "限定历史条件描述；年份分布不均、不是账户回测，不能据此调整投入。",
+      "funding_basis": "D1经济收盘的价格路径；不是成交价格，无完整账户、现金、分红或成本。",
+      "sources": [
+        {"path": "docs/archive/handoffs-plans/factor-core-breadth-trend-2026-09-23/breadth-road-context-execute-contract-2026-09-24.json", "sha256": "64f8e99dd160d622c0d2ab8f2c9903ffab299503cd922064526cbd1a3b8ce572"},
+        {"path": "docs/experiments/raw/breadth-road-context-2026-09-24/delivery.json", "sha256": "855801ab3de4701804ab4e6d96b3fdd1f735d69ff545ea1c43fa0c956b0ac3e9"},
+        {"path": "docs/experiments/factor-breadth-road-risk-findings-2026-09-24.md", "sha256": "90782c1c2cf1292dd98016d122f082d8ebbe81b01d22878712f67c20e7d19845"}
+      ]
+    }
+  ]
+}

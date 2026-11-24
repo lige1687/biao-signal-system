@@ -31,8 +31,8 @@ _ERP_HIST_TTL = 24 * 3600
 _VALUATION_TTL = 24 * 3600
 _COMMODITY_TTL = 12 * 3600
 _ETF_TTL = 12 * 3600
-_OVERLAY_TTL = 24 * 3600# 美国宏观（FRED）：就业周更、物价/房月更、利差日更，统一 6 小时
-_US_MACRO_TTL = 6 * 3600
+_OVERLAY_TTL = 24 * 3600  # 美国宏观（FRED）：就业周更、物价/房月更、利差日更，统一 12 小时配合每日预热
+_US_MACRO_TTL = 12 * 3600
 
 
 class _TtlCache:
@@ -64,6 +64,25 @@ class _TtlCache:
 class FundamentalsService:
     def __init__(self) -> None:
         self._cache = _TtlCache()
+
+    def observations(self, market: str) -> dict[str, Any]:
+        """独立来源隔离的市场观察接口。"""
+        from lei_signal.fundamentals.observations import build_observations
+
+        return build_observations(market, lambda key, loader: self._cache.get_or_load(
+            key, _US_MACRO_TTL if market == "us" else _MARGIN_TTL, loader,
+        )[0])
+
+    def cross_border_premium(self, *, refresh: bool = False) -> dict[str, Any]:
+        """常用海外场内ETF溢价率实时观测（30分钟缓存，支持强制刷新）。"""
+        from lei_signal.fundamentals.etf_premium import build_cross_border_premium
+
+        if refresh:
+            self._cache.invalidate("cross_border_premium")
+        data, _ = self._cache.get_or_load(
+            "cross_border_premium", 1800, build_cross_border_premium
+        )
+        return data
 
     def overview(self, *, refresh: bool = False) -> dict[str, Any]:
         if refresh:
@@ -186,6 +205,28 @@ class FundamentalsService:
             "errors": errors,
         }
 
+    def valuation_history(self) -> dict[str, Any]:
+        """Untrimmed same-source valuation series; no dependency on rates or ERP."""
+        series: dict[str, Any] = {}
+        errors = []
+        for key, label, cache_key, loader in (
+            ("pe_cn", "沪深300 PE_TTM", "hs300_pe_hist", sources.fetch_hs300_pe_history),
+            ("cape_us", "标普500 Shiller CAPE", "cape_hist", sources.fetch_us_cape_history),
+        ):
+            try:
+                history, _ = self._cache.get_or_load(cache_key, _VALUATION_TTL, loader)
+            except sources.FundamentalsSourceError as exc:
+                errors.append(f"{label}: {exc}")
+                continue
+            points = sorted(history.items())
+            series[key] = {
+                "label": label, "unit": "倍",
+                "dates": [day for day, _ in points],
+                "values": [value for _, value in points],
+            }
+        as_of = max((row["dates"][-1] for row in series.values() if row["dates"]), default="")
+        return {"as_of": as_of, "series": series, "errors": errors, "valuation_full": True}
+
     def rates_history(self, *, lookback_days: int = 1095) -> dict[str, Any]:
         """宏观利率/VIX/两融 历史时间序列，供趋势图使用。单项失败降级。
 
@@ -214,6 +255,15 @@ class FundamentalsService:
             )
         except sources.FundamentalsSourceError as exc:
             errors.append(f"VIX历史: {exc}")
+        vix_term_hist: dict[str, float] = {}
+        try:
+            vix_term_hist, _ = self._cache.get_or_load(
+                f"vix_term_hist:{lookback_days}",
+                _VIX_TTL,
+                lambda: sources.fetch_vix_term_history(lookback_days),
+            )
+        except sources.FundamentalsSourceError as exc:
+            errors.append(f"VIX期限结构: {exc}")
         try:
             margin_hist, _ = self._cache.get_or_load(
                 f"margin_hist:{lookback_days}",
@@ -244,6 +294,13 @@ class FundamentalsService:
             erp_us_hist = {}
             errors.append(f"美股ERP历史: {exc}")
 
+        # The daily refresh job writes this independently of process-local TTLs.
+        # Read it on every request so a running backend sees new completed dates.
+        from lei_signal.fundamentals.erp_refresh import read_us_erp
+        live_us = read_us_erp()
+        if live_us and (not erp_us_hist or max(live_us) >= max(erp_us_hist)):
+            erp_us_hist = live_us
+
         # 估值分位对照序列：全史各拉一次（缓存键不带 lookback），下面统一按自然日截尾。
         try:
             cape_hist, _ = self._cache.get_or_load(
@@ -260,13 +317,13 @@ class FundamentalsService:
             pe_cn_hist = {}
             errors.append(f"A股PE历史: {exc}")
 
-        def mk(label: str, unit: str, dvals: dict[str, float | None]) -> dict[str, Any]:
+        def mk(label: str, unit: str, dvals: dict[str, float | None], digits: int = 2) -> dict[str, Any]:
             items = sorted((d, v) for d, v in dvals.items() if v is not None)
             return {
                 "label": label,
                 "unit": unit,
                 "dates": [d for d, _ in items],
-                "values": [round(float(v), 2) for _, v in items],
+                "values": [round(float(v), digits) for _, v in items],
             }
 
         # 统一按自然日截尾：国债/两融接口按「行数」取数会过采（1,095 行 ≈ 4 年多），
@@ -303,10 +360,11 @@ class FundamentalsService:
             "cn_10y": mk("中10Y", "%", cn10),
             "cn_us_spread_10y": mk("中美10Y利差", "%", spread),
             "vix": mk("VIX", "", tail(vix_hist)),
+            "vix_term": mk("VIX 期限结构", "", tail(vix_term_hist), digits=3),
             "margin_rzrqye": mk("两融余额", "亿", margin_series),
             "margin_rzyezb": mk("融资余额占流通市值比", "%", margin_zb_series),
             "erp_cn": mk("A股ERP", "%", erp_cn_hist),
-            "erp_us": mk("美股ERP", "%", erp_us_hist),
+            "erp_us": mk("美股ERP", "%", tail(erp_us_hist)),
             # 估值分位对照：CAPE 月频（10 年平均盈利，故点少但不失真），PE_TTM 日频。
             "cape_us": mk("美股CAPE", "倍", tail(cape_hist)),
             "pe_cn": mk("沪深300 PE_TTM", "倍", tail(pe_cn_hist)),
@@ -355,7 +413,7 @@ class FundamentalsService:
         数据源：国债/两融沿用东财（翻页取全史），A 股指数腾讯、美指 FRED。
         日频全史 ~5000 点，缓存 12 小时。
         """
-        years = max(1, min(int(years), 30))
+        years = max(1, min(int(years), 50))
         lookback = years * 365 + 30
         errors: list[str] = []
         series: dict[str, Any] = {}
@@ -391,7 +449,7 @@ class FundamentalsService:
 
         # 两融占比 + 绝对余额（全史约 3,977 交易日，2026-08 实测）
         try:
-            margin = load("margin", lambda: sources.fetch_margin_history(min(lookback, 4000)))
+            margin = load("margin", lambda: sources.fetch_margin_history(min(lookback, 5000)))
             series["margin_rzyezb"] = mk(
                 "融资余额占流通市值比",
                 "%",
@@ -420,12 +478,12 @@ class FundamentalsService:
                 errors.append(f"指数 {label}: {exc}")
 
         # 美股指数（FRED）
-        for key, label, sid in (
-            ("sp500", "标普500", sources.FRED_INDEX_SERIES["sp500"]),
-            ("nasdaq", "纳斯达克", sources.FRED_INDEX_SERIES["nasdaq"]),
+        for key, label, loader in (
+            ("sp500", "标普500", lambda: sources.fetch_sp500_index_history(lookback)),
+            ("nasdaq", "纳斯达克", lambda: sources.fetch_nasdaq_index_history(lookback)),
         ):
             try:
-                hist = load(f"idx:{key}", lambda s=sid: sources.fetch_fred_index_history(s))
+                hist = load(f"idx:{key}", loader)
                 series[key] = mk(label, "", hist)
             except sources.FundamentalsSourceError as exc:
                 errors.append(f"指数 {label}: {exc}")

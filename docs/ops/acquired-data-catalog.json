@@ -1,0 +1,3036 @@
+{
+  "schema": "lei-acquired-data-location-catalog/1",
+  "updated_at": "2026-10-30T17:10:14.351822+00:00",
+  "scope": "Data acquired or referenced in this conversation; not a census of every project database. Existing reports and their qualifications remain authoritative.",
+  "external_volume_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+  "external_mount": "/Volumes/win+mac通用",
+  "archive_snapshot": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot",
+  "archive_manifest": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/archive-manifest.json",
+  "archive_manifest_sha256": "53e5babe7e9c2a7b8de93f9be9e1d69282cf59cfd6468e57f584de3d9ed3e23d",
+  "copy_receipt": "docs/experiments/raw/acquired-data-external-archive-2026-10-25/copy-receipt.json",
+  "financial_datasets": [
+    {
+      "id": "ofr-fsi",
+      "name": "OFR全球金融压力及分项",
+      "source": "https://www.financialresearch.gov/financial-stress-index/data/fsi.csv",
+      "access": "official_public_download",
+      "coverage": {
+        "start": "2000-01-03",
+        "end": "2026-10-21",
+        "rows": 6785,
+        "unit": "standardized index level"
+      },
+      "meaning_and_candidate_use": "全球信用、融资、避险、权益估值和波动压力的环境解释候选。",
+      "qualification_limits": [
+        "当前修订版本，不是首发历史。",
+        "2018-11-01地域分项与总值差异保留。",
+        "未证明交易或仓位增量。"
+      ],
+      "refresh": {
+        "source_cadence": "daily; approximately two business days observation lag",
+        "last_probe": "2026-10-25",
+        "conditional_GET_status": 304,
+        "local_scheduled_collector": false
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/free-financial-resource-expansion-2026-10-25/us/ofr-fsi-original.csv",
+      "normalized_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/free-financial-resource-expansion-2026-10-25/us/ofr-fsi-normalized.csv",
+      "original_sha256": "46e6dcb7c75a746913f243fe0104e13ce10238a51fe2f2d54116ef8f2a444b5d",
+      "original_bytes": 516794,
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/free-financial-resource-expansion-2026-10-25",
+      "qualification_report": "docs/experiments/free-financial-resource-expansion-2026-10-25.md",
+      "available_path_verified_at": "2026-10-25T15:28:40.227020+00:00",
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false
+    },
+    {
+      "id": "cboe-vvix",
+      "name": "Cboe VVIX",
+      "source": "https://cdn-api.cboe.com/api/global/us_indices/daily_prices/VVIX_History.csv",
+      "access": "official_public_download",
+      "coverage": {
+        "start": "2006-03-06",
+        "end": "2026-10-23",
+        "rows": 5132,
+        "unit": "VVIX index level"
+      },
+      "meaning_and_candidate_use": "美国期权对VIX自身变化不确定性的观察候选。",
+      "qualification_limits": [
+        "2006部分日期稀疏，跨度20年不等于每日齐全。",
+        "没有历史每次发布时间或版本。"
+      ],
+      "refresh": {
+        "source_cadence": "official ongoing history link; no specific future VVIX schedule inferred",
+        "last_probe": "2026-10-25",
+        "conditional_GET_status": 304,
+        "local_scheduled_collector": false
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/free-financial-resource-expansion-2026-10-25/us/cboe-vvix-original.csv",
+      "normalized_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/free-financial-resource-expansion-2026-10-25/us/cboe-vvix-normalized.csv",
+      "original_sha256": "369c1bb264144d6b9ad0b04f7fe8662d68748b2d927bd0351682249e2b4e2e0a",
+      "original_bytes": 109217,
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/free-financial-resource-expansion-2026-10-25",
+      "qualification_report": "docs/experiments/free-financial-resource-expansion-2026-10-25.md",
+      "available_path_verified_at": "2026-10-25T15:28:40.228273+00:00",
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false
+    },
+    {
+      "id": "finra-margin",
+      "name": "FINRA客户融资借款及自由贷方余额",
+      "source": "https://www.finra.org/sites/default/files/2021-03/margin-statistics.xlsx",
+      "access": "official_public_download",
+      "coverage": {
+        "start": "1997-01",
+        "end": "2026-09",
+        "rows": 357,
+        "unit": "USD millions"
+      },
+      "meaning_and_candidate_use": "美国市场杠杆与客户现金背景。",
+      "qualification_limits": [
+        "1997-01至2010-01贷方余额为合并口径，之后拆分。",
+        "当前版本；不能把参考月当可得月。",
+        "不是ETF流入或做空余额。"
+      ],
+      "refresh": {
+        "source_cadence": "monthly; generally third week of following month per saved official documentation",
+        "local_scheduled_collector": false
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/official-sources/finra-margin-statistics.xlsx",
+      "normalized_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/official-sources/finra-margin-statistics-normalized.csv",
+      "original_sha256": "fae9f873d7388eff7ba0f08f7f5b2eaea0a54df6aab311503fda4025d25fb796",
+      "original_bytes": 20499,
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/external-financial-resource-access-2026-10-25",
+      "qualification_report": "docs/experiments/external-financial-resource-access-2026-10-25.md",
+      "available_path_verified_at": "2026-10-25T15:28:40.229188+00:00",
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false
+    },
+    {
+      "id": "sec-13f-2013q2",
+      "name": "SEC 13F 2013Q2申报文件样本",
+      "source": "https://www.sec.gov/files/structureddata/data/form-13f-data-sets/2013q2_form13f.zip",
+      "access": "official_public_download",
+      "coverage": {
+        "filing_collection_quarter": "2013Q2",
+        "filings": 166,
+        "unique_CIKs": 95,
+        "information_table_rows": 87715,
+        "older_VALUE_unit": "USD thousands"
+      },
+      "meaning_and_candidate_use": "机构持仓申报结构与披露时点研究样本。",
+      "qualification_limits": [
+        "仅一份申报季度包，不是20年完整持仓。",
+        "申报季度不等于持仓报告期，存在修订等异常。",
+        "旧VALUE千美元口径需保留。"
+      ],
+      "refresh": {
+        "source_cadence": "historical sample, no updater deployed",
+        "local_scheduled_collector": false
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/controller-sec-2013q2-form13f.zip",
+      "normalized_read_path": null,
+      "original_sha256": "569d56e978f7dee3775e544a1e46019389e22adcf482386fcfaba51ceb6c7e84",
+      "original_bytes": 1957345,
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/external-financial-resource-access-2026-10-25",
+      "qualification_report": "docs/experiments/external-financial-resource-access-2026-10-25.md",
+      "available_path_verified_at": "2026-10-25T15:28:40.234328+00:00",
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false
+    },
+    {
+      "id": "huatai-510300-2024q2",
+      "name": "510300 2024年二季报及份额汇总",
+      "source": "https://www.huatai-pb.com/upload/pdf/1721370528878-htbrhs300jyxkfszszqtzjj2024nd2jdbg.pdf",
+      "access": "official_public_download",
+      "coverage": {
+        "period_start": "2024-04-01",
+        "period_end": "2024-06-30",
+        "pages": 14,
+        "stated_dispatch_date": "2024-07-19",
+        "parent_index": "沪深300",
+        "unit": "fund shares"
+      },
+      "meaning_and_candidate_use": "基金份额、季度申购赎回的官方文件锚点。",
+      "qualification_limits": [
+        "只有季度汇总，不是逐日份额或资金流。",
+        "本次文件不是独立验证的历史首发版本。"
+      ],
+      "refresh": {
+        "source_cadence": "quarterly issuer documents, this sample only",
+        "local_scheduled_collector": false
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/controller-510300-2024q2.pdf",
+      "normalized_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/controller-510300-quarterly-official.csv",
+      "original_sha256": "83f876b4bc0eaea24f4f95944a423e6d5d51c4b3876c54a12912cd52749d2d53",
+      "original_bytes": 838395,
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/external-financial-resource-access-2026-10-25",
+      "qualification_report": "docs/experiments/external-financial-resource-access-2026-10-25.md",
+      "available_path_verified_at": "2026-10-25T15:28:40.236777+00:00",
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false
+    },
+    {
+      "id": "longbridge-aapl-consensus",
+      "name": "长桥AAPL一致预期当前快照",
+      "source": "mcp__codex_apps__longbridge_consensus",
+      "access": "connected_service_not_open_public_api",
+      "coverage": {
+        "fiscal_periods": 11,
+        "metric_rows": 66,
+        "released_rows": 48,
+        "future_rows": 18,
+        "retrieved_at": "2026-10-25T11:44:55.714Z"
+      },
+      "meaning_and_candidate_use": "一致预期字段与实际值结构验证。",
+      "qualification_limits": [
+        "当前快照不是历史当时预期，不能直接回测。",
+        "不是官方公司预测，持续权限未验证。"
+      ],
+      "refresh": {
+        "source_cadence": "connected-service current query; ongoing entitlements unverified",
+        "local_scheduled_collector": false
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/controller-longbridge-consensus-aapl.json",
+      "normalized_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/controller-longbridge-consensus-aapl-normalized.csv",
+      "original_sha256": "e421e84fb7cb3fd22a0101b2091d63468d627012c9c6cd73ce32371d3898cfb2",
+      "original_bytes": 12957,
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/external-financial-resource-access-2026-10-25",
+      "qualification_report": "docs/experiments/external-financial-resource-access-2026-10-25.md",
+      "available_path_verified_at": "2026-10-25T15:28:40.237287+00:00",
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false
+    },
+    {
+      "id": "longbridge-iwm-option-daily",
+      "name": "长桥IWM期权日度汇总样本",
+      "source": "mcp__codex_apps__longbridge_option_volume_daily",
+      "access": "connected_service_not_open_public_api",
+      "coverage": {
+        "start": "2026-09-28",
+        "end": "2026-10-23",
+        "rows": 20,
+        "retrieved_at": "2026-10-25T11:44:55.484Z"
+      },
+      "meaning_and_candidate_use": "期权成交量、持仓量及看跌看涨比样本。",
+      "qualification_limits": [
+        "是日度汇总，不是行权价和到期日全期权链。",
+        "来源时间戳不等于实际可得时刻。",
+        "长期权限和完整历史未验证。"
+      ],
+      "refresh": {
+        "source_cadence": "connected-service query; ongoing entitlements unverified",
+        "local_scheduled_collector": false
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/controller-longbridge-option-daily-iwm.json",
+      "normalized_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/controller-longbridge-option-daily-iwm-normalized.csv",
+      "original_sha256": "0c80349f19109ff7b73ccde39839731593d3a5c472a9f72d6f5705a30e3a1f9a",
+      "original_bytes": 8384,
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/external-financial-resource-access-2026-10-25",
+      "qualification_report": "docs/experiments/external-financial-resource-access-2026-10-25.md",
+      "available_path_verified_at": "2026-10-25T15:28:40.237704+00:00",
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false
+    },
+    {
+      "id": "longbridge-600000-filings",
+      "name": "600000公告目录样本",
+      "source": "mcp__codex_apps__longbridge_filings",
+      "access": "connected_service_links_to_exchange_documents",
+      "coverage": {
+        "start": "2025-11-25",
+        "end": "2026-09-29",
+        "rows": 50,
+        "retrieved_at": "2026-10-25T11:44:56.461Z"
+      },
+      "meaning_and_candidate_use": "公告检索字段、原文链接与发布时间核验样本。",
+      "qualification_limits": [
+        "只取50条，不保证分页全量或全文。",
+        "个别日期路径相差一天，不能等同信息到达时刻。"
+      ],
+      "refresh": {
+        "source_cadence": "connected-service query; pagination and continuing entitlement unverified",
+        "local_scheduled_collector": false
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/controller-longbridge-filings-cn600000.json",
+      "normalized_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/acquired-data-external-archive-20261025/acquired-data-external-archive-20261025-20261025T232420-997b28c5bcf8/result/snapshot/docs/experiments/raw/external-financial-resource-access-2026-10-25/controller-longbridge-filings-cn600000-normalized.csv",
+      "original_sha256": "ea236e6b4318a920fa7196ab52a5566fb28a5e4d0a6c73cff051969b7775ad07",
+      "original_bytes": 23182,
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/external-financial-resource-access-2026-10-25",
+      "qualification_report": "docs/experiments/external-financial-resource-access-2026-10-25.md",
+      "available_path_verified_at": "2026-10-25T15:28:40.238471+00:00",
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false
+    },
+    {
+      "access": "official_public_download",
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26",
+      "qualification_report": "docs/experiments/financial-conditions-history-and-vintages-2026-10-26.md",
+      "available_path_verified_at": "2026-10-26T15:44:33.674320+00:00",
+      "trading_increment_proven": false,
+      "strategy_ready": false,
+      "id": "chicago-financial-conditions-current",
+      "name": "Chicago Fed金融条件六序列当前历史版本",
+      "source": "https://api.data.chicagofed.org/NFCI/nfci-data-series-csv.csv",
+      "coverage": {
+        "start": "1971-01-08",
+        "end": "2026-10-16",
+        "rows": 2911,
+        "series": [
+          "NFCI",
+          "ANFCI",
+          "Risk",
+          "Credit",
+          "Leverage",
+          "Nonfinancial_Leverage"
+        ],
+        "unit": "source-defined index levels",
+        "source_version_utc": "2026-10-21T12:30:04Z"
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-nfci/chicago-full-index-series.response",
+      "normalized_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-nfci/normalized-v2/chicago-nfci-current.csv",
+      "original_sha256": "643b55ac45a4b34cc648fab7fc2e5da17735af01a7d82e238d31e211359cc0b6",
+      "original_bytes": 148970,
+      "meaning_and_candidate_use": "美国金融条件及经济活动调整后条件、风险、信用、杠杆解释变量；未检验交易增量。",
+      "qualification_limits": [
+        "当前修订版本不是历史当时值；历史研究优先查对应ALFRED版本。",
+        "Risk/Credit/Leverage不能直接相加为NFCI。"
+      ],
+      "historical_asof_versions_qualified": false,
+      "refresh": {
+        "source_cadence": "weekly; official current schedule Wednesday08:30ET, holiday changes possible",
+        "last_probe": "2026-10-26",
+        "local_scheduled_collector": false,
+        "method": "Use official page-declared endpoint, compare version and SHA; preserve old versions."
+      }
+    },
+    {
+      "access": "official_public_download",
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26",
+      "qualification_report": "docs/experiments/financial-conditions-history-and-vintages-2026-10-26.md",
+      "available_path_verified_at": "2026-10-26T15:44:33.674320+00:00",
+      "trading_increment_proven": false,
+      "strategy_ready": false,
+      "id": "alfred-nfci-vintages",
+      "name": "ALFRED NFCI历史发布版本",
+      "source": "https://alfred.stlouisfed.org/series/downloaddata?seid=NFCI",
+      "coverage": {
+        "first_vintage": "2011-05-25",
+        "last_vintage": "2026-10-21",
+        "vintages": 801,
+        "nonmissing_observation_vintage_rows": 1975576,
+        "latest_observation": "2026-10-16",
+        "earliest_vintage_observation_start": "1973-01-05",
+        "latest_vintage_observation_start": "1971-01-08"
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-nfci/normalized-v2/source-map.json",
+      "original_sha256": "f420b11114360dd25119a941c83afd3e047d86be02433a090f71faf4da2c2dc8",
+      "original_bytes": 27450,
+      "normalized_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-nfci/normalized-v2/alfred-nfci-vintage-observations.csv.gz",
+      "normalized_sha256": "8302ad038264f51944b2faed4974a56b48f9a373d80f66b040586c4937b958f8",
+      "source_manifest_is_index_not_an_original_zip": true,
+      "meaning_and_candidate_use": "在日级发布版本范围内重建可知金融条件，核查修订与前视偏差。",
+      "qualification_limits": [
+        "2011-05-25之前没有已取得历史发布版本。",
+        "发布版本日期不证明历史盘中/开盘前发布时间。",
+        "空值不是零，旧版历史起点可能不同。",
+        "文件资格不代表因子有效或允许上线。"
+      ],
+      "historical_asof_versions_qualified": true,
+      "historical_asof_qualification_scope": "date-level archived vintage and observation pairs only; intraday availability and pre2011 vintages unqualified",
+      "refresh": {
+        "source_cadence": "weekly/when source publishes a vintage",
+        "last_probe": "2026-10-26",
+        "local_scheduled_collector": false,
+        "method": "Compare form vintage list against source-map; request only absent vintage columns using file_type2 and csv ZIP; immutable originals."
+      }
+    },
+    {
+      "access": "official_public_download",
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26",
+      "qualification_report": "docs/experiments/financial-conditions-history-and-vintages-2026-10-26.md",
+      "available_path_verified_at": "2026-10-26T15:44:33.674320+00:00",
+      "trading_increment_proven": false,
+      "strategy_ready": false,
+      "id": "alfred-anfci-vintages",
+      "name": "ALFRED ANFCI历史发布版本",
+      "source": "https://alfred.stlouisfed.org/series/downloaddata?seid=ANFCI",
+      "coverage": {
+        "first_vintage": "2011-05-25",
+        "last_vintage": "2026-10-21",
+        "vintages": 801,
+        "nonmissing_observation_vintage_rows": 1975576,
+        "latest_observation": "2026-10-16",
+        "earliest_vintage_observation_start": "1973-01-05",
+        "latest_vintage_observation_start": "1971-01-08"
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-anfci/normalized/source-map.json",
+      "original_sha256": "3ee8eb137bd20cd00d1088892f3844c8cf44257e6c30fa4eb319b5433fec5534",
+      "original_bytes": 27069,
+      "normalized_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-anfci/normalized/alfred-anfci-vintage-observations.csv.gz",
+      "normalized_sha256": "0a4739bfe40cd6812af1ef4d697923b62b53233abf846fe9ad8f79bd9793f899",
+      "source_manifest_is_index_not_an_original_zip": true,
+      "meaning_and_candidate_use": "在日级发布版本范围内重建可知金融条件，核查修订与前视偏差。",
+      "qualification_limits": [
+        "2011-05-25之前没有已取得历史发布版本。",
+        "发布版本日期不证明历史盘中/开盘前发布时间。",
+        "空值不是零，旧版历史起点可能不同。",
+        "文件资格不代表因子有效或允许上线。"
+      ],
+      "historical_asof_versions_qualified": true,
+      "historical_asof_qualification_scope": "date-level archived vintage and observation pairs only; intraday availability and pre2011 vintages unqualified",
+      "refresh": {
+        "source_cadence": "weekly/when source publishes a vintage",
+        "last_probe": "2026-10-26",
+        "local_scheduled_collector": false,
+        "method": "Compare form vintage list against source-map; request only absent vintage columns using file_type2 and csv ZIP; immutable originals."
+      }
+    },
+    {
+      "access": "official_public_download",
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26",
+      "qualification_report": "docs/experiments/financial-conditions-history-and-vintages-2026-10-26.md",
+      "available_path_verified_at": "2026-10-26T15:44:33.674320+00:00",
+      "trading_increment_proven": false,
+      "strategy_ready": false,
+      "id": "chicago-financial-conditions-contributions",
+      "name": "Chicago Fed金融条件模型贡献簿",
+      "source": "https://api.data.chicagofed.org/NFCI/contributions-data-series-xlsx.xlsx",
+      "coverage": {
+        "start": "1971-01-08",
+        "end": "2026-10-16",
+        "rows_per_sheet": 2911,
+        "nfci_indicator_columns": 105,
+        "anfci_indicator_and_macro_columns": 106
+      },
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-nfci/chicago-indicator-contributions.response",
+      "original_sha256": "10b27ce1cb0c36173e1d7dac636076ca98c87db3a40ae4576cc596b2b63c945b",
+      "original_bytes": 7875431,
+      "meaning_and_candidate_use": "解释指标对金融条件指数的模型贡献，不是105个底层原始数据库。",
+      "qualification_limits": [
+        "当前修订版本；非历史发布版本贡献簿。",
+        "±0.0005容差外：NFCI551周、ANFCI677周；残差原因未确认，不强行闭合。"
+      ],
+      "historical_asof_versions_qualified": false,
+      "refresh": {
+        "source_cadence": "weekly",
+        "last_probe": "2026-10-26",
+        "local_scheduled_collector": false
+      }
+    },
+    {
+      "id": "cftc-tff-us-equity-index-five-contract-histories",
+      "name": "CFTC纳指、罗素和道指期货分类持仓五合约历史",
+      "access": "official_public_download",
+      "source": "https://publicreporting.cftc.gov/stories/s/TFF-Futures/98ig-3k9y/",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/us-tff/source-manifest.json",
+      "manifest_sha256": "5c3470d22bcc8050a733890a6970b7bf96d3628ca7b3de2e7c719699b6affe3b",
+      "local_frozen_bundle": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/us-tff",
+      "qualification_report": "docs/experiments/us-equity-index-futures-position-history-2026-10-27.md",
+      "independent_review": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-us-tff/independent-audit.json",
+        "sha256": "92ded9affb421dc2eb75a1df41764b3d8ceef954ba5fe9b67c1c93519c44f273",
+        "bytes": 13441
+      },
+      "available_path_verified_at": "2026-10-26T18:09:17.012296+00:00",
+      "coverage": {
+        "source_files": 5,
+        "contract_week_rows": 3578,
+        "bytes": 988759,
+        "sources": [
+          {
+            "code": "209742",
+            "raw_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/us-tff/cftc-tff-futures-only-209742-response-1.csv",
+            "raw_sha256": "459cd515573d22c10fced50b798351878c6037cc5ced3634e2102653ca1bad04",
+            "raw_bytes": 297622,
+            "rows": 1063,
+            "date_first": "2006-06-13",
+            "date_last": "2026-10-20"
+          },
+          {
+            "code": "209741",
+            "raw_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/us-tff/cftc-tff-futures-only-209741-response-2.csv",
+            "raw_sha256": "31c55759fe869ebc17a8640129b6818ee24a93a25944a45c2dc64726f52bb721",
+            "raw_bytes": 89832,
+            "rows": 337,
+            "date_first": "2006-06-13",
+            "date_last": "2015-06-16"
+          },
+          {
+            "code": "239742",
+            "raw_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/us-tff/cftc-tff-futures-only-239742-response-3.csv",
+            "raw_sha256": "428c6252450b62d0c9ae3f1699ac0678d5d686ce40028020caa987a80b77244d",
+            "raw_bytes": 169627,
+            "rows": 599,
+            "date_first": "2006-06-13",
+            "date_last": "2026-10-20"
+          },
+          {
+            "code": "23977A",
+            "raw_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/us-tff/cftc-tff-futures-only-23977A-response-4.csv",
+            "raw_sha256": "8a36874921a504df52e422a850567736d370a2fcc301348395223467d3e2dc2b",
+            "raw_bytes": 151682,
+            "rows": 516,
+            "date_first": "2008-07-22",
+            "date_last": "2018-06-05"
+          },
+          {
+            "code": "124603",
+            "raw_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/us-tff/cftc-tff-futures-only-124603-response-5.csv",
+            "raw_sha256": "47418e94dc3c1d5616bb035c1f36818260e4ebc98b765cf444978f1a1f1ca9c2",
+            "raw_bytes": 279996,
+            "rows": 1063,
+            "date_first": "2006-06-13",
+            "date_last": "2026-10-20"
+          }
+        ],
+        "existing_sp500_13874A_reused_no_download": true
+      },
+      "units": "Source-defined contract counts. Selected fields omit contract multipliers and notional amounts; cross-contract addition is not qualified.",
+      "meaning_and_candidate_use": "同一股指期货合约内的分类投资者拥挤、套保与压力背景研究。",
+      "qualification_limits": [
+        "当前修订历史快照；报告日期不等于首次公开日期，没有逐周vintage。",
+        "请求2006-01-01起但实际最早2006-06-13；纳指标准稀疏且止2015年。",
+        "罗素CME有3255天间隔、与ICE重叠52周；两个序列分存未合并。",
+        "非ETF持仓、现货净敞口、指数历史成员或已验证交易信号。"
+      ],
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false,
+      "strategy_ready": false,
+      "refresh": {
+        "source_cadence": "weekly where still reporting",
+        "last_probe": "2026-10-27",
+        "local_scheduled_collector": false,
+        "method": "Separately register new-date tail updates; tail alone cannot find revisions. Historical overlap revision comparison requires a separate bounded query. Preserve all original snapshots."
+      }
+    },
+    {
+      "id": "bis-cn-us-private-nonfinancial-credit-to-gdp",
+      "name": "BIS中美私人非金融部门信用占GDP历史",
+      "access": "official_public_SDMX_API",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-credit/bis-private-nonfinancial-credit-gdp-cn-us-normalized.csv",
+      "original_sha256": "04936f7f073f8218666df0b80b15ed6ff064b821dcdb9a1309624ff66093e432",
+      "original_sha256_meaning": "normalized reader CSV SHA; original XML SHA separately listed in coverage.series",
+      "normalized_bytes": 92188,
+      "source_manifest": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-credit/delivery-v2.json",
+        "sha256": "2fa16669ab0c360911ec93147e37a95387f16960d1738805f16ebe8036ff9c4b",
+        "bytes": 7280
+      },
+      "source_bytes": 42074,
+      "source_http_requests": 2,
+      "qualification_report": "docs/experiments/bis-cn-us-credit-history-2026-10-27.md",
+      "independent_review": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-credit/independent-acceptance.json",
+        "sha256": "7017651fc96de9aade311db510a4dd116a573dcc3c1d1e1eb122ff5cfb0cd7d8",
+        "bytes": 5531
+      },
+      "available_path_verified_at": "2026-10-26T18:29:08.017708+00:00",
+      "coverage": {
+        "rows": 476,
+        "unit": "percentage of GDP, unit multiplier 0",
+        "frequency": "quarterly",
+        "series": [
+          {
+            "country": "US",
+            "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-credit/bis-ws-tc-us-response-1.raw",
+            "source_sha256": "d39e7646dcbe180b222258807033b38068611c26769696c5fff6c09023bc55bc",
+            "source_bytes": 27002,
+            "source_content_type": "application/xml;charset=UTF-8",
+            "series_attributes": {
+              "FREQ": "Q",
+              "BORROWERS_CTY": "US",
+              "TC_BORROWERS": "P",
+              "TC_LENDERS": "A",
+              "VALUATION": "M",
+              "UNIT_TYPE": "770",
+              "TC_ADJUST": "A",
+              "TITLE_TS": "United States - Credit to Private non-financial sector from All sectors at Market value - Percentage of GDP - Adjusted for breaks",
+              "UNIT_MULT": "0",
+              "UNIT_MEASURE": "367"
+            },
+            "rows": 314,
+            "first_quarter": "1947-Q4",
+            "last_quarter": "2026-Q1",
+            "unique_contiguous_quarters": true,
+            "finite_nonnegative_values": true,
+            "value_min": 47.1,
+            "value_max": 172.0
+          },
+          {
+            "country": "CN",
+            "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-credit/bis-ws-tc-cn-response-2.raw",
+            "source_sha256": "3a59443d3d9d20ee6edfb8380fc18007bdef65723a74f54c12a3e6ebc4a2269d",
+            "source_bytes": 15072,
+            "source_content_type": "application/xml;charset=UTF-8",
+            "series_attributes": {
+              "FREQ": "Q",
+              "BORROWERS_CTY": "CN",
+              "TC_BORROWERS": "P",
+              "TC_LENDERS": "A",
+              "VALUATION": "M",
+              "UNIT_TYPE": "770",
+              "TC_ADJUST": "A",
+              "TITLE_TS": "China - Credit to Private non-financial sector from All sectors at Market value - Percentage of GDP - Adjusted for breaks",
+              "UNIT_MULT": "0",
+              "UNIT_MEASURE": "367"
+            },
+            "rows": 162,
+            "first_quarter": "1985-Q4",
+            "last_quarter": "2026-Q1",
+            "unique_contiguous_quarters": true,
+            "finite_nonnegative_values": true,
+            "value_min": 61.5,
+            "value_max": 204.1
+          }
+        ]
+      },
+      "meaning_and_candidate_use": "长期私人非金融部门杠杆背景；断点调整后的总信用/GDP，不是信用缺口或偿债比率。",
+      "qualification_limits": [
+        "BIS主表仍是当前历史快照，非历史PIT；另有已独核的ALFRED版本原值见vintage_archive，但版本标签未证明BIS首发时刻。",
+        "原件为SDMX XML，首US响应格式差异已按明确补充接受并复用，0重复下载。",
+        "未另外下载信用/GDP分子分母，也未自行计算gap或DSR。"
+      ],
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false,
+      "strategy_ready": false,
+      "refresh": {
+        "source_cadence": "quarterly",
+        "last_probe": "2026-10-27",
+        "last_observed_quarter": "2026-Q1",
+        "local_scheduled_collector": false,
+        "method": "Separately register exact new quarters and bounded overlap revision check; preserve original snapshots."
+      },
+      "vintage_archive": {
+        "available": true,
+        "source": "Federal Reserve Bank of St. Louis ALFRED, original source BIS",
+        "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-credit-vintages/alfred-bis-credit-series-vintage-observation-values.csv",
+        "normalized_sha256": "9e83f753a208b527a434be762867158e981a716f1480f20c759c0960f88ac0c6",
+        "missing_cells_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-credit-vintages/alfred-bis-credit-missing-cells.csv",
+        "missing_cells_sha256": "2d7dfe521c8e034bdb99569690990672697af7eba4a28fc75db0c8ce2fb57ec2",
+        "source_manifest": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-vintages/delivery-post.json",
+          "sha256": "e871b2b4c28603e663809e178c641dd6e21815d53e1522296af9f1f65fd38c54",
+          "bytes": 7697
+        },
+        "independent_review": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-vintages/independent-acceptance.json",
+          "sha256": "5d52559f7cfd0698ad6dd0717bb879e292a15fc698edc54360197706d7565660",
+          "bytes": 7321
+        },
+        "per_series": {
+          "US": {
+            "series_id": "QUSPAM770A",
+            "vintages": 40,
+            "first_vintage": "2016-06-06",
+            "last_vintage": "2026-06-15",
+            "observation_quarters": 313,
+            "first_observation_date": "1947-10-01",
+            "last_observation_date": "2025-10-01",
+            "earliest_vintage_observation_count": 256,
+            "earliest_vintage_observation_range": [
+              "1952-Q1",
+              "2015-Q4"
+            ],
+            "latest_vintage_observation_count": 313,
+            "latest_vintage_observation_range": [
+              "1947-Q4",
+              "2025-Q4"
+            ],
+            "nonmissing_cells": 11424,
+            "missing_cells": 1096,
+            "adjacent_transitions_with_revised_common_quarters": 39,
+            "adjacent_revised_common_cell_count": 2089,
+            "max_adjacent_abs_revision_percent_of_gdp": 3.1,
+            "latest_BIS_overlap_quarters": 313,
+            "latest_BIS_differing_quarters": 6,
+            "latest_BIS_max_abs_difference_percent_of_gdp": "0.1",
+            "saved_BIS_quarters_after_ALFRED_latest": 1
+          },
+          "CN": {
+            "series_id": "QCNPAM770A",
+            "vintages": 40,
+            "first_vintage": "2016-06-06",
+            "last_vintage": "2026-06-15",
+            "observation_quarters": 161,
+            "first_observation_date": "1985-10-01",
+            "last_observation_date": "2025-10-01",
+            "earliest_vintage_observation_count": 121,
+            "earliest_vintage_observation_range": [
+              "1985-Q4",
+              "2015-Q4"
+            ],
+            "latest_vintage_observation_count": 161,
+            "latest_vintage_observation_range": [
+              "1985-Q4",
+              "2025-Q4"
+            ],
+            "nonmissing_cells": 5650,
+            "missing_cells": 790,
+            "adjacent_transitions_with_revised_common_quarters": 38,
+            "adjacent_revised_common_cell_count": 1561,
+            "max_adjacent_abs_revision_percent_of_gdp": 28.2,
+            "latest_BIS_overlap_quarters": 161,
+            "latest_BIS_differing_quarters": 7,
+            "latest_BIS_max_abs_difference_percent_of_gdp": "0.1",
+            "saved_BIS_quarters_after_ALFRED_latest": 1
+          }
+        },
+        "series_vintage_pairs": 80,
+        "nonempty_values": 17074,
+        "explicit_missing_cells": 1886,
+        "incremental_new_indicators": 0,
+        "qualification_report": "docs/experiments/bis-credit-vintage-history-2026-10-27.md",
+        "revision_context": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-vintages/revision-context.json",
+          "sha256": "8087bdb2fda633f9f703b004551b1dfc30c076ef89f58aeb9f37697680e7298f",
+          "bytes": 4181
+        },
+        "vintage_labeled_values_verified": true,
+        "original_BIS_first_publication_timestamps_verified": false,
+        "full_twenty_year_PIT_qualified": false,
+        "strategy_ready": false,
+        "boundary": "Historical versions labelled 2016-06-06 through 2026-06-15; earlier observation quarters do not imply earlier availability. Large version revisions are retained without unproven causal explanation.",
+        "available_path_verified_at": "2026-10-26T19:14:37.362609+00:00",
+        "refresh": "Read exact series form, register only new vintage dates and bounded revision comparisons; preserve old archives. No scheduled collector."
+      }
+    },
+    {
+      "id": "bis-cn-us-credit-gap-and-debt-service-ratio",
+      "name": "BIS中美信用缺口与偿债比率历史",
+      "access": "official_public_topic_archives",
+      "source": "https://data.bis.org/bulkdownload",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-gap-dsr/bis-cn-us-gap-dsr-selected-quarters.csv",
+      "normalized_sha256": "b0b240a6470392debce504a9bb353b0894eaf5dcbcbed7dadddfd0de05e6c276",
+      "normalized_bytes": 164757,
+      "source_manifest": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-gap-dsr/delivery.json",
+        "sha256": "c645b0d8e8d5318ffc93438caefb09f01c5ca65be94be63aedc6293e61d0a349",
+        "bytes": 11561
+      },
+      "source_bytes": 147060,
+      "source_http_requests": 2,
+      "qualification_report": "docs/experiments/bis-credit-gap-debt-service-history-2026-10-27.md",
+      "independent_review": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-gap-dsr/independent-acceptance.json",
+        "sha256": "be65b3e8573fa965a195bb69fb939a26ecce6475531f98426bceff2d9baad5f6",
+        "bytes": 8657
+      },
+      "available_path_verified_at": "2026-10-26T18:39:14.570833+00:00",
+      "coverage": {
+        "new_selected_series": 4,
+        "new_country_metric_quarter_rows": 614,
+        "series": [
+          {
+            "metric": "private_nonfinancial_credit_to_gdp_gap",
+            "country": "US",
+            "source_series_key": "Q:US:P:A:C",
+            "source_dimensions": {
+              "FREQ": "Q",
+              "Frequency": "Quarterly",
+              "BORROWERS_CTY": "US",
+              "Borrowers' country": "United States",
+              "TC_BORROWERS": "P",
+              "Borrowing sector": "Private non-financial sector",
+              "TC_LENDERS": "A",
+              "Lending sector": "All sectors",
+              "CG_DTYPE": "C",
+              "Credit gap data type": "Credit-to-GDP gaps (actual-trend)",
+              "TIME_FORMAT": "",
+              "Time Format": "",
+              "TITLE_TS": "",
+              "Series": "Q:US:P:A:C"
+            },
+            "unit": "percentage_points_of_gdp",
+            "unit_basis": "Official BIS topic metadata; CSV member contains dimension labels but no explicit unit column",
+            "observations": 274,
+            "first_quarter": "1957-Q4",
+            "last_quarter": "2026-Q1",
+            "leading_blank_quarter_columns": 40,
+            "trailing_blank_quarter_columns": 0,
+            "internal_missing_quarters": 0,
+            "minimum": -16.934,
+            "maximum": 11.6373,
+            "negative_values": 172
+          },
+          {
+            "metric": "private_nonfinancial_credit_to_gdp_gap",
+            "country": "CN",
+            "source_series_key": "Q:CN:P:A:C",
+            "source_dimensions": {
+              "FREQ": "Q",
+              "Frequency": "Quarterly",
+              "BORROWERS_CTY": "CN",
+              "Borrowers' country": "China",
+              "TC_BORROWERS": "P",
+              "Borrowing sector": "Private non-financial sector",
+              "TC_LENDERS": "A",
+              "Lending sector": "All sectors",
+              "CG_DTYPE": "C",
+              "Credit gap data type": "Credit-to-GDP gaps (actual-trend)",
+              "TIME_FORMAT": "",
+              "Time Format": "",
+              "TITLE_TS": "",
+              "Series": "Q:CN:P:A:C"
+            },
+            "unit": "percentage_points_of_gdp",
+            "unit_basis": "Official BIS topic metadata; CSV member contains dimension labels but no explicit unit column",
+            "observations": 122,
+            "first_quarter": "1995-Q4",
+            "last_quarter": "2026-Q1",
+            "leading_blank_quarter_columns": 192,
+            "trailing_blank_quarter_columns": 0,
+            "internal_missing_quarters": 0,
+            "minimum": -14.6778,
+            "maximum": 25.4573,
+            "negative_values": 50
+          },
+          {
+            "metric": "private_nonfinancial_debt_service_ratio",
+            "country": "US",
+            "source_series_key": "Q:US:P",
+            "source_dimensions": {
+              "FREQ": "Q",
+              "Frequency": "Quarterly",
+              "BORROWERS_CTY": "US",
+              "Borrowers' country": "United States",
+              "DSR_BORROWERS": "P",
+              "Borrowers": "Private non-financial sector",
+              "DECIMALS": "1",
+              "Decimals": "One",
+              "TITLE_TS": "United States - Private non-financial sector",
+              "Series": "Q:US:P"
+            },
+            "unit": "percent_of_income",
+            "unit_basis": "Official BIS topic metadata; CSV member contains dimension labels but no explicit unit column",
+            "observations": 109,
+            "first_quarter": "1999-Q1",
+            "last_quarter": "2026-Q1",
+            "leading_blank_quarter_columns": 0,
+            "trailing_blank_quarter_columns": 0,
+            "internal_missing_quarters": 0,
+            "minimum": 13.7,
+            "maximum": 18.5,
+            "negative_values": 0
+          },
+          {
+            "metric": "private_nonfinancial_debt_service_ratio",
+            "country": "CN",
+            "source_series_key": "Q:CN:P",
+            "source_dimensions": {
+              "FREQ": "Q",
+              "Frequency": "Quarterly",
+              "BORROWERS_CTY": "CN",
+              "Borrowers' country": "China",
+              "DSR_BORROWERS": "P",
+              "Borrowers": "Private non-financial sector",
+              "DECIMALS": "1",
+              "Decimals": "One",
+              "TITLE_TS": "China - Private non-financial sector",
+              "Series": "Q:CN:P"
+            },
+            "unit": "percent_of_income",
+            "unit_basis": "Official BIS topic metadata; CSV member contains dimension labels but no explicit unit column",
+            "observations": 109,
+            "first_quarter": "1999-Q1",
+            "last_quarter": "2026-Q1",
+            "leading_blank_quarter_columns": 0,
+            "trailing_blank_quarter_columns": 0,
+            "internal_missing_quarters": 0,
+            "minimum": 9.9,
+            "maximum": 19.1,
+            "negative_values": 0
+          }
+        ],
+        "source_archives": [
+          {
+            "kind": "gap",
+            "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-gap-dsr/WS_CREDIT_GAP_csv_col.zip",
+            "sha256": "58f4726e1c7b7f5ce354f09b9dfb4760435f3ef56b9aade33fd9d7f2012ef02a",
+            "compressed_bytes": 136320,
+            "member": "WS_CREDIT_GAP_csv_col.csv",
+            "member_uncompressed_bytes": 308084,
+            "member_crc32": "17adbd49",
+            "member_sha256": "06de76b34e399159b9453c80c459eb4abf09924aa0f9f717b8c878a1c1aa31a0",
+            "member_count": 1,
+            "crc_verified": true,
+            "safe_member_paths": true,
+            "source_row_count_all_countries": 132,
+            "quarter_columns": 314,
+            "first_quarter_column": "1947-Q4",
+            "last_quarter_column": "2026-Q1",
+            "gap_identity_context_only": {
+              "US": {
+                "overlap_quarters": 274,
+                "maximum_abs_A_minus_B_minus_C": 9.220179000024586e-05,
+                "within_rounding_tolerance_0_001": true
+              },
+              "CN": {
+                "overlap_quarters": 122,
+                "maximum_abs_A_minus_B_minus_C": 8.925350000499321e-05,
+                "within_rounding_tolerance_0_001": true
+              }
+            }
+          },
+          {
+            "kind": "dsr",
+            "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-gap-dsr/WS_DSR_csv_col.zip",
+            "sha256": "1fdeb7d2b66c906a5ea48879ca1900b3094a0fe4fcef3530cf8c7844b6e43b15",
+            "compressed_bytes": 10740,
+            "member": "WS_DSR_csv_col.csv",
+            "member_uncompressed_bytes": 40338,
+            "member_crc32": "9fb07f69",
+            "member_sha256": "511c5eaa8636b01ad5d16d72952a4d811a0deff4313ff7348313c2e0b3cd633c",
+            "member_count": 1,
+            "crc_verified": true,
+            "safe_member_paths": true,
+            "source_row_count_all_countries": 66,
+            "quarter_columns": 109,
+            "first_quarter_column": "1999-Q1",
+            "last_quarter_column": "2026-Q1"
+          }
+        ]
+      },
+      "meaning_and_candidate_use": "长期信用相对趋势偏离和偿本付息负担背景，区别于信用水平和短期金融条件。",
+      "qualification_limits": [
+        "当前历史快照，季度标签不是首次公开时间；PIT发布修订历史未取得。",
+        "单位据官方主题说明；原CSV没有独立单位列。",
+        "信用水平A/趋势B与其他国家随完整ZIP保留，仅四条所选中美序列通过本轮资格检查，不把上下文重复算新增。",
+        "同包A信用水平与先前WS_TC XML按1位小数对照CN162/162一致、US313/314一致；US2018Q1尚有0.05004710876百分点原值差异，未调和。"
+      ],
+      "historical_asof_versions_qualified": false,
+      "trading_increment_proven": false,
+      "strategy_ready": false,
+      "refresh": {
+        "source_cadence": "quarterly",
+        "last_probe": "2026-10-27",
+        "last_observed_quarter": "2026-Q1",
+        "local_scheduled_collector": false,
+        "method": "Read exact official archive links, retain previous ZIP and compare per-series new/revised observations; source availability not guaranteed."
+      },
+      "original_archive_series_inventory": {
+        "json": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-inventory/source-series-inventory.json",
+          "sha256": "ed5e5548e4bcf883269a42c563fc5f11c88774738d28726f108654cb32ea1aaa",
+          "bytes": 192006
+        },
+        "csv": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-inventory/source-series-inventory.csv",
+          "sha256": "cb2974cae7c7db2933479a7b900b249a9d644cb95553a7687bdba26693041eca",
+          "bytes": 77745
+        },
+        "source_series_rows": 198,
+        "selected_previously_reviewed_series": 4,
+        "new_qualified_series": 0,
+        "meaning": "Source lookup and dedup metadata only; other-country and other-sector records are not admitted by this inventory."
+      },
+      "prepared_cross_market_reuse": {
+        "status": "memory_audit_only_no_derived_dataset_written",
+        "delivery": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/bis-cross-market-reuse/delivery.json",
+          "sha256": "c3a83150b68698fdefd19e2b9198cfdc996fc19e219830ccb51999dd8da3093a",
+          "bytes": 8033
+        },
+        "target_series": 5,
+        "nonempty_quarter_values_observed": 643,
+        "source_requests": 0,
+        "OUT4_writes": 0,
+        "not_counted_as_acquired": true,
+        "missing": "Euro area private nonfinancial DSR absent from this saved archive; no synthesis."
+      },
+      "cross_market_reuse": {
+        "status": "actual_current_history_values_verified",
+        "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-cross-market-reuse/bis-hk-jp-xm-gap-dsr-selected-quarters.csv",
+        "normalized_sha256": "1f2cd1f0178e1c8ea2b1e9b8db39862fb8223c5a2b6e7ee08d7df2127d17785b",
+        "source_manifest": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-cross-market-reuse/manifest.json",
+          "sha256": "6741e00b3b6a74e83cac71af24ee463f228ec34877e92cb65b3d5bdfa4fc1f32",
+          "bytes": 7102
+        },
+        "acceptance": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-final-source-closure-20261027/controller-bis-cross-market-v2-actual-readback.json",
+          "sha256": "1f993e17f3b2546416be2f715406b3bdd00e0fc036266047e449b85c66ef0996",
+          "bytes": 1414
+        },
+        "series": [
+          {
+            "source_series_key": "Q:HK:P:A:C",
+            "source_row_number_1based": 44,
+            "country": "HK",
+            "metric": "private_nonfinancial_credit_to_gdp_gap",
+            "unit": "percentage_points_of_gdp",
+            "observations": 150,
+            "first_quarter": "1988-Q4",
+            "last_quarter": "2026-Q1",
+            "internal_missing_quarters": 0,
+            "finite_values": 150,
+            "negative_values": 66,
+            "minimum": -61.3681,
+            "maximum": 49.8056,
+            "quarter_raw_value_sha256": "bad7aca3efbbc84441bb41e39c07635dee8fcc05c6dd8f8ffa0c5e6b3fa54373",
+            "source_zip_sha256": "58f4726e1c7b7f5ce354f09b9dfb4760435f3ef56b9aade33fd9d7f2012ef02a",
+            "source_member_sha256": "06de76b34e399159b9453c80c459eb4abf09924aa0f9f717b8c878a1c1aa31a0"
+          },
+          {
+            "source_series_key": "Q:JP:P:A:C",
+            "source_row_number_1based": 32,
+            "country": "JP",
+            "metric": "private_nonfinancial_credit_to_gdp_gap",
+            "unit": "percentage_points_of_gdp",
+            "observations": 206,
+            "first_quarter": "1974-Q4",
+            "last_quarter": "2026-Q1",
+            "internal_missing_quarters": 0,
+            "finite_values": 206,
+            "negative_values": 100,
+            "minimum": -29.6498,
+            "maximum": 27.0421,
+            "quarter_raw_value_sha256": "cf732052c6271f474408b1bba528b5bacce4a82109179a60e2c3f45722a264a3",
+            "source_zip_sha256": "58f4726e1c7b7f5ce354f09b9dfb4760435f3ef56b9aade33fd9d7f2012ef02a",
+            "source_member_sha256": "06de76b34e399159b9453c80c459eb4abf09924aa0f9f717b8c878a1c1aa31a0"
+          },
+          {
+            "source_series_key": "Q:XM:P:A:C",
+            "source_row_number_1based": 68,
+            "country": "XM",
+            "metric": "private_nonfinancial_credit_to_gdp_gap",
+            "unit": "percentage_points_of_gdp",
+            "observations": 69,
+            "first_quarter": "2009-Q1",
+            "last_quarter": "2026-Q1",
+            "internal_missing_quarters": 0,
+            "finite_values": 69,
+            "negative_values": 59,
+            "minimum": -20.5601,
+            "maximum": 7.1353,
+            "quarter_raw_value_sha256": "bb004ed20878a77a3c5a504b2338b80c061cb714cbfb20674f3fdf2ba42725e0",
+            "source_zip_sha256": "58f4726e1c7b7f5ce354f09b9dfb4760435f3ef56b9aade33fd9d7f2012ef02a",
+            "source_member_sha256": "06de76b34e399159b9453c80c459eb4abf09924aa0f9f717b8c878a1c1aa31a0"
+          },
+          {
+            "source_series_key": "Q:HK:P",
+            "source_row_number_1based": 60,
+            "country": "HK",
+            "metric": "private_nonfinancial_debt_service_ratio",
+            "unit": "percent_of_income",
+            "observations": 109,
+            "first_quarter": "1999-Q1",
+            "last_quarter": "2026-Q1",
+            "internal_missing_quarters": 0,
+            "finite_values": 109,
+            "negative_values": 0,
+            "minimum": 14.4,
+            "maximum": 37.4,
+            "quarter_raw_value_sha256": "f9a417d6b76cc55021fbcf6b5604a966d04a9b282e17665f5fa7aa8ddb2821ea",
+            "source_zip_sha256": "1fdeb7d2b66c906a5ea48879ca1900b3094a0fe4fcef3530cf8c7844b6e43b15",
+            "source_member_sha256": "511c5eaa8636b01ad5d16d72952a4d811a0deff4313ff7348313c2e0b3cd633c"
+          },
+          {
+            "source_series_key": "Q:JP:P",
+            "source_row_number_1based": 9,
+            "country": "JP",
+            "metric": "private_nonfinancial_debt_service_ratio",
+            "unit": "percent_of_income",
+            "observations": 109,
+            "first_quarter": "1999-Q1",
+            "last_quarter": "2026-Q1",
+            "internal_missing_quarters": 0,
+            "finite_values": 109,
+            "negative_values": 0,
+            "minimum": 13.1,
+            "maximum": 20.0,
+            "quarter_raw_value_sha256": "19644d84ed1c3392410ba7b7dfd30e2bd5588689b3c544b7b1cc84d5e21b00ea",
+            "source_zip_sha256": "1fdeb7d2b66c906a5ea48879ca1900b3094a0fe4fcef3530cf8c7844b6e43b15",
+            "source_member_sha256": "511c5eaa8636b01ad5d16d72952a4d811a0deff4313ff7348313c2e0b3cd633c"
+          }
+        ],
+        "rows": 643,
+        "new_downloads": 0,
+        "new_originals": 0,
+        "full_PIT_qualified": false,
+        "strategy_ready": false,
+        "refresh": "Reuse exact keys in future official bulk release; keep old ZIP/version. No automatic schedule."
+      }
+    }
+  ],
+  "existing_universe_acquisition_bundles": [
+    {
+      "id": "universe-data-completion-2026-10-23",
+      "report": "docs/experiments/universe-data-completion-2026-10-23.md",
+      "local_manifest": "docs/experiments/raw/universe-data-completion-2026-10-23/storage-plan.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/universe-data-completion-20261023/universe-data-completion-20261023-20261023T174722-64e02fe6da9a/result",
+      "external_inventory": "/Volumes/win+mac通用/LeiSignal-新实验结果/universe-data-completion-us-20261023/universe-data-completion-us-20261023-20261023T175005-d64aeb4c4488/result",
+      "actual_exists": true,
+      "inventory_sha256": null,
+      "coverage_summary": {
+        "as_of": "2026-10-23",
+        "scope": "A股2577计划来源对象，覆盖观察到1552代码；美股S&P500/NDX候选源",
+        "report_pointer_files": [
+          "cn_receipt_v2.json",
+          "us_sina_coverage_v5.json",
+          "shared-input-locator.json"
+        ],
+        "external_outputs": [
+          "universe-data-completion-20261023/universe-data-completion-20261023-20261023T174722-64e02fe6da9a/result",
+          "universe-data-completion-us-20261023/universe-data-completion-us-20261023T175005-d64aeb4c4488/result"
+        ],
+        "external_outputs_verified": [
+          {
+            "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/universe-data-completion-20261023/universe-data-completion-20261023-20261023T174722-64e02fe6da9a/result",
+            "exists": true
+          },
+          {
+            "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/universe-data-completion-us-20261023/universe-data-completion-us-20261023-20261023T175005-d64aeb4c4488/result",
+            "exists": true
+          }
+        ],
+        "storage_plan_note": "A-share run_directory field omits separator before timestamp; the exact extant path is recorded here."
+      },
+      "qualification_limits": "storage-plan标记唯一run仅指A股子批次；manifest未见。42份早期A股日线为空；历史成员非资格；标普748、纳指3349证券日仍无候选，异常/身份缺口。不得视为完整历史行情池。",
+      "copied_bytes": 0,
+      "external_inventory_kind": "related_external_directory_not_manifest"
+    },
+    {
+      "id": "common-universe-acquisition-2026-10-24",
+      "report": "docs/experiments/common-universe-acquisition-2026-10-24.md",
+      "local_manifest": "docs/experiments/raw/common-universe-acquisition-2026-10-24/coverage-manifest.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result",
+      "external_inventory": null,
+      "actual_exists": true,
+      "inventory_sha256": "d4f5f918d04255e92a30820f94d217862b303308b55f8e79e6b705fd29067c81",
+      "coverage_summary": {
+        "as_of": "2026-10-24T02:32:20.564547+08:00",
+        "named_universes": 13,
+        "manifest_sha256": "d4f5f918d04255e92a30820f94d217862b303308b55f8e79e6b705fd29067c81",
+        "manifest_bytes": 56669,
+        "external_files_count_unverified": "not rehashed in this registration",
+        "external_inventory_manifest": "not present at expected delivery/artifact-file-inventory.json; local coverage manifest hash recorded"
+      },
+      "qualification_limits": "13对象清单；all_13_historical_datasets_complete=false；enables_backtesting=false。当前名单不等历史名单；RUTTR总收益毛/净税口径未绑定；基金持仓有缺月、代码缺失、重复及非普通股/权利记录。",
+      "copied_bytes": 0
+    },
+    {
+      "id": "research-universe-expansion-2026-10-24",
+      "report": "docs/experiments/research-universe-expansion-2026-10-24.md",
+      "local_manifest": "docs/experiments/raw/research-universe-expansion-2026-10-24/coverage-manifest.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-expand-20261024/downside-sensitivity-universe-20261023-expand-20261024-20261024T091036-8ff20d9465db/result",
+      "external_inventory": null,
+      "actual_exists": true,
+      "inventory_sha256": "5ee0a104ab6e613c26d196d54fe5372ee0a6bcde9593d222ec8d2690394bd481",
+      "coverage_summary": {
+        "as_of": "2026-10-24T09:31:57.721573+08:00",
+        "scope": "named common research universes; catalog entries are not qualified historical backtest datasets",
+        "new_cn_official_indices": 19,
+        "new_us_targets": 18,
+        "manifest_sha256": "5ee0a104ab6e613c26d196d54fe5372ee0a6bcde9593d222ec8d2690394bd481",
+        "manifest_bytes": 33668,
+        "external_inventory_manifest": "not present at expected delivery/artifact-file-inventory.json; local coverage manifest hash recorded"
+      },
+      "qualification_limits": "59项目录是研究范围输入目录，不是59套合格历史回测池；full_historical_backtest_universes_complete=false；当前成员与历史资格需分开。",
+      "copied_bytes": 0
+    },
+    {
+      "id": "universe-history-completion-2026-10-24",
+      "report": "docs/experiments/universe-history-completion-2026-10-24.md",
+      "local_manifest": "docs/experiments/raw/universe-history-completion-2026-10-24/coverage-manifest.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-history-20261024/downside-sensitivity-universe-20261023-history-20261024-20261024T093252-9b5d45a6ea04/result",
+      "external_inventory": null,
+      "actual_exists": true,
+      "inventory_sha256": "41339c28d34fc73c40aa2963092c1428acd17c66ae1e1fc0af44ee7bf20c95bc",
+      "coverage_summary": {
+        "target_start": "2006-01-01",
+        "latest_completed_market_day": "2026-10-23",
+        "catalog_entries": 59,
+        "closure_summary": {
+          "catalog_entries": 59,
+          "cn_named_index_inputs": 26,
+          "new_cn_official_daily_slices": 43,
+          "new_cn_official_values": 70449,
+          "new_us_daily_source_objects": 50,
+          "new_us_valid_daily_values": 97076,
+          "new_us_issuer_valid_months": 736,
+          "reused_us_issuer_valid_months": 377,
+          "total_us_issuer_valid_months": 1113,
+          "us_issuer_target_months": 1176,
+          "us_issuer_missing_months": 63,
+          "csi1000_admitted_target_months": 36,
+          "csi1000_target_months": 132,
+          "csi2000_admitted_target_months": 3,
+          "csi2000_target_months": 28,
+          "new_stock_exact_dates_requested": 299,
+          "new_stock_tradable_quotes": 264,
+          "new_stock_nontrading_records": 33,
+          "new_stock_empty_dates": 2,
+          "new_stock_adjustment_objects": 47,
+          "new_stock_adjustment_rows": 472,
+          "admitted_incomplete_price_member_months_before": 440,
+          "price_member_months_with_two_raw_quotes_after_reuse": 341,
+          "remaining_incomplete_price_member_months": 99,
+          "new_effect_runs": 0
+        },
+        "manifest_sha256": "41339c28d34fc73c40aa2963092c1428acd17c66ae1e1fc0af44ee7bf20c95bc",
+        "manifest_bytes": 362305,
+        "external_inventory_manifest": "not present at expected delivery/artifact-file-inventory.json; local coverage manifest hash recorded"
+      },
+      "qualification_limits": "补采批次完成不等全部历史池完成；full_historical_backtest_universes_complete=false；美国持仓缺63月；不完整价格成员月仍99；新效果运行0。",
+      "copied_bytes": 0
+    },
+    {
+      "id": "twenty-year-universe-data-2026-10-25",
+      "report": "docs/experiments/twenty-year-universe-data-2026-10-25.md",
+      "local_manifest": "docs/experiments/raw/twenty-year-universe-data-2026-10-25/coverage-manifest.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/twenty-year-universe-data-20261025/twenty-year-universe-data-20261025-20261025T154847-f27d39c4e083/result",
+      "external_inventory": "/Volumes/win+mac通用/LeiSignal-新实验结果/twenty-year-universe-data-20261025/twenty-year-universe-data-20261025-20261025T154847-f27d39c4e083/result/delivery/artifact-file-inventory.json",
+      "actual_exists": true,
+      "inventory_sha256": "b434932db867a0e7b7fb70393bd9d842a0949f3d5f162cfebf7ef38445dbcf43",
+      "coverage_summary": {
+        "target": [
+          "2006-01-01",
+          "2026-10-23"
+        ],
+        "named_research_objects": 59,
+        "closure_summary": {
+          "named_objects": 59,
+          "CN_indices": 26,
+          "US_and_cross_asset_ETFs": 33,
+          "domestic_ETFs": 7,
+          "observed_A_share_codes": 1552,
+          "stock_date_observations": 5913633,
+          "new_raw_stock_rows": 1676405,
+          "stock_source_empty_objects": 454,
+          "new_supplier_member_requests": 337,
+          "supplier_membership_periods_including_partial_october": {
+            "000016": 250,
+            "000300": 250,
+            "000905": 238
+          },
+          "csi1000_qualified_complete_months": 53,
+          "csi1000_qualified_table_rows": 53000,
+          "csi1000_earlier_candidate_months_in_old_target": 77,
+          "csi1000_no_candidate_months_in_old_target": 12,
+          "csi2000_qualified_months": 3,
+          "US_fund_holding_months_reused": 1113,
+          "US_holding_months_remaining_missing": 63,
+          "new_effect_runs": 0
+        },
+        "manifest_sha256": "2f8a9643a0322f0675d78b0ab20267009370976eac7d54efcd98745922744da2",
+        "manifest_bytes": 304616,
+        "external_inventory_recorded_sha256": "b434932db867a0e7b7fb70393bd9d842a0949f3d5f162cfebf7ef38445dbcf43",
+        "external_inventory_actual_sha256": "b434932db867a0e7b7fb70393bd9d842a0949f3d5f162cfebf7ef38445dbcf43",
+        "external_inventory_record_matches": true
+      },
+      "qualification_limits": "full_twenty_year_research_data_complete=false；官方历史成分资格不全；1552只观测代码不能代表全A股；CSI1000正式修订仅准入53月，2014-12至2015-11无候选；美国持仓缺63月；价格复权/生命周期边界及母指数口径未完全核定；无新效果运行。",
+      "copied_bytes": 0
+    },
+    {
+      "id": "downside-sensitivity-universe-2026-10-23",
+      "report": "docs/experiments/downside-sensitivity-universe-2026-10-23.md",
+      "local_manifest": "docs/experiments/raw/downside-sensitivity-universe-2026-10-23/closure.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023/downside-sensitivity-universe-20261023-20261023T185920-2e8e02d8a11b/result",
+      "external_inventory": null,
+      "actual_exists": true,
+      "inventory_sha256": null,
+      "coverage_summary": {
+        "bounded_question": "5只固定ETF、53个形成月；510300仅参照",
+        "external_files_recorded": 8,
+        "local_external_file_manifest": "closure.json external_files array",
+        "actual_inventory_sha256": null
+      },
+      "qualification_limits": "非完整股票universe采集；historical_equity_member_pools_qualified=false；qualified_parent_total_return_excess=false；仅两个ETF问题，研究收益不能替代母指数净超额。",
+      "copied_bytes": 0
+    },
+    {
+      "id": "institutional-data-sources-2026-10-22",
+      "report": "docs/experiments/institutional-data-sources-2026-10-22.md",
+      "local_manifest": null,
+      "external_path": null,
+      "external_inventory": null,
+      "actual_exists": false,
+      "inventory_sha256": null,
+      "coverage_summary": {
+        "relevant_actual_source": "HF trader298/sec-nport 2025 filing-year source reuse; report states 16 files about 937MB; no universe bundle reported"
+      },
+      "qualification_limits": "未发现该报告对应的本地storage-plan/closure或universes外盘入口；只是机构持仓数据源核查，不能把来源候选登记为股票池。",
+      "copied_bytes": 0
+    },
+    {
+      "id": "factor-curve-catalog-unavailable-universes",
+      "report": "web/public/research/factor-curve-library-20261022/catalog.json#unavailableUniverses",
+      "local_manifest": "web/public/research/factor-curve-library-20261022/catalog.json",
+      "external_path": null,
+      "external_inventory": null,
+      "actual_exists": true,
+      "inventory_sha256": null,
+      "coverage_summary": {
+        "catalog_sha256": "7f7c30aaae1027e6ca3af2f4609d6e00aecf12dd24cb924f38e9beaab1f37ae4",
+        "nodes": [
+          {
+            "id": "csi300",
+            "label": "沪深300历史成分",
+            "reason": "132个月末来源已取；官方事件复核发现2015年12月、2021年6月及12月、2022年12月换股未正确反映。新报告已列具体差异，原件保留外盘；完整历史名单与复权资格尚未核齐，本池新收益未生成。",
+            "statusLabel": "历史名单已发现错配"
+          },
+          {
+            "id": "csi500",
+            "label": "中证500历史成分",
+            "reason": "132个月末来源已取；2021年9月499只已定位缺中国能建601868，2021年6月及12月、2022年12月另有换股错配。官方附件有名称缺代码的两处已核身份；完整历史池仍未合格，不开放新收益。",
+            "statusLabel": "历史名单已发现错配"
+          },
+          {
+            "id": "sp500",
+            "label": "标普500历史成分",
+            "reason": "Yahoo与旧Tiingo/WIKI复用，新增新浪来源；原缺口仍748个证券日无候选，新增候选另有255个零量或价格结构异常日。代码身份与退出收益未核齐，候选覆盖不等于完整可回测。",
+            "statusLabel": "新增新浪历史，异常已单列"
+          },
+          {
+            "id": "ndx100",
+            "label": "纳斯达克100历史成分",
+            "reason": "原缺口仍3,349个证券日无候选，新增新浪候选有2个零量日；TCOM加入日期、Endo等代码身份仍待核。纳指价格/总回报参考已存，不开放未核完整池收益。",
+            "statusLabel": "多源候选已补，身份待核"
+          }
+        ]
+      },
+      "qualification_limits": "目录节点记录沪深300/500、SP500、NDX100历史成员未合格；仅为限制入口，不是外盘数据manifest。",
+      "copied_bytes": 0,
+      "catalog_hash_verified_at_registration": "7f7c30aaae1027e6ca3af2f4609d6e00aecf12dd24cb924f38e9beaab1f37ae4"
+    },
+    {
+      "report": "docs/experiments/public-universe-deep-completion-2026-10-26.md",
+      "actual_exists": true,
+      "copied_bytes": 0,
+      "available_path_verified_at": "2026-10-26T16:49:25.563957+00:00",
+      "strategy_ready": false,
+      "full_twenty_year_research_data_complete": false,
+      "id": "csi1000-reviewed-expost-members-2018-01_2026-09",
+      "local_manifest": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/controller-csi1000-admission/root-admission.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-csi1000-admission",
+      "external_inventory": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-csi1000-admission/csi1000-reviewed-expost-members-2018-01_2026-09.csv",
+      "inventory_sha256": "885befb3053dcf5ab3beeb11518a5a6ada3d867e1d81024b7fb3b19091add98e",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-csi1000-admission/csi1000-reviewed-expost-members-2018-01_2026-09.csv",
+      "coverage_summary": {
+        "first_month": "2018-01",
+        "last_month": "2026-09",
+        "months": 105,
+        "rows": 105000,
+        "members_per_month": 1000,
+        "new_months": 52
+      },
+      "qualification_limits": "Reviewed ex-post event reconstruction only; not proof of historical publication/PIT. No2016-12..2017-12 admission; no prelaunch investability; no qualified returns."
+    },
+    {
+      "report": "docs/experiments/public-universe-deep-completion-2026-10-26.md",
+      "actual_exists": true,
+      "copied_bytes": 0,
+      "available_path_verified_at": "2026-10-26T16:49:25.563957+00:00",
+      "strategy_ready": false,
+      "full_twenty_year_research_data_complete": false,
+      "id": "bse-current-directory-2026-10-27-cst",
+      "local_manifest": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/controller-bse-root-acceptance.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-bse-browser",
+      "external_inventory": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-bse-browser/visible-directory-current.csv",
+      "inventory_sha256": "1d259eeaf513e79eda77e61ffee2603a32e16eab62497abfd3e109e5e1aa8848",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-bse-browser/visible-directory-current.csv",
+      "coverage_summary": {
+        "snapshot_started_at_utc": "2026-10-26T16:00:37.838Z",
+        "snapshot_ended_at_utc": "2026-10-26T16:09:10.291Z",
+        "snapshot_local_date": "2026-10-27",
+        "timezone": "Asia/Shanghai",
+        "rows": 353,
+        "pages": 18,
+        "source_form": "rendered DOM",
+        "raw_capture": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-bse-browser/visible-directory-pages.json",
+          "sha256": "9a789cc0d30cbf1fa5ad718323721de437daff008ba705ad2278d4941644e745",
+          "bytes": 80204
+        }
+      },
+      "qualification_limits": "Current official directory only. Source listing date may mean NEEQ selected-layer date; share fields are raw wan-shares. No historical membership inference."
+    },
+    {
+      "report": "docs/experiments/public-universe-deep-completion-2026-10-26.md",
+      "actual_exists": true,
+      "copied_bytes": 0,
+      "available_path_verified_at": "2026-10-26T16:49:25.563957+00:00",
+      "strategy_ready": false,
+      "full_twenty_year_research_data_complete": false,
+      "id": "bse-code-crosswalk-effective-dates-v3",
+      "local_manifest": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/bse-directory/manifest-v3.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bse-directory",
+      "external_inventory": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bse-directory/effective-date-crosswalk-v3.csv",
+      "inventory_sha256": "df524378898b49368c30f15c3ddf1092055b137a262a0fb1e86551e6af1017f6",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bse-directory/effective-date-crosswalk-v3.csv",
+      "coverage_summary": {
+        "rows": 248,
+        "effective_groups": {
+          "2025-05-06": 6,
+          "2025-10-09": 242
+        },
+        "current_present": 246,
+        "current_absent_officially_delisted": 2
+      },
+      "qualification_limits": "Only248 legacy code changes, not full current directory. Do not mechanically replace code prefixes or use listing-date field as change date."
+    },
+    {
+      "report": "docs/experiments/public-universe-deep-completion-2026-10-26.md",
+      "actual_exists": true,
+      "copied_bytes": 0,
+      "available_path_verified_at": "2026-10-26T16:49:25.563957+00:00",
+      "strategy_ready": false,
+      "full_twenty_year_research_data_complete": false,
+      "id": "bse-guangdao-yunchuang-delisting-evidence",
+      "local_manifest": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/bse-lifecycle/lifecycle-evidence-manifest.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bse-lifecycle",
+      "external_inventory": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bse-lifecycle/lifecycle-findings.json",
+      "inventory_sha256": "2a8a84925ae934ec0dc0e70d7303c873c4c89cd848554db32686d159a50bc607",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bse-lifecycle/lifecycle-findings.json",
+      "coverage_summary": {
+        "official_source_objects": 5,
+        "securities": {
+          "920680": "2026-01-05",
+          "920305": "2026-07-30"
+        },
+        "event": "termination and delisting date"
+      },
+      "qualification_limits": "Official dated lifecycle events only; no exit prices, post-delisting returns, full historical universe or historical index membership."
+    },
+    {
+      "report": "docs/experiments/public-universe-deep-completion-2026-10-26.md",
+      "actual_exists": true,
+      "copied_bytes": 0,
+      "available_path_verified_at": "2026-10-26T16:49:25.563957+00:00",
+      "strategy_ready": false,
+      "full_twenty_year_research_data_complete": false,
+      "id": "spmd-contemporaneous-2020-benchmark-change",
+      "local_manifest": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/etf-history/result.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/etf-history",
+      "external_inventory": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/etf-history/sec-spmd-benchmark-change-2019-12-18.html",
+      "inventory_sha256": "1f86d2a01e5264d63427d7f75dffeb037b98dc0b5609f3cbe0d38d6170878a9e",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/etf-history/sec-spmd-benchmark-change-2019-12-18.html",
+      "coverage_summary": {
+        "publication_date": "2019-12-18",
+        "effective_date": "2020-01-24",
+        "from": "S&P1000",
+        "to": "S&PMidCap400",
+        "early_price_missing_days": 1890
+      },
+      "qualification_limits": "Contemporaneous SEC497K supports benchmark switch only; does not provide index return series or fill early ETF daily prices."
+    },
+    {
+      "report": "docs/experiments/public-universe-deep-completion-2026-10-26.md",
+      "actual_exists": true,
+      "copied_bytes": 0,
+      "available_path_verified_at": "2026-10-26T16:49:25.563957+00:00",
+      "strategy_ready": false,
+      "full_twenty_year_research_data_complete": false,
+      "id": "csi300500-local-event-corrected-candidates-20261027",
+      "local_manifest": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn300500-local-repair/manifest.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/cn300500-local-repair",
+      "external_inventory": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/cn300500-local-repair/csi300-csi500-local-event-corrected-candidates.csv",
+      "inventory_sha256": "d14265c8857395435e965432186a24e19f031f4c3c59b2f654d5c739f9cc980a",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/cn300500-local-repair/csi300-csi500-local-event-corrected-candidates.csv",
+      "coverage_summary": {
+        "index_months": 12,
+        "rows": 4800,
+        "known_notice_index_conflicts": 8,
+        "new_source_requests": 0,
+        "full_month_membership_qualified": false
+      },
+      "qualification_limits": "Independent review accepts specific event deltas only. Twelve candidate index-months are not full-month/PIT qualification. Six2022-12..2023-02source responses share stale2022-08-01updateDate; other missing events remain possible.",
+      "qualification_status": "reviewed_local_event_correction_candidate_not_admitted_as_full_month"
+    },
+    {
+      "report": "docs/experiments/cn-price-integrity-and-delisting-dates-2026-10-27.md",
+      "actual_exists": true,
+      "copied_bytes": 0,
+      "strategy_ready": false,
+      "full_twenty_year_research_data_complete": false,
+      "id": "cn-seven-delisting-date-status-overlay-20261027",
+      "local_manifest": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/controller-outdate-admission.json",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-outdate-admission/date-status-overlay.csv",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-outdate-admission",
+      "external_inventory": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-outdate-admission/date-status-overlay.csv",
+      "inventory_sha256": "85762fad7ef52c16e3e9d2e07961191095f8a546f27380586c7962bdfa652547",
+      "coverage_summary": {
+        "rows": 8,
+        "official_delisting_date_confirmed": 7,
+        "unverified": 1,
+        "new_price_rows": 0
+      },
+      "qualification_limits": "Exact listing-status events only. 600193 is anti-bot response; daily quote completeness and executable exit prices remain unqualified. No auto extension to later collector gaps."
+    },
+    {
+      "report": "docs/experiments/cn-price-integrity-and-delisting-dates-2026-10-27.md",
+      "actual_exists": true,
+      "copied_bytes": 0,
+      "strategy_ready": false,
+      "full_twenty_year_research_data_complete": false,
+      "id": "parent-benchmark-coverage-readiness-20261027",
+      "local_manifest": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/parent-benchmark-coverage-readiness-v2.json",
+      "primary_read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-parent-benchmark-readiness/parent-benchmark-coverage-readiness-v2.json",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-parent-benchmark-readiness",
+      "external_inventory": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-parent-benchmark-readiness/parent-benchmark-coverage-readiness-v2.json",
+      "inventory_sha256": "8de1bfdd25cb600234572e1a6092cdb1ab1dc86498bf47d1f5c18c294f251b4b",
+      "archive_kind": "existing_source_readiness_index_not_new_quotes",
+      "coverage_summary": {
+        "objects": 59,
+        "series": 86,
+        "source_references": 134,
+        "domestic_etf_current_bindings": 7,
+        "mutable_cache_old_sha_drift_paths": 2
+      },
+      "qualification_limits": "Metadata selectors and evidence paths; not59qualified historical benchmark series. ETF regimes use effective dates. Price!=TR; gross/net/tax unknown remainsnull. Mutable cache SHA observed_at only, stable_read_path=false; old-byte copies not found only within reviewed paths."
+    }
+  ],
+  "existing_universe_inventory_scope": "Checked external result directory existence and local/external inventory manifest object hashes when identified. No bulk source files were rehashed. No files copied.",
+  "blocked_or_empty_not_acquired": [
+    {
+      "id": "neodata",
+      "status": "local TOKEN_MISSING before HTTP, platform entitlement unknown"
+    },
+    {
+      "id": "ifind",
+      "status": "local skill disabled and needs key; not connected by this run"
+    },
+    {
+      "id": "mx-finance-data",
+      "status": "local skill disabled and needs key; not connected by this run"
+    },
+    {
+      "id": "chinabond-samples",
+      "status": "two saved download responses had zero data rows; do not count as acquired time series"
+    }
+  ],
+  "reader_rules": [
+    "Verify fixed volume UUID, mount and read_path before reading; no internal fallback or duplicate downloads if absent.",
+    "Verify archive-manifest SHA and desired file SHA; archived metadata retains historical local paths and must not be blindly executed.",
+    "Reuse matching object/fields/date/version first; preserve retrieval dates and revision versions when updating.",
+    "Path and manifest checks for old universe batches are not a fresh full bulk integrity or backtest admission check.",
+    "Current constituents or ETF holdings must not be reinterpreted as qualified historical index membership.",
+    "Frozen financial originals remain intact. The 2026-10-25 archive released no internal space; the separate 2026-10-26 maintenance removed only three verified, externally archived idle caches. Never infer blanket deletion authorization from this catalog.",
+    "Read latest_coverage_review and universe_gap_continuations before the preserved historical readiness_review; corrections supersede stated fields only. ETF fund-holding evidence months do not imply stable security identity mapping or official parent-index membership.",
+    "Second public pass:74CNdays are corroborated nominal OHLC observations only; preserve both one-hand volume differences. SPMD90month candidates and454recent premium-discount rows do not fill1890early daily prices. Read benchmark regimes before choosing a comparison index.",
+    "Third public pass: use identity-map-v4 review_cusip/review_isin and tier only; v3 numerically matching but name-unverified rows were quarantined after independent review. All strategy_ready=false. IWM201706 disclosed-position presence is a separate delayed-publication use, not an addition to1131strictmonths or formal index history.",
+    "Financial-conditions update20261026: NFCI/ANFCI have801date-level archived vintages each, not pre2011 or intraday availability. Prefer source-map for history; current6series and105indicator contributions are not extra underlying raw-series access. Other universe collection remains separate.",
+    "Use root-admitted105-monthCSI1000 file, not earlier65-monthcandidate or older53-monthonlycoverage.",
+    "Use BSEv3 crosswalk plus current353-rowdirectory separately; older v1/v2 mapping date ambiguity is superseded.",
+    "Archived/current/PIT/return qualification are separate. No source completeness or trading efficacy claim.",
+    "The bounded all-equity main and interior queues have exited and passed actual validation. Frozen older running snapshots are historical. Do not relaunch them; fullA historical membership and 20year return qualification remain incomplete.",
+    "Main v8 and additive interior4711 accepted. Lifecycle original8 plus followup3 explain11 new dates, together with old7 explain18 of main31. All31 source-missing rows remain, remaining13 date classes unknown, no exit prices inferred. No completed queue may be relaunched.",
+    "HTTP200 is not source-data success:600193returneddenied-by-botHTML; future SSE path stopped. Use only saved verified issuer/exchange evidence.",
+    "Old7 plus new11 official dates classify18 of main31 source-missing dates; remaining13 date classes unresolved. No quote or exit price was filled. Use both lifecycle acceptance addenda; old15/16 counts are historical.",
+    "Use readiness_review and latest_quality_review dated 2026-10-31 for current audit. Earlier readiness53 CSI1000 months/63 missing US fund-months and running-queue Markdown are historical: latest counts105 expost reconstructed months/45 missing fund-months, final main v8 accepted; no 20-year PIT qualification.",
+    "Two mutable parent-price caches 000300.SS.bars.parquet and ^GSPC.bars.parquet differ from original recorded and prior audit SHA. See readiness_review.explicit_read_constraints; never silently update original frozen-input hashes. New source versions require their own freeze and qualification.",
+    "For ETF distributions/actions/index methods read latest_etf_data_qualification and its SHA-bound data-package first. 23 new raw response objects, 16 US funds distribution rows and 510300 cash facts do not grant market-return/PIT/20-year qualification. Preserve conflicts and prelisting/prepublication boundaries; do not restart old collectors."
+  ],
+  "other_existing_institutional_data": {
+    "schema": "existing-institutional-source-location/1",
+    "recorded_at": "2026-10-25",
+    "id": "institutional-data-sources-2026-10-22-trader298-sec-nport-2025",
+    "report": "docs/experiments/institutional-data-sources-2026-10-22.md",
+    "source_report": "docs/experiments/institutional-flow-holdings-pilot-2026-10-21.md",
+    "local_manifest": "docs/experiments/raw/institutional-flow-holdings-pilot-2026-10-21/mirror-qualification/request-manifest.json",
+    "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/mechanism-rebalancing-review-20261020/mechanism-rebalancing-review-20261020-20261021T235746-99163d862723/result/mirror-trader298",
+    "external_inventory": "docs/experiments/raw/institutional-flow-holdings-pilot-2026-10-21/mirror-qualification/request-manifest.json",
+    "actual_exists": true,
+    "file_count": 16,
+    "bytes": 937243865,
+    "manifest_sha256": "897579c894a75e22245040933bdd5e7036ab15dfdbce92db60a6226df901e74f",
+    "manifest_bytes": 23300,
+    "all_manifested_files_exist": true,
+    "source": {
+      "dataset": "trader298/sec-nport",
+      "revision": "d8db5addd8261a422aa2df269b764d746b7ceb54",
+      "filing_year": 2025,
+      "tables": [
+        "SUBMISSION",
+        "FUND_REPORTED_INFO",
+        "FUND_REPORTED_HOLDING",
+        "MONTHLY_TOTAL_RETURN"
+      ],
+      "quarters": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "coverage_summary": "16 parquet files across four tables and four 2025 filing quarters; request manifest records 937243865 bytes and 16 successful downloads.",
+    "qualification_limits": [
+      "Third-party Hugging Face mirror, not a bulk download from the official SEC site; mirror transformations or omissions have not been fully reconciled to SEC originals.",
+      "Filing year is not the same as economic report year; this is not a complete 2025 year-end holdings snapshot.",
+      "Fund active/passive/ETF classification is unresolved; revision selection, corporate actions, and actual public-availability timing remain unresolved.",
+      "Monthly total return is reported by share class and cannot be treated as one series per fund without additional identity handling.",
+      "Data availability does not establish fund flows caused sales and does not constitute a return or strategy-effect test."
+    ],
+    "validation_scope": "Read the referenced request manifest and qualification note; verified each of the 16 exact manifested external file paths exists. Did not rehash the 937 MB of source files.",
+    "copied_bytes": 0
+  },
+  "readiness_review": {
+    "as_of": "2026-10-31",
+    "status": "bounded_quality_review_complete_core_etf_return_and_pit_gaps_remain",
+    "report": "docs/experiments/data-readiness-and-quality-review-2026-10-31.md",
+    "report_sha256": "0bbb5af76880670c6a44e2ce6c33ab61cfce89077046fcf11d48050690c66e03",
+    "raw_directory": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/readiness-review-20261031",
+    "source_snapshot_date": "2026-10-27; observation endpoints vary; not refreshed by this audit",
+    "acceptance_definition": [
+      {
+        "layer": 1,
+        "name": "presence_and_readability",
+        "gate": "Fixed volume identity, actual file readable, selected raw and consumer files SHA-256 match manifest; dates and fields read back."
+      },
+      {
+        "layer": 2,
+        "name": "cleaning_identity_units",
+        "gate": "Instrument, issuer, share class, parent index and tracking changes mapped; units, adjustment basis, source tier, nontrading/missing rows and anomalous values resolved for selected use."
+      },
+      {
+        "layer": 3,
+        "name": "point_in_time_inputs",
+        "gate": "For historical decisions, effective-date membership and first public availability of financials/forecasts preserved; splits, distributions, exits, delistings and revisions represented without future leakage."
+      },
+      {
+        "layer": 4,
+        "name": "benchmark_and_execution",
+        "gate": "For return or trading claims, matching parent-index total return, genuine ETF lifetime, executable prices/status, costs and account convention fixed."
+      },
+      {
+        "layer": 5,
+        "name": "ongoing_versions",
+        "gate": "For current/continuous claims, refresh receipts, last successful observation, retrieval and source timestamps, immutable vintages, revision diff and stale-data behavior verified."
+      }
+    ],
+    "csi1000_expost_reconstructed_member_months": 105,
+    "csi2000_reconstructed_member_months": 3,
+    "us_fund_holding_present_months": 1131,
+    "us_fund_holding_target_months": 1176,
+    "us_fund_holding_missing_months": 45,
+    "etf_holdings_are_official_index_members": false,
+    "main_queue_final_verification_complete": true,
+    "main_source_missing_dates": 31,
+    "main_missing_dates_official_delisting_date_explanation": 18,
+    "main_missing_dates_unresolved_classification": 13,
+    "exit_prices_added_by_lifecycle_addenda": 0,
+    "sample_source_integrity_passed": 7,
+    "sample_source_integrity_checked": 7,
+    "financial_read_paths_exist": 25,
+    "financial_read_paths_checked": 25,
+    "bulk_files_rehashed": false,
+    "all_market_data_quality_certified": false,
+    "full_twenty_year_research_data_complete": false,
+    "scheduled_collector_deployed": false,
+    "new_factor_runs": 0,
+    "new_price_data_downloads": 0,
+    "new_data_refresh_performed": false,
+    "priority": "selected broad-index ETF distributions/actions and historical parent total-return alignment, immutable inputs, then information availability; stock PIT by defined question",
+    "parent_manifest_audit": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/readiness-review-20261031/parent-and-cache-quality-readback.json",
+      "bytes": 3104,
+      "sha256": "f6d60d461117821e9044207bf247954d20920d29783b9c07deb157f67df90d51"
+    },
+    "explicit_read_constraints": [
+      {
+        "path": "/Users/yongbiaoli/.lei_signal_lab/cache/000300.SS.bars.parquet",
+        "original_recorded_sha256": "752090c262edde86e5f3c214494f8ef8982d91ca8b5c461cc1f31332ddb25ba4",
+        "observed_sha256": "c66be7577aebdb16164ff2b8a3838b156fae4e763b520bbfb7aaf3f1ffa1b50c",
+        "stable_frozen_input": false,
+        "qualification": "cache changed; not evidence of corruption; cannot silently replace original frozen input"
+      },
+      {
+        "path": "/Users/yongbiaoli/.lei_signal_lab/cache/^GSPC.bars.parquet",
+        "original_recorded_sha256": "3e14f89c31d3f2cab20b5108f7ee7b5ecaf4eac1d25d8433736872b4649e3e01",
+        "observed_sha256": "d002379fb8c1d2c1e377260b4d10eea41ee9cca22da406e7312746d8e6607c99",
+        "stable_frozen_input": false,
+        "qualification": "cache changed; not evidence of corruption; cannot silently replace original frozen input"
+      }
+    ]
+  },
+  "storage_maintenance": {
+    "checked_at": "2026-10-26T14:48:49.803574+08:00",
+    "report": "docs/experiments/data-readiness-and-storage-cleanup-2026-10-26.md",
+    "receipt": "docs/experiments/raw/data-readiness-and-storage-cleanup-2026-10-26/controller-cleanup-receipt.json",
+    "receipt_sha256": "6467d8a7465bdaee9800030cc9152e191f6cd80db22c33ec591d1e9333876ce1",
+    "external_receipt": "/Volumes/win+mac通用/LeiSignal-新实验结果/data-readiness-storage-cleanup-20261026/data-readiness-storage-cleanup-20261026-20261026T144608-87fea8fe5e63/result/cleanup-receipt.json",
+    "removed_local_cache_files": 452,
+    "removed_local_cache_logical_bytes": 35587416,
+    "removed_external_financial_bytes": 0,
+    "cleanmymac_deleted_bytes": 0,
+    "financial_originals_removed": false,
+    "protected_runtimes_unchanged": true,
+    "internal_free_bytes_at_completion": 17129639936,
+    "external_free_bytes_at_completion": 475598290944,
+    "observed_internal_free_delta_during_removal": 2408448,
+    "free_delta_causally_attributed": false,
+    "cache_archives_are_new_financial_datasets": false
+  },
+  "latest_catalog_copy": "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-return-chain-20261031/etf-return-chain-20261031-20261031T003948-204b5ceb09d0/result/controller/catalog-final/acquired-data-catalog.json",
+  "universe_gap_continuations": [
+    {
+      "id": "public-universe-gap-completion-2026-10-26",
+      "as_of": "2026-10-26T13:02:43.642923+00:00",
+      "report": "docs/experiments/public-universe-gap-completion-2026-10-26.md",
+      "report_sha256": "d6fc36b593e83be180e1b21c338b7fb4fc578a0375bc458cafda1c5cb69757ac",
+      "evidence": "docs/experiments/raw/public-universe-gap-completion-2026-10-26/coverage-manifest.json",
+      "evidence_sha256": "76c711401f63f2ba3f12e0174ce860a9af219d5debbb9305f11637bd326986a0",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-gap-completion-20261026/public-universe-gap-completion-20261026-20261026T202539-2095632ae60b/result",
+      "current_coverage": {
+        "us_fund_holding_evidence_months": {
+          "before": 1113,
+          "added": 18,
+          "after": 1131,
+          "target": 1176,
+          "missing_before": 63,
+          "missing_after": 45,
+          "unreconciled_readable_candidates": 1,
+          "stable_security_identifiers_mapped": false,
+          "official_index_membership": false
+        },
+        "h30269_official_price_calendar_days": {
+          "before": 5051,
+          "added": 1,
+          "after": 5052,
+          "added_date": "2012-12-31",
+          "prelaunch_backcast": true
+        },
+        "a500_official_price_calendar_days": {
+          "before": 5050,
+          "after": 5050,
+          "missing_dates": [
+            "2024-08-30",
+            "2024-09-02"
+          ],
+          "anomalous_returned_row_rejected": true
+        },
+        "etf159915_issuer_nav": {
+          "new_rows": 3635,
+          "first": "2011-09-20",
+          "last": "2026-10-23",
+          "matched_existing_market_dates": 3608,
+          "extra_nav_dates_corrected": {
+            "prelisting": 15,
+            "postlisting_nontrading_period_end": 11,
+            "etf_suspension": 1
+          },
+          "specific_market_source_seam_crosschecked": true,
+          "full_executable_return_series_certified": false
+        },
+        "cn143_missing_original_quote_days": {
+          "original_ledger_unchanged": 143,
+          "official_nontrading_or_terminal_date_evidence": 69,
+          "third_party_quote_candidates": 74,
+          "without_either_explanation_or_candidate": 0,
+          "candidate_adjustment_fully_qualified": false,
+          "candidates_admitted_to_return_inputs": 0
+        },
+        "formal_csi1000_complete_months": {
+          "before": 53,
+          "after": 53
+        },
+        "formal_csi2000_complete_months": {
+          "before": 3,
+          "after": 3
+        },
+        "spmd_early_exchange_price_missing_days": {
+          "before": 1890,
+          "after": 1890,
+          "nav_substituted": false
+        }
+      },
+      "qualification": "New dated source evidence and candidates; not full20year point-in-time index universes or demonstrated factor efficacy.",
+      "corrective_precedence": [
+        "cn/extension/delivery-extension.json corrects cn/delivery.json extra NAV classification and PDF pages",
+        "us/delivery.json uses positions-v3; original v1 and v2 parsing evidence retained",
+        "controller-stock-lifecycle/extension/delivery-extension.json supplements original60 classified days to69 and74 candidates; original143 ledger unchanged"
+      ],
+      "cleanmymac": {
+        "module": "Large & Old Files",
+        "volume": "win+mac通用",
+        "scan_completed": true,
+        "displayed_candidate_gb": 53.84,
+        "candidate_size_is_deletable_space": false,
+        "deleted_bytes": 0,
+        "space_lens_verified": false
+      },
+      "new_source_http_attempts": 73,
+      "large_existing_inputs_recopied": false
+    },
+    {
+      "id": "public-universe-gap-second-pass-2026-10-26",
+      "as_of": "2026-10-26T13:46:14.464591+00:00",
+      "report": "docs/experiments/public-universe-gap-second-pass-2026-10-26.md",
+      "report_sha256": "1fff773a084eb291729120b5df315cd28b3d2aeab45987fc754934202c432225",
+      "evidence": "docs/experiments/raw/public-universe-gap-second-pass-2026-10-26/coverage-manifest.json",
+      "evidence_sha256": "2611393b33787a4148e583659d649afc08b9507b571ca6b65279b589636355f9",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-gap-second-pass-20261026/public-universe-gap-second-pass-20261026-20261026T211418-224d714dec7f/result",
+      "current_coverage": {
+        "cn74_nominal_ohlc_cross_provider_checked": {
+          "before": 0,
+          "after": 74,
+          "exact_ohlc_matches": 74,
+          "volume_exact": 72,
+          "volume_difference_one_hand": 2,
+          "independent_amount_check": false,
+          "return_input_admission": false
+        },
+        "cn143_original_missing_ledger": {
+          "before": 143,
+          "after": 143,
+          "nontrading_or_terminal_evidence_inherited": 69,
+          "nominal_ohlc_observations": 74,
+          "original_ledger_unchanged": true
+        },
+        "cn600636_adjustment_window": {
+          "start": "2026-01-30",
+          "end": "2026-06-22",
+          "nominal_qfq_ohlc_equal_dates": 72,
+          "includes_one_existing_anchor": true,
+          "supplier_recorded_events": 0,
+          "issuer_annual_no_distribution_supported": true,
+          "official_all_action_register_complete": false
+        },
+        "formal_csi1000_complete_months": {
+          "before": 53,
+          "added": 0,
+          "after": 53
+        },
+        "formal_csi2000_complete_months": {
+          "before": 3,
+          "added": 0,
+          "after": 3
+        },
+        "us_fund_holding_evidence_months": {
+          "before": 1131,
+          "added": 0,
+          "after": 1131,
+          "target": 1176,
+          "missing_after": 45,
+          "stable_security_identifiers_mapped": false,
+          "official_index_membership": false,
+          "iwm201706_source_discrepancy_usd": 120
+        },
+        "spmd_early_exchange_price_missing_days": {
+          "before": 1890,
+          "after": 1890,
+          "new_daily_quotes": 0,
+          "new_month_label_candidates": 90,
+          "candidate_range": [
+            "2006-01",
+            "2013-06"
+          ],
+          "exact_trade_date_known": false,
+          "adjustment_method_qualified": false,
+          "nav_substituted": false
+        },
+        "spmd_benchmark_identity": {
+          "issuer_retrospective_regimes": 4,
+          "change_dates": [
+            "2013-07-09",
+            "2016-08-31",
+            "2020-01-24"
+          ],
+          "full_benchmark_total_return_series_added": false,
+          "contemporaneous2020notice_obtained": false
+        },
+        "spmd_recent_premium_discount": {
+          "new_rows": 454,
+          "first": "2025-01-02",
+          "last": "2026-10-23",
+          "early_gap_filled": 0
+        },
+        "a500_official_price_gap_inherited": {
+          "missing_dates": [
+            "2024-08-30",
+            "2024-09-02"
+          ],
+          "no_new_request_this_pass": true
+        }
+      },
+      "qualification": "Cross-provider nominal quote observations and retrospective issuer benchmark identity; not full20year historical membership, total-return, or execution qualification.",
+      "new_source_http_attempts": 26,
+      "large_existing_inputs_recopied": false,
+      "corrective_precedence": [
+        "This pass upgrades the74day nominal OHLC observation only; prior original143 source ledger and all69nontrading classifications remain unchanged.",
+        "Prior cn/extension NAV date and PDF page corrections remain authoritative for prior159915 findings.",
+        "Prior positions-v3 US fund-month evidence remains; zero additional months this pass."
+      ]
+    },
+    {
+      "id": "public-universe-identity-and-gap-2026-10-26",
+      "as_of": "2026-10-26T14:43:36.516770+00:00",
+      "report": "docs/experiments/public-universe-identity-and-gap-2026-10-26.md",
+      "report_sha256": "c97031aa090386e2cfc3d8791a1f89fa69591e83425d1d420eb567dd68bcec3c",
+      "evidence": "docs/experiments/raw/public-universe-identity-and-gap-2026-10-26/coverage-manifest.json",
+      "evidence_sha256": "17c02d7c2c8916fdcf657c76c896fc20804f0073740420d366748ea1e98fb029",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-identity-and-gap-20261026/public-universe-identity-and-gap-20261026-20261026T221153-f85f4525ff28/result",
+      "current_coverage": {
+        "us_sec_identity": {
+          "fund_months": 18,
+          "stock_rows": 29720,
+          "stock_value_usd": 192183996818,
+          "review_rows": 19808,
+          "review_value_usd": 133417302562,
+          "review_row_coverage": 0.6664872139973083,
+          "review_value_coverage": 0.6942165048651132,
+          "same_period_exact_name_rows": 1561,
+          "adjacent_exact_name_inferred_rows": 18247,
+          "name_unverified_quarantined_rows": 456,
+          "id_conflict_quarantined_rows": 1,
+          "numeric_unmatched_rows": 6,
+          "direct_sec_id_rows": 0,
+          "strategy_ready": false,
+          "consumer_csv_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-identity-and-gap-20261026/public-universe-identity-and-gap-20261026-20261026T221153-f85f4525ff28/result/us-identity/sec-holdings-historical-identity-map-v4.csv",
+          "consumer_csv_sha256": "6d8cff2ea92787c14bf5c9aea34629f161c859b49c8643ab32bc3b6dee9b4e2b"
+        },
+        "us_complete_fund_holding_months": {
+          "before": 1131,
+          "added": 0,
+          "after": 1131,
+          "target": 1176,
+          "missing": 45,
+          "official_index_membership": false
+        },
+        "iwm201706_limited_presence_snapshot": {
+          "added": 1,
+          "common_stock_disclosure_rows": 2013,
+          "includes_escrow": true,
+          "valuation_discrepancy_usd": 120,
+          "as_of": "2017-06-30",
+          "filing_date": "2017-08-29",
+          "strict_admission": false
+        },
+        "formal_csi1000_complete_months": {
+          "before": 53,
+          "after": 53,
+          "added": 0
+        },
+        "formal_csi2000_complete_months": {
+          "before": 3,
+          "after": 3,
+          "added": 0
+        },
+        "a500_official_price_dates": {
+          "before": 5050,
+          "after": 5050,
+          "missing": [
+            "2024-08-30",
+            "2024-09-02"
+          ],
+          "new_candidates": 0
+        },
+        "spmd_early_daily_prices": {
+          "missing_days_inherited": 1890,
+          "new_requests_this_batch": 0
+        },
+        "workbuddy": {
+          "new_queries_sent": 0,
+          "new_data_obtained": 0
+        }
+      },
+      "qualification": "Use v4 review fields only for identity investigation. Exact names and numerical portfolio links are not proof of corporate-action continuity or historical public availability. Neither ETF holdings nor identifiers certify official Russell membership or return inputs.",
+      "new_source_http_attempts": 24,
+      "large_existing_inputs_recopied": false,
+      "corrective_precedence": [
+        "v4 consumer columns supersede v3 broad numerical identity links; preserve v1/v3/old delivery as audit only. 456 name-unverified numerical links have no review ID.",
+        "18,247 adjacent full-name matches remain inference; all strategy_ready false. As-of dates do not prove publication time.",
+        "IWM201706 limited disclosed-position presence is separate from strict valuation-qualified fund months. 1131/1176 missing45 unchanged.",
+        "Prior53/3formalCNcoverage,74nominalCNquotes,143originalgapledger,SPMD1890dailygap and four parent-regimes retained."
+      ]
+    },
+    {
+      "id": "public-universe-deep-completion-2026-10-26",
+      "as_of": "2026-10-26T16:49:25.563957+00:00",
+      "report": "docs/experiments/public-universe-deep-completion-2026-10-26.md",
+      "report_sha256": "fb7badccf5a7ce6d62ba8d82ad3930fd418d1174a90494ecabc50a61f2f63b61",
+      "evidence": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/coverage-manifest.json",
+      "evidence_sha256": "6c5e8a95ab8a3cf5f12683bfa637aecac204fd131863b8ed3b4655d925d42b1f",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result",
+      "current_coverage": {
+        "csi1000_reviewed_expost_months": {
+          "before": 53,
+          "after": 105,
+          "added": 52,
+          "first": "2018-01",
+          "last": "2026-09",
+          "historical_publication_proven": false
+        },
+        "csi2000_reviewed_months": 3,
+        "bse_current_directory_rows": 353,
+        "bse_dated_code_mappings": 248,
+        "bse_new_officially_dated_delistings": 2,
+        "us_fund_months": {
+          "qualified": 1131,
+          "target": 1176,
+          "missing": 45,
+          "official_russell_constituents": false
+        },
+        "spmd_early_daily_price_missing": 1890,
+        "financial_conditions_report": "docs/experiments/financial-conditions-history-and-vintages-2026-10-26.md",
+        "all_sh_sz_price_factor_queue": "running_incomplete",
+        "new_factor_runs": 0,
+        "production_changed": false
+      },
+      "qualification": "Accepted current/ex-post/event evidence only. Full20yearPIT, delisting returns, and all-equity collector remain incomplete.",
+      "new_source_http_request_objects": 479,
+      "running_collector": {
+        "handoff": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/runtime-handoff-v4.json",
+        "live_ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/cn-all-equity/continuation-attempts.jsonl",
+        "read_rule": "Ledger is mutable during active execution; not hashed or admitted as a completed dataset. Existing originals are immutable; terminal source status and coverage are distinct."
+      }
+    },
+    {
+      "id": "cn-price-integrity-and-delisting-dates-2026-10-27",
+      "as_of": "2026-10-26T17:15:39.414461+00:00",
+      "report": "docs/experiments/cn-price-integrity-and-delisting-dates-2026-10-27.md",
+      "report_sha256": "2de6d9e60845ebfbe94113188437401ff32186837e3aaa69d6e15e2136ab2346",
+      "evidence": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/price-integrity-coverage-manifest.json",
+      "evidence_sha256": "bb3fdf354e282528b729f297f5073d41ca3de34ffe02a3d2f145b04db1e63c50",
+      "external_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result",
+      "current_coverage": {
+        "csi1000_reviewed_expost_months": {
+          "before": 53,
+          "after": 105,
+          "added": 52,
+          "first": "2018-01",
+          "last": "2026-09",
+          "historical_publication_proven": false
+        },
+        "csi2000_reviewed_months": 3,
+        "bse_current_directory_rows": 353,
+        "bse_dated_code_mappings": 248,
+        "bse_new_officially_dated_delistings": 2,
+        "us_fund_months": {
+          "qualified": 1131,
+          "target": 1176,
+          "missing": 45,
+          "official_russell_constituents": false
+        },
+        "spmd_early_daily_price_missing": 1890,
+        "financial_conditions_report": "docs/experiments/financial-conditions-history-and-vintages-2026-10-26.md",
+        "all_sh_sz_price_factor_queue": "running_incomplete",
+        "new_factor_runs": 0,
+        "production_changed": false,
+        "new_outdate_statuses_verified": 7,
+        "outdate_scope_unverified": 1,
+        "new_exit_prices": 0,
+        "parent_benchmark_objects_indexed": 59,
+        "domestic_etf_current_parent_bindings": 7,
+        "partial_price_prefix_preserved_rows": 2000
+      },
+      "new_source_http_request_objects": 8,
+      "current_batch_http_request_objects": 487,
+      "prior_batches_inclusive_http_request_objects": 610,
+      "qualification": "Seven listing-status events and reviewed metadata. All-equity collector and final read-index not complete. Frozen earlier479count precedes8objectextension."
+    }
+  ],
+  "latest_coverage_review": "cn-lifecycle-final-notices-followup-2026-10-27",
+  "previous_catalog_copy": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-readiness-review-20261031/acquired-data-catalog.json",
+  "catalog_copy_history": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/data-readiness-storage-cleanup-20261026/data-readiness-storage-cleanup-20261026-20261026T144608-87fea8fe5e63/result/catalog/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-gap-completion-20261026/public-universe-gap-completion-20261026-20261026T202539-2095632ae60b/result/controller/catalog/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-gap-completion-20261026/public-universe-gap-completion-20261026-20261026T202539-2095632ae60b/result/controller/catalog-v2/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-gap-second-pass-20261026/public-universe-gap-second-pass-20261026-20261026T211418-224d714dec7f/result/controller/catalog/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-identity-and-gap-20261026/public-universe-identity-and-gap-20261026-20261026T221153-f85f4525ff28/result/controller/catalog/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-financial-conditions/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-universe-evidence/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-price-integrity/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-source-audits/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-source-qualification/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-us-tff/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-v6-quality/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-cboe-reuse/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-credit/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-gap-dsr/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-inventory/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-vintages/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-transport-stop-002840/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-transport-recovery-authorized/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-final-source-closure-20261027/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-lifecycle-followup-20261027/acquired-data-catalog.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-readiness-review-20261031/acquired-data-catalog.json"
+  ],
+  "active_acquisition_jobs": [
+    {
+      "id": "cn-all-equity-2006-20261023",
+      "status_at_registration": "bounded_source_batches_complete_verified_not_full_PIT_or_returns",
+      "observed_at": "2026-10-27T07:21:05.305952+00:00",
+      "pid": null,
+      "exec_session_id": null,
+      "handoff": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-v6-quality/runtime-handoff-v6.json",
+        "sha256": "b50cf4e923e3bc54cbb1dd75b40729c6c9f850fd843204f3520dedd8a87cacf0",
+        "bytes": 1241
+      },
+      "live_ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/cn-all-equity/continuation-attempts.jsonl",
+      "postprocess_gate": "completed_actual_v8_and_interior_postvalidation_no_rerun",
+      "postprocessor_to_use": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/build_read_index_v8.py",
+      "obsolete_postprocessor_do_not_run": [
+        "docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/build_read_index_v4.py",
+        "docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/build_read_index_v5.py",
+        "docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/build_read_index_v6.py"
+      ],
+      "lifecycle_status_overlay": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller-outdate-admission/date-status-overlay.csv",
+        "sha256": "85762fad7ef52c16e3e9d2e07961191095f8a546f27380586c7962bdfa652547",
+        "bytes": 3887
+      },
+      "read_rule": "Main v8 and additive interior4711 accepted. Lifecycle original8 plus followup3 explain11 new dates, together with old7 explain18 of main31. All31 source-missing rows remain, remaining13 date classes unknown, no exit prices inferred. No completed queue may be relaunched.",
+      "supplemental_offline_audits": [
+        "cn-legacy-source-and-interior-date-audits-20261027",
+        "cn-legacy-observation-content-qualification-20261027"
+      ],
+      "planned_interior_supplement": {
+        "status": "complete_additive_source_validated",
+        "acceptance": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-source-qualification/controller-interior-preparation-acceptance.json",
+          "sha256": "732f6f89d4d018db7da8396733bbc2c0add8ede5d67add6bd05a1e62cd510714",
+          "bytes": 2132
+        },
+        "requests_planned": 248,
+        "requests_attempted": 248,
+        "target_dates": 4711,
+        "execution_authorized": true,
+        "latest_frozen_contract": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-interior-supplement-plan-v5/supplement-contract-draft-v5.json",
+          "sha256": "cd47ff359712e602af09777c3fc2096dd2f2c5a548e6c120564eccdd73d5d050",
+          "bytes": 14744
+        },
+        "latest_independent_review": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/method-review-interior-v5/independent-review.json",
+          "sha256": "a9965fb3247a1e241246fe9e42cc924ef75a8f3683184b31f3dda9e87cdd157c",
+          "bytes": 8121
+        },
+        "previous_v4_preparation": {
+          "latest_frozen_contract": {
+            "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-interior-supplement-plan-v4/supplement-contract-draft-v4.json",
+            "sha256": "950e2d972edc34e045a9191cb093d9dde69a53af1de5fa42856d7220741793ca",
+            "bytes": 12591
+          },
+          "latest_independent_review": {
+            "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/method-review-cn-interior-v4/receipt.json",
+            "sha256": "3dd6d8bd5317c0e972ec29dadbed428722489e883e4a35ffd30525ae9043b41e",
+            "bytes": 4975
+          }
+        },
+        "latest_delivery": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-interior-supplement-plan-v5/delivery-v5.json",
+          "sha256": "14edaae10400c9fa54e6fef65725057dd3f0e1d4d062e0539474563ca0b6d375",
+          "bytes": 6262
+        },
+        "postvalidator": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-interior-supplement-validation-prep/validate_after_supplement_v4.py",
+          "sha256": "42865837b8a2d64ce5953cae7371739c94762b48e4a695e37528747df1f8d2d9",
+          "bytes": 24678
+        },
+        "postvalidator_plan": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-interior-supplement-validation-prep/plan-v4.json",
+          "sha256": "b2df8e34faa399759cd65efb12399edab96a4c9cb0459da229f574314c517a54",
+          "bytes": 3089
+        },
+        "current_gate": "Actual postvalidation accepted; no rerun.",
+        "authorization": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/controller-interior-v5-execution-authorization.json",
+          "sha256": "abff6f24b5f5b3676da80ca22b4793961a39d205310b962a29f8cb2528b2ecf6",
+          "bytes": 1549
+        },
+        "runtime": {
+          "pid": null,
+          "exec_session_id": null,
+          "status": "finished_queue_complete",
+          "completed_at": "2026-10-27T14:43:43.229920+08:00"
+        },
+        "actual_validation": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-final-source-closure-20261027/supplement-validation-v4-20261027T065248Z.json",
+          "sha256": "49adb53aaf667ce0f25aa4ddbbae645ce2613c651d3ad6dd9871393b51678958",
+          "bytes": 232658
+        },
+        "result": {
+          "observed_dates": 4711,
+          "qualified_quotes": 4559,
+          "status0_nonquotes": 152,
+          "unknown_dates": 0,
+          "excluded_old_status0_dates": 18
+        }
+      },
+      "superseded_handoffs": [
+        {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/runtime-handoff-v5.json",
+          "sha256": "0929d285f7db3a7018f11902a9184ce55b110558fbde1edce2949153f178ea51",
+          "bytes": 2276
+        }
+      ],
+      "postprocessor_sha256": "55f0644cf6a376ed5103f39e6b778919d98d2aa51c8858f96091d8ec4ff8a53d",
+      "independent_v6_fix_review": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-v6-quality/v6-count-review.json",
+        "sha256": "f78e188c0072d55e74f446ede1983b04dbb0ac70fd60039584d73b867cef9a93",
+        "bytes": 4098
+      },
+      "latest_partial_row_quality": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-v6-quality/delivery.json",
+        "sha256": "379c50dbf8e16d88bb665826a1c2c8ac615b7ca48e5ab856c4d8a25fbcc24dbf",
+        "bytes": 12205
+      },
+      "row_quality_status": "main12661_sources_verified_9592591_price_observations_9288261_quotes_304329_nontrades_1_invalid_32926_factor_events_31_dates_unknown",
+      "previous_postprocessor_before_transport_stop": {
+        "path": "docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/build_read_index_v6.py",
+        "sha256": "600ca697c335cc4c679d6c866d1433f2172e57e22c5c150eb4f4542966129dac"
+      },
+      "latest_transport_stop": {
+        "evidence": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-transport-stop-002840/source-stop-sz002840-20261027.json",
+          "sha256": "4ca93901555268a1dba02b8c58cde7463df422c4fdf4d1c18cfb02140e3e068b",
+          "bytes": 3812
+        },
+        "one_attempt_recovery_proposal": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-transport-stop-002840/transport-recovery-plan-sz002840-v1.json",
+          "sha256": "c6433a377fbc6d5dddc5e8661f1053ee88ebd0513dc24d81a70affa253423982",
+          "bytes": 2508
+        },
+        "original_pid": 24891,
+        "observed_continuation_ledger_sha256": "5740fa545ab62574bcf1758d0e6936fe9c613254dabd79adf82b2deaaedcd7e2",
+        "failed_source_partial_rows": 0,
+        "recovery_executed": true,
+        "recovery_root_readback": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/controller-sz002840-recovery-readback.json",
+          "sha256": "2b12b8c4ac2c86cce7b09354f6d64c1807535ea2eaf356e685f21b7070dc5850"
+        }
+      },
+      "continuation_recovery_authorization": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-transport-recovery-authorized/controller-coordination-transport-recovery-v1-receipt.json",
+        "sha256": "4365d777175ffeee604e9f22f3dcb589134167651595d1846539d7434a322cbe",
+        "bytes": 1250
+      },
+      "collector_to_use": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/collect_continuation_v6.py",
+        "sha256": "5a45280b57dff94bf2b115befbe767fb5d812fbee40fb67b6b8146e0b1b0962b",
+        "bytes": 24630
+      },
+      "prepared_finalization": {
+        "delivery": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-quality/delivery-v8-prep-v2.json",
+          "sha256": "819b0304e61ccafd71299e6b4dfee4dc574872f851cce248d9c6cfad071ff810",
+          "bytes": 9775
+        },
+        "independent_review": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/method-review-v8-final/static-review-v2.json",
+          "sha256": "ed2fa6d971ffb2ca6308c371bdf75454340e8361360702c273cbbb4e6d5ff153",
+          "bytes": 5575
+        },
+        "audit": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-quality/audit_terminal_quality_v3.py",
+          "sha256": "1740e041b373bc7be368137b6d86f9c67f96bb412411ff7bc4241a1e3d257354",
+          "bytes": 32930
+        },
+        "builder": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/build_read_index_v8.py",
+          "sha256": "55f0644cf6a376ed5103f39e6b778919d98d2aa51c8858f96091d8ec4ff8a53d",
+          "bytes": 17735
+        },
+        "verifier": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-quality/verify_v8_final_v2.py",
+          "sha256": "746537e4651eef36c67cc40a47630b3d2f01e32c724986bedaf86b67b45f8ce5",
+          "bytes": 46770
+        },
+        "verifier_plan": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-quality/v8-final-verifier-plan-v2.json",
+          "sha256": "4f86310509c27754f5e0f40af17ba709a180c271fc693f81dcce559b0b9b3de9",
+          "bytes": 9403
+        },
+        "source_requests": 0,
+        "executed": true,
+        "builder_storage_gate": "root caller fresh receipt required immediately before actual builder; frozen builder does not implement it"
+      },
+      "previous_state_before_factor_stop": {
+        "status_at_registration": "running_v5_exact_recovery_passed_remaining_fixed_queue",
+        "observed_at": "2026-10-26T19:31:26.492982+00:00",
+        "pid": 5072,
+        "exec_session_id": 11059,
+        "postprocessor_to_use": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/build_read_index_v7.py",
+        "postprocessor_sha256": "e3d81c1c8f6752d8a2734d232d5501dae2d7413b39cc949b0a6e5b542d76b95f",
+        "postprocess_gate": "Reviewed preparation only: await finite v5 completion; run final incremental audit_v2, builder_v7 with exact final quality manifest, independent verifier_v7, then separately authorized248-window interior collector_v4 and validator_v3. No final execution has occurred."
+      },
+      "latest_factor_stop": {
+        "incident": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/source-stop-factor-sz000716-v5-20261027.json",
+          "sha256": "6826c14241f3067e005f4f524651173d2491699c97ebbc58053f66ace7f567ce",
+          "bytes": 2278
+        },
+        "last_successful_continuation_terminal": "baostock|adjust_factor|sz.000715|2006-01-01|2026-10-23",
+        "unresolved_started": "baostock|adjust_factor|sz.000716|2006-01-01|2026-10-23",
+        "continuation_terminals": 8441,
+        "no_saved_source_for_unresolved_object": true,
+        "untouched_objects": 3638,
+        "planned_single_recovery_objects": 1,
+        "source_requests_after_stop": 0,
+        "remount_binding": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/controller-storage-remount-binding-20261027.json",
+          "sha256": "078a788f810e740c2542c29d085ef374d718a13cb9f832575b7a17c2e62859f3",
+          "bytes": 2778
+        },
+        "failure_cause_limit": "Source timeout/reset observed; final ledger write was blocked by combined reserve check. Current free space does not prove which condition failed then."
+      },
+      "previous_stopped_v5_registration": {
+        "status_at_registration": "stopped_v5_factor_timeout_and_terminal_write_gate_recovery_preparing",
+        "observed_at": "2026-10-27T05:01:23.841253+00:00",
+        "pid": null,
+        "exec_session_id": null,
+        "read_rule": "Saved successful sources remain reusable; started-only sz000716 is neither empty response nor success. Future source-pointer admission requires a new six-ledger v8 receipt.",
+        "postprocess_gate": "blocked_until_exact_factor_recovery_and_remaining_queue_complete_then_new_audit_v3_index_v8_verifier_v8; v7_and_older_do_not_run",
+        "prepared_finalization": {
+          "delivery": {
+            "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-quality/delivery-v7-prep.json",
+            "sha256": "d813260dabce9278587803e877c575a1daf750d1ed399bc2baaf89317b67c494",
+            "bytes": 5664
+          },
+          "independent_review": {
+            "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/method-review-v7-final/receipt.json",
+            "sha256": "a5f6bd4d53970cdc3bae4c7de1fad14a8ee3912e5ed62fd4a2e216f5820fc350",
+            "bytes": 10167
+          },
+          "interior_independent_review": {
+            "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/method-review-cn-interior-v4/receipt.json",
+            "sha256": "3dd6d8bd5317c0e972ec29dadbed428722489e883e4a35ffd30525ae9043b41e",
+            "bytes": 4975
+          },
+          "interior_validator": {
+            "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-interior-supplement-validation-prep/delivery-v3-final-binding.json",
+            "sha256": "8f750c2b61795751d60968b011aa530110e2f1de3c6f0561b1f025a0ff1d0523",
+            "bytes": 4080
+          },
+          "source_requests": 0,
+          "executed": false,
+          "superseded_by_factor_stop": true
+        },
+        "collector_to_use": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-transport-recovery-authorized/collect_continuation_v5.py",
+          "sha256": "544b63c28724825bfd58eab2bfc5815840b04134ea0b2035796cd78edd77038b",
+          "bytes": 20630
+        }
+      },
+      "source_execution_control": {
+        "authorization": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/controller-coordination-factor-recovery-v1-receipt.json",
+          "sha256": "04f5ae8644571a4b31dadfb07c048a7ec64e8fa79db61c14923d90aefa5f5425",
+          "bytes": 2154
+        },
+        "only_authorized_entrypoint": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/controller-launch-factor-recovery-v6-once.py",
+          "sha256": "5975b3ed7fbbc5f08649a3abbb43e76ec5dcd68c6e915326aeb4ef41f162537c",
+          "bytes": 4741
+        },
+        "immutable_start_marker": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/controller-factor-recovery-v6-execution-start.json",
+          "sha256": "9476ada26742b3e58ab2368a6a9263fd8797fa3d7a88ab27af6be2f0c2b8513c",
+          "bytes": 714
+        },
+        "maximum_objects": 3639,
+        "maximum_sessions": 1,
+        "automatic_retry": false,
+        "direct_partial_invocation_authorized": false,
+        "status": "main_v6_finished_zero_exit_do_not_relaunch"
+      },
+      "factor_recovery_root_readback": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/controller-sz000716-factor-recovery-readback.json",
+        "sha256": "30e14e31816dcdb0f000f52a82c10410464cde279cbecdd66ffc914765b32f5e",
+        "bytes": 1279
+      },
+      "denominator_reconciliation": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/denominator-reconciliation-20261027.md",
+        "sha256": "3217f35b07478776cbe65c75ee95bd08bac31066296dd1662d2e6239882bca6a",
+        "bytes": 3127
+      },
+      "prepared_offline_bis_reuse": {
+        "status": "extracted_actual_values_readback_verified",
+        "plan": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/bis-cross-market-reuse/plan-v2.json",
+          "sha256": "369ba4083e8e18f47e4e647eddc4d8c6be79d1986a1946a2929e53f13f41c54e",
+          "bytes": 10463
+        },
+        "review": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/method-review-bis-cross-market-reuse/independent-review-v2.json",
+          "sha256": "9c640049b326ce5bcf5194032c39e427ec4c76dc14dadcfbd5fd5146294fc4c3",
+          "bytes": 4665
+        },
+        "series": 5,
+        "quarter_rows": 643,
+        "new_source_requests": 0,
+        "execution_authorized": true,
+        "actual_readback": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-final-source-closure-20261027/controller-bis-cross-market-v2-actual-readback.json",
+          "sha256": "1f993e17f3b2546416be2f715406b3bdd00e0fc036266047e449b85c66ef0996",
+          "bytes": 1414
+        },
+        "manifest": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/bis-cross-market-reuse/manifest.json",
+          "sha256": "6741e00b3b6a74e83cac71af24ee463f228ec34877e92cb65b3d5bdfa4fc1f32",
+          "bytes": 7102
+        }
+      },
+      "actual_main_final_verification": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-final-source-closure-20261027/v8-final-verification-v2-20261027T063330Z.json",
+        "sha256": "b34543ccaa862876386086a4b413bdee7d0c591b32291ad95c4118d6cd1be401",
+        "bytes": 9866
+      },
+      "actual_main_result": {
+        "counts": {
+          "factor_objects": 5410,
+          "factor_rows": 32926,
+          "price_objects": 7251,
+          "price_rows": 9592591,
+          "strict_trade_quotes": 9288261,
+          "status0_nonquote_rows": 304329,
+          "status1_invalid_nonquotes": 1
+        },
+        "target_sessions": 9592622,
+        "observed_unique_price_dates": 9592591,
+        "missing_source_dates_unknown": 31,
+        "supplier_outdate_missing_dates": 30,
+        "of_which_official_listing_end_without_exit_price": 7,
+        "of_which_overlay_date_status_unknown": 1,
+        "of_which_unmatched_overlay_unknown": 22,
+        "overlay_unmatched_code_dates_unknown": [
+          {
+            "code": "sh.601028",
+            "date": "2025-05-27",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sh.603003",
+            "date": "2025-07-03",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sh.603388",
+            "date": "2025-12-05",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sh.605081",
+            "date": "2026-07-03",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sh.688287",
+            "date": "2026-06-10",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.000004",
+            "date": "2026-07-14",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.000584",
+            "date": "2025-07-11",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.000622",
+            "date": "2025-07-16",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.000638",
+            "date": "2026-06-03",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.000851",
+            "date": "2025-11-11",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.002231",
+            "date": "2026-03-27",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.002336",
+            "date": "2025-07-04",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.002750",
+            "date": "2025-06-27",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.002808",
+            "date": "2026-07-14",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.002898",
+            "date": "2026-07-17",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.300029",
+            "date": "2026-07-10",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.300108",
+            "date": "2025-05-29",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.300208",
+            "date": "2025-07-21",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.300280",
+            "date": "2025-10-14",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.300344",
+            "date": "2026-04-22",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.300379",
+            "date": "2026-01-22",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          },
+          {
+            "code": "sz.300391",
+            "date": "2026-04-13",
+            "classification": "overlay_unmatched_exit_date_and_price_unknown"
+          }
+        ],
+        "old_evidence": {
+          "old_union_source_sha_reused": "bb73ebce7e677b1e1b77446c8d832243d01813e53406a48e2792f2e820ff2396",
+          "old_original_files_sha_rechecked": 2238,
+          "old_row_semantics_rescanned": false
+        },
+        "full_twenty_year_research_data_complete": false,
+        "strategy_ready": false,
+        "price_returns_qualified": false
+      },
+      "lifecycle_addendum": {
+        "acceptance": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-final-source-closure-20261027/controller-lifecycle-actual-acceptance.json",
+          "sha256": "009e783cea81980402029b86ad50f4b67725614cb16e57494c990f2e68868dc6",
+          "bytes": 11003
+        },
+        "events": 8,
+        "original_main31_missing_count_preserved": true,
+        "total_official_dates_in_main31": 18,
+        "unresolved_date_classification_count": 13,
+        "exit_prices_added": 0,
+        "overwrites_main_v8": false,
+        "followup_three": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-lifecycle-followup-20261027/controller-lifecycle-followup-acceptance.json",
+          "sha256": "09cd3bfef883383edf194e718da9412594369cda2e35dd36aca32c4b89f203a5",
+          "bytes": 4715
+        },
+        "total_new_events": 11
+      }
+    }
+  ],
+  "qualification_addenda": [
+    {
+      "id": "cn-legacy-source-and-interior-date-audits-20261027",
+      "as_of": "2026-10-26T17:29:00.302905+00:00",
+      "kind": "offline_file_and_coverage_audit_not_acquired_quotes",
+      "source_requests": 0,
+      "legacy_pointer_audit": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-source-audits/old-nested-source-pointer-audit.json",
+        "sha256": "aa77f7b6f26ae845714fb01ecfb6147a76308e7c07dd502dba10f1ef401ec609",
+        "bytes": 1335224
+      },
+      "legacy_pointer_result": {
+        "file_sha_matches": 2238,
+        "bytes_read": 67676619,
+        "scope": "v5-bound inventories only; file integrity not semantic/return qualification"
+      },
+      "interior_gap_audit": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-source-audits/cn-interior-4729-gap-audit.json",
+        "sha256": "d7343f8b92832e16b6123f0f0834108257f9400c670a9cc3da19687ea7b96b43",
+        "bytes": 26408
+      },
+      "interior_gap_result": {
+        "codes": 46,
+        "windows": 248,
+        "date_slots": 4729,
+        "prior_adjusted_tradable": 641,
+        "prior_adjusted_nontrading": 18,
+        "no_reviewed_continuous_daily_request": 4070,
+        "inside_original_price_plan": 0
+      },
+      "daily_gap_table": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/cn-interior-4729-gap-audit/interior-4729-daily-classification.csv",
+        "sha256": "79d952d5d3196edc76be03d5b053eaaacf86dc2cbff1345cb95c53f1ea58975c",
+        "bytes": 557773,
+        "rows": 4729
+      },
+      "window_evidence": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/cn-interior-4729-gap-audit/interior-248-window-evidence.jsonl",
+        "sha256": "5d0163a7d7f6f7d4f36a6339ccaa211cf574eb916e0ffa0d71eef9d80a3b548e",
+        "bytes": 260476,
+        "rows": 248
+      },
+      "qualification": "adjustflag2 source status is not raw3 price. 4729 calendar sessions are not 4729 proven quotes. Current collector has no such requests; no source attempts added by this audit.",
+      "full_twenty_year_research_data_complete": false
+    },
+    {
+      "id": "cn-legacy-observation-content-qualification-20261027",
+      "as_of": "2026-10-26T17:49:58.098972+00:00",
+      "kind": "offline_existing_source_content_qualification",
+      "source_requests": 0,
+      "review": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-source-qualification/cn-legacy-union-content-qualification.json",
+        "sha256": "225834beccbcab130e71e05eea25b2f62cdf3148544d124363fdc2d5a08e9e78",
+        "bytes": 6695
+      },
+      "coverage": {
+        "old_union_codes": 1552,
+        "old_union_unique_code_dates": 5913633,
+        "old_union_lifecycle_missing_dates": 143,
+        "reused_codes": 219,
+        "reused_unique_code_dates": 531840,
+        "reused_valid_tradable_rows": 508255,
+        "reused_nontrading_rows": 23585
+      },
+      "verification_boundary": "1552 original-row audit is reused from 2026-10-25 SHA-bound receipts; current check rereads union content. 219 originals and both factor inventories are rehashed and content checked now. Neither row/date count proves executable prices, PIT membership or qualified returns.",
+      "full_twenty_year_research_data_complete": false
+    },
+    {
+      "id": "cn-price-partial-quality-and-v6-fix-20261027",
+      "as_of": "2026-10-26T18:10:43.024116+00:00",
+      "source_requests": 0,
+      "review": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-v6-quality/v6-count-review.json",
+        "sha256": "f78e188c0072d55e74f446ede1983b04dbb0ac70fd60039584d73b867cef9a93",
+        "bytes": 4098
+      },
+      "partial_row_quality": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-v6-quality/delivery.json",
+        "sha256": "379c50dbf8e16d88bb665826a1c2c8ac615b7ca48e5ab856c4d8a25fbcc24dbf",
+        "bytes": 12205
+      },
+      "coverage": {
+        "terminal_source_objects": 2793,
+        "source_price_rows": 4071380,
+        "status1_rows": 3947571,
+        "qualified_quote_rows": 3947570,
+        "status0_rows": 123809,
+        "invalid_status1_rows": 1
+      },
+      "full_twenty_year_research_data_complete": false,
+      "status": "partial_snapshot_not_final_union"
+    },
+    {
+      "id": "public-universe-source-closure-20261027",
+      "status": "bounded_acquisition_verified_not_research_complete",
+      "report": "docs/experiments/public-universe-data-closure-2026-10-27.md",
+      "main_verification": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-final-source-closure-20261027/v8-final-verification-v2-20261027T063330Z.json",
+        "sha256": "b34543ccaa862876386086a4b413bdee7d0c591b32291ad95c4118d6cd1be401",
+        "bytes": 9866
+      },
+      "interior_verification": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-final-source-closure-20261027/supplement-validation-v4-20261027T065248Z.json",
+        "sha256": "49adb53aaf667ce0f25aa4ddbbae645ce2613c651d3ad6dd9871393b51678958",
+        "bytes": 232658
+      },
+      "lifecycle_verification": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-final-source-closure-20261027/controller-lifecycle-actual-acceptance.json",
+        "sha256": "009e783cea81980402029b86ad50f4b67725614cb16e57494c990f2e68868dc6",
+        "bytes": 11003
+      },
+      "bis_readback": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-final-source-closure-20261027/controller-bis-cross-market-v2-actual-readback.json",
+        "sha256": "1f993e17f3b2546416be2f715406b3bdd00e0fc036266047e449b85c66ef0996",
+        "bytes": 1414
+      }
+    },
+    {
+      "id": "cn-lifecycle-final-notices-followup-20261027",
+      "report": "docs/experiments/cn-lifecycle-final-notices-followup-2026-10-27.md",
+      "acceptance": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-lifecycle-followup-20261027/controller-lifecycle-followup-acceptance.json",
+        "sha256": "09cd3bfef883383edf194e718da9412594369cda2e35dd36aca32c4b89f203a5",
+        "bytes": 4715
+      },
+      "new_events": 3,
+      "new_exit_prices": 0,
+      "frozen_main_unchanged": true
+    },
+    {
+      "id": "etf-return-chain-20261031",
+      "as_of": "2026-10-31",
+      "kind": "new_issuer_sources_and_offline_qualification_addendum",
+      "report": "docs/experiments/etf-return-chain-qualification-2026-10-31.md",
+      "report_sha256": "74ca38bde8752238a60b16386ff31ed84922cb2f0ecd3c5970c549367cb621b8",
+      "data_package": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-return-chain-20261031/etf-return-chain-20261031-20261031T003948-204b5ceb09d0/result/data-package.json",
+        "bytes": 10814,
+        "sha256": "621cef27e1ba7ca869c4a0fc69f8770831fb30fb0c2cedb1cc6d23ef48cd33d5"
+      },
+      "new_source_objects": 23,
+      "new_source_original_bytes": 8172463,
+      "coverage": {
+        "spy_issuer_distributions": 136,
+        "spy_issuer_nav_days": 5768,
+        "additional_spdr_funds": 15,
+        "additional_spdr_distribution_rows": 1641,
+        "cn510300_cash_events": 14,
+        "domestic_etf_quote_field_rows_checked": 20283,
+        "domestic_parent_series_codes_checked": 7
+      },
+      "request_accounting": {
+        "direct_attempts": 24,
+        "success": 23,
+        "failed_stopped": 1,
+        "same_counter_cumulative": 661,
+        "web_search_calls": 14,
+        "web_search_queries": 43,
+        "web_opens": 2
+      },
+      "new_price_data": "five-day 2012 Tencent cross-check only; existing full price histories reused",
+      "conflicts_retained": [
+        "SPY 2021-12-17 issuer 1.636431 vs vendor 1.633 USD",
+        "510300 closes differ on 2014-04-23 and 2016-01-04",
+        "H00300 56 pre-2006-04-03 dates are retrospective, not verified public contemporaneous history"
+      ],
+      "return_series_ready": false,
+      "full_twenty_year_research_data_complete": false,
+      "production_changed": false,
+      "scheduled_refresh_deployed": false
+    }
+  ],
+  "latest_financial_data_review": {
+    "report": "docs/experiments/bis-credit-vintage-history-2026-10-27.md",
+    "report_sha256": "c3676c800b984b5d21d6b31d0e19c59d1e0049b4dfeb25a8522f3b6ded4644ce",
+    "new_source_http_objects": 4,
+    "new_objects_breakdown": {
+      "download_form_GET": 2,
+      "vintage_ZIP_POST": 2
+    },
+    "current_deep_batch_http_objects": 501,
+    "prior_three_batches_inclusive_http_objects": 624,
+    "official_web_actions_this_extension": 7,
+    "qualification": "Two existing BIS indicators supplemented with 80 ALFRED country-vintage pairs, 17074 values and 1886 blanks. Financial group count stays15. First-publication timing,20-year PIT and effect remain unqualified."
+  },
+  "latest_us_gap_review": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-v6-quality/audit.json",
+    "sha256": "ae4fc431926bd682fab84c8def9a8d4b36760ab84e0929d83bc1b155a3024a6d",
+    "bytes": 8756
+  },
+  "existing_data_references": [
+    {
+      "id": "existing-cboe-vix9d-vix3m-official-histories",
+      "kind": "existing_local_source_reference_no_download",
+      "sources": [
+        {
+          "symbol": "VIX9D",
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/vix-sentiment/data/VIX9D_History.csv",
+          "source": "Cboe official public CSV per DATA_SOURCES.md",
+          "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX9D_History.csv",
+          "bytes": 199979,
+          "sha256": "794fc98a3c8c132fd28bf1040e4c9f31c179b1f7ea967525074ab5dd5079f125",
+          "rows": 3937,
+          "header": [
+            "DATE",
+            "OPEN",
+            "HIGH",
+            "LOW",
+            "CLOSE"
+          ],
+          "first_observed_date": "01/04/2011",
+          "last_observed_date": "08/31/2026",
+          "tail_after_2026_08_31": "not checked or refreshed in this task"
+        },
+        {
+          "symbol": "VIX3M",
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/vix-sentiment/data/VIX3M_History.csv",
+          "source": "Cboe official public CSV per DATA_SOURCES.md",
+          "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX3M_History.csv",
+          "bytes": 217438,
+          "sha256": "697071b1b6fd9a3416d085864f15f5c5b34902886497a6ac117b63725b9e09d7",
+          "rows": 4263,
+          "header": [
+            "DATE",
+            "OPEN",
+            "HIGH",
+            "LOW",
+            "CLOSE"
+          ],
+          "first_observed_date": "09/18/2009",
+          "last_observed_date": "08/31/2026",
+          "tail_after_2026_08_31": "not checked or refreshed in this task"
+        }
+      ],
+      "original_bytes_copied": 0,
+      "qualification": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-cboe-reuse/reuse-qualification.json",
+        "sha256": "8a682b2ca54dadcb69e4cc53e6878ee320e0e49c7feb6eaef7e537160ec8ae24",
+        "bytes": 5931
+      },
+      "date_end": "2026-08-31",
+      "index_levels_not_tradable_OHLC": true,
+      "vix9d_equal_OHLC_rows": 722,
+      "existing_effect_conclusions_preserved": true,
+      "historical_asof_versions_qualified": false,
+      "post_August_tail_refreshed": false,
+      "known_external_copy": "not found in checked registered archive manifest; unregistered disks not exhaustively searched",
+      "meaning": "SPX option implied volatility term structure: 9-day versus three-month; complements existing30-day VIX, not newly acquired data."
+    }
+  ],
+  "source_discovery_limits": {
+    "cboe_skew": {
+      "as_of": "2026-10-27",
+      "web_discovery_actions": 4,
+      "data_gets": 0,
+      "exact_free_official_download_confirmed": false,
+      "source_decision": "No delayed quote automation, paid endpoint or guessed data GET. Limited search does not prove no free original exists.",
+      "audit": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-cboe-reuse/audit.json",
+        "sha256": "02af8fdc1be8e6f08d31c0ae48b9a62a7c85b32f13c4117b01abdcf43c98a3dc",
+        "bytes": 8459
+      },
+      "exact_search": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-cboe-reuse/controller-skew-exact-discovery-result.json",
+        "sha256": "6d70b03c35c0dfc2e45b7fd56c0aa3965627ecbdbe7b5e1428686d0ec7abf1c1",
+        "bytes": 582
+      }
+    },
+    "bis_gap_dsr_remaining_keys": {
+      "as_of": "2026-10-27",
+      "qualified_keys": 0,
+      "attempted_data_gets": 0,
+      "country_topic_queries": 4,
+      "evidence": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-bis-credit/controller-bis-four-key-discovery-result.json",
+        "sha256": "f807372872693476e71ab1e194dbfa8fd263f465a6ee8c613b758281a820dc95",
+        "bytes": 388
+      },
+      "scope": "Limited queries returned wrong debt-security themes; no claim that official gap/DSR data cannot be obtained.",
+      "resolution": {
+        "status": "resolved_via_official_exact_archive_links",
+        "new_exact_series_keys": [
+          "Q:US:P:A:C",
+          "Q:CN:P:A:C",
+          "Q:US:P",
+          "Q:CN:P"
+        ],
+        "report": "docs/experiments/bis-credit-gap-debt-service-history-2026-10-27.md",
+        "source_data_gets": 2,
+        "metadata_gets": 1,
+        "earlier_query_failure_retained_as_history": true
+      }
+    },
+    "sec_13f_filing_zip_catalog": {
+      "as_of": "2026-10-27T05:01:23.841253+00:00",
+      "status": "discovery_only_budget_decision_pending",
+      "discovery": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/sec-13f-history-discovery/discovery.json",
+        "sha256": "58a0fad8470c7539adcebefdc237dc252f51afaca12c1381fa6174ab742f339b",
+        "bytes": 14899
+      },
+      "official_directory_zip_links": 54,
+      "existing_sample_reused": 1,
+      "additional_exact_links": 53,
+      "additional_zip_GETs": 0,
+      "new_archives_acquired": 0,
+      "displayed_new_archive_bytes": 2907970000,
+      "proposed_whole_OUT4_cap_bytes": 5368709120,
+      "current_whole_OUT4_cap_bytes": 2147483648,
+      "user_budget_approved": false,
+      "unit_amendment_evidence": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/sec-13f-history-discovery/controller-unit-and-amendment-evidence.json",
+        "sha256": "6ba6897740ab2653639f30000b4c64e733df50687a527b0cde8d7da4509e179d",
+        "bytes": 2317
+      },
+      "limits": [
+        "Submission archive windows, not holding periods, parent-index membership or original publication timestamps.",
+        "Raw VALUE and amendments need separate unit/identity qualification; no date-only global rescaling.",
+        "SEC collector v4 closure bindings were prepared before new main interruption and need final v8 rebind before execution."
+      ],
+      "latest_preparation": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/sec-13f-history-plan-v5/preparation-receipt-v5.json",
+        "sha256": "e89a432c1b6b9d0100c295d4c8f6e1d1f6519981261668d0e7757cb43cc15992",
+        "bytes": 8715
+      },
+      "latest_plan": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/sec-13f-history-plan-v5/plan-v5.json",
+        "sha256": "b59edd88d429d0ab64f561502e2f590edb0fd724c7566e73ab6fc4eb58cdc299",
+        "bytes": 21997
+      },
+      "latest_independent_review": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/method-review-sec-13f-plan/independent-review-v5.json",
+        "sha256": "695979355365ba388cd6833c7aa625d1d624da1676bcfb01fa464ad1cadf58b1",
+        "bytes": 4749
+      },
+      "execution_authorized": false,
+      "user_budget_expansion_approved": false,
+      "actual_zip_GETs": 0
+    },
+    "sec_13f_securities_list": {
+      "as_of": "2026-10-27T05:01:23.841253+00:00",
+      "status": "directory_labels_only_exact_HTML_403_stopped",
+      "discovery": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/sec-13f-security-list-discovery/discovery.json",
+        "sha256": "7d3664d4757d66d0570bdcbdce15237c69a6c63807732e4860717540dedfb0d8",
+        "bytes": 26859
+      },
+      "directory_quarter_labels": 83,
+      "first": "2006Q1",
+      "last": "2026Q3",
+      "exact_file_urls_verified": 0,
+      "source_files_acquired": 0,
+      "file_GETs": 0,
+      "limits": [
+        "A different resource from institutional filing ZIPs; no all-US or Russell universe qualification.",
+        "Do not guess URLs, retry denied HTML interface or treat quarter labels as downloaded files."
+      ]
+    }
+  },
+  "financial_data_review_history": [
+    {
+      "report": "docs/experiments/us-equity-index-futures-position-history-2026-10-27.md",
+      "report_sha256": "9ff3ea837a023e31b264e56090f9c596b1adad4ebb833c5016511c249d5757a9",
+      "new_source_http_objects": 5,
+      "current_deep_batch_http_objects": 492,
+      "prior_three_batches_inclusive_http_objects": 615,
+      "qualification": "Only these five contract sources are complete and reviewed; full twenty-year universes remain incomplete."
+    },
+    {
+      "report": "docs/experiments/bis-cn-us-credit-history-2026-10-27.md",
+      "report_sha256": "9ac3ae51112bb2ad17538fa5cbbc264a6349a2f00f3aa69f370f5147543984a3",
+      "new_source_http_objects": 2,
+      "current_deep_batch_http_objects": 494,
+      "prior_three_batches_inclusive_http_objects": 617,
+      "qualification": "Two exact BIS series complete and reviewed; full twenty-year research input remains incomplete."
+    },
+    {
+      "report": "docs/experiments/bis-credit-gap-debt-service-history-2026-10-27.md",
+      "report_sha256": "d8fbc321e45d7d1ffc2eebad1c2c49444fcb6bb89e73686fc0e6a1f648084444",
+      "new_source_http_objects": 3,
+      "new_objects_breakdown": {
+        "metadata_page": 1,
+        "zip_archives": 2
+      },
+      "current_deep_batch_http_objects": 497,
+      "prior_three_batches_inclusive_http_objects": 620,
+      "qualification": "BIS six named CN/US series acquired as current snapshots; four gap/DSR series added here. Full research input remains incomplete."
+    }
+  ],
+  "latest_catalog_copy_note": "ETF addendum source package; local/external bytes read back in catalog-final/registration.json. Prior readiness audit retained as historical baseline; latest_etf_data_qualification supplies the new ETF facts and limits.",
+  "readiness_review_history": [
+    {
+      "as_of": "2026-10-26",
+      "status": "partially_ready_by_use_not_complete_twenty_year_equity_universes",
+      "report": "docs/experiments/data-readiness-and-storage-cleanup-2026-10-26.md",
+      "report_sha256": "a96b236d57079d271c9f2c521d23402f114858c15a734355365d47414c307a67",
+      "evidence": "docs/experiments/raw/data-readiness-and-storage-cleanup-2026-10-26/readiness/readiness.json",
+      "evidence_sha256": "aa09199e65579b22752188184a230a6629affb3d00c8c4727ae28eac035e3a68",
+      "acceptance_definition": [
+        {
+          "layer": 1,
+          "name": "presence_and_readability",
+          "gate": "Fixed volume identity, actual file readable, selected raw and consumer files SHA-256 match manifest; dates and fields read back."
+        },
+        {
+          "layer": 2,
+          "name": "cleaning_identity_units",
+          "gate": "Instrument, issuer, share class, parent index and tracking changes mapped; units, adjustment basis, source tier, nontrading/missing rows and anomalous values resolved for selected use."
+        },
+        {
+          "layer": 3,
+          "name": "point_in_time_inputs",
+          "gate": "For historical decisions, effective-date membership and first public availability of financials/forecasts preserved; splits, distributions, exits, delistings and revisions represented without future leakage."
+        },
+        {
+          "layer": 4,
+          "name": "benchmark_and_execution",
+          "gate": "For return or trading claims, matching parent-index total return, genuine ETF lifetime, executable prices/status, costs and account convention fixed."
+        },
+        {
+          "layer": 5,
+          "name": "ongoing_versions",
+          "gate": "For current/continuous claims, refresh receipts, last successful observation, retrieval and source timestamps, immutable vintages, revision diff and stale-data behavior verified."
+        }
+      ],
+      "formal_csi1000_complete_months": 53,
+      "formal_csi2000_complete_months": 3,
+      "us_fund_holding_missing_months": 63,
+      "etf_holdings_are_official_index_members": false,
+      "bulk_files_rehashed": false,
+      "scheduled_collector_deployed": false
+    }
+  ],
+  "latest_quality_review": {
+    "id": "data-readiness-and-quality-review-2026-10-31",
+    "as_of": "2026-10-31",
+    "report": "docs/experiments/data-readiness-and-quality-review-2026-10-31.md",
+    "report_sha256": "0bbb5af76880670c6a44e2ce6c33ab61cfce89077046fcf11d48050690c66e03",
+    "evidence_archive_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/controller/catalog-readiness-review-20261031/audit",
+    "new_source_data_acquired": false,
+    "quality_scope": "fixed 7-original sample, 25 financial read paths, 59-object parent manifest and 2 mutable caches; historical acceptance reused"
+  },
+  "latest_etf_data_qualification": {
+    "id": "etf-return-chain-20261031",
+    "as_of": "2026-10-31",
+    "kind": "new_issuer_sources_and_offline_qualification_addendum",
+    "report": "docs/experiments/etf-return-chain-qualification-2026-10-31.md",
+    "report_sha256": "74ca38bde8752238a60b16386ff31ed84922cb2f0ecd3c5970c549367cb621b8",
+    "data_package": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-return-chain-20261031/etf-return-chain-20261031-20261031T003948-204b5ceb09d0/result/data-package.json",
+      "bytes": 10814,
+      "sha256": "621cef27e1ba7ca869c4a0fc69f8770831fb30fb0c2cedb1cc6d23ef48cd33d5"
+    },
+    "new_source_objects": 23,
+    "new_source_original_bytes": 8172463,
+    "coverage": {
+      "spy_issuer_distributions": 136,
+      "spy_issuer_nav_days": 5768,
+      "additional_spdr_funds": 15,
+      "additional_spdr_distribution_rows": 1641,
+      "cn510300_cash_events": 14,
+      "domestic_etf_quote_field_rows_checked": 20283,
+      "domestic_parent_series_codes_checked": 7
+    },
+    "request_accounting": {
+      "direct_attempts": 24,
+      "success": 23,
+      "failed_stopped": 1,
+      "same_counter_cumulative": 661,
+      "web_search_calls": 14,
+      "web_search_queries": 43,
+      "web_opens": 2
+    },
+    "new_price_data": "five-day 2012 Tencent cross-check only; existing full price histories reused",
+    "conflicts_retained": [
+      "SPY 2021-12-17 issuer 1.636431 vs vendor 1.633 USD",
+      "510300 closes differ on 2014-04-23 and 2016-01-04",
+      "H00300 56 pre-2006-04-03 dates are retrospective, not verified public contemporaneous history"
+    ],
+    "return_series_ready": false,
+    "full_twenty_year_research_data_complete": false,
+    "production_changed": false,
+    "scheduled_refresh_deployed": false
+  },
+  "latest_cross_section_observation": {
+    "id": "market-cross-section-csi300-sector-spdr-20261103",
+    "kind": "new_industry_observation_price_panels_not_pit_universe",
+    "package_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/market-increment-map-20261102/market-increment-map-20261102-20261103T001645-6461aa2fb48e/result/data-package.json",
+    "package_sha256": "c3b2938b8cce925e59d43c16cc021f578fb3fc3687f0128b7f865ab8dc740da0",
+    "report_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/market-increment-map-2026-11-02.md",
+    "date_end_cn": "2026-11-02",
+    "date_end_us": "2026-10-30",
+    "universe_cn": "CSI300 ten industry price indices; not SW31",
+    "universe_us": "11 Sector SPDR ETFs price excluding dividends",
+    "rows_cn": 640,
+    "rows_us": 499,
+    "qualified_for": "descriptive industry co-movement/dispersion only",
+    "not_qualified_for": [
+      "same_day_investor_identity",
+      "trading_or_forecast_increment",
+      "full_A_share_industry_coverage",
+      "historic_vintage_constituents"
+    ],
+    "refresh_deployed": false,
+    "original_sources_unchanged": true
+  }
+}

@@ -169,7 +169,7 @@ def nag_open_items(
 
 
 def handle_supersede(
-    conn: sqlite3.Connection, entered_plan: TradePlan
+    conn: sqlite3.Connection, entered_plan: TradePlan, *, commit: bool = True
 ) -> list[str]:
     """决策 5：同标的同方向只允许一条 entered。新 entered 顶替既有的 armed/entered。"""
     superseded: list[str] = []
@@ -180,20 +180,22 @@ def handle_supersede(
             continue
         if other.state not in ("armed", "entered"):
             continue
-        mark_superseded(conn, other.plan_id, by_plan_id=entered_plan.plan_id)
+        mark_superseded(conn, other.plan_id, by_plan_id=entered_plan.plan_id, commit=False)
         add_annotation(
             conn, other.plan_id, ref_kind="revision", ref_id=None,
             kind="review_conclusion",
             reason_cn=f"被同向计划 {entered_plan.plan_id} 顶替（决策5）",
-            author="system",
+            author="system", commit=False,
         )
         for item in list_action_items(conn, other.plan_id):
             if item.state == "open":
                 update_action_item(
                     conn, item.action_id, state="expired",
-                    close_kind=CLOSE_KIND_SUPERSEDED,
+                    close_kind=CLOSE_KIND_SUPERSEDED, commit=False,
                 )
         superseded.append(other.plan_id)
+    if commit:
+        conn.commit()
     return superseded
 
 

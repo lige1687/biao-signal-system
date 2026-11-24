@@ -1,0 +1,14 @@
+{
+  "mission": "Check whether existing local sector observations provide separately qualified semiconductor-equipment and semiconductor-materials turnover histories",
+  "task_scope": ["Inspect already stored local sources and current turnover packet", "Identify actual data coverage, source, and aliases for requested sectors only"],
+  "read_only_paths": ["web/public/research", "docs/ops/microstructure-observations-20261108", "src/lei_signal/market_context", "existing corresponding external-drive raw evidence"],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": ["Exact existing IDs and sources or precise data gap", "Report whether sector ETF proxies are distinct from industry turnover"],
+  "stop_conditions": ["No local exact source", "Network needed", "No write authority"],
+  "executor": {"model": "gpt-6.1-sol", "reasoning_effort": "medium"},
+  "controller_review": {"required": true}
+}

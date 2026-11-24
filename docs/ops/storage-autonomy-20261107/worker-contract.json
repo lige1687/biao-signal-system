@@ -1,0 +1,38 @@
+{
+  "mission": "Replace fixed 5GiB research launch refusal with advisory cleanup target and a real-byte sufficiency check; no repeated user exception approval.",
+  "task_scope": [
+    "User explicitly authorized storage policy modification 2026-11-07. Keep device, path, overwrite and external capacity protections. 5GiB is cleanup advisory; if actual planned internal records fit, return plan plus low-space advisory, not refusal. If even actual planned internal bytes do not fit, return actionable storage recovery, no destructive auto-deletion in plan_only. Keep exact saved paths and budget bindings; refresh current advisories during saved-plan recheck. Do not rewrite frozen historical consumers."
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/storage-policy.v1.json",
+    "docs/ops/research-output-storage.md"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/output_storage.py",
+    "tests/unit/test_research_output_storage.py",
+    "tests/integration/test_research_output_routing_cli.py",
+    "configs/research-output-policy.v1.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "compatible new output_storage behavior and policy fields",
+    "meaningful synthetic regression checks including old saved routes and low-space actual capacity",
+    "readable callback with exact changes/tests/limits"
+  ],
+  "stop_conditions": [
+    "no filesystem cleanup, production strategy, financial simulation or network",
+    "no edits outside four owned paths",
+    "return after tests and diff review"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

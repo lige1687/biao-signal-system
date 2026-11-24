@@ -1,0 +1,28 @@
+{
+  "observed_at": "2026-09-22T09:30:53.953544+00:00",
+  "reviewed_at": "2026-09-22T09:31:12Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-09-22T093053.953544_0000-4fdc801d.json",
+  "changed_sources": ["source-01", "source-02"],
+  "facts": {
+    "a_share_content_hash_unchanged": true,
+    "a_share_rows": 4067021,
+    "a_share_latest_date": "2026-09-21",
+    "current_code_date": "2026-09-22",
+    "current_code_count": 4949,
+    "previous_code_count": 5565,
+    "code_count_change": -616,
+    "current_code_prefix_counts": {"sh": 1702, "sz": 2902, "bj": 345}
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "逐股行情内容没有更新，当前代码列表却减少616只；没有同日价格和统一分母，不能生成冻结宽度。",
+    "historical_membership": "名单数量突降约11%，原因尚未由版本、生效时间或来源说明支持，先记录为输入异常，不解释为真实退市或策略变化。",
+    "etf_nominal_prices_and_actions": "ETF价格和公司行动监测来源均未变化，原资格缺口仍在。",
+    "availability": "本次实际读取时间已保存；9月22日名单不能倒填为当天完整可用行情。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "记录名单数量异常；冻结输入仍不齐备，不生成信号，也不自动修正或重跑历史。后续观察该异常是否自行恢复或取得来源说明。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

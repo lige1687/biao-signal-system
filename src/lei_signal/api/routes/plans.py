@@ -11,6 +11,8 @@ from contextlib import closing
 from datetime import UTC, datetime
 
 from fastapi import APIRouter, HTTPException, Request
+from pydantic import BaseModel
+from lei_signal.plans import evidence
 
 from lei_signal.api.config import sqlite_path as default_db
 from lei_signal.api.schemas import (
@@ -94,6 +96,8 @@ def _to_action_dto(i) -> ActionItemDTO:  # noqa: ANN001
         source_alert_code=i.source_alert_code, state=i.state, due_from=i.due_from,
         nag_count=i.nag_count, last_nagged_bar_date=i.last_nagged_bar_date,
         resume_on=i.resume_on, closed_on=i.closed_on, close_kind=i.close_kind,
+        actual_action_date=i.actual_action_date, done_recorded_at=i.done_recorded_at,
+        done_source=i.done_source,
     )
 
 
@@ -440,6 +444,8 @@ def confirm(request: Request, plan_id: str) -> PlanDTO:
                 },
             )
 
+    reviewed_fingerprint = evidence.plan_fingerprint(plan)
+
     # 分析依赖：缺席/无结果/异常一律 503，不允许跳过符合性检查继续确认
     service = getattr(request.app.state, "analysis_service", None)
     if service is None:
@@ -500,10 +506,12 @@ def confirm(request: Request, plan_id: str) -> PlanDTO:
             if plan.plan_kind == PLAN_KIND_HOLDING_WATCH:
                 entered_on = datetime.now(UTC).date().isoformat()
                 confirmed = confirm_holding_watch(
-                    conn, plan_id, entered_on=entered_on
+                    conn, plan_id, entered_on=entered_on, expected_fingerprint=reviewed_fingerprint
                 )
             else:
-                confirmed = confirm_plan(conn, plan_id)
+                confirmed = confirm_plan(conn, plan_id, expected_fingerprint=reviewed_fingerprint)
+        except evidence.PlanFingerprintConflict as exc:
+            raise HTTPException(status_code=409, detail={"code": "DRAFT_CHANGED", "message": str(exc)}) from exc
         except KeyError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValueError as exc:
@@ -666,22 +674,31 @@ def defer_action(
         return _to_action_dto(item)
 
 
+class ActionDoneRequest(BaseModel):
+    actual_action_date: str | None = None
+
+
 @router.post("/plans/{plan_id}/actions/{action_id}/done", response_model=ActionItemDTO)
-def done_action(request: Request, plan_id: str, action_id: str) -> ActionItemDTO:
+def done_action(request: Request, plan_id: str, action_id: str, body: ActionDoneRequest | None = None) -> ActionItemDTO:
     with closing(connect(_db_path(request))) as conn:
-        item = update_action_item(
-            conn, action_id, state="done", closed_on=None, close_kind="done",
-        )
-        if item is None:
-            raise HTTPException(status_code=404, detail=f"待办不存在: {action_id}")
-        # ENTER done -> plan entered；EXIT done -> plan exited
-        # 入场/退出日取该待办 due_from（系统判定的可执行日），两侧同源；缺 due_from
-        # 时退回当日（仅日期，无数量金额）。
-        plan = get_plan(conn, plan_id)
-        executed_on = item.due_from or datetime.now(UTC).date().isoformat()
-        if plan is not None and item.kind == "ENTER" and plan.state == "armed":
-            set_entered(conn, plan_id, entered_on=executed_on)
-            handle_supersede(conn, get_plan(conn, plan_id))  # type: ignore[arg-type]
-        elif plan is not None and item.kind == "EXIT" and plan.state == "entered":
-            set_exited(conn, plan_id, exited_on=executed_on)
+        try:
+            item = evidence.complete_action(conn, plan_id, action_id,
+                actual_action_date=body.actual_action_date if body else None, source="web")
+        except KeyError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        except evidence.EvidenceConflict as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
         return _to_action_dto(item)
+
+
+@router.get("/plans/{plan_id}/versions")
+def plan_versions(request: Request, plan_id: str) -> dict:
+    with closing(connect(_db_path(request))) as conn:
+        if get_plan(conn, plan_id) is None:
+            raise HTTPException(status_code=404, detail="计划不存在")
+        versions = evidence.list_plan_versions(conn, plan_id)
+        return {"plan_id": plan_id, "versions": [
+            {k: v for k, v in version.items() if k != "payload"} for version in versions
+        ], "note_cn": "仅列实际记录的完整版本；旧记录不倒填，成交录入时关联不证明实际按它交易。"}

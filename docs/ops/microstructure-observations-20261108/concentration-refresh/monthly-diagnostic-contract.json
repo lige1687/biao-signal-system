@@ -1,0 +1,44 @@
+{
+  "mission": "独立定位旧月频45个缺月的准确缺股日期及异常源行，为最低补采清单提供依据",
+  "task_scope": [
+    "本地只读复用monthly.json、compute-v2和实际逐股raw，精确定位4906上市期缺行及异常",
+    "区分真缺请求区间、源内缺日、退出日inclusive问题与异常值",
+    "保存最小每股起止日期请求清单、所影响月份，不采新源不重算收益或公开包"
+  ],
+  "path_base": "/",
+  "execution_cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/implementation-v2/concentration",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/market_context/microstructure_equity.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/monthly-range-diagnosis-v2.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/monthly_diagnosis.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/monthly-gap-detail.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/microstructure-observations-20261108/concentration-refresh/monthly-diagnosis.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "逐股缺日期与异常行",
+    "可复用现有原件及失效范围",
+    "最少补采清单及粗字节估计",
+    "12587原件的完整扫描核验状态/已核数量"
+  ],
+  "stop_conditions": [
+    "要联网或改源",
+    "SHA冲突",
+    "输出本机超过1MiB",
+    "需要改旧冻结算法/产物"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

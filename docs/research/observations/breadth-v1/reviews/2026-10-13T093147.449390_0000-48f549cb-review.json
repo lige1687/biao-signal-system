@@ -1,0 +1,46 @@
+{
+  "observed_at": "2026-10-13T09:31:47.449390+00:00",
+  "reviewed_at": "2026-10-13T09:32:26Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-10-13T093147.449390_0000-48f549cb.json",
+  "coordination_check": {
+    "checked_coordination_sha": "4dee87ce55f15a2ff175f05d4af1e385dbf06519",
+    "checked_at": "2026-10-13T17:31:35+08:00",
+    "read_task_ids": [
+      "research-dispatch-controller"
+    ],
+    "conflict_decision": "本轮仅执行既有冻结宽度输入观察并写入按时间唯一命名的追加记录；未修改协调任务或共享研究结果。"
+  },
+  "changed_sources": [
+    "source-01",
+    "source-02",
+    "source-03",
+    "source-08"
+  ],
+  "facts": {
+    "a_share_rows": 4070219,
+    "a_share_latest_date": "2026-10-13",
+    "members_at_latest_market_date": 3,
+    "members_still_at_2026_10_12": 5211,
+    "symbols_in_a_share_raw": 5224,
+    "current_code_date": "2026-10-13",
+    "current_code_count": 4955,
+    "current_code_count_change": -618,
+    "daily_snapshot_date": "2026-10-13",
+    "daily_snapshot_total": 4955,
+    "daily_snapshot_eligible": 5216,
+    "etf_510300_nominal_latest_date": "2026-10-13",
+    "etf_159915_nominal_latest_date": "2022-06-17"
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "快照标为10月13日，但逐股原料只有3只更新到当天，5211只仍停在10月12日；快照eligible为5216，甚至大于当前名单总数4955，不能构成同日共同200日分母或有效覆盖率。",
+    "historical_membership": "当前名单从5573骤降至4955，减少618只；这可能是抓取范围或输入异常，且仍无逐日历史成员版本、生效时刻与取得时间链，不能直接解释为真实成分变化。",
+    "etf_nominal_prices_and_actions": "510300名义价格已更新到10月13日；159915仍只到2022年6月17日，持续公司行动、停牌和限价链仍缺。",
+    "availability": "10月13日快照与逐股行情明显不同步，且名单总数与eligible自相矛盾，属于输入观察失败。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "10月13日输入存在同步和名单异常；继续仅输入观察，不生成信号，并通知用户具体证据。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

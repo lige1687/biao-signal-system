@@ -21,12 +21,22 @@ export async function resolveRoute(opts: {
     selected_symbol: opts.symbol,
   });
   let action: RouteAction = "chat";
+
   if (
     resolve.intent === "trade_report" ||
     resolve.intent === "discovery" ||
     resolve.intent === "existing_action"
   ) {
     action = "dispatch"; // 已有流水线：报单预览/机会卡/持仓复盘卡
+  } else if (
+    resolve.intent === "discussion" &&
+    ["dca", "sentiment", "mindset"].includes(resolve.topic)
+  ) {
+    // discussion 统一由 resolve 层识别叙事主题。
+    // resolve 话题词表覆盖范围大于 dispatch 出卡词表，
+    // 因此前端只放行已上线的三类 topic；若后端 dispatch 未命中，
+    // 仍会按 chat_fallback 优雅回落，不改变安全边界。
+    action = "dispatch";
   } else if (resolve.intent === "backtest_request") {
     action = "backtest";
   }

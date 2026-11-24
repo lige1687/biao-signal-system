@@ -26,7 +26,9 @@ import type { BoardProfile, BoardChartSeries, SentimentDashboard, SentimentLight
   DraftUpdatePayload,
   EventItem,
   ForwardStatsResponse,
+  FwdLedgerResponse,
   FundamentalsOverview,
+  MarketObservationsResponse,
   GlobalStripResponse,
   CommodityRatios,
   EtfItem,
@@ -326,10 +328,10 @@ export const api = {
       `/plans/${encodeURIComponent(planId)}/actions${qs}`,
     );
   },
-  doneAction: (planId: string, actionId: string) =>
+  doneAction: (planId: string, actionId: string, body?: { actual_action_date: string | null }) =>
     request<ActionItem>(
       `/plans/${encodeURIComponent(planId)}/actions/${encodeURIComponent(actionId)}/done`,
-      { method: "POST" },
+      { method: "POST", ...(body ? { body: JSON.stringify(body) } : {}) },
     ),
   deferAction: (
     planId: string,
@@ -471,6 +473,19 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ message }),
     }),
+  copilotTradePlans: (fundCode: string) =>
+    request<{
+      fund_code: string;
+      plans: Array<{
+        plan_id: string;
+        symbol: string;
+        state: "armed" | "entered" | "exited";
+        reason: string;
+        created_at: string;
+        updated_at: string;
+      }>;
+      note_cn: string;
+    }>(`/copilot/trades/plans?fund_code=${encodeURIComponent(fundCode)}`),
   copilotTradesCreate: (t: {
     fund_code: string;
     fund_name: string;
@@ -478,6 +493,7 @@ export const api = {
     amount: number;
     trade_date: string;
     note?: string;
+    plan_id?: string;
     // 确认身份：每次独立确认生成一个稳定UUID，失败重试沿用同一ID；
     // 服务端据此保证同一次确认只记一笔（新UI必须携带）。
     request_id: string;
@@ -498,6 +514,8 @@ export const api = {
 
 // ---- 基本面参考层 ----
 export const fundamentalsApi = {
+  observations: (market: "cn" | "us") =>
+    request<MarketObservationsResponse>(`/fundamentals/observations?market=${market}`),
   overview: (refresh = false) =>
     request<FundamentalsOverview>(`/fundamentals/overview${refresh ? "?refresh=true" : ""}`),
   industryFlow: (code: string, days = 20) =>
@@ -510,6 +528,8 @@ export const fundamentalsApi = {
     request<RatesHistoryResponse>(
       `/fundamentals/rates-history?lookback_days=${lookbackDays}`,
     ),
+  valuationHistory: () =>
+    request<RatesHistoryResponse>("/fundamentals/rates-history?lookback_days=7300&valuation_only=true"),
   macroHistory: (pageSize = 60) =>
     request<MacroHistoryResponse>(
       `/fundamentals/macro-history?page_size=${pageSize}`,
@@ -801,6 +821,11 @@ export const mindsetApi = {
     }),
   remove: (id: string) => request<void>(`/mindset/items/${id}`, { method: "DELETE" }),
   reviewNext: () => request<MindsetItem | null>("/mindset/review/next"),
+};
+
+// ---- 前向验证成绩单（只读）----
+export const fwdLedgerApi = {
+  scorecard: () => request<FwdLedgerResponse>("/fwd-ledger/scorecard"),
 };
 
 export const strategyDocumentsApi = {

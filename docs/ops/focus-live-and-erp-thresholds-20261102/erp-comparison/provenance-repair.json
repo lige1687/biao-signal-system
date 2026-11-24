@@ -1,0 +1,36 @@
+{
+  "recordedAt": "2026-11-02T12:25:53.048996+00:00",
+  "issue": "Controller resumed after provider capacity failure and overwrote helper run.py and method.json without preserving initial files. Aggregate results.json remained unchanged. Earlier coordination text saying no artifacts was wrong.",
+  "repair": "Recover script and method source from exact tool invocation records; preserve noncanonical helper result. No experiments rerun.",
+  "sourceSession": "rollout-2026-11-02T19-48-03-01a19c16-82ac-7ef1-a867-d9badfc1fab8.jsonl",
+  "sourceLines": {
+    "methodCommand": 81,
+    "initialRun": 90,
+    "patches": [
+      95,
+      109
+    ],
+    "runs": [
+      90,
+      102,
+      114
+    ]
+  },
+  "methodRecovery": "Semantic reconstruction only; original runtime timestamp not recovered. Method-write command is preserved exactly, never executed.",
+  "canonical": "sigma-1.0/results.json, sigma-1.5/results.json, sigma-2.0/results.json, increment-results.json; these alone feed display.json",
+  "attemptAccounting": {
+    "helperCoreAttempt": 1,
+    "helperRepairRuns": 2,
+    "controllerReconciliationBatch": 1,
+    "controllerIncrementFollowup": 1,
+    "helperMaxRepairRuns": 2,
+    "overrun": "Controller reconciliation was an extra core rerun beyond helper contract repair ceiling. This was a process error, recorded rather than resetting budget. No more experiments in this stage."
+  },
+  "hashes": {
+    "failed-agent-original/method-write-command.txt": "5fdeac26704c99a0d926bf35647a64868bd902856712b3ec83784cafab260b4e",
+    "failed-agent-original/method-reconstructed.json": "86afba4d8ad30cb9355a8c7b175c6c12b7d1b73bbf219dc928e2ffcbb5e6bd73",
+    "failed-agent-original/results.json": "aa7913b7f08fba15c5c883b63ca516659e57b8dc6adb8187f4caab522bb382a8",
+    "failed-agent-original/run-after-two-repairs.py": "c35b062161db483429e9c76dda6d98ac0e02da7e309973f37248abcd7da1d3f7",
+    "failed-agent-original/run-initial.py": "d567ffd2bbba1f7b8191ec3630954e887490c5394b9c3d387a99bc19c47c3d55"
+  }
+}

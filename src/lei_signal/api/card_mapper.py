@@ -4,10 +4,10 @@
 """
 from __future__ import annotations
 
-from datetime import UTC, date, datetime, tzinfo
-from zoneinfo import ZoneInfo
+from datetime import date, datetime
 
 from lei_signal.api import labels
+from lei_signal.api.bar_status import assess_bar_status
 from lei_signal.api.config import KEY_CHANGE_LOOKBACK_DAYS, SPARKLINE_BARS
 from lei_signal.api.explanations import Explanation, lookup
 from lei_signal.api.schemas import (
@@ -20,6 +20,7 @@ from lei_signal.api.schemas import (
 from lei_signal.compose.pipeline import AnalysisResult
 from lei_signal.domain.types import (
     COLOR_CN,
+    LONG_TREND_CN,
     STAGE_CN,
     Severity,
     SignalEvent,
@@ -166,18 +167,20 @@ def event_dto(event: SignalEvent, *, as_of: date | None = None) -> EventDTO:
     )
 
 
-def is_intraday_forming(result: AnalysisResult, *, now: datetime | None = None) -> bool:
-    """最后一根 bar 是否为交易所当日（盘中形成中）。"""
-    last_date = result.price_data.report.last_date
-    if last_date is None:
-        return False
-    tz_name = result.price_data.info.timezone
-    try:
-        tz: tzinfo = ZoneInfo(tz_name)
-    except Exception:  # 时区名异常时按 UTC 处理，不阻断卡片
-        tz = UTC
-    today = (now or datetime.now(UTC)).astimezone(tz).date()
-    return last_date.date() == today
+def is_intraday_forming(
+    result: AnalysisResult,
+    *,
+    fetched_at: datetime | None = None,
+    now: datetime | None = None,
+) -> bool:
+    """兼容布尔字段；来源状态不明时按未确认收盘处理。"""
+    status = assess_bar_status(
+        last_date=result.price_data.report.last_date,
+        fetched_at=fetched_at,
+        timezone=result.price_data.info.timezone,
+        cache_fallback_used=bool(getattr(result, "cache_fallback_used", False)),
+    )
+    return status.status != "closed"
 
 
 def build_card(
@@ -213,7 +216,7 @@ def build_card(
         card.change_pct = (close / prev_close - 1) * 100
     report = result.price_data.report
     card.last_bar_date = report.last_date.strftime("%Y-%m-%d") if report.last_date else None
-    card.is_intraday_forming = is_intraday_forming(result)
+    card.is_intraday_forming = is_intraday_forming(result, fetched_at=data_time)
     card.provider = report.provider
     card.stale = result.cache_fallback_used
 
@@ -237,10 +240,76 @@ def build_card(
 
     card.b1_price = assessment.b1_price
     card.distance_to_b1_pct = assessment.distance_to_b1_pct
+    if len(frame):
+        try:
+            from lei_signal.rules.tradability_gate import evaluate_tradability
+
+            tr = evaluate_tradability(frame, len(frame) - 1)
+            card.tradable = bool(tr.tradable)
+            card.trend_type_cn = tr.trend_type_cn
+        except Exception:  # noqa: BLE001
+            pass
+
+    if len(frame) and "long_trend" in frame.columns:
+        raw_daily = frame["long_trend"].iloc[-1]
+        if raw_daily is not None and raw_daily == raw_daily:
+            card.daily_long_trend_cn = LONG_TREND_CN.get(str(raw_daily), str(raw_daily))
+
+    weekly_df = getattr(result, "weekly_trend", None)
+    if (
+        weekly_df is not None
+        and not weekly_df.empty
+        and "long_trend" in weekly_df.columns
+        and len(frame)
+    ):
+        visible_weekly = weekly_df.loc[weekly_df.index <= frame.index[-1], "long_trend"]
+        if not visible_weekly.empty:
+            w_state = str(visible_weekly.iloc[-1])
+            card.weekly_long_trend_cn = LONG_TREND_CN.get(w_state, w_state)
+
+    def _dist_pct(col_name: str) -> float | None:
+        if close is None or not close or not len(frame) or col_name not in frame.columns:
+            return None
+        raw_val = frame[col_name].iloc[-1]
+        try:
+            lvl = float(raw_val)
+        except (TypeError, ValueError):
+            return None
+        if lvl != lvl or not lvl:
+            return None
+        return round((close / lvl - 1) * 100, 2)
+
+    card.dist_ema20_pct = _dist_pct("ema20")
+    card.dist_ema60_pct = _dist_pct("ema60")
+    card.ret_20d_pct = _dist_pct("close_lag20")
+
+    if len(frame) > 252 and "close" in frame.columns:
+        try:
+            c_skip = float(frame["close"].iloc[-1 - 21])
+            c_long = float(frame["close"].iloc[-1 - 252])
+            if c_skip == c_skip and c_long == c_long and c_long > 0:
+                card.mom_121_pct = round((c_skip / c_long - 1) * 100, 2)
+        except (TypeError, ValueError, IndexError):
+            pass
 
     tail = frame.tail(SPARKLINE_BARS)
-    card.sparkline = [
-        SparkPoint(date=idx.strftime("%Y-%m-%d"), close=round(float(row["close"]), 4))
-        for idx, row in tail.iterrows()
-    ]
+    has_ema20 = "ema20" in tail.columns
+    spark_points: list[SparkPoint] = []
+    for idx, row in tail.iterrows():
+        ema_val: float | None = None
+        if has_ema20:
+            try:
+                raw_ema = float(row["ema20"])
+                if raw_ema == raw_ema:
+                    ema_val = round(raw_ema, 4)
+            except (TypeError, ValueError):
+                ema_val = None
+        spark_points.append(
+            SparkPoint(
+                date=idx.strftime("%Y-%m-%d"),
+                close=round(float(row["close"]), 4),
+                ema20=ema_val,
+            )
+        )
+    card.sparkline = spark_points
     return card

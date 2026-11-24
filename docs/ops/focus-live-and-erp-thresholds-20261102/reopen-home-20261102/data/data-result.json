@@ -1,0 +1,183 @@
+{
+  "status": "qualified_raw_available",
+  "stopReason": "queries_finished",
+  "asOfRequested": "2026-11-02",
+  "lastQualifiedContinuationDate": "2026-10-23",
+  "missingSessionsBeforeFetch": [
+    "2026-10-26",
+    "2026-10-27",
+    "2026-10-28",
+    "2026-10-29",
+    "2026-10-30",
+    "2026-11-02"
+  ],
+  "manifestSha256": "5f3bd55994025442b5d7af416a8bd316f347b73ad61dcf134ac6040c9597cca6",
+  "adjustment": "BaoStock adjustflag=3 is unadjusted; factor events are separate",
+  "amount": "BaoStock daily amount field, reported CNY yuan; source string retained",
+  "storageUuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+  "externalRawDirectory": "/Volumes/win+mac通用/LeiSignal-新实验结果/focus-recent-20261102/focus-recent-20261102-20261102T221933-461019228cc1/result/raw",
+  "queryRequests": 600,
+  "loginAttemptsThisRun": 1,
+  "coverage": {
+    "dailyQuerySuccessCodes": 300,
+    "factorQuerySuccessCodes": 300,
+    "dailyQueryFailedCodes": [],
+    "factorQueryFailedCodes": [],
+    "factorEventRows": 1,
+    "byDate": {
+      "2026-10-26": {
+        "quotedCodes": 280,
+        "validAmountCodes": 279,
+        "zeroAmountCodes": 0,
+        "nonTradingCodes": 1,
+        "noQuoteRowAmongSuccessfulDailyCodes": 20
+      },
+      "2026-10-27": {
+        "quotedCodes": 280,
+        "validAmountCodes": 279,
+        "zeroAmountCodes": 0,
+        "nonTradingCodes": 1,
+        "noQuoteRowAmongSuccessfulDailyCodes": 20
+      },
+      "2026-10-28": {
+        "quotedCodes": 280,
+        "validAmountCodes": 279,
+        "zeroAmountCodes": 0,
+        "nonTradingCodes": 1,
+        "noQuoteRowAmongSuccessfulDailyCodes": 20
+      },
+      "2026-10-29": {
+        "quotedCodes": 280,
+        "validAmountCodes": 279,
+        "zeroAmountCodes": 0,
+        "nonTradingCodes": 1,
+        "noQuoteRowAmongSuccessfulDailyCodes": 20
+      },
+      "2026-10-30": {
+        "quotedCodes": 280,
+        "validAmountCodes": 279,
+        "zeroAmountCodes": 0,
+        "nonTradingCodes": 1,
+        "noQuoteRowAmongSuccessfulDailyCodes": 20
+      },
+      "2026-11-02": {
+        "quotedCodes": 280,
+        "validAmountCodes": 279,
+        "zeroAmountCodes": 0,
+        "nonTradingCodes": 1,
+        "noQuoteRowAmongSuccessfulDailyCodes": 20
+      }
+    }
+  },
+  "unresolvedSessions": [],
+  "sourceArrivalAndRevisionTime": "unknown; acquisition timestamps in ledger",
+  "integration": "not done; controller must independently read back and run original fixed-300 continuation",
+  "acquisitionLedger": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/focus-recent-20261102/focus-recent-20261102-20261102T221933-461019228cc1/result/acquisition-ledger.json",
+    "sha256": "3d1ba0686e00c03ffeaea513c9dcb2fa0a66b4da1f2e3681864fbd9ceddba338"
+  },
+  "dailyFields": [
+    "date",
+    "code",
+    "open",
+    "high",
+    "low",
+    "close",
+    "preclose",
+    "volume",
+    "amount",
+    "adjustflag",
+    "tradestatus",
+    "pctChg",
+    "isST"
+  ],
+  "factorFields": [
+    "code",
+    "dividOperateDate",
+    "foreAdjustFactor",
+    "backAdjustFactor",
+    "adjustFactor"
+  ],
+  "dailyRange": [
+    "2026-10-26",
+    "2026-11-02"
+  ],
+  "factorRange": [
+    "2026-10-24",
+    "2026-11-02"
+  ],
+  "rawCompressedBytes": 185387,
+  "readback": {
+    "ledgerSha256Verified": true,
+    "rawSha256Verified": 600,
+    "payloadSha256Verified": 600,
+    "responseSchemasVerified": 600,
+    "responseRowsVerified": 600,
+    "quoteDatesWith280Rows": [
+      "2026-10-26",
+      "2026-10-27",
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
+      "2026-11-02"
+    ],
+    "v8IndexPath": "/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result/cn-all-equity/all-equity-read-index-v8.jsonl",
+    "v8IndexSha256": "165a695612cfb4022b899d9c20ea5c85e1736994533974551685f58c3a7dd153",
+    "v8IndexMetaSha256": "34f918863dd4f665a84e254d1e7879b7e5fbfff902a1a4c09692503259e22e7e",
+    "noQuoteCodes": [
+      "sh.600090",
+      "sh.600213",
+      "sh.600277",
+      "sh.600647",
+      "sh.600677",
+      "sh.600701",
+      "sh.603555",
+      "sz.000587",
+      "sz.000627",
+      "sz.000638",
+      "sz.000976",
+      "sz.002089",
+      "sz.002473",
+      "sz.002499",
+      "sz.002665",
+      "sz.300023",
+      "sz.300064",
+      "sz.300108",
+      "sz.300312",
+      "sz.300367"
+    ],
+    "noQuoteSupplierOut": {
+      "sh.600090": "2022-07-07",
+      "sh.600213": "2024-10-17",
+      "sh.600277": "2024-07-18",
+      "sh.600647": "2024-07-03",
+      "sh.600677": "2021-03-18",
+      "sh.600701": "2021-04-30",
+      "sh.603555": "2024-03-29",
+      "sz.000587": "2023-04-03",
+      "sz.000627": "2025-09-30",
+      "sz.000638": "2026-06-03",
+      "sz.000976": "2024-08-27",
+      "sz.002089": "2024-04-18",
+      "sz.002473": "2022-06-22",
+      "sz.002499": "2023-04-18",
+      "sz.002665": "2024-08-26",
+      "sz.300023": "2022-06-29",
+      "sz.300064": "2022-06-27",
+      "sz.300108": "2025-05-29",
+      "sz.300312": "2022-07-04",
+      "sz.300367": "2022-06-30"
+    },
+    "allNoQuoteOutBeforeGap": true,
+    "nonTradingCodes": [
+      "sz.002717"
+    ],
+    "factorEvents": [
+      {
+        "code": "sh.601088",
+        "date": "2026-10-26",
+        "foreAdjustFactor": "1.000000"
+      }
+    ]
+  }
+}

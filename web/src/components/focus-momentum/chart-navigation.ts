@@ -1,0 +1,82 @@
+export interface ChartWindow { start: number; end: number }
+
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+export function normalizeWindow(window: ChartWindow): ChartWindow {
+  const start = clamp(Number.isFinite(window.start) ? window.start : 0, 0, 100);
+  const end = clamp(Number.isFinite(window.end) ? window.end : 100, 0, 100);
+  return { start: Math.min(start, end), end: Math.max(start, end) };
+}
+
+export function zoomWindow(window: ChartWindow, factor: number): ChartWindow {
+  const current = normalizeWindow(window);
+  const width = clamp((current.end - current.start) * factor, 0.5, 100);
+  const center = (current.start + current.end) / 2;
+  const start = clamp(center - width / 2, 0, 100 - width);
+  return { start, end: start + width };
+}
+
+export function panWindow(window: ChartWindow, fraction: number): ChartWindow {
+  const current = normalizeWindow(window);
+  const width = current.end - current.start;
+  const start = clamp(current.start + width * fraction, 0, 100 - width);
+  return { start, end: start + width };
+}
+
+export function visibleDateRange(dates: string[], window: ChartWindow): { start: string | null; end: string | null; count: number } {
+  if (!dates.length) return { start: null, end: null, count: 0 };
+  const current = normalizeWindow(window);
+  // ECharts category axes round dataZoom bounds to the nearest category.
+  const first = clamp(Math.round((dates.length - 1) * current.start / 100), 0, dates.length - 1);
+  const last = clamp(Math.round((dates.length - 1) * current.end / 100), first, dates.length - 1);
+  return { start: dates[first], end: dates[last], count: last - first + 1 };
+}
+
+/** Calendar-month shortcuts stay within the selected overview's available history. */
+export function recentMonthWindow(dates: string[], months: number): ChartWindow {
+  if (dates.length < 2) return { start: 0, end: 100 };
+  const end = new Date(`${dates[dates.length - 1]}T00:00:00Z`);
+  if (!Number.isFinite(end.getTime())) return { start: 0, end: 100 };
+  const day = end.getUTCDate();
+  end.setUTCDate(1);
+  end.setUTCMonth(end.getUTCMonth() - months);
+  const monthEnd = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth() + 1, 0)).getUTCDate();
+  end.setUTCDate(Math.min(day, monthEnd));
+  const cutoff = end.toISOString().slice(0, 10);
+  const first = dates.findIndex(date => date >= cutoff);
+  return { start: Math.max(0, first) / (dates.length - 1) * 100, end: 100 };
+}
+
+/** Scale each panel from the visible dates only; momentum retains the zero anchor. */
+export function visibleYBounds(values: (number | null)[], window: ChartWindow, includeZero = false): { min: number | undefined; max: number | undefined } {
+  const current = normalizeWindow(window);
+  const first = Math.round((values.length - 1) * current.start / 100);
+  const last = Math.round((values.length - 1) * current.end / 100);
+  const valid = values.slice(first, last + 1).filter((value): value is number => typeof value === "number" && Number.isFinite(value));
+  if (!valid.length) return { min: undefined, max: undefined };
+  const low = includeZero ? Math.min(0, ...valid) : Math.min(...valid);
+  const high = includeZero ? Math.max(0, ...valid) : Math.max(...valid);
+  const padding = (high - low || Math.abs(low) * 0.02 || 1) * 0.08;
+  return { min: low - padding, max: high + padding };
+}
+
+/** Keep a chosen date on screen; optionally inspect its surrounding trading days. */
+export function windowAroundDate(dates: string[], date: string, window: ChartWindow, nearby = false): ChartWindow {
+  const current = normalizeWindow(window);
+  const index = dates.indexOf(date);
+  if (index < 0 || dates.length < 2) return current;
+  const visible = visibleDateRange(dates, current);
+  if (!nearby && visible.start && visible.end && date >= visible.start && date <= visible.end) return current;
+  const width = nearby ? Math.min(100, 60 / (dates.length - 1) * 100) : Math.max(0.5, current.end - current.start);
+  const center = index / (dates.length - 1) * 100;
+  const start = clamp(center - width / 2, 0, 100 - width);
+  return { start, end: start + width };
+}
+
+export function adjacentEventIndices(dates: string[], selectedDate: string | undefined, start: string | null, end: string | null): { previous: number; next: number } {
+  const selected = selectedDate ? dates.indexOf(selectedDate) : -1;
+  if (selected >= 0) return { previous: selected - 1, next: selected + 1 < dates.length ? selected + 1 : -1 };
+  let previous = -1;
+  for (let i = 0; i < dates.length; i++) if (start && dates[i] < start) previous = i;
+  return { previous, next: end ? dates.findIndex(date => date > end) : -1 };
+}

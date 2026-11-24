@@ -176,15 +176,18 @@ def prepare_frame(frame: pd.DataFrame) -> dict:
     costbasis_cond = (frame["close"] < frame["ema20"]) & (
         frame["close"] < frame["close_lag20"]
     )
-    top_dates = sorted(
-        s.confirmed_date
+    top_structures = sorted(
+        (
+            s.confirmed_date,
+            s.invalidated_date,
+        )
         for s in detect_strict_structures(frame)
         if s.side == SIDE_TOP
     )
     return {
         "atr20": atr20,
         "costbasis_cond": costbasis_cond,
-        "top_dates": top_dates,
+        "top_structures": top_structures,
         "clock": clock_series(frame),
     }
 
@@ -368,8 +371,12 @@ def simulate_trade(
         return trade
 
     costbasis = prepared["costbasis_cond"]
-    top_dates = prepared["top_dates"]
-    tops_since_entry = [d for d in top_dates if spec.signal_date < d]
+    top_structures = prepared["top_structures"]
+    tops_since_entry = [
+        (confirmed_date, invalidated_date)
+        for confirmed_date, invalidated_date in top_structures
+        if spec.signal_date < confirmed_date
+    ]
 
     def close_at(position: int, reason: str) -> Trade:
         exit_position = position + 1
@@ -386,7 +393,7 @@ def simulate_trade(
             exit_position += 1
         if exit_position >= len(frame):
             trade.exit_reason = f"{reason}(数据末尾未执行)"
-            trade.holding_bars = position - entry_position
+            trade.holding_bars = len(frame) - 1 - entry_position
             return trade
         trade.exit_date = frame.index[exit_position].date()
         trade.exit_price = float(frame["open"].iloc[exit_position])
@@ -407,7 +414,12 @@ def simulate_trade(
         if exit_variant == EXIT_COSTBASIS and bool(costbasis.iloc[position]):
             return close_at(position, "exit_a6_1_costbasis")
         if exit_variant == EXIT_TOP_PLUS_KEYWAVE:
-            has_top = any(d <= frame.index[position].date() for d in tops_since_entry)
+            current_day = frame.index[position].date()
+            has_top = any(
+                confirmed_date <= current_day
+                and (invalidated_date is None or current_day < invalidated_date)
+                for confirmed_date, invalidated_date in tops_since_entry
+            )
             if has_top and bool(costbasis.iloc[position]):
                 return close_at(position, "exit_a6_2_top_plus_keywave")
         if exit_variant == EXIT_STRUCTURE_STOP:

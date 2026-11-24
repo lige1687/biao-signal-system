@@ -1,0 +1,46 @@
+{
+  "mission": "Implement and qualify derivatives observation packet per packet-contract.md",
+  "task_scope": [
+    "User authorized all previously identified observation supplements",
+    "Observation engineering only; no new financial efficacy experiments",
+    "Public source retrieval up to 30 HTTP objects / 50MiB; source failures preserved",
+    "External write path explicitly authorized below"
+  ],
+  "read_only_paths": [
+    "docs/ops/acquired-data-catalog.json",
+    "configs",
+    "data",
+    "src/lei_signal/fundamentals",
+    "docs/experiments"
+  ],
+  "write_paths": [
+    "src/lei_signal/market_context/microstructure_derivatives.py",
+    "tests/unit/test_microstructure_derivatives.py",
+    "web/public/research/microstructure-observations-20261108/derivatives.json",
+    "docs/ops/microstructure-observations-20261108/derivatives"
+  ],
+  "external_write_paths": [
+    "/Volumes/win+mac\u901a\u7528/LeiSignal-\u65b0\u5b9e\u9a8c\u7ed3\u679c/microstructure-observations-20261108/derivatives"
+  ],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Qualified packet with real values, dates, units and unavailable requirements",
+    "Runnable builder and tests covering financial units/missing date semantics",
+    "Source ledger actual counts/failures/paths/SHA and concise acceptance handoff"
+  ],
+  "stop_conditions": [
+    "Protected inputs require modifications",
+    "Missing data budget or permission; report affected item and continue independent items",
+    "Finish only after building and validating available scope"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

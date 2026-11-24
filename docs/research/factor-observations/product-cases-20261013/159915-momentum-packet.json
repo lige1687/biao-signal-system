@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "kind": "research_batch",
+  "metadata": {
+    "reference": "mixed.momentum.raw@1.0.0",
+    "card": {
+      "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+      "not_for": [
+        "production_trade",
+        "unique_alpha_claim",
+        "prediction_from_contemporaneous_fit"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "economic_index"
+        ],
+        "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "daily_valid_quotes",
+        "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+      },
+      "universe": {
+        "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+        "warmup": "按每个对象窗口，不以日历天补足",
+        "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+        "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+        "degrade": "缺报价不发新信号；未确认资料不得生产"
+      },
+      "time": {
+        "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+        "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+        "decision_at": "不得早于available_at",
+        "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "公式一致不证明市场有效；旧消费者未迁移"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "mixed_code",
+        "mixed_protocol",
+        "mixed_prices",
+        "mixed_actions",
+        "mixed_pool"
+      ],
+      "id": "mixed.momentum.raw",
+      "version": "1.0.0",
+      "name": "252至21有效报价涨幅",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "ranking",
+        "description",
+        "research_signal"
+      ],
+      "dependencies": [
+        "mixed.price.economic@1.0.0"
+      ],
+      "definition": {
+        "formula": "I(t-21)/I(t-252)-1",
+        "parameters": {
+          "long_lag": 252,
+          "skip_lag": 21
+        },
+        "endpoints": "自身有效报价行位移；第253条首次可算；不含最近21条",
+        "unit": "fraction",
+        "direction": "降序排序，负分允许",
+        "transforms": "无标准化、无截尾、无年化"
+      },
+      "lifecycle": {
+        "state": "verified",
+        "basis": [
+          "docs/research/definitions.v1.json",
+          "tests/unit/test_research_definitions.py"
+        ],
+        "verification_scope": "函数级合成精确值验证与resolve/calculate身份参数绑定（仅该测试文件覆盖范围）；未做账户级回放，不构成有效性或生产授权"
+      }
+    },
+    "card_kind": "registered",
+    "type": "feature",
+    "unit": "fraction",
+    "purpose": "calculation_only",
+    "entity_axis": "instrument",
+    "value_type": "continuous",
+    "protocol": {
+      "protocol_id": "factor-product-historical-observation-20261013",
+      "version": "1.0.0",
+      "kind": "calculation_only",
+      "data_mode": "historical_reconstruction",
+      "sha256": "9436ee768e2351fed362760a77053e9e584c2c998709f2b20277ec7b32f31b17"
+    },
+    "data_identity": {
+      "synthetic": false,
+      "source": {
+        "path": "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv",
+        "sha256": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be"
+      },
+      "qualification": "retrospective_only",
+      "data_cutoff": "2026-06-30",
+      "price_basis": "economic_index"
+    },
+    "code_identity": {
+      "path": "src/lei_signal/research/definitions.py",
+      "sha256": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94"
+    },
+    "calendar": {
+      "timezone": "Asia/Shanghai",
+      "rows_in_saved_output": 1085,
+      "valid_count_at_observation": 1337,
+      "t_minus_252_date": "2025-06-16",
+      "t_minus_21_date": "2026-05-29",
+      "independent_value": 0.9896907216494846,
+      "absolute_difference": 0.0,
+      "price_basis": "economic_index"
+    },
+    "time_evidence": {
+      "observation_time": "2026-06-30T15:00:00+08:00",
+      "historical_availability": "unknown",
+      "available_at": null,
+      "current_qualified": false
+    },
+    "synthetic": false,
+    "definition_status": "explicit",
+    "data_status": "historical_reconstruction",
+    "implementation_status": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated",
+    "effectiveness_status": "not_tested_by_normalization",
+    "production_authorization": "not_authorized"
+  },
+  "values": [
+    {
+      "observation_date": "2026-06-30",
+      "entity_id": "159915.SZ",
+      "value": 0.9896907216494846,
+      "missing_reason": null
+    }
+  ],
+  "findings": [
+    {
+      "kind": "arithmetic_check",
+      "rows_in_saved_output": 1085,
+      "valid_count_at_observation": 1337,
+      "t_minus_252_date": "2025-06-16",
+      "t_minus_21_date": "2026-05-29",
+      "independent_value": 0.9896907216494846,
+      "absolute_difference": 0.0,
+      "price_basis": "economic_index"
+    }
+  ],
+  "sources": [
+    {
+      "path": "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv",
+      "sha256": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be"
+    },
+    {
+      "path": "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/input-manifest.json",
+      "sha256": "b5392a07e03f1deb27997ca8cf9d94c904433c0d1bff54e2c2f1c6b5ed52f293"
+    },
+    {
+      "path": "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/run-record.json",
+      "sha256": "0769c245b5d22366e6d7f56ca88834ae24f91d40fb558f85de5dde980e8876eb"
+    }
+  ],
+  "calculated_at": "2026-10-13T10:26:13.083177+08:00",
+  "definition_contract_sha256": "4a73747acd27aa90ff0fbf5909028ba661d1a7a785fc8c694fb54319b52eb5b5"
+}

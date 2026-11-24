@@ -1,0 +1,9 @@
+.ops-page .ops-without-kline { grid-template-columns: minmax(0, 1fr); }
+.ops-page .ops-history { margin-top: 16px; border-top: 1px solid #dce3ed; padding: 14px 4px; color: #536174; font-size: 14px; }
+.ops-page .ops-history summary { cursor: pointer; font-weight: 600; }
+.ops-page .ops-history p { max-width: 100ch; line-height: 1.65; }
+.ops-page .ops-empty a { margin-left: 8px; }
+.ops-page { font-size: 14px; }
+.ops-page .cp-row, .ops-page .ops-empty, .ops-page .pg-grp-hint, .ops-page .ops-grp-sumline { font-size: 14px; line-height: 1.65; }
+.ops-page .pg-grp-head h1 { font-size: 22px; }
+@media (min-width: 1150px) { .ops-page .ops-without-kline .ops-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

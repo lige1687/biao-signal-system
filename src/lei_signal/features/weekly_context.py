@@ -14,10 +14,19 @@ V2 §15 第一轮落地：模块 A 的 A1 环境条件之一是「周线多头�
 """
 from __future__ import annotations
 
+from datetime import date
+
 import numpy as np
 import pandas as pd
 
-from lei_signal.data.point_in_time import aggregate_weekly
+from lei_signal.data.calendar import CoveredCalendar
+from lei_signal.data.point_in_time import (
+    TradingCalendar,
+    aggregate_weekly,
+    completed_daily_view,
+    require_weekly_qualification,
+    weekly_input_quality,
+)
 from lei_signal.features.indicators import seeded_ema
 
 PERIODS = (20, 60, 120)
@@ -49,15 +58,30 @@ def weekly_alignment(weekly: pd.DataFrame) -> pd.DataFrame:
     return frame
 
 
-def weekly_env_series(daily: pd.DataFrame) -> pd.Series:
+def weekly_env_series(
+    daily: pd.DataFrame, *, calendar: TradingCalendar | None = None,
+    as_of: date | pd.Timestamp | None = None, complete_bar: bool = True,
+    require_qualified_weekly: bool = False,
+) -> pd.Series:
     """每个交易日的周线多头环境（只用已完成周，无未来泄漏）。"""
-    weekly = weekly_alignment(aggregate_weekly(daily))
+    source = daily
+    daily = completed_daily_view(daily, as_of=as_of, calendar=calendar, complete_bar=complete_bar)
+    observation = as_of if as_of is not None else (None if source.empty else source.index[-1])
+    protected_clock = isinstance(calendar, CoveredCalendar) or not complete_bar
+    weekly = weekly_alignment(aggregate_weekly(
+        daily, calendar=calendar,
+        as_of=observation if protected_clock else None, complete_bar=complete_bar,
+    ))
+    quality = weekly_input_quality(daily, weekly, as_of=observation,
+                                   calendar=calendar, complete_bar=complete_bar)
+    require_weekly_qualification(quality, require_qualified_weekly)
     result = pd.Series(False, index=daily.index, name="weekly_bull_env")
+    result.attrs["weekly_quality"] = quality
     if weekly.empty:
         return result
     week_ends = weekly.index
     bull = np.asarray(weekly["bull_alignment"], dtype=bool)
-    positions = np.searchsorted(week_ends, daily.index, side="right") - 1
+    positions = np.atleast_1d(np.searchsorted(week_ends, daily.index, side="right")) - 1
     result[:] = [bool(bull[i]) if i >= 0 else False for i in positions]
     return result
 

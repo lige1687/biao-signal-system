@@ -1,0 +1,25 @@
+{
+  "question": "Does a primary institutional source support simultaneous B50/B200 low/high thresholds as opportunity or risk, and how should existing large-chart queries be retained?",
+  "mode": "report_only primary-source verification plus authorized display changes",
+  "decision_use": "Separate long-term participation background from joint extreme observations; retain price-aligned inquiry",
+  "scope": [
+    "Remove 200-day majority-line choice from mini chart",
+    "Keep joint B50+B200 filters in large chart, accessible without conflating with validated signals",
+    "Verify institutional provenance of joint thresholds and qualifications"
+  ],
+  "target_and_baseline": "Existing CN20/80 and US15/85 joint display conditions versus exact primary institutional claims",
+  "existing_evidence": [
+    "institutional-source-facts-v8.json",
+    "evidence-review-v6.md",
+    "web/src/components/trend/zones.ts"
+  ],
+  "allowed_actions": "Read primary sources and existing reports; own UI paths after coordination; no financial experiment or source-data writes",
+  "budget_and_stop": {
+    "prior_source_requests": 11,
+    "new_source_requests_max": 6,
+    "financial_experiments": 0,
+    "stop": "Exact same-indicator sources verified or bounded evidence exhausted; no quota-filling"
+  },
+  "output_location": "docs/ops/breadth-reading-aid-20261101",
+  "updated_at": "2026-11-02T20:04:01.109524+08:00"
+}

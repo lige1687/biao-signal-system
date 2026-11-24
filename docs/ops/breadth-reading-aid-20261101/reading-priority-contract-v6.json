@@ -1,0 +1,34 @@
+{
+  "question": "Make opportunity/risk observations readable with less information; evaluate use of breadth bands against existing evidence and reuse named chat models.",
+  "decision_use": "Low-frequency market reading, not trades",
+  "mode": "report_only evidence reuse plus authorized UI engineering",
+  "scope": [
+    "Three compact trend cards",
+    "Desktop chart plus right-hand concise reading, mobile stacked",
+    "Expose real history range and default longer history",
+    "Promote only evidence-appropriate signals, fold statistical band and repair metadata"
+  ],
+  "existing_evidence": [
+    "increment-review-contract-v4.json",
+    "docs/experiments/breadth-erp-ma200-increment-review-2026-11-02.md",
+    "docs/experiments/equity-bond-bands-effect-2026-11-01.md",
+    "Codex thread 01a16bd6-3661-7cd3-a2ff-5cadfa181605"
+  ],
+  "frozen_decisions": [
+    "No new threshold search or strategy change",
+    "P10/P90 descriptive only, do not turn into verified opportunity/risk rails",
+    "50% describes majority participation, not predictive threshold",
+    "ERP existing upper-side evidence can be described; lower-side no reliable top evidence",
+    "Use shared backend state codes for simple meaning, do not invent combined signal"
+  ],
+  "budget_and_stop": {
+    "new_experiment_runs": 0,
+    "new_external_requests": 1,
+    "prior_source_requests": 5,
+    "cumulative_source_requests": 6,
+    "source": "StockCharts original percent-above-MA page live checked",
+    "no_further_external_requests_required": true
+  },
+  "allowed_actions": "Task local UI, reports and tests; cache and frozen financial source files read only",
+  "updated_at": "2026-11-02T15:52:31.179727+08:00"
+}

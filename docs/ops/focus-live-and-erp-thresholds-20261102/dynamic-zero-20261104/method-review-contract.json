@@ -1,0 +1,32 @@
+{
+  "mission": "Pre-effect independent read-only review of descriptive zero-crossing comparison",
+  "task_scope": [
+    "Review exact formula, next-session labels, common dates, state-standardized control and calendar-block intervals for serious bugs",
+    "Report only concrete must-fix issues and limitations; no outcomes or experiments"
+  ],
+  "read_only_paths": [
+    "src/lei_signal/research/focus_zero_evaluation.py",
+    "tests/unit/test_focus_zero_evaluation.py",
+    "docs/ops/focus-live-and-erp-thresholds-20261102/dynamic-zero-20261104/protocol.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "method and implementation acceptance or concrete blocking corrections"
+  ],
+  "stop_conditions": [
+    "no file changes",
+    "no financial computation or sources",
+    "no other agents"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

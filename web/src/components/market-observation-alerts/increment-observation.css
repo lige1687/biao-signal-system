@@ -1,0 +1,48 @@
+.io-card { min-width: 0; }
+.io-card .moa-item-head { align-items: baseline; }
+.io-card .moa-item-head h3 { font-size: 13px; color: #405448; }
+.io-lead { margin: 9px 0 10px; color: #293a31; font-size: 16px; line-height: 1.45; font-weight: 650; }
+.io-values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+.io-values div { min-width: 0; padding: 5px 6px; border: 1px solid #e2e8e0; border-radius: 5px; background: #f7f9f5; }
+.io-values span, .io-values strong { display: block; font-variant-numeric: tabular-nums; }
+.io-values span { color: #607066; font-size: 13px; }
+.io-values strong { margin-top: 2px; font-size: 22px; line-height: 1.2; }
+.io-unit, .io-comparison, .io-scope-note { margin: 6px 0 8px; color: #5b695e; font-size: 13px; line-height: 1.45; }
+.io-card .moa-chart-legend { margin-top: 6px; }
+.io-card .moa-mini { margin-top: 3px; }
+.io-card .moa-card-meta a, .io-dialog a { color: #345d52; text-decoration: underline; }
+.io-card footer button, .io-dialog button, .io-status button { border: 1px solid #cbd5cf; border-radius: 5px; padding: 4px 8px; background: #fff; color: #345d52; cursor: pointer; font: inherit; }
+.io-card footer button:hover, .io-dialog button:hover, .io-status button:hover { background: #edf3ef; }
+.io-card :is(button, a):focus-visible, .io-dialog :is(button, a):focus-visible, .io-status button:focus-visible { outline: 2px solid #397766; outline-offset: 2px; }
+.io-scope { display: inline-block; margin: 9px 0 0; padding: 4px 7px; background: #eff4f0; border-radius: 4px; color: #4d6258; font-size: 13px; }
+.io-bars { display: grid; gap: 9px; margin: 11px 0; }
+.io-net-value { display: flex; align-items: baseline; flex-wrap: wrap; gap: 7px; margin: 12px 0 17px; color: #536158; font-size: 13px; }
+.io-net-value strong { font-size: 30px; font-weight: 650; color: #293a31; font-variant-numeric: tabular-nums; }
+.io-bars > div { display: grid; grid-template-columns: 30px minmax(0, 1fr) 85px; align-items: center; gap: 6px; color: #4d5c51; font-size: 13px; }
+.io-bars i { display: block; height: 13px; background: #edf0eb; border-radius: 2px; overflow: hidden; }
+.io-bars b { display: block; height: 100%; border-radius: 2px; }
+.io-bar-buy { background: #327c72; }.io-bar-sell { background: #986737; }
+.io-bars strong { text-align: right; color: #324239; font-variant-numeric: tabular-nums; }
+.io-status { grid-column: 1 / -1; padding: 16px; border: 1px solid #e1e5dc; border-radius: 7px; color: #56645a; font-size: 13px; }
+.io-status button { margin-left: 7px; }
+.io-dialog { width: min(1050px, 92vw); max-height: 90vh; padding: 0; border: 0; border-radius: 10px; box-shadow: 0 22px 80px #172b4550; color: #283238; }
+.io-dialog::backdrop { background: #172b45a8; }
+.io-dialog-surface { max-height: 90vh; overflow: auto; padding: 18px 20px; box-sizing: border-box; }
+.io-dialog header { display: flex; justify-content: space-between; align-items: start; gap: 15px; }
+.io-dialog h2 { margin: 0; color: #25332e; font-size: 18px; }
+.io-dialog p { line-height: 1.5; }
+.io-detail-lead { margin: 10px 0; color: #2b3d31; font-size: 14px; font-weight: 600; }
+.io-period { display: flex; gap: 6px; margin-top: 14px; }
+.io-period button[aria-pressed="true"] { background: #e5efe8; border-color: #567b69; }
+.io-range, .io-source, .io-explain { color: #56645a; font-size: 13px; }
+.io-range { margin: 7px 0; }
+.io-ranking-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 12px 0; }
+.io-ranking { min-width: 0; padding: 10px 12px; border: 1px solid #dce6de; border-radius: 7px; background: #f8faf8; }
+.io-ranking h3 { margin: 0 0 7px; color: #354c3f; font-size: 14px; }
+.io-ranking ol { margin: 0; padding-left: 20px; }
+.io-ranking li { padding: 5px 0; border-top: 1px solid #e6ece6; font-size: 13px; }
+.io-ranking li:first-child { border-top: 0; }
+.io-ranking li a { display: inline-block; max-width: calc(100% - 110px); }
+.io-ranking li small { color: #66756a; }
+.io-ranking li strong { float: right; font-variant-numeric: tabular-nums; }
+.io-buy { color: #327c72; }.io-sell { color: #986737; }

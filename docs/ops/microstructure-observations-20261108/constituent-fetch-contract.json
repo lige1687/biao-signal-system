@@ -1,0 +1,42 @@
+{
+  "mission": "Refresh recent adjusted-price raw inputs for the existing October 15 US fixed-member snapshot; observation data engineering only",
+  "task_scope": [
+    "Read old Yahoo result filenames to establish same 502-stock fixed pool; no membership inference",
+    "Acquire recent daily Yahoo chart JSON from 2026-08-25 through 2026-11-06 inclusive; retain raw adjclose timestamps/actions",
+    "No return efficacy experiment; no alteration of old raw data or equity builder/packet"
+  ],
+  "read_only_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result/"
+  ],
+  "write_paths": [
+    "docs/ops/microstructure-observations-20261108/constituents/"
+  ],
+  "external_write_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/equity/us-recent/"
+  ],
+  "network_allowed": true,
+  "max_http_requests": 600,
+  "max_new_bytes": 31457280,
+  "max_wall_minutes": 8,
+  "max_concurrency": 4,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Standalone bounded fetch script and source ledger each actual URL/status/bytes/hash",
+    "Summary actual pool and earliest/latest aligned price dates, missing ticker list, adjusted price qualification",
+    "No accepted current observation claim until root/equity verifier accepts"
+  ],
+  "stop_conditions": [
+    "HTTP429 or source asks stop; record and do not evade",
+    "Protected file change needed",
+    "Budget reached: write partial progress, do not fabricate completion"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

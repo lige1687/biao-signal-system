@@ -1,0 +1,646 @@
+--- before-v6/web/src/components/market-observation-alerts/index.tsx
++++ after-v6/web/src/components/market-observation-alerts/index.tsx
+@@ -6,7 +6,11 @@
+ import { breadthInput, chartLink, erpInput, parseBreadth, type BreadthMarket } from "./adapters";
+ import { buildAlertSnapshot, eventLabel, parseSeen, type AlertSnapshot } from "./model";
+ import { acknowledge, SEEN_EVENT, SEEN_KEY } from "./storage";
+-import type { BreadthReadingPoint } from "../market-style/breadthReadingTypes";
++import type { BreadthReadingPoint, BreadthReadingResponse } from "../market-style/breadthReadingTypes";
++import { breadthInterpretation } from "../market-style/breadthInterpretation";
++import type { AlertPoint } from "./model";
++import MiniTrend from "./MiniTrend";
++import { BREADTH_LINES } from "../trend/zones";
+ import "./style.css";
+ 
+ async function getJson(url: string, signal: AbortSignal): Promise<unknown> {
+@@ -30,43 +34,51 @@
+ const today = () => new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Shanghai" }).format(new Date());
+ const format = (n: number | null | undefined) => n == null || !Number.isFinite(n) ? "—" : n.toFixed(2);
+ 
+-function meaning(s: AlertSnapshot): string {
+-  if (s.kind === "erp") return "上轨：相对便宜、反弹观察；下轨：相对偏贵，未证实能报顶。";
+-  return "离开低位看修复，离开高位看回落；高低位本身不是买卖点。";
+-}
+-
+-function AlertRow({ snapshot: s, href, pending, onRead, participation }: {
+-  snapshot: AlertSnapshot; href: string; pending: boolean; onRead: () => void; participation?: BreadthReadingPoint | null;
++function AlertRow({ snapshot: s, href, pending, onRead, participation, breadth, points }: {
++  snapshot: AlertSnapshot; href: string; pending: boolean; onRead: () => void;
++  participation?: BreadthReadingPoint | null; breadth?: BreadthReadingResponse; points: AlertPoint[];
+ }) {
+   const fresh = s.quality === "ready";
+-  const lastNew = s.newEvents[s.newEvents.length - 1];
+   const reading = fresh && participation?.date === s.latest?.date ? participation : null;
+-  const change = reading?.horizons["50"].delta_5;
+-  const quality = pending && !s.latest ? "读取中" : s.quality === "historical" ? "历史快照 · 未自动更新"
+-    : s.quality === "stale" ? "待更新" : s.quality === "error" ? "读取失败" : s.quality === "missing" ? "资料不足" : "资料可用";
+-  return <article className={`moa-item moa-${s.quality} moa-kind-${s.kind} moa-zone-${s.latest?.phase ?? "unknown"}`} aria-label={s.label}>
+-    <div className="moa-item-head"><h3>{s.label}</h3><span className="moa-quality" title={s.qualityLabel}>{quality}</span></div>
+-    <div className="moa-reading"><strong>{format(s.latest?.value)}<small>{s.kind === "erp" ? "百分点" : "%"}</small></strong>
+-      <span>{fresh ? "" : "末次："}{s.positionLabel}</span></div>
+-    <div className="moa-bounds"><span>{s.kind === "erp" ? "下轨" : "低位线 P10"} <b>{format(s.latest?.lower)}</b></span>
+-      <span>{s.kind === "erp" ? "上轨" : "高位线 P90"} <b>{format(s.latest?.upper)}</b></span></div>
+-    {reading && <p className="moa-participation"><b title={reading.state.summary}>{reading.state.label}</b><span>20/50日合看</span>
+-      {change != null && Number.isFinite(change) && <small>50日宽度较5条记录前 {change > 0 ? "+" : ""}{change.toFixed(2)} 个百分点</small>}</p>}
+-    <p className="moa-meaning">{meaning(s)}</p>
+-    {lastNew ? <div className="moa-new"><span>新变化 · {eventLabel(s.kind, lastNew.event)} <time>{lastNew.date}</time>
+-      {s.newEvents.length > 1 ? ` 等${s.newEvents.length}次` : ""}</span><button onClick={onRead}>知道了</button></div>
+-      : s.revised && fresh ? <p className="moa-event">同日数据已修订，未记为新穿越</p>
+-      : fresh && s.latest ? <p className="moa-event">{eventLabel(s.kind, s.latest.event)}</p>
+-      : <p className="moa-event">{s.quality === "historical" ? "仅供历史回看，当前提醒未启用"
+-        : s.quality === "error" ? "本次读取失败，暂不判断新变化"
+-        : s.quality === "stale" ? "旧读数仅供回看，当前变化未知" : "等待完整读数与轨道"}</p>}
+-    <footer><time>数据 {s.latest?.date ?? "—"}{s.kind === "erp" ? " · 周频" : ""}</time>
+-      <Link to={href} onClick={onRead}>看走势图 <span aria-hidden="true">↗</span></Link></footer>
+-    {s.lastEvent && <p className="moa-last-change">最近历史变化 <b>{eventLabel(s.kind, s.lastEvent.event)}</b><time>{s.lastEvent.date}</time></p>}
+-    {s.lastEvent && <details className="moa-history"><summary>触发时读数与边界</summary>
+-      <p>{eventLabel(s.kind, s.lastEvent.event)} · 读数 {format(s.lastEvent.value)}；当时下界 {format(s.lastEvent.lower)}、上界 {format(s.lastEvent.upper)}。
+-        {s.kind === "breadth" ? "仅检索返回的近90条记录。" : "历史事件，不代表今天触发。"}</p>
+-    </details>}
++  const interpretation = breadthInterpretation(reading);
++  const isErp = s.kind === "erp";
++  const quality = pending && !s.latest ? "读取中" : s.quality === "historical" ? "历史观察"
++    : s.quality === "stale" ? "待更新" : s.quality === "error" ? "读取失败" : s.quality === "missing" ? "资料不足" : "";
++  const erpKnown = !!s.latest && s.quality !== "error" && s.quality !== "missing";
++  const headline = isErp ? !erpKnown ? "估值位置暂不判断" : s.latest?.phase === "high" ? "相对便宜，留意反弹"
++    : s.latest?.phase === "low" ? "相对偏贵，不等于见顶" : "估值居中，未触及观察线" : interpretation.headline;
++  const tone = isErp ? !erpKnown ? "unknown" : s.latest?.phase === "high" ? "supportive" : s.latest?.phase === "low" ? "caution" : "neutral" : interpretation.tone;
++  const rows = (breadth?.history ?? []).slice(-90);
++  const erpRows = points.slice(-260);
++  const latest = rows[rows.length - 1];
++  const periods = ["20", "50", "200"] as const;
++  const colors = { "20": BREADTH_LINES[0].color, "50": BREADTH_LINES[1].color, "200": BREADTH_LINES[2].color };
++  return <article className={`moa-item moa-${s.quality}`} data-tone={tone} aria-label={s.label}>
++    <div className="moa-item-head"><h3>{isErp ? s.label : s.label.replace(" · 50日宽度", " · 市场宽度")}</h3>
++      {quality && <span className="moa-quality" title={s.qualityLabel}>{quality}</span>}</div>
++    <h4 className="moa-conclusion">{headline}</h4>
++    {isErp ? <>
++      <div className="moa-erp-value"><strong>{format(s.latest?.value)}</strong><span>百分点</span></div>
++      <div className="moa-key-lines"><span>反弹观察线 <b>&gt; {format(s.latest?.upper)}</b></span><span>偏贵参考线 <b>&lt; {format(s.latest?.lower)}</b></span></div>
++      <MiniTrend dates={erpRows.map(p => p.date)} lines={[{ name: "股债利差", color: "#315b8c", values: erpRows.map(p => p.value) }]}
++        lower={erpRows.map(p => p.lower)} upper={erpRows.map(p => p.upper)} label="沪深300股债利差近五年趋势与三年上下轨，绿色虚线为上轨，棕色虚线为下轨" />
++    </> : <>
++      <div className="moa-horizons">{periods.map(period => <div key={period}><span><i style={{ background: colors[period] }} />{period}日</span><strong>{latest?.[`breadth_${period}`] == null ? "—" : `${latest[`breadth_${period}`]!.toFixed(1)}%`}</strong></div>)}</div>
++      <MiniTrend dates={rows.map(p => p.date)} percent lines={["50", "20", "200"].map(period => ({ name: `${period}日`, color: colors[period as typeof periods[number]], values: rows.map(p => p[`breadth_${period as typeof periods[number]}`] ?? null) }))}
++        label={`${s.label}近90条记录，蓝色50日、橙色20日、紫色200日；50%表示半数股票站上对应均线`} />
++    </>}
++    <p className="moa-use">{isErp ? "上穿上轨有历史反弹线索；下穿下轨未可靠地提示顶部。" : interpretation.meaning}</p>
++    <footer><Link to={href} onClick={onRead}>看大图 <span aria-hidden="true">↗</span></Link>
++      <details className="moa-history"><summary>依据与变化{s.newEvents.length > 0 ? ` · ${s.newEvents.length}项新变化` : ""}</summary>
++        <div><p>读数日期 {s.latest?.date ?? "未知"}。{s.qualityLabel}</p>
++          {isErp ? <p>绿色上轨是反弹观察线，棕色下轨仅提示相对偏贵。当前为历史周频资料，未自动更新，不触发今日提醒。</p>
++            : <><p>{reading?.state.summary ?? "资料尚未齐备，当前参与变化未知。"}</p><p>50%只表示半数股票。历史P10/P90仅描述相对位置，未验证为机会或风险阈值。</p><p>P10 {format(s.latest?.lower)}% · P90 {format(s.latest?.upper)}%</p></>}
++          {s.lastEvent && <p>最近历史位置变化：{eventLabel(s.kind, s.lastEvent.event)} · {s.lastEvent.date}。{isErp ? "历史事件，不表示今天触发。" : "仅检索近90条状态记录。"}</p>}
++          {s.revised && fresh && <p>同日数据修订，未记新穿越。</p>}
++          {s.newEvents.length > 0 && <button onClick={onRead}>知道了</button>}
++        </div>
++      </details>
++    </footer>
+   </article>;
+ }
+ 
+@@ -111,21 +123,20 @@
+     } catch { setStored(previous => ({ ...previous, failed: true })); }
+   };
+   return <section className={`market-observation-alerts moa-placement-${placement}`} aria-labelledby={titleId}>
+-    <header className="moa-header"><div><h2 id={titleId}>重点观察 · 宽度与股债</h2>
++    <header className="moa-header"><div><h2 id={titleId}>市场速览</h2>
+       <span aria-live="polite">{newCount ? `${newCount}条新变化` : readyCount === 0 ? "当前提醒待资料更新"
+-        : readyCount < monitored.length ? `${readyCount}/${monitored.length}项宽度资料可用 · 其余待更新` : "宽度暂无新穿越 · 股债仅历史观察"}</span></div>
++        : readyCount < monitored.length ? `${readyCount}/${monitored.length}项宽度资料可用 · 其余待更新` : "宽度看市场支撑 · 股债看估值"}</span></div>
+       <div className="moa-actions">{newCount > 0 && <button onClick={() => markRead(snapshots)}>全部已读</button>}
+         <button disabled={fetching} onClick={() => { void Promise.all([erp.refetch(), cn.refetch(), us.refetch()]); }}>{fetching ? "读取中…" : "刷新读数"}</button></div>
+     </header>
+-    <p className="moa-intro">先看参与面、估值位置和越轨变化，再对照价格判断机会与风险。每项保留自己的数据日期。</p>
+     {stored.failed && <p className="moa-storage-error" role="status">浏览器未能保存已读状态，刷新后可能再次显示提醒。</p>}
+     <div className="moa-grid">{snapshots.map((s, i) => <AlertRow key={s.id} snapshot={s} href={hrefs[i]}
+-      pending={sources[i].isPending} participation={participation[i]} onRead={() => markRead([s])} />)}</div>
+-    <details className="moa-rules"><summary>提醒口径与依据</summary><div>
++      pending={sources[i].isPending} participation={participation[i]} breadth={i === 1 ? cn.data : i === 2 ? us.data : undefined} points={inputs[i].points} onRead={() => markRead([s])} />)}</div>
++    <details className="moa-rules"><summary>这些信息怎样用</summary><div>
+       <p>穿出上下界、重新回到界内时提示；持续在界外不重复报新变化。这里常驻显示读数，已读仅清除新变化标记。</p>
+       <p>股债轨道：<a href={ERP_BAND_METHOD.url} target="_blank" rel="noreferrer">国信证券三年均值±2σ方法</a>的独立参照版，现有周频资料仅供历史回看。
+         <Link to="/library?report=docs%2Fexperiments%2Fequity-bond-bands-effect-2026-11-01.md">查看效果检验</Link>：上轨有反弹线索，下轨未证明能预测顶部。</p>
+-      <p>宽度：站上50日均线的股票占比；低位/高位线为各自市场近1260条有效记录的P10/P90，最少252条、包含当日。属于历史统计边界，不是已验证的机会值或风险值。20/200日可进宽度图切换。</p>
++      <p>宽度：站上20、50、200日均线的股票占比，用来观察短、中、长期参与方向。P10/P90是历史位置参照，最少252条、最近最多1260条有效记录、包含当日；尚未验证为机会或风险阈值。</p>
+       <p>首页打开时每5分钟重读系统资料；不会在页面关闭后推送。超过7个自然日未更新、读取失败或资料缺失时暂停新提醒；7天是资料时效容忍，与金融阈值无关。</p>
+     </div></details>
+   </section>;
+--- before-v6/web/src/components/market-observation-alerts/style.css
++++ after-v6/web/src/components/market-observation-alerts/style.css
+@@ -1,59 +1,53 @@
+-.market-observation-alerts { flex: 0 0 auto; margin: 8px 18px 4px; padding: 12px 16px 8px; border: 1px solid #dce4ee; border-radius: 10px; background: #fff; color: #172b45; font-size: 12px; }
+-.market-observation-alerts.moa-placement-market { margin: 0 0 18px; padding: 16px; }
+-.moa-intro { margin: -2px 0 12px; color: #607088; font-size: 12px; line-height: 1.6; }
+-/* Keep the permanent section reachable when a small viewport or expanded detail exceeds the workbench height. */
++.market-observation-alerts { flex: 0 0 auto; margin: 8px 18px 4px; padding: 14px 16px 8px; border: 1px solid #dce4ee; border-radius: 10px; background: #fff; color: #172b45; font-size: 12px; }
++.market-observation-alerts.moa-placement-market { margin: 0 0 18px; }
+ .workspace:has(> .market-observation-alerts) { overflow-y: auto; }
+ .workspace:has(> .market-observation-alerts) > .ws-body { min-height: 250px; }
+-.moa-header, .moa-header > div, .moa-item-head, .moa-reading, .moa-bounds, .moa-item footer, .moa-new { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+-.moa-header { margin-bottom: 10px; }
++.moa-header, .moa-header > div, .moa-item-head, .moa-item footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
++.moa-header { margin-bottom: 12px; }
+ .moa-header h2 { margin: 0; font-size: 16px; font-weight: 650; }
+-.moa-header > div > span { color: #7c6339; font-size: 11px; }
++.moa-header > div > span { color: #748094; font-size: 11px; }
+ .market-observation-alerts button { min-height: 28px; padding: 3px 9px; border: 1px solid #dce4ee; border-radius: 5px; background: #fff; color: #2458c6; cursor: pointer; font-size: 11px; }
+ .market-observation-alerts button:disabled { color: #758395; cursor: default; }
+ .market-observation-alerts :is(button, a, summary):focus-visible { outline: 2px solid #2458c6; outline-offset: 3px; }
+-.moa-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+-.moa-item { min-width: 0; padding: 12px; border: 1px solid #e5ebf3; border-top: 3px solid #8296ac; border-radius: 7px; background: #f8fafc; }
+-.moa-item.moa-zone-low, .moa-item.moa-kind-erp.moa-zone-high { border-top-color: #459384; background: #f1f8f6; }
+-.moa-item.moa-zone-high, .moa-item.moa-kind-erp.moa-zone-low { border-top-color: #c59148; background: #fcf7ee; }
+-.moa-item h3 { font-size: 13px; font-weight: 650; margin: 0; }
++.moa-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
++.moa-item { min-width: 0; padding: 14px; border: 1px solid #e2e8f0; border-top: 3px solid #8393a8; border-radius: 7px; background: #fbfcfe; }
++.moa-item[data-tone=supportive] { border-top-color: #388e80; }
++.moa-item[data-tone=caution] { border-top-color: #bf873a; }
++.moa-item h3 { margin: 0; font-size: 12px; color: #5c6b80; font-weight: 600; }
+ .moa-quality { font-size: 10px; color: #8b631d; background: #faf5e9; padding: 2px 5px; border-radius: 3px; white-space: nowrap; }
+-.moa-ready .moa-quality { color: #526c63; background: #f1f6f3; }
+-.moa-reading { margin: 6px 0 5px; align-items: baseline; flex-wrap: wrap; gap: 4px 8px; }
+-.moa-reading strong { font-size: 28px; line-height: 1.2; letter-spacing: -.5px; font-variant-numeric: tabular-nums; font-weight: 650; }
+-.moa-reading small { font-size: 11px; font-weight: 400; margin-left: 3px; letter-spacing: 0; color: #607088; }
+-.moa-reading > span { color: #344862; font-size: 12px; font-weight: 600; }
+-.moa-bounds { justify-content: flex-start; gap: 20px; font-size: 11px; color: #607088; font-variant-numeric: tabular-nums; }
+-.moa-bounds b { color: #344862; font-weight: 600; margin-left: 4px; }
+-.moa-participation { display: flex; flex-wrap: wrap; gap: 3px 6px; margin: 8px 0 4px; color: #607088; font-size: 11px; line-height: 1.5; }
+-.moa-participation b { color: #344862; font-size: 12px; font-weight: 600; }
+-.moa-participation small { flex-basis: 100%; font: inherit; font-variant-numeric: tabular-nums; }
+-.moa-meaning { margin: 6px 0 4px; color: #607088; line-height: 1.5; font-size: 11px; }
+-.moa-event { color: #8b631d; font-size: 11px; margin: 4px 0; }
+-.moa-ready .moa-event { color: #607088; }
+-.moa-new { padding: 5px 7px; margin: 6px 0; background: #eef4ff; border-left: 2px solid #2458c6; color: #2458c6; line-height: 1.5; }
+-.moa-new button { flex-shrink: 0; }
+-.moa-item footer { margin-top: 5px; color: #607088; font-size: 11px; }
+-.market-observation-alerts a { color: #2458c6; text-decoration: none; }
++.moa-conclusion { margin: 9px 0 12px; font-size: 17px; line-height: 1.4; font-weight: 650; }
++.moa-horizons { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; min-height: 62px; }
++.moa-horizons > div { display: flex; flex-direction: column; gap: 3px; }
++.moa-horizons span { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #68788d; }
++.moa-horizons i { width: 11px; height: 3px; display: inline-block; }
++.moa-horizons strong { font-size: 21px; font-weight: 600; font-variant-numeric: tabular-nums; }
++.moa-erp-value { display: flex; align-items: baseline; gap: 5px; }
++.moa-erp-value strong { font-size: 25px; line-height: 1; font-weight: 650; }
++.moa-erp-value span { font-size: 11px; color: #68788d; }
++.moa-key-lines { display: flex; gap: 5px 13px; flex-wrap: wrap; min-height: 37px; align-items: center; padding: 5px 0; font-size: 11px; color: #806136; }
++.moa-key-lines span:first-child { color: #287c70; }
++.moa-key-lines b { font-weight: 650; }
++.moa-mini svg { display: block; width: 100%; height: 116px; }
++.moa-mini-dates { display: flex; justify-content: space-between; color: #8490a1; font-size: 9px; font-variant-numeric: tabular-nums; }
++.moa-mini-empty { display: grid; place-items: center; height: 132px; color: #8490a1; }
++.moa-use { min-height: 33px; margin: 10px 0; color: #4e5f76; font-size: 12px; line-height: 1.5; }
++.moa-item footer { align-items: flex-start; border-top: 1px solid #e5ebf3; padding-top: 8px; font-size: 11px; }
++.market-observation-alerts a { color: #2458c6; text-decoration: none; white-space: nowrap; }
+ .market-observation-alerts a:hover { text-decoration: underline; }
+-.market-observation-alerts summary { cursor: pointer; color: #607088; font-size: 10px; }
+-.moa-history { margin-top: 5px; }
+-.moa-last-change { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 6px; margin: 9px 0 4px; padding-top: 7px; border-top: 1px solid #dce4ee; color: #607088; font-size: 11px; line-height: 1.5; }
+-.moa-last-change b { font-weight: 600; color: #344862; }
+-.moa-last-change time { font-variant-numeric: tabular-nums; }
+-.moa-history p { margin: 5px 0 0; font-size: 11px; line-height: 1.6; color: #607088; }
+-.moa-rules { border-top: 1px solid #edf1f6; margin-top: 9px; padding-top: 6px; }
++.market-observation-alerts summary { cursor: pointer; color: #718094; font-size: 10px; }
++.moa-history { text-align: right; }
++.moa-history > div { text-align: left; }
++.moa-history p, .moa-rules p { color: #607088; line-height: 1.65; font-size: 11px; margin: 7px 0; }
++.moa-rules { margin-top: 8px; }
+ .moa-rules > div { max-width: 1000px; }
+-.moa-rules p { line-height: 1.6; margin: 6px 0; font-size: 11px; color: #607088; }
+-.moa-storage-error { color: #8b631d; font-size: 11px; margin: 4px 0 8px; }
+-@media (max-width: 1050px) { .moa-item-head { align-items: flex-start; flex-direction: column; gap: 4px; } }
++.moa-storage-error { color: #8b631d; font-size: 11px; }
++@media (max-width: 1050px) { .moa-item-head { align-items: flex-start; flex-direction: column; gap: 4px; } .moa-conclusion { font-size: 15px; } }
+ @media (max-width: 700px) {
+-  .workspace:has(> .market-observation-alerts) > .ws-body { flex: 0 0 auto; overflow: visible; }
+-  .market-observation-alerts { margin: 6px 10px; padding: 10px 12px 8px; }
+-  .moa-header { align-items: flex-start; gap: 4px; }
+-  .moa-header > div:first-child { flex-direction: column; align-items: flex-start; gap: 3px; }
+-  .moa-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+-  .moa-item { padding: 10px 12px; }
+-  .moa-item-head { flex-direction: row; align-items: center; }
+-  .moa-reading strong { font-size: 26px; }
+-  .moa-meaning { margin-top: 5px; }
++ .workspace:has(> .market-observation-alerts) > .ws-body { flex: 0 0 auto; overflow: visible; }
++ .market-observation-alerts { margin: 6px 10px; padding: 10px 12px 8px; }
++ .moa-header { align-items: flex-start; }
++ .moa-header > div:first-child { flex-direction: column; align-items: flex-start; gap: 3px; }
++ .moa-grid { grid-template-columns: minmax(0,1fr); gap: 10px; }
++ .moa-item-head { flex-direction: row; align-items: center; }
++ .moa-conclusion { font-size: 17px; }
+ }
+--- before-v6/web/src/components/market-style/BreadthComparison.tsx
++++ after-v6/web/src/components/market-style/BreadthComparison.tsx
+@@ -5,6 +5,7 @@
+ import type { BreadthHistoryPoint, RatesHistorySeries } from "../../types";
+ import { BREADTH_HIGHLIGHT_RULES, BREADTH_LINES, computeHighlightBands, type HighlightBand } from "../trend/zones";
+ import BreadthReading from "./BreadthReading";
++import { breadthChangeAnnotations } from "./breadthInterpretation";
+ import { BREADTH_HORIZONS, type BreadthHorizon, type BreadthTrack, type BreadthReadingPoint, type BreadthReadingResponse } from "./breadthReadingTypes";
+ import { BACKGROUND_STYLES, backgroundRuns, gapText, type BackgroundRun, type BackgroundMode } from "./breadthChartDisplay";
+ import "./breadth-comparison.css";
+@@ -18,6 +19,7 @@
+   { label: "1年", days: 365 },
+   { label: "3年", days: 1095 },
+   { label: "5年", days: 1825 },
++  { label: "全部", days: 12600 },
+ ] as const;
+ const PRICE_NAMES: Record<PriceKey, string> = { sse: "上证指数", hs300: "沪深300", sp500: "标普500", nasdaq: "纳斯达克综合指数" };
+ const exists = (value: number | null | undefined): value is number => typeof value === "number" && Number.isFinite(value);
+@@ -62,8 +64,10 @@
+   const minDate = cutoff.toISOString().slice(0, 10);
+   const prices = seriesMap(series);
+   const bmap = new Map(breadth.map((point) => [point.date, point]));
++  // Begin at available breadth history; retain internal and trailing missing dates.
++  const firstBreadthDate = breadth.find((point) => BREADTH_HORIZONS.some((h) => exists(point[`breadth_${h}`])))?.date ?? minDate;
+   // Price trading dates are the shared axis. A missing same-day breadth stays null.
+-  const dates = [...new Set(series.dates.filter((date) => date >= minDate && date <= last))].sort();
++  const dates = [...new Set(series.dates.filter((date) => date >= minDate && date >= firstBreadthDate && date <= last))].sort();
+   const values = dates.map((date) => prices.get(date) ?? null);
+   const b20 = dates.map((date) => bmap.get(date)?.breadth_20 ?? null);
+   const b50 = dates.map((date) => bmap.get(date)?.breadth_50 ?? null);
+@@ -178,13 +182,11 @@
+       const event = readings.get(date)?.horizons[horizon]?.event;
+       return event === "exit_high" || event === "exit_low" ? [{ name: exitNames[event], value: [date, view.breadth[focusIndex][i]], itemStyle: { color: event === "exit_high" ? "#ad6d2d" : "#16847b" } }] : [];
+     }) : [];
+-    const turningLabels = runs.filter((run) => ["recovering", "retreating", "low", "high"].includes(run.key))
+-      .filter((run) => exists(view.price[run.start])).map((run) => ({
+-        name: run.key === "low" ? "历史低位" : run.key === "high" ? "历史高位" : BACKGROUND_STYLES[run.key].label,
+-        value: [view.dates[run.start], view.price[run.start]],
+-        itemStyle: { color: BACKGROUND_STYLES[run.key].color },
+-        label: { color: BACKGROUND_STYLES[run.key].color, backgroundColor: "rgba(255,255,255,.94)" },
+-      }));
++    const turningLabels = breadthChangeAnnotations(view.dates, view.price, readings).slice(-12).map((mark) => ({
++      name: mark.label, value: [mark.date, mark.price],
++      itemStyle: { color: mark.tone === "supportive" ? "#0f766e" : "#b45309" },
++      label: { color: mark.tone === "supportive" ? "#0f766e" : "#b45309", backgroundColor: "rgba(255,255,255,.94)" },
++    }));
+     let lastValid = view.breadth[focusIndex].length - 1;
+     while (lastValid >= 0 && !exists(view.breadth[focusIndex][lastValid])) lastValid--;
+     const endMark = lastValid >= 0 && lastValid < view.dates.length - 1 ? {
+@@ -237,21 +239,21 @@
+   onMarketChange: (market: Market) => void;
+   onContextChange?: (context: { windowDays: number; ruleIds: string[]; priceKey: string; fingerprint: string }) => void;
+ }) {
+-  const [windowDays, setWindowDays] = useState<number>(365);
++  const [windowDays, setWindowDays] = useState<number>(1825);
+   const [cnPrice, setCnPrice] = useState<"sse" | "hs300">("sse");
+   const [usPrice, setUsPrice] = useState<"sp500" | "nasdaq">("sp500");
+   const [active, setActive] = useState<ReadonlySet<string>>(() => new Set());
+   const [horizon, setHorizon] = useState<BreadthHorizon>("50");
+-  const [track, setTrack] = useState<BreadthTrack>("historical");
+-  const [compare, setCompare] = useState(false);
++  const [track, setTrack] = useState<BreadthTrack>("off");
++  const [compare, setCompare] = useState(true);
+   const [showPhases, setShowPhases] = useState(true);
+   const [backgroundMode, setBackgroundMode] = useState<BackgroundMode>("levels");
+   const [cursorDate, setCursorDate] = useState<string | null>(null);
+   const priceKey: PriceKey = market === "cn" ? cnPrice : usPrice;
+   const breadthId = market === "cn" ? "CN_ALL_A" : "SP500";
+-  const breadth = useQuery({ queryKey: ["overlayBreadthReading", breadthId, 1825],
++  const breadth = useQuery({ queryKey: ["overlayBreadthReading", breadthId, 12600],
+     queryFn: async ({ signal }): Promise<BreadthReadingResponse> => {
+-      const response = await fetch(`/api/market-context/breadth-history?market_id=${breadthId}&lookback_days=1825&include_observation=true`, { signal });
++      const response = await fetch(`/api/market-context/breadth-history?market_id=${breadthId}&lookback_days=12600&include_observation=true`, { signal });
+       if (!response.ok) throw new Error(`宽度历史读取失败 (${response.status})`);
+       return response.json();
+     }, staleTime: 5 * 60_000, refetchInterval: 5 * 60_000 });
+@@ -265,7 +267,9 @@
+   const gaps = useMemo(() => gapText(runs, view.dates), [runs, view.dates]);
+   const pointByDate = useMemo(() => new Map(points.map((row) => [row.date, row])), [points]);
+   const lastBreadthDate = points[points.length - 1]?.date;
+-  const lastComparableDate = useMemo(() => [...view.dates].reverse().find((date) => pointByDate.has(date)), [view.dates, pointByDate]);
++  const comparableDates = useMemo(() => view.dates.filter((_, index) =>
++    exists(view.price[index]) && view.breadth.some((line) => exists(line[index]))), [view]);
++  const lastComparableDate = comparableDates[comparableDates.length - 1];
+   const selectedDate = cursorDate && view.dates.includes(cursorDate) ? cursorDate : lastComparableDate;
+   const reading = selectedDate ? readings.get(selectedDate) : undefined;
+   const selectedPoint = selectedDate ? pointByDate.get(selectedDate) : undefined;
+@@ -301,39 +305,47 @@
+       </div>
+     </div>
+     <p className="bc-scope">{market === "cn" ? `全A股票宽度 × ${PRICE_NAMES[priceKey]}价格` : `标普500股票样本宽度 × ${PRICE_NAMES[priceKey]}价格`}</p>
+-    <p className={`bc-dates${breadthBehindPrice ? " bc-stale" : ""}`}>价格截至 {lastPriceDate ?? "未提供"} · 宽度截至 {lastBreadthDate ?? "未提供"}{breadthBehindPrice ? "（宽度后续缺失；图上留白）" : ""}</p>
+-    {market === "cn" && <p className="bc-caption">数据修复：2026-08-19—10-30已按同一来源重建；历史分位仅作观察参考。<a href="/library?report=docs%2Fexperiments%2Fbreadth-erp-ma200-increment-review-2026-11-02.md">口径与核验 →</a></p>}
++    <p className="bc-dates" title={`价格截至 ${lastPriceDate ?? "未提供"}；宽度截至 ${lastBreadthDate ?? "未提供"}；仅同日有效值可比`}>图示区间 {view.dates[0] ?? "—"}—{view.dates[view.dates.length - 1] ?? "—"}{breadthBehindPrice && <span className="bc-lag-badge" title="宽度更新落后于价格；后续日期保留缺测，不沿用旧读数">宽度待更新</span>}</p>
+     {breadth.isPending || overlay.isPending ? <p className="bc-state" role="status">正在读取历史曲线…</p> : null}
+     {breadth.isError || overlay.isError ? <p className="bc-state bc-error" role="alert">{breadth.isError ? "宽度历史读取失败。" : "指数价格历史读取失败。"}暂不能显示同期对照。</p> : null}
+     {!breadth.isPending && !overlay.isPending && !breadth.isError && !overlay.isError && (!view.dates.length || !view.breadth.some((line) => line.some(exists))) &&
+       <p className="bc-state">此期间没有价格与宽度同日可比资料。</p>}
+-    <div className="bc-reader-controls bc-controls">
+-      <div role="group" aria-label="图中主要宽度周期"><span className="bc-control-label">观察周期</span>{BREADTH_HORIZONS.map((period) => <button type="button" key={period} aria-pressed={horizon === period} onClick={() => setHorizon(period)}>{period}日</button>)}</div>
+-      <label>参照轨道 <select aria-label="参照轨道" value={track} onChange={(event) => setTrack(event.target.value as BreadthTrack)}><option value="historical">历史分位上下轨</option><option value="fixed">固定高低参考</option><option value="off">关闭轨道</option></select></label>
+-      <label className="bc-compare-toggle"><input type="checkbox" checked={compare} onChange={(event) => setCompare(event.target.checked)} />三线对照</label>
+-    </div>
+-    <div className="bc-background-legend" aria-label="背景颜色图例">
++    {view.dates.length > 0 && view.breadth.some((line) => line.some(exists)) && !breadth.isError && !overlay.isError && <div className="bc-main">
++      <div className="bc-chart-pane">
++      {showPhases && <div className="bc-inline-legend">{backgroundMode === "levels" ? <><span>底色 · {horizon}日宽度</span><span className="bc-low">历史低位</span><span className="bc-high">历史高位</span></> : <><span>底色 · 20/50日参与</span><span className="bc-low">回升</span><span className="bc-high">收缩</span></>}</div>}
++      <BreadthProjectionChart view={view} priceName={PRICE_NAMES[priceKey]} readings={readings} horizon={horizon} track={track} compare={compare} market={market} windowDays={windowDays} runs={runs} selectedDate={selectedDate} onDateChange={setCursorDate} />
++      <details className="bc-chart-settings"><summary>图表设置与资料说明</summary>
++      <div className="bc-reader-controls bc-controls">
++        <div role="group" aria-label="图中主要宽度周期"><span className="bc-control-label">强调周期</span>{BREADTH_HORIZONS.map((period) => <button type="button" key={period} aria-pressed={horizon === period} onClick={() => setHorizon(period)}>{period}日</button>)}</div>
++        <label>参照轨道 <select aria-label="参照轨道" value={track} onChange={(event) => setTrack(event.target.value as BreadthTrack)}><option value="off">关闭轨道</option><option value="historical">历史分位上下轨</option><option value="fixed">固定高低参考</option></select></label>
++        <label className="bc-compare-toggle"><input type="checkbox" checked={compare} onChange={(event) => setCompare(event.target.checked)} />三线对照</label>
++      </div>
++      <div className="bc-background-legend" aria-label="背景颜色图例">
+       <label><input type="checkbox" checked={showPhases} onChange={(event) => setShowPhases(event.target.checked)} />背景色带</label>
+       <select aria-label="背景含义" value={backgroundMode} disabled={!showPhases} onChange={(event) => setBackgroundMode(event.target.value as BackgroundMode)}><option value="levels">宽度高低区间</option><option value="phases">宽度参与升降</option></select>
+       {Object.entries(BACKGROUND_STYLES).filter(([key]) => key === "missing" || showPhases && (backgroundMode === "levels" ? ["low", "high"].includes(key) : !["low", "high"].includes(key))).map(([key, style]) => <span key={key}><i style={{ backgroundColor: style.fill, borderColor: style.color }} aria-hidden="true" />{style.label}</span>)}
+       <small>{!showPhases ? "缺测标记始终保留" : backgroundMode === "levels" ? `${horizon}日历史P10/P90 · 看位置；切换「参与升降」看方向` : "20/50日合看 · 空白为分歧、暂稳或状态未知"}</small>
+-    </div>
+-    <p className="bc-track-hint">{track === "historical" ? `${horizon}日宽度 · 虚线：历史10%／90%分位，点线：中位 · 菱形：退出历史高位或低位。高位可以延续，不等于见顶。`
++      </div>
++      <p className="bc-track-hint">{track === "historical" ? `${horizon}日宽度 · 虚线：历史10%／90%分位，点线：中位 · 菱形：退出历史高位或低位。高位可以延续，不等于见顶。`
+       : track === "fixed" ? `${horizon}日宽度 · 高${market === "cn" ? 80 : 85}%／低${market === "cn" ? 20 : 15}%为固定经验参考，50%表示半数股票。尚未验证为顶底阈值。`
+       : `${horizon}日宽度 · 轨道已关闭，仍可查看原始曲线与下方读数。`}</p>
+-    {view.dates.length > 0 && view.breadth.some((line) => line.some(exists)) && !breadth.isError && !overlay.isError && <>
+-      <BreadthProjectionChart view={view} priceName={PRICE_NAMES[priceKey]} readings={readings} horizon={horizon} track={track} compare={compare} market={market} windowDays={windowDays} runs={runs} selectedDate={selectedDate} onDateChange={setCursorDate} />
++      <p className="bc-caption">为避免拥挤，图上只显示部分参与变化标签；背景保留所选含义的逐日状态，缺测留白。</p>
+       {gaps && <p className="bc-gap-note" role="note"><b>{horizon}日宽度的断线说明</b><span>{gaps}。灰带内不连接宽度线，也不延用参与状态。</span></p>}
+-      <div className="bc-review-controls">
+-        <label>回看日期 <select aria-label="宽度回看日期" value={selectedDate ?? ""} onChange={(event) => setCursorDate(event.target.value)}>{view.dates.map((date) => <option key={date} value={date}>{date}{pointByDate.has(date) ? "" : " · 宽度缺失"}</option>)}</select></label>
+-        <button type="button" onClick={() => setCursorDate(null)}>最近同日读数</button><span>图上悬停可同步回看</span>
+-      </div>
+-      <BreadthReading date={selectedDate} point={selectedPoint} reading={reading} horizon={horizon} onHorizonChange={setHorizon} error={breadth.data?.observation?.error} />
+-    </>}
+     <details className="bc-source bc-legacy"><summary>更多数值条件标记{active.size > 0 ? `（已开${active.size}项）` : ""}</summary><div className="bc-rules" role="group" aria-label="可选标记历史宽度数值条件">
+       <span>数值标记（默认关闭）：</span>{BREADTH_HIGHLIGHT_RULES.map((rule) => <button key={rule.key} type="button" aria-pressed={active.has(rule.key)} onClick={() => toggle(rule.key)} title={rule.full}><span className="bc-rule-dot" style={{ background: rule.color }} aria-hidden="true" />{numericRuleLabel(rule.key, market)}</button>)}
+     </div><p className="bc-caption">条件色带同时标在价格与宽度上；它们只是数值筛选，未验证为顶底或收益信号。20日宽度不参与这六项旧筛选。</p></details>
+     <p className="bc-caption"><a href="/fundamentals?section=overlay#fund-sec-overlay">原长周期叠加：指数 × 利率／两融／VIX →</a></p>
+-    <details className="bc-source"><summary>轨道口径、状态依据与来源</summary><p>历史轨道采用截至所示日期最近1260个有效读数（含当日）的10%、50%、90%分位，至少252个有效值才显示；它描述历史分布，不是预测区间。历史百分位采用不高于当日值的样本比例；变化比较5条记录前，不承诺等于5个交易日。缺值留白，不填补。</p><p>“上涨参与延续”表示20/50日宽度均回升且三周期均≥50%；“低位修复／高位回落”表示此前5条记录中20/50日宽度曾同处固定低位／高位，目前均反向变化。其余状态描述参与回升、收缩或分歧。状态依据固定经验值（A股20/80、美股15/85），越轨事件依据历史分位，两者含义不同。当前没有100日宽度数据。</p><p>宽度是股票中有多少比例站在各自均线上方。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源，也不为本图的分位参数背书。</p>{market === "cn" && <p>2026-11-02修复记录：08-19至10-30按当日取得的5,577只股票名单回看，以WeStock前复权日线统一重建；各周期分别排除当日非交易股票及上市后有效记录不足的新股。它不是逐日历史成员还原。更早的旧记录保留原值；本次补齐不代表长期分位阈值已通过效果验证。</p>}<p>价格与宽度沿用现有接口，严格同日对齐。全A宽度不是沪深300成分股专属宽度，美股沿用标普500股票样本，尚非逐日还原的官方成分股，也非纳指专属宽度。当前接口未给出逐日完整覆盖率；这些限制会影响历史对照。新轨道和状态仅帮助读图，尚无顶底识别或收益增量验证。</p></details>
++    <details className="bc-source"><summary>轨道口径、状态依据与来源</summary><p>价格资料截至 {lastPriceDate ?? "未提供"}，宽度资料截至 {lastBreadthDate ?? "未提供"}；同日有效区间 {comparableDates[0] ?? "—"}—{lastComparableDate ?? "—"}。</p><p>历史轨道采用截至所示日期最近1260个有效读数（含当日）的10%、50%、90%分位，至少252个有效值才显示；它描述历史分布，不是预测区间。历史百分位采用不高于当日值的样本比例；变化比较5条记录前，不承诺等于5个交易日。缺值留白，不填补。</p><p>“上涨支撑增强”表示20/50日宽度均回升且三周期均≥50%；“低位参与回暖／高位参与转弱”表示此前5条记录中20/50日宽度曾同处固定低位／高位，目前均反向变化。其余状态描述参与回升、收缩或分歧。状态依据固定经验值（A股20/80、美股15/85），越轨事件依据历史分位，两者含义不同。当前没有100日宽度数据。</p><p>宽度是股票中有多少比例站在各自均线上方。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源，也不为本图的分位参数背书。</p>{market === "cn" && <p>2026-11-02修复记录：08-19至10-30按当日取得的5,577只股票名单回看，以WeStock前复权日线统一重建；各周期分别排除当日非交易股票及上市后有效记录不足的新股。它不是逐日历史成员还原。更早的旧记录保留原值；本次补齐不代表长期分位阈值已通过效果验证。</p>}<p>价格与宽度沿用现有接口，严格同日对齐。全A宽度不是沪深300成分股专属宽度，美股沿用标普500股票样本，尚非逐日还原的官方成分股，也非纳指专属宽度。当前接口未给出逐日完整覆盖率；这些限制会影响历史对照。新轨道和状态仅帮助读图，尚无顶底识别或收益增量验证。</p></details>
++      </details>
++      </div>
++      <div className="bc-reading-pane">
++      <div className="bc-review-controls">
++        <label>回看日期 <select aria-label="宽度回看日期" value={selectedDate ?? ""} onChange={(event) => setCursorDate(event.target.value)}>{view.dates.map((date) => <option key={date} value={date}>{date}{pointByDate.has(date) ? "" : " · 宽度缺失"}</option>)}</select></label>
++        <button type="button" onClick={() => setCursorDate(null)}>最近同日读数</button><span>图上悬停可同步回看</span>
++      </div>
++      <BreadthReading date={selectedDate} point={selectedPoint} reading={reading} horizon={horizon} onHorizonChange={setHorizon} error={breadth.data?.observation?.error} />
++      </div>
++    </div>}
++
+   </section>;
+ }
+--- before-v6/web/src/components/market-style/BreadthReading.tsx
++++ after-v6/web/src/components/market-style/BreadthReading.tsx
+@@ -1,5 +1,6 @@
+ import type { BreadthHistoryPoint } from "../../types";
+ import { BREADTH_HORIZONS, type BreadthHorizon, type BreadthReadingPoint } from "./breadthReadingTypes";
++import { breadthInterpretation } from "./breadthInterpretation";
+ 
+ const eventNames = {
+   enter_low: "进入历史低位", exit_low: "退出历史低位", enter_high: "进入历史高位", exit_high: "退出历史高位",
+@@ -20,14 +21,18 @@
+   error?: string;
+ }) {
+   const selected = reading?.horizons[horizon];
+-  const state = reading?.state;
+-  return <div className="bc-reading" data-tone={state?.tone ?? "unknown"} aria-label="所选日期宽度判读">
++  const interpretation = breadthInterpretation(point ? reading : null);
++  const headline = !point ? "当日宽度缺失" : !reading ? "判读暂未提供" : interpretation.headline;
++  const meaning = !point ? "这一天没有宽度记录，不能沿用此前读数判断当前状态。"
++    : !reading ? error ? "历史日期或输入需要核验，暂不生成判读。" : "原始曲线仍可查看，判读资料尚未加载。"
++    : interpretation.meaning;
++  return <div className="bc-reading" data-tone={interpretation.tone} aria-label="所选日期宽度判读">
+     <div className="bc-reading-head">
+       <div><span className="bc-eyebrow">{date ?? "日期未提供"} · 参与状态</span>
+-        <h3>{state?.label ?? (point ? "判读暂未提供" : "当日宽度缺失")}</h3></div>
+-      <span className="bc-reading-tag">观察描述</span>
++        <h3>{headline}</h3></div>
++      <span className="bc-reading-tag" title="宽度变化与价格可不同步；只描述当前资料，不确认顶底">观察</span>
+     </div>
+-    <p className="bc-reading-summary">{state?.summary ?? (error ? "历史日期或输入需要核验，暂不生成轨道与状态。" : point ? "原始曲线仍可查看，判读资料尚未加载。" : "这一天没有宽度记录，不能沿用此前读数判断当前状态。")}</p>
++    <p className="bc-reading-summary">{meaning}</p>
+     <div className="bc-reading-metrics" role="group" aria-label="选择宽度周期">
+       {BREADTH_HORIZONS.map((period) => {
+         const stats = reading?.horizons[period];
+@@ -35,17 +40,21 @@
+         return <button key={period} type="button" aria-pressed={horizon === period} onClick={() => onHorizonChange(period)}>
+           <span className="bc-metric-label">{period}日 <span>{horizonNames[period]}</span></span>
+           <strong>{number(point?.[`breadth_${period}`], "%")}</strong>
+-          <span className="bc-metric-change">较5条前 <b>{delta == null ? "—" : `${delta > 0 ? "+" : ""}${delta.toFixed(1)}`}</b> 个百分点</span>
++          <span className="bc-metric-change" title="与5条宽度记录前相比，不保证等于5个交易日">较5条前 <b>{delta == null ? "—" : `${delta > 0 ? "+" : ""}${delta.toFixed(1)}`}</b> 点</span>
+         </button>;
+       })}
+     </div>
+-    <div className="bc-track-reading">
++    <p className="bc-reading-watch">{point && reading ? interpretation.watch : "资料不足，暂不作参与判断。"}</p>
++    <details className="bc-reading-detail"><summary>历史位置与判读依据</summary>
++      <p>{reading?.state.summary ?? meaning}</p>
++      <div className="bc-track-reading">
+       <div><b>{horizon}日 · {selected ? positionNames[selected.position] : "位置未知"}</b>
+         <span>{selected?.status === "ready" ? `${eventNames[selected.event]} · 历史百分位 ${number(selected.percentile)}`
+           : selected?.status === "insufficient" ? `历史不足 ${selected.sample_count}/252 条，轨道暂缺`
+           : "当日轨道暂无有效读数"}</span></div>
+       {selected?.status === "ready" && <div className="bc-track-values"><span>下轨 <b>{number(selected.lower, "%")}</b></span><span>中位 <b>{number(selected.median, "%")}</b></span><span>上轨 <b>{number(selected.upper, "%")}</b></span></div>}
+-    </div>
+-    <p className="bc-reading-footnote">高位回落、低位修复是转折观察；是否形成价格顶底，仍需对照上方指数走势。这里不确认顶底。</p>
++      </div>
++      <p className="bc-reading-footnote">高位回落、低位修复只是参与变化观察，未确认价格顶底。</p>
++    </details>
+   </div>;
+ }
+--- before-v6/web/src/components/market-style/breadth-comparison.css
++++ after-v6/web/src/components/market-style/breadth-comparison.css
+@@ -11,8 +11,15 @@
+ .bc-market-controls > div:first-child { background: var(--bg); border-radius: var(--radius-sm); padding: 2px; }
+ .bc-controls button:focus-visible, .bc-rules button:focus-visible, .bc-source summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ .bc-chart { width: 100%; min-width: 0; height: 540px; margin-top: 8px; }
++.bc-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(270px, 320px); gap: 18px; align-items: start; margin-top: 10px; }
++.bc-chart-pane, .bc-reading-pane { min-width: 0; }
++.bc-reading-pane { position: sticky; top: 110px; }
++.bc-chart-settings { margin-top: 8px; padding: 8px 10px; border: 1px solid var(--border-subtle); border-radius: 5px; color: var(--text-secondary); font-size: 12px; }
++.bc-chart-settings > summary, .bc-reading-detail > summary { cursor: pointer; color: var(--accent); }
++.bc-chart-settings > summary:focus-visible, .bc-reading-detail > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ .bc-dates { font-variant-numeric: tabular-nums; }
+ .bc-dates.bc-stale { color: var(--warn); font-weight: 600; }
++.bc-lag-badge { display: inline-block; margin-left: 7px; padding: 1px 5px; border-radius: 4px; color: var(--warn); background: var(--bg-card-hover); cursor: help; }
+ .bc-error { color: var(--error); }
+ .bc-rules { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-subtle); font-size: var(--fs-xs); }
+ .bc-rules > span { color: var(--text-secondary); }
+@@ -40,25 +47,28 @@
+ .bc-background-legend small { color: var(--text-secondary); font-size: 11px; }
+ .bc-gap-note { margin: 5px 0 12px; padding: 10px 12px; background: var(--bg-card-hover); border-left: 3px solid #8794a4; font-size: 12px; line-height: 1.65; color: var(--text-secondary); }
+ .bc-gap-note b { color: var(--text-primary); display: block; font-weight: 600; margin-bottom: 2px; }
+-.bc-review-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; margin: 6px 0 14px; }
++.bc-review-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin: 0 0 8px; }
+ .bc-review-controls button { background: transparent; border: 0; padding: 5px 0; color: var(--accent); cursor: pointer; font: inherit; font-size: 12px; }
+ .bc-review-controls > span { color: var(--text-tertiary, var(--text-secondary)); font-size: 11px; margin-left: auto; }
+-.bc-reading { border: 1px solid var(--border-subtle); border-top: 3px solid #7890a3; border-radius: 6px; padding: 16px; background: var(--bg-card); }
++.bc-reading { border: 1px solid var(--border-subtle); border-top: 3px solid #7890a3; border-radius: 6px; padding: 12px; background: var(--bg-card); }
+ .bc-reading[data-tone="supportive"] { border-top-color: #16847b; }
+ .bc-reading[data-tone="caution"] { border-top-color: #ad6d2d; }
+ .bc-reading-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+ .bc-eyebrow { color: var(--text-secondary); font-size: 11px; font-variant-numeric: tabular-nums; }
+-.bc-reading-head h3 { font-size: 21px; margin: 4px 0 0; font-weight: 650; letter-spacing: .01em; color: var(--text-primary); }
++.bc-reading-head h3 { font-size: 18px; margin: 4px 0 0; font-weight: 650; letter-spacing: .01em; color: var(--text-primary); }
+ .bc-reading-tag { color: var(--text-secondary); border: 1px solid var(--border-subtle); border-radius: 4px; padding: 3px 7px; font-size: 11px; flex-shrink: 0; }
+-.bc-reading-summary { color: var(--text-secondary); margin: 8px 0 14px; line-height: 1.65; font-size: 12px; }
+-.bc-reading-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+-.bc-reading-metrics button { text-align: left; padding: 10px 12px; border: 1px solid var(--border-subtle); border-radius: 5px; background: transparent; font: inherit; color: var(--text-primary); cursor: pointer; min-width: 0; }
++.bc-reading-summary { color: var(--text-secondary); margin: 7px 0 10px; line-height: 1.55; font-size: 12px; }
++.bc-reading-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
++.bc-reading-metrics button { text-align: left; padding: 7px 6px; border: 1px solid var(--border-subtle); border-radius: 5px; background: transparent; font: inherit; color: var(--text-primary); cursor: pointer; min-width: 0; }
+ .bc-reading-metrics button[aria-pressed="true"] { border-color: #7b9bbb; background: var(--bg-card-hover); }
+-.bc-metric-label { display: flex; justify-content: space-between; align-items: center; gap: 5px; font-size: 12px; }
+-.bc-metric-label > span { color: var(--text-secondary); font-size: 11px; }
+-.bc-reading-metrics strong { display: block; font-size: 25px; font-weight: 600; font-variant-numeric: tabular-nums; margin: 6px 0; }
++.bc-metric-label { display: block; font-size: 12px; }
++.bc-metric-label > span { display: block; color: var(--text-secondary); font-size: 10px; }
++.bc-reading-metrics strong { display: block; font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; margin: 3px 0; }
+ .bc-metric-change { color: var(--text-secondary); font-size: 11px; line-height: 1.5; display: block; }
+ .bc-metric-change b { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--text-primary); }
++.bc-reading-watch { margin: 10px 0 0; padding: 8px 9px; border-radius: 5px; background: var(--bg-card-hover); font-size: 12px; line-height: 1.5; }
++.bc-reading-detail { margin-top: 11px; color: var(--text-secondary); font-size: 11px; line-height: 1.55; }
++.bc-reading-detail > p { margin: 8px 0 0; }
+ .bc-track-reading { margin-top: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; font-size: 12px; }
+ .bc-track-reading > div:first-child { display: flex; flex-direction: column; gap: 4px; }
+ .bc-track-reading > div:first-child > span { color: var(--text-secondary); font-size: 11px; }
+@@ -68,6 +78,7 @@
+ .bc-legacy { margin-top: 15px; }
+ .bc-legacy .bc-rules { border: 0; padding-top: 0; }
+ .bc-reading button:focus-visible, .bc-review-controls button:focus-visible, .bc-reader-controls select:focus-visible, .bc-review-controls select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
++@media (max-width: 1000px) { .bc-main { grid-template-columns: minmax(0, 1fr); } .bc-reading-pane { position: static; } }
+ @media (max-width: 600px) {
+   .bc-chart { height: 480px; }
+   .bc-controls { width: 100%; justify-content: flex-start; }
+@@ -87,3 +98,8 @@
+   .bc-background-legend { gap: 8px 12px; padding: 9px; font-size: 11px; }
+   .bc-background-legend label, .bc-background-legend small { flex-basis: 100%; }
+ }
++
++.bc-inline-legend { display: flex; flex-wrap: wrap; gap: 7px 12px; align-items: center; color: var(--text-secondary); font-size: 11px; margin: 0 0 4px; }
++.bc-inline-legend .bc-low, .bc-inline-legend .bc-high { display: inline-flex; align-items: center; gap: 5px; }
++.bc-inline-legend .bc-low::before, .bc-inline-legend .bc-high::before { content: ""; width: 11px; height: 8px; border-radius: 2px; background: rgba(13,148,136,.22); }
++.bc-inline-legend .bc-high::before { background: rgba(217,119,6,.22); }
+--- before-v6/web/src/components/market-observation-alerts/MiniTrend.tsx
++++ after-v6/web/src/components/market-observation-alerts/MiniTrend.tsx
+@@ -0,0 +1,40 @@
++type Line = { name: string; color: string; values: (number | null)[] };
++const finite = (v: number | null | undefined): v is number => typeof v === "number" && Number.isFinite(v);
++
++/** A small, date-aligned view of supplied observations; missing points break the line. */
++export default function MiniTrend({ dates, lines, lower, upper, percent = false, label }: {
++  dates: string[]; lines: Line[]; lower?: (number | null)[]; upper?: (number | null)[];
++  percent?: boolean; label: string;
++}) {
++  if (dates.length < 2 || !lines.some(line => line.values.filter(finite).length >= 2)) return <div className="moa-mini-empty">趋势资料不足</div>;
++  const values = [...lines.flatMap(line => line.values), ...(lower ?? []), ...(upper ?? [])].filter(finite);
++  if (!values.length) return <div className="moa-mini-empty">趋势资料不足</div>;
++  const low = percent ? 0 : Math.min(...values);
++  const high = percent ? 100 : Math.max(...values);
++  const span = high - low || 1;
++  const start = Date.parse(dates[0]);
++  const elapsed = Date.parse(dates[dates.length - 1]) - start || 1;
++  const x = (i: number) => 8 + (Date.parse(dates[i]) - start) / elapsed * 304;
++  const y = (v: number) => 12 + (high - v) / span * 94;
++  const path = (data: (number | null)[]) => {
++    let drawing = false;
++    return dates.map((_, i) => {
++      const value = data[i];
++      if (!finite(value)) { drawing = false; return ""; }
++      const command = `${drawing ? "L" : "M"}${x(i).toFixed(2)},${y(value).toFixed(2)}`;
++      drawing = true;
++      return command;
++    }).join(" ");
++  };
++  return <div className="moa-mini">
++    <svg viewBox="0 0 320 120" role="img" aria-label={label}>
++      <title>{label}</title>
++      {percent && <><path d={`M8,${y(50)}H312`} stroke="#9caaba" strokeDasharray="3 4" fill="none" />
++        <text x="9" y={y(50) - 5} fill="#78889a" fontSize="9">50% · 半数股票</text></>}
++      {lower && <path d={path(lower)} stroke="#bb8b4b" strokeDasharray="4 3" strokeWidth="1.2" fill="none" />}
++      {upper && <path d={path(upper)} stroke="#368d80" strokeDasharray="4 3" strokeWidth="1.2" fill="none" />}
++      {lines.map((line, i) => <path key={line.name} d={path(line.values)} stroke={line.color} strokeWidth={i === 0 ? 2.3 : 1.4} strokeLinejoin="round" strokeLinecap="round" fill="none" />)}
++    </svg>
++    <div className="moa-mini-dates"><span>{dates[0]}</span><span>{dates[dates.length - 1]}</span></div>
++  </div>;
++}
+--- before-v6/web/src/components/market-style/breadthInterpretation.ts
++++ after-v6/web/src/components/market-style/breadthInterpretation.ts
+@@ -0,0 +1,46 @@
++import type { BreadthReadingPoint } from "./breadthReadingTypes";
++
++type Interpretation = { headline: string; meaning: string; watch: string; tone: "supportive" | "caution" | "neutral" | "unknown" };
++
++const BY_CODE: Record<string, Interpretation> = {
++  recovering: { headline: "低位参与回暖", meaning: "此前站上20日、50日均线的股票比例都很低，现在一起回升。", watch: "留意回升能否延续；这还不是底部确认。", tone: "supportive" },
++  expanding: { headline: "上涨支撑增强", meaning: "站上20日、50日均线的股票比例一起上升，三个周期都已过半。", watch: "留意广泛参与能否维持。", tone: "supportive" },
++  improving: { headline: "修复尚未完成", meaning: "站上20日、50日均线的股票比例一起上升，但还不能确认三个周期都已过半。", watch: "继续看较长期的参与能否跟上。", tone: "supportive" },
++  retreating: { headline: "高位参与转弱", meaning: "此前站上20日、50日均线的股票比例都很高，现在一起回落。", watch: "留意回落是否继续；这还不是顶部确认。", tone: "caution" },
++  weakening: { headline: "弱势仍在扩散", meaning: "站上20日、50日均线的股票比例一起下降，站上200日均线的仍不足半数。", watch: "先看参与面是否停止收缩。", tone: "caution" },
++  contracting: { headline: "上涨支撑减弱", meaning: "站上20日、50日均线的股票比例一起下降。", watch: "留意下跌是否扩散到长期参与。", tone: "caution" },
++  flat: { headline: "参与变化不大", meaning: "站上20日、50日均线的股票比例较5条记录前没有变化。", watch: "继续看下一段参与方向。", tone: "neutral" },
++  mixed: { headline: "短中期方向不一", meaning: "站上20日、50日均线的股票比例变化方向不一致。", watch: "先看短中期参与能否趋于一致。", tone: "neutral" },
++};
++
++const UNKNOWN: Interpretation = { headline: "参与状态未知", meaning: "同日宽度或此前可比读数不足。", watch: "等待有效的同日资料。", tone: "unknown" };
++
++/** Plain-language rendering of the existing backend state; no new thresholds or score. */
++export function breadthInterpretation(reading?: BreadthReadingPoint | null): Interpretation {
++  return reading ? BY_CODE[reading.state.code] ?? UNKNOWN : UNKNOWN;
++}
++
++const DIRECTION: Record<string, "up" | "down"> = {
++  recovering: "up", expanding: "up", improving: "up",
++  retreating: "down", weakening: "down", contracting: "down",
++};
++
++/** Mark sparse state changes using only that date and earlier states. */
++export function breadthChangeAnnotations(
++  dates: readonly string[], prices: readonly (number | null)[], readings: ReadonlyMap<string, BreadthReadingPoint>,
++): { date: string; price: number; label: string; tone: "supportive" | "caution" }[] {
++  const marks: { date: string; price: number; label: string; tone: "supportive" | "caution" }[] = [];
++  let prior: "up" | "down" | undefined;
++  let lastMark = -90;
++  dates.forEach((date, index) => {
++    const code = readings.get(date)?.state.code ?? "";
++    const direction = DIRECTION[code];
++    const price = prices[index];
++    if (direction && direction !== prior && typeof price === "number" && Number.isFinite(price) && index - lastMark >= 90) {
++      marks.push({ date, price, label: direction === "up" ? "参与回升" : "参与转弱", tone: direction === "up" ? "supportive" : "caution" });
++      lastMark = index;
++    }
++    prior = direction;
++  });
++  return marks;
++}
+--- before-v6/web/src/components/market-style/breadthInterpretation.test.mjs
++++ after-v6/web/src/components/market-style/breadthInterpretation.test.mjs
+@@ -0,0 +1,33 @@
++import test from "node:test";
++import assert from "node:assert/strict";
++import { build } from "esbuild";
++
++const bundle = await build({ entryPoints: [new URL("./breadthInterpretation.ts", import.meta.url).pathname],
++  bundle: true, format: "esm", platform: "node", write: false });
++const { breadthInterpretation, breadthChangeAnnotations } = await import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text).toString("base64")}`);
++
++test("only known backend codes receive a specific reading", () => {
++  const expected = { recovering: "supportive", expanding: "supportive", improving: "supportive",
++    retreating: "caution", weakening: "caution", contracting: "caution", flat: "neutral", mixed: "neutral" };
++  for (const [code, tone] of Object.entries(expected)) {
++    const result = breadthInterpretation({ state: { code, label: "upstream", summary: "upstream", tone: "unknown" } });
++    assert.equal(result.tone, tone, code);
++    assert.ok(result.headline && result.meaning && result.watch);
++    assert.doesNotMatch(`${result.headline}${result.meaning}${result.watch}`, /买入|卖出|见顶|见底/);
++  }
++});
++
++test("missing and new codes stay unknown", () => {
++  assert.equal(breadthInterpretation(null).tone, "unknown");
++  assert.equal(breadthInterpretation({ state: { code: "new_code" } }).tone, "unknown");
++});
++
++test("a historical change mark does not depend on the length of its later run", () => {
++  const point = (code) => ({ state: { code } });
++  const dates = Array.from({ length: 100 }, (_, i) => `d${i}`);
++  const base = new Map(dates.map((date, i) => [date, point(i < 10 ? "flat" : i < 20 ? "improving" : "flat")]));
++  const short = breadthChangeAnnotations(dates.slice(0, 21), dates.map(() => 100), base);
++  const long = breadthChangeAnnotations(dates, dates.map(() => 100), base);
++  assert.deepEqual(short, long);
++  assert.deepEqual(long.map((mark) => [mark.date, mark.label]), [["d10", "参与回升"]]);
++});

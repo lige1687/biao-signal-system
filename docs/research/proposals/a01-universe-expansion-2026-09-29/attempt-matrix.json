@@ -1,0 +1,1717 @@
+{
+  "schema_status": "document_contract_not_runner_api",
+  "research_id": "A01-universe-expansion-20260929",
+  "version": "1.0.0",
+  "owner": "technical_agent",
+  "execution": "blocked",
+  "evidence": "not_evaluated",
+  "formula_reference": "research.a01.signed_band@1.0.1",
+  "execution_object": "research.a01.signed_band@2.0.0",
+  "numeric_policy": "segmented-real-ohlc-252@1.0.0",
+  "question": "state-layer conditional price-distance increment",
+  "primary": {
+    "layer": "CN_stock",
+    "universe": "CN-CSI300-PIT-ordinary-v1",
+    "N": 60,
+    "bar": "daily",
+    "decision": "W",
+    "target": "return20",
+    "contrast": "B2 -> B2F",
+    "minimum_research_attention_improvement_relative": 0.01,
+    "not_a_trading_materiality_threshold": true
+  },
+  "layers": [
+    {
+      "id": "CN_stock",
+      "status": "BLOCKED_DATA",
+      "members": "historical CSI300 ordinary A shares, effective at each decision",
+      "hypothesized_scope": "large-cap ordinary-share entry-position judgement",
+      "tested_scope": "not_evaluated",
+      "supported_scope": "no_new_evidence",
+      "data_gaps": [
+        "20-session membership probes incomplete change certification",
+        "25 historical members missing in current stock close panel across 2014-26",
+        "no qualified historical OHLC/actions/delisting outcome source"
+      ]
+    },
+    {
+      "id": "CN_index",
+      "status": "BLOCKED_DATA",
+      "planned_primary": [
+        "000300.SH",
+        "399006.SZ"
+      ],
+      "planned_later": [
+        "000016.SH",
+        "000905.SH",
+        "000852.SH",
+        "000688.SH"
+      ],
+      "hypothesized_scope": "aggregate price process; not investable account",
+      "tested_scope": "not_evaluated",
+      "supported_scope": "no_new_evidence",
+      "data_gaps": [
+        "close-only Chinext source lacks ATR/entry open",
+        "CSI300 OHLC fixture source/calendar/publication/history qualification pending"
+      ]
+    }
+  ],
+  "period": [
+    "2022-01-01",
+    "2026-06-30"
+  ],
+  "earliest_source_warmup": "2020-12-18",
+  "new_history_status": "retrospective_temporal_and_preregistered_asset_transfer_not_sealed_C",
+  "models": [
+    "B0",
+    "F",
+    "B1",
+    "B1F",
+    "B2",
+    "B2F"
+  ],
+  "main_weighting": "asset-equal within each date, then date-equal",
+  "train_weighting": "same-date equal assets, weights sum1",
+  "folds": [
+    {
+      "train_end_exclusive": "2024-01-01",
+      "eval": [
+        "2024-01-01",
+        "2025-01-01"
+      ]
+    },
+    {
+      "train_end_exclusive": "2025-01-01",
+      "eval": [
+        "2025-01-01",
+        "2026-01-01"
+      ]
+    },
+    {
+      "train_end_exclusive": "2026-01-01",
+      "eval": [
+        "2026-01-01",
+        "2026-07-01"
+      ]
+    }
+  ],
+  "missing": "no fills; calendar retained; after gap require252 real complete OHLC; every incomplete/termination label reason retained",
+  "attempts": [],
+  "market_attempts_used": 0,
+  "budget": {
+    "core_batches_max": 1,
+    "followup_batches_max": 3,
+    "market_runner_attempts_max": 4,
+    "qualification_attempts_max": 4,
+    "new_market_data_requests": 0,
+    "paid": 0,
+    "runtime_hours_max": 2,
+    "working_memory_GB_max": 8,
+    "new_artifacts_GB_max": 2
+  },
+  "historical_budgets_preserved": {
+    "A01_market": {
+      "used": 3,
+      "max": 4
+    },
+    "A02_market": {
+      "used": 1,
+      "max": 4
+    },
+    "universe_correction": {
+      "coverage_runs": 2,
+      "targeted_diagnosis": 1,
+      "operations_max": 3
+    }
+  },
+  "optional_nonlinear_models": 0,
+  "recovery_numeric_sensitivity_warmup": 480,
+  "description_configs": [
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 5
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 10
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 20
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 60
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 120
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 5
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 10
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 20
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 60
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 120
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 5
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 10
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 20
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 60
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 120
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 5
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 10
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 20
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 60
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 120
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 5
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 10
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 20
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 60
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 120
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 5
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 10
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 20
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 60
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 120
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 5
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 10
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 20
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 60
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 120
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 5
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 10
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 20
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 60
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 120
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 5
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 10
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 20
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 60
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 120
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 5
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 10
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 20
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 60
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 120
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 5
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 10
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 20
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 60
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 120
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 5
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 10
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 20
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 60
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 120
+    }
+  ],
+  "prediction_configs": [
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "W",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 20,
+      "freq": "M",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "W",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 60,
+      "freq": "M",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "W",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_stock",
+      "N": 120,
+      "freq": "M",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "W",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 20,
+      "freq": "M",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "W",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 60,
+      "freq": "M",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "W",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 20,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 20,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 20,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 60,
+      "target": "return",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 60,
+      "target": "mae",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    },
+    {
+      "layer": "CN_index",
+      "N": 120,
+      "freq": "M",
+      "h": 60,
+      "target": "up",
+      "models": [
+        "B0",
+        "F",
+        "B1",
+        "B1F",
+        "B2",
+        "B2F"
+      ],
+      "lambda": 1,
+      "declared_before_outcomes": true
+    }
+  ]
+}

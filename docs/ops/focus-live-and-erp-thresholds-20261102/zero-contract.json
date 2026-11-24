@@ -1,0 +1,39 @@
+{
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "No writes outside assigned paths",
+    "No protected input changes, new agents or model replacement",
+    "Stop when exact gap or evidence boundary found; return limitations"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "mission": "Add first zero crossings to existing focus momentum price projection, preserving negative spans and exact historical data",
+  "task_scope": [
+    "Read existing frontend projection/data/tests, add daily first strict downcross and upcross price markers with date and focus value; zero equality should bridge naturally without repeat events; missing data or unobserved price date must not invent crossing; range filtering must not invent first edge event",
+    "Do not call below zero an opportunity/buy signal; use 进入负值区/回到正值区 labels and explain closes known after that day",
+    "Run meaningful targeted node test and TypeScript verification; local files only"
+  ],
+  "read_only_paths": [
+    "web/AGENTS.md",
+    "web/src/components/focus-momentum/data.ts",
+    "web/package.json"
+  ],
+  "write_paths": [
+    "web/src/components/focus-momentum/price-projection-data.ts",
+    "web/src/components/focus-momentum/price-projection.tsx",
+    "web/src/components/focus-momentum/price-projection.test.mjs",
+    "docs/ops/focus-live-and-erp-thresholds-20261102/zero-cross-review.md"
+  ],
+  "expected_outputs": [
+    "Reviewed code/tests only in assigned paths",
+    "Short report with semantics, checks, limitations"
+  ]
+}

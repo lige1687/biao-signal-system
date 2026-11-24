@@ -1,0 +1,121 @@
+--- web/src/components/market-observation-alerts/index.tsx (v8-before)
++++ web/src/components/market-observation-alerts/index.tsx (v8-after)
+@@ -11,6 +11,7 @@
+ import type { AlertPoint } from "./model";
+ import MiniTrend from "./MiniTrend";
+ import { BREADTH_LINES } from "../trend/zones";
++import BreadthInstitutionalReference from "../market-style/BreadthInstitutionalReference";
+ import "./style.css";
+ 
+ async function getJson(url: string, signal: AbortSignal): Promise<unknown> {
+@@ -67,12 +68,13 @@
+         lower={erpRows.map(p => p.lower)} upper={erpRows.map(p => p.upper)} label="沪深300股债利差近五年趋势与三年上下轨，绿色虚线为上轨，棕色虚线为下轨" />
+     </> : <>
+       <div className="moa-horizons">{periods.map(period => <div key={period}><span><i style={{ background: colors[period] }} />{period}日</span><strong>{latest?.[`breadth_${period}`] == null ? "—" : `${latest[`breadth_${period}`]!.toFixed(1)}%`}</strong></div>)}</div>
+-      <div className="moa-breadth-thresholds" aria-label="50日宽度历史高低观察区"><span>50日历史参考 · 非买卖线</span><span>低位 ≤ <b>{format(s.latest?.lower)}%</b></span><span>高位 ≥ <b>{format(s.latest?.upper)}%</b></span></div>
++      <div className="moa-breadth-thresholds" aria-label="50日宽度历史高低观察区"><span>50日动态分位 · 非买卖线</span><span>低位 ≤ <b>{format(s.latest?.lower)}%</b></span><span>高位 ≥ <b>{format(s.latest?.upper)}%</b></span></div>
+       <MiniTrend dates={rows.map(p => p.date)} percent lower={low} upper={high} lines={["50", "20", "200"].map(period => ({ name: `${period}日`, color: colors[period as typeof periods[number]], values: rows.map(p => p[`breadth_${period as typeof periods[number]}`] ?? null) }))}
+         label={`${s.label}近90条记录，蓝色50日、橙色20日、紫色200日；绿区为50日历史低位，观察修复机会；棕区为50日历史高位，观察回落风险。边界为当时P10/P90，非已验证买卖线`} />
+       <div className="moa-threshold-meaning"><span>低位回升时看机会</span><span>高位转弱时看风险</span></div>
+     </>}
+     <p className="moa-use">{isErp ? "上穿上轨有历史反弹线索；下穿下轨未可靠地提示顶部。" : reading && s.latest?.phase === "low" ? `已在低位观察区。${interpretation.watch}` : reading && s.latest?.phase === "high" ? `已在高位观察区。${interpretation.watch}` : interpretation.meaning}</p>
++    {!isErp && <BreadthInstitutionalReference market={s.id.startsWith("SP500:") ? "us" : "cn"} />}
+     <footer><Link to={href} onClick={onRead}>看大图 <span aria-hidden="true">↗</span></Link>
+       <details className="moa-history"><summary>依据与变化{s.newEvents.length > 0 ? ` · ${s.newEvents.length}项新变化` : ""}</summary>
+         <div><p>读数日期 {s.latest?.date ?? "未知"}。{s.qualityLabel}</p>
+--- web/src/components/market-observation-alerts/style.css (v8-before)
++++ web/src/components/market-observation-alerts/style.css (v8-after)
+@@ -37,6 +37,10 @@
+ .moa-mini-dates { display: flex; justify-content: space-between; color: #8490a1; font-size: 9px; font-variant-numeric: tabular-nums; }
+ .moa-mini-empty { display: grid; place-items: center; height: 132px; color: #8490a1; }
+ .moa-use { min-height: 33px; margin: 10px 0; color: #4e5f76; font-size: 12px; line-height: 1.5; }
++.moa-item .bc-external-reference { margin: 9px 0; padding: 7px 8px; background: #f4f7fb; }
++.moa-item .bc-external-values { gap: 2px 10px; }
++.moa-item .bc-external-values > a { flex-basis: 100%; }
++.moa-item .bc-external-detail a { white-space: normal; }
+ .moa-item footer { align-items: flex-start; border-top: 1px solid #e5ebf3; padding-top: 8px; font-size: 11px; }
+ .market-observation-alerts a { color: #2458c6; text-decoration: none; white-space: nowrap; }
+ .market-observation-alerts a:hover { text-decoration: underline; }
+--- web/src/components/market-style/BreadthComparison.tsx (v8-before)
++++ web/src/components/market-style/BreadthComparison.tsx (v8-after)
+@@ -5,6 +5,7 @@
+ import type { BreadthHistoryPoint, RatesHistorySeries } from "../../types";
+ import { BREADTH_HIGHLIGHT_RULES, BREADTH_LINES, computeHighlightBands, type HighlightBand } from "../trend/zones";
+ import BreadthReading from "./BreadthReading";
++import BreadthInstitutionalReference from "./BreadthInstitutionalReference";
+ import { breadthChangeAnnotations } from "./breadthInterpretation";
+ import { BREADTH_HORIZONS, type BreadthHorizon, type BreadthTrack, type BreadthReadingPoint, type BreadthReadingResponse } from "./breadthReadingTypes";
+ import { BACKGROUND_STYLES, backgroundRuns, gapText, type BackgroundRun, type BackgroundMode } from "./breadthChartDisplay";
+@@ -314,6 +315,7 @@
+       <div className="bc-chart-pane">
+       {showPhases && <div className="bc-inline-legend">{backgroundMode === "levels" ? <><span>底色 · {horizon}日宽度</span><span className="bc-low">历史低位</span><span className="bc-high">历史高位</span></> : <><span>底色 · 20/50日参与</span><span className="bc-low">回升</span><span className="bc-high">收缩</span></>}</div>}
+       <BreadthProjectionChart view={view} priceName={PRICE_NAMES[priceKey]} readings={readings} horizon={horizon} track={track} compare={compare} market={market} windowDays={windowDays} runs={runs} selectedDate={selectedDate} onDateChange={setCursorDate} />
++      <BreadthInstitutionalReference market={market} horizon={horizon} />
+       <details className="bc-chart-settings"><summary>图表设置与资料说明</summary>
+       <div className="bc-reader-controls bc-controls">
+         <div role="group" aria-label="图中主要宽度周期"><span className="bc-control-label">强调周期</span>{BREADTH_HORIZONS.map((period) => <button type="button" key={period} aria-pressed={horizon === period} onClick={() => setHorizon(period)}>{period}日</button>)}</div>
+--- web/src/components/market-style/breadth-comparison.css (v8-before)
++++ web/src/components/market-style/breadth-comparison.css (v8-after)
+@@ -103,3 +103,15 @@
+ .bc-inline-legend .bc-low, .bc-inline-legend .bc-high { display: inline-flex; align-items: center; gap: 5px; }
+ .bc-inline-legend .bc-low::before, .bc-inline-legend .bc-high::before { content: ""; width: 11px; height: 8px; border-radius: 2px; background: rgba(13,148,136,.22); }
+ .bc-inline-legend .bc-high::before { background: rgba(217,119,6,.22); }
++.bc-external-reference { margin: 9px 0; padding: 8px 10px; border: 1px solid var(--border-subtle, #e2e8f0); border-radius: 5px; background: var(--bg-card-hover, #f7f9fc); color: var(--text-secondary, #607088); font-size: 11px; line-height: 1.55; }
++.bc-external-values { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 14px; }
++.bc-external-values > a { color: var(--accent, #2458c6); text-decoration: none; font-size: 10px; }
++.bc-external-values > span { white-space: nowrap; }
++.bc-external-values b { font-weight: 550; color: var(--text-primary, #172b45); font-variant-numeric: tabular-nums; }
++.bc-external-values [data-selected="true"] b { font-weight: 700; }
++.bc-external-detail { margin-top: 4px; font-size: 10px; }
++.bc-external-detail > summary { cursor: pointer; color: var(--text-secondary, #607088); }
++.bc-external-detail p { margin: 7px 0 0; font-size: 11px; }
++.bc-external-detail a { color: var(--accent, #2458c6); }
++.bc-external-note { margin: 5px 0 0; font-size: 11px; }
++.bc-external-reference :is(a, summary):focus-visible { outline: 2px solid var(--accent, #2458c6); outline-offset: 2px; }
+--- web/src/components/market-style/BreadthInstitutionalReference.tsx (v8-before)
++++ web/src/components/market-style/BreadthInstitutionalReference.tsx (v8-after)
+@@ -0,0 +1,23 @@
++import type { BreadthHorizon } from "./breadthReadingTypes";
++import { BREADTH_EXTERNAL_REFERENCES as refs } from "./breadthInstitutionalReferences";
++import "./breadth-comparison.css";
++
++/** Fixed external examples alongside, never substituted for, the local dynamic percentiles. */
++export default function BreadthInstitutionalReference({ market, horizon }: {
++  market: "cn" | "us"; horizon?: BreadthHorizon;
++}) {
++  return <aside className="bc-external-reference" aria-label="外部来源宽度固定参考">
++    <div className="bc-external-values">
++      <a href={refs.stockcharts.url} target="_blank" rel="noreferrer">StockCharts 固定参考 ↗</a>
++      <span data-selected={horizon === "50"}>50日 <b>&lt;{refs.stockcharts.sma50.lower}%低 / &gt;{refs.stockcharts.sma50.upper}%高</b></span>
++      <span data-selected={horizon === "200"}>200日 <b>{refs.stockcharts.sma200.majority}%半数线</b></span>
++    </div>
++    {horizon === "20" && <p className="bc-external-note">20日宽度暂无已核实的机构固定参考值。</p>}
++    <details className="bc-external-detail">
++      <summary>{market === "cn" ? "美股经验 · 全A未验证 · 用法与来源" : "高位不等于顶部 · 用法与来源"}</summary>
++      <p><a href={refs.stockcharts.url} target="_blank" rel="noreferrer">StockCharts 指标说明</a>：50日宽度低于30%、高于70%作为超卖／超买经验参考；不同指数可不同，极端状态可持续。200日的50%用于观察是否过半参与，不是对称的顶底线。</p>
++      <p><a href={refs.schwab.url} target="_blank" rel="noreferrer">Charles Schwab（{refs.schwab.publishedOn}）</a>：标普500的50日宽度在上涨中约80%，可体现广泛强势；下跌中低于10%可提示卖压极端，但不能确认下跌结束。因此不能把80%直接当卖出线。</p>
++      <p>{market === "cn" ? "原文示例来自美国指数，放在全A旁仅供跨市场对照，尚未验证适用性。" : "两份原文是经验解释与示例，本系统尚未验证其预测效果。"}动态P10/P90来自本系统历史统计，与这里的固定参考分别阅读。</p>
++    </details>
++  </aside>;
++}
+--- web/src/components/market-style/breadthInstitutionalReferences.ts (v8-before)
++++ web/src/components/market-style/breadthInstitutionalReferences.ts (v8-after)
+@@ -0,0 +1,18 @@
++/** Published interpretation examples; these never participate in alert or trading calculations. */
++export const BREADTH_EXTERNAL_REFERENCES = {
++  stockcharts: {
++    name: "StockCharts",
++    url: "https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average",
++    verifiedOn: "2026-11-02",
++    sma50: { lower: 30, upper: 70 },
++    sma200: { majority: 50 },
++  },
++  schwab: {
++    name: "Charles Schwab",
++    url: "https://www.schwab.com/learn/story/breadth-check-strength-and-weakness-trend-tracker",
++    publishedOn: "2025-06-26",
++    verifiedOn: "2026-11-02",
++    market: "SP500",
++    sma50: { extremeWeaknessBelow: 10, broadParticipationAround: 80 },
++  },
++} as const;

@@ -366,6 +366,40 @@ def test_dividend_amount_boundaries():
     assert "action_bad_amount" in _codes(check_actions([_dividend(cash=float("inf"))]))
 
 
+@pytest.mark.parametrize("value", [True, False])
+@pytest.mark.parametrize("kind,field,code", [
+    ("cash_dividend", "cash_per_unit", "action_bad_amount"),
+    ("split", "split_ratio", "action_bad_ratio"),
+])
+def test_boolean_action_quantities_rejected(value, kind, field, code):
+    action = dict(event_id="boolean-quantity", symbol="510300", type=kind,
+                  effective_date="2026-01-05",
+                  available_at="2026-01-02T16:00:00+08:00")
+    action[field] = value
+    report = check_actions([action], declared_symbols=[GOOD])
+    assert code in _codes(report)
+    assert report.verdict_for("attribution") == UNUSABLE
+
+
+@pytest.mark.parametrize("kind,field,value", [
+    ("cash_dividend", "cash_per_unit", 0),
+    ("cash_dividend", "cash_per_unit", 0.0),
+    ("cash_dividend", "cash_per_unit", 1),
+    ("cash_dividend", "cash_per_unit", 0.03),
+    ("split", "split_ratio", 2),
+    ("split", "split_ratio", 2.0),
+])
+def test_numeric_action_quantities_remain_usable(kind, field, value):
+    action = dict(event_id="numeric-quantity", symbol="510300", type=kind,
+                  effective_date="2026-01-05",
+                  available_at="2026-01-02T16:00:00+08:00")
+    action[field] = value
+    report = check_actions([action], declared_symbols=[GOOD])
+    assert "action_bad_amount" not in _codes(report)
+    assert "action_bad_ratio" not in _codes(report)
+    assert report.verdict_for("attribution") == USABLE
+
+
 def test_dividend_missing_amount_blocks_and_undeclared_field_not_accepted():
     bad = _dividend()
     del bad["cash_per_unit"]

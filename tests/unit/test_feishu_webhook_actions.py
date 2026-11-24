@@ -197,7 +197,7 @@ def test_defer_records_reason_and_predicate(tmp_path, monkeypatch) -> None:  # n
 
 
 def test_exit_done_stamps_exited_on_and_replay_is_idempotent(tmp_path, monkeypatch) -> None:  # noqa: ANN001
-    """EXIT 确认盖 exited_on（与 ENTER 盖 entered_on 对称），重复提交幂等。"""
+    """EXIT 未声明实际日期时保持未知，首录时间和重复提交保持一致。"""
     client, db_path = _client(tmp_path, monkeypatch)
     plan_id, action_id = _make_action(db_path, kind="EXIT")
     # EXIT 分支要求计划已 entered：先把计划推进到 entered（入场日早于退出日）。
@@ -210,6 +210,11 @@ def test_exit_done_stamps_exited_on_and_replay_is_idempotent(tmp_path, monkeypat
     url = _signed_url(plan_id, action_id)
     form = _form_from_url(url)
     first = client.post("/api/feishu-webhook/action/submit", data=form)
+    conn = connect(db_path)
+    try:
+        first_recorded_at = get_action_item(conn, action_id).done_recorded_at
+    finally:
+        conn.close()
     second = client.post("/api/feishu-webhook/action/submit", data=form)
     assert first.status_code == 200
     assert "回执已记录" in first.text
@@ -221,8 +226,15 @@ def test_exit_done_stamps_exited_on_and_replay_is_idempotent(tmp_path, monkeypat
         assert get_action_item(conn, action_id).state == "done"  # type: ignore[union-attr]
         plan = get_plan(conn, plan_id)
         assert plan is not None and plan.state == "exited"
-        # exited_on 取 EXIT 待办 due_from（系统判定的可执行日），与 entered_on 同源。
-        assert plan.exited_on == "2026-08-05"
+        # 最早可处理日不是用户声明的实际退出日；既有入场日期仍保留。
+        assert plan.exited_on is None
+        item = get_action_item(conn, action_id)
+        assert item.actual_action_date is None
+        assert item.due_from == "2026-08-05"
+        assert item.done_source == "feishu"
+        assert item.done_recorded_at == first_recorded_at
+        from datetime import datetime
+        assert first_recorded_at and datetime.fromisoformat(first_recorded_at).tzinfo is not None
         assert plan.entered_on == "2026-08-04"  # 入场日未被退出覆盖
         done_notes = [
             note for note in list_annotations(conn, plan_id) if note.kind == "webhook_done"

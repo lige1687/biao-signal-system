@@ -1,0 +1,37 @@
+{
+  "schema": "stock-price-scale-readonly-scope/1.0",
+  "created_at_utc": "2026-10-06T17:59:10.792254+00:00",
+  "formal_candidate_dates": [
+    "2022-01-04",
+    "2026-06-30"
+  ],
+  "candidate_codes": 439,
+  "primary": "a_share_klines_full.parquet existing source only; no repair calculations",
+  "exact_producer_files": [
+    "scripts/backfill_breadth_full.py",
+    "scripts/refresh_timing_matrix.py",
+    "src/lei_signal/market_context/a_share_breadth.py",
+    "scripts/precompute_a_share_ma.py",
+    "installed akshare/stock/stock_zh_a_sina.py and stock/cons.py"
+  ],
+  "existing_evidence_dirs": [
+    "stock-universe-data-qualification-2026-10-05",
+    "stock-week-month-qualification-2026-10-05",
+    "research-etf-breadth-confirmation-2026-09-09/prepared",
+    "baostock-bounded-air-probe-2026-10-05/run-01",
+    "b02-targeted-gap-batch-2026-10-05/run-01",
+    "b03-targeted-gap-batch-2026-10-06/run-01 and run-02",
+    "b04-targeted-gap-batch-2026-10-06/run-01 and run01-review-01"
+  ],
+  "official_files": "Only32 existing prepared/sources documents; HTML titles and source lineage, PDF first page local text",
+  "cache_inspection": "Only named wide close, codes sidecar and optional named long close metadata; no personal account files",
+  "repository_history": "Only git log/show for the2 identified producer scripts",
+  "logs": "Only targeted matching lines in logs/backfill_klines.log and logs/precompute_a_share_ma_task.log plus explicitly checked missing backfill log path; no shell history",
+  "network_source_fetches": 0,
+  "provider_calls": 0,
+  "fits": 0,
+  "factor_or_return_calculations": 0,
+  "primary_data_edits": 0,
+  "registry_edits": 0,
+  "scope_correction": "Initial rg searches were broader than intended and matched irrelevant agent mirrors; those matches are excluded from evidence. Subsequent searches use exact files and top-level path enumeration."
+}

@@ -1,0 +1,45 @@
+{
+  "observed_at": "2026-10-12T09:30:35.074339+00:00",
+  "reviewed_at": "2026-10-12T09:31:00Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-10-12T093035.074339_0000-79703cfb.json",
+  "coordination_check": {
+    "checked_coordination_sha": "b4289e3f6c5298d91f0323badbfa8ef8a36e804e",
+    "checked_at": "2026-10-12T17:30:24+08:00",
+    "read_task_ids": [
+      "research-dispatch-controller"
+    ],
+    "conflict_decision": "本轮仅执行既有冻结宽度输入观察并写入按时间唯一命名的追加记录；未修改协调任务或共享研究结果。"
+  },
+  "changed_sources": [
+    "source-01",
+    "source-02",
+    "source-03",
+    "source-08"
+  ],
+  "facts": {
+    "a_share_rows": 4070212,
+    "a_share_latest_date": "2026-10-12",
+    "members_at_latest_market_date": 5211,
+    "symbols_in_a_share_raw": 5223,
+    "current_code_date": "2026-10-12",
+    "current_code_count": 5573,
+    "daily_snapshot_date": "2026-10-12",
+    "daily_snapshot_total": 5573,
+    "daily_snapshot_eligible": 5216,
+    "etf_510300_nominal_latest_date": "2026-10-09",
+    "etf_510300_source_fetched_at": "2026-10-11T16:25:58.391757+00:00",
+    "etf_159915_nominal_latest_date": "2022-06-17"
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "逐股原料大多数已补齐到10月12日，但日常快照eligible为5216且仍是MA20口径，不是冻结研究要求的共同200日分母、90%覆盖率和逐日有效成员记录。",
+    "historical_membership": "当前名单日期更新到10月12日；仍没有逐日历史成员版本、生效时刻或可核的持续取得时间链。",
+    "etf_nominal_prices_and_actions": "510300带来源元数据的名义价格已更新到10月9日，但仍落后当前市场日；159915名义价格仍只到2022年6月17日，持续公司行动、停牌和限价链仍缺。",
+    "availability": "10月12日逐股行情与快照已实际读到并保存指纹；510300新增文件不等于两个候选的匹配输入全部齐备。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "10月9日大范围行情延迟已恢复，510300名义价也有更新，但冻结口径与159915执行输入仍不合格；继续仅输入观察，不生成信号。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

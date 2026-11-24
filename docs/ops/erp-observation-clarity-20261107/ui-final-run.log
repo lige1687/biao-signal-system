@@ -1,0 +1,25 @@
+{
+  "expected": {
+    "cn": {
+      "date": "2026-11-06",
+      "value": 5.8319
+    },
+    "us": {
+      "date": "2026-11-06",
+      "value": -0.9
+    }
+  },
+  "checks": [
+    "cn home, date, detail, display range, close checked",
+    "us home, date, detail, display range, close checked",
+    "combination evidence is unique; collapse/restore works",
+    "cn rates card/date/detail match home canonical observation",
+    "us rates card/date/detail match home canonical observation",
+    "cn overlay dates/values match canonical data with null gaps and visible points",
+    "us overlay dates/values match canonical data with null gaps and visible points",
+    "CN source 503: no competing snapshot fallback in rates/home",
+    "desktop 1280/1440/1920 no page horizontal overflow"
+  ],
+  "pageErrors": [],
+  "trendObservation": "沪深300当前估值与趋势 · 2026-11-06 · Z -0.11 · 均线 0/3项成立\n3年均值\n5.90 个百分点\n标准差\n0.56 个百分点\n历史分位\n41.6%\n观测数\n155 周\n\nZ 表示离3年均值几个标准差；分位比较同一窗口的周频读数。分位越高，利差在自身历史中越高。\n\n均线计分 · 偏弱\n收盘价 > MA20\n未成立\nMA20 > MA60\n未成立\nMA60 > MA120\n未成立\n\n3项成立为偏强，0项为偏弱，1–2项为分歧；分歧不等于窄幅横盘。\n\n带宽＋斜率 · 偏弱\n均线带宽\n11.14% / 参考 2.50%\nMA60近5日斜率（年化）\n-51.85%\n\n带宽与斜率均未进入收敛参考；满足任一收敛条件归为过渡，再按价格与MA20/60的相对位置区分强弱。\n\n价格截至 2026-11-06：收盘 4054.28 · MA20 4112.86 · MA60 4404.84 · MA120 4603.54 点\n\n两种方法属于本次实验定义。比较阶梯与连续调仓的历史结果 ↗"
+}

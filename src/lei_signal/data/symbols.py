@@ -70,25 +70,30 @@ def resolve_symbol(raw: str) -> SymbolInfo:
         return SymbolInfo(f"{m.group(1)}.SS", Market.CN_SH, m.group(1), "Asia/Shanghai")
 
     # 东财板块代码：BK + 4 位数字（如 BK0457 电网设备）。
-    # .SECTOR 后缀避免与 A 股六位码 / ETF 混淆。
-    if re.fullmatch(r"BK\d{4}", symbol):
-        return SymbolInfo(f"{symbol}.SECTOR", Market.SECTOR, symbol, "Asia/Shanghai")
+    # .SECTOR 后缀避免与 A 股六位码 / ETF 混淆；已带后缀时保持幂等识别。
+    if re.fullmatch(r"BK\d{4}(?:\.SECTOR)?", symbol):
+        bare = symbol.removesuffix(".SECTOR")
+        return SymbolInfo(f"{bare}.SECTOR", Market.SECTOR, bare, "Asia/Shanghai")
 
     # 搜狐申万行业/地域板块：SW + 4 位数字（如 SW3098 传媒、SW3111 公用事业）。
     # 搜狐 hisHq 用 zs_00003xxx 拿日线；3xxx 段是申万一级行业 + 地域，
     # 概念板块（4xxx-8xxx）搜狐无历史，不在此列。
-    if re.fullmatch(r"SW\d{4}", symbol):
-        return SymbolInfo(f"{symbol}.SECTOR", Market.SECTOR, symbol, "Asia/Shanghai")
+    if re.fullmatch(r"SW\d{4}(?:\.SECTOR)?", symbol):
+        bare = symbol.removesuffix(".SECTOR")
+        return SymbolInfo(f"{bare}.SECTOR", Market.SECTOR, bare, "Asia/Shanghai")
 
     # 同花顺行业板块：TH + 6 位代码（如 TH881278 电网设备、TH881121 半导体）。
     # 走 d.10jqka.com.cn/v4/line/bk_{code}/01/{year}.js，需 ths.js 算 v cookie。
     # 行业板块 881xxx（90 个），概念板块需额外 HTML 解析（暂不支持）。
-    if re.fullmatch(r"TH\d{6}", symbol):
-        return SymbolInfo(f"{symbol}.SECTOR", Market.SECTOR, symbol, "Asia/Shanghai")
+    if re.fullmatch(r"TH\d{6}(?:\.SECTOR)?", symbol):
+        bare = symbol.removesuffix(".SECTOR")
+        return SymbolInfo(f"{bare}.SECTOR", Market.SECTOR, bare, "Asia/Shanghai")
 
     if not re.fullmatch(r"[A-Z0-9.^=\-]+", symbol):
         raise ValueError("代码格式无法识别；港股请使用 0700.HK 形式")
 
+    if symbol.endswith(".SECTOR"):
+        return SymbolInfo(symbol, Market.SECTOR, symbol[:-7], "Asia/Shanghai")
     if symbol.endswith(".SS"):
         return SymbolInfo(symbol, Market.CN_SH, symbol[:-3], "Asia/Shanghai")
     if symbol.endswith(".SZ"):
@@ -103,6 +108,11 @@ def resolve_symbol(raw: str) -> SymbolInfo:
 def is_a_share(info: SymbolInfo) -> bool:
     """是否 A 股标的（可使用东方财富增强源）。"""
     return info.market in (Market.CN_SH, Market.CN_SZ)
+
+
+def is_cn_session_symbol(info: SymbolInfo) -> bool:
+    """是否遵循沪深交易时段的标的（A 股证券/指数及国内行业板块指数）。"""
+    return info.market in (Market.CN_SH, Market.CN_SZ, Market.SECTOR)
 
 
 def eastmoney_secid(info: SymbolInfo) -> str:
@@ -130,6 +140,7 @@ __all__ = [
     "SymbolInfo",
     "eastmoney_secid",
     "is_a_share",
+    "is_cn_session_symbol",
     "normalize_symbol",
     "resolve_symbol",
 ]

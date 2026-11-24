@@ -1,0 +1,203 @@
+.pwt-gap-summary { margin: 10px 0 14px; border: 1px solid var(--pl-line); background: var(--pl-soft); border-radius: 6px; padding: 8px 12px; }
+.pwt-gap-top-summary { cursor: pointer; font-size: 13px; color: var(--pl-ink); font-weight: 500; padding: 2px 0; }
+.pwt-gap-summary[open] .pwt-gap-summary-list { margin-top: 10px; background: var(--pl-paper); }
+.pwt-gap-summary-list { display: grid; gap: 7px; }
+.pwt-gap-summary-list details { border: 1px solid var(--pl-line); }
+.pwt-gap-summary-list summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 11px; cursor: pointer; font-size: 14px; }
+.pwt-gap-summary-list summary strong { white-space: nowrap; font-size: 12px; color: var(--pl-muted); }
+.pwt-gap-products { border-top: 1px solid var(--pl-line); padding: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+.pwt-gap-products button { background: var(--pl-soft); color: var(--pl-ink); border: 1px solid var(--pl-line); padding: 6px 9px; border-radius: 4px; cursor: pointer; font-size: 13px; }
+.pwt-gap-products button:hover { background: #eef4fa; }
+.pwt-gap-products button:focus-visible, .pwt-gap-summary-list summary:focus-visible { outline: 2px solid #315c88; outline-offset: 2px; }
+.pwt-list .pwt-row-title { font-size: 13px; }
+
+/* 持仓赛道 × 同方向市场参考趋势对照面板 */
+.ptb-panel {
+  background: var(--pl-paper, #fff);
+  border: 1px solid var(--pl-line, #dce3eb);
+  border-radius: 6px;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+}
+
+.ptb-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+.ptb-summary-left {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ptb-summary-left strong {
+  font-size: 14px;
+  color: var(--pl-ink, #203149);
+}
+
+.ptb-summary-left span {
+  font-size: 12px;
+  color: var(--pl-muted, #66758a);
+}
+
+.ptb-jump-link {
+  font-size: 12px;
+  color: #1d4ed8;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ptb-jump-link:hover {
+  text-decoration: underline;
+}
+
+.ptb-table-wrap {
+  margin-top: 10px;
+  overflow-x: auto;
+  border-top: 1px solid var(--pl-line, #dce3eb);
+}
+
+.ptb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.ptb-table th {
+  text-align: left;
+  padding: 8px 10px;
+  background: var(--pl-soft, #f5f7fa);
+  color: var(--pl-muted, #66758a);
+  font-weight: 600;
+  border-bottom: 1px solid var(--pl-line, #dce3eb);
+  white-space: nowrap;
+}
+
+.ptb-table th.ptb-num,
+.ptb-table td.ptb-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ptb-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #edf0f4;
+  vertical-align: middle;
+}
+
+.ptb-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ptb-group-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.ptb-group-btn:hover strong {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.ptb-group-btn small,
+.ptb-group-static small {
+  font-size: 11px;
+  color: var(--pl-muted, #66758a);
+}
+
+.ptb-weight-cell {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.ptb-weight-cell small {
+  font-size: 11.5px;
+  color: var(--pl-muted, #66758a);
+}
+
+.ptb-mini-bar {
+  margin-top: 4px;
+  height: 4px;
+  background: #edf1f7;
+  border-radius: 2px;
+  overflow: hidden;
+  width: 110px;
+  margin-left: auto;
+}
+
+.ptb-mini-bar i {
+  display: block;
+  height: 100%;
+  background: #3b66b0;
+  border-radius: 2px;
+}
+
+.ptb-ref-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ptb-ref-chip {
+  font-size: 12px;
+  color: #1e4975;
+  background: #eef4fa;
+  border: 1px solid #cbd9e8;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ptb-ref-chip:hover {
+  background: #dbeafe;
+  border-color: #93c5fd;
+}
+
+.ptb-state-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ptb-trend-text {
+  font-size: 11.5px;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.ptb-muted {
+  color: var(--pl-muted, #66758a);
+  font-size: 11.5px;
+}
+
+.ptb-mono {
+  font-variant-numeric: tabular-nums;
+}
+
+.ptb-footnote {
+  margin: 8px 0 2px;
+  font-size: 11.5px;
+  color: var(--pl-muted, #66758a);
+  line-height: 1.45;
+}

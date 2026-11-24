@@ -1,0 +1,47 @@
+{
+  "mission": "回答美股股债利差口径、专业依据及上下轨适用性；本轮只复核，不修改页面或规则。",
+  "task_scope": [
+    "Read the current US earnings yield minus bond yield implementation and existing qualified study results. Return exact sources, frequency, formula, current reference band algorithm, limitations and prior increment evidence. Local read only."
+  ],
+  "read_only_paths": [
+    "web/src/components/observation-library",
+    "web/src/components/market-observation-alerts",
+    "src/lei_signal/fundamentals",
+    "docs/experiments/breadth-erp-ma200-increment-review-2026-11-02.md",
+    "docs/experiments/cross-market-risk-context-2026-11-02.md"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Return concise facts with exact code/report paths and lines; do not write files"
+  ],
+  "stop_conditions": [
+    "No financial runs, no source calls, no cache changes, no UI changes, no other agents"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true,
+    "checks": [
+      "Root checks formula and primary professional source against report facts"
+    ]
+  },
+  "mode": "report_only",
+  "question": "Does the current US equity-bond spread have professional support for 1.5/2 sigma opportunity-risk rails?",
+  "decision_use": "Distinguish valuation background from short-term timing; choose display evidence appropriate to US rather than transplant CN",
+  "target_and_baseline": "current SP500 TTM E/P minus US10Y and current P15/P85 references; prior price/MA200-conditioned study if qualified",
+  "existing_evidence": "Reuse CN sigma distinction and existing US return evidence; no parameter search",
+  "success_and_falsification": "Identify exact comparable object and source; unknown threshold efficacy stays unknown",
+  "budget_and_stop": {
+    "new_source_calls": 6,
+    "new_financial_experiments": 0,
+    "helper_source_calls": 0,
+    "stop": "bounded question answered or verified-source boundary"
+  },
+  "output_location": "docs/ops/breadth-reading-aid-20261101/us-erp-v12"
+}

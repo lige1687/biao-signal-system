@@ -1,0 +1,51 @@
+{
+  "mission": "核查不同指标1.5/2标准差的专业依据，复用已有ERP检验；本地同时显示1.5/2轨道并对齐价格。",
+  "task_scope": [
+    "source review only, primary network sources; max four new web calls for helper; no financial experiment or parameter search",
+    "Read existing ERP report and archived institutional primary review; distinguish ERP, price Bollinger, bounded breadth; list exact method, source and unknowns."
+  ],
+  "read_only_paths": [
+    "docs/experiments/erp-band-sensitivity-2026-11-02.md",
+    "docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-bands-replication-20261101/literature",
+    "docs/ops/focus-live-and-erp-thresholds-20261102/erp-comparison"
+  ],
+  "write_paths": [
+    "docs/ops/breadth-reading-aid-20261101/sigma-overlay-v11/source-review.md",
+    "docs/ops/breadth-reading-aid-20261101/sigma-overlay-v11/source-ledger.json"
+  ],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "source-review.md with primary links and method distinctions",
+    "source-ledger.json recording all requests and failures"
+  ],
+  "stop_conditions": [
+    "Four source requests exhausted or question answered",
+    "No UI edits, cache writes, original report changes, financial tests or downstream agents"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true,
+    "checks": [
+      "Read cited primary evidence",
+      "Verify numeric comparison against frozen results",
+      "Desktop-only UI validation"
+    ]
+  },
+  "research_mode": "report_only",
+  "budget": {
+    "helper_source_calls": 4,
+    "root_source_calls": 2,
+    "new_financial_experiments": 0,
+    "max_new_artifact_bytes": 5000000,
+    "minimum_internal_free_bytes": 5368709120
+  },
+  "baseline": "existing 2-sigma plus frozen matched-price comparison; no refit",
+  "decision": "display sensitivity, not new trade rule",
+  "mechanism": "ERP valuation compensation may mean-revert; narrower rails flag earlier but also more failures. Breadth bounded and price volatility are distinct objects."
+}

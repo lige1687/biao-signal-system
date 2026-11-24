@@ -392,3 +392,26 @@ def test_today_overview_without_quote_marks_unavailable() -> None:
     assert ov.capital == [], "无盘口时不应编造市值指标"
     # 但量能倍数来自日线，应该有值
     assert vol["vol_ratio20"].value is not None
+
+
+def test_build_card_populates_cross_section_summary_fields() -> None:
+    """CardDTO 直接带出后端已计算的周/日长趋势、均线偏离与 12-1 动量。"""
+    result = _analyzed("QQQ", _uptrend_bars(280))
+    card = build_card(
+        symbol="QQQ",
+        display_name="纳指100 QQQ",
+        market_cn="美股",
+        group="watchlist",
+        result=result,
+        error=None,
+        data_time=datetime(2026, 11, 16, 12, 0),
+    )
+    assert card.tradable is not None
+    assert card.daily_long_trend_cn is not None
+    assert card.weekly_long_trend_cn is not None
+    assert card.dist_ema20_pct is not None and card.dist_ema20_pct > 0
+    assert card.dist_ema60_pct is not None and card.dist_ema60_pct > 0
+    assert card.ret_20d_pct is not None and card.ret_20d_pct > 0
+    assert card.mom_121_pct is not None and card.mom_121_pct > 0
+    assert len(card.sparkline) == 60
+    assert card.sparkline[-1].ema20 is not None and card.sparkline[-1].close > card.sparkline[-1].ema20

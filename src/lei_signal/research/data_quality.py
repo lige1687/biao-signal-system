@@ -1573,7 +1573,8 @@ def check_actions(
                         evidence=where,
                     )
                 )
-            elif not (isinstance(cash, int | float) and math.isfinite(cash) and cash >= 0):
+            elif not (not isinstance(cash, bool) and isinstance(cash, int | float)
+                      and math.isfinite(cash) and cash >= 0):
                 findings.append(
                     Finding(
                         BLOCK, "action_bad_amount",
@@ -1585,7 +1586,8 @@ def check_actions(
         if atype == "split":
             ratio = action.get("split_ratio", action.get("ratio"))
             if not (
-                isinstance(ratio, int | float) and math.isfinite(ratio) and ratio > 0
+                not isinstance(ratio, bool) and isinstance(ratio, int | float)
+                and math.isfinite(ratio) and ratio > 0
             ):
                 findings.append(
                     Finding(

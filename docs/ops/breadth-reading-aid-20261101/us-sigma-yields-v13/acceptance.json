@@ -1,0 +1,53 @@
+{
+  "completedAt": "2026-11-03T23:52:58.200374+08:00",
+  "status": "completed_local_desktop_display_and_bounded_definition_research",
+  "branch": "codex/factor-unit-research-20260915",
+  "base": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+  "sourceFiles": [
+    "web/src/components/observation-library/ErpCrossChart.tsx",
+    "web/src/components/observation-library/projectionView.tsx",
+    "web/src/components/observation-library/metricData.ts",
+    "web/src/components/observation-library/catalog.ts",
+    "web/src/components/market-style/CrossMarketObservation.tsx",
+    "web/src/components/market-observation-alerts/index.tsx",
+    "web/src/components/market-observation-alerts/UsErpCard.tsx",
+    "web/src/components/market-observation-alerts/us-erp-card.css",
+    "web/src/components/observation-library/usErpBands.ts",
+    "web/src/components/observation-library/usErpBands.test.mjs"
+  ],
+  "tests": 21,
+  "testsPassed": 21,
+  "typecheck": "passed",
+  "viteMemoryBuild": "passed",
+  "hygiene": "passed",
+  "independentMath": "Python stats versus JS within 1e-12",
+  "independentReview": "4 findings fixed and read-only recheck clear; root accepted",
+  "desktop": "1280x900 actual UI checks; viewport reset",
+  "mobile": false,
+  "consoleNewErrors": 0,
+  "consoleWarnings": "2 existing React Router future flag warnings",
+  "sourceCallsStage": 6,
+  "sourceCallsOwnCumulative": 34,
+  "newFinancialExperiments": 0,
+  "parameterSearches": 0,
+  "dataDefinitionWrites": 0,
+  "backendRestart": false,
+  "alertOrTradingRulesChanged": false,
+  "sourceCommitOrDeploy": false,
+  "registryOtherEntriesPreserved": 824,
+  "freeInternalBytes": 5565460480,
+  "qaBytesBeforeAcceptance": 2367856,
+  "limitations": [
+    "Monthly earnings forward-used in daily series; publication vintages unverified",
+    "No new sigma efficacy/return or account increment test",
+    "Price coverage 2016-11-03 to 2026-10-30; ERP through 2026-11-02",
+    "5Y/10Y snapshot is existing vendor source, not independent quote certification",
+    "Actual-yield/breakeven history not installed; conceptual explanation only"
+  ],
+  "failuresPreserved": [
+    "Transient missing component HMR during file creation; final reload clear",
+    "QA Node ESM lookup corrected without install",
+    "3 browser locator corrections in browser-proof",
+    "Wrong COORDINATION path then root COORDINATION.md found and read"
+  ]
+}

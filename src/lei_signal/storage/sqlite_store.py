@@ -1163,6 +1163,29 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON fund_trades(request_id) WHERE request_id IS NOT NULL;
         """,
     ),
+    (32, "032_execution_history", """
+        CREATE TABLE IF NOT EXISTS trade_plan_versions (
+            version_id TEXT PRIMARY KEY, plan_id TEXT NOT NULL,
+            event_kind TEXT NOT NULL CHECK(event_kind IN ('initial_confirmation','applied_revision')),
+            recorded_at TEXT NOT NULL, content_sha256 TEXT NOT NULL,
+            source_revision_id TEXT, payload_json TEXT NOT NULL
+        );
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_plan_initial_version ON trade_plan_versions(plan_id)
+            WHERE event_kind='initial_confirmation';
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_plan_revision_version ON trade_plan_versions(source_revision_id)
+            WHERE source_revision_id IS NOT NULL;
+        CREATE TRIGGER IF NOT EXISTS plan_version_no_update BEFORE UPDATE ON trade_plan_versions
+            BEGIN SELECT RAISE(ABORT,'immutable plan version'); END;
+        CREATE TRIGGER IF NOT EXISTS plan_version_no_delete BEFORE DELETE ON trade_plan_versions
+            BEGIN SELECT RAISE(ABORT,'immutable plan version'); END;
+        CREATE TRIGGER IF NOT EXISTS trade_version_no_change BEFORE UPDATE OF plan_version_id ON fund_trades
+            WHEN OLD.plan_version_id IS NOT NEW.plan_version_id
+            BEGIN SELECT RAISE(ABORT,'immutable trade version reference'); END;
+        CREATE TRIGGER IF NOT EXISTS action_completion_no_change BEFORE UPDATE ON plan_action_items
+            WHEN (OLD.state='done' OR OLD.done_recorded_at IS NOT NULL) AND (OLD.actual_action_date IS NOT NEW.actual_action_date
+              OR OLD.done_recorded_at IS NOT NEW.done_recorded_at OR OLD.done_source IS NOT NEW.done_source)
+            BEGIN SELECT RAISE(ABORT,'immutable first completion evidence'); END;
+    """),
 )
 
 
@@ -1186,7 +1209,12 @@ def connect(path: str | Path) -> sqlite3.Connection:
     - 迁移必须 **只** 第一次开连接时跑一次（pragma journal_mode 是持久化的，
       后续连接会复用），避免并发连接重复 apply 互相抢锁。
     """
-    connection = sqlite3.connect(str(path), timeout=30.0)
+    # TrackedConnection（2026-09-15 agent-ask-stability）：写事务进程内登记——
+    # BEGIN IMMEDIATE 锁等待失败时日志能指认当时进程内的持锁方（位置/线程/
+    # 已持有多久），慢等待/慢持有也有日志；行为与 sqlite3.Connection 一致。
+    from lei_signal.storage.write_tx import TrackedConnection
+
+    connection = sqlite3.connect(str(path), timeout=30.0, factory=TrackedConnection)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
     connection.execute("PRAGMA journal_mode = WAL")
@@ -1258,6 +1286,11 @@ def apply_migrations(connection: sqlite3.Connection) -> tuple[str, ...]:
                 "CREATE UNIQUE INDEX IF NOT EXISTS idx_fund_trades_request_id "
                 "ON fund_trades(request_id) WHERE request_id IS NOT NULL"
             )
+        elif name == "032_execution_history":
+            _safe_add_column(connection, "fund_trades", "plan_version_id", "TEXT")
+            for column in ("actual_action_date", "done_recorded_at", "done_source"):
+                _safe_add_column(connection, "plan_action_items", column, "TEXT")
+            connection.executescript(sql)
         else:
             # executescript 会隐式提交，因此记账单独提交
             connection.executescript(sql)
@@ -1283,8 +1316,46 @@ def write_events(
     """
     inserted = 0
     attempted = 0
+    # 正式分析结果是 list。先用主键只读识别旧事件，让重复刷新不占写锁；
+    # 任意迭代器仍按原来的单遍顺序处理，避免提前消费改变中途异常语义。
+    existing_ids: set[str] | None = None
+    if isinstance(events, (list, tuple)):
+        existing_ids = set()
+        ids = list(dict.fromkeys(event.event_id for event in events))
+        for start in range(0, len(ids), 800):
+            chunk = ids[start:start + 800]
+            placeholders = ",".join("?" for _ in chunk)
+            existing_ids.update(
+                row[0] for row in connection.execute(
+                    f"SELECT event_id FROM signal_events WHERE event_id IN ({placeholders})",
+                    chunk,
+                )
+            )
     for event in events:
         attempted += 1
+        values = (
+            event.event_id,
+            event.symbol,
+            event.timeframe,
+            event.event_date.isoformat(),
+            event.available_date.isoformat(),
+            event.rule_id,
+            event.rule_version,
+            event.direction.value,
+            event.severity.value,
+            event.strength,
+            event.reason_cn,
+            event.provenance.value,
+            json.dumps(event.evidence, ensure_ascii=False, sort_keys=True, default=str),
+            json.dumps(event.invalidation, ensure_ascii=False, sort_keys=True, default=str),
+            event.structure_id,
+            run_id or event.run_id,
+            event.valid_until.isoformat() if event.valid_until is not None else None,
+            event.lifecycle_id,
+            event.ended_event_id,
+        )
+        if existing_ids is not None and event.event_id in existing_ids:
+            continue
         cursor = connection.execute(
             """
             INSERT OR IGNORE INTO signal_events (
@@ -1294,29 +1365,12 @@ def write_events(
                 structure_id, run_id, valid_until, lifecycle_id, ended_event_id
             ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             """,
-            (
-                event.event_id,
-                event.symbol,
-                event.timeframe,
-                event.event_date.isoformat(),
-                event.available_date.isoformat(),
-                event.rule_id,
-                event.rule_version,
-                event.direction.value,
-                event.severity.value,
-                event.strength,
-                event.reason_cn,
-                event.provenance.value,
-                json.dumps(event.evidence, ensure_ascii=False, sort_keys=True, default=str),
-                json.dumps(event.invalidation, ensure_ascii=False, sort_keys=True, default=str),
-                event.structure_id,
-                run_id or event.run_id,
-                event.valid_until.isoformat() if event.valid_until is not None else None,
-                event.lifecycle_id,
-                event.ended_event_id,
-            ),
+            values,
         )
-        inserted += cursor.rowcount if cursor.rowcount > 0 else 0
+        if cursor.rowcount > 0:
+            inserted += cursor.rowcount
+            if existing_ids is not None:
+                existing_ids.add(event.event_id)
     connection.commit()
     return WriteReport(inserted=inserted, ignored=attempted - inserted)
 
@@ -1600,13 +1654,10 @@ class EventIdentityConflictError(RuntimeError):
     """
 
 
-def _assert_event_identity(
-    connection: sqlite3.Connection,
+def _assert_event_identity_row(
+    existing: dict[str, object],
     event: SignalEvent,
 ) -> None:
-    existing = _read_existing_event_identity(connection, event)
-    if existing is None:
-        return
     new_values = {
         "event_date": event.event_date.isoformat(),
         "available_date": event.available_date.isoformat(),
@@ -1623,6 +1674,16 @@ def _assert_event_identity(
                 f"已存={expected!r}，新值={new_values[key]!r}。"
                 "身份字段是不可变历史事实，必须显式处理，不得静默覆盖。"
             )
+
+
+def _assert_event_identity(
+    connection: sqlite3.Connection,
+    event: SignalEvent,
+) -> None:
+    existing = _read_existing_event_identity(connection, event)
+    if existing is None:
+        return
+    _assert_event_identity_row(existing, event)
 
 
 def write_event_lifecycles(
@@ -1648,10 +1709,85 @@ def write_event_lifecycles(
     if run_id is None:
         raise ValueError("write_event_lifecycles 必须显式传入 run_id")
 
-    inserted = 0
     recorded_at = datetime.now(UTC).isoformat()
     as_of_text = as_of.isoformat()
 
+    # 正式分析结果是 list/tuple：先用主键批量只读核对身份与既有快照，
+    # 同日重复刷新在生命周期未变化时零写锁返回，避免每次重写上万行 B-tree。
+    if isinstance(events, (list, tuple)):
+        if not events:
+            return 0, 0
+        ids = list(dict.fromkeys(event.event_id for event in events))
+        existing_identities: dict[str, dict[str, object]] = {}
+        for start in range(0, len(ids), 800):
+            chunk = ids[start:start + 800]
+            placeholders = ",".join("?" for _ in chunk)
+            for row in connection.execute(
+                f"""
+                SELECT event_id, event_date, available_date, rule_id, rule_version,
+                       structure_id, symbol, timeframe
+                FROM signal_events WHERE event_id IN ({placeholders})
+                """,
+                chunk,
+            ):
+                existing_identities[row["event_id"]] = {
+                    "event_date": row["event_date"],
+                    "available_date": row["available_date"],
+                    "rule_id": row["rule_id"],
+                    "rule_version": row["rule_version"],
+                    "structure_id": row["structure_id"],
+                    "symbol": row["symbol"],
+                    "timeframe": row["timeframe"],
+                }
+        for event in events:
+            existing = existing_identities.get(event.event_id)
+            if existing is not None:
+                _assert_event_identity_row(existing, event)
+
+        existing_snapshots: dict[str, tuple[str | None, str | None, str | None]] = {}
+        for start in range(0, len(ids), 800):
+            chunk = ids[start:start + 800]
+            placeholders = ",".join("?" for _ in chunk)
+            for row in connection.execute(
+                f"""
+                SELECT event_id, valid_until, lifecycle_id, ended_event_id
+                FROM event_lifecycle_snapshots
+                WHERE event_id IN ({placeholders}) AND run_id = ? AND as_of = ?
+                """,
+                [*chunk, run_id, as_of_text],
+            ):
+                existing_snapshots[row["event_id"]] = (
+                    row["valid_until"],
+                    row["lifecycle_id"],
+                    row["ended_event_id"],
+                )
+
+        desired: dict[str, tuple[str | None, str | None, str | None]] = {}
+        for event in events:
+            desired[event.event_id] = (
+                event.valid_until.isoformat() if event.valid_until is not None else None,
+                event.lifecycle_id,
+                event.ended_event_id,
+            )
+        to_write = [
+            (eid, run_id, as_of_text, vals[0], vals[1], vals[2], recorded_at)
+            for eid, vals in desired.items()
+            if existing_snapshots.get(eid) != vals
+        ]
+        if to_write:
+            connection.executemany(
+                """
+                INSERT OR REPLACE INTO event_lifecycle_snapshots (
+                    event_id, run_id, as_of, valid_until,
+                    lifecycle_id, ended_event_id, recorded_at
+                ) VALUES (?,?,?,?,?,?,?)
+                """,
+                to_write,
+            )
+            connection.commit()
+        return len(events), 0
+
+    inserted = 0
     for event in events:
         _assert_event_identity(connection, event)
         cursor = connection.execute(

@@ -1,0 +1,69 @@
+{
+  "version": "draft-2",
+  "revision":"2026-09-24一次主控反馈；规则数值与三档不变，明确B50、恢复字段及阈值未达的解释边界；对应method-repair-contract.json。",
+  "status": "predeclared_research_conventions_pending_controller_acceptance",
+  "not_user_risk_preference": true,
+  "not_statistical_confidence": true,
+  "purpose": "把几乎一样、值得有限继续、没有增量、资料不足、停止分别讲清；不从三档代价或九种均线政策里选最漂亮的结果宣布成功。",
+  "units": "所有pp为百分点，例如0.02收益fraction=2个百分点；交易数为实际单边成交次数/年",
+  "symbols_required": 6,
+  "tiers_annual_return_cost_pp": [0,1,2],
+  "tier_rule": "所有对照同时报告三个档；允许代价a的收益条件为candidate_CAGR-comparator_CAGR >= -a/100。边界只用计算容差1e-10，不额外赠送0.1个百分点；三档结果以向量显示，不输出挑一档的全局passed。",
+  "thresholds": {
+    "near_equal_return_pp": 0.1,
+    "near_equal_mdd_pp": 0.5,
+    "near_equal_sides_per_year": 1,
+    "material_mdd_reduction_base_pp": 2,
+    "material_mdd_reduction_stress_pp": 1,
+    "annual_mdd_worsening_tolerance_pp": 1,
+    "full_years_without_material_mdd_worsening_required": 3,
+    "full_years_evaluated": [2022,2023,2024,2025],
+    "max_single_year_mdd_worsening_pp": 5,
+    "descriptive_cross_symbol_support_required": 4
+  },
+  "threshold_basis": "均为本轮分析者看新资金结果前约定，非论文定律、非统计显著性、非用户可接受损失。0.1年化点与0.5跌幅点用于避免追逐细小差别；2点少跌要求有可辨认量级，较高费用至少保留1点；3/4完整年不明显恶化与单年恶化不超过5点防止只靠一个最大下跌事件；4/6只表达本有限集合的多数，不制造独立样本或所有市场推广。原始连续数值同时保留，阈值不能替代判断。",
+  "threshold_failure_limit":"未达到预定风险改善幅度不等于统计证伪或普遍无用。若收益更高、风险不更差但少跌不足2pp，可如实描述其经济取舍，只是不满足本轮特定风险管理保留规则；不按未来结果改阈值，也不由此自动授权新方向或生产采用。",
+  "B50_limit":"固定月度半仓并非与每政策平均仓位完全匹配；能说明简单少买的取舍，不能仅因胜过B50便宣称已剔除全部少持仓效应。本轮不新增事后配仓优化。",
+  "pairwise_fields": {
+    "delta_cagr_pp":"100*(R_candidate-R_comparator)",
+    "mdd_reduction_pp":"100*(D_comparator-D_candidate)，正数表示少跌",
+    "delta_sides_per_year":"candidate-comparator",
+    "delta_fee_cny":"candidate-comparator",
+    "delta_terminal_cny":"candidate-comparator",
+    "recovery_change_days":"longest_underwater_duration分别相减，同时保留双方longest_underwater_is_open；另列longest_recovered_duration之差（任一无已恢复区间则null）和current_underwater_is_open/current_duration双方原值，不把期末未恢复当已恢复、不把最长历史区间状态替代当前状态"
+  },
+  "approximate_dominance": {
+    "definition":"X在收益、下跌、执行负担三方面均不劣于Y（容差分别0.1pp、0.5pp、1单边/年），并至少一方面超过该容差，称X全面超过Y。",
+    "comparators_for_single":["B0","B50"],
+    "comparators_for_dual":["B0","B50","S_N","E_N"],
+    "costs":"各费用分别判，候选若基础或较高费用任一被简单对手全面超过，则不可给无条件保留；列被谁超过及差额",
+    "caveat":"只是筛选需要继续研究的复杂度，不把没有被全面超过当有效证明"
+  },
+  "pairwise_candidate_at_each_tier": [
+    "同产品、同区间、同价格/行动/日历/账户约束、同费用的完整可核账户；对手缺结果则本比较证据不足",
+    "基础费用收益满足该档，且最大跌幅减少>=2pp",
+    "较高费用收益仍满足同一档，且最大跌幅减少>=1pp",
+    "2022–2025四个完整年中至少3年，候选年度最大跌幅不比对手大超过1pp；任一年不大超过5pp。2026H1照报，不塞进四年分母",
+    "没有被该政策预定简单对手在任一费用全面超过；恢复时间、费用、交易负担、少持有日期与实际账户差同时披露；经济开盘无源的错过上涨分解明确null且不阻塞主要判断"
+  ],
+  "policy_retention": {
+    "S_or_E":"每产品每档，相对B0满足pairwise_candidate，且未被B50全面超过，则该产品该档为保留继续验证；B50取舍表不可省。",
+    "D":"每产品每档，对B0、同N的S和E三对均满足pairwise_candidate，且未被B50全面超过，才称第二条线在该产品该档有继续验证价值。只胜一条单线写明条件性结果，不称双线整体增量成立。",
+    "N60_N120":"按相同规则展示，但标尺度探索；不能替换N20主问题，不能自动挑周期上线。",
+    "all_six":"同一固定政策、同一档至少4/6产品保留且6/6数据可评，才可写在这六只里多数支持有限继续；否则只作逐产品结论。六只不是独立证据；缺一只不改变分母或以5只改多数标准。",
+    "report":"固定顺序N20,60,120，每N按S,E,D；三个代价档固定0,1,2；所有六ETF原顺序。保留全部指标与反例，不排列收益冠军。"
+  },
+  "decision_order": [
+    {"decision":"停止受影响执行/解释","when":"来源漂移、账不平、时点泄漏、未核资金单位、突破预算；先保留失败证据，不能归类策略有效性"},
+    {"decision":"有限补证/证据不足","when":"至少一个必需来源、完整账户或关键人工例未通过，或仅一个有限可明确补齐缺项有望改变判断","next":"列精确文件/日期/产品/字段、最多一个补证动作；不改池/参数/区间。补完仍不足则如实停止该收益主张，不无限准备"},
+    {"decision":"保留继续验证","when":"上述逐档保留条件成立","next":"仅提出固定候选的真正未见行情观察；未获生产或真实资金授权；不把冻结观察计划写成已经执行"},
+    {"decision":"没有明确增量","when":"数据和账户可评但逐档保留条件不成立；包括只有微小少跌、代价超出该档、只胜一个对手、费用/年度反例未过","next":"准确写为未满足本轮预定风险管理保留要求，列连续数值及哪项代价/对手导致；更高收益且风险不更差仍如实说明，不写统计证伪或普遍无用；收益更高但跌幅更大记收益风险取舍，不冒称风险管理有效"},
+    {"decision":"停止这条固定假设","when":"某固定政策在全部六只、两费用、三个档均无任何逐产品保留，且没有一个具体未核缺项可能改变判定","next":"停止的是本轮固定风险管理假设的继续投入，不是证明策略在所有用途下无用。保存反例与全部尝试，不自动邻域调参。双线停止不自动否定单线，N20停止不删除已授权60/120结果。"}
+  ],
+  "future_evidence": {
+    "seen_history":"2022–2026H1已经参与定义、名单和过去研究，不论逐年切分或换执行者仍是已见探索；收益未算不意味着价格历史未见。",
+    "unseen_design":"候选与所有阈值固定后，主控记录未参与任何选择且来源适用的数据及冻结时刻；找不到旧未见资料则使用冻结之后的新行情，完整登记所有信号/未成交/分红/费用，仍不自动授权观察执行或定时器。",
+    "no_proof_by_count":"10次/30次交易、4/6产品或3/4年度不是可靠性或非巧合的证明；本轮无声称独立统计检验。",
+    "no_more_search":"50/60/70或新费用/交易约束/产品/窗口都需新有界合同；历史尝试数未知写未知和已核下限。"
+  }
+}

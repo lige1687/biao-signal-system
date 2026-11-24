@@ -1,0 +1,47 @@
+{
+  "mission": "Complete bounded official stock-only financing ratio history so 20-day mean and prior250 percentile can actually be computed",
+  "task_scope": [
+    "Fetch older sessions only before 2026-10-08; current21-session owner retains later files",
+    "Use existing official A-share calendar plus accepted later session dates, choose enough prior dates for total271 sessions through2026-11-05",
+    "Read SSE page count dynamically, obtain all pages; SZSE official XLSX margins and A-stock turnover; SSE stock turnover categories01+03",
+    "First verify oldest date supports sources, then bounded requests; retain failures; no source substitution or backtesting"
+  ],
+  "read_only_paths": [
+    "src/lei_signal/market_context/microstructure_funding.py",
+    "docs/ops/microstructure-observations-20261108/funding/",
+    "docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/coverage-plan-v2.json"
+  ],
+  "write_paths": [
+    "docs/ops/microstructure-observations-20261108/funding-history/"
+  ],
+  "external_write_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/microstructure-observations-20261108/funding/"
+  ],
+  "filename_scope": "Only source files dated before20261008 plus history-request-ledger.json/history-session-dates.json; do not modify any existing input",
+  "network_allowed": true,
+  "max_http_requests": 1500,
+  "max_new_bytes": 314572800,
+  "max_wall_minutes": 12,
+  "max_concurrency": 4,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Runnable bounded fetch script",
+    "Every attempted URL/date/status/bytes/SHA and failures ledger",
+    "Historical date list and per-day completeness summary; primary funding owner will calculate"
+  ],
+  "stop_conditions": [
+    "HTTP429/access denial stop without evasion",
+    "Oldest official source unsupported: report before bulk",
+    "Budget reached preserve partial result",
+    "Never overwrite existing file"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -1,0 +1,328 @@
+{
+  "schema_version": "csi300-membership-qualification-handoff/1.0",
+  "title": "沪深300历史成员最小修正与资料资格方案（2026-10-07）",
+  "report_markdown": "# 沪深300历史成员：最小修正与资料资格方案\n\n2026-10-07，版本1.0。服务于个股研究的数据资格层：确认每个历史时点可以放进同一横向比较的股票。本轮仅核资料、整理修正建议；没有更改成员表、价格、技术规则或研究参数，没有新标签、模型、收益计算或行情查询。B05已由父线程告知独立验收，原1944缺口分类为1601正常来源、339提供方占位、4旧无返回、0未查，主表修复0；常规补查关闭，不再复跑。\n\n## 一句话结论（大白话）\n\n现有股票池至少有两处把“查到名单变化的日期”当成了实际生效日期，2022年起点也保留了应该更早移出的28个候选成员。现在可以纠正这些日期的含义和资料资格标记，但只把两个日期提前，仍不能证明整张历史名单正确。最小下一步是固定一个当时真实有效的完整300股名单，再核清通往研究起点的全部变更；已明确的单个事件可以同时核对，不必等待整段历史全部齐全。\n\n## 本轮范围与复用依据\n\n仅核Library `libfile_0713d6d13a588191be63adf77b1e8cc0` 版本1的四个事件对象、既有本机起点加12处候选差异，以及原件审计清单。Library全文794行，正文快照36469字节，SHA-256为`b9b7af39378aa620ff4c7c7a97644b5cd5020c7a9f5f42c19fee81b0b0cb92e7`；它是此前查证记录，不是本轮新取得的官方原件。\n\n本机原候选表仍为`docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet`，SHA-256 `a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30`。正式期2022-01-04—2026-06-30有1085个日期、每天300候选代码、累计439代码。这些是候选表规模，不是其历史正确性的证明。\n\nLuna只读核对本地必要字段和原件指纹；主控独立核对云端15对代码集合、28对名称关联集合与候选起点。原32份材料的5,706,828字节和指纹均未变，复用此前“25 HTML和7 PDF属于其他深圳/国证指数，不能支持沪深300”的全文结论，没有重新通读。不能把这一限定范围的零匹配推广为所有本地或云端都没有原件。所有实际源路径、版本、hash、检查范围及未验证项见`evidence-manifest.json`。\n\n## 已能说明白的错误，与仍缺的证据\n\n| 对象 | 当前可明确的结论 | 仍不能声称的结果 |\n|---|---|---|\n| 起点2022-01-04 | 按已逐个列明的名称—候选代码关联，28个拟调入成员全部缺失，28个拟调出成员全部仍在。起点不应继续当作可靠的完整历史名单 | 名称关联尚无独立官方代码表支持；不能说另外272个位置全部正确，也不能说权威差异总数恰好28 |\n| 候选2022-01-17的28对变化 | 同期报道把对应定期调整的生效时点写为2021-12-10收盘后；按下一交易日状态表示为2021-12-13。01-17应保留为候选表检测日期，不能继续直接叫官方生效日 | 尚缺中证指数官方完整56代码增删附件，以及起点300名单。不能仅凭名称表自动交换主表中的28对代码 |\n| 候选2023-03-20的15对变化 | 云端媒体转载的中证表格截图中30个代码，与本地候选增删集合完全一致；同期报道生效时点为2022-12-09收盘后，下一交易日状态为2022-12-12 | 原始中证托管附件尚未取得；转载截图的官方来源署名不能升级为直接官方原件。该事件一致也不能证明前后完整300名单 |\n| 候选2025-03-10：600837→601058 | 现有报道把赛轮纳入日期写为2025-03-04，与候选日期不一致，应优先核正式临时调整原件 | 报道尚不能完整绑定移出600837、调入601058及精确生效时点，不能直接执行这一替换 |\n| 候选2025-09-08：601989→601298 | 公司署名转载材料把青岛港纳入日期写为2025-09-05，应核正式临时调整原件 | 原公司帖身份及中证原件尚缺；该材料没有写明601989移出，不能据纳入报道补出完整替换关系 |\n\n本地候选表中，2022-01-04—01-14的9个日期均保持版本`8e9ddebf7b05`；2022-12-12—2023-03-17的64个日期均保持版本`4c6ce697c428`，每天均300只。这里独立核的是表内日期和集合状态，没有重新认证交易所完整日历。两段名单依赖的旧研究输入需要标注这一已知问题；整个2022—2026历史股票池尚未取得完整资格，不等于每一天或每只股票都错误。\n\n已存报道来源：2021年日期见[证券时报同期快讯](https://www.stcn.com/kuaixun/egs/202111/t20211126_3911027.html)，名称表见[中国证券报署名稿的新浪转载](https://finance.sina.com.cn/wm/2021-11-27/doc-ikyamrmy5416301.shtml)；2022年完整30代码截图和日期见[证券时报报道](https://www.stcn.com/article/detail/741239.html)，日期另有[中证网同期报道](https://www.cs.com.cn/gppd/gsyj/202211/t20221125_6310359.html)；两处2025线索分别见[赛轮报道](https://finance.sina.com.cn/stock/relnews/cn/2025-03-04/doc-inennqmm8628146.shtml)和[青岛港署名转载](https://finance.sina.com.cn/stock/relnews/hk/2025-09-08/doc-infpuftn6264331.shtml)。本轮复用Library保存的阅读记录、附件hash及来源分类，没有重新抓取这些网页；其中2021快讯原HTML曾返回404，不能把现有阅读记录冒充本轮原件下载成功。\n\n## 为什么仅挪两处日期不够\n\n旧生成器`prepare_data.py::build_csi300_memberships`每20个交易日查询一次供应商名单。端点不同才搜索第一次集合变化，再把这次查询结果向后铺开；输出键叫`detected_effective_dates`。程序并未核官方公告生效时间，也未把原始成员回应及其`updateDate`保存进该审计JSON。不能仅凭现存集合反推出延迟具体出在提供方历史覆盖、回应日期含义还是其他环节。\n\n两端相同会漏掉区间内先移出再纳入；一个区间内多次变化也没有逐事件穷尽保证。因此12处候选差异只是查证队列，不是官方全部事件目录。每天恰好300只、连续区间无缺行、另一个端点名单相同，都不能单独证明中间没有遗漏。\n\n本轮可立即整理的最小修正是**新的证据描述**：保留原候选检测日；另外记录报道生效时点、日期精度、来源等级、下一交易日状态和尚未核实的代码关系。原候选表和原`detected_effective_dates`封存不覆盖；此方案没有实际修改任何输入表，也没有发布“已修复300股”的替代名单。\n\n## 建立可靠完整起点的最短路径\n\n完整起点指某个明确历史日期有效的全部指数成员，至少要有沪深300身份（000300及其正式名称）、完整代码、交易所、有效日期、原文件来源及hash。\n\n1. **优先取得2022-01-04当时有效的官方完整名单。** 若只有2021-12-13有效的官方完整名单，则再核12-13至01-04所有正式常规、临时和身份变更。日期明确且目录覆盖完整、确无中间变化，才可承接到01-04。\n2. **找不到上述名单时，用更早的官方完整名单加全部中间变更。** 此路至少需要2021年12月调整的完整56代码附件；只有28对增删而没有之前的完整300名单，不够重建起点。公告正文和名单附件可由同一份官方文件满足，不机械要求文件数量。\n3. **独立推进时允许另选一个可取得的历史起点。** 后来某个明确历史日期的官方完整名单，可以支持一个单独标明范围的有限时段。若要反推原2022起点，必须有两点之间完整、可逆、含退出证券的官方变动链；拿今天名单加几次已知调整回填，不满足这个条件。\n\n指数ETF持仓、证券简称对照、当前300名单、媒体调入名单都可作交叉检查，但不能单独代替完整官方指数名单。特别是把现有300候选名单直接减28加28，只得到一个待验证的重建候选，不能证明其余272个位置。名称—代码关系可另用有日期的交易所证券资料核实，但该核实本身不证明指数成员身份。\n\n**首个真正补件目标：**中证指数2021年12月调整后/2022年起点的完整沪深300代码名单及有效时点；若走更早起点方案，再取2021-11-26定期调整公告的完整沪深300代码附件。当前没有这两个对象的已验证中证原始URL，故保留缺失，不能编造下载地址。应沿已有公告日期、指数代码和附件对象定点寻找；只有标题或正文、附件未取得时不标完成。公开原件之外的历史成分服务，其访问权限、费用和再分发条件均未知，不能默认免费、购买或配置密钥。\n\n## 完整变动链怎么收口\n\n研究全期是2022-01-04—2026-06-30。起点以前的衔接事件也要覆盖。候选12处分别为：2022-01-17（28对）、2022-06-13（28对）、2023-03-20（15对）、2023-06-12（9对）、2023-12-11（14对）、2024-06-17（12对）、2024-12-16（16对）、2025-03-10（1对）、2025-06-16（7对）、2025-09-08（1对）、2025-12-15（11对）、2026-06-15（19对）。所有日期与数量都保留“候选”身份，不要求官方资料迁就它们。\n\n后续按中证的完整公告目录登记常规定期、临时替换、证券身份变化，记录目录覆盖到哪里、哪些正文或附件仍缺。不能只找恰好能解释12处差异的文件。涉及302132/300114的代码身份另列有效区间；旧脚本存在这组重命名常量，但沪深300构建函数读取供应商原代码，不能把创业板路径的处理直接当作沪深300身份已核实。\n\n从可靠完整起点逐条应用正式增删：移出对象原应在集合中，调入对象原不应重复，代码与交易所及有效区间明确，官方如有例外须原文解释，不能自动删重或硬凑300。遇缺公告或缺名单附件，标记受影响区间未知；不能把未知默默沿用前日。至少再取得另一个独立官方完整名单作逐代码对账；这只是必要交叉检查，仍须完整目录防止中间移出又进入的事件被端点抵消。\n\n官方链若引入现候选439以外代码，先列范围差异及旧实验可比性，提交父线程决定是否形成新输入版本。不得为维持439这个数而漏事件，也不得擅自把新候选加入旧冻结实验。\n\n## 可并行的最小任务及验收\n\n| 顺序 | 可执行工作 | 交付与通过条件 | 不依赖的事项 |\n|---|---|---|---|\n| 1 | 固定起点资料 | 一份有完整代码和有效时间的官方名单；若非01-04，同步给出通往01-04的完整衔接目录与增删 | 不需要再下载价格，也不需要B05重查 |\n| 同时 | 单独核2021年12月56代码和2022年12月30代码事件 | 精确原URL/附件hash/指数身份/公告时间/生效时间/完整增删；明确直接官方还是转载。2022集合可复用本轮精确匹配 | 不用等2025临时资料或整段历史全部完成 |\n| 同时 | 核两处2025临时替换与代码身份 | 每一对加入/移出必须由同一有效事件或可连接的正式文件绑定，不能从公司纳入报道补出另一侧 | 不妨碍起点及2022单事件整理 |\n| 随后 | 整理完整公告目录并重建可证实时段 | 每段资料覆盖范围明确、集合演算可复现、另一完整名单逐代码相符，未知段不伪装合格 | 可先交付真正完整的一小段，不必等全期；该段不替代原全期目标 |\n\n若起点原件暂缺，事件级资料整理、名称代码核对、目录覆盖检查照常推进。已另获授权的82只固定缓存描述性研究，不依赖“它们曾属于沪深300”的说法，能在其原范围内独立推进；它不替代本项历史指数名单修正，也不因本文件自动获得新实验许可。本轮没有启动它或任何新标签/模型作业。\n\n## 后续小型事件表应保留的字段\n\n`candidate_observed_date`保留候选表检测日；`published_at`记录公布时间；`effective_at_raw`保留原文生效表述及精度；`first_membership_session`记录经过日历核对的第一个成员状态日期；`added`/`removed`保留代码、交易所及身份有效区间；`source_class`、`source_url`、`source_sha256`记录证据等级与原件；`coverage_interval`、`missing_attachment`、`qualification_status`标明覆盖与缺失。\n\n例如2022年12月事件：候选检测日2023-03-20，报道生效为2022-12-09收盘后，下一交易日状态为2022-12-12，15增15删已对上转载截图，但`official_original_obtained=false`。这些字段不能把报道提升为原件，也不能用下载时间代替历史公布时间。周末检查若发生在收盘前后边界，需沿研究合同明确使用哪个时点的成员状态，不能仅比较日期字符串。\n\n本轮未创建事件数据表或改变登记定义。这些是可交给下一执行者的字段要求，不代表已有接口或自动检查已实现。官方公开时间可支持有明确边界的历史复核；指定供应商当时是否已收到该版本仍未知，不能因今天取得文件就宣称过去可实时使用。\n\n## 本轮交付边界\n\n只写本目录的小型说明、Library正文快照和证据清单，及既有任务进度。写前空间须≥536870912字节，本轮新增文档总量≤1048576字节；不下载新行情、不抓新网页或大文件、不买数据、不配置密钥。没有替换任何封存原件、成员表、价格、规则、研究参数或registry；没有提交或推送。原负结果保留，源指纹及最终文件大小由证据清单核回。Library文本写入时工具额外添加的一个末尾换行已去除，快照与Library元数据36469字节一致；不把这次文本恢复冒充新的官方附件下载。\n",
+  "report_sha256": "42643faec26ed074a84c6a9c210bbcd740d4d95dce7ed514f218bab678930faa",
+  "evidence_manifest": {
+    "schema_version": "csi300-membership-repair-qualification/1.0",
+    "created_at_utc": "2026-10-07T07:06:44.598537+00:00",
+    "status": "proposal_complete_historical_universe_not_qualified",
+    "qualified_historical_universe": false,
+    "source_thread_id": "01a10228-d8a4-73ac-afb1-72b1c8b7003a",
+    "ownership": "本机资料资格线；本轮不承担新因子、标签、模型或收益试验",
+    "scope": {
+      "period": [
+        "2022-01-04",
+        "2026-06-30"
+      ],
+      "library_event_objects": 4,
+      "candidate_anchor_count": 1,
+      "candidate_change_count": 12,
+      "original_hash_only_files": 32,
+      "no_broad_file_or_session_scan": true
+    },
+    "library_source": {
+      "library_file_id": "libfile_0713d6d13a588191be63adf77b1e8cc0",
+      "version_id": "1",
+      "file_id": "file_00000000ec748230a035eee3e176cec3",
+      "filename": "csi300-targeted-date-evidence-2026-10-06.json",
+      "schema_version": "csi300-targeted-membership-evidence/1.1",
+      "read_complete": true,
+      "read_lines": 794,
+      "read_has_more": false,
+      "method": "Library全文read；按原元数据恢复无末尾换行的UTF-8正文，不是本轮官方原件下载",
+      "snapshot": {
+        "path": "docs/research/proposals/csi300-membership-repair-qualification-2026-10-07/library-evidence-v1.json",
+        "bytes": 36469,
+        "sha256": "b9b7af39378aa620ff4c7c7a97644b5cd5020c7a9f5f42c19fee81b0b0cb92e7"
+      }
+    },
+    "local_sources": [
+      {
+        "path": "docs/research/proposals/csi300-official-member-binding-2026-10-06/object-mapping.json",
+        "bytes": 43531,
+        "sha256": "9e8c6fab10e8e0485e9f727bc8a071a8868f9cf52744c6d4f48b06e3aadfc261"
+      },
+      {
+        "path": "docs/research/proposals/csi300-official-member-binding-2026-10-06/binding-result.md",
+        "bytes": 6974,
+        "sha256": "a405d0d17a006b7418a057e19e87366d52fbb87a8047ae7057c9b18d6829fe18"
+      },
+      {
+        "path": "docs/research/proposals/csi300-official-member-binding-2026-10-06/local-originals-audit.json",
+        "bytes": 59712,
+        "sha256": "cfd36911160570a1c63b12c3305a4d2dba3412111b33f42ef0ab34ed966e383b"
+      },
+      {
+        "path": "docs/research/proposals/csi300-official-member-binding-2026-10-06/inspection-scope.json",
+        "bytes": 2437,
+        "sha256": "1116529a12220d86d97fb1810adba1b6a5bfc80fac96018b71db79cf529f8239"
+      },
+      {
+        "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+        "bytes": 136179,
+        "sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30"
+      },
+      {
+        "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepare_data.py",
+        "bytes": 17731,
+        "sha256": "16e0f937a68c09a70eb672ee76c766a26793aced5a77ba34f0433753a5e12f7b"
+      },
+      {
+        "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_probe_audit.json",
+        "bytes": 3351,
+        "sha256": "163424317ba3b0b27dd13e37b5c178999c87d8e81b9bc5c3d1f388ae3c854f22"
+      }
+    ],
+    "candidate_summary": {
+      "dates": 1085,
+      "rows": 325500,
+      "codes_per_date": 300,
+      "unique_codes": 439,
+      "source_columns": [
+        "date",
+        "symbol",
+        "version"
+      ],
+      "qualification": "candidate_vendor_reconstruction_only",
+      "anchor_date": "2022-01-04",
+      "anchor_version": "8e9ddebf7b05",
+      "candidate_changes": [
+        {
+          "object_id": "change-2022-01-17",
+          "candidate_observed_date": "2022-01-17",
+          "added_count": 28,
+          "removed_count": 28
+        },
+        {
+          "object_id": "change-2022-06-13",
+          "candidate_observed_date": "2022-06-13",
+          "added_count": 28,
+          "removed_count": 28
+        },
+        {
+          "object_id": "change-2023-03-20",
+          "candidate_observed_date": "2023-03-20",
+          "added_count": 15,
+          "removed_count": 15
+        },
+        {
+          "object_id": "change-2023-06-12",
+          "candidate_observed_date": "2023-06-12",
+          "added_count": 9,
+          "removed_count": 9
+        },
+        {
+          "object_id": "change-2023-12-11",
+          "candidate_observed_date": "2023-12-11",
+          "added_count": 14,
+          "removed_count": 14
+        },
+        {
+          "object_id": "change-2024-06-17",
+          "candidate_observed_date": "2024-06-17",
+          "added_count": 12,
+          "removed_count": 12
+        },
+        {
+          "object_id": "change-2024-12-16",
+          "candidate_observed_date": "2024-12-16",
+          "added_count": 16,
+          "removed_count": 16
+        },
+        {
+          "object_id": "change-2025-03-10",
+          "candidate_observed_date": "2025-03-10",
+          "added_count": 1,
+          "removed_count": 1
+        },
+        {
+          "object_id": "change-2025-06-16",
+          "candidate_observed_date": "2025-06-16",
+          "added_count": 7,
+          "removed_count": 7
+        },
+        {
+          "object_id": "change-2025-09-08",
+          "candidate_observed_date": "2025-09-08",
+          "added_count": 1,
+          "removed_count": 1
+        },
+        {
+          "object_id": "change-2025-12-15",
+          "candidate_observed_date": "2025-12-15",
+          "added_count": 11,
+          "removed_count": 11
+        },
+        {
+          "object_id": "change-2026-06-15",
+          "candidate_observed_date": "2026-06-15",
+          "added_count": 19,
+          "removed_count": 19
+        }
+      ]
+    },
+    "checks": [
+      {
+        "executor": "root",
+        "check": "2022年12月转载表的15增15删与本地change-2023-03-20集合一致",
+        "status": "passed_secondary_source_exact_code_match",
+        "official_original_verified": false
+      },
+      {
+        "executor": "root",
+        "check": "2021年12月56个名称—候选代码关联与change-2022-01-17相符；起点28旧在、28新缺",
+        "status": "passed_association_only",
+        "official_56_codes_verified": false,
+        "other_272_positions_verified": false
+      },
+      {
+        "executor": "membership_local_delta",
+        "check": "候选表2022-01-04..01-14共9日期，每日300且version=8e9ddebf7b05",
+        "status": "passed_local_table_only",
+        "official_calendar_independently_checked": false
+      },
+      {
+        "executor": "membership_local_delta",
+        "check": "候选表2022-12-12..2023-03-17共64日期，每日300且version=4c6ce697c428",
+        "status": "passed_local_table_only",
+        "official_calendar_independently_checked": false
+      },
+      {
+        "executor": "membership_local_delta",
+        "check": "复算原审计清单32文件SHA/字节；7 PDF+25 HTML、5706828字节全部一致",
+        "status": "passed_hash_reuse",
+        "full_text_reread": false,
+        "prior_reused_conclusion": "这些材料属于其他深圳/国证指数，不能证明沪深300成员；不是全库无资料证明"
+      }
+    ],
+    "date_correction_proposals": [
+      {
+        "candidate_observed_date": "2022-01-17",
+        "reported_effective_at_raw": "2021-12-10收盘后",
+        "normalized_next_membership_date": "2021-12-13",
+        "source_class": "同期媒体日期报道+记者名称表转载+显式候选代码关联",
+        "applied_to_main_table": false
+      },
+      {
+        "candidate_observed_date": "2023-03-20",
+        "reported_effective_at_raw": "2022-12-09收盘后",
+        "normalized_next_membership_date": "2022-12-12",
+        "source_class": "媒体转载中证表格截图30代码及同期报道",
+        "applied_to_main_table": false
+      }
+    ],
+    "minimal_next_objects": [
+      {
+        "priority": 1,
+        "object": "2022-01-04有效的官方沪深300完整代码名单；或2021-12-13完整名单加截至01-04的完整衔接目录与事件",
+        "owner": "历史成员资料线",
+        "source_authority": "中证指数有限公司，沪深300/000300",
+        "verified_original_url": null,
+        "success": "完整300成员、交易所、明确有效日期、来源文件hash；若锚点较早，所有中间事件覆盖明确"
+      },
+      {
+        "priority": "parallel",
+        "object": "2021-11-26定期调整公告的沪深300完整56代码附件",
+        "role": "独立确认28对代码及生效时点；单独有差异附件不能重建完整起点",
+        "verified_original_url": null
+      },
+      {
+        "priority": "parallel",
+        "object": "2022-11-25定期调整公告及沪深300完整30代码官方原件",
+        "role": "复用现有转载集合核对；取得直接官方来源和精确生效语义",
+        "verified_original_url": null
+      },
+      {
+        "priority": "parallel",
+        "object": "2025年3月海通/赛轮、9月中国重工/青岛港临时调整原件；302132/300114身份有效区间",
+        "role": "同一有效事件或正式可连接文件绑定加入和移出，不能只凭公司纳入新闻",
+        "verified_original_url": null
+      },
+      {
+        "priority": "after_anchor",
+        "object": "起点衔接及2022-01-04..2026-06-30常规/临时/身份变更完整官方目录，并用第二份独立完整名单对账",
+        "role": "候选12差异只是查证队列；端点相符不保证区间无遗漏",
+        "verified_original_url": null
+      }
+    ],
+    "blocked_acceptance": {
+      "item": "全期历史成员资格及可靠2022起点",
+      "missing": [
+        "官方完整起点",
+        "全期完整变动目录及缺失附件",
+        "2021年28对正式代码",
+        "两处2025完整替换关系",
+        "代码身份有效区间"
+      ],
+      "why_current_evidence_insufficient": "只调整两日期或对现300减28加28，无法证明其余成员和遗漏事件；当前名单回填不能代表历史真实股票池",
+      "resume_condition": "取得上述精确对象中支持某完整时段的可靠起点、全部变动和独立对账材料",
+      "independent_work_allowed": "事件资料核对和完整目录整理可并行；既有82固定缓存仅在另行既有授权内描述性探索，不替代本目标"
+    },
+    "source_access": {
+      "current_public_source_reads": 0,
+      "official_original_acquired_this_round": 0,
+      "public_originals": "沿已知公告日期/指数代码定点寻找，当前没有已验证原始URL，不编造链接",
+      "commercial_historical_service_permission": "unknown",
+      "fees": "unknown",
+      "redistribution_terms": "unknown",
+      "purchase_or_key_setup_authorized": false
+    },
+    "field_definitions": {
+      "candidate_observed_date": "候选成员表首次出现差异的日期，不当作官方生效日",
+      "published_at": "来源公开时间及其精度",
+      "effective_at_raw": "保留原文生效表述",
+      "first_membership_session": "按研究时点及独立日历核实的第一个成员状态日期",
+      "added_removed": "代码、交易所、身份有效区间与完整增删证据",
+      "source_class": "直接官方、官方转载截图、媒体名称表或未核线索",
+      "source_sha256": "所保存原件/正文的SHA-256，必须连同对象及字节范围说明",
+      "coverage_interval": "该证据能支持的完整时段",
+      "qualification_status": "合格、候选、未核或缺资料，未知不沿用前日冒充合格"
+    },
+    "producer_limitations": {
+      "probe_step_trading_days": 20,
+      "only_first_detected_change_per_different_endpoint_interval": true,
+      "equal_endpoints_can_hide_intermediate_changes": true,
+      "vendor_raw_response_and_updateDate_preserved_in_probe_audit": false,
+      "membership_builder_applies_CODE_RENAMES": false,
+      "vendor_historical_arrival_time_known": false
+    },
+    "resource_limits": {
+      "minimum_free_bytes_before_write": 536870912,
+      "maximum_new_document_bytes": 1048576,
+      "free_bytes_before_this_write": 4836966400,
+      "provider_requests": 0,
+      "quote_downloads": 0,
+      "performance_computations": 0,
+      "main_data_changes": 0,
+      "registry_changes": 0,
+      "commit_or_push": false
+    },
+    "delegation": {
+      "agent": "membership_local_delta",
+      "model": "gpt-6-luna",
+      "reasoning": "low",
+      "scope": "只读本地候选表两区间及审计原件hash",
+      "fallback": null,
+      "actual_usage_and_cost": "unknown"
+    },
+    "retained_failure_note": "首次正文快照写入工具多加1末尾LF造成36470字节核对失败；仅去除新副本该LF后36469字节与Library元数据一致，源未更改。",
+    "b05_status": {
+      "basis": "父线程独立验收确认，未在本轮重查",
+      "normal_source": 1601,
+      "provider_placeholders": 339,
+      "old_no_response": 4,
+      "unqueried": 0,
+      "main_repair": 0,
+      "routine_acquisition_closed": true
+    },
+    "report": {
+      "path": "docs/research/proposals/csi300-membership-repair-qualification-2026-10-07/README.md",
+      "bytes": 13825,
+      "sha256": "42643faec26ed074a84c6a9c210bbcd740d4d95dce7ed514f218bab678930faa"
+    }
+  },
+  "evidence_manifest_sha256": "52b99e7c6e80d9255f190ef9ed1c27b0132dfb1f8fa830e3dd04971c803e812e",
+  "source_snapshot_location": "Library libfile_0713d6d13a588191be63adf77b1e8cc0 version 1；正文SHA与字节数在manifest内，不重复上传",
+  "qualified_historical_universe": false
+}

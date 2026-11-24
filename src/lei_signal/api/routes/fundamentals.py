@@ -1,6 +1,8 @@
 """基本面参考层端点：宏观指标 + 行业板块全景 + 行业资金流历史。"""
 from __future__ import annotations
 
+from typing import Literal
+
 from fastapi import APIRouter, HTTPException, Request
 
 from lei_signal.fundamentals import sources
@@ -11,6 +13,12 @@ router = APIRouter(prefix="/api/fundamentals", tags=["fundamentals"])
 
 def _service(request: Request) -> FundamentalsService:
     return request.app.state.fundamentals_service
+
+
+@router.get("/observations")
+def observations(request: Request, market: Literal["cn", "us"]) -> dict:
+    """叙事观察事实、来源、时点和缺项原因。"""
+    return _service(request).observations(market)
 
 
 @router.get("/overview")
@@ -26,14 +34,31 @@ def rates(request: Request, refresh: bool = False) -> dict:
 
 
 @router.get("/rates-history")
-def rates_history(request: Request, lookback_days: int = 1095) -> dict:
+def rates_history(request: Request, lookback_days: int = 1095, valuation_only: bool = False) -> dict:
     """宏观利率/VIX/两融/股债收益差/估值分位 历史时间序列，供趋势图。
 
     lookback_days 默认 1095（3 年），上限 7665（21 年）。各序列自身可得上限：
     国债 1990 起 / VIX 1990 起 / 两融 2010 开闸 / 股债收益差 2005 起 /
     CAPE 1871 起（月频）/ 沪深300 PE_TTM 2005 起。
+    valuation_only 返回两个估值来源的完整可用历史，不受图表显示窗口影响。
     """
-    return _service(request).rates_history(lookback_days=max(5, min(int(lookback_days), 7665)))
+    if valuation_only:
+        return _service(request).valuation_history()
+    return _service(request).rates_history(lookback_days=max(5, min(int(lookback_days), 18250)))
+
+
+@router.get("/erp-cn-reference")
+def erp_cn_reference() -> dict:
+    """Read the automatically updated, same-definition CSI300 reference."""
+    from lei_signal.fundamentals.erp_refresh import read_cn_erp
+
+    return read_cn_erp()
+
+
+@router.get("/turnover-concentration")
+def turnover_concentration() -> dict:
+    from lei_signal.fundamentals.valuation_context import read_concentration
+    return read_concentration()
 
 
 @router.get("/macro-history")
@@ -70,6 +95,19 @@ def us_macro(request: Request, refresh: bool = False) -> dict:
     首次加载逐序列拉 FRED（约 15 秒，序列间限速），之后 6 小时走缓存。
     """
     return _service(request).us_macro(refresh=refresh)
+
+
+@router.get("/cn-financing-history")
+def cn_financing_history() -> dict:
+    from lei_signal.market_context.cn_funding_refresh import read_cn_funding
+
+    return read_cn_funding()
+
+
+@router.get("/cross-border-premium")
+def cross_border_premium(request: Request, refresh: bool = False) -> dict:
+    """常用海外场内ETF（纳指、标普、恒生科技）实时溢价率与同组比价。"""
+    return _service(request).cross_border_premium(refresh=refresh)
 
 
 @router.get("/industry/{code}/flow")

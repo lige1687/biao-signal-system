@@ -1,0 +1,327 @@
+"""基本面页市场观察事实；所有指标仅供叙事说明。"""
+
+from __future__ import annotations
+
+import os
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+from typing import Any, Callable
+
+from lei_signal.fundamentals import sources, turnover_snapshot
+from lei_signal.fundamentals.observation_meta import observation_item
+
+
+def _series_item(
+    raw: dict[str, float], *, metric_id: str, label: str, universe: str,
+    unit: str, source_name: str, source_url: str, reading: str,
+    limitations: list[str], fetched_at: str | None, change_steps: int = 1,
+) -> dict[str, Any]:
+    points = sorted((day, float(value)) for day, value in raw.items())
+    if not points:
+        raise sources.FundamentalsSourceError(f"{metric_id} 没有有效观测")
+    day, value = points[-1]
+    change = round(value - points[-1 - change_steps][1], 3) if len(points) > change_steps else None
+    item = observation_item(
+        metric_id=metric_id, label=label, market="us", universe=universe,
+        value=value, unit=unit, change=change,
+        comparison_period=f"前{change_steps}个有效观测日" if change is not None else None,
+        observation_date=day, fetched_at=fetched_at, source_name=source_name,
+        source_url=source_url, source_access="public_with_source_terms",
+        history_start=points[0][0], history_end=day,
+        observation_count=len(points), valid_count=len(points),
+        eligible_count=None, reading=reading, limitations=limitations,
+        evidence_refs=[source_url],
+    )
+    if len(points) >= 250 and item["value"] is not None:
+        vals = [v for _, v in points]
+        item["history_percentile"] = sources.percentile_rank(vals, float(item["value"]))
+    return item
+
+
+def _load_live_cn_turnover() -> dict[str, Any] | None:
+    """从官方沪深交易所日更缓存读取最新 A 股成交额（不覆盖冻结快照）。"""
+    import json
+    import re
+    from lei_signal.api.config import cache_root
+
+    live_path = Path(cache_root()) / "cn_funding_live.json"
+    if not live_path.is_file():
+        return None
+    try:
+        pkt = json.loads(live_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+    t_points = [
+        (str(p["date"]), float(p["value_yi"]))
+        for p in (pkt.get("turnoverPoints") or [])
+        if p.get("date") and p.get("value_yi") is not None
+    ]
+    day: str | None = None
+    val_yi: float | None = None
+    change: float | None = None
+    comp: str | None = None
+    hist_start: str | None = None
+    obs_cnt = 1
+    if t_points:
+        t_points.sort()
+        day, val_yi = t_points[-1]
+        hist_start = t_points[0][0]
+        obs_cnt = len(t_points)
+        if len(t_points) > 20:
+            prior_mean = sum(v for _, v in t_points[-21:-1]) / 20.0
+            if prior_mean > 0:
+                change = round((val_yi / prior_mean - 1.0) * 100.0, 2)
+                comp = "相对此前20个有效交易日均值"
+    else:
+        cards = pkt.get("cards") or []
+        main_card = cards[0] if cards else {}
+        details = main_card.get("latestDetails") or []
+        by_lbl = {str(d.get("label", "")): str(d.get("value", "")) for d in details}
+        raw_t = by_lbl.get("沪深A股成交额", "")
+        m = re.search(r"([0-9]+(?:\.[0-9]+)?)", raw_t)
+        raw_d = by_lbl.get("源样本结束日", "")
+        if m and re.fullmatch(r"\d{4}-\d{2}-\d{2}", raw_d):
+            day = raw_d
+            val_yi = round(float(m.group(1)), 2)
+            hist_start = raw_d
+    if day is None or val_yi is None:
+        return None
+    return observation_item(
+        metric_id="cn_turnover_live",
+        label="沪深A股官方最新成交额",
+        market="cn",
+        universe="沪深A股股票（上交所主板和科创板 + 深交所主板和创业板）",
+        value=val_yi,
+        unit="亿元",
+        change=change,
+        change_unit="%" if change is not None else "亿元",
+        comparison_period=comp,
+        observation_date=day,
+        fetched_at=pkt.get("generatedAt"),
+        history_start=hist_start,
+        history_end=day,
+        observation_count=obs_cnt,
+        valid_count=obs_cnt,
+        source_name="上交所、深交所每日官方成交统计（自动增量更新）",
+        source_url="https://www.sse.com.cn/market/stockdata/overview/day/",
+        source_access="public_web",
+        reading="衡量当前沪深股市交易冷热；连续放量往往情绪升温，缩量往往偏冷清。",
+        limitations=["不含北交所、基金与债券回购", "单日成交受节前节后影响，建议结合近期均值看"],
+        evidence_refs=[
+            "https://www.sse.com.cn/market/stockdata/overview/day/",
+            "https://www.szse.cn/market/overview/index.html",
+        ],
+    )
+
+
+def _missing(spec: dict[str, Any], reason: str) -> dict[str, Any]:
+    return observation_item(**spec, quality_reason=reason)
+
+
+def build_observations(market: str, fetch: Callable[[str, Callable[[], Any]], Any]) -> dict[str, Any]:
+    """按项抓取与降级；fetch 由 service 注入 TTL 缓存。"""
+    generated = datetime.now(UTC).isoformat()
+    items: list[dict[str, Any]] = []
+    errors: list[str] = []
+
+    def add(spec: dict[str, Any], loader: Callable[[], dict[str, Any]]) -> None:
+        try:
+            items.append(loader())
+        except (sources.FundamentalsSourceError, ValueError, OSError) as exc:
+            errors.append(f"{spec['metric_id']}: {exc}")
+            items.append(_missing(spec, "来源读取或校验失败，目前没有合格读数"))
+
+    if market == "cn":
+        base = {"market": "cn", "universe": "沪深交易所融资标的证券（可能含基金）",
+                "unit": "亿元", "source_name": "东方财富融资融券历史汇总",
+                "source_url": "https://data.eastmoney.com/rzrq/total.html",
+                "source_access": "public_web", "reading": "只描述融资活动，不代表全部散户",
+                "limitations": ["融资标的可能包括基金，不与股票成交额相除", "交易所范围和发布时间未逐日复核"]}
+        for metric_id, label, key in (
+            ("margin_balance", "融资余额", "rzye_yi"),
+            ("margin_buy", "融资买入额", "buy_yi"),
+        ):
+            spec = {**base, "metric_id": metric_id, "label": label}
+
+            def load_margin(key: str = key, spec: dict[str, Any] = spec) -> dict[str, Any]:
+                hist = fetch("margin_hist:observations", lambda: sources.fetch_margin_history(90))
+                points = sorted((d, float(v[key])) for d, v in hist.items() if v.get(key) is not None)
+                if not points:
+                    raise sources.FundamentalsSourceError("没有有效融资日值")
+                day, value = points[-1]
+                steps = 20 if key == "rzye_yi" else 1
+                change = round(value - points[-1 - steps][1], 2) if len(points) > steps else None
+                return observation_item(
+                    **{**spec, "reading": ("尚未偿还的融资金额，变化反映融资余额增减，不代表全部投资者的态度。" if key == "rzye_yi" else "当日使用融资买入的金额，变化反映这类交易活跃程度。")}, value=value, change=change,
+                    comparison_period=f"前{steps}个有效观测日" if change is not None else None,
+                    observation_date=day, fetched_at=None,
+                    history_start=points[0][0], history_end=day,
+                    observation_count=len(hist), valid_count=len(points),
+                    evidence_refs=[spec["source_url"]],
+                )
+
+            add(spec, load_margin)
+        try:
+            margin_hist = fetch("margin_hist:observations", lambda: sources.fetch_margin_history(365))
+            ratio_pts = sorted(
+                (d, float(v["rzyezb_pct"]))
+                for d, v in margin_hist.items()
+                if v.get("rzyezb_pct") is not None
+            )
+            if ratio_pts:
+                r_day, r_val = ratio_pts[-1]
+                r_chg = round(r_val - ratio_pts[-21][1], 3) if len(ratio_pts) > 20 else None
+                ratio_item = observation_item(
+                    metric_id="margin_balance_ratio",
+                    label="融资余额占流通市值比例",
+                    market="cn",
+                    universe="沪深交易所融资标的相对A股流通市值",
+                    value=round(r_val, 3),
+                    unit="%",
+                    change=r_chg,
+                    comparison_period="前20个有效观测日" if r_chg is not None else None,
+                    observation_date=r_day,
+                    fetched_at=None,
+                    history_start=ratio_pts[0][0],
+                    history_end=r_day,
+                    observation_count=len(margin_hist),
+                    valid_count=len(ratio_pts),
+                    source_name="东方财富融资融券历史汇总",
+                    source_url="https://data.eastmoney.com/rzrq/total.html",
+                    source_access="public_web",
+                    reading="剔除市场总盘子扩容影响，跨年份观察借钱买股盘子是偏轻还是偏重。",
+                    limitations=["融资标的包含部分场内基金，仅供跨年冷热参考"],
+                    evidence_refs=["https://data.eastmoney.com/rzrq/total.html"],
+                )
+                if len(ratio_pts) >= 250 and ratio_item["value"] is not None:
+                    ratio_item["history_percentile"] = sources.percentile_rank(
+                        [v for _, v in ratio_pts], float(ratio_item["value"])
+                    )
+                items.append(ratio_item)
+        except (sources.FundamentalsSourceError, ValueError, OSError):
+            pass
+        turnover_spec = {
+            "metric_id": "stock_turnover", "label": "A股股票成交额", "market": "cn",
+            "universe": "沪深A股股票（上交所主板A股和科创板；深交所主板A股和创业板A股）", "unit": "亿元",
+            "source_name": "上交所、深交所每日成交统计（固定历史快照）",
+            "source_url": "https://www.sse.com.cn/market/stockdata/overview/day/", "source_access": "public_web",
+            "reading": "仅说明截至2026-09-29的历史交易活跃度，不表示当前市场，也不参与交易判定。",
+            "limitations": ["首次公布时间与修订记录未核实", "固定历史资料；未来日期及自动刷新未核实"],
+            "evidence_refs": ["https://www.sse.com.cn/market/stockdata/overview/day/", "https://www.szse.cn/market/overview/index.html"],
+        }
+        add(turnover_spec, turnover_snapshot.load_turnover_snapshot)
+        live_turnover = _load_live_cn_turnover()
+        if live_turnover is not None:
+            items.append(live_turnover)
+    else:
+        ten_years_ago = (datetime.now(UTC).date() - timedelta(days=3650)).isoformat()
+        series_specs = [
+            ("vix", "标普500预期波动率 VIX", "标普500期权", "指数点", "Yahoo / Cboe",
+             "https://finance.yahoo.com/quote/%5EVIX/", lambda: sources.fetch_vix_history(3650),
+             ["期权预期波动不表示涨跌方向", "Yahoo 转发数据未核实首次发布时间"]),
+            ("vxn", "纳斯达克100预期波动率 VXN", "Nasdaq-100 期权", "指数点", "FRED / Cboe",
+             "https://fred.stlouisfed.org/series/VXNCLS", lambda: sources._fetch_fred_series("VXNCLS", cosd=ten_years_ago),
+             ["期权预期波动不表示涨跌方向", "Cboe 数据再分发需遵守来源条款"]),
+            ("real_yield_10y", "美国10年实际利率", "美国10年通胀保值国债", "%", "FRED / 美国财政部",
+             "https://fred.stlouisfed.org/series/DFII10", lambda: sources._fetch_fred_series("DFII10", cosd=ten_years_ago),
+             ["实际利率与股价可同涨", "不是名义利率减当月 CPI"]),
+            ("hy_oas", "美国高收益债信用利差", "美国高收益债", "%", "FRED / ICE",
+             "https://fred.stlouisfed.org/series/BAMLH0A0HYM2", lambda: sources._fetch_fred_series("BAMLH0A0HYM2", cosd=ten_years_ago),
+             ["ICE 授权及历史窗口限制", "不是科技股专属指标"]),
+        ]
+        for metric_id, label, universe, unit, source_name, url, loader, limits in series_specs:
+            spec = {"metric_id": metric_id, "label": label, "market": "us",
+                    "universe": universe, "unit": unit, "source_name": source_name,
+                    "source_url": url, "source_access": "public_with_source_terms",
+                    "reading": {
+                        "vix": "标普500期权反映的预期波动。读数上升表示预期波动加大，不表示价格一定下跌。",
+                        "vxn": "纳斯达克100期权反映的预期波动。与VIX的股票范围不同，不能混称全市场恐慌。",
+                        "real_yield_10y": "美国10年通胀保值国债收益率，观察实际利率水平；变化以百分点表示。",
+                        "hy_oas": "高收益企业债相对国债的利差，观察借款风险补偿要求；它不是违约率。",
+                    }[metric_id], "limitations": limits}
+            add(spec, lambda spec=spec, loader=loader: _series_item(
+                fetch(f"observations:{spec['metric_id']}", loader),
+                metric_id=spec["metric_id"], label=spec["label"], universe=spec["universe"],
+                unit=spec["unit"], source_name=spec["source_name"], source_url=spec["source_url"],
+                reading=spec["reading"], limitations=spec["limitations"], fetched_at=None,
+                change_steps=20 if spec["metric_id"] == "real_yield_10y" else 1,
+            ))
+        _surveys(items, errors, generated)
+    if market == "us":
+        # 仅解释原体系参数出处，不据原值重新分类情绪或生成交易条件。
+        notes = _survey_reference_notes()
+        for item in items:
+            if item["metric_id"] in notes:
+                item["reference_note"] = notes[item["metric_id"]]
+    return {"market": market, "generated_at": generated, "items": items, "errors": errors}
+
+
+def _surveys(items: list[dict[str, Any]], errors: list[str], fetched_at: str) -> None:
+    from lei_signal.market_context import sentiment
+
+    root = Path(os.environ.get("LEI_SENTIMENT_ROOT") or Path(__file__).resolve().parents[3] / "data" / "sentiment")
+    for series_id, label, filename, loader, attr, unit in (
+        ("naaim", "NAAIM 主动管理人自报股票敞口", "naaim.csv", sentiment.load_naaim_observations, "exposure_index", "%"),
+        ("aaii", "AAII 会员未来六个月看涨减看跌", "aaii.csv", sentiment.load_aaii_observations, "bull_bear", "百分点"),
+    ):
+        url = "https://www.naaim.org/programs/naaim-exposure-index/" if series_id == "naaim" else "https://www.aaii.com/sentimentsurvey"
+        universe = "美国主动投资管理人自报股票敞口" if series_id == "naaim" else "AAII会员未来六个月美股方向调查"
+        spec = {"metric_id": series_id, "label": label, "market": "us", "universe": universe,
+                "unit": unit, "source_name": series_id.upper(), "source_url": url,
+                "source_access": "unknown", "reading": ("看涨比例减去看跌比例：正值说明看涨人数比例较高，负值相反；问的是未来六个月。" if series_id == "aaii" else "受访管理人自报股票敞口，可以为负或超过100%；不能读成全体机构持股比例。"),
+                "limitations": ["历史文件的首次公开时间未经逐期核实，不能用于历史交易", "本地历史资料，来源声明尚未逐期核实"]}
+        path = root / filename
+        if not path.exists():
+            items.append(_missing(spec, "未提供本地问卷历史文件"))
+            continue
+        try:
+            observations = loader(path)
+            if not observations:
+                raise ValueError("文件中没有有效观测")
+            # 旧采集器把无日期 NAAIM 组件贴上运行周且默认 licensed：这些行不能用于最新值。
+            eligible = [o for o in observations if not (series_id == "naaim" and o.source.startswith("auto:naaim.org"))]
+            if not eligible:
+                items.append(_missing(spec, "仅有旧采集器推测调查周的 NAAIM 数值；没有可确认日期的观测"))
+                continue
+            last = eligible[-1]
+            values = [float(getattr(o, attr)) for o in eligible if getattr(o, attr) is not None]
+            if not values:
+                raise ValueError("没有有效问卷数值")
+            item = observation_item(
+                **{**spec, "source_access": "local_source_claim_unverified"}, value=values[-1],
+                change=round(values[-1] - values[-2], 2) if len(values) > 1 else None,
+                comparison_period="上一期" if len(values) > 1 else None,
+                observation_date=last.survey_week.isoformat(),
+                fetched_at=None, history_start=eligible[0].survey_week.isoformat(),
+                history_end=last.survey_week.isoformat(), observation_count=len(observations),
+                valid_count=len(values), eligible_count=0,
+                quality_reason="本地文件的授权声明和逐期首次公开时间未经核实；只供观察，不能用于历史交易回放",
+                evidence_refs=[url],
+            )
+            if series_id == "aaii":
+                item["components"] = {
+                    "bullish_pct": float(last.bullish), "neutral_pct": float(last.neutral),
+                    "bearish_pct": float(last.bearish),
+                }
+            items.append(item)
+        except (ValueError, OSError) as exc:
+            errors.append(f"{series_id}: {exc}")
+            items.append(_missing(spec, "问卷历史资料未通过校验，无法确认合格读数"))
+
+
+def _survey_reference_notes() -> dict[str, str]:
+    from lei_signal.domain.rules_config import get_rule
+
+    fallback = "原体系调查确认参考值暂不可读取；本页不按调查值判断短期顶底。"
+    try:
+        rule = get_rule("module_e_sentiment_extreme")
+        aaii_low, aaii_high = rule.param("aaii_extreme")
+        naaim_low, naaim_high = rule.param("naaim_extreme")
+        suffix = "源自LEI模块E，须结合市场宽度（股票站上均线的比例）；尚未证明能定位纳斯达克短期顶底。"
+        return {
+            "aaii": f"原体系确认参考：看涨减看跌≤{aaii_low * 100:g}或≥{aaii_high * 100:g}个百分点。{suffix}",
+            "naaim": f"原体系确认参考：自报股票敞口≤{naaim_low * 100:g}%或≥{naaim_high * 100:g}%。{suffix}",
+        }
+    except (KeyError, TypeError, ValueError, FileNotFoundError):
+        return {"aaii": fallback, "naaim": fallback}

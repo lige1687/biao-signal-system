@@ -1,0 +1,46 @@
+{
+  "mission": "美股1.5σ与2σ首页观察及5年/10年国债用途核查",
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "mode": "research",
+  "question": "如何清楚显示美股相对估值轨道；5年比10年国债提供什么独立观察信息",
+  "decision_use": "每日/每周看相对估值位置与价格，区分期限、实际利率与通胀，不改变策略",
+  "target_and_baseline": "现有TTM EY−US10Y及P15/P85；固定1.5/2观察候选，不搜索最佳参数",
+  "existing_evidence": "v12已核3份专业来源和旧US30/70无增量研究，CN证据不可移植",
+  "budget_and_stop": {
+    "new_source_calls_total": 6,
+    "research_helper_calls": 4,
+    "root_calls": 2,
+    "new_financial_experiments": 0,
+    "data_acquisition": "先用现有本地/缓存；若必须联网采集另登记，不由助手擅自取数"
+  },
+  "output_location": "docs/ops/breadth-reading-aid-20261101/us-sigma-yields-v13",
+  "task_scope": [
+    "Read-only review of root US sigma UI wiring and pure-data correctness. Check CN preserved, US uses matching dates/full-history warmup and latest readout, rail visibility, missing data, chosen intervals, links and labels. Return findings only."
+  ],
+  "read_only_paths": [
+    "web/src/components/observation-library/ErpCrossChart.tsx",
+    "web/src/components/observation-library/projectionView.tsx",
+    "web/src/components/market-observation-alerts/UsErpCard.tsx",
+    "web/src/components/market-observation-alerts/index.tsx",
+    "web/src/components/observation-library/usErpBands.ts"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "expected_outputs": [
+    "Return prioritized concrete issues only; no edits"
+  ],
+  "stop_conditions": [
+    "Do not write other paths",
+    "No network/API requests or source fetching",
+    "No child agents"
+  ]
+}

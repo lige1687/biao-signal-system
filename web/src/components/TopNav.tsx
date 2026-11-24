@@ -1,18 +1,47 @@
-import { sentimentApi } from "../api/client";
-import { useQuery } from "@tanstack/react-query";
-import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { api } from "../api/client";
+import { NavLink, useLocation } from "react-router-dom";
 import { agentConsoleStore } from "../App";
+import "./navigation-context.css";
 
-/**
- * 全局顶栏：看盘与执行入口常驻，资料与研究入口分组展开。
- * 「工作台 + AI 助手」是 AI 区，归到右侧与信息导航分开。
- * 监督待办带红点（全库 open 待办数）；看盘入口带红点（买卖信号合计）。
- * 计数轮询 60s：待办由日终监督周期产生，不需要更快。
- */
-type NavItem = { to: string; label: string; end?: boolean; badge?: number; dot?: string };
-type NavGroup = NavItem[];
+type NavItem = { to: string; label: string };
+type ArchiveGroup = { heading: string; items: NavItem[] };
+
+const PRIMARY_LINKS: { to: string; label: string; match: (path: string) => boolean }[] = [
+  { to: "/onepage", label: "一页看全", match: (p) => p === "/onepage" },
+  { to: "/", label: "看盘", match: (p) => p === "/" || p.startsWith("/symbol/") },
+  { to: "/portfolio", label: "持仓", match: (p) => p === "/portfolio" },
+  {
+    to: "/fundamentals",
+    label: "宏观与情绪",
+    match: (p) => p === "/fundamentals" || p === "/sentiment" || p === "/news",
+  },
+];
+
+const ARCHIVE_GROUPS: ArchiveGroup[] = [
+  {
+    heading: "日常备用",
+    items: [
+      { to: "/ops", label: "今日重点清单" },
+      { to: "/daily", label: "收盘简报" },
+      { to: "/plans", label: "计划待办" },
+    ],
+  },
+  {
+    heading: "研究归档",
+    items: [
+      { to: "/strategy", label: "技术体系" },
+      { to: "/fwd", label: "策略跟踪与复盘" },
+      { to: "/library", label: "实验报告库" },
+      { to: "/factors", label: "因子观测台" },
+      { to: "/backtest", label: "历史回测" },
+      { to: "/learning", label: "文献学习" },
+      { to: "/mindset", label: "认知心态" },
+      { to: "/upgrades", label: "系统待升级" },
+      { to: "/research", label: "历史研究" },
+      { to: "/agent", label: "AI 全屏工作台" },
+    ],
+  },
+];
 
 export default function TopNav() {
   const location = useLocation();
@@ -29,95 +58,63 @@ export default function TopNav() {
     document.addEventListener("pointerdown", dismiss);
     return () => document.removeEventListener("pointerdown", dismiss);
   }, []);
-  const { data: moodLight } = useQuery({
-    queryKey: ["sentimentLight"],
-    queryFn: () => sentimentApi.light(),
-    refetchInterval: 5 * 60_000,
-    staleTime: 5 * 60_000,
-  });
-  const { data } = useQuery({
-    queryKey: ["plansSummary"],
-    queryFn: () => api.plansSummary(),
-    refetchInterval: 60_000,
-    staleTime: 30_000,
-  });
-  const open = data?.open_actions ?? 0;
-  const todayOpps = data?.today_signal_total ?? data?.today_opportunities ?? 0;
 
-  const groups: NavGroup[] = [
-    [
-      { to: "/", label: "看盘", end: true, badge: todayOpps || undefined },
-      { to: "/sectors", label: "行业板块" },
-      { to: "/sentiment", label: "情绪", dot: moodLight?.available && moodLight.light !== "gray"
-        ? (moodLight.light === "blue" ? "#4d7fc4" : "#d24a43")
-        : undefined },
-    ],
-    [
-      { to: "/ops", label: "今日操作" },
-      { to: "/portfolio", label: "我的持仓" },
-      { to: "/plans", label: "监督待办", badge: open || undefined },
-    ],
-    [
-      { to: "/fundamentals", label: "基本面" },
-      { to: "/factors", label: "因子观测台" },
-      { to: "/news", label: "资讯流" },
-      { to: "/daily", label: "收盘简报" },
-      { to: "/mindset", label: "认知心态" },
-    ],
-    [
-      { to: "/strategy", label: "技术体系" },
-      { to: "/backtest", label: "回测" },
-      { to: "/research", label: "本轮研究" },
-      { to: "/library", label: "实验报告库" },
-      { to: "/learning", label: "文献学习库" },
-      { to: "/upgrades", label: "系统待升级" },
-    ],
-  ];
-
-  const link = (item: NavItem) => (
-    <NavLink key={item.to} to={item.to} end={item.end}
-      onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>
-      {item.label}
-      {(item as { dot?: string }).dot && (
-        <span className="nav-mood-dot" style={{ background: (item as { dot?: string }).dot }}
-              title={item.dot === "#4d7fc4" ? "冰点机会窗口开启" : "情绪警报触发"} />
-      )}
-      {item.badge != null && item.badge > 0 && <span className="nav-badge">{item.badge}</span>}
-    </NavLink>
-  );
+  const inArchive = ARCHIVE_GROUPS.some((g) => g.items.some((it) => it.to === location.pathname));
 
   return (
     <nav className="top-nav" aria-label="主导航" ref={navRef}>
-      <NavLink to="/" className="brand" aria-label="BIAO 看盘首页">BIAO<span>趋势研究</span></NavLink>
-      {groups.slice(0, 2).map((g, i) => (
-        <span className="nav-group" key={i}>
-          {i > 0 && <span className="nav-sep" />}
-          {g.map(link)}
-        </span>
-      ))}
-      {groups.slice(2).map((g, i) => (
-        <details className={`nav-more${g.some((item) => item.to === location.pathname) ? " is-current" : ""}`}
-          key={i} onKeyDown={(event) => {
-            if (event.key === "Escape") {
-              event.currentTarget.removeAttribute("open");
-              event.currentTarget.querySelector("summary")?.focus();
-            }
-          }}>
-          <summary>{i === 0 ? "资讯与认知" : "策略研究"}<span aria-hidden="true">⌄</span></summary>
-          <div className="nav-more-links">{g.map(link)}</div>
-        </details>
+      <NavLink to="/" className="brand" aria-label="BIAO 看盘首页">
+        BIAO<span>趋势研究</span>
+      </NavLink>
+      {PRIMARY_LINKS.map((item) => (
+        <NavLink
+          key={item.to}
+          to={item.to}
+          end={item.to === "/"}
+          className={item.match(location.pathname) ? "active" : ""}
+        >
+          {item.label}
+        </NavLink>
       ))}
       <span className="nav-spacer" />
-      <span className="nav-ai">
-        <NavLink to="/agent">工作台</NavLink>
-        <button
-          className="btn small nav-agent"
-          onClick={() => agentConsoleStore.openConsole(null)}
-          title="AI 助手：问行情、查信号、复盘对话"
-        >
-          AI 助手
-        </button>
-      </span>
+      <details
+        className={`nav-more nav-archive${inArchive ? " is-current" : ""}`}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            event.currentTarget.removeAttribute("open");
+            event.currentTarget.querySelector("summary")?.focus();
+          }
+        }}
+      >
+        <summary aria-label="展开备用与研究归档页面" title="备用工具与研究归档（平时不看，需要时直达）">
+          <span>更多</span>
+          <span aria-hidden="true">⌄</span>
+        </summary>
+        <div className="nav-more-links nav-archive-menu">
+          {ARCHIVE_GROUPS.map((group) => (
+            <div className="nav-archive-group" key={group.heading}>
+              <div className="nav-archive-heading">{group.heading}</div>
+              {group.items.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end
+                  onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </div>
+          ))}
+        </div>
+      </details>
+      <button
+        className="btn small nav-agent"
+        onClick={() => agentConsoleStore.openConsole(null)}
+        title="打开 AI 助手；当前页面对象会显示在面板顶部"
+      >
+        问 AI
+      </button>
     </nav>
   );
 }

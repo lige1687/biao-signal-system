@@ -115,6 +115,25 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001
             print(f"  ⚠ 情绪信号存证失败（不影响主快照）: {exc}")
 
+    # 情绪存证 T+10/T+20 到期对账（每日自动；幂等：已对账记录自动跳过；失败不阻断）
+    if not args.no_save:
+        try:
+            import subprocess as _sp2
+
+            r3 = _sp2.run(
+                [sys.executable, str(Path(__file__).resolve().parent / "sentiment_journal.py"), "review"],
+                capture_output=True, text=True, timeout=120,
+                env={**os.environ, "PYTHONPATH": str(Path(__file__).resolve().parents[1] / "src")},
+            )
+            tail3 = (r3.stdout or r3.stderr or "").strip().splitlines()
+            last3 = tail3[-1] if tail3 else f"无输出（退出码 {r3.returncode}）"
+            if r3.returncode == 0:
+                print("✓ 情绪存证对账：" + last3)
+            else:
+                print(f"  ⚠ 情绪存证对账异常（不影响主快照，退出码 {r3.returncode}）：{last3}")
+        except Exception as exc:  # noqa: BLE001
+            print(f"  ⚠ 情绪存证对账失败（不影响主快照）: {exc}")
+
     print(f"⏱ 耗时 {time.time() - t0:.1f}s")
     return 0
 

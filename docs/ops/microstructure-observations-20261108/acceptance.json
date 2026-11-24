@@ -1,0 +1,82 @@
+{
+  "acceptedAt": "2026-11-08T19:46:45.166895+08:00",
+  "status": "local_snapshot_implementation_accepted_with_explicit_data_limits",
+  "taskId": "microstructure-observations-20261108",
+  "cardsWithData": 76,
+  "unavailable": 1,
+  "packets": {
+    "funding": {
+      "sha256": "19ffdf35414e388fb4a42fd8125f8aa756fd2be8250bd7ccba8bea752d8e1697",
+      "cards": 2,
+      "unavailable": 0
+    },
+    "equity": {
+      "sha256": "0dd6407df2f5843130e568ab823f8a42deeb200b8c5daf0fdb0039904b68fab9",
+      "cards": 64,
+      "unavailable": 1
+    },
+    "derivatives": {
+      "sha256": "e6f79cded49e38c8c2b9c7cbd24a994cd99e8675d403453a512e58a205f3de90",
+      "cards": 10,
+      "unavailable": 0
+    }
+  },
+  "sourceFiles": {
+    "src/lei_signal/market_context/microstructure_funding.py": "2ff95e719f2caf542efaafebb7f85d5c83433b44b46c4664d12856de5256c100",
+    "src/lei_signal/market_context/microstructure_equity.py": "021ac78bfeb526353c95e5225ffe498991c3feab1a341d4bd30ac066c45beeb8",
+    "src/lei_signal/market_context/microstructure_derivatives.py": "488f2b2c9756cbde21af46c1f0054a07ccc046bcee572c107a31601b3beb94db",
+    "tests/unit/test_microstructure_funding.py": "c3804e0639b1ce7cfc1f4f8ca10a6dcbe0577a757731dad2749f7f4b0bb096de",
+    "tests/unit/test_microstructure_equity.py": "6e1a6ba6791a6eb4e53182ce9ffb31ba3fc34366be544fa14553776d68319f23",
+    "tests/unit/test_microstructure_derivatives.py": "bfa0c02cdcda5e846bde04dbb2120537b0c6652f713f1cb0eaffc7e4d9580c65",
+    "web/src/components/market-observation-alerts/MicrostructureObservations.tsx": "f7d2ef603fdfcfadf78b6998c073203f117e26d8bc0ba7d6a303918b3f502a1c",
+    "web/src/components/market-observation-alerts/microstructureData.ts": "e91c4f020da80f0b1246c37afc210166ef5c350e1e4cc002d29171817fe85813",
+    "web/src/components/market-observation-alerts/microstructure.css": "252b9be38477909ca9dbaadbd5ca1dc7d474fb224fd46e7773df640855639df3",
+    "web/src/components/market-observation-alerts/microstructureData.test.mjs": "acd09469dac7dec9a7144634884f45dabbc8b619f670f2fa44c2f6bbe9ecfd49",
+    "web/src/components/market-observation-alerts/indicatorCatalog.ts": "5a24a9cefa716f6178d3501b4124ab43878e38d9cea58e2862d803c32c6f9962",
+    "web/src/components/market-style/MarketTrendChart.tsx": "0513a467442aad6bf0983b205ec2f8dee29fd60c7adabcd45d60e97e971ef05b"
+  },
+  "verification": {
+    "pythonTargetedTestsPassed": 21,
+    "frontendParserCatalogSelectionTestsPassed": 19,
+    "typescriptFinalExitCode": 0,
+    "viteFinalExitCode": 0,
+    "viteWrite": false,
+    "repositoryHygieneExitCode": 0,
+    "independentFundingDays": 271,
+    "independentFundingRawObjects": 1117,
+    "independentIndustryWindows": 56,
+    "independentStockCorrelationAndDispersion": true,
+    "independentDerivativesArithmetic": true,
+    "browserSearchPreviewHistory": true,
+    "browserPinPersistRemoveRestoredOriginalFour": true,
+    "percentileAxisTicks": [
+      0,
+      25,
+      50,
+      75,
+      100
+    ]
+  },
+  "screenshots": {
+    "industry-turnover-preview.png": {
+      "bytes": 93035,
+      "sha256": "d6eac856833f522f2356f4acf82ab41a67c670b007c7d64148d33ab349957871"
+    },
+    "funding-preview.png": {
+      "bytes": 91303,
+      "sha256": "ed0906c9d1332b7c2e8a4ffe1c0dd5652d8037552b7dc1592a8b2cb53e51a009"
+    }
+  },
+  "limitations": [
+    "Fixed local dated snapshots; no new-session auto acquisition",
+    "CN stock-level input through 2026-10-23; last concentration date incomplete",
+    "56 supplier industry/overlap boards, not full independently reconstructed free-float turnover",
+    "Current fixed constituent snapshots, not historical point-in-time membership",
+    "CN IV near-month ATM proxy, not constant-maturity QVIX",
+    "US PCR only one day; basis five days and fixed 2611 contracts",
+    "No predictive efficacy or trading-threshold validation"
+  ],
+  "sourceCommitCreated": false,
+  "productionDeploy": false,
+  "productionStrategyChanged": false
+}

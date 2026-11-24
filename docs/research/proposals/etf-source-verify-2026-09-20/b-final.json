@@ -1,0 +1,18 @@
+{
+  "verified": true,
+  "summary": "ETF外部数据源核验全目标通过：白名单两源42/60预算、身份费率上交所权威化、天天基金净值交叉验证为二级源、四反例全过（联接错配/净值混用/未知费率/跨境晚一天）、待核项如实保留。返修1/3补齐整理层交付物并精确化一处引用。零业务代码。B方向源核验步完成，可进入glm-high适配实现（另立作业）。",
+  "goals": [
+    {"id": "G1", "verified": true, "evidence": ["endpoint_evidence.json七端点", "budget_ledger.jsonl 42行逐请求", "净值归属/披露/抓取三分记录且披露如实unknown"]},
+    {"id": "G2", "verified": true, "evidence": ["identity_binding.json三样本权威绑定+正式清单XML哈希", "旧表错标精确引用坐实"]},
+    {"id": "G3", "verified": true, "evidence": ["counterexample_results.json四反例构造与结果"]},
+    {"id": "G4", "verified": true, "evidence": ["field_admission.json 12字段准入判定含待核", "报告含大白话结论", "零业务代码改动"]}
+  ],
+  "changed_files": ["docs/experiments/etf-source-verify-2026-09-20.md", "docs/experiments/raw/etf-source-verify-2026-09-20/", "docs/experiments/registry.json", "docs/experiments/INDEX.md"],
+  "limitations": ["管理人官网域名待核", "跟踪指数权威代码仅有名称", "披露时间戳两源皆缺"],
+  "pending_actions": ["另立glm-high适配实现作业（复用A健康机制）", "A作业验收仍进行中"],
+  "verification": [
+    {"command": "清点raw 33+文件与三表", "result": "齐备且与证据对应"},
+    {"command": "逐行核引用原文", "result": "两处医药错标坐实"},
+    {"command": "check_repo_hygiene.py", "result": "仅已知.git误报"}
+  ]
+}

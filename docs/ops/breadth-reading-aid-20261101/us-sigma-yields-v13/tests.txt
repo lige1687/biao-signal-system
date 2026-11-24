@@ -1,0 +1,29 @@
+✔ three calendar years exclude the left boundary, include today, and use population sigma (1.915916ms)
+✔ future observations cannot change past bands; a displayed crop must retain full-history warmup (0.521667ms)
+✔ nulls are neither zero-filled nor silently removed from a statistical window (0.101875ms)
+✔ flat series have valid coincident bands and no spurious cheap/expensive or infinite Z (0.07225ms)
+✔ invalid and duplicate dates fail closed; leap-day window is calendar based (0.159625ms)
+✔ distance is explicit, with no invented near-band threshold (0.09475ms)
+✔ a jump across both thresholds keeps both events independently selectable (10.6635ms)
+✔ shallower observation can occur before the extreme event; equality alone is not a crossing (0.139917ms)
+✔ missing observations or a missing week never manufacture crossings (0.086833ms)
+✔ markers preserve both identities on the same price date, and omit unpriced weeks (0.144ms)
+✔ mini inner rails use the same supplied 2-sigma window and preserve unknowns (0.091667ms)
+✔ comparison requires two joint finite observations, not just a priced date axis (0.06775ms)
+✔ first usable row and persistent excursions are not repeated events (1.440625ms)
+✔ strict edge, missing data, and historical prefix (0.1555ms)
+✔ a missing week does not create a crossing across a 14-day gap (0.07075ms)
+✔ prior three-calendar-year window includes cutoff, excludes current, and uses population sigma (14.812667ms)
+✔ January cutoff and leap-day February 28 mapping keep calendar boundaries (9.461042ms)
+✔ missing, duplicate, unsorted, and nonfinite inputs fail or blank explicitly (5.513959ms)
+✔ 500 records guard and zero variance leave no fabricated extreme (5.444583ms)
+✔ same-day crossings retain each sigma; equality alone and first valid row do not cross (8.069208ms)
+✔ missing values, unresolved bands, and gaps over seven days reset crossing state (0.143541ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 197.249875

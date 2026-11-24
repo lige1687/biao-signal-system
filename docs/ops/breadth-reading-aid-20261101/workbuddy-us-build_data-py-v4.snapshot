@@ -1,0 +1,412 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""美股情绪/宽度 → 价格通道。宽度取 lab.db 的 20/50/200 日三档，价格取 FRED。"""
+import csv, json, os, sqlite3, statistics as st
+
+FRED = "/tmp"
+LAB_DB = os.path.expanduser("~/.lei_signal_lab/lab.db")
+
+# 周期 → 配套的宽度口径（短期配 20 日、中期配 50 日、长期配 200 日）
+PERIODS = [20, 60, 200]
+BW_OF = {20: 20, 60: 50, 200: 200}
+
+def read_fred(name):
+    out = {}
+    with open(os.path.join(FRED, name), newline="", encoding="utf-8-sig") as f:
+        r = csv.reader(f); next(r)
+        for row in r:
+            if len(row) < 2: continue
+            d, v = row[0].strip(), row[1].strip()
+            if not v or v in (".", "NA"): continue
+            try: out[d] = float(v)
+            except ValueError: pass
+    return out
+
+db = sqlite3.connect(LAB_DB)
+BREADTH = {20: {}, 50: {}, 200: {}}
+for d, b20, b50, b200 in db.execute(
+        "select as_of, breadth_20, breadth_50, breadth_200 from market_breadth_snapshots "
+        "where market_id='SP500' and breadth_50 is not null order by as_of"):
+    if b20 is not None: BREADTH[20][d] = b20
+    if b50 is not None: BREADTH[50][d] = b50
+    if b200 is not None: BREADTH[200][d] = b200
+db.close()
+
+spx = read_fred("sp500.csv"); vix = read_fred("vix.csv"); vxv = read_fred("VXVCLS.csv"); hy = read_fred("hy.csv")
+dates = sorted(spx.keys()); n = len(dates)
+
+def ffill(series):
+    out, last, j = [None]*n, None, 0
+    src = sorted(series.keys())
+    for i, d in enumerate(dates):
+        while j < len(src) and src[j] <= d:
+            last = series[src[j]]; j += 1
+        out[i] = None if d > src[-1] else last
+    return out
+
+px = [spx[d] for d in dates]
+BRD = {k: ffill(v) for k, v in BREADTH.items()}
+V = ffill(vix); VX = ffill(vxv); HY = ffill(hy)
+ratio = [None if (V[i] is None or VX[i] in (None, 0)) else V[i]/VX[i] for i in range(n)]
+
+def channel(W):
+    ma, s = [None]*n, [None]*n
+    for i in range(n):
+        if i >= W-1: ma[i] = sum(px[i-W+1:i+1])/W
+    st_ = [None if ma[i] is None else px[i]/ma[i]-1 for i in range(n)]
+    PW = 750
+    for i in range(n):
+        if st_[i] is None or i < W+PW-10: continue
+        w = [x for x in st_[i-PW+1:i+1] if x is not None]
+        if len(w) >= PW*0.8: s[i] = st.pstdev(w)
+    return ma, s, st_
+
+def roll_pct(series, win=750):
+    out = [None]*n
+    for i in range(n):
+        if series[i] is None: continue
+        w = [x for x in series[i-win+1:i+1] if x is not None]
+        if len(w) >= win*0.7:
+            out[i] = 100.0*sum(1 for x in w if x <= series[i])/len(w)
+    return out
+
+p_vix  = roll_pct([None if x is None else -x for x in V])
+p_term = roll_pct([None if x is None else -x for x in ratio])
+
+def runs_idx(mask, gap=15, minlen=8):
+    raw, s = [], None
+    for i in range(n):
+        if mask[i] and s is None: s = i
+        elif not mask[i] and s is not None:
+            raw.append([s, i]); s = None
+    if s is not None: raw.append([s, n-1])
+    m = []
+    for r in raw:
+        if m and r[0] - m[-1][1] <= gap: m[-1][1] = r[1]
+        else: m.append(list(r))
+    return [r for r in m if r[1] - r[0] >= minlen]
+
+def fwd(i, k): return None if i+k >= n else px[i+k]/px[i]-1
+
+def stat(mask, label):
+    r20 = [x for x in (fwd(i,20) for i in range(n) if mask[i]) if x is not None]
+    r60 = [x for x in (fwd(i,60) for i in range(n) if mask[i]) if x is not None]
+    if not r20: return None
+    return {"label": label, "n": len(r20), "r20": 100*sum(r20)/len(r20), "r60": 100*sum(r60)/len(r60),
+            "win60": 100*sum(1 for x in r60 if x>0)/len(r60), "worst": 100*min(r60)}
+
+def cu(a,i): return a[i] is not None and a[i-1] is not None and px[i]>a[i] and px[i-1]<=a[i-1]
+def cd(a,i): return a[i] is not None and a[i-1] is not None and px[i]<a[i] and px[i-1]>=a[i-1]
+
+base = stat([True]*n, "基准（全部交易日）")
+out_periods = {}
+
+for W in PERIODS:
+    BW = BW_OF[W]
+    ma, sd, st_ = channel(W)
+    brd = BRD[BW]
+    p_brd = roll_pct(brd)
+    p_str = roll_pct(st_)
+    temp = []
+    for i in range(n):
+        parts, ws = [], []
+        for v, w in ((p_brd[i],0.40), (p_str[i],0.25), (p_vix[i],0.20), (p_term[i],0.15)):
+            if v is not None: parts.append(v*w); ws.append(w)
+        temp.append(None if (not ws or sum(ws) < 0.4) else 2*((sum(parts)/sum(ws)) - 50))
+
+    u1 = [None if sd[i] is None else ma[i]*(1+sd[i]) for i in range(n)]
+    u2 = [None if sd[i] is None else ma[i]*(1+2*sd[i]) for i in range(n)]
+    l1 = [None if sd[i] is None else ma[i]*(1-sd[i]) for i in range(n)]
+    l2 = [None if sd[i] is None else ma[i]*(1-2*sd[i]) for i in range(n)]
+
+    opp  = [brd[i] is not None and brd[i] <= 20 and px[i] < ma[i] for i in range(n)]
+    risk = [temp[i] is not None and temp[i] >= 60 and u1[i] is not None and px[i] > u1[i] for i in range(n)]
+
+    rows = [base]
+    for lab, mask in (("突破上轨 1σ", [cu(u1,i) for i in range(n)]),
+                      ("跌破下轨 1σ", [cd(l1,i) for i in range(n)]),
+                      ("突破上轨 2σ", [cu(u2,i) for i in range(n)]),
+                      ("跌破下轨 2σ", [cd(l2,i) for i in range(n)])):
+        r = stat(mask, lab)
+        if r: r["grp"] = "A"; rows.append(r)
+    for lab, mask in (("宽度≤20% 且 价格低于均线", opp),
+                      ("宽度≥80% 且 价格高于上轨 1σ", [brd[i] is not None and brd[i]>=80 and u1[i] is not None and px[i]>u1[i] for i in range(n)]),
+                      ("温度≥+60 且 价格高于上轨 1σ", risk),
+                      ("温度≤−60 且 价格低于下轨 1σ", [temp[i] is not None and temp[i]<=-60 and l1[i] is not None and px[i]<l1[i] for i in range(n)])):
+        r = stat(mask, lab)
+        if r: r["grp"] = "B"; rows.append(r)
+
+    out_periods[str(W)] = {
+        "bw": BW,
+        "ma": ma, "sd": sd, "temp": temp,
+        "opp": runs_idx(opp), "risk": runs_idx(risk),
+        "hot": runs_idx([temp[i] is not None and temp[i] >= 60 for i in range(n)]),
+        "cold": runs_idx([temp[i] is not None and temp[i] <= -60 for i in range(n)]),
+        "table": rows,
+    }
+
+K = 60; ext = []
+for i in range(K, n-K):
+    w = px[i-K:i+K+1]
+    if px[i] == max(w) and min(px[i:i+K+1])/px[i]-1 < -0.07: ext.append([dates[i], round(px[i],0), "顶"])
+    if px[i] == min(w) and max(px[i:i+K+1])/px[i]-1 > 0.07:  ext.append([dates[i], round(px[i],0), "底"])
+
+def rnd(a, k=2): return [None if x is None else round(x, k) for x in a]
+
+def lastv(series):
+    for x in reversed(series):
+        if x is not None: return x
+    return None
+
+def last_date(series):
+    for i in range(n-1, -1, -1):
+        if series[i] is not None: return dates[i]
+    return None
+
+
+# ---------- 价格位置 × 宽度 交叉矩阵（统一用 MA200 通道，横向比三档宽度） ----------
+ma2, sd2, _ = channel(200)
+U1_2 = [None if sd2[i] is None else ma2[i]*(1+sd2[i]) for i in range(n)]
+L1_2 = [None if sd2[i] is None else ma2[i]*(1-sd2[i]) for i in range(n)]
+
+def zone200(i):
+    if U1_2[i] is None: return None
+    if px[i] > U1_2[i]: return 3      # 上轨之上
+    if px[i] >= ma2[i]: return 2      # 均线上方
+    if px[i] >= L1_2[i]: return 1     # 均线下方
+    return 0                          # 下轨之下
+
+def bandof(b):
+    if b is None: return None
+    return 0 if b <= 30 else (2 if b >= 70 else 1)
+
+def seg_count(mask):
+    c, on = 0, False
+    for i in range(n):
+        if mask[i] and not on: c += 1; on = True
+        elif not mask[i]: on = False
+    return c
+
+cross = {}
+for BW in (20, 50, 200):
+    brd = BRD[BW]; cells = []
+    for z in range(4):
+        for bd in range(3):
+            mask = [zone200(i) == z and bandof(brd[i]) == bd for i in range(n)]
+            r60 = [x for x in (fwd(i, 60) for i in range(n) if mask[i]) if x is not None]
+            if not r60:
+                cells.append([bd, z, None, None, 0, 0]); continue
+            cells.append([bd, z, round(100*sum(r60)/len(r60), 2),
+                          round(100*sum(1 for x in r60 if x > 0)/len(r60), 1),
+                          len(r60), seg_count(mask)])
+    cross[str(BW)] = cells
+
+# 共线性：宽度 vs 价格偏离 MA200
+def corr(a, b):
+    xs = [(a[i], b[i]) for i in range(n) if a[i] is not None and b[i] is not None]
+    if len(xs) < 30: return None
+    mx = sum(x for x, _ in xs)/len(xs); my = sum(y for _, y in xs)/len(xs)
+    cov = sum((x-mx)*(y-my) for x, y in xs)/len(xs)
+    sx = st.pstdev([x for x, _ in xs]); sy = st.pstdev([y for _, y in xs])
+    return None if sx == 0 or sy == 0 else cov/(sx*sy)
+
+collin = {str(BW): round(corr(BRD[BW], _ if False else None) or 0, 3) if False else round(corr(BRD[BW], [None if sd2[i] is None else px[i]/ma2[i]-1 for i in range(n)]) or 0, 3) for BW in (20, 50, 200)}
+
+
+# ---------- 三档宽度共振 ----------
+B20, B50, B200 = BRD[20], BRD[50], BRD[200]
+def ok3(i): return B20[i] is not None and B50[i] is not None and B200[i] is not None
+all_low  = [ok3(i) and max(B20[i], B50[i], B200[i]) <= 30 for i in range(n)]
+all_high = [ok3(i) and min(B20[i], B50[i], B200[i]) >= 70 for i in range(n)]
+low_runs  = runs_idx(all_low,  gap=10, minlen=3)
+high_runs = runs_idx(all_high, gap=10, minlen=3)
+
+ladder = []
+def addlad(grp, mask, label):
+    r = stat(mask, label)
+    if r: r["grp"] = grp; ladder.append(r)
+
+addlad("低", [ok3(i) and B20[i] <= 30 for i in range(n)], "b20 ≤30（只看短期）")
+addlad("低", [ok3(i) and B20[i] <= 30 and B50[i] <= 40 for i in range(n)], "b20 ≤30 且 b50 ≤40")
+addlad("低", all_low, "三档全 ≤30（全面共振）")
+addlad("高", [ok3(i) and B20[i] >= 70 for i in range(n)], "b20 ≥70（只看短期）")
+addlad("高", [ok3(i) and B20[i] >= 70 and B50[i] >= 60 for i in range(n)], "b20 ≥70 且 b50 ≥60")
+addlad("高", all_high, "三档全 ≥70（全面共振）")
+
+ci = max(i for i in range(n) if ok3(i))
+disp = st.pstdev([B20[ci], B50[ci], B200[ci]])
+cur_state = {
+    "date": dates[ci], "b20": B20[ci], "b50": B50[ci], "b200": B200[ci],
+    "disp": round(disp, 1), "spread": round(B20[ci] - B200[ci], 1),
+    "all_low": bool(all_low[ci]), "all_high": bool(all_high[ci]),
+    "ladder": [{"label": x["label"], "grp": x["grp"], "n": x["n"],
+                "r60": round(x["r60"], 2), "win60": round(x["win60"], 1),
+                "worst": round(x["worst"], 1)} for x in ladder],
+    "low_runs": [[dates[a], dates[b]] for a, b in low_runs],
+    "high_runs": [[dates[a], dates[b]] for a, b in high_runs],
+}
+
+
+# ---------- 45 年验证：纳指 + 宽度 → 三周期买入点 ----------
+def build_buy():
+    ix = read_fred("gspc.csv")
+    d2 = sorted(d for d in ix if d >= "1980-04-01")
+    n2 = len(d2); p2 = [ix[d] for d in d2]
+
+    def ff2(series):
+        src = sorted(series); out = []; j = 0; last = None
+        for d in d2:
+            while j < len(src) and src[j] <= d: last = series[src[j]]; j += 1
+            out.append(None if d > src[-1] else last)
+        return out
+
+    B2 = {k: ff2(v) for k, v in BREADTH.items()}
+
+    def fwd2(i, k): return None if i + k >= n2 else p2[i + k]/p2[i] - 1
+
+    def ma2(W):
+        m = [None]*n2
+        for i in range(n2):
+            if i >= W-1: m[i] = sum(p2[i-W+1:i+1])/W
+        return m
+
+    def cell2(mask, k):
+        r = [x for x in (fwd2(i, k) for i in range(n2) if mask[i]) if x is not None]
+        if not r: return None
+        return len(r), 100*sum(r)/len(r), 100*sum(1 for x in r if x > 0)/len(r), 100*min(r)
+
+    def cluster_first(mask, gap=250):
+        """相邻触发日间隔 > gap 才另起一簇；每簇只留首日，保证样本独立"""
+        out, prev = [], None
+        for i in range(n2):
+            if not mask[i]: continue
+            if prev is None or i - prev > gap:
+                out.append(i)
+            prev = i
+        return out
+
+    def path_stats(b2, thr, hold=250):
+        mask = [b2[i] is not None and b2[i] <= thr for i in range(n2)]
+        raw = sum(1 for x in mask if x)
+        pts = [i for i in cluster_first(mask) if i + hold < n2]
+        rs, mds, d60, d120 = [], [], [], []
+        for i in pts:
+            seg = p2[i:i+hold+1]
+            rs.append(100*(p2[i+hold]/p2[i]-1)); mds.append(100*(min(seg)/p2[i]-1))
+            if i+60 < n2: d60.append(100*(p2[i+60]/p2[i]-1))
+            if i+120 < n2: d120.append(100*(p2[i+120]/p2[i]-1))
+        if not rs: return None
+        return {"k": len(rs), "raw": raw, "mean": round(sum(rs)/len(rs), 1),
+                "median": round(st.median(rs), 1),
+                "win": round(100*sum(1 for x in rs if x > 0)/len(rs)),
+                "sd": round(st.pstdev(rs), 1) if len(rs) > 1 else 0,
+                "worst": round(min(rs), 1), "best": round(max(rs), 1),
+                "mdd_med": round(st.median(mds), 1), "mdd_worst": round(min(mds), 1),
+                "w60": round(100*sum(1 for x in d60 if x > 0)/len(d60)) if d60 else None,
+                "w120": round(100*sum(1 for x in d120 if x > 0)/len(d120)) if d120 else None}
+
+    def segs2(mask):
+        c, on = 0, False
+        for i in range(n2):
+            if mask[i] and not on: c += 1; on = True
+            elif not mask[i]: on = False
+        return c
+
+    rows = []
+    for W, BW, HOLD, NAME in [(20, 20, 20, "短期"), (60, 50, 60, "中期"), (200, 200, 250, "长期")]:
+        b = B2[BW]
+        ps = path_stats(b, 10, HOLD); base = cell2([True]*n2, HOLD)
+        ps20 = path_stats(b, 20, HOLD)
+        rows.append({
+            "period": NAME, "bw": BW, "hold": HOLD,
+            "n": ps["k"], "segs": ps["k"], "raw": ps["raw"],
+            "r": ps["mean"], "win": ps["win"], "worst": ps["worst"],
+            "median": ps["median"], "sd": ps["sd"],
+            "base": round(base[1], 2), "base_win": round(base[2], 1),
+            "n20": ps20["k"] if ps20 else None,
+            "r20": ps20["mean"] if ps20 else None,
+            "win20": ps20["win"] if ps20 else None,
+            "worst20": ps20["worst"] if ps20 else None,
+        })
+
+    # 从当前位置等到 ≤10% 的概率（250 个交易日内）
+    wait = {}
+    for BW, lo, hi in [(20, 30, 45), (50, 40, 60), (200, 55, 80)]:
+        b = B2[BW]; tot = 0; got = 0
+        for i in range(n2):
+            if b[i] is None or not (lo <= b[i] <= hi): continue
+            tot += 1
+            if any(b[j] is not None and b[j] <= 10 for j in range(i+1, min(i+251, n2))): got += 1
+        wait[str(BW)] = round(100.0*got/tot) if tot else None
+
+    # 所有 ≤10% 的独立触发点（每簇首日，间隔 >250 交易日）
+    b2 = B2[200]
+    hist = []
+    for i in cluster_first([b2[i] is not None and b2[i] <= 10 for i in range(n2)]):
+        if i + 250 >= n2: continue
+        hist.append([d2[i], round(b2[i], 1), round(100*fwd2(i, 250), 1)])
+
+    # 2008 年逐月：宽度 vs 250 日后
+    seen = set(); y08 = []
+    for i in range(n2):
+        if not d2[i].startswith("2008") or b2[i] is None or i + 250 >= n2: continue
+        ym = d2[i][:7]
+        if ym in seen: continue
+        seen.add(ym)
+        y08.append([d2[i], round(b2[i], 1), round(100*fwd2(i, 250), 1)])
+
+    sens = []
+    for t in (3, 5, 7, 10, 15, 20, 30):
+        ps = path_stats(b2, t)
+        if ps: ps["thr"] = t; sens.append(ps)
+
+    return {"start": d2[0], "end": d2[-1], "n": n2, "rows": rows, "wait": wait,
+            "hist": hist, "y08": y08, "sens": sens,
+            "core": path_stats(b2, 10), "tight": path_stats(b2, 5)}
+
+payload = {
+    "dates": dates, "px": rnd(px, 2),
+    "brd": {str(k): rnd(v, 1) for k, v in BRD.items()},
+    "vix": rnd(V, 2), "term": rnd(ratio, 3),
+    "hy": rnd([None if x is None else x*100 for x in HY], 1),
+    "ext": ext, "cross": cross, "collin": collin, "cur": cur_state, "buy": build_buy(),
+    "periods": {k: {
+        "bw": v["bw"],
+        "ma": rnd(v["ma"], 2), "sd": rnd(v["sd"], 4), "temp": rnd(v["temp"], 1),
+        "opp": v["opp"], "risk": v["risk"],
+        "hot": [[dates[a], dates[b]] for a, b in v["hot"]],
+        "cold": [[dates[a], dates[b]] for a, b in v["cold"]],
+        "table": v["table"],
+    } for k, v in out_periods.items()},
+    "last": {"date": dates[-1], "px": px[-1], "vix": V[-1],
+             "term": ratio[-1], "hy": HY[-1]*100 if HY[-1] else None,
+             "brd": {str(k): lastv(BRD[k]) for k in BRD},
+             "brd_date": last_date(BRD[50]),
+             "ma": {str(W): out_periods[str(W)]["ma"][-1] for W in PERIODS},
+             "sd": {str(W): out_periods[str(W)]["sd"][-1] for W in PERIODS},
+             "temp": {str(W): out_periods[str(W)]["temp"][-1] for W in PERIODS}},
+}
+with open("data.json", "w", encoding="utf-8") as f:
+    json.dump(payload, f, ensure_ascii=False, separators=(",", ":"))
+
+print(f"日期 {dates[0]} → {dates[-1]}  {n} 个交易日")
+print(f"最新有效宽度：20日 {lastv(BRD[20]):.1f}% | 50日 {lastv(BRD[50]):.1f}% | 200日 {lastv(BRD[200]):.1f}%")
+for W in PERIODS:
+    p = out_periods[str(W)]
+    print(f"MA{W} + 宽度{p['bw']}日: 温度 {p['temp'][-1]:+.0f} | 机会{len(p['opp'])}段 危险{len(p['risk'])}段 "
+          f"| 过热带{len(p['hot'])} 过冷带{len(p['cold'])}")
+print("共线性 r（宽度 vs 价格偏离MA200）:", collin)
+for BW in ("20","50","200"):
+    filled = sum(1 for c in cross[BW] if c[4] > 0)
+    print(f"  交叉矩阵 宽度{BW}日: 12 格中 {filled} 格有样本")
+print(f"共振：全≤30 {len(low_runs)} 段 / 全≥70 {len(high_runs)} 段")
+print(f"当前 {cur_state['date']}: b20={cur_state['b20']:.0f} b50={cur_state['b50']:.0f} b200={cur_state['b200']:.0f} 分化{cur_state['disp']} spread{cur_state['spread']:+.0f}")
+for x in cur_state["ladder"]:
+    print(f"  [{x['grp']}] {x['label']:<24} {x['n']:>4}d {x['r60']:+6.2f}% {x['win60']:>5.1f}% {x['worst']:+6.1f}%")
+print(f"45年验证 {cur_state and ''}", "")
+b = payload["buy"]
+print(f"纳指样本 {b['start']} → {b['end']}  {b['n']} 个交易日")
+for r in b["rows"]:
+    print(f"  {r['period']}: 宽度{r['bw']}日≤10% 持{r['hold']}日 {r['r']:+.2f}%/{r['win']}%/{r['worst']:+.1f}%  "
+          f"{r['segs']}段  基准{r['base']:+.2f}%  一年内等到≤10%概率 {b['wait'][str(r['bw'])]}%")
+print("文件", os.path.getsize("data.json")//1024, "KB")

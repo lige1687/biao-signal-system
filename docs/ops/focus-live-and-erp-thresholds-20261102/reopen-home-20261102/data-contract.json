@@ -1,0 +1,48 @@
+{
+  "mission": "Verify and fill original fixed300 focus model latest six sessions from registered external archives or same supplier, preserving old evidence",
+  "task_scope": [
+    "Read previous completion/data-review/continuation-contract and inherit counts:4 continuation runs,2 failed supplier logins; no financial efficacy rerun",
+    "Inspect latest registered source indices for only fixed300 Oct26-Nov2, no cross-project data",
+    "If missing, make at most2 new BaoStock login attempts with15s hard socket timeout. On success collect each fixed300 code once for unadjusted daily2026-10-26..2026-11-02 and factor events2026-10-24..2026-11-02; stop3consecutive quote errors; maximum600 successful query requests and2logins, no paid data or alternate inferred amounts",
+    "Raw source only to fresh verified external storage child directory using existing storage tooling. Never overwrite old raw sources or public packet. New raw SHA and response date/field/adjustment qualification; exact rows/gaps",
+    "Write data-result.json and brief report of qualified availability; if unable return exact failure no fake current data. Main controller integrates/publishes. Do not modify UI or existing focus_recent or old reports"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "src/lei_signal/research/focus_recent.py",
+    "docs/experiments/raw/focus-stock-momentum-evaluation-2026-10-25",
+    "web/public/research/focus-momentum",
+    "docs/ops/focus-live-and-erp-thresholds-20261102/completion.json",
+    "docs/ops/focus-live-and-erp-thresholds-20261102/data-review.md",
+    "docs/ops/focus-live-and-erp-thresholds-20261102/continuation-contract.json",
+    "docs/ops/focus-live-and-erp-thresholds-20261102/focus-continuation"
+  ],
+  "write_paths": [
+    "docs/ops/focus-live-and-erp-thresholds-20261102/reopen-home-20261102/data",
+    "src/lei_signal/research/focus_gap_fetch.py",
+    "tests/unit/test_focus_gap_fetch.py"
+  ],
+  "network_allowed": true,
+  "external_read_permission": "Only existing manifest/v8/old-union and verified registered newer same-project archives under /Volumes/win+mac通用, device UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+  "external_write_permission": "Fresh bounded fixed300 gap raw output under /Volumes/win+mac通用/LeiSignal-新实验结果/focus-recent-20261102, after fresh UUID/reserve check; <=100MB; no overwrite",
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "expected_outputs": [
+    "source-bound data-result.json, source/acquisition ledger, raw SHA and date/field/amount/unit/adjustment qualifications",
+    "fresh meaningful fetch parser tests if code added",
+    "blocking condition and remaining sessions if none qualified"
+  ],
+  "stop_conditions": [
+    "No scope or model expansion, no paid service, no writes elsewhere",
+    "2login failures or3consecutivequeryfailures",
+    "No canonical publication by helper"
+  ],
+  "controller_review": {
+    "required": true
+  }
+}
